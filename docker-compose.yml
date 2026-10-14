@@ -1,0 +1,28 @@
+# Local development services.
+#
+# Postgres is the corpus system of record (ADR-0003). Pinecone is managed
+# and lives in the cloud — there is nothing to run locally for vectors.
+#
+#   docker compose up -d postgres
+#
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: brh-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: brh_corpus
+      POSTGRES_USER: brh
+      POSTGRES_PASSWORD: brh
+    ports:
+      - "5432:5432"
+    volumes:
+      - brh-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U brh -d brh_corpus"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  brh-pgdata:

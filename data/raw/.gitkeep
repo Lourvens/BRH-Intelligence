@@ -1,0 +1,2 @@
+# data/raw — source documents (gitignored)
+# Run `make seed` to copy the sibling project's PDFs here.

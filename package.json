@@ -1,0 +1,13 @@
+{
+  "name": "brh-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BRH Intelligence — public research interface, agent, and MCP server.",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "bun run --filter web dev",
+    "build": "bun run --filter web build",
+    "lint": "bun run --filter web lint",
+    "typecheck": "bun run --filter web typecheck"
+  }
+}
