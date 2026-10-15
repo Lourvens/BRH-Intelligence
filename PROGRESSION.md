@@ -7,11 +7,11 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
-- **BRH inventory (front half) is implemented** — `make inventory` discovers
-  every PDF on `brh.ht`, downloads it content-addressed, and logs it in
-  `corpus.crawl_urls` / `corpus.crawl_runs`. Idempotent, and **resumable**: a
-  persisted cursor (`corpus.sync_state`) means bounded runs continue where the
-  last stopped and failures are retried.
+- **BRH inventory (front half) is implemented** — `make inventory` catalogues
+  every PDF on `brh.ht` (the ledger lists the whole corpus, pending or resolved)
+  and downloads the missing ones content-addressed into `data/raw/web/`.
+  Idempotent: the download queue is the unresolved rows, so bounded runs advance
+  and failures are retried.
 - The rest of the repo is still a scaffold: structure, contracts, config, and
   wiring only. See the build order in [`README.md`](README.md).
 
@@ -31,10 +31,9 @@ Continue the build order:
 - **2026-10-14 — BRH document inventory.** `brh_core.inventory`: discover PDFs
   via the WordPress media API, download into `data/raw/web/<sha256>.pdf`, log
   every URL in `corpus.crawl_urls` (dates + status + hash) with a run history in
-  `corpus.crawl_runs` and a resume cursor in `corpus.sync_state`. Verified
-  against the live site + Postgres: repeated `--limit` runs keep advancing
-  (22 documents in, no re-downloads) and a run that hits a failure stops its
-  cursor before it, so the next run retries it. Offline tests in
+  `corpus.crawl_runs`. Each run catalogues the whole site first, so the ledger
+  lists every PDF whether or not it has been downloaded. Verified against the
+  live site + Postgres; covered offline in
   `packages/core/tests/test_inventory.py`.
 - **2026-10-14 — Scaffold.** Monorepo (uv workspace: `brh-core`, `brh-agent`,
   `brh-mcp`; bun workspace: `apps/web`). Real: config, domain model, SQL schema,
@@ -80,7 +79,8 @@ Continue the build order:
   `ETag`**, so a cheap re-check is `(last_modified, content_length)`; the real
   identity is the `sha256` computed after download. The same bytes appear at
   more than one URL, so a file's URL is not its identity.
-- The inventory resumes from a `(modified, url)` cursor in `corpus.sync_state`,
-  not from a count. `--limit N` processes the next N *after* the cursor; the
-  cursor only advances past resolved documents, so a failed download sits at the
-  cursor and is retried next run. `--since` bypasses the cursor.
+- The inventory's download queue is *derived*, not a stored cursor: it is the
+  rows whose status is not resolved (`pending`/`failed`, ordered by
+  `wp_modified`). So a bounded run advances, a failure is simply still queued,
+  and a document that changes is re-queued (its `wp_modified` moves). Each run
+  re-catalogues the whole site first, so the ledger always lists every URL.

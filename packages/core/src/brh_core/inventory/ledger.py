@@ -1,11 +1,18 @@
 """The inventory ledger — every read and write over ``crawl_runs`` / ``crawl_urls``.
 
-Raw SQL on ``psycopg`` 3 (ADR-0003). Writes are idempotent: a URL is upserted
-on its primary key, so re-seeing it updates state instead of duplicating a row.
+Raw SQL on ``psycopg`` 3 (ADR-0003). Writes are idempotent: a URL is upserted on
+its primary key, so re-seeing it refreshes state instead of duplicating a row.
+
+Two phases use this object:
+
+* **catalogue** — record every document the site lists (new ones arrive as
+  ``pending``; a document whose WordPress ``wp_modified`` moved is re-queued);
+* **queue** — the rows still needing work (``pending`` / ``failed``), ordered.
 """
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
@@ -14,6 +21,28 @@ from psycopg.types.json import Jsonb
 from psycopg_pool import ConnectionPool
 
 from brh_core.inventory.discovery import MediaItem
+
+_CATALOGUE_SQL = """
+    INSERT INTO corpus.crawl_urls (
+        url, wp_id, slug, title, wp_date, wp_modified, last_seen_at, last_run_id
+    )
+    VALUES (%s, %s, %s, %s, %s, %s, now(), %s)
+    ON CONFLICT (url) DO UPDATE SET
+        wp_id        = EXCLUDED.wp_id,
+        slug         = EXCLUDED.slug,
+        title        = EXCLUDED.title,
+        wp_date      = EXCLUDED.wp_date,
+        wp_modified  = EXCLUDED.wp_modified,
+        last_seen_at = now(),
+        last_run_id  = EXCLUDED.last_run_id,
+        -- a document that changed is re-queued for download; otherwise keep
+        -- whatever status it already had (so nothing resolved is redone).
+        status       = CASE
+            WHEN EXCLUDED.wp_modified IS DISTINCT FROM crawl_urls.wp_modified
+            THEN 'pending'
+            ELSE crawl_urls.status
+        END
+"""
 
 
 @dataclass(frozen=True, slots=True)
@@ -69,66 +98,74 @@ class InventoryLedger:
                 (status, Jsonb(counts), error, run_id),
             )
 
-    def get_cursor(self, scope: str) -> tuple[datetime, str] | None:
-        """The ``(modified, url)`` of the last resolved document, or ``None``.
+    def url_count(self) -> int:
+        with self._pool.connection() as conn:
+            row = conn.execute("SELECT count(*) AS n FROM corpus.crawl_urls").fetchone()
+        return int(row["n"])
 
-        This is where a run resumes: everything at or before it has been
-        resolved (downloaded / unchanged / gone) and is not revisited.
+    # --- catalogue + queue ---------------------------------------------
+
+    def catalogue(self, items: Iterable[MediaItem], run_id: str) -> int:
+        """Record every listed document; return how many URLs are new."""
+        rows = [
+            (
+                item.source_url,
+                item.wp_id,
+                item.slug,
+                item.title,
+                item.date_gmt,
+                item.modified_gmt,
+                run_id,
+            )
+            for item in items
+            if item.source_url
+        ]
+        if not rows:
+            return 0
+        with self._pool.connection() as conn:
+            before = conn.execute("SELECT count(*) AS n FROM corpus.crawl_urls").fetchone()["n"]
+            with conn.cursor() as cursor:
+                cursor.executemany(_CATALOGUE_SQL, rows)
+            after = conn.execute("SELECT count(*) AS n FROM corpus.crawl_urls").fetchone()["n"]
+        return int(after - before)
+
+    def queue(
+        self,
+        *,
+        limit: int | None = None,
+        since: datetime | None = None,
+        include_resolved: bool = False,
+    ) -> list[str]:
+        """URLs that still need a download, in ``(wp_modified, url)`` order.
+
+        Only unresolved rows (``pending`` / ``failed``) are returned unless
+        ``include_resolved`` is set (``--force``); ``since`` narrows the window
+        to documents modified after it.
         """
         with self._pool.connection() as conn:
-            row = conn.execute(
-                "SELECT cursor_modified, cursor_url FROM corpus.sync_state WHERE scope = %s",
-                (scope,),
-            ).fetchone()
-        if row is None or row["cursor_modified"] is None:
-            return None
-        return row["cursor_modified"], row["cursor_url"] or ""
-
-    def set_cursor(self, scope: str, modified: datetime, url: str) -> None:
-        with self._pool.connection() as conn:
-            conn.execute(
+            rows = conn.execute(
                 """
-                INSERT INTO corpus.sync_state (scope, cursor_modified, cursor_url, updated_at)
-                VALUES (%s, %s, %s, now())
-                ON CONFLICT (scope) DO UPDATE SET
-                    cursor_modified = EXCLUDED.cursor_modified,
-                    cursor_url      = EXCLUDED.cursor_url,
-                    updated_at      = now()
+                SELECT url
+                FROM corpus.crawl_urls
+                WHERE (%(include)s::boolean OR status IN ('pending', 'failed'))
+                  AND (%(since)s::timestamptz IS NULL OR wp_modified > %(since)s::timestamptz)
+                ORDER BY wp_modified ASC NULLS FIRST, url ASC
+                LIMIT %(limit)s
                 """,
-                (scope, modified, url),
-            )
+                {"include": include_resolved, "since": since, "limit": limit},
+            ).fetchall()
+        return [row["url"] for row in rows]
+
+    def resolved_urls(self) -> set[str]:
+        """URLs already dealt with — used by ``--dry-run`` to preview the queue."""
+        with self._pool.connection() as conn:
+            rows = conn.execute(
+                "SELECT url FROM corpus.crawl_urls"
+                " WHERE status IN ('downloaded', 'unchanged', 'gone')"
+            ).fetchall()
+        return {row["url"] for row in rows}
 
     # --- url state -----------------------------------------------------
-
-    def upsert_seen(self, item: MediaItem, run_id: str) -> None:
-        """Record that ``item`` was discovered in this run (idempotent)."""
-        with self._pool.connection() as conn:
-            conn.execute(
-                """
-                INSERT INTO corpus.crawl_urls (
-                    url, wp_id, slug, title, wp_date, wp_modified,
-                    last_seen_at, last_run_id
-                )
-                VALUES (%s, %s, %s, %s, %s, %s, now(), %s)
-                ON CONFLICT (url) DO UPDATE SET
-                    wp_id        = EXCLUDED.wp_id,
-                    slug         = EXCLUDED.slug,
-                    title        = EXCLUDED.title,
-                    wp_date      = EXCLUDED.wp_date,
-                    wp_modified  = EXCLUDED.wp_modified,
-                    last_seen_at = now(),
-                    last_run_id  = EXCLUDED.last_run_id
-                """,
-                (
-                    item.source_url,
-                    item.wp_id,
-                    item.slug,
-                    item.title,
-                    item.date_gmt,
-                    item.modified_gmt,
-                    run_id,
-                ),
-            )
 
     def get_url(self, url: str) -> UrlState | None:
         with self._pool.connection() as conn:
@@ -236,5 +273,6 @@ class InventoryLedger:
             "urls": sum(by_status.values()),
             "artefacts": int(row["artefacts"]),
             "bytes": int(row["bytes"]),
+            "outstanding": by_status.get("pending", 0) + by_status.get("failed", 0),
             "by_status": by_status,
         }

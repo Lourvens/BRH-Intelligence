@@ -65,11 +65,11 @@ Legend: ✅ real = ready to use; ⬜ stub = signatures + `TODO`, you write the b
 
 A suggested path. Each step is independently verifiable.
 
-0. **Inventory (front half)** — already implemented. `make inventory` discovers
-   PDFs on `brh.ht`, downloads them into a content-addressed store, and logs
-   them in the ledger (`brh_core.inventory`, migrations `0002`–`0003`). Every run
-   **resumes** from a persisted cursor, so `make inventory ARGS="--limit 20"`
-   keeps advancing and never re-downloads. Run `make migrate` first.
+0. **Inventory (front half)** — already implemented. `make inventory` catalogues
+   every PDF on `brh.ht` (so the ledger lists the whole corpus), then downloads
+   the ones still missing into a content-addressed store (`brh_core.inventory`,
+   migration `0002`). `make inventory ARGS="--limit 20"` downloads the next 20;
+   the rest stay queued. Run `make migrate` first.
 1. **Config & schema** — already done. `make postgres-up && make migrate` (once
    `db/migrate.py` is implemented) creates the corpus tables.
 2. **Vector store + embedder** — implement `embeddings/hashing.py` and

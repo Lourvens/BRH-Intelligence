@@ -3,7 +3,9 @@
 No Postgres and no network: the WordPress API and file URLs are faked with an
 ``httpx.MockTransport``, the ledger is an in-memory stand-in, and the raw store
 writes to ``tmp_path``. This exercises the real pipeline logic — pagination,
-content addressing, the resume cursor, and the "never download twice" guarantee.
+catalogue-then-download, the unresolved queue, content addressing, re-queueing
+of changed documents, retry of failures, and the "never download twice"
+guarantee.
 """
 
 from __future__ import annotations
@@ -20,13 +22,12 @@ from brh_core.inventory.store import ContentStore
 
 BASE = "https://www.brh.ht"
 SCOPE = "brh.ht/media/pdf"
+UPLOADS = f"{BASE}/wp-content/uploads"
+UPLOAD_PATH = "/wp-content/uploads"
 PDF_A = b"%PDF-1.4 alpha\n" + b"a" * 256
 PDF_B = b"%PDF-1.4 bravo\n" + b"b" * 512
 PDF_C = b"%PDF-1.4 charlie\n" + b"c" * 128
 PDF_D = b"%PDF-1.4 delta\n" + b"d" * 1024
-
-UPLOADS = f"{BASE}/wp-content/uploads"
-UPLOAD_PATH = "/wp-content/uploads"
 
 
 def _item(wp_id: int, slug: str, modified: str) -> dict:
@@ -68,9 +69,8 @@ class FakeLedger:
 
     def __init__(self) -> None:
         self.runs: dict[str, dict[str, object]] = {}
-        self.urls: dict[str, dict[str, object]] = {}
+        self.rows: dict[str, dict[str, object]] = {}
         self.finished: list[tuple[str, str, dict[str, int]]] = []
-        self.cursors: dict[str, tuple[datetime, str]] = {}
 
     def start_run(self, *, scope: str, mode: str, watermark=None) -> str:
         run_id = f"run-{len(self.runs) + 1}"
@@ -80,34 +80,66 @@ class FakeLedger:
     def finish_run(self, run_id: str, *, status: str, counts, error=None) -> None:
         self.finished.append((run_id, status, dict(counts)))
 
-    def get_cursor(self, scope: str) -> tuple[datetime, str] | None:
-        return self.cursors.get(scope)
+    def url_count(self) -> int:
+        return len(self.rows)
 
-    def set_cursor(self, scope: str, modified: datetime, url: str) -> None:
-        self.cursors[scope] = (modified, url)
+    def catalogue(self, items, run_id: str) -> int:
+        new = 0
+        for item in items:
+            if not item.source_url:
+                continue
+            row = self.rows.get(item.source_url)
+            if row is None:
+                self.rows[item.source_url] = {
+                    "status": "pending",
+                    "sha256": None,
+                    "raw_path": None,
+                    "last_modified": None,
+                    "content_length": None,
+                    "wp_modified": item.modified_gmt,
+                }
+                new += 1
+            else:
+                if row["wp_modified"] != item.modified_gmt:
+                    row["status"] = "pending"
+                row["wp_modified"] = item.modified_gmt
+        return new
 
-    def upsert_seen(self, item, run_id: str) -> None:
-        state = self.urls.setdefault(
-            item.source_url,
-            {"sha256": None, "raw_path": None, "last_modified": None, "content_length": None},
+    def queue(self, *, limit=None, since=None, include_resolved=False) -> list[str]:
+        ordered = sorted(
+            self.rows.items(),
+            key=lambda kv: (kv[1]["wp_modified"] or datetime.min.replace(tzinfo=UTC), kv[0]),
         )
-        state.update(wp_id=item.wp_id, slug=item.slug)
+        urls = [
+            url
+            for url, row in ordered
+            if (include_resolved or row["status"] in ("pending", "failed"))
+            and (since is None or (row["wp_modified"] and row["wp_modified"] > since))
+        ]
+        return urls[:limit] if limit is not None else urls
+
+    def resolved_urls(self) -> set[str]:
+        return {
+            url
+            for url, row in self.rows.items()
+            if row["status"] in ("downloaded", "unchanged", "gone")
+        }
 
     def get_url(self, url: str) -> UrlState | None:
-        state = self.urls.get(url)
-        if state is None:
+        row = self.rows.get(url)
+        if row is None:
             return None
         return UrlState(
             url=url,
-            status=str(state.get("status", "pending")),
-            sha256=state["sha256"],  # type: ignore[arg-type]
-            raw_path=state["raw_path"],  # type: ignore[arg-type]
-            last_modified=state["last_modified"],  # type: ignore[arg-type]
-            content_length=state["content_length"],  # type: ignore[arg-type]
+            status=str(row["status"]),
+            sha256=row["sha256"],  # type: ignore[arg-type]
+            raw_path=row["raw_path"],  # type: ignore[arg-type]
+            last_modified=row["last_modified"],  # type: ignore[arg-type]
+            content_length=row["content_length"],  # type: ignore[arg-type]
         )
 
     def mark_unchanged(self, url: str, run_id: str, *, http_status) -> None:
-        self.urls[url]["status"] = "unchanged"
+        self.rows[url]["status"] = "unchanged"
 
     def mark_downloaded(
         self,
@@ -120,7 +152,7 @@ class FakeLedger:
         content_length,
         last_modified,
     ) -> None:
-        self.urls[url].update(
+        self.rows[url].update(
             status="downloaded",
             sha256=sha256,
             raw_path=raw_path,
@@ -129,14 +161,15 @@ class FakeLedger:
         )
 
     def mark_failed(self, url, run_id, *, error, http_status=None, status="failed") -> None:
-        self.urls.setdefault(url, {})["status"] = status
+        self.rows.setdefault(url, {})["status"] = status
 
 
 def _transport(
-    requests: list[httpx.Request], *, fail_paths: set[str] | None = None
+    requests: list[httpx.Request],
+    *,
+    media: dict[int, list[dict]],
+    fail_paths: set[str],
 ) -> httpx.MockTransport:
-    fail_paths = fail_paths if fail_paths is not None else set()
-
     def handler(request: httpx.Request) -> httpx.Response:
         requests.append(request)
         path = request.url.path
@@ -144,7 +177,7 @@ def _transport(
             page = int(request.url.params.get("page", "1"))
             return httpx.Response(
                 200,
-                json=MEDIA_PAGES.get(page, []),
+                json=media.get(page, []),
                 headers={"x-wp-totalpages": "2", "content-type": "application/json"},
             )
         if path in fail_paths:
@@ -164,8 +197,10 @@ def _transport(
     return httpx.MockTransport(handler)
 
 
-def _client(requests: list[httpx.Request], **kwargs) -> WordPressMediaClient:
-    transport = _transport(requests, fail_paths=kwargs.pop("fail_paths", None))
+def _client(requests: list[httpx.Request], *, media=None, fail_paths=None, **kwargs):
+    transport = _transport(
+        requests, media=media or MEDIA_PAGES, fail_paths=fail_paths or set()
+    )
     return WordPressMediaClient(
         base_url=BASE, user_agent="test", delay=0.0, transport=transport, **kwargs
     )
@@ -175,11 +210,17 @@ def _settings(tmp_path) -> Settings:
     return Settings(_env_file=None, raw_dir=tmp_path)
 
 
-def test_iter_pdfs_paginates_parses_and_forwards_incremental():
-    requests: list[httpx.Request] = []
-    client = _client(requests)
+def _touched_alpha() -> dict[int, list[dict]]:
+    """MEDIA_PAGES with alpha's wp_modified bumped (same bytes)."""
+    return {
+        1: [{**MEDIA_PAGES[1][0], "modified_gmt": "2026-10-20T00:00:00"}, *MEDIA_PAGES[1][1:]],
+        2: MEDIA_PAGES[2],
+    }
 
-    items = list(client.iter_pdfs(modified_after=datetime(2026, 10, 1, tzinfo=UTC)))
+
+def test_iter_pdfs_paginates_and_parses():
+    requests: list[httpx.Request] = []
+    items = list(_client(requests).iter_pdfs())
 
     assert [item.slug for item in items] == ["alpha", "bravo", "charlie", "delta", "alpha-copy"]
     assert items[0].wp_id == 1
@@ -188,7 +229,6 @@ def test_iter_pdfs_paginates_parses_and_forwards_incremental():
 
     media_calls = [r for r in requests if r.url.path == "/wp-json/wp/v2/media"]
     assert len(media_calls) == 2  # two pages
-    assert all(r.url.params.get("modified_after") == "2026-10-01T00:00:00" for r in media_calls)
     assert all(r.url.params.get("mime_type") == "application/pdf" for r in media_calls)
 
 
@@ -208,25 +248,20 @@ def test_content_store_is_content_addressed(tmp_path):
     assert not list(tmp_path.glob(".dl-*"))  # no temp files left behind
 
 
-def test_full_run_then_second_run_resumes_past_everything(tmp_path):
+def test_catalogue_records_every_url_even_when_limit_bounds_download(tmp_path):
     settings = _settings(tmp_path)
     store = ContentStore(tmp_path / "web")
     ledger = FakeLedger()
 
-    first = run_inventory(settings, ledger=ledger, client=_client([]), store=store)
+    report = run_inventory(settings, ledger=ledger, client=_client([]), store=store, limit=2)
 
-    assert first.discovered == 5
-    assert first.downloaded == 4  # alpha, bravo, charlie, delta
-    assert first.duplicated == 1  # alpha-copy shares alpha's bytes
-    assert first.bytes_written == len(PDF_A) + len(PDF_B) + len(PDF_C) + len(PDF_D)
-    assert len(list((tmp_path / "web").glob("*.pdf"))) == 4
-    assert ledger.cursors[SCOPE][1].endswith("alpha-copy.pdf")
-
-    second = run_inventory(settings, ledger=ledger, client=_client([]), store=store)
-
-    assert second.discovered == 0  # cursor is past everything
-    assert second.downloaded == 0
-    assert len(list((tmp_path / "web").glob("*.pdf"))) == 4  # nothing rewritten
+    assert report.catalogued == 5
+    assert report.new_urls == 5
+    assert report.selected == 2
+    assert report.downloaded == 2
+    # all five URLs are in the ledger, three of them still pending
+    assert len(ledger.rows) == 5
+    assert sum(row["status"] == "pending" for row in ledger.rows.values()) == 3
 
 
 def test_bounded_runs_keep_advancing(tmp_path):
@@ -241,34 +276,33 @@ def test_bounded_runs_keep_advancing(tmp_path):
 
     first, second, third, fourth = run(), run(), run(), run()
 
-    assert (first.discovered, first.downloaded) == (2, 2)  # alpha, bravo
-    assert (second.discovered, second.downloaded) == (2, 2)  # charlie, delta
-    assert (third.discovered, third.duplicated) == (1, 1)  # alpha-copy (dedup)
-    assert fourth.discovered == 0  # nothing left
-
-    # the cursor marched forward through the ordering
-    assert ledger.cursors[SCOPE][1].endswith("alpha-copy.pdf")
-    assert len(list((tmp_path / "web").glob("*.pdf"))) == 4
+    assert (first.selected, first.downloaded) == (2, 2)  # alpha, bravo
+    assert (second.selected, second.downloaded) == (2, 2)  # charlie, delta
+    assert (third.selected, third.duplicated) == (1, 1)  # alpha-copy (dedup)
+    assert fourth.selected == 0  # queue drained
+    assert len(list((tmp_path / "web").glob("*.pdf"))) == 4  # never rewritten
+    assert all(r.catalogued == 5 for r in (first, second, third, fourth))
 
 
-def test_since_window_rerun_skips_unchanged(tmp_path):
+def test_changed_document_is_requeued_then_skipped_by_head(tmp_path):
     settings = _settings(tmp_path)
     store = ContentStore(tmp_path / "web")
     ledger = FakeLedger()
-    since = datetime(2026, 10, 1, tzinfo=UTC)
 
-    first = run_inventory(settings, ledger=ledger, client=_client([]), store=store, since=since)
-    assert first.downloaded == 4
+    first = run_inventory(settings, ledger=ledger, client=_client([]), store=store)
+    assert first.downloaded == 4 and first.duplicated == 1
 
-    # `--since` bypasses the cursor, so this re-scans the window and must skip
-    # every document via its (last_modified, content_length) signal.
-    second = run_inventory(settings, ledger=ledger, client=_client([]), store=store, since=since)
-    assert second.discovered == 5
+    # alpha's wp_modified moves (a metadata touch) but its bytes are unchanged.
+    second = run_inventory(
+        settings, ledger=ledger, client=_client([], media=_touched_alpha()), store=store
+    )
+    assert second.new_urls == 0
+    assert second.selected == 1  # only alpha was re-queued
+    assert second.unchanged == 1  # HEAD signal says it is still current
     assert second.downloaded == 0
-    assert second.unchanged == 5
 
 
-def test_failure_does_not_block_others_and_is_retried(tmp_path):
+def test_failure_is_retried_on_the_next_run(tmp_path):
     settings = _settings(tmp_path)
     store = ContentStore(tmp_path / "web")
     ledger = FakeLedger()
@@ -280,25 +314,37 @@ def test_failure_does_not_block_others_and_is_retried(tmp_path):
         client=_client([], fail_paths=fail_paths, max_retries=0),
         store=store,
     )
+    assert first.selected == 5
+    assert first.failed == 1  # bravo
+    assert first.downloaded == 3
+    assert first.duplicated == 1
 
-    # bravo fails; the rest still complete, but the cursor stops *before* bravo.
-    assert first.failed == 1
-    assert first.downloaded == 3  # alpha, charlie, delta
-    assert first.duplicated == 1  # alpha-copy
-    assert ledger.cursors[SCOPE][1].endswith("alpha.pdf")
-
-    # next run resumes at bravo, which now succeeds; the rest are unchanged.
-    fail_paths.clear()
+    # the failure is still queued; a later run picks it up and succeeds.
     second = run_inventory(
+        settings, ledger=ledger, client=_client([], fail_paths=set(), max_retries=0), store=store
+    )
+    assert second.selected == 1
+    assert second.downloaded == 1
+    assert second.new_urls == 0
+
+
+def test_since_narrows_the_download_window(tmp_path):
+    settings = _settings(tmp_path)
+    store = ContentStore(tmp_path / "web")
+    ledger = FakeLedger()
+
+    report = run_inventory(
         settings,
         ledger=ledger,
-        client=_client([], fail_paths=fail_paths, max_retries=0),
+        client=_client([]),
         store=store,
+        since=datetime(2026, 10, 14, 12, 1, 30, tzinfo=UTC),
     )
-    assert second.discovered == 4  # bravo, charlie, delta, alpha-copy
-    assert second.downloaded == 1  # bravo retried successfully
-    assert second.unchanged == 3
-    assert ledger.cursors[SCOPE][1].endswith("alpha-copy.pdf")
+
+    assert report.catalogued == 5  # the whole catalogue is still recorded
+    assert report.selected == 3  # charlie (12:02), delta (12:03), alpha-copy (12:04)
+    assert report.downloaded == 3  # alpha is outside the window, so no dedup hit
+    assert len(ledger.rows) == 5
 
 
 def test_dry_run_writes_nothing(tmp_path):
@@ -310,8 +356,9 @@ def test_dry_run_writes_nothing(tmp_path):
         settings, ledger=ledger, client=_client([]), store=store, dry_run=True
     )
 
-    assert report.discovered == 5
+    assert report.catalogued == 5
+    assert report.selected == 5
     assert report.downloaded == 5  # planned, not performed
+    assert ledger.rows == {}
     assert ledger.runs == {}
-    assert ledger.cursors == {}
     assert not (tmp_path / "web").exists()

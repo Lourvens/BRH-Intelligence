@@ -24,7 +24,7 @@ seed: ## Copy the sibling project's PDFs + parsed Markdown into data/
 ingest: ## Discover PDFs in data/raw and run the ingestion pipeline
 	uv run python -m brh_core.ingestion
 
-inventory: ## Discover + download BRH documents from brh.ht (ARGS="--incremental")
+inventory: ## Catalogue brh.ht and download the missing documents (ARGS="--limit 20")
 	uv run python -m brh_core.inventory $(ARGS)
 
 agent-dev: ## Run the LangGraph agent server locally

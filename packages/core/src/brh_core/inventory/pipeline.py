@@ -1,28 +1,28 @@
-"""The inventory pipeline — discover, download, and log every BRH document.
+"""The inventory pipeline — catalogue the site, then download what is missing.
 
 One pass:
 
-1. enumerate PDFs via the WordPress media API, in ``modified`` ascending order;
-2. start **after the resume cursor** (or an explicit ``--since``), so a bounded
-   run picks up where the last one stopped instead of re-scanning;
-3. for each URL, ``HEAD`` for a cheap change signal, and skip it when the ledger
-   already holds the same ``(last_modified, content_length)`` and the bytes are
-   on disk;
-4. otherwise stream the file into the content-addressed store, hashing as we go;
-5. advance the cursor past the documents that were resolved.
+1. **catalogue** — list every PDF via the WordPress media API and upsert each
+   URL. New documents arrive as ``pending``; a document whose ``wp_modified``
+   changed is re-queued. This is what makes the ledger an inventory of the whole
+   corpus, not just of what has been downloaded.
+2. **queue** — take the rows still needing work (``pending`` / ``failed``), in
+   ``(wp_modified, url)`` order, bounded by ``--limit``.
+3. **download** — for each queued URL, ``HEAD`` for a cheap change signal; skip
+   it when the ledger already holds the same ``(last_modified, content_length)``
+   and the bytes are on disk; otherwise stream it into the content-addressed
+   store, hashing as we go.
+4. record each outcome on the URL row.
 
-The cursor only moves past *resolved* documents, so a URL that failed is retried
-on the next run. Because a changed document's ``modified`` moves forward, edits
-surface naturally at the far end of the ordering.
-
-Nothing here parses PDFs — the inventory ends when bytes are on disk with a
-ledger row. Parsing/chunking/indexing is a later stage that consumes it.
+Because the queue is just "unresolved rows", bounded runs keep advancing and a
+failed download is simply still in the queue next run. Nothing parses PDFs —
+the inventory ends when bytes are on disk with a ledger row.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 
 from brh_core.config import Settings
 from brh_core.inventory.discovery import MediaItem, WordPressMediaClient
@@ -39,7 +39,9 @@ class InventoryReport:
 
     run_id: str
     mode: str
-    discovered: int = 0
+    catalogued: int = 0  # PDFs the site listed this run
+    new_urls: int = 0  # of those, how many were new to the ledger
+    selected: int = 0  # download candidates taken from the queue
     downloaded: int = 0
     duplicated: int = 0
     unchanged: int = 0
@@ -50,7 +52,9 @@ class InventoryReport:
     @property
     def counts(self) -> dict[str, int]:
         return {
-            "discovered": self.discovered,
+            "catalogued": self.catalogued,
+            "new_urls": self.new_urls,
+            "selected": self.selected,
             "downloaded": self.downloaded,
             "duplicated": self.duplicated,
             "unchanged": self.unchanged,
@@ -60,23 +64,8 @@ class InventoryReport:
 
 
 def item_key(item: MediaItem) -> tuple[datetime, str]:
-    """Total order over documents: ``(modified, url)``.
-
-    ``url`` is the tie-break so documents sharing a ``modified`` timestamp still
-    have one stable position — the cursor can then never skip or repeat one.
-    """
+    """Total order over documents: ``(modified, url)``."""
     return (item.modified_gmt or _EPOCH, item.source_url)
-
-
-def _api_modified_after(
-    cursor: tuple[datetime, str] | None, since: datetime | None
-) -> datetime | None:
-    """The ``modified_after`` to send, with a 1s trailing edge for timestamp ties."""
-    if since is not None:
-        return since
-    if cursor is not None:
-        return cursor[0] - timedelta(seconds=1)
-    return None
 
 
 def run_inventory(
@@ -95,54 +84,40 @@ def run_inventory(
     client = client or WordPressMediaClient.from_settings(settings)
     store = store or ContentStore(settings.web_store_dir)
 
-    cursor = ledger.get_cursor(scope)
-    # `--force` (refresh all) and an explicit `--since` (re-scan a window) bypass
-    # the cursor; the default resumes from it.
-    floor_key = None if (force or since is not None) else cursor
-    mode = "incremental" if floor_key is not None else "bulk"
+    items = sorted(client.iter_pdfs(), key=item_key)
+    catalogued = len(items)
 
-    items = sorted(
-        client.iter_pdfs(modified_after=_api_modified_after(cursor, since)),
-        key=item_key,
-    )
-    if floor_key is not None:
-        items = [item for item in items if item_key(item) > floor_key]
-    if limit is not None:
-        items = items[:limit]
-
+    mode = "bulk" if ledger.url_count() == 0 else "incremental"
     run_id = "dry-run" if dry_run else ledger.start_run(scope=scope, mode=mode, watermark=since)
 
-    discovered = len(items)
+    new_urls = 0
+    if dry_run:
+        resolved = ledger.resolved_urls()
+        selected_urls = [
+            item.source_url
+            for item in items
+            if item.source_url and item.source_url not in resolved
+        ]
+        if limit is not None:
+            selected_urls = selected_urls[:limit]
+    else:
+        new_urls = ledger.catalogue(items, run_id)
+        selected_urls = ledger.queue(limit=limit, since=since, include_resolved=force)
+
     downloaded = duplicated = unchanged = failed = bytes_written = 0
     failures: list[tuple[str, str]] = []
-    blocked = False
-    reached_key: tuple[datetime, str] | None = None
-
-    def resolve(item: MediaItem) -> None:
-        """Record that ``item`` is fully handled, moving the resume cursor."""
-        nonlocal reached_key
-        if not blocked:
-            reached_key = item_key(item)
 
     def record_failure(
         url: str, message: str, http_status: int | None, status: str = "failed"
     ) -> None:
-        nonlocal failed, blocked
+        nonlocal failed
         failed += 1
         failures.append((url, message))
-        if status != "gone":
-            blocked = True  # transient: stop advancing so it is retried next run
         if not dry_run:
             ledger.mark_failed(url, run_id, error=message, http_status=http_status, status=status)
 
     try:
-        for item in items:
-            url = item.source_url
-            if not url:
-                continue
-
-            if not dry_run:
-                ledger.upsert_seen(item, run_id)
+        for url in selected_urls:
             state = ledger.get_url(url)
 
             try:
@@ -153,7 +128,6 @@ def run_inventory(
 
             if stat.status_code == 404:
                 record_failure(url, "HTTP 404 not found", 404, status="gone")
-                resolve(item)
                 continue
             if stat.status_code != 200:
                 record_failure(url, f"HTTP {stat.status_code}", stat.status_code)
@@ -173,12 +147,10 @@ def run_inventory(
                 unchanged += 1
                 if not dry_run:
                     ledger.mark_unchanged(url, run_id, http_status=stat.status_code)
-                resolve(item)
                 continue
 
             if dry_run:
                 downloaded += 1  # planned
-                resolve(item)
                 continue
 
             try:
@@ -204,19 +176,17 @@ def run_inventory(
                 content_length=stat.content_length or saved.size,
                 last_modified=stat.last_modified,
             )
-            resolve(item)
     except Exception as exc:
         if not dry_run:
             ledger.finish_run(run_id, status="failed", counts={}, error=str(exc))
         raise
 
-    if not dry_run and reached_key is not None and reached_key != floor_key:
-        ledger.set_cursor(scope, reached_key[0], reached_key[1])
-
     report = InventoryReport(
         run_id=run_id,
         mode=mode,
-        discovered=discovered,
+        catalogued=catalogued,
+        new_urls=new_urls,
+        selected=len(selected_urls),
         downloaded=downloaded,
         duplicated=duplicated,
         unchanged=unchanged,

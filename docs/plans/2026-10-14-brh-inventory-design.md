@@ -49,10 +49,10 @@ on disk with a ledger row; parsing/indexing consumes it afterwards.
 | D1 | **Discovery source** | WP REST `media` API · HTML crawl of `/publications/` · Firecrawl `/map` · sitemap | WP REST API — structured, paginated, free, gives dates + `source_url` |
 | D2 | **Document identity** (dedupe) | `sha256(bytes)` · `source_url` · WP `id` · `(url, last_modified, content_length)` | `sha256` is the only true identity; the rest are cheap skip-hints |
 | D3 | **Fetching** | `httpx` streaming · Firecrawl `/scrape` · Scrapy | `httpx` — files are plain `application/pdf`, no JS needed (contra sibling ADR-0031) |
-| D4 | **Incremental** | WP `modified_after` watermark · re-list all + diff hashes · conditional GET | `modified_after` first, conditional GET as a second guard |
+| D4 | **Incremental** | status-derived queue · `modified_after` watermark · re-list all + diff hashes · conditional GET | Re-list all + upsert; the download queue is the unresolved rows; `HEAD` as a second guard |
 | D5 | **Volume / storage** | — (measure) | **Measured (n=25 sample): mean 1.5 MB, median 0.2 MB, max 6.3 MB → ≈0.3–1.8 GB** for 1171 PDFs |
 | D6 | **Politeness** | concurrency, delay, retries, UA | 1–2 concurrent, ≥0.5 s delay, identify UA, retry 5xx/429 with backoff |
-| D7 | **Schedule** | Modal cron · LangGraph cron · GitHub Actions · systemd | Decide with deployment (ADR-0009); `--incremental` is the unit it calls |
+| D7 | **Schedule** | Modal cron · LangGraph cron · GitHub Actions · systemd | Decide with deployment (ADR-0009); `make inventory` is the unit it calls |
 
 ## Proposed design (draft — the experiment may change it)
 
@@ -70,16 +70,16 @@ on disk with a ledger row; parsing/indexing consumes it afterwards.
 unique in `crawl_urls`. Re-running the pipeline never writes a second copy of the
 same bytes, and the resume cursor means it does not even re-scan what it finished.
 
-**Resume + incremental run.**
-1. Read the resume cursor from `corpus.sync_state` — the `(modified, url)` of the
-   last fully-resolved document — or take an explicit `--since` override.
-2. `GET media?mime_type=application/pdf&modified_after=<cursor − 1s>&orderby=modified`,
-   then filter client-side by the `(modified, url)` tuple (the 1s trailing edge
-   catches documents that share a timestamp).
-3. For each candidate: `HEAD` → skip when `Last-Modified` + `Content-Length`
+**Catalogue + queue.**
+1. `GET media?mime_type=application/pdf&orderby=modified` and upsert *every* URL —
+   new ones arrive as `pending`; a document whose `wp_modified` moved is
+   re-queued. The ledger therefore always lists the whole corpus.
+2. The download queue is the unresolved rows (`pending` / `failed`), ordered by
+   `(wp_modified, url)`, bounded by `--limit` and narrowed by `--since`.
+3. For each queued URL: `HEAD` → skip when `Last-Modified` + `Content-Length`
    match the ledger; else stream-download, hash, record.
-4. Advance the cursor past the resolved documents, stopping at the first failure
-   so a failed download is retried on the next run. `--limit N` bounds each run.
+4. Because the queue is derived from status, bounded runs advance and failures
+   retry with no stored cursor.
 
 **Raw layout.** Content-addressed so dedupe is free and re-runs are safe:
 `data/raw/web/<sha256>.pdf`. A short `source_url → sha256` index lives in the DB.
@@ -92,8 +92,7 @@ same bytes, and the resume cursor means it does not even re-scan what it finishe
 > `url` alone and holds the *current* state of each URL (not one row per run),
 > and carries `wp_date`/`wp_modified` for the incremental watermark. There is no
 > `documents` foreign key — the parsed-artefact table stays owned by the later
-> ingestion stage; the inventory records `sha256` + `raw_path` directly. A third
-> table, `sync_state`, holds the resume cursor (migration `0003`).
+> ingestion stage; the inventory records `sha256` + `raw_path` directly.
 
 ```sql
 -- discovery runs

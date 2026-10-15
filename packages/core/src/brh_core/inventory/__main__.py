@@ -8,13 +8,13 @@ Usage::
 Requires the corpus schema (``python -m brh_core.db.migrate``) and a reachable
 Postgres per ``.env``.
 
-Every run **resumes** from where the last one stopped (a persisted cursor), so
-repeated bounded runs keep making progress::
+Every run first **catalogues** the site — recording every PDF URL, so the ledger
+always lists the whole corpus — then downloads the documents still outstanding::
 
-    make inventory ARGS="--limit 20"   # first 20, then the next 20, ...
-    make inventory                     # everything still outstanding (a cron unit)
+    make inventory ARGS="--limit 20"   # catalogue all, download the next 20
+    make inventory                     # catalogue all, download everything left
 
-``--since`` re-scans an explicit time window instead; ``--force`` re-downloads.
+``--since`` narrows the download window; ``--force`` re-downloads.
 """
 
 from __future__ import annotations
@@ -38,18 +38,18 @@ def _parse_datetime(value: str) -> datetime:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="brh_core.inventory",
-        description="Discover and download BRH documents from brh.ht into the inventory ledger.",
+        description="Catalogue BRH documents on brh.ht and download the missing ones.",
     )
     parser.add_argument(
         "--since",
         type=_parse_datetime,
         default=None,
-        help="Re-scan PDFs modified after this ISO-8601 timestamp (ignores the cursor).",
+        help="Only download PDFs modified after this ISO-8601 timestamp.",
     )
     parser.add_argument(
-        "--limit", type=int, default=None, help="Process at most N documents this run."
+        "--limit", type=int, default=None, help="Download at most N documents this run."
     )
-    parser.add_argument("--force", action="store_true", help="Re-download from the start.")
+    parser.add_argument("--force", action="store_true", help="Re-download everything.")
     parser.add_argument("--dry-run", action="store_true", help="Decide without writing.")
     parser.add_argument("--stats", action="store_true", help="Print ledger stats and exit.")
     args = parser.parse_args(argv)
@@ -78,10 +78,10 @@ def main(argv: list[str] | None = None) -> int:
         )
 
         print(
-            f"[{report.mode}] discovered={report.discovered} "
-            f"downloaded={report.downloaded} duplicated={report.duplicated} "
-            f"unchanged={report.unchanged} failed={report.failed} "
-            f"bytes={report.bytes_written}"
+            f"[{report.mode}] catalogued={report.catalogued} new={report.new_urls} "
+            f"selected={report.selected} downloaded={report.downloaded} "
+            f"duplicated={report.duplicated} unchanged={report.unchanged} "
+            f"failed={report.failed} bytes={report.bytes_written}"
         )
         for url, error in report.failures:
             print(f"  FAILED {url}: {error}")
