@@ -30,7 +30,7 @@ PDF_C = b"%PDF-1.4 charlie\n" + b"c" * 128
 PDF_D = b"%PDF-1.4 delta\n" + b"d" * 1024
 
 
-def _item(wp_id: int, slug: str, modified: str) -> dict:
+def _item(wp_id: int, slug: str, modified: str, filesize: int | None = None) -> dict:
     return {
         "id": wp_id,
         "slug": slug,
@@ -39,19 +39,20 @@ def _item(wp_id: int, slug: str, modified: str) -> dict:
         "mime_type": "application/pdf",
         "date_gmt": "2026-10-01T08:00:00",
         "modified_gmt": modified,
+        "media_details": {"filesize": filesize},
     }
 
 
 # two pages, five documents, ascending modified; alpha-copy shares alpha's bytes.
 MEDIA_PAGES = {
     1: [
-        _item(1, "alpha", "2026-10-14T12:00:00"),
-        _item(2, "bravo", "2026-10-14T12:01:00"),
-        _item(3, "charlie", "2026-10-14T12:02:00"),
+        _item(1, "alpha", "2026-10-14T12:00:00", len(PDF_A)),
+        _item(2, "bravo", "2026-10-14T12:01:00", len(PDF_B)),
+        _item(3, "charlie", "2026-10-14T12:02:00", len(PDF_C)),
     ],
     2: [
-        _item(4, "delta", "2026-10-14T12:03:00"),
-        _item(5, "alpha-copy", "2026-10-14T12:04:00"),
+        _item(4, "delta", "2026-10-14T12:03:00", len(PDF_D)),
+        _item(5, "alpha-copy", "2026-10-14T12:04:00", len(PDF_A)),
     ],
 }
 
@@ -95,7 +96,7 @@ class FakeLedger:
                     "sha256": None,
                     "raw_path": None,
                     "last_modified": None,
-                    "content_length": None,
+                    "content_length": item.filesize,  # declared size, known pre-download
                     "wp_modified": item.modified_gmt,
                 }
                 new += 1
@@ -103,6 +104,8 @@ class FakeLedger:
                 if row["wp_modified"] != item.modified_gmt:
                     row["status"] = "pending"
                 row["wp_modified"] = item.modified_gmt
+                if row["content_length"] is None:
+                    row["content_length"] = item.filesize
         return new
 
     def queue(self, *, limit=None, since=None, include_resolved=False) -> list[str]:
@@ -261,7 +264,12 @@ def test_catalogue_records_every_url_even_when_limit_bounds_download(tmp_path):
     assert report.downloaded == 2
     # all five URLs are in the ledger, three of them still pending
     assert len(ledger.rows) == 5
-    assert sum(row["status"] == "pending" for row in ledger.rows.values()) == 3
+    pending = [row for row in ledger.rows.values() if row["status"] == "pending"]
+    assert len(pending) == 3
+    # metadata is present before download: title/date via the ledger, size via
+    # the API's declared filesize
+    assert all(row["content_length"] for row in pending)
+    assert all(row["sha256"] is None for row in pending)
 
 
 def test_bounded_runs_keep_advancing(tmp_path):

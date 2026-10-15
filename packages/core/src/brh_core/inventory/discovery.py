@@ -34,7 +34,7 @@ from brh_core.config import Settings
 
 RETRYABLE_STATUSES = frozenset({429, 500, 502, 503, 504})
 DEFAULT_PER_PAGE = 100
-MEDIA_FIELDS = "id,slug,title,source_url,mime_type,date_gmt,modified_gmt"
+MEDIA_FIELDS = "id,slug,title,source_url,mime_type,date_gmt,modified_gmt,media_details"
 
 
 @dataclass(frozen=True, slots=True)
@@ -48,6 +48,7 @@ class MediaItem:
     mime_type: str
     date_gmt: datetime | None
     modified_gmt: datetime | None
+    filesize: int | None = None  # from media_details; known before download
 
 
 @dataclass(frozen=True, slots=True)
@@ -82,6 +83,8 @@ def _to_media_item(raw: dict[str, Any]) -> MediaItem:
     title = raw.get("title")
     if isinstance(title, dict):
         title = title.get("rendered", "")
+    details = raw.get("media_details")
+    filesize = details.get("filesize") if isinstance(details, dict) else None
     return MediaItem(
         wp_id=int(raw["id"]),
         slug=str(raw.get("slug", "")),
@@ -90,6 +93,7 @@ def _to_media_item(raw: dict[str, Any]) -> MediaItem:
         mime_type=str(raw.get("mime_type", "")),
         date_gmt=_parse_gmt(raw.get("date_gmt")),
         modified_gmt=_parse_gmt(raw.get("modified_gmt")),
+        filesize=int(filesize) if isinstance(filesize, (int, float)) else None,
     )
 
 

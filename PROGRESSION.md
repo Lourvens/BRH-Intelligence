@@ -84,3 +84,9 @@ Continue the build order:
   `wp_modified`). So a bounded run advances, a failure is simply still queued,
   and a document that changes is re-queued (its `wp_modified` moves). Each run
   re-catalogues the whole site first, so the ledger always lists every URL.
+- The catalogue stores each PDF's `title`, `slug`, `wp_id` and dates before it is
+  downloaded. Its declared `filesize` (from `media_details`) is stored too — but
+  only when WordPress has one; older attachments return `media_details: {}`, so
+  their size stays unknown until the `HEAD` at download time. `--stats` reports
+  `outstanding_sized` so the partial `outstanding_bytes` is not mistaken for the
+  whole corpus.

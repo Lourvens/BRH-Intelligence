@@ -24,9 +24,10 @@ from brh_core.inventory.discovery import MediaItem
 
 _CATALOGUE_SQL = """
     INSERT INTO corpus.crawl_urls (
-        url, wp_id, slug, title, wp_date, wp_modified, last_seen_at, last_run_id
+        url, wp_id, slug, title, wp_date, wp_modified, content_length,
+        last_seen_at, last_run_id
     )
-    VALUES (%s, %s, %s, %s, %s, %s, now(), %s)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, now(), %s)
     ON CONFLICT (url) DO UPDATE SET
         wp_id        = EXCLUDED.wp_id,
         slug         = EXCLUDED.slug,
@@ -35,6 +36,9 @@ _CATALOGUE_SQL = """
         wp_modified  = EXCLUDED.wp_modified,
         last_seen_at = now(),
         last_run_id  = EXCLUDED.last_run_id,
+        -- the declared size (from WP) is only a fallback; once a document has
+        -- been downloaded its observed size is authoritative and left alone.
+        content_length = coalesce(crawl_urls.content_length, EXCLUDED.content_length),
         -- a document that changed is re-queued for download; otherwise keep
         -- whatever status it already had (so nothing resolved is redone).
         status       = CASE
@@ -115,6 +119,7 @@ class InventoryLedger:
                 item.title,
                 item.date_gmt,
                 item.modified_gmt,
+                item.filesize,
                 run_id,
             )
             for item in items
@@ -264,9 +269,13 @@ class InventoryLedger:
             row = conn.execute(
                 """
                 SELECT count(DISTINCT sha256) AS artefacts,
-                       coalesce(sum(content_length), 0) AS bytes
+                       coalesce(sum(content_length) FILTER (WHERE sha256 IS NOT NULL), 0) AS bytes,
+                       count(*) FILTER (WHERE status IN ('pending', 'failed')
+                                          AND content_length IS NOT NULL) AS outstanding_sized,
+                       coalesce(
+                           sum(content_length) FILTER (WHERE status IN ('pending', 'failed')), 0
+                       ) AS outstanding_bytes
                 FROM corpus.crawl_urls
-                WHERE sha256 IS NOT NULL
                 """
             ).fetchone()
         return {
@@ -274,5 +283,7 @@ class InventoryLedger:
             "artefacts": int(row["artefacts"]),
             "bytes": int(row["bytes"]),
             "outstanding": by_status.get("pending", 0) + by_status.get("failed", 0),
+            "outstanding_sized": int(row["outstanding_sized"]),
+            "outstanding_bytes": int(row["outstanding_bytes"]),
             "by_status": by_status,
         }
