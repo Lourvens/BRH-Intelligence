@@ -2,12 +2,19 @@
 
 Usage::
 
-    python -m brh_core.inventory [--since ISO] [--incremental] [--limit N]
-                                 [--force] [--dry-run] [--stats]
+    python -m brh_core.inventory [--since ISO] [--limit N] [--force] [--dry-run]
+                                 [--stats]
 
 Requires the corpus schema (``python -m brh_core.db.migrate``) and a reachable
-Postgres per ``.env``. A full backfill is the default; ``--incremental`` pulls
-only documents changed since the last run's watermark.
+Postgres per ``.env``.
+
+Every run **resumes** from where the last one stopped (a persisted cursor), so
+repeated bounded runs keep making progress::
+
+    make inventory ARGS="--limit 20"   # first 20, then the next 20, ...
+    make inventory                     # everything still outstanding (a cron unit)
+
+``--since`` re-scans an explicit time window instead; ``--force`` re-downloads.
 """
 
 from __future__ import annotations
@@ -37,15 +44,12 @@ def main(argv: list[str] | None = None) -> int:
         "--since",
         type=_parse_datetime,
         default=None,
-        help="Only PDFs modified after this ISO-8601 timestamp.",
+        help="Re-scan PDFs modified after this ISO-8601 timestamp (ignores the cursor).",
     )
     parser.add_argument(
-        "--incremental",
-        action="store_true",
-        help="Use the ledger watermark (max wp_modified) as --since.",
+        "--limit", type=int, default=None, help="Process at most N documents this run."
     )
-    parser.add_argument("--limit", type=int, default=None, help="Stop after N PDFs.")
-    parser.add_argument("--force", action="store_true", help="Re-download even if unchanged.")
+    parser.add_argument("--force", action="store_true", help="Re-download from the start.")
     parser.add_argument("--dry-run", action="store_true", help="Decide without writing.")
     parser.add_argument("--stats", action="store_true", help="Print ledger stats and exit.")
     args = parser.parse_args(argv)
@@ -64,16 +68,10 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(ledger.stats(), indent=2, default=str))
             return 0
 
-        since = args.since
-        if args.incremental:
-            since = ledger.watermark()
-            if since is None:
-                print("No watermark yet (empty ledger) — running a full inventory.")
-
         report = run_inventory(
             settings,
             ledger=ledger,
-            since=since,
+            since=args.since,
             limit=args.limit,
             force=args.force,
             dry_run=args.dry_run,

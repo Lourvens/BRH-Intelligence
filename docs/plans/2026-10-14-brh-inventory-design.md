@@ -66,15 +66,20 @@ on disk with a ledger row; parsing/indexing consumes it afterwards.
 **Status lifecycle** (per URL): `pending → fetched → (parsed → indexed)`, or
 `failed` / `superseded`. Only `pending/fetched/failed` are this task's concern.
 
-**Idempotency.** `sha256` is the natural key for an artifact (ADR-0003). The URL
-row is unique per `(crawl_run_id, url)`. Re-running the pipeline never writes a
-second copy of the same bytes.
+**Idempotency.** `sha256` is the natural key for an artifact (ADR-0003); a URL is
+unique in `crawl_urls`. Re-running the pipeline never writes a second copy of the
+same bytes, and the resume cursor means it does not even re-scan what it finished.
 
-**Incremental run.**
-1. `watermark = max(modified_gmt)` in the ledger (or `--since`).
-2. `GET media?mime_type=application/pdf&modified_after=<watermark>&orderby=modified`.
+**Resume + incremental run.**
+1. Read the resume cursor from `corpus.sync_state` — the `(modified, url)` of the
+   last fully-resolved document — or take an explicit `--since` override.
+2. `GET media?mime_type=application/pdf&modified_after=<cursor − 1s>&orderby=modified`,
+   then filter client-side by the `(modified, url)` tuple (the 1s trailing edge
+   catches documents that share a timestamp).
 3. For each candidate: `HEAD` → skip when `Last-Modified` + `Content-Length`
    match the ledger; else stream-download, hash, record.
+4. Advance the cursor past the resolved documents, stopping at the first failure
+   so a failed download is retried on the next run. `--limit N` bounds each run.
 
 **Raw layout.** Content-addressed so dedupe is free and re-runs are safe:
 `data/raw/web/<sha256>.pdf`. A short `source_url → sha256` index lives in the DB.
@@ -87,7 +92,8 @@ second copy of the same bytes.
 > `url` alone and holds the *current* state of each URL (not one row per run),
 > and carries `wp_date`/`wp_modified` for the incremental watermark. There is no
 > `documents` foreign key — the parsed-artefact table stays owned by the later
-> ingestion stage; the inventory records `sha256` + `raw_path` directly.
+> ingestion stage; the inventory records `sha256` + `raw_path` directly. A third
+> table, `sync_state`, holds the resume cursor (migration `0003`).
 
 ```sql
 -- discovery runs

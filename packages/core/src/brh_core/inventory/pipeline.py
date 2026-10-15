@@ -2,13 +2,18 @@
 
 One pass:
 
-1. enumerate PDFs via the WordPress media API (optionally only those modified
-   since a watermark — the incremental run);
-2. for each URL, ``HEAD`` for a cheap change signal, and skip it when the ledger
+1. enumerate PDFs via the WordPress media API, in ``modified`` ascending order;
+2. start **after the resume cursor** (or an explicit ``--since``), so a bounded
+   run picks up where the last one stopped instead of re-scanning;
+3. for each URL, ``HEAD`` for a cheap change signal, and skip it when the ledger
    already holds the same ``(last_modified, content_length)`` and the bytes are
    on disk;
-3. otherwise stream the file into the content-addressed store, hashing as we go;
-4. record the outcome on the URL row.
+4. otherwise stream the file into the content-addressed store, hashing as we go;
+5. advance the cursor past the documents that were resolved.
+
+The cursor only moves past *resolved* documents, so a URL that failed is retried
+on the next run. Because a changed document's ``modified`` moves forward, edits
+surface naturally at the far end of the ordering.
 
 Nothing here parses PDFs — the inventory ends when bytes are on disk with a
 ledger row. Parsing/chunking/indexing is a later stage that consumes it.
@@ -17,14 +22,15 @@ ledger row. Parsing/chunking/indexing is a later stage that consumes it.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime, timedelta
 
 from brh_core.config import Settings
-from brh_core.inventory.discovery import WordPressMediaClient
+from brh_core.inventory.discovery import MediaItem, WordPressMediaClient
 from brh_core.inventory.ledger import InventoryLedger
 from brh_core.inventory.store import ContentStore
 
 DEFAULT_SCOPE = "brh.ht/media/pdf"
+_EPOCH = datetime.min.replace(tzinfo=UTC)
 
 
 @dataclass(frozen=True, slots=True)
@@ -53,6 +59,26 @@ class InventoryReport:
         }
 
 
+def item_key(item: MediaItem) -> tuple[datetime, str]:
+    """Total order over documents: ``(modified, url)``.
+
+    ``url`` is the tie-break so documents sharing a ``modified`` timestamp still
+    have one stable position — the cursor can then never skip or repeat one.
+    """
+    return (item.modified_gmt or _EPOCH, item.source_url)
+
+
+def _api_modified_after(
+    cursor: tuple[datetime, str] | None, since: datetime | None
+) -> datetime | None:
+    """The ``modified_after`` to send, with a 1s trailing edge for timestamp ties."""
+    if since is not None:
+        return since
+    if cursor is not None:
+        return cursor[0] - timedelta(seconds=1)
+    return None
+
+
 def run_inventory(
     settings: Settings,
     *,
@@ -68,27 +94,49 @@ def run_inventory(
     """Run one inventory pass; contain per-URL errors and keep going."""
     client = client or WordPressMediaClient.from_settings(settings)
     store = store or ContentStore(settings.web_store_dir)
-    mode = "incremental" if since is not None else "bulk"
+
+    cursor = ledger.get_cursor(scope)
+    # `--force` (refresh all) and an explicit `--since` (re-scan a window) bypass
+    # the cursor; the default resumes from it.
+    floor_key = None if (force or since is not None) else cursor
+    mode = "incremental" if floor_key is not None else "bulk"
+
+    items = sorted(
+        client.iter_pdfs(modified_after=_api_modified_after(cursor, since)),
+        key=item_key,
+    )
+    if floor_key is not None:
+        items = [item for item in items if item_key(item) > floor_key]
+    if limit is not None:
+        items = items[:limit]
 
     run_id = "dry-run" if dry_run else ledger.start_run(scope=scope, mode=mode, watermark=since)
 
-    discovered = downloaded = duplicated = unchanged = failed = bytes_written = 0
+    discovered = len(items)
+    downloaded = duplicated = unchanged = failed = bytes_written = 0
     failures: list[tuple[str, str]] = []
+    blocked = False
+    reached_key: tuple[datetime, str] | None = None
+
+    def resolve(item: MediaItem) -> None:
+        """Record that ``item`` is fully handled, moving the resume cursor."""
+        nonlocal reached_key
+        if not blocked:
+            reached_key = item_key(item)
 
     def record_failure(
         url: str, message: str, http_status: int | None, status: str = "failed"
     ) -> None:
-        nonlocal failed
+        nonlocal failed, blocked
         failed += 1
         failures.append((url, message))
+        if status != "gone":
+            blocked = True  # transient: stop advancing so it is retried next run
         if not dry_run:
             ledger.mark_failed(url, run_id, error=message, http_status=http_status, status=status)
 
     try:
-        for item in client.iter_pdfs(modified_after=since):
-            if limit is not None and discovered >= limit:
-                break
-            discovered += 1
+        for item in items:
             url = item.source_url
             if not url:
                 continue
@@ -105,6 +153,7 @@ def run_inventory(
 
             if stat.status_code == 404:
                 record_failure(url, "HTTP 404 not found", 404, status="gone")
+                resolve(item)
                 continue
             if stat.status_code != 200:
                 record_failure(url, f"HTTP {stat.status_code}", stat.status_code)
@@ -124,10 +173,12 @@ def run_inventory(
                 unchanged += 1
                 if not dry_run:
                     ledger.mark_unchanged(url, run_id, http_status=stat.status_code)
+                resolve(item)
                 continue
 
             if dry_run:
                 downloaded += 1  # planned
+                resolve(item)
                 continue
 
             try:
@@ -153,10 +204,14 @@ def run_inventory(
                 content_length=stat.content_length or saved.size,
                 last_modified=stat.last_modified,
             )
+            resolve(item)
     except Exception as exc:
         if not dry_run:
             ledger.finish_run(run_id, status="failed", counts={}, error=str(exc))
         raise
+
+    if not dry_run and reached_key is not None and reached_key != floor_key:
+        ledger.set_cursor(scope, reached_key[0], reached_key[1])
 
     report = InventoryReport(
         run_id=run_id,

@@ -69,13 +69,34 @@ class InventoryLedger:
                 (status, Jsonb(counts), error, run_id),
             )
 
-    def watermark(self) -> datetime | None:
-        """Highest WordPress ``modified_gmt`` seen — where the next incremental run starts."""
+    def get_cursor(self, scope: str) -> tuple[datetime, str] | None:
+        """The ``(modified, url)`` of the last resolved document, or ``None``.
+
+        This is where a run resumes: everything at or before it has been
+        resolved (downloaded / unchanged / gone) and is not revisited.
+        """
         with self._pool.connection() as conn:
             row = conn.execute(
-                "SELECT max(wp_modified) AS watermark FROM corpus.crawl_urls"
+                "SELECT cursor_modified, cursor_url FROM corpus.sync_state WHERE scope = %s",
+                (scope,),
             ).fetchone()
-        return row["watermark"] if row else None
+        if row is None or row["cursor_modified"] is None:
+            return None
+        return row["cursor_modified"], row["cursor_url"] or ""
+
+    def set_cursor(self, scope: str, modified: datetime, url: str) -> None:
+        with self._pool.connection() as conn:
+            conn.execute(
+                """
+                INSERT INTO corpus.sync_state (scope, cursor_modified, cursor_url, updated_at)
+                VALUES (%s, %s, %s, now())
+                ON CONFLICT (scope) DO UPDATE SET
+                    cursor_modified = EXCLUDED.cursor_modified,
+                    cursor_url      = EXCLUDED.cursor_url,
+                    updated_at      = now()
+                """,
+                (scope, modified, url),
+            )
 
     # --- url state -----------------------------------------------------
 
