@@ -31,7 +31,9 @@ design layer plus its `inventory` family.
 - `services/analytics` (`brh_analytics`) — stats, charts and social-media
   assets, grouped into *families* (one package per kind of analytics; the
   `inventory` family is live). Take colours from `palette.py` and rules from its
-  `DESIGN.md`; never hardcode a hex.
+  `DESIGN.md`; never hardcode a hex. The `analytics` agent
+  (`.opencode/agents/analytics.md`) owns changes there — delegate to it rather
+  than re-deriving the house style.
 - `experiments/` — a **standalone uv project** (own `.venv` + lockfile), *not* a
   workspace member. Notebooks answer design questions before implementation.
 - `docs/` — `adr/` (why), `architecture/` (as-is), `plans/` (pre-work).
