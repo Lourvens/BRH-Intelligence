@@ -34,6 +34,7 @@ PURPLE = "#593196"  # accent
 SCARLET = "#C8102E"  # negative, alert
 EMERALD = "#0E7C66"  # positive
 STEEL = "#5279B3"  # muted series colour
+SLATE = "#6C6C89"  # the site's own muted grey; the "unclassified" colour
 
 # --- Neutrals ---------------------------------------------------------------
 BG = "#F7F9FC"  # page background
@@ -47,6 +48,10 @@ INK_MUTED = "#5A6B87"  # captions, axis labels (5.4:1)
 # Categorical rotation, ordered so the first two or three read well together.
 # Past six series, facet or aggregate instead of inventing more colours.
 SERIES: tuple[str, ...] = (NAVY, AZURE, GOLD_INK, PURPLE, TEAL, STEEL)
+
+#: For category charts, where every bar is visible at once and no two may share
+#: a hue. The six series colours plus two more that still clear 3:1 on white.
+CATEGORY: tuple[str, ...] = (*SERIES, SLATE, SCARLET)
 
 # Semantic pairs. Never the only signal — pair with a sign, arrow or label,
 # because red/green is the most common colour-blind confusion.

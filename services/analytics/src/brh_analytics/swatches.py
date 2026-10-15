@@ -11,11 +11,11 @@ DejaVu is the fallback so the render works offline.
 
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
-from brh_analytics import palette
+from brh_analytics import assets, palette
 
-ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
+ASSETS_DIR = assets.ASSETS_DIR
 OUTPUT_PATH = ASSETS_DIR / "palette.png"
 
 _SCALE = 2  # draw oversized and downsample, so hairlines and text stay crisp
@@ -75,15 +75,7 @@ _GROUPS: tuple[tuple[str, tuple[tuple[str, str], ...]], ...] = (
 
 def _font(size: int, *, bold: bool = False):
     """Montserrat if bundled, DejaVu otherwise — the repo renders offline."""
-    family = "Montserrat-Bold" if bold else "Montserrat-Regular"
-    fallback = "DejaVuSans-Bold" if bold else "DejaVuSans"
-    for candidate in (
-        ASSETS_DIR / "fonts" / f"{family}.ttf",
-        Path("/usr/share/fonts/truetype/dejavu") / f"{fallback}.ttf",
-    ):
-        if candidate.exists():
-            return ImageFont.truetype(str(candidate), size * _SCALE)
-    return ImageFont.load_default(size * _SCALE)
+    return assets.font(size, bold=bold, scale=_SCALE)
 
 
 def _height() -> int:

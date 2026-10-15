@@ -1,4 +1,4 @@
-.PHONY: help install sync postgres-up postgres-down migrate ingest inventory agent-dev mcp-dev web-dev test lint fmt check seed lab
+.PHONY: help install sync postgres-up postgres-down migrate ingest inventory analytics analytics-dev agent-dev mcp-dev web-dev test lint fmt check seed lab
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -26,6 +26,12 @@ ingest: ## Discover PDFs in data/raw and run the ingestion pipeline
 
 inventory: ## Catalogue brh.ht and download the missing documents (ARGS="--limit 20")
 	uv run python -m brh_core.inventory $(ARGS)
+
+analytics: ## Render the posts into services/analytics/out (ARGS="--size portrait")
+	uv run python -m brh_analytics $(ARGS)
+
+analytics-dev: ## Open the analytics dashboard
+	uv run streamlit run services/analytics/src/brh_analytics/app.py
 
 agent-dev: ## Run the LangGraph agent server locally
 	cd services/agent && uv run langgraph dev

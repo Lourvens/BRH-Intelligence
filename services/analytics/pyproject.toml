@@ -5,7 +5,9 @@ description = "Stats, charts and social-media assets built on the BRH corpus."
 requires-python = ">=3.12"
 dependencies = [
     "brh-core",
+    "matplotlib>=3.9",
     "pillow>=10.0",
+    "streamlit>=1.40",
 ]
 
 [project.optional-dependencies]

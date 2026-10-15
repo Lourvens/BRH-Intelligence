@@ -15,8 +15,8 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 - **The rest of the repo is still a scaffold**: structure, contracts, config, and
   wiring only. See the build order in [`README.md`](README.md).
 - **A second track, `services/analytics`**, generates the stats, charts and
-  social-media assets. The palette and the style guide are done; the charts are
-  not, because the plotting stack is still an open choice.
+  social-media assets. Its `inventory` family is live (six posts, rendered from
+  the crawl ledger); the next family waits on corpus ingestion.
 
 ## Next up
 
@@ -37,9 +37,17 @@ Continue the build order:
   `#031A71` navy, headings are Montserrat — then re-tuned where WCAG demanded
   it (gold stays a fill colour; `gold-ink` carries text). `palette.check()` is
   the machine-checkable contract, `python -m brh_analytics` renders
-  `assets/palette.png`, and the rules live in `services/analytics/DESIGN.md`.
-  No charts yet: the interactive stack (Streamlit / Gradio / CLI) is the open
-  decision.
+  `assets/palette.png` plus every post, and the rules live in
+  `services/analytics/DESIGN.md`.
+- **2026-10-15 — the inventory family, and the grouping.** Analytics is
+  organised into *families*: a package per kind of analytics owning its source
+  and its copy, with a shared, domain-free design layer (`palette`, `charts`,
+  `finding`, `posts`) on top. `inventory` is the first — six findings from the
+  crawl ledger (1 169 documents; the 2017-2018 migration masquerading as a
+  publication spike; what the BRH publishes; the inflation note cadence; the
+  job postings hidden in the media library; the 198 titles that arrive damaged)
+  rendered to postable PNGs and browsable in a Streamlit dashboard. Output is
+  grouped to match: `out/inventory/<slug>-<format>.png`.
 - **2026-10-14 — BRH document inventory.** `brh_core.inventory`: discover PDFs
   via the WordPress media API, download into `data/raw/web/<sha256>.pdf`, log
   every URL in `corpus.crawl_urls` (dates + status + hash) with a run history in

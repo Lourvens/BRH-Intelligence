@@ -19,8 +19,8 @@ works. These still `raise NotImplementedError`:
 - `brh_agent`: `llm.py`, `nodes.py`, `prompts.py`
 
 Implemented today: `brh_core.{config,models}`, `brh_core.db.{pool,migrate}`,
-`brh_core.inventory.*`, `brh_agent.{graph,state}`, and
-`brh_analytics.{palette,swatches}`.
+`brh_core.inventory.*`, `brh_agent.{graph,state}`, and the `brh_analytics`
+design layer plus its `inventory` family.
 
 ## Layout and boundaries
 
@@ -29,8 +29,9 @@ Implemented today: `brh_core.{config,models}`, `brh_core.db.{pool,migrate}`,
 - `services/agent` (`brh_agent`) — LangGraph graph. `services/mcp` (`brh_mcp`)
   — FastMCP server. `apps/web` — Next.js, talks to the agent via the LangGraph SDK.
 - `services/analytics` (`brh_analytics`) — stats, charts and social-media
-  assets. Take colours from `palette.py` and rules from its `DESIGN.md`; never
-  hardcode a hex.
+  assets, grouped into *families* (one package per kind of analytics; the
+  `inventory` family is live). Take colours from `palette.py` and rules from its
+  `DESIGN.md`; never hardcode a hex.
 - `experiments/` — a **standalone uv project** (own `.venv` + lockfile), *not* a
   workspace member. Notebooks answer design questions before implementation.
 - `docs/` — `adr/` (why), `architecture/` (as-is), `plans/` (pre-work).

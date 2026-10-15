@@ -43,6 +43,9 @@ experiments/.venv/
 experiments/artifacts/*
 !experiments/artifacts/.gitkeep
 
+# --- Analytics output (regenerate with `make analytics`) ---
+services/analytics/out/
+
 # --- OS / editor ---
 .DS_Store
 *.swp

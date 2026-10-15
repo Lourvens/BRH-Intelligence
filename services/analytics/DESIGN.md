@@ -48,6 +48,7 @@ text, **3:1** for graphics.
 | `gold-ink` | `#A67C00` | Gold as a line or label | 3.8:1 |
 | `purple` | `#593196` | Accent | 9.1:1 |
 | `steel` | `#5279B3` | Muted series colour | 4.3:1 |
+| `slate` | `#6C6C89` | The site's own grey — "unclassified", neutrals | 5.1:1 |
 
 ### Neutrals
 
@@ -67,7 +68,14 @@ use, so the order matters:
 
 `S1 navy` → `S2 azure` → `S3 gold-ink` → `S4 purple` → `S5 teal` → `S6 steel`
 
-Past six series, facet or aggregate. Do not add a seventh colour.
+Past six series, facet or aggregate. Do not add a seventh colour to a *series*
+rotation.
+
+**Category** charts (every bar visible at once) are the exception: no two bars
+may share a hue, so they use an eight-colour ramp — the six series colours plus
+`slate` and `scarlet`. A "green means good" reading is not available there, so
+never use `scarlet` for a category in the same chart as a positive/negative
+pair.
 
 **Semantic:** `positive` `#0E7C66` (5.1:1), `negative` `#C8102E` (5.9:1).
 
@@ -110,12 +118,20 @@ inflation 24,3 %                 taux de 3,75 %
 **Always**
 
 - White plot area; no frame, no border, no background tint.
-- Horizontal gridlines only, `border` at 1px. No vertical grid, no tick marks
-  beyond the axis.
-- Title and subtitle left-aligned, above the plot.
+- **A chart is naked.** It carries data and nothing else — the asset around it
+  owns the headline, the legend and the source line. That is what lets the same
+  chart drop into a slide or a report without fighting baked-in text.
+- When every bar is labelled directly, drop the value axis: the labels are the
+  axis, and gridlines behind them are just furniture.
+- When an axis is needed, horizontal gridlines only, `border` at 1px. No
+  vertical grid, no tick marks beyond the axis.
 - Legend above the plot, horizontal, when there is more than one series.
-- Source line bottom-left: `Source : Banque de la République d'Haïti (brh.ht) · <date>`.
+- Source line bottom-left of the **asset**: `Source : Banque de la République
+  d'Haïti (brh.ht) · <date>`.
 - Zero baseline on bars. Truncated axes must be labelled.
+- A bucket — "Autres", "Divers", "N/A" — is never charted. It outranks the
+  named categories and contradicts whatever the headline claims. Its size goes
+  in the caption.
 
 **Never**
 
@@ -156,7 +172,7 @@ never covers it.
 
 ```
 ┌──────────────────────────────────────┐
-│  EYEBROW            (Montserrat 600, │  ← gold-ink or azure, uppercase, tracked
+│  EYEBROW            (Montserrat 600, │  ← gold-ink, uppercase, tracked
 │                       uppercase, 14) │
 │  Headline that says one thing        │  ← Montserrat 700, 32–44, ≤2 lines
 │                                      │
@@ -182,20 +198,38 @@ On navy, use the white version.
 **Do** — one idea per asset · left-align · always show a source and a date ·
 lead with `navy` · keep whitespace · use tabular figures.
 
-**Don't** — tint the background behind charts · use gold for text · mix more
-than four type sizes on one asset · add shadows or gradients to data · recolour
-or stretch the logo · invent colours outside this palette.
+**Don't** — tint the background behind charts · use the raw gold `#E8D833` for
+text (that is what `gold-ink` is for) · mix more than four type sizes on one
+asset · add shadows or gradients to data · recolour or stretch the logo ·
+invent colours outside this palette.
 
 ## Implementation
 
-- Tokens live in [`src/brh_analytics/palette.py`](src/brh_analytics/palette.py)
-  and are the only place a hex value is written.
+| Module | Job |
+|---|---|
+| `palette.py` | The tokens. **The only place a hex value is written.** |
+| `formatting.py` | French numbers, dates and byte sizes. |
+| `charts.py` | Chart primitives, from numbers and labels only. |
+| `finding.py` | The `Finding` shape every family produces. |
+| `posts.py` | Composes copy + chart + footer onto a canvas. |
+| `families.py` | The registry the CLI and dashboard iterate. |
+| `swatches.py` | Renders `assets/palette.png`. |
+| `app.py` | The Streamlit dashboard. |
+| `inventory/` | The inventory family: its source and its copy. |
+
+A family is a package under `src/brh_analytics/` exposing `build()`. Charts and
+posts stay family-agnostic so the next family inherits the whole design system
+for free.
+
 - The contrast figures in this guide are produced by `palette.check()` — run
   `uv run python -m brh_analytics` to regenerate
-  [`assets/palette.png`](assets/palette.png), the swatch sheet.
+  [`assets/palette.png`](assets/palette.png) and every post into
+  `out/<family>/`, so output is grouped the way the code is.
 - Fonts: Montserrat and Inter are SIL OFL. Not bundled yet — drop the TTFs in
-  `assets/fonts/` (Montserrat first, then Inter) and the renderer and charts
+  `assets/fonts/` (Montserrat first, then Inter) and the renderers and charts
   pick them up; until then rendering falls back to DejaVu, which keeps the repo
   offline-clean.
-- Localisation: French number and date formats (`15/10/2026`), non-breaking
-  spaces in numbers.
+- The BRH mark is not bundled either. Save it to `assets/logo.png` and the
+  footer picks it up. It is BRH's mark: never recolour or stretch it.
+- Localisation: French number and date formats (`15/10/2026`), narrow no-break
+  spaces inside numbers, no-break space before `%`.
