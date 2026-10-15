@@ -1,0 +1,98 @@
+# AGENTS.md
+
+Repo-specific guidance for agents. Read [`PROGRESSION.md`](PROGRESSION.md) first —
+it holds current state, next steps, and gotchas; update it when you start or
+finish a task.
+
+## What this is
+
+Monorepo for BRH Intelligence: a French-language RAG platform over BRH (Haiti's
+central bank) documents — a LangGraph agent, a FastMCP server, and a Next.js
+app, all sharing one Python core.
+
+**Much of it is a scaffold.** A module existing in the tree does not mean it
+works. These still `raise NotImplementedError`:
+
+- `brh_core`: `catalog.py`, `citations.py`, `db/repository.py`,
+  `embeddings/{factory,hashing,openai}.py`, `ingestion/{discover,metadata,extract,chunk,pipeline}.py`,
+  `retrieval/service.py`, `vectorstore/{factory,memory,pinecone_store}.py`
+- `brh_agent`: `llm.py`, `nodes.py`, `prompts.py`
+
+Implemented today: `brh_core.{config,models}`, `brh_core.db.{pool,migrate}`,
+`brh_core.inventory.*`, and `brh_agent.{graph,state}`.
+
+## Layout and boundaries
+
+- `packages/core` (`brh_core`) — domain model, storage, ingestion, retrieval;
+  the single shared core that both services depend on.
+- `services/agent` (`brh_agent`) — LangGraph graph. `services/mcp` (`brh_mcp`)
+  — FastMCP server. `apps/web` — Next.js, talks to the agent via the LangGraph SDK.
+- `experiments/` — a **standalone uv project** (own `.venv` + lockfile), *not* a
+  workspace member. Notebooks answer design questions before implementation.
+- `docs/` — `adr/` (why), `architecture/` (as-is), `plans/` (pre-work).
+- `data/` — gitignored. `data/raw/web/<sha256>.pdf` is the content-addressed
+  store the inventory writes.
+
+Two separate workspaces: the root `pyproject.toml` is a uv virtual workspace
+(`packages/*`, `services/*`); the root `package.json` is a bun workspace
+(`apps/*`).
+
+## Commands
+
+Run from the repo root with `uv run` / `bun` — the uv workspace is what resolves
+`brh-core` for the services.
+
+```bash
+make help                          # list all targets
+make install                       # uv sync --all-packages + bun install
+make postgres-up                   # docker compose, container brh-postgres :5432
+make migrate                       # python -m brh_core.db.migrate
+make inventory ARGS="--limit 20"   # catalogue brh.ht + download (needs Postgres)
+make test                          # uv run pytest
+make lint                          # ruff check . + web tsc --noEmit
+make check                         # lint + test
+make lab                           # JupyterLab for experiments/
+```
+
+- Single test: `uv run pytest packages/core/tests/test_inventory.py -k catalogue`.
+- pytest runs `packages/core/tests` + `services/agent/tests` (root `testpaths`).
+- `apps/web` has **no ESLint** — its `lint` and `typecheck` are both
+  `tsc --noEmit`. `apps/web/package.json` is the source of truth.
+- Ruff excludes `experiments/` (notebook cells trip it).
+
+## Gotchas that cost time
+
+- **`langgraph dev` overrides shell env.** `services/agent/langgraph.json` sets
+  `"env": "../../.env"`, which wins over exported variables — edit `.env`, not
+  the shell, to change what the agent sees.
+- **`.env` is discovered by walking up from the CWD**
+  (`brh_core.config._discover_env_file`), so the repo-root file is found from any
+  member. `get_settings()` is process-cached; pass `refresh=True` to reload.
+- **Tests run offline** — no Postgres, no Pinecone, no network. Use the `memory`
+  vector backend + `hashing` embeddings, and duck-typed fakes instead of a DB.
+  Mark anything needing real services `@pytest.mark.integration`; the marker is
+  declared but *not* deselected by default, so filter with `-m "not integration"`.
+- **Migrations are append-only and idempotent**: add `NNNN_*.sql` under
+  `brh_core/db/migrations/`, applied by `brh_core.db.migrate` and tracked in
+  `corpus.schema_migrations`. Never edit an applied migration.
+- **`brh.ht` is WordPress.** Enumerate documents with
+  `wp-json/wp/v2/media?mime_type=application/pdf` — `media_type=application/pdf`
+  returns HTTP 400. File responses carry `Last-Modified`/`Content-Length` but
+  **no `ETag`**, and the same bytes appear at more than one URL — a URL is not an
+  identity; `sha256` is.
+- **The sibling `../brh-intelligence-queryengine`** is the seed corpus and prior
+  art (`make seed`, override with `BRH_SIBLING=`). Its parsed Markdown has **no
+  page markers**, so page-level citations must come from re-extracting the PDFs
+  (PyMuPDF, ADR-0005). Its web-ingestion notes are also stale/wrong on the API.
+- `data/processed/catalog.json` and the sibling Markdown under `data/` are
+  leftovers from an earlier run, not sources of truth.
+
+## Conventions that differ from defaults
+
+- Domain models are **frozen** pydantic — construct new instances, don't mutate.
+- Surfaces (agent, MCP) must go through `RetrievalService`; never touch
+  Pinecone/Postgres read paths directly (ADR-0006).
+- The web app uses `@langchain/langgraph-sdk` `useStream`, not the AI SDK
+  (ADR-0008). The corpus is **French-only**, no auto-translation (ADR-0004).
+- Non-trivial decisions get an ADR in `docs/adr/`.
+- `BRH_LLM_MAX_TOKENS` defaults to 2048 on purpose (thinking-token budget).
