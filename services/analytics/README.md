@@ -5,7 +5,8 @@ Stats, charts and social-media posts built on the BRH corpus.
 **Status: working, one family.** `inventory` is live — six findings drawn from
 the crawl ledger, rendered to postable images and browsable in a dashboard. No
 corpus ingestion yet, so every number here comes from what the *catalogue*
-knows: titles, dates, sizes, status.
+knows: titles, dates, sizes, status. There are no tests in this scope yet
+either; the check so far is `make analytics` plus looking at what it rendered.
 
 ```bash
 make analytics                              # palette sheet + every family → out/
@@ -17,6 +18,10 @@ make analytics-dev                          # Streamlit dashboard
 
 - [`DESIGN.md`](DESIGN.md) — the style guide. **Read it before drawing anything.**
 - `src/brh_analytics/palette.py` — the tokens, and the only place a hex lives.
+- The `analytics` agent
+  ([`.opencode/agents/analytics.md`](../../.opencode/agents/analytics.md)) owns
+  this scope: it carries the rules below, so hand it the work rather than
+  re-deriving them.
 
 ## Grouped by family
 
