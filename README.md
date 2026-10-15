@@ -8,8 +8,9 @@ same knowledge through **MCP**.
 > **This repository is a scaffold.** The structure, contracts, configuration,
 > and wiring are in place; most of the implementation is not. Every module
 > carries `TODO:` markers and signature-level stubs so you can build it step by
-> step. The first vertical slice — the BRH document inventory — *is* implemented
-> (`make inventory`). See [Build order](#build-order) below.
+> step. Two slices *are* implemented: the BRH document inventory
+> (`make inventory`) and its analytics track, `services/analytics`
+> (`make analytics`). See [Build order](#build-order) below.
 
 ## The one workflow we build first
 
@@ -24,8 +25,11 @@ BRH PDF  ──►  page-aware extraction  ──►  Postgres (metadata, pages,
    (answer + citations)   (ask + open PDF page)   (same retrieval)
 ```
 
-Everything else (indicator comparison, French/Creole/English, crawler,
-multi-agent) is deliberately out of scope for now — see `PROGRESSION.md`.
+Everything else (indicator comparison, French/Creole/English, multi-agent) is
+deliberately out of scope for now — see `PROGRESSION.md`. The **analytics
+track** (`services/analytics`) runs beside this one: it turns the inventory's
+crawl ledger into stats, charts and postable images, and nothing above depends
+on it.
 
 ## Layout
 
@@ -46,7 +50,8 @@ brh-intelligence/
 │       ├── inventory/           ✅ real  (brh.ht: discover → download → ledger)
 │       ├── ingestion/           ⬜ stub  (discover, extract, chunk, pipeline)
 │       ├── retrieval/service.py ⬜ stub  (THE shared core)
-│       └── citations.py         ⬜ stub  (PDF page deep links)
+│       ├── citations.py         ⬜ stub  (PDF page deep links)
+│       └── catalog.py           ⬜ stub  (export for the web PDF route)
 ├── services/agent/      # brh_agent — LangGraph graph
 │   ├── graph.py                 ✅ real  (retrieve → generate|refuse)
 │   ├── state.py                 ✅ real  (graph state)
@@ -54,6 +59,15 @@ brh-intelligence/
 │   ├── prompts.py               ⬜ stub  (French prompt)
 │   └── llm.py                   ⬜ stub  (provider-agnostic chat model)
 ├── services/mcp/        # brh_mcp   — FastMCP server (tools to add)
+├── services/analytics/  # brh_analytics — stats, charts, social posts (LIVE)
+│   ├── palette.py               ✅ real  (design tokens, sampled from brh.ht)
+│   ├── formatting.py            ✅ real  (French numbers, dates, byte sizes)
+│   ├── charts.py                ✅ real  (draws from numbers + labels only)
+│   ├── finding.py posts.py      ✅ real  (describe a figure → compose a canvas)
+│   ├── families.py swatches.py  ✅ real  (the family registry, the palette sheet)
+│   ├── app.py                   ✅ real  (Streamlit dashboard)
+│   ├── DESIGN.md                ✅ real  (the style guide — binding)
+│   └── inventory/               ✅ real  (the crawl ledger → six findings)
 ├── apps/web/            # Next.js   — chat + citations + PDF viewer (to build)
 ├── docs/                # ADRs, architecture, plan, runbook
 └── docker-compose.yml   # local Postgres
@@ -70,8 +84,13 @@ A suggested path. Each step is independently verifiable.
    the ones still missing into a content-addressed store (`brh_core.inventory`,
    migration `0002`). `make inventory ARGS="--limit 20"` downloads the next 20;
    the rest stay queued. Run `make migrate` first.
-1. **Config & schema** — already done. `make postgres-up && make migrate` (once
-   `db/migrate.py` is implemented) creates the corpus tables.
+
+   **Analytics** is implemented on top of that ledger — `make analytics` renders
+   the findings as postable images and `make analytics-dev` opens the dashboard.
+   It sits off the critical path: a new family needs no change to the core. See
+   [`services/analytics/README.md`](services/analytics/README.md).
+1. **Config & schema** — already done. `make postgres-up && make migrate` creates
+   the corpus tables (migrations `0001`–`0002`).
 2. **Vector store + embedder** — implement `embeddings/hashing.py` and
    `vectorstore/memory.py` first; they run fully offline and unlock tests.
 3. **Ingestion** — `metadata.py` → `extract.py` (PyMuPDF, page-aware) →
@@ -90,9 +109,12 @@ A suggested path. Each step is independently verifiable.
 cp .env.example .env          # fill in what each step needs
 make install                  # uv sync --all-packages + bun install
 make postgres-up              # metadata store
-make migrate                  # apply the corpus schema (implement first)
+make migrate                  # apply the corpus schema
 make seed                     # copy the corpus into data/raw (sibling project)
 make inventory                # discover + download BRH documents from brh.ht
+
+make analytics                # render the stats, charts and posts → out/
+make analytics-dev            # the analytics dashboard  :8501
 
 make agent-dev                # LangGraph agent server   :2024
 make mcp-dev                  # MCP server               :8000/mcp
@@ -104,6 +126,9 @@ make web-dev                  # Next.js                  :3000
 - Every non-trivial decision is an ADR in [`docs/adr/`](docs/adr/).
 - Imports stay inside the contract: surfaces use `RetrievalService`, never
   Pinecone/Postgres read paths directly.
+- Analytics colours come from `services/analytics/src/brh_analytics/palette.py`
+  and its rules from [`DESIGN.md`](services/analytics/DESIGN.md) — never
+  hardcode a hex.
 - Tests run offline; live calls are `@pytest.mark.integration`.
 - Frozen pydantic models; small focused files; type hints everywhere.
 
