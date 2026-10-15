@@ -1,0 +1,14 @@
+[project]
+name = "brh-experiments"
+version = "0.1.0"
+description = "Notebooks for spikes and option analysis. Not shipped."
+requires-python = ">=3.12"
+dependencies = [
+    "jupyterlab>=4.2",
+    "ipykernel>=6.29",
+    "pandas>=2.2",
+    "pymupdf>=1.24",
+    "pypdf>=5.0",
+    "fonttools>=4.53",
+    "httpx>=0.27",
+]

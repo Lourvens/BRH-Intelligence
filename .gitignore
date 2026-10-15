@@ -37,6 +37,12 @@ data/web/
 langgraph_api/
 logs/
 
+# --- Experiments (notebooks) ---
+*.ipynb_checkpoints/
+experiments/.venv/
+experiments/artifacts/*
+!experiments/artifacts/.gitkeep
+
 # --- OS / editor ---
 .DS_Store
 *.swp

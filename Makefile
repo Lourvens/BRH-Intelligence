@@ -1,4 +1,4 @@
-.PHONY: help install sync postgres-up postgres-down migrate ingest agent-dev mcp-dev web-dev test lint fmt check seed
+.PHONY: help install sync postgres-up postgres-down migrate ingest agent-dev mcp-dev web-dev test lint fmt check seed lab
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -32,6 +32,9 @@ mcp-dev: ## Run the MCP server (streamable HTTP)
 
 web-dev: ## Run the Next.js app
 	cd apps/web && bun dev
+
+lab: ## Open JupyterLab for experiments (syncs its env first)
+	cd experiments && uv sync && uv run jupyter lab notebooks
 
 test: ## Run the Python test suite
 	uv run pytest
