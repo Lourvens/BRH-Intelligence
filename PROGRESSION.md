@@ -1,6 +1,6 @@
 # Progression
 
-Last updated: 2026-10-14 (BRH document inventory implemented)
+Last updated: 2026-10-15 (analytics scope + BRH design guide)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
@@ -12,8 +12,11 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   and downloads the missing ones content-addressed into `data/raw/web/`.
   Idempotent: the download queue is the unresolved rows, so bounded runs advance
   and failures are retried.
-- The rest of the repo is still a scaffold: structure, contracts, config, and
+- **The rest of the repo is still a scaffold**: structure, contracts, config, and
   wiring only. See the build order in [`README.md`](README.md).
+- **A second track, `services/analytics`**, generates the stats, charts and
+  social-media assets. The palette and the style guide are done; the charts are
+  not, because the plotting stack is still an open choice.
 
 ## Next up
 
@@ -28,6 +31,15 @@ Continue the build order:
 
 ## Recently done
 
+- **2026-10-15 — Analytics scope + BRH design guide.** `services/analytics`
+  (`brh_analytics`, a new uv workspace member) opens the stats/charts/social
+  track. The palette was sampled from `brh.ht` itself — the site logo is a flat
+  `#031A71` navy, headings are Montserrat — then re-tuned where WCAG demanded
+  it (gold stays a fill colour; `gold-ink` carries text). `palette.check()` is
+  the machine-checkable contract, `python -m brh_analytics` renders
+  `assets/palette.png`, and the rules live in `services/analytics/DESIGN.md`.
+  No charts yet: the interactive stack (Streamlit / Gradio / CLI) is the open
+  decision.
 - **2026-10-14 — BRH document inventory.** `brh_core.inventory`: discover PDFs
   via the WordPress media API, download into `data/raw/web/<sha256>.pdf`, log
   every URL in `corpus.crawl_urls` (dates + status + hash) with a run history in
