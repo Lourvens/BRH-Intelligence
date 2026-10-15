@@ -1,4 +1,4 @@
-.PHONY: help install sync postgres-up postgres-down migrate ingest agent-dev mcp-dev web-dev test lint fmt check seed lab
+.PHONY: help install sync postgres-up postgres-down migrate ingest inventory agent-dev mcp-dev web-dev test lint fmt check seed lab
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -23,6 +23,9 @@ seed: ## Copy the sibling project's PDFs + parsed Markdown into data/
 
 ingest: ## Discover PDFs in data/raw and run the ingestion pipeline
 	uv run python -m brh_core.ingestion
+
+inventory: ## Discover + download BRH documents from brh.ht (ARGS="--incremental")
+	uv run python -m brh_core.inventory $(ARGS)
 
 agent-dev: ## Run the LangGraph agent server locally
 	cd services/agent && uv run langgraph dev

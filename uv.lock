@@ -152,6 +152,7 @@ name = "brh-core"
 version = "0.1.0"
 source = { editable = "packages/core" }
 dependencies = [
+    { name = "httpx" },
     { name = "langchain-text-splitters" },
     { name = "openai" },
     { name = "pinecone" },
@@ -172,6 +173,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "httpx", specifier = ">=0.27" },
     { name = "langchain-text-splitters", specifier = ">=0.3" },
     { name = "openai", specifier = ">=1.40" },
     { name = "pinecone", specifier = ">=6.0" },

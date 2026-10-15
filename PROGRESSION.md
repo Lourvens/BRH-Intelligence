@@ -1,28 +1,37 @@
 # Progression
 
-Last updated: 2026-10-14 (scaffold only — implementation not started)
+Last updated: 2026-10-14 (BRH document inventory implemented)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
-- Nothing implemented. The repo is a scaffold: structure, contracts, config,
-  and wiring only. See the build order in [`README.md`](README.md).
+- **BRH inventory (front half) is implemented** — `make inventory` discovers
+  every PDF on `brh.ht`, downloads it content-addressed, and logs it in
+  `corpus.crawl_urls` / `corpus.crawl_runs`. Idempotent and incremental.
+- The rest of the repo is still a scaffold: structure, contracts, config, and
+  wiring only. See the build order in [`README.md`](README.md).
 
 ## Next up
 
-Follow the build order. Suggested first three, each verifiable offline:
+Continue the build order:
 
 1. `embeddings/hashing.py` + `vectorstore/memory.py` — offline embedder and
    vector store, so tests can run with no cloud.
-2. `db/migrate.py` + `db/pool.py` + `db/repository.py` — apply the schema and
-   make the corpus queryable (`make postgres-up && make migrate`).
-3. Ingestion: `metadata.py` → `extract.py` → `chunk.py` → `pipeline.py`.
-   Verify with `make seed && make ingest`.
+2. `db/repository.py` — corpus documents/pages/chunks read/write (pool and
+   migrate are done; run `make postgres-up && make migrate`).
+3. Ingestion: `metadata.py` → `extract.py` → `chunk.py` → `pipeline.py`, fed by
+   the files the inventory has already downloaded. Verify with `make ingest`.
 
 ## Recently done
 
+- **2026-10-14 — BRH document inventory.** `brh_core.inventory`: discover PDFs
+  via the WordPress media API, download into `data/raw/web/<sha256>.pdf`, log
+  every URL in `corpus.crawl_urls` (dates + status + hash) with a run history in
+  `corpus.crawl_runs`. Verified against the live site + Postgres: 11 PDFs
+  downloaded, re-run skipped all 11 (unchanged), `--incremental` ran from the
+  watermark. Offline tests in `packages/core/tests/test_inventory.py`.
 - **2026-10-14 — Scaffold.** Monorepo (uv workspace: `brh-core`, `brh-agent`,
   `brh-mcp`; bun workspace: `apps/web`). Real: config, domain model, SQL schema,
   `VectorStore`/`Embedder` protocols, graph wiring, MCP server shell, tooling,
@@ -35,7 +44,6 @@ Follow the build order. Suggested first three, each verifiable offline:
 
 ## Backlog / out of scope for now
 
-- Autodiscovery crawler for `brh.ht` (Firecrawl).
 - Haitian Creole + English surfaces (docs are French-only for now).
 - Indicator comparison / structured tables as a first-class query type.
 - Session persistence + follow-up memory (LangGraph checkpointer on Postgres).
@@ -60,3 +68,11 @@ Follow the build order. Suggested first three, each verifiable offline:
 - `multilingual-e5-large` has a ~512-token (~2K char) ceiling; chunks above it
   are silently truncated at embed time. Keep `chunk_size` well under it
   (default 1000 chars).
+- `brh.ht` is WordPress: enumerate documents through
+  `wp-json/wp/v2/media?mime_type=application/pdf`, **not** `media_type=...`
+  (that rejects `pdf` with HTTP 400 — the sibling project's doc is wrong).
+  Incremental discovery is the `modified_after` parameter.
+- `brh.ht` file responses carry `Last-Modified` + `Content-Length` but **no
+  `ETag`**, so a cheap re-check is `(last_modified, content_length)`; the real
+  identity is the `sha256` computed after download. The same bytes appear at
+  more than one URL, so a file's URL is not its identity.

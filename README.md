@@ -6,9 +6,10 @@ documents, open the exact source page, and let other people's agents use the
 same knowledge through **MCP**.
 
 > **This repository is a scaffold.** The structure, contracts, configuration,
-> and wiring are in place; the implementation is not. Every module carries
-> `TODO:` markers and signature-level stubs so you can build it step by step.
-> See [Build order](#build-order) below.
+> and wiring are in place; most of the implementation is not. Every module
+> carries `TODO:` markers and signature-level stubs so you can build it step by
+> step. The first vertical slice — the BRH document inventory — *is* implemented
+> (`make inventory`). See [Build order](#build-order) below.
 
 ## The one workflow we build first
 
@@ -35,11 +36,14 @@ brh-intelligence/
 │       ├── config.py            ✅ real  (env plumbing)
 │       ├── models.py            ✅ real  (frozen domain model)
 │       ├── db/migrations/*.sql  ✅ real  (schema)
-│       ├── db/                  ⬜ stub  (pool, repository, migrate)
+│       ├── db/pool.py           ✅ real  (connection pool)
+│       ├── db/migrate.py        ✅ real  (migration runner)
+│       ├── db/repository.py     ⬜ stub  (corpus documents/pages/chunks)
 │       ├── vectorstore/base.py  ✅ real  (VectorStore protocol)
 │       ├── vectorstore/         ⬜ stub  (pinecone, memory, factory)
 │       ├── embeddings/base.py   ✅ real  (Embedder protocol)
 │       ├── embeddings/          ⬜ stub  (openai, hashing, factory)
+│       ├── inventory/           ✅ real  (brh.ht: discover → download → ledger)
 │       ├── ingestion/           ⬜ stub  (discover, extract, chunk, pipeline)
 │       ├── retrieval/service.py ⬜ stub  (THE shared core)
 │       └── citations.py         ⬜ stub  (PDF page deep links)
@@ -61,6 +65,11 @@ Legend: ✅ real = ready to use; ⬜ stub = signatures + `TODO`, you write the b
 
 A suggested path. Each step is independently verifiable.
 
+0. **Inventory (front half)** — already implemented. `make inventory` discovers
+   every PDF on `brh.ht`, downloads it into a content-addressed store, and logs
+   it in the ledger (`brh_core.inventory`, migration `0002`). `--incremental`
+   pulls only what changed since the last run — the scheduled unit. Run
+   `make migrate` first.
 1. **Config & schema** — already done. `make postgres-up && make migrate` (once
    `db/migrate.py` is implemented) creates the corpus tables.
 2. **Vector store + embedder** — implement `embeddings/hashing.py` and
@@ -83,6 +92,7 @@ make install                  # uv sync --all-packages + bun install
 make postgres-up              # metadata store
 make migrate                  # apply the corpus schema (implement first)
 make seed                     # copy the corpus into data/raw (sibling project)
+make inventory                # discover + download BRH documents from brh.ht
 
 make agent-dev                # LangGraph agent server   :2024
 make mcp-dev                  # MCP server               :8000/mcp

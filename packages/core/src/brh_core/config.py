@@ -147,6 +147,18 @@ class Settings(BaseSettings):
     chunk_size: int = Field(default=1000, gt=0, validation_alias="BRH_CHUNK_SIZE")
     chunk_overlap: int = Field(default=150, ge=0, validation_alias="BRH_CHUNK_OVERLAP")
 
+    # --- Web inventory (discovery of brh.ht) ---------------------------
+    web_base_url: str = Field(default="https://www.brh.ht", validation_alias="BRH_WEB_BASE_URL")
+    web_user_agent: str = Field(
+        default="brh-intelligence-inventory/0.1 (+public-sector document inventory)",
+        validation_alias="BRH_WEB_USER_AGENT",
+    )
+    web_request_delay: float = Field(
+        default=0.3, ge=0, validation_alias="BRH_WEB_REQUEST_DELAY"
+    )
+    web_timeout: float = Field(default=30.0, gt=0, validation_alias="BRH_WEB_TIMEOUT")
+    web_max_retries: int = Field(default=3, ge=0, validation_alias="BRH_WEB_MAX_RETRIES")
+
     # --- Citations -----------------------------------------------------
     public_pdf_base_url: str = Field(
         default="http://localhost:3000/api/pdfs",
@@ -190,6 +202,11 @@ class Settings(BaseSettings):
     @property
     def resolved_processed_dir(self) -> Path:
         return Path(self.processed_dir)
+
+    @property
+    def web_store_dir(self) -> Path:
+        """Content-addressed store for downloaded web artefacts (under raw_dir)."""
+        return self.raw_dir / "web"
 
     @property
     def cors_allowed_origins_list(self) -> list[str]:

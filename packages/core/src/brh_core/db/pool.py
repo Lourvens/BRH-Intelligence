@@ -1,20 +1,24 @@
-"""Connection-pool helpers for the corpus database.
-
-TODO: implement ``open_pool`` on top of ``psycopg_pool.ConnectionPool``. Keep
-it lazy (``open=False``) and pass the search path through ``settings.postgres_dsn``.
-"""
+"""Connection-pool helpers for the corpus database."""
 
 from __future__ import annotations
 
+from psycopg.rows import dict_row
 from psycopg_pool import ConnectionPool
 
 from brh_core.config import Settings
 
 
 def open_pool(settings: Settings) -> ConnectionPool:
-    """Open a connection pool against the corpus database.
+    """Build a lazy connection pool against the corpus database.
 
-    The pool should be lazy: no connection until the first ``connection()``
-    call. Autocommit is fine for the ingestion workload.
+    No connection is opened until the first ``connection()`` call. Autocommit
+    suits the pipeline's single-statement writes; the schema is pinned through
+    ``settings.postgres_dsn``; ``dict_row`` keeps rows addressable by name.
     """
-    raise NotImplementedError("TODO: build a ConnectionPool from settings")
+    return ConnectionPool(
+        conninfo=settings.postgres_dsn,
+        min_size=settings.postgres_pool_min_size,
+        max_size=settings.postgres_pool_max_size,
+        open=False,
+        kwargs={"autocommit": True, "row_factory": dict_row},
+    )

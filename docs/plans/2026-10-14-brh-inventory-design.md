@@ -1,7 +1,7 @@
 # Plan: BRH document inventory (discover → download → ledger)
 
 - **Date**: 2026-10-14
-- **Status**: Planned — experiments first, implementation after sign-off
+- **Status**: Implemented — see `brh_core.inventory` and migration `0002_inventory.sql`
 - **Feeds**: `brh_core.ingestion` (discovery stage), ADR-0003 (Postgres), ADR-0005 (page-aware PDFs)
 
 ## Goal
@@ -79,7 +79,15 @@ second copy of the same bytes.
 **Raw layout.** Content-addressed so dedupe is free and re-runs are safe:
 `data/raw/web/<sha256>.pdf`. A short `source_url → sha256` index lives in the DB.
 
-## Schema sketch (migration `0002_inventory.sql`, additive)
+## Schema sketch (draft — the experiment may change it)
+
+> **As built.** The shipped schema is
+> `packages/core/src/brh_core/db/migrations/0002_inventory.sql`. It keeps
+> `crawl_runs` as sketched, but differs on `crawl_urls`: the table is keyed by
+> `url` alone and holds the *current* state of each URL (not one row per run),
+> and carries `wp_date`/`wp_modified` for the incremental watermark. There is no
+> `documents` foreign key — the parsed-artefact table stays owned by the later
+> ingestion stage; the inventory records `sha256` + `raw_path` directly.
 
 ```sql
 -- discovery runs

@@ -33,6 +33,9 @@ markers = [
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+# notebooks live in the standalone `experiments/` project (own uv env); ruff
+# treats their cells as plain Python and IPython-style indented cells trip it.
+extend-exclude = ["experiments"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
