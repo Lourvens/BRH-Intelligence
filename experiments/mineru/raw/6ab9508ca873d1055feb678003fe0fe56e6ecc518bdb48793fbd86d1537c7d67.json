@@ -1,0 +1,580 @@
+{
+  "metadata": {
+    "file_suffix": "pdf",
+    "producer": {
+      "name": "mineru",
+      "version": "4.0.12"
+    },
+    "document": {
+      "page_count": 2,
+      "page_count_kind": "physical"
+    }
+  },
+  "extensions": {
+    "mineru": {
+      "tier": "standard",
+      "parse_mode": "ocr"
+    },
+    "docvortex_layout": {
+      "version": 1,
+      "pages": [
+        {
+          "page_idx": 0,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 1,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "page_idx": 0,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.246,
+            0.125,
+            0.484,
+            0.176
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Banque de la République d'Haïti\nCIRCULAIRE\nNo. 122"
+            }
+          ]
+        },
+        {
+          "type": "doc_title",
+          "index": 1,
+          "bbox": [
+            0.259,
+            0.226,
+            0.756,
+            0.246
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "AUX INSTITUTIONS FINANCIERES NON BANCAIRES"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.12,
+            0.28,
+            0.898,
+            0.383
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Pour l'application des articles 162 et 163 de la loi du 14 mai 2012 portant sur les banques et autres institutions financières et l'article 39 du décret du 25 novembre 2020 sur les intermédiaires de change, les sociétés financières de développement, les sociétés de cartes de crédit, les sociétés de crédit-bail, les sociétés de promotion des investissements, les maisons de transfert, les bureaux de change et toutes autres institutions financières désignées par la Banque de la République d'Haiti (BRH) sont tenues de respecter les dispositions de la présente circulaire en matière de transmission d'états financiers à la BRH."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 3,
+          "bbox": [
+            0.122,
+            0.395,
+            0.486,
+            0.413
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1. Certification des états financiers annuels"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.121,
+            0.425,
+            0.899,
+            0.512
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Les institutions financières, autres que les banques, visées à l'article 2 de la loi du 14 mai 2012 et celles visées à l'article 2 du décret du 25 novembre 2020 doivent se conformer aux dispositions de l'article 162 de la loi de 2012 et de l'article 39 du décret de 2020 en matière de vérification financière ainsi qu'à celles de la circulaire sur la vérification des états financiers annuels concernant les conditions de désignation et d'intervention du vérificateur indépendant en charge de la certification de ces états."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 5,
+          "bbox": [
+            0.122,
+            0.525,
+            0.573,
+            0.543
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2. Transmission à la BRH des états financiers annuels"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.122,
+            0.555,
+            0.899,
+            0.608
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Les institutions visées par la présente circulaire doivent transmettre à la BRH leurs états financiers certifiés annuels ainsi que la lettre d'opinion et le rapport du vérificateur indépendant sur les états financiers, au plus tard cent-vingt (120) jours calendaires après la date de clôture de l'exercice fiscal."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 7,
+          "bbox": [
+            0.123,
+            0.62,
+            0.589,
+            0.638
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3. Transmission à la BRH d'états financiers trimestriels"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.122,
+            0.651,
+            0.9,
+            0.721
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Les institutions assujetties doivent établir et transmettre à la BRH des états financiers trimestriels, à savoir un bilan et un compte de résultats provisoires, arrêtés aux 31 décembre, 31 mars, 30 juin et 30 septembre de chaque exercice. Ces états sont établis suivant le format électronique rendu disponible par la BRH. Ils doivent être envoyés à la BRH au plus tard quinze (15) jours après la fin du trimestre."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 9,
+          "bbox": [
+            0.125,
+            0.734,
+            0.422,
+            0.752
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "4. Disponibilité de renseignements"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.123,
+            0.764,
+            0.899,
+            0.818
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "La BRH peut requérir, en fixant un délai pour leur communication, tout document, renseignement, éclaircissement ou justification qu'elle juge utile pour l'analyse et l'appréciation de la situation financière et prudentielle des institutions visées par la présente circulaire."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 11,
+          "bbox": [
+            0.125,
+            0.831,
+            0.24,
+            0.848
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "5. Sanctions"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.124,
+            0.86,
+            0.9,
+            0.896
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "En cas de non-respect des obligations définies dans la présente circulaire, les institutions financières visées s'exposent aux sanctions suivantes :"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 13,
+          "bbox": [
+            0.856,
+            0.903,
+            0.944,
+            0.97
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 1,
+      "blocks": [
+        {
+          "type": "paragraph_title",
+          "index": 0,
+          "bbox": [
+            0.121,
+            0.09,
+            0.453,
+            0.107
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "a) Non certification des états financiers"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 1,
+          "bbox": [
+            0.116,
+            0.111,
+            0.893,
+            0.166
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A défaut par une institution financière de faire vérifier ses livres et comptes en vertu de la section 1 de la présente circulaire, la BRH peut, après avis donné à l'institution, faire procéder à une vérification spéciale aux frais de l'institution."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 2,
+          "bbox": [
+            0.122,
+            0.189,
+            0.364,
+            0.207
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "b) Fiabilité de l'information"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.118,
+            0.22,
+            0.893,
+            0.258
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "En tout temps, les montants déclarés dans les états financiers transmis à la BRH doivent être ceux apparaissant dans les livres comptables de l'institution financière."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.118,
+            0.27,
+            0.895,
+            0.324
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A défaut de se conformer à cette disposition, la BRH peut, après enquête sur les circonstances et la nature de la violation, imposer une pénalité de 10% de la différence entre les montants déclarés dans lesdits états financiers et les montants apparaissant aux livres comptables."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 5,
+          "bbox": [
+            0.124,
+            0.339,
+            0.334,
+            0.357
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "c) Retard de soumission"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.124,
+            0.37,
+            0.896,
+            0.44
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A défaut de fournir, dans le délai, les états financiers requis par la présente circulaire, l'institution financière concernée est passible d'une pénalité de cinquante mille gourdes (HTG 50,000."
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{00}"
+            },
+            {
+              "type": "text",
+              "content": ") par jour d'infraction. La période de pénalité s'étend du jour de l'infraction jusqu'à celui où les renseignements sont mis à la disposition de la BRH."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 7,
+          "bbox": [
+            0.125,
+            0.456,
+            0.219,
+            0.473
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "d) Autres"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.12,
+            0.477,
+            0.897,
+            0.563
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "La BRH peut exiger d'une institution qu'elle redresse toute situation ayant trait à des violations relatives aux dispositions de la présente circulaire ou relevées par le vérificateur indépendant. A défaut de se conformer aux actions de redressement requises par la BRH, l'institution est assujettie à une pénalité de cent mille gourdes (HTG 100.000."
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{00}"
+            },
+            {
+              "type": "text",
+              "content": ") par jour d'infraction à partir de la date à laquelle l'infraction lui est notifiée par la BRH."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.12,
+            0.568,
+            0.898,
+            0.67
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Toute pénalité sera déduite du solde de l'un des comptes de l'institution domicilié à la BRH. En l'absence de détention d'un compte à la BRH par l'institution concernée, le paiement sera à effectuer par chèque de direction à l'ordre de la Banque de la République d'Haïti, au plus tard cinq (5) jours ouvrables après réception de la notification du montant de la pénalité. En cas de non-paiement dans les délais, des pénalités additionnelles de deux mille cinq cents gourdes (HTG 2.500.00) par jour de retard seront appliquées."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 10,
+          "bbox": [
+            0.123,
+            0.684,
+            0.305,
+            0.702
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "6. Entrée en vigueur"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.122,
+            0.713,
+            0.723,
+            0.733
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Les dispositions de la présente circulaire entrent en vigueur le 1"
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{er}"
+            },
+            {
+              "type": "text",
+              "content": " février 2022."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.123,
+            0.764,
+            0.386,
+            0.782
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Port-au-Prince, le 13 janvier 2022"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 13,
+          "bbox": [
+            0.128,
+            0.79,
+            0.294,
+            0.849
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Bradw Iuhy"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 14,
+          "bbox": [
+            0.125,
+            0.847,
+            0.315,
+            0.866
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Jean Baden Dubois"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 15,
+          "bbox": [
+            0.125,
+            0.865,
+            0.228,
+            0.882
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Gouverneur"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 16,
+          "bbox": [
+            0.883,
+            0.904,
+            0.898,
+            0.917
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "is_full_document": true,
+  "schema": "docvortex.middle",
+  "schema_version": "2.0"
+}

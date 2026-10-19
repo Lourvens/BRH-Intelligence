@@ -1,0 +1,634 @@
+{
+  "metadata": {
+    "file_suffix": "pdf",
+    "producer": {
+      "name": "mineru",
+      "version": "4.0.12"
+    },
+    "document": {
+      "title": "Microsoft Photo Editor - nider 25.jpg",
+      "authors": [
+        "rnoel"
+      ],
+      "created_at": "2009-04-17T13:42:47-05:00",
+      "modified_at": "2009-04-17T14:26:15-05:00",
+      "creator_application": "PScript5.dll Version 5.2.2",
+      "producer_application": "Acrobat Distiller 6.0 (Windows)",
+      "page_count": 4,
+      "page_count_kind": "physical"
+    }
+  },
+  "extensions": {
+    "mineru": {
+      "tier": "standard",
+      "parse_mode": "ocr"
+    },
+    "docvortex_layout": {
+      "version": 1,
+      "pages": [
+        {
+          "page_idx": 0,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 1,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 2,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 3,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "page_idx": 0,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.009,
+            0.041,
+            0.128,
+            0.09
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "BRH"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 1,
+          "bbox": [
+            0.145,
+            0.064,
+            0.392,
+            0.129
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Banque de la République d'Haiti\nCIRCULAIRE\nNo 95-1A"
+            }
+          ]
+        },
+        {
+          "type": "doc_title",
+          "index": 2,
+          "bbox": [
+            0.341,
+            0.146,
+            0.652,
+            0.168
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "AUX MAISONS DE TRANSFERT"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.064,
+            0.185,
+            0.862,
+            0.278
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Conformément au paragraphe premier de l'article 2.1.2 de la loi du 21 février 2001 relative au blanchiment des avoirs provenant du trafic illicite de la drogue et d'autres infractions graves, pour tenir compte de l'évolution du cours de la gourde par rapport aux principales devises étrangères, la Banque de la République d'Haïti (BRH) modifie le seuil établi par la loi ainsi qu'il suit :"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.064,
+            0.295,
+            0.863,
+            0.353
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Les maisons de transfert sont tenus de recueillir de tous clients, réguliers ou occasionnels, des déclarations de transaction en espèces ou au porteur pour tout montant supérieur ou égal à QUARANTE MILLE GOURDES (Gdes 40,000."
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{00}"
+            },
+            {
+              "type": "text",
+              "content": ") ou son équivalent en monnaies étrangères."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.064,
+            0.368,
+            0.863,
+            0.48
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Les formulaires de déclaration de transaction des clients annexés à la présente circulaire devront être transmis à l'Unité Centrale de Renseignements Financier (UCREF) au plus tard trois (3) jours ouvrables pour les maisons de transfert se trouvant dans la zone métropolitaine et cinq (5) jours ouvrables pour les maisons de transfert se trouvant en provinces, après qu'ils ont été remplis. Les copies desdits formulaires doivent être convenablement répertoriées et disponibles pour inspection par la Banque de la République d'Haïti."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.063,
+            0.493,
+            0.862,
+            0.55
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "En cas de non respect de la présente circulaire, les maisons de transfert s'exposent à des pénalités et à des mesures administratives, ce sans préjudice des autres sanctions dont peut être frappée l'institution ou la personne fautive, en vertu de la loi du 21 février 2001."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 7,
+          "bbox": [
+            0.064,
+            0.565,
+            0.675,
+            0.585
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "a) Pénalité pour non disponibilité de renseignements pour inspection"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.064,
+            0.583,
+            0.862,
+            0.623
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A défaut de fournir les copies des formulaires, les maisons de transfert sont assujetties à une pénalité de cinq mille gourdes (Gdes 5, 000."
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{00}"
+            },
+            {
+              "type": "text",
+              "content": ") par jour d'infraction."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.062,
+            0.637,
+            0.863,
+            0.678
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "La période de pénalité s'étend du jour de l'infraction (demande de renseignements par la BRH) jusqu'à celui où les renseignements sont mis à la disposition des agents de la BRH."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 10,
+          "bbox": [
+            0.064,
+            0.693,
+            0.416,
+            0.712
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "b) Pénalité pour absence de formulaire"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.063,
+            0.712,
+            0.863,
+            0.752
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "A défaut de remplir le formulaire de transaction, les maisons de transfert encourent une amende de cent mille gourdes (Gdes. 100,000."
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{90}"
+            },
+            {
+              "type": "text",
+              "content": ") par jour d'infraction."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.062,
+            0.767,
+            0.864,
+            0.807
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "La période de pénalité s'étend du jour où une transaction aurait du faire l'objet d'un report auprès de l'UCREF au jour où la BRH constate l'infraction."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 13,
+          "bbox": [
+            0.063,
+            0.823,
+            0.546,
+            0.842
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "c) Pénalité pour retard de transmission de formulaire"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 14,
+          "bbox": [
+            0.062,
+            0.841,
+            0.864,
+            0.881
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "En cas de retard de transmission d'un formulaire, les maisons de transfert encourent une pénalité de cinq mille gourdes (Gdes. 5,000."
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{00}"
+            },
+            {
+              "type": "text",
+              "content": ") par jour d'infraction."
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 15,
+          "bbox": [
+            0.13,
+            0.901,
+            0.796,
+            0.919
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "P.O. BOX 1570, Port-au-Prince, Haïti. Téléphone: (509) 299-(1200 à 09 ( Fax: (509) 299-1215"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 1,
+      "blocks": [
+        {
+          "type": "text",
+          "index": 0,
+          "bbox": [
+            0.062,
+            0.075,
+            0.858,
+            0.115
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "La période de pénalité s'étend du jour où un formulaire aurait du être transmis à l'UCREF au jour où cette dernière le reçoit."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 1,
+          "bbox": [
+            0.062,
+            0.13,
+            0.495,
+            0.149
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "d) Pénalité pour non transmission de formulaire"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.061,
+            0.149,
+            0.859,
+            0.206
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "En cas de non transmission de formulaire de transactions dûment rempli à l'UCREF, les maisons de transfert encourent une pénalité de cent mille gourdes (Gdes. 100,000."
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{90}"
+            },
+            {
+              "type": "text",
+              "content": ") par jour d 'infraction."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.062,
+            0.222,
+            0.859,
+            0.261
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "La période de pénalité s'étend du jour où un formulaire aurait dû être transmis au jour où la BRH constate l'infraction."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.062,
+            0.294,
+            0.86,
+            0.334
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "La présente circulaire entre en vigueur le 3 novembre 2008 et remplace la circulaire 95 du 1 "
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{ier}"
+            },
+            {
+              "type": "text",
+              "content": " aout 2000."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.063,
+            0.368,
+            0.35,
+            0.388
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Port-au-Prince, le 30 octobre 2008"
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 6,
+          "bbox": [
+            0.134,
+            0.388,
+            0.272,
+            0.425
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 6,
+              "bbox": [
+                0.134,
+                0.388,
+                0.272,
+                0.425
+              ],
+              "content": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.064,
+            0.423,
+            0.232,
+            0.442
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Philippe W. Lahens"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.064,
+            0.441,
+            0.215,
+            0.459
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Vice-Gouverneur"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.062,
+            0.512,
+            0.414,
+            0.534
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "p.j. : Formulaire déclaration de transaction"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 2,
+      "blocks": [
+        {
+          "type": "doc_title",
+          "index": 0,
+          "bbox": [
+            0.192,
+            0.074,
+            0.728,
+            0.096
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "FORMULAIRE DE DECLARATION DE TRANSACTIONS"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "paragraph_title",
+          "index": 1,
+          "bbox": [
+            0.037,
+            0.128,
+            0.798,
+            0.148
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "La circulaire 95-1A de la BRH exige que les maisons de transfert recueillent les informations sur la transaction."
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "table",
+          "index": 2,
+          "bbox": [
+            0.033,
+            0.161,
+            0.885,
+            0.915
+          ],
+          "content": [
+            {
+              "type": "table_body",
+              "index": 2,
+              "bbox": [
+                0.033,
+                0.161,
+                0.885,
+                0.915
+              ],
+              "content": "<table><tr><td colspan=\"3\">SECTION A- L&#x27;InstitutionA1. Maison de transfertA.2 Nom de l&#x27;institution Financière: A.3 AdresseA.4 Date de la Transaction:(jj/mm/aa)//A.5 No de PatenteA.6 No de téléphone</td></tr><tr><td colspan=\"3\">SECTION B-LA TRANSACTION</td></tr><tr><td colspan=\"3\">B.1 Envoi d&#x27;argent vers ____ ____Pays VilleB.2 Montant enEspeces □ Montant____Chèque □ Montant____Autres____B. 3 Montant total de la transaction :____B. 4 Monnaie:GDES □ USD □ EURO □ PESO □ CAN □ AUTRES □</td></tr><tr><td colspan=\"3\">SECTION C- L&#x27;EXPEDITEUR</td></tr><tr><td colspan=\"3\">C.1. Nom: Prénom: Nationalité:C.2 Type d&#x27;identification:CIN □ NIF □ Passeport □ Permis de conduire□ Autres □C.3. Numéro d&#x27;identification____</td></tr><tr><td colspan=\"3\">C.4. Adresse de l&#x27;expéditeur</td></tr><tr><td colspan=\"3\">C.5. Numéro de téléphonePortable ____Résidence ____Bureau____</td></tr></table>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 3,
+      "blocks": [
+        {
+          "type": "table",
+          "index": 0,
+          "bbox": [
+            0.088,
+            0.063,
+            0.916,
+            0.908
+          ],
+          "content": [
+            {
+              "type": "table_body",
+              "index": 0,
+              "bbox": [
+                0.088,
+                0.063,
+                0.916,
+                0.908
+              ],
+              "content": "<table><tr><td colspan=\"2\">SECTION D- LE DESTINATAIRE</td></tr><tr><td colspan=\"2\">D.1. Nom : Prénom :D. 2 Adresse :D.3. Numéro de téléphonePortable_Résidence_Bureau_</td></tr><tr><td colspan=\"2\">SECTION E-BENEFICIAIRE DE LA TRANSACTIONA remplir au cas où le destinataire n&#x27;est pas le bénéficiaire de la transaction</td></tr><tr><td>E.1. Personne Morale □NomStatut JuridiqueSecteur d&#x27;activitéAdresseTéléphoneNom du propriétaireTéléphone</td><td>E.2. Personne Physique □NomPrénomAdresseTéléphoneProfessionNIFNationalité</td></tr><tr><td colspan=\"2\">SECTION F-LA PROVENANCE DES FONDSCette section doit être toujours remplie</td></tr><tr><td colspan=\"2\">F.1. Je soussigné (e) déclare que les fonds objet de la présente transaction proviennent de : _________ Je m&#x27;engage d&#x27;ores et déjà à fournir toute les fois où ceci serasollicité, la preuve de la provenance desdits fonds.Fait à Port-au-Prince, ce........Lu et approuvéSignature</td></tr><tr><td colspan=\"2\">SECTIONG-ESPACE RESERVE A L&#x27;INSTITUTION FINANCIERE</td></tr><tr><td colspan=\"2\">G.1. Initié par : G.2. Autorisé par :G.3 Transaction acceptée G.4 Transaction refuséeMotif_</td></tr><tr><td colspan=\"2\">H.5 Remarques :</td></tr></table>"
+            }
+          ],
+          "continues_prev": true
+        }
+      ]
+    }
+  ],
+  "is_full_document": true,
+  "schema": "docvortex.middle",
+  "schema_version": "2.0"
+}

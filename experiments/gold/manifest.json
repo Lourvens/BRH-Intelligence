@@ -1,0 +1,195 @@
+{
+ "selection": {
+  "generated": "2026-10-16",
+  "unit": "document",
+  "chosen_by": "human, from candidates.json",
+  "source": "the 116-document stratified sample of brh.ht (--sample 90)",
+  "ci_classes": [
+   "scan/bad",
+   "scan/ok",
+   "digital/text-only",
+   "digital/table"
+  ],
+  "class_axis": "format x resolution x content, per page; a document joins the set for every class it contains"
+ },
+ "coverage": {
+  "covered": [
+   "scan/bad",
+   "scan/ok",
+   "scan/good",
+   "digital/text-only",
+   "digital/table",
+   "digital/2col",
+   "digital/figure",
+   "digital/table+2col"
+  ],
+  "missing": [
+   "blank",
+   "digital/cover",
+   "digital/table+figure",
+   "digital/figure+2col",
+   "digital/table+figure+2col"
+  ]
+ },
+ "eval": {
+  "110b25ca611ddf3dd50eda474d60e4ba5c427c3d3978ed0a14292d8f926ee349": {
+   "sha256": "110b25ca611ddf3dd50eda474d60e4ba5c427c3d3978ed0a14292d8f926ee349",
+   "file": "documents/110b25ca611ddf3dd50eda474d60e4ba5c427c3d3978ed0a14292d8f926ee349.pdf",
+   "title": "NOTE MENSUELLE D&#8217;INFLATION DU MOIS DE NOVEMBRE 2025",
+   "year": 2026,
+   "url": "https://www.brh.ht/wp-content/uploads/NOTE-MENSUELLE-DINFLATION-DU-MOIS-DE-NOVEMBRE-2025.pdf",
+   "pages": 10,
+   "bytes": 2031309,
+   "classes": [
+    "digital/2col",
+    "digital/table",
+    "digital/text-only",
+    "scan/good"
+   ],
+   "pages_per_class": {
+    "scan/good": 2,
+    "digital/text-only": 4,
+    "digital/table": 2,
+    "digital/2col": 2
+   }
+  },
+  "1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a": {
+   "sha256": "1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a",
+   "file": "documents/1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a.pdf",
+   "title": "02 La gestion du risque de change et des réserves obligatoires",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/lc_02.pdf",
+   "pages": 1,
+   "bytes": 175979,
+   "classes": [
+    "scan/ok"
+   ],
+   "pages_per_class": {
+    "scan/ok": 1
+   }
+  },
+  "63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451": {
+   "sha256": "63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451",
+   "file": "documents/63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451.pdf",
+   "title": "Note mensuelle d&#8217;inflation-septembre 2022_f",
+   "year": 2023,
+   "url": "https://www.brh.ht/wp-content/uploads/Note-mensuelle-dinflation-septembre-2022_f.pdf",
+   "pages": 9,
+   "bytes": 615690,
+   "classes": [
+    "digital/2col",
+    "digital/figure",
+    "digital/table",
+    "digital/table+2col",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/figure": 1,
+    "digital/text-only": 5,
+    "digital/table+2col": 1,
+    "digital/2col": 1,
+    "digital/table": 1
+   }
+  },
+  "6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67": {
+   "sha256": "6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67",
+   "file": "documents/6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67.pdf",
+   "title": "Circulaire 122-pdf",
+   "year": 2022,
+   "url": "https://www.brh.ht/wp-content/uploads/Circulaire-122-pdf.pdf",
+   "pages": 2,
+   "bytes": 393363,
+   "classes": [
+    "scan/ok"
+   ],
+   "pages_per_class": {
+    "scan/ok": 2
+   }
+  },
+  "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9": {
+   "sha256": "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9",
+   "file": "documents/f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9.pdf",
+   "title": "95-1A Déclaration de provenance de fonds &#8211; Maisons de Transfert",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/circulaire_95-1a.pdf",
+   "pages": 4,
+   "bytes": 859999,
+   "classes": [
+    "scan/bad"
+   ],
+   "pages_per_class": {
+    "scan/bad": 4
+   }
+  },
+  "f31dfee9575ff1197dc5ff28cc4d42b85d79234f9c58cb2f12a202768bc4ae01": {
+   "sha256": "f31dfee9575ff1197dc5ff28cc4d42b85d79234f9c58cb2f12a202768bc4ae01",
+   "file": "documents/f31dfee9575ff1197dc5ff28cc4d42b85d79234f9c58cb2f12a202768bc4ae01.pdf",
+   "title": "pibsecteur",
+   "year": 2026,
+   "url": "https://www.brh.ht/wp-content/uploads/pibsecteur.pdf",
+   "pages": 1,
+   "bytes": 49623,
+   "classes": [
+    "digital/table"
+   ],
+   "pages_per_class": {
+    "digital/table": 1
+   }
+  }
+ },
+ "ci": {
+  "1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a": {
+   "sha256": "1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a",
+   "file": "documents/1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a.pdf",
+   "title": "02 La gestion du risque de change et des réserves obligatoires",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/lc_02.pdf",
+   "pages": 1,
+   "bytes": 175979,
+   "classes": [
+    "scan/ok"
+   ],
+   "pages_per_class": {
+    "scan/ok": 1
+   }
+  },
+  "63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451": {
+   "sha256": "63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451",
+   "file": "documents/63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451.pdf",
+   "title": "Note mensuelle d&#8217;inflation-septembre 2022_f",
+   "year": 2023,
+   "url": "https://www.brh.ht/wp-content/uploads/Note-mensuelle-dinflation-septembre-2022_f.pdf",
+   "pages": 9,
+   "bytes": 615690,
+   "classes": [
+    "digital/2col",
+    "digital/figure",
+    "digital/table",
+    "digital/table+2col",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/figure": 1,
+    "digital/text-only": 5,
+    "digital/table+2col": 1,
+    "digital/2col": 1,
+    "digital/table": 1
+   }
+  },
+  "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9": {
+   "sha256": "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9",
+   "file": "documents/f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9.pdf",
+   "title": "95-1A Déclaration de provenance de fonds &#8211; Maisons de Transfert",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/circulaire_95-1a.pdf",
+   "pages": 4,
+   "bytes": 859999,
+   "classes": [
+    "scan/bad"
+   ],
+   "pages_per_class": {
+    "scan/bad": 4
+   }
+  }
+ }
+}

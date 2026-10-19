@@ -1,0 +1,23 @@
+<!-- page 1 -->
+
+CIRCULAIRE #02
+
+# LETTRE-CIRCULAIRE AUX BANQUES COMMERCIALES ET AUX BANQUES D'EPARGNE ET DE LOGEMENT
+
+Conformément au paragraphe 5 de l'article 43 du Décret du 14 novembre 1980 réglementant le fonctionnement des banques et les activités bancaires sur le territoire de la République d'Haïti, les établissements bancaires doivent respecter les dispositions de la présente lettre-circulaire en matière de gestion du risque de change et des réserves obligatoires.
+
+### 1. - Position de change
+
+À compter du 1 $ ^{er} $ mars 2008, la position de change structurelle telle que définie dans la circulaire # 81-4 sur le risque de change est fixée à un maximum de 1% par rapport aux fonds propres comptables.
+
+À la fin de chaque journée, tout établissement bancaire accusant une position longue supérieure à 1% des fonds propres comptables est tenu de se défaire de cette position. Au cas où cette position excédentaire n'est pas débouclée, elle sera vendue à la BRH, le troisième jour ouvré suivant, au taux de référence bancaire. Le taux de référence bancaire est la moyenne pondérée des taux d'acquisition de dollars par les banques la veille du jour auquel cet excédent a été accusé.
+
+2.- Constitution de réserves obligatoires sur les passifs libellés en monnaies étrangères
+
+Les mesures portant sur la constitution des réserves obligatoires sur les passifs libellés en monnaies étrangères et adoptées le 25 janvier 2008 selon la Circulaire # 01 restent et demeurent en vigueur.
+
+Port-au-Prince, le 26 février 2008
+
+![](assets/p001/img_in_image_box_177_1228_384_1312.jpg)
+
+Charles Castel

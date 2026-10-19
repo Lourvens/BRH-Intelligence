@@ -19,7 +19,9 @@ works. These still `raise NotImplementedError`:
 - `brh_agent`: `llm.py`, `nodes.py`, `prompts.py`
 
 Implemented today: `brh_core.{config,models}`, `brh_core.db.{pool,migrate}`,
-`brh_core.inventory.*`, `brh_agent.{graph,state}`, and the `brh_analytics`
+`brh_core.inventory.*`, `brh_core.ingestion.{ocr,engines,markdown}` (the batch
+OCR stage: manifest → ledger → page-marked markdown),
+`brh_agent.{graph,state}`, and the `brh_analytics`
 design layer plus its `inventory` family.
 
 ## Layout and boundaries
@@ -55,6 +57,7 @@ make install                       # uv sync --all-packages + bun install
 make postgres-up                   # docker compose, container brh-postgres :5432
 make migrate                       # python -m brh_core.db.migrate
 make inventory ARGS="--limit 20"   # catalogue brh.ht + download (needs Postgres)
+make inventory ARGS="--sample 90"  # spread across publication years, not the oldest
 make test                          # uv run pytest
 make lint                          # ruff check . + web tsc --noEmit
 make check                         # lint + test

@@ -46,6 +46,10 @@ experiments/artifacts/*
 # --- Analytics output (regenerate with `make analytics`) ---
 services/analytics/out/
 
+# OCR output is committed on purpose (it is the corpus product); the per-document
+# ledgers that `scripts/modal-pull.sh` merges are scratch and go in state.jsonl.
+data/ocr/_ledger/
+
 # --- OS / editor ---
 .DS_Store
 *.swp

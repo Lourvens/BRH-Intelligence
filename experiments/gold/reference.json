@@ -1,0 +1,490 @@
+{
+ "provider": "llamaparse",
+ "tier": "agentic",
+ "version": "latest",
+ "languages": [
+  "fr"
+ ],
+ "output_options": {
+  "images_to_save": [],
+  "markdown": {
+   "annotate_links": true,
+   "tables": {
+    "output_tables_as_markdown": true,
+    "compact_markdown_tables": true
+   }
+  }
+ },
+ "processing_options": {
+  "ocr_parameters": {
+   "languages": [
+    "fr"
+   ]
+  },
+  "specialized_chart_parsing": "agentic"
+ },
+ "format": {
+  "per": "document",
+  "page_marker": "<!-- page N -->"
+ },
+ "verify_word_f1": 0.98,
+ "order_cer_threshold": 0.02,
+ "documents": {
+  "110b25ca611ddf3dd50eda474d60e4ba5c427c3d3978ed0a14292d8f926ee349": {
+   "title": "NOTE MENSUELLE D&#8217;INFLATION DU MOIS DE NOVEMBRE 2025",
+   "pages_expected": 10,
+   "pages_returned": 10,
+   "page_number_offset_applied": 0,
+   "job_id": "pjb-2tge1o6ve3i1orrym3huvqzfsku4",
+   "credits": 180.0,
+   "files": {
+    "markdown": "reference/110b25ca611ddf3dd50eda474d60e4ba5c427c3d3978ed0a14292d8f926ee349.md"
+   },
+   "pages": {
+    "1": {
+     "class": "scan/good",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": false,
+     "chars": 197,
+     "words": 32,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    },
+    "2": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "review",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 547,
+     "words": 92,
+     "expansion_ratio": 1.18,
+     "content_f1": 0.9176,
+     "order_wer": 0.5256,
+     "confidence": null
+    },
+    "3": {
+     "class": "digital/table",
+     "scanned": false,
+     "status": "review",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 1553,
+     "words": 327,
+     "expansion_ratio": 1.15,
+     "content_f1": 0.8987,
+     "order_wer": 0.3754,
+     "confidence": null
+    },
+    "4": {
+     "class": "digital/2col",
+     "scanned": false,
+     "status": "review",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 2590,
+     "words": 450,
+     "expansion_ratio": 1.0,
+     "content_f1": 0.9745,
+     "order_wer": 0.2949,
+     "confidence": null
+    },
+    "5": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "verified",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 1651,
+     "words": 310,
+     "expansion_ratio": 1.0,
+     "content_f1": 0.9984,
+     "order_wer": 0.2251,
+     "confidence": null
+    },
+    "6": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "semantic",
+     "reason": "chart or figure reconstructed as data",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 2459,
+     "words": 713,
+     "expansion_ratio": 2.21,
+     "content_f1": 0.5643,
+     "order_wer": 1.4596,
+     "confidence": null
+    },
+    "7": {
+     "class": "digital/table",
+     "scanned": false,
+     "status": "review",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 2491,
+     "words": 500,
+     "expansion_ratio": 1.15,
+     "content_f1": 0.8994,
+     "order_wer": 0.4147,
+     "confidence": null
+    },
+    "8": {
+     "class": "digital/2col",
+     "scanned": false,
+     "status": "review",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 955,
+     "words": 215,
+     "expansion_ratio": 0.97,
+     "content_f1": 0.9587,
+     "order_wer": 0.8009,
+     "confidence": null
+    },
+    "9": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "review",
+     "reason": null,
+     "reading_order": "ok",
+     "has_table": false,
+     "chars": 1146,
+     "words": 179,
+     "expansion_ratio": 1.05,
+     "content_f1": 0.9685,
+     "order_wer": 0.0647,
+     "confidence": null
+    },
+    "10": {
+     "class": "scan/good",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": false,
+     "chars": 156,
+     "words": 26,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    }
+   }
+  },
+  "1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a": {
+   "title": "02 La gestion du risque de change et des réserves obligatoires",
+   "pages_expected": 1,
+   "pages_returned": 1,
+   "page_number_offset_applied": 0,
+   "job_id": "pjb-62w46i7l39l2lwzefy4lzoul9lzl",
+   "credits": 10.0,
+   "files": {
+    "markdown": "reference/1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a.md"
+   },
+   "pages": {
+    "1": {
+     "class": "scan/ok",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": false,
+     "chars": 1553,
+     "words": 255,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    }
+   }
+  },
+  "63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451": {
+   "title": "Note mensuelle d&#8217;inflation-septembre 2022_f",
+   "pages_expected": 9,
+   "pages_returned": 9,
+   "page_number_offset_applied": 0,
+   "job_id": "pjb-1cnx9n83rxt5spd4fr0ihjrazn16",
+   "credits": 130.0,
+   "files": {
+    "markdown": "reference/63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451.md"
+   },
+   "pages": {
+    "1": {
+     "class": "digital/figure",
+     "scanned": false,
+     "status": "semantic",
+     "reason": "chart or figure reconstructed as data",
+     "reading_order": null,
+     "has_table": false,
+     "chars": 166,
+     "words": 29,
+     "expansion_ratio": 2.42,
+     "content_f1": 0.5854,
+     "order_wer": 1.4167,
+     "confidence": null
+    },
+    "2": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "verified",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 377,
+     "words": 62,
+     "expansion_ratio": 0.98,
+     "content_f1": 0.992,
+     "order_wer": 0.0159,
+     "confidence": null
+    },
+    "3": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "semantic",
+     "reason": "chart or figure reconstructed as data",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 2480,
+     "words": 539,
+     "expansion_ratio": 1.57,
+     "content_f1": 0.7452,
+     "order_wer": 0.686,
+     "confidence": null
+    },
+    "4": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "verified",
+     "reason": null,
+     "reading_order": "ok",
+     "has_table": false,
+     "chars": 2007,
+     "words": 338,
+     "expansion_ratio": 1.02,
+     "content_f1": 0.9866,
+     "order_wer": 0.024,
+     "confidence": null
+    },
+    "5": {
+     "class": "digital/table+2col",
+     "scanned": false,
+     "status": "review",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 1906,
+     "words": 357,
+     "expansion_ratio": 1.04,
+     "content_f1": 0.9786,
+     "order_wer": 0.0465,
+     "confidence": null
+    },
+    "6": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "verified",
+     "reason": null,
+     "reading_order": "ok",
+     "has_table": false,
+     "chars": 2335,
+     "words": 383,
+     "expansion_ratio": 1.0,
+     "content_f1": 0.9961,
+     "order_wer": 0.0052,
+     "confidence": null
+    },
+    "7": {
+     "class": "digital/2col",
+     "scanned": false,
+     "status": "semantic",
+     "reason": "chart or figure reconstructed as data",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 934,
+     "words": 280,
+     "expansion_ratio": 2.22,
+     "content_f1": 0.4828,
+     "order_wer": 1.7778,
+     "confidence": null
+    },
+    "8": {
+     "class": "digital/table",
+     "scanned": false,
+     "status": "verified",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 1020,
+     "words": 221,
+     "expansion_ratio": 1.0,
+     "content_f1": 0.9977,
+     "order_wer": 0.0045,
+     "confidence": null
+    },
+    "9": {
+     "class": "digital/text-only",
+     "scanned": false,
+     "status": "verified",
+     "reason": null,
+     "reading_order": "ok",
+     "has_table": false,
+     "chars": 1085,
+     "words": 171,
+     "expansion_ratio": 1.01,
+     "content_f1": 0.9912,
+     "order_wer": 0.0118,
+     "confidence": null
+    }
+   }
+  },
+  "6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67": {
+   "title": "Circulaire 122-pdf",
+   "pages_expected": 2,
+   "pages_returned": 2,
+   "page_number_offset_applied": 0,
+   "job_id": "pjb-qgeojp1rnig34ifud2y0e4zo0kv4",
+   "credits": 20.0,
+   "files": {
+    "markdown": "reference/6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67.md"
+   },
+   "pages": {
+    "1": {
+     "class": "scan/ok",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": false,
+     "chars": 2604,
+     "words": 420,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    },
+    "2": {
+     "class": "scan/ok",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": false,
+     "chars": 2358,
+     "words": 405,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    }
+   }
+  },
+  "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9": {
+   "title": "95-1A Déclaration de provenance de fonds &#8211; Maisons de Transfert",
+   "pages_expected": 4,
+   "pages_returned": 4,
+   "page_number_offset_applied": 0,
+   "job_id": "pjb-7jnnaxf093p6d9imls1iembc00t3",
+   "credits": 40.0,
+   "files": {
+    "markdown": "reference/f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9.md"
+   },
+   "pages": {
+    "1": {
+     "class": "scan/bad",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": false,
+     "chars": 2606,
+     "words": 443,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    },
+    "2": {
+     "class": "scan/bad",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": false,
+     "chars": 763,
+     "words": 134,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    },
+    "3": {
+     "class": "scan/bad",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": false,
+     "chars": 846,
+     "words": 141,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    },
+    "4": {
+     "class": "scan/bad",
+     "scanned": true,
+     "status": "unverified",
+     "reason": null,
+     "reading_order": null,
+     "has_table": true,
+     "chars": 955,
+     "words": 156,
+     "expansion_ratio": null,
+     "content_f1": null,
+     "order_wer": null,
+     "confidence": null
+    }
+   }
+  },
+  "f31dfee9575ff1197dc5ff28cc4d42b85d79234f9c58cb2f12a202768bc4ae01": {
+   "title": "pibsecteur",
+   "pages_expected": 1,
+   "pages_returned": 1,
+   "page_number_offset_applied": 0,
+   "job_id": "pjb-uvwfc9l6j5oel5g9n0fbeb34alx7",
+   "credits": 10.0,
+   "files": {
+    "markdown": "reference/f31dfee9575ff1197dc5ff28cc4d42b85d79234f9c58cb2f12a202768bc4ae01.md"
+   },
+   "pages": {
+    "1": {
+     "class": "digital/table",
+     "scanned": false,
+     "status": "verified",
+     "reason": "table: serialization differs from the text layer",
+     "reading_order": null,
+     "has_table": true,
+     "chars": 1583,
+     "words": 326,
+     "expansion_ratio": 1.0,
+     "content_f1": 0.9939,
+     "order_wer": 0.0061,
+     "confidence": null
+    }
+   }
+  }
+ }
+}

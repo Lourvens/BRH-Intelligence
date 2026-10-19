@@ -1,0 +1,449 @@
+{
+ "selection": {
+  "generated": "2026-10-16",
+  "unit": "document",
+  "axis": "format x resolution x content, per page; a document joins the set for the classes it contains",
+  "target_per_class": {
+   "blank": 2,
+   "scan/bad": 3,
+   "scan/ok": 3,
+   "scan/good": 2,
+   "digital/text-only": 1,
+   "digital/table": 1,
+   "digital/2col": 2,
+   "digital/cover": 2,
+   "digital/figure": 2,
+   "digital/table+2col": 2,
+   "digital/table+figure": 2,
+   "digital/figure+2col": 2,
+   "digital/table+figure+2col": 2
+  },
+  "corpus_documents_profiled": 116,
+  "corpus_pages_profiled": 1192,
+  "source_sample": "the 116-document stratified sample (--sample 90)"
+ },
+ "eval": {
+  "06681c1c21733b0cb9053bd13e85a4e67e8ade58cef69a92c31d84384754a6bb": {
+   "sha256": "06681c1c21733b0cb9053bd13e85a4e67e8ade58cef69a92c31d84384754a6bb",
+   "title": "interventions21_euros",
+   "year": 2021,
+   "url": "https://www.brh.ht/wp-content/uploads/interventions21_euros.pdf",
+   "pages": 1,
+   "bytes": 8337,
+   "classes": [
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/text-only": 1
+   }
+  },
+  "110b25ca611ddf3dd50eda474d60e4ba5c427c3d3978ed0a14292d8f926ee349": {
+   "sha256": "110b25ca611ddf3dd50eda474d60e4ba5c427c3d3978ed0a14292d8f926ee349",
+   "title": "NOTE MENSUELLE D&#8217;INFLATION DU MOIS DE NOVEMBRE 2025",
+   "year": 2026,
+   "url": "https://www.brh.ht/wp-content/uploads/NOTE-MENSUELLE-DINFLATION-DU-MOIS-DE-NOVEMBRE-2025.pdf",
+   "pages": 10,
+   "bytes": 2031309,
+   "classes": [
+    "digital/2col",
+    "digital/table",
+    "digital/text-only",
+    "scan/good"
+   ],
+   "pages_per_class": {
+    "scan/good": 2,
+    "digital/text-only": 4,
+    "digital/table": 2,
+    "digital/2col": 2
+   }
+  },
+  "1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a": {
+   "sha256": "1a84a9a73493ae39e02993fbffddb76baee572cfa957193b80b51c8dcd78280a",
+   "title": "02 La gestion du risque de change et des réserves obligatoires",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/lc_02.pdf",
+   "pages": 1,
+   "bytes": 175979,
+   "classes": [
+    "scan/ok"
+   ],
+   "pages_per_class": {
+    "scan/ok": 1
+   }
+  },
+  "1d275de70c374391f43d90837ea7083bdda4cf462a6509982a2c22e6d93d1e09": {
+   "sha256": "1d275de70c374391f43d90837ea7083bdda4cf462a6509982a2c22e6d93d1e09",
+   "title": "Document d&#8217;Information #8 (1)",
+   "year": 2024,
+   "url": "https://www.brh.ht/wp-content/uploads/Document-dInformation-8-1.pdf",
+   "pages": 12,
+   "bytes": 960308,
+   "classes": [
+    "blank",
+    "digital/2col",
+    "digital/cover",
+    "digital/figure",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/text-only": 7,
+    "blank": 1,
+    "digital/figure": 1,
+    "digital/2col": 2,
+    "digital/cover": 1
+   }
+  },
+  "3e6a8d649cf1120eb09bad4a3f4e897955057c688dc7f9a3d0a20b2f33d5ba6c": {
+   "sha256": "3e6a8d649cf1120eb09bad4a3f4e897955057c688dc7f9a3d0a20b2f33d5ba6c",
+   "title": "Politique_monétaire_décembre2022",
+   "year": 2023,
+   "url": "https://www.brh.ht/wp-content/uploads/Politique_monetaire_decembre2022.pdf",
+   "pages": 14,
+   "bytes": 1261123,
+   "classes": [
+    "digital/table",
+    "digital/table+2col",
+    "digital/table+figure",
+    "digital/table+figure+2col"
+   ],
+   "pages_per_class": {
+    "digital/table+figure": 3,
+    "digital/table": 8,
+    "digital/table+figure+2col": 1,
+    "digital/table+2col": 2
+   }
+  },
+  "4ea455ca4d52776c99efab6bfe62775ccf65e44c7a53bf0dbdfb2e2cee641249": {
+   "sha256": "4ea455ca4d52776c99efab6bfe62775ccf65e44c7a53bf0dbdfb2e2cee641249",
+   "title": "interventions20",
+   "year": 2020,
+   "url": "https://www.brh.ht/wp-content/uploads/interventions20-1.pdf",
+   "pages": 1,
+   "bytes": 8018,
+   "classes": [
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/text-only": 1
+   }
+  },
+  "5aec149f3ccd3ae1fd8f065dd71ff4ee4694e0d5cc7900b8b9c7cc0287100386": {
+   "sha256": "5aec149f3ccd3ae1fd8f065dd71ff4ee4694e0d5cc7900b8b9c7cc0287100386",
+   "title": "APCSA42024",
+   "year": 2024,
+   "url": "https://www.brh.ht/wp-content/uploads/APCSA42024.pdf",
+   "pages": 2,
+   "bytes": 102293,
+   "classes": [
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/text-only": 2
+   }
+  },
+  "63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451": {
+   "sha256": "63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451",
+   "title": "Note mensuelle d&#8217;inflation-septembre 2022_f",
+   "year": 2023,
+   "url": "https://www.brh.ht/wp-content/uploads/Note-mensuelle-dinflation-septembre-2022_f.pdf",
+   "pages": 9,
+   "bytes": 615690,
+   "classes": [
+    "digital/2col",
+    "digital/figure",
+    "digital/table",
+    "digital/table+2col",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/figure": 1,
+    "digital/text-only": 5,
+    "digital/table+2col": 1,
+    "digital/2col": 1,
+    "digital/table": 1
+   }
+  },
+  "65661da7967090f02d46d7715d8709e0fde94128ba40facc4ee5252a9298f8c6": {
+   "sha256": "65661da7967090f02d46d7715d8709e0fde94128ba40facc4ee5252a9298f8c6",
+   "title": "enquete_supermarches",
+   "year": 2019,
+   "url": "https://www.brh.ht/wp-content/uploads/enquete_supermarches-1.pdf",
+   "pages": 23,
+   "bytes": 2054450,
+   "classes": [
+    "digital/cover",
+    "digital/figure",
+    "digital/figure+2col",
+    "scan/ok"
+   ],
+   "pages_per_class": {
+    "digital/cover": 17,
+    "scan/ok": 3,
+    "digital/figure+2col": 1,
+    "digital/figure": 2
+   }
+  },
+  "6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67": {
+   "sha256": "6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67",
+   "title": "Circulaire 122-pdf",
+   "year": 2022,
+   "url": "https://www.brh.ht/wp-content/uploads/Circulaire-122-pdf.pdf",
+   "pages": 2,
+   "bytes": 393363,
+   "classes": [
+    "scan/ok"
+   ],
+   "pages_per_class": {
+    "scan/ok": 2
+   }
+  },
+  "6e1787f65499c51756f4e780c4e3a028c38ebe85f14c46b268e91cfaa4f66ed5": {
+   "sha256": "6e1787f65499c51756f4e780c4e3a028c38ebe85f14c46b268e91cfaa4f66ed5",
+   "title": "note-dinformation-FRD-BRH",
+   "year": 2025,
+   "url": "https://www.brh.ht/wp-content/uploads/note-dinformation-FRD-BRH.pdf",
+   "pages": 1,
+   "bytes": 1254681,
+   "classes": [
+    "digital/table+figure"
+   ],
+   "pages_per_class": {
+    "digital/table+figure": 1
+   }
+  },
+  "a4719b0947ec88845b1b10bdea749097707b29bb717666c0d154229807eb3f93": {
+   "sha256": "a4719b0947ec88845b1b10bdea749097707b29bb717666c0d154229807eb3f93",
+   "title": "NOTE-MENSUELLE DINFLATION-OCT-2024",
+   "year": 2025,
+   "url": "https://www.brh.ht/wp-content/uploads/NOTE-MENSUELLE-DINFLATION-OCT-2024.pdf",
+   "pages": 10,
+   "bytes": 1380473,
+   "classes": [
+    "digital/2col",
+    "digital/table",
+    "digital/text-only",
+    "scan/good"
+   ],
+   "pages_per_class": {
+    "scan/good": 2,
+    "digital/text-only": 4,
+    "digital/2col": 2,
+    "digital/table": 2
+   }
+  },
+  "a9e44cba8fa4ce93a91f624f5510494524f99cb56d99d13b4f7487efcc5eda1a": {
+   "sha256": "a9e44cba8fa4ce93a91f624f5510494524f99cb56d99d13b4f7487efcc5eda1a",
+   "title": "note_polmon1t20",
+   "year": 2020,
+   "url": "https://www.brh.ht/wp-content/uploads/note_polmon1t20.pdf",
+   "pages": 14,
+   "bytes": 815805,
+   "classes": [
+    "digital/table",
+    "digital/table+figure",
+    "digital/table+figure+2col",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/table+figure": 2,
+    "digital/table": 10,
+    "digital/text-only": 1,
+    "digital/table+figure+2col": 1
+   }
+  },
+  "abecbb4494e1ebb02f8452c58d5429172c1e63fc35a95d0eb6922a706df2bc7f": {
+   "sha256": "abecbb4494e1ebb02f8452c58d5429172c1e63fc35a95d0eb6922a706df2bc7f",
+   "title": "95-1B Déclaration de provenance de fonds &#8211; Agent de Change",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/circulaire_95-1b.pdf",
+   "pages": 4,
+   "bytes": 228911,
+   "classes": [
+    "scan/bad"
+   ],
+   "pages_per_class": {
+    "scan/bad": 4
+   }
+  },
+  "b041d1d05998890469be16f4006ca3a25871453487cd6431dd6145207a8dd60e": {
+   "sha256": "b041d1d05998890469be16f4006ca3a25871453487cd6431dd6145207a8dd60e",
+   "title": "plan_previsionnel_pmp_2019",
+   "year": 2019,
+   "url": "https://www.brh.ht/wp-content/uploads/plan_previsionnel_pmp_2019.pdf",
+   "pages": 2,
+   "bytes": 227351,
+   "classes": [
+    "digital/table"
+   ],
+   "pages_per_class": {
+    "digital/table": 2
+   }
+  },
+  "b1951d6ab223678106516259f36826026d11bf56d15d837ebd071b5c2c509421": {
+   "sha256": "b1951d6ab223678106516259f36826026d11bf56d15d837ebd071b5c2c509421",
+   "title": "note_inflat0819",
+   "year": 2020,
+   "url": "https://www.brh.ht/wp-content/uploads/note_inflat0819.pdf",
+   "pages": 8,
+   "bytes": 667588,
+   "classes": [
+    "digital/2col",
+    "digital/figure",
+    "digital/table",
+    "digital/table+2col",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/figure": 1,
+    "digital/text-only": 3,
+    "digital/2col": 1,
+    "digital/table+2col": 1,
+    "digital/table": 2
+   }
+  },
+  "bd33e4a2c80fd8e62027bc68265ab1e29b2b0e3791eae7d918c328b2d3306ab7": {
+   "sha256": "bd33e4a2c80fd8e62027bc68265ab1e29b2b0e3791eae7d918c328b2d3306ab7",
+   "title": "106 Développement et aménagement des zones franches et des parcs industriels",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/zones_franches.pdf",
+   "pages": 3,
+   "bytes": 642062,
+   "classes": [
+    "scan/bad"
+   ],
+   "pages_per_class": {
+    "scan/bad": 3
+   }
+  },
+  "c126c5a4ecc3437ca8dc8907639210312927590117e68918ddecf37eb41cfd61": {
+   "sha256": "c126c5a4ecc3437ca8dc8907639210312927590117e68918ddecf37eb41cfd61",
+   "title": "Avis Circulaire 61-3",
+   "year": 2023,
+   "url": "https://www.brh.ht/wp-content/uploads/Avis-Circulaire-61-3.pdf",
+   "pages": 1,
+   "bytes": 40244,
+   "classes": [
+    "scan/ok"
+   ],
+   "pages_per_class": {
+    "scan/ok": 1
+   }
+  },
+  "ee8e0a16efb68e060bbaa5b10fd725353de2bbc98aa7a50f03d8befdd24b9ca4": {
+   "sha256": "ee8e0a16efb68e060bbaa5b10fd725353de2bbc98aa7a50f03d8befdd24b9ca4",
+   "title": "Document d&#8217;Information #9",
+   "year": 2024,
+   "url": "https://www.brh.ht/wp-content/uploads/Document-dInformation-9.pdf",
+   "pages": 12,
+   "bytes": 765039,
+   "classes": [
+    "blank",
+    "digital/2col",
+    "digital/figure",
+    "digital/figure+2col",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/text-only": 5,
+    "blank": 1,
+    "digital/2col": 2,
+    "digital/figure": 2,
+    "digital/figure+2col": 2
+   }
+  },
+  "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9": {
+   "sha256": "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9",
+   "title": "95-1A Déclaration de provenance de fonds &#8211; Maisons de Transfert",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/circulaire_95-1a.pdf",
+   "pages": 4,
+   "bytes": 859999,
+   "classes": [
+    "scan/bad"
+   ],
+   "pages_per_class": {
+    "scan/bad": 4
+   }
+  },
+  "f31dfee9575ff1197dc5ff28cc4d42b85d79234f9c58cb2f12a202768bc4ae01": {
+   "sha256": "f31dfee9575ff1197dc5ff28cc4d42b85d79234f9c58cb2f12a202768bc4ae01",
+   "title": "pibsecteur",
+   "year": 2026,
+   "url": "https://www.brh.ht/wp-content/uploads/pibsecteur.pdf",
+   "pages": 1,
+   "bytes": 49623,
+   "classes": [
+    "digital/table"
+   ],
+   "pages_per_class": {
+    "digital/table": 1
+   }
+  },
+  "fb486a96fd95b886bbe5a0dffc27166ce1d33bdbbae1c09f489df788b42dab99": {
+   "sha256": "fb486a96fd95b886bbe5a0dffc27166ce1d33bdbbae1c09f489df788b42dab99",
+   "title": "92 Surveillance consolidée des opérations des banques",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/surveillance.pdf",
+   "pages": 6,
+   "bytes": 31935,
+   "classes": [
+    "blank",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/text-only": 5,
+    "blank": 1
+   }
+  }
+ },
+ "ci": {
+  "6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67": {
+   "sha256": "6ab9508ca873d1055feb678003fe0fe56e6ecc518bdb48793fbd86d1537c7d67",
+   "title": "Circulaire 122-pdf",
+   "year": 2022,
+   "url": "https://www.brh.ht/wp-content/uploads/Circulaire-122-pdf.pdf",
+   "pages": 2,
+   "bytes": 393363,
+   "classes": [
+    "scan/ok"
+   ],
+   "pages_per_class": {
+    "scan/ok": 2
+   }
+  },
+  "a9e44cba8fa4ce93a91f624f5510494524f99cb56d99d13b4f7487efcc5eda1a": {
+   "sha256": "a9e44cba8fa4ce93a91f624f5510494524f99cb56d99d13b4f7487efcc5eda1a",
+   "title": "note_polmon1t20",
+   "year": 2020,
+   "url": "https://www.brh.ht/wp-content/uploads/note_polmon1t20.pdf",
+   "pages": 14,
+   "bytes": 815805,
+   "classes": [
+    "digital/table",
+    "digital/table+figure",
+    "digital/table+figure+2col",
+    "digital/text-only"
+   ],
+   "pages_per_class": {
+    "digital/table+figure": 2,
+    "digital/table": 10,
+    "digital/text-only": 1,
+    "digital/table+figure+2col": 1
+   }
+  },
+  "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9": {
+   "sha256": "f2d799b9527eef9caaede5f0c5ee0afe4eb897ff8de972560f7b6e47e58faef9",
+   "title": "95-1A Déclaration de provenance de fonds &#8211; Maisons de Transfert",
+   "year": 2018,
+   "url": "https://www.brh.ht/wp-content/uploads/2018/08/circulaire_95-1a.pdf",
+   "pages": 4,
+   "bytes": 859999,
+   "classes": [
+    "scan/bad"
+   ],
+   "pages_per_class": {
+    "scan/bad": 4
+   }
+  }
+ }
+}

@@ -1,0 +1,259 @@
+{
+  "metadata": {
+    "file_suffix": "pdf",
+    "producer": {
+      "name": "mineru",
+      "version": "4.0.12"
+    },
+    "document": {
+      "created_at": "2015-09-14T12:12:47-04:00",
+      "modified_at": "2015-09-14T12:12:47-04:00",
+      "page_count": 1,
+      "page_count_kind": "physical"
+    }
+  },
+  "extensions": {
+    "mineru": {
+      "tier": "standard",
+      "parse_mode": "ocr"
+    },
+    "docvortex_layout": {
+      "version": 1,
+      "pages": [
+        {
+          "page_idx": 0,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "page_idx": 0,
+      "blocks": [
+        {
+          "type": "header",
+          "index": 0,
+          "bbox": [
+            0.141,
+            0.037,
+            0.256,
+            0.084
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "38+"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 1,
+          "bbox": [
+            0.257,
+            0.067,
+            0.541,
+            0.087
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Banque de la République d'Haïti"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "index": 2,
+          "bbox": [
+            0.141,
+            0.12,
+            0.313,
+            0.139
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "CIRCULAIRE # 02"
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 3,
+          "bbox": [
+            0.271,
+            0.171,
+            0.727,
+            0.227
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "LETTRE-CIRCULAIRE AUX BANQUES COMMERCIALES ET AUX BANQUES D'EPARGNE ET DE LOGEMENT"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.139,
+            0.242,
+            0.858,
+            0.331
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Conformément au paragraphe 5 de l'article 43 du Décret du 14 novembre 1980 réglementant le fonctionnement des banques et les activités bancaires sur le territoire de la République d'Haïti, les établissements bancaires doivent respecter les dispositions de la présente lettre-circulaire en matière de gestion du risque de change et des réserves obligatoires."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 5,
+          "bbox": [
+            0.142,
+            0.347,
+            0.333,
+            0.366
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "1.- Position de change"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.14,
+            0.38,
+            0.858,
+            0.436
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "À compter du 1"
+            },
+            {
+              "type": "equation_inline",
+              "content": "^{er}"
+            },
+            {
+              "type": "text",
+              "content": " mars 2008, la position de change structurelle telle que définie dans la circulaire # 81-4 sur le risque de change est fixée à un maximum de 1% par rapport aux fonds propres comptables."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 7,
+          "bbox": [
+            0.14,
+            0.449,
+            0.859,
+            0.558
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "À la fin de chaque journée, tout établissement bancaire accusant une position longue supérieure à 1% des fonds propres comptables est tenu de se défaire de cette position. Au cas où cette position excédentaire n'est pas débouclée, elle sera vendue à la BRH, le troisième jour ouvré suivant, au taux de référence bancaire. Le taux de référence bancaire est la moyenne pondérée des taux d'acquisition de dollars par les banques la veille du jour auquel cet excédent a été accusé."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.141,
+            0.572,
+            0.858,
+            0.608
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "2.- Constitution de réserves obligatoires sur les passifs libellés en monnaies étrangères"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 9,
+          "bbox": [
+            0.141,
+            0.623,
+            0.858,
+            0.678
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Les mesures portant sur la constitution des réserves obligatoires sur les passifs libellés en monnaies étrangères et adoptées le 25 janvier 2008 selon la Circulaire # 01 restent et demeurent en vigueur."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.142,
+            0.727,
+            0.415,
+            0.747
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Port-au-Prince, le 26 février 2008"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 11,
+          "bbox": [
+            0.144,
+            0.83,
+            0.266,
+            0.849
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Charles Castel"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 12,
+          "bbox": [
+            0.191,
+            0.921,
+            0.858,
+            0.938
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "P.O. Box 1570, Port-au-Prince, Haiti. Téléphone.: (509) 299-1243 / Fax: (509) 299-1095"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "is_full_document": true,
+  "schema": "docvortex.middle",
+  "schema_version": "2.0"
+}

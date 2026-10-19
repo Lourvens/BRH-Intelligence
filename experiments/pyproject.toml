@@ -11,4 +11,5 @@ dependencies = [
     "pypdf>=5.0",
     "fonttools>=4.53",
     "httpx>=0.27",
+    "llama-cloud>=2.18.0",
 ]

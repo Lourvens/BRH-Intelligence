@@ -1,0 +1,1658 @@
+{
+  "metadata": {
+    "file_suffix": "pdf",
+    "producer": {
+      "name": "mineru",
+      "version": "4.0.12"
+    },
+    "document": {
+      "languages": [
+        "en-US"
+      ],
+      "created_at": "2026-01-29T16:02:14-05:00",
+      "modified_at": "2026-01-29T16:02:16-05:00",
+      "creator_application": "Adobe InDesign 21.1 (Macintosh)",
+      "producer_application": "Adobe PDF Library 18.0",
+      "page_count": 10,
+      "page_count_kind": "physical"
+    }
+  },
+  "extensions": {
+    "mineru": {
+      "tier": "standard",
+      "parse_mode": "txt"
+    },
+    "docvortex_layout": {
+      "version": 1,
+      "pages": [
+        {
+          "page_idx": 0,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 1,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 2,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 3,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 4,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 5,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 6,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 7,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 8,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        },
+        {
+          "page_idx": 9,
+          "width_pt": 612.0,
+          "height_pt": 792.0
+        }
+      ]
+    }
+  },
+  "pages": [
+    {
+      "page_idx": 0,
+      "blocks": [
+        {
+          "type": "text",
+          "index": 0,
+          "bbox": [
+            0.066,
+            0.092,
+            0.432,
+            0.18
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "31 BANQUE DE LA RÉPUBLIQUE D'HAïTI"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 1,
+          "bbox": [
+            0.067,
+            0.544,
+            0.864,
+            0.648
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "NOTE MENSUELLE D'INFLATION"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.035,
+            0.9,
+            0.434,
+            0.938
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "NOVEMBRE 2025"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 1,
+      "blocks": [
+        {
+          "type": "paragraph_title",
+          "index": 0,
+          "bbox": [
+            0.328,
+            0.104,
+            0.67,
+            0.132
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "TABLE DES MATIÈRES"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "index",
+          "index": 1,
+          "bbox": [
+            0.098,
+            0.195,
+            0.905,
+            0.679
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "I.- Introduction....PAGE 3"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "II.- Évolution de l'inflation globale en novembre 2025....PAGE 3"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "III.- Évolution des principales fonctions de consommation en novembre 2025....PAGE 4"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "IV.- Évolution de l'inflation selon l'origine des produits et les régions géographiques du pays....PAGE 5"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "V.- Évolution de l'inflation sous-jacente....PAGE 6"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "VI.- Facteurs explicatifs de l'évolution de l'inflation mensuelle en novembre 2025....PAGE 7"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "content": [
+                {
+                  "type": "text",
+                  "content": "VII.- Prévisions d'inflation....PAGE 7"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 2,
+      "blocks": [
+        {
+          "type": "paragraph_title",
+          "index": 0,
+          "bbox": [
+            0.099,
+            0.088,
+            0.393,
+            0.113
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "I.- INTRODUCTION"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 1,
+          "bbox": [
+            0.097,
+            0.135,
+            0.901,
+            0.192
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Cette note analyse l’évolution de l’indice des prix à la consommation (IPC) en Haïti au cours du mois de novembre 2025. Elle apporte quelques éléments explicatifs permettant de comprendre les facteurs qui influencent la variation de l’IPC durant cette période."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 2,
+          "bbox": [
+            0.098,
+            0.236,
+            0.802,
+            0.291
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "II.- ÉVOLUTION DE L’INFLATION GLOBALE EN NOVEMBRE 2025"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.098,
+            0.313,
+            0.9,
+            0.369
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "En novembre 2025, le taux d’inflation s’est décéléré tant en variation mensuelle qu’en rythme annuel. Ainsi, il s’est contracté de 50 points de base sur un mois pour atteindre 1 %. Sur une base annuelle, il est passé de 32,2 % en octobre 2025 à 28,3 % au cours du mois sous revue."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.097,
+            0.379,
+            0.901,
+            0.472
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Sur les deux (2) premiers mois de l’exercice 2025-2026, l’inflation mensuelle cumulée a atteint 2,5 %, nettement inférieure par rapport aux 5,4 % observés sur la même période de l’exercice précédent. Par ailleurs, le taux d’inflation moyen mensuel s’est inscrit à 1 %, soit 3 points de pourcentage de moins que sur le même intervalle de l’exercice antérieur, tout en demeurant supérieur à celui enregistré en République dominicaine (0,7 %)."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.248,
+            0.5,
+            0.749,
+            0.517
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Évolution de l’inflation mensuelle et annuelle en novembre 2025 (en %)"
+            }
+          ]
+        },
+        {
+          "type": "chart",
+          "index": 6,
+          "bbox": [
+            0.135,
+            0.53,
+            0.858,
+            0.74
+          ],
+          "content": [
+            {
+              "type": "chart_body",
+              "index": 6,
+              "bbox": [
+                0.135,
+                0.53,
+                0.858,
+                0.74
+              ],
+              "content": ""
+            },
+            {
+              "type": "chart_footnote",
+              "index": 7,
+              "bbox": [
+                0.135,
+                0.746,
+                0.494,
+                0.76
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Source : Institut haïtien de statistique et d’informatique (IHSI)"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 8,
+          "bbox": [
+            0.789,
+            0.935,
+            0.871,
+            0.969
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "334"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 9,
+          "bbox": [
+            0.935,
+            0.945,
+            0.951,
+            0.961
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 3,
+      "blocks": [
+        {
+          "type": "doc_title",
+          "index": 0,
+          "bbox": [
+            0.098,
+            0.085,
+            0.875,
+            0.14
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "III.- ÉVOLUTION DES PRINCIPALES FONCTIONS DE CONSOMMATION EN NOVEMBRE 2025"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "text",
+          "index": 1,
+          "bbox": [
+            0.096,
+            0.162,
+            0.902,
+            0.328
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "L’évolution de l’IPC en variation mensuelle s’explique par la décélération enregistrée au niveau de la quasi-totalité des divisions de consommation au cours du mois de novembre 2025. Parmi les postes ayant enregistré les replis les plus importants, il convient de souligner les fonctions telles : « Restaurant » (0,5 % contre 3,2 % en octobre 2025), « Biens et services divers » (0,5 % contre 1,8 %), « Loisirs » (0,4 % contre 1,4 %), « Produits alimentaires et boissons non alcoolisées » (0,9 % contre 1,6 %), « Meubles, articles de ménage et entretien courant du foyer » (1,2 % contre 1,9 %). En revanche, l’inflation des postes « Boissons alcoolisées, tabac et stupéfiants » et « Santé » a affiché des hausses respectives de 32 points de base et de 6 points de base, atteignant 0,8 % et 1,5 % chacune, alors que celle de la fonction « Enseignement » est restée inchangée (0 %)."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.096,
+            0.337,
+            0.902,
+            0.429
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "En glissement annuel, l’inflation a été principalement tributaire de la baisse des prix au niveau de l’ensemble des divisions de consommation, à l’exception du groupe « Enseignement » dont la variation est restée stable à 7,3 %. En effet, l’indice des postes « Produits alimentaires et boissons non alcoolisées » (-5,4 pp à 29,7 %) et « Boissons alcoolisées, tabac et stupéfiants » (-3,7 pp à 15,7 %) a affiché un recul notable au cours du mois sous-étude."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.097,
+            0.439,
+            0.902,
+            0.514
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "En outre, les divisions de consommation « Produits alimentaires et boissons non alcoolisées » et « Logement, eau, gaz, électricité et autres combustibles » ont concouru de manière significative à l’évolution de l’inflation mensuelle à 72,7 % et à celle de l’inflation annuelle à "
+            },
+            {
+              "type": "equation_inline",
+              "content": "^ { 7 7 , 5 }"
+            },
+            {
+              "type": "text",
+              "content": " %, soulignant leurs contributions prépondérantes dans la formation des prix."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "index": 5,
+          "bbox": [
+            0.102,
+            0.556,
+            0.897,
+            0.856
+          ],
+          "content": [
+            {
+              "type": "table_caption",
+              "index": 4,
+              "bbox": [
+                0.246,
+                0.546,
+                0.771,
+                0.564
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Contributions à l’inflation mensuelle et annuelle en novembre 2025 (en %)"
+                }
+              ]
+            },
+            {
+              "type": "table_body",
+              "index": 5,
+              "bbox": [
+                0.102,
+                0.556,
+                0.897,
+                0.856
+              ],
+              "content": "<table><tbody><tr><td></td><td></td><td>Contribution à</td><td>Contribution à</td></tr><tr><td>Fonctions de consommation</td><td>Pondération</td><td>l'inflation</td><td>l'inflation</td></tr><tr><td></td><td>en %</td><td>mensuelle en %</td><td>annuelle en %</td></tr><tr><td>Indice général</td><td>100,00</td><td>100,00</td><td>100,00</td></tr><tr><td>Produits alimentaires etboissonsnon alcoolisées</td><td>48,50</td><td>49,36</td><td>53,26</td></tr><tr><td>Boissons alcoolisées, tabac et stupéfiants</td><td>1,42</td><td>1,19</td><td>0,82</td></tr><tr><td>Ar cles d'habillement et chaussures</td><td>5,55</td><td>7,35</td><td>5,21</td></tr><tr><td>Logement, eau, gaz, électricité et autres combus bles</td><td>14,14</td><td>23,41</td><td>24,26</td></tr><tr><td>Meubles, ar cles de ménages et entre en courant du foyer</td><td>5,32</td><td>7,07</td><td>4,73</td></tr><tr><td>Santé</td><td>2,56</td><td>4,31</td><td>1,94</td></tr><tr><td>Transports</td><td>9,10</td><td>2,92</td><td>2,39</td></tr><tr><td>Communica ons</td><td>2,23</td><td>0,45</td><td>0,29</td></tr><tr><td>Loisirs</td><td>1,52</td><td>0,64</td><td>1,03</td></tr><tr><td>Enseignement</td><td>3,91</td><td>0,00</td><td>1,05</td></tr><tr><td>Restaurants</td><td>0,49</td><td>0,25</td><td>0,57</td></tr><tr><td>Biens et Services divers</td><td>5,26</td><td>3,04</td><td>4,42</td></tr></tbody></table>"
+            },
+            {
+              "type": "table_footnote",
+              "index": 6,
+              "bbox": [
+                0.132,
+                0.854,
+                0.322,
+                0.868
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Source : Calculs de la BRH/MAE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 7,
+          "bbox": [
+            0.048,
+            0.945,
+            0.065,
+            0.961
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "4"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 8,
+          "bbox": [
+            0.128,
+            0.935,
+            0.209,
+            0.969
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "334"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 4,
+      "blocks": [
+        {
+          "type": "doc_title",
+          "index": 0,
+          "bbox": [
+            0.097,
+            0.083,
+            0.888,
+            0.166
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "IV.- ÉVOLUTION DE L’INFLATION SELON L’ORIGINE DES PRODUITS ET LES RÉGIONS GÉOGRAPHIQUES DU PAYS"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "text",
+          "index": 1,
+          "bbox": [
+            0.096,
+            0.188,
+            0.902,
+            0.281
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "L’évolution de l’inflation en novembre 2025 s’explique par une croissance moins marquée des prix des produits domestiques et des produits importés par rapport au mois précédent. En rythme annuel, la progression de l’indice des prix des produits locaux a ralenti de 3,8 points de pourcentage par rapport à octobre 2025 pour atteindre 30,7 %. De même, celle des produits importés a reculé pour s’établir à 24,8 % contre 28,7 % le mois antérieur."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.096,
+            0.29,
+            0.902,
+            0.439
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Considérant la répartition géographique, un fléchissement de l’inflation mensuelle a été observé dans l’ensemble des régions du pays. Dans les zones « Reste Ouest » et « Sud », elle s’est chiffrée à 0,9 %, marquant un recul respectif de 76 points de base (pb) et de 60 pb. L’IPC des régions « Nord », « Aire Métropolitaine » et « Transversale » a affiché une contraction de 80 pb, 39 pb et 55 pb respectivement, pour s’établir à 0,8 %, 1,1 % et 1 % chacun. Parallèlement, en glissement annuel, des baisses ont été enregistrées au niveau du taux de croissance de l’IPC de toutes les régions notamment : « Reste Ouest » (-4,2 pp à 29,5 %), « Sud » (-4,1 pp à 28,1 %), « Aire Métropolitaine » (-3,7 pp à 28,9 %), « Nord » (-3,6 pp à 25,5 %) et « Transversale » ( -3,6 pp à 28,3 %)."
+            }
+          ]
+        },
+        {
+          "type": "table",
+          "index": 3,
+          "bbox": [
+            0.101,
+            0.47,
+            0.897,
+            0.712
+          ],
+          "content": [
+            {
+              "type": "table_body",
+              "index": 3,
+              "bbox": [
+                0.101,
+                0.47,
+                0.897,
+                0.712
+              ],
+              "content": "<table><tbody><tr><td>Tableau 2 Distribut Région</td><td>ion de l'inflation par régi Variation me Octobre 2025</td><td>on géographique nsuelle (en %) Novembre 2025</td><td>Variation an Octobre 2025</td><td>nuelle (en %) Novembre 2025</td></tr><tr><td>Aire Métropolitaine</td><td>1,5</td><td>1,1</td><td>32,7</td><td>28,9</td></tr><tr><td>Reste Ouest</td><td>1,7</td><td>0,9</td><td>33,7</td><td>29,5</td></tr><tr><td>Nord</td><td>1,6</td><td>0,8</td><td>29,2</td><td>25,5</td></tr><tr><td>Sud</td><td>1,5</td><td>0,9</td><td>32,3</td><td>28,1</td></tr><tr><td>Transversale</td><td>1,6</td><td>1,0</td><td>31,9</td><td>28,3</td></tr><tr><td>Source : IHSI</td><td></td><td></td><td></td><td></td></tr></tbody></table>"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 4,
+          "bbox": [
+            0.789,
+            0.935,
+            0.872,
+            0.97
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "334"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 5,
+          "bbox": [
+            0.934,
+            0.944,
+            0.951,
+            0.961
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "5"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 5,
+      "blocks": [
+        {
+          "type": "paragraph_title",
+          "index": 0,
+          "bbox": [
+            0.099,
+            0.087,
+            0.838,
+            0.113
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "V.- ÉVOLUTION DE L’INFLATION SOUS-JACENTE"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 1,
+          "bbox": [
+            0.096,
+            0.136,
+            0.902,
+            0.247
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "L’inflation sous-jacente annuelle a accusé une décélération sur la période sous revue, en se portant à 27 % en novembre 2025, contre 30,6 % un mois auparavant. En variation mensuelle, elle est demeurée supérieure à l’inflation globale en s’inscrivant à 1 % en novembre 2025, soit une baisse de 60 points de base. Par ailleurs, le rythme de progression de l’IPC des produits alimentaires s’est contracté de 69 points de base (pb) pour atteindre 0,9 %, ainsi que celui des produits échangeables (-0,7 pb à 0,9 %), des biens industriels (-0,5 pb à 0,8 %) et non échangeables (-0,3 pb à 1,1 %)."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.246,
+            0.268,
+            0.671,
+            0.297
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Évolution de l'inflation globale et de l'inflation sous-jacente (en rythme mensuel et en %)"
+            }
+          ]
+        },
+        {
+          "type": "chart",
+          "index": 3,
+          "bbox": [
+            0.148,
+            0.307,
+            0.853,
+            0.518
+          ],
+          "content": [
+            {
+              "type": "chart_body",
+              "index": 3,
+              "bbox": [
+                0.148,
+                0.307,
+                0.853,
+                0.518
+              ],
+              "content": ""
+            },
+            {
+              "type": "chart_footnote",
+              "index": 4,
+              "bbox": [
+                0.135,
+                0.521,
+                0.262,
+                0.534
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Sources : IHSI et BRH"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "chart",
+          "index": 5,
+          "bbox": [
+            0.116,
+            0.566,
+            0.855,
+            0.786
+          ],
+          "content": [
+            {
+              "type": "chart_body",
+              "index": 5,
+              "bbox": [
+                0.116,
+                0.566,
+                0.855,
+                0.786
+              ],
+              "content": ""
+            },
+            {
+              "type": "chart_footnote",
+              "index": 6,
+              "bbox": [
+                0.134,
+                0.82,
+                0.264,
+                0.833
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Sources : IHSI et BRH"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 7,
+          "bbox": [
+            0.048,
+            0.945,
+            0.065,
+            0.96
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "6"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 8,
+          "bbox": [
+            0.129,
+            0.935,
+            0.209,
+            0.968
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "334"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 6,
+      "blocks": [
+        {
+          "type": "doc_title",
+          "index": 0,
+          "bbox": [
+            0.098,
+            0.087,
+            0.859,
+            0.141
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "VI.- FACTEURS EXPLICATIFS DE L’ÉVOLUTION DE L’INFLATION MENSUELLE EN NOVEMBRE 2025"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "text",
+          "index": 1,
+          "bbox": [
+            0.096,
+            0.163,
+            0.902,
+            0.328
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Le ralentissement de l’inflation au mois de novembre 2025 est lié à l’atténuation continue de l’impact des chocs antérieurs dans un contexte marqué par la bonne tenue du marché des changes. En effet, le maintien de la relative stabilité du taux de change (baisse mensuelle de 0,08 % du taux en novembre après -0,04 % en octobre 2025), soutenue par les transferts sans contrepartie et les mesures prises par la Banque centrale, a aussi contribué à la décélération de l’inflation importée (0,77 % contre 1,42 % en octobre 2025), alors qu’on observe une modération des cours internationaux des matières premières (contraction de 1,0 % de l’indice des prix alimentaires de la FAO en septembre, après -0,2 % en août 2025) et un manque de dynamisme de la demande intérieure en raison du ralentissement de l’activité économique."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 2,
+          "bbox": [
+            0.099,
+            0.373,
+            0.574,
+            0.4
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "VII.- PRÉVISIONS D’INFLATION"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 3,
+          "bbox": [
+            0.097,
+            0.422,
+            0.901,
+            0.515
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Les prévisions réalisées par la Direction Monnaie et Analyse Économique (MAE) de la BRH laissent augurer une poursuite de la baisse de l’inflation annuelle au cours des trois (3) prochains mois. Cette dernière devrait ralentir à 25,4 % en décembre 2025, avant de se porter à 24,5 % et 23,6 % respectivement en janvier et en février 2026. Parallèlement, l’inflation mensuelle devrait s’inscrire à 1,3 % en décembre 2025, tout comme en janvier et février 2026."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.097,
+            0.525,
+            0.9,
+            0.581
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "S’agissant de la composante sous-jacente de l’inflation, en variation mensuelle, elle devrait s’établir à 1,3 % en décembre 2025 contre 1,4 % en janvier comme en février 2026, alors qu’en rythme annuel, elle se porterait à 24,5 %, 23,9 % et 23,4 % respectivement en décembre 2025, janvier et février 2026."
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 5,
+          "bbox": [
+            0.109,
+            0.607,
+            0.213,
+            0.625
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Graphique 4"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.246,
+            0.603,
+            0.766,
+            0.63
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Prévisions de l’inflation en variation mensuelle et annuelle sur trois mois (décembre 2025, janvier et février 2026)"
+            }
+          ]
+        },
+        {
+          "type": "chart",
+          "index": 7,
+          "bbox": [
+            0.124,
+            0.635,
+            0.879,
+            0.861
+          ],
+          "content": [
+            {
+              "type": "chart_body",
+              "index": 7,
+              "bbox": [
+                0.124,
+                0.635,
+                0.879,
+                0.861
+              ],
+              "content": ""
+            },
+            {
+              "type": "chart_footnote",
+              "index": 8,
+              "bbox": [
+                0.134,
+                0.864,
+                0.738,
+                0.878
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Source : Prévisions du Service de Modélisation et Prévisions Macroéconomiques de la Direction MAE/BRH"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 9,
+          "bbox": [
+            0.79,
+            0.935,
+            0.871,
+            0.969
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "334"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 10,
+          "bbox": [
+            0.935,
+            0.945,
+            0.951,
+            0.961
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 7,
+      "blocks": [
+        {
+          "type": "table",
+          "index": 1,
+          "bbox": [
+            0.101,
+            0.126,
+            0.897,
+            0.538
+          ],
+          "content": [
+            {
+              "type": "table_caption",
+              "index": 0,
+              "bbox": [
+                0.236,
+                0.095,
+                0.878,
+                0.122
+              ],
+              "content": [
+                {
+                  "type": "text",
+                  "content": "Indice des prix à la consommation (IPC) par postes de dépenses et en variation mensuelle et annuelle de l’IPC en novembre 2025"
+                }
+              ]
+            },
+            {
+              "type": "table_body",
+              "index": 1,
+              "bbox": [
+                0.101,
+                0.126,
+                0.897,
+                0.538
+              ],
+              "content": "<table><tbody><tr><td>Fonctions de consommation</td><td>Novembre2024</td><td>IPC Octobre2025</td><td>Novembre2025</td><td>Variatio Mensuelle</td><td>n IPC (%) Annuelle</td></tr><tr><td>Indice général</td><td>444,6</td><td>564,9</td><td>570,4</td><td>1,0</td><td>28,3</td></tr><tr><td>Produits alimentaires et boissons non alcoolisées</td><td>545,6</td><td>701,2</td><td>707,7</td><td>0,9</td><td>29,7</td></tr><tr><td>Boissons alcoolisées, tabac et stupéfiants</td><td>240,4</td><td>275,9</td><td>278,0</td><td>0,8</td><td>15,7</td></tr><tr><td>Ar cles d'habillement et chaussures</td><td>427,1</td><td>529,2</td><td>535,6</td><td>1,2</td><td>25,4</td></tr><tr><td>Logement, eau, gaz, électricité et autres combus bles</td><td>379,5</td><td>547,3</td><td>555,6</td><td>1,5</td><td>46,4</td></tr><tr><td>Meubles, ar cles de ménages et entre en courant du foyer</td><td>382,0</td><td>468,3</td><td>473,9</td><td>1,2</td><td>24,1</td></tr><tr><td>Santé</td><td>453,4</td><td>538,3</td><td>546,5</td><td>1,5</td><td>20,5</td></tr><tr><td>Transports</td><td>340,4</td><td>363,5</td><td>364,6</td><td>0,3</td><td>7,1</td></tr><tr><td>Communica ons</td><td>214,0</td><td>221,3</td><td>221,7</td><td>0,2</td><td>3,6</td></tr><tr><td>Loisirs</td><td>322,5</td><td>380,2</td><td>381,7</td><td>0,4</td><td>18,3</td></tr><tr><td>Enseignement</td><td>171,4</td><td>183,9</td><td>183,9</td><td>0,0</td><td>7,3</td></tr><tr><td>Restaurants</td><td>475,8</td><td>622,7</td><td>625,6</td><td>0,5</td><td>31,5</td></tr><tr><td>Biens et Services divers</td><td>334,1</td><td>407,8</td><td>410,0</td><td>0,5</td><td>22,7</td></tr><tr><td>Source : IHSI</td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table>"
+            }
+          ]
+        },
+        {
+          "type": "page_number",
+          "index": 2,
+          "bbox": [
+            0.048,
+            0.945,
+            0.064,
+            0.96
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "8"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 3,
+          "bbox": [
+            0.129,
+            0.935,
+            0.209,
+            0.968
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "334"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 8,
+      "blocks": [
+        {
+          "type": "doc_title",
+          "index": 0,
+          "bbox": [
+            0.41,
+            0.087,
+            0.591,
+            0.114
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "GLOSSAIRE"
+            }
+          ],
+          "level": 1
+        },
+        {
+          "type": "paragraph_title",
+          "index": 1,
+          "bbox": [
+            0.142,
+            0.169,
+            0.385,
+            0.19
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Aire Métropolitaine :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 2,
+          "bbox": [
+            0.141,
+            0.194,
+            0.466,
+            0.252
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Elle contient les villes de Port-au-Prince, de Delmas, de Pétion-Ville, de Carrefour et de Croix des Bouquets."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 3,
+          "bbox": [
+            0.142,
+            0.271,
+            0.269,
+            0.292
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Déflation :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 4,
+          "bbox": [
+            0.142,
+            0.297,
+            0.457,
+            0.354
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Baisse du niveau général des prix associée à une contraction de la masse monétaire et du crédit."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 5,
+          "bbox": [
+            0.142,
+            0.374,
+            0.303,
+            0.395
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Désinflation :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 6,
+          "bbox": [
+            0.142,
+            0.4,
+            0.469,
+            0.42
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Ralentissement de la croissance des prix."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 7,
+          "bbox": [
+            0.142,
+            0.44,
+            0.374,
+            0.461
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Glissement annuel :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 8,
+          "bbox": [
+            0.142,
+            0.467,
+            0.461,
+            0.505
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Variation par rapport au même mois de l’année antérieure."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 9,
+          "bbox": [
+            0.142,
+            0.525,
+            0.262,
+            0.546
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Inflation :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 10,
+          "bbox": [
+            0.142,
+            0.551,
+            0.445,
+            0.59
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Mouvement persistant à la hausse du niveau général des prix."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 11,
+          "bbox": [
+            0.141,
+            0.609,
+            0.412,
+            0.631
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Inflation sous-jacente :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 12,
+          "bbox": [
+            0.141,
+            0.635,
+            0.475,
+            0.674
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Tendance de long terme des prix, tout en excluant la volatilité, les mouvements"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "index": 13,
+          "bbox": [
+            0.523,
+            0.17,
+            0.848,
+            0.226
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "saisonniers, conjoncturels, et les chocs qui affectent les composantes du panier considéré."
+            }
+          ],
+          "continues_prev": true
+        },
+        {
+          "type": "paragraph_title",
+          "index": 14,
+          "bbox": [
+            0.525,
+            0.246,
+            0.688,
+            0.268
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Région Nord :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 15,
+          "bbox": [
+            0.525,
+            0.271,
+            0.834,
+            0.31
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Elle couvre les départements du Nord, Nord-Est et Nord-Ouest."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 16,
+          "bbox": [
+            0.525,
+            0.33,
+            0.766,
+            0.352
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Région Reste Ouest :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 17,
+          "bbox": [
+            0.524,
+            0.356,
+            0.838,
+            0.413
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Y sont inclus les départements du Sud-Est et de l’Ouest, à l’exception de l’Aire Métropolitaine"
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 18,
+          "bbox": [
+            0.525,
+            0.433,
+            0.673,
+            0.455
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Région Sud :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 19,
+          "bbox": [
+            0.524,
+            0.459,
+            0.851,
+            0.498
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Elle comprend les départements du Sud, de la Grand-Anse et des Nippes."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 20,
+          "bbox": [
+            0.524,
+            0.517,
+            0.779,
+            0.539
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Région Transversale :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 21,
+          "bbox": [
+            0.524,
+            0.544,
+            0.805,
+            0.582
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Elle regroupe les départements du Centre et de l’Artibonite."
+            }
+          ]
+        },
+        {
+          "type": "paragraph_title",
+          "index": 22,
+          "bbox": [
+            0.524,
+            0.601,
+            0.774,
+            0.624
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Variation mensuelle :"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "text",
+          "index": 23,
+          "bbox": [
+            0.524,
+            0.628,
+            0.853,
+            0.649
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "Variation par rapport au mois précédent."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "index": 24,
+          "bbox": [
+            0.152,
+            0.672,
+            0.849,
+            0.949
+          ],
+          "content": [
+            {
+              "type": "image_body",
+              "index": 24,
+              "bbox": [
+                0.152,
+                0.672,
+                0.849,
+                0.949
+              ],
+              "content": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_idx": 9,
+      "blocks": [
+        {
+          "type": "paragraph_title",
+          "index": 0,
+          "bbox": [
+            0.066,
+            0.093,
+            0.432,
+            0.179
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "3H BANQUE DE LA RÉPUBLIQUE D'HAïTI"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "paragraph_title",
+          "index": 1,
+          "bbox": [
+            0.101,
+            0.258,
+            0.895,
+            0.503
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "C"
+            }
+          ],
+          "level": 2
+        },
+        {
+          "type": "footer",
+          "index": 2,
+          "bbox": [
+            0.036,
+            0.901,
+            0.432,
+            0.935
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "NOVEMBRE 2025"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 3,
+          "bbox": [
+            0.491,
+            0.901,
+            0.645,
+            0.927
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "www.brh.ht"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 4,
+          "bbox": [
+            0.662,
+            0.902,
+            0.695,
+            0.927
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "X"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 5,
+          "bbox": [
+            0.701,
+            0.905,
+            0.807,
+            0.925
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "@brhhaiti"
+            }
+          ]
+        },
+        {
+          "type": "footer",
+          "index": 6,
+          "bbox": [
+            0.824,
+            0.901,
+            0.971,
+            0.927
+          ],
+          "content": [
+            {
+              "type": "text",
+              "content": "@BRHHaiti"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "is_full_document": true,
+  "schema": "docvortex.middle",
+  "schema_version": "2.0"
+}

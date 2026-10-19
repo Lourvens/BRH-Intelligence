@@ -1,12 +1,30 @@
 # Progression
 
-Last updated: 2026-10-15 (analytics scope + BRH design guide)
+Last updated: 2026-10-19 (OCR batch on Modal)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
+- **OCR extraction is running on a Modal GPU cluster (2026-10-19).** 42 of 116
+  documents are extracted (409 pages) — PaddleOCR-VL 0.9B, `transformers`
+  backend, chart recognition on. The batch is manifest → per-document ledger →
+  `document.md`; 15 page-capped containers (≤ 50 pages each) run 8 at a time on
+  A100-80GB in two waves, and `scripts/modal-pull.sh` downloads the volume and
+  merges the per-document ledgers into `data/ocr/state.jsonl`.
+  - Measured on real documents: **8.7 s/page** including model load, 6.6 s/page
+    on the 41-page document, so the whole remaining corpus is ~2 GPU-hours.
+  - **The GPU choice is open**: L4 measured 7.2–10.1 s/page, T4 9.4–13.4, and
+    A100-80GB 9.4–14.7 at three times L4's price. The pipeline is latency-bound
+    at batch size 1, so A100 buys nothing; it is being used because it was asked
+    for, not because it measured best.
+  - Free Colab and Kaggle only offer T4 (compute 7.5), and PaddleOCR documents
+    that vLLM is not recommended below 8.0 — L4/A100 are what make vLLM possible.
+    The `transformers` engine and vLLM cannot share an environment, so that
+    comparison needs its own image and a server/client split.
+  - A document that already has `document.md` is never redone, so re-dispatching,
+    chunking, or restarting costs nothing.
 - **BRH inventory (front half) is implemented** — `make inventory` catalogues
   every PDF on `brh.ht` (the ledger lists the whole corpus, pending or resolved)
   and downloads the missing ones content-addressed into `data/raw/web/`.
@@ -17,6 +35,21 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 - **A second track, `services/analytics`**, generates the stats, charts and
   social-media assets. Its `inventory` family is live (six posts, rendered from
   the crawl ledger); the next family waits on corpus ingestion.
+- **A third track, OCR evaluation, is mid-phase 1.** The plan is
+  `docs/plans/2026-10-15-ocr-evaluation-design.md`: corpus composition (measured),
+  the engine landscape, the three scoring axes (quality / efficiency /
+  reliability), and four phases — gold standard dataset → benchmark harness →
+  ADR → CI regression gate. Phase 1a (the stratified corpus sample) is **done**,
+  and phase 1b has **chosen** its documents — 6 picked by hand from a 22-document
+  machine shortlist, 27 pages, in `experiments/gold/documents/`, with
+  `build_manifest.py` adopting them and reporting that **5 of the 13 classes are
+  uncovered**. Not transcribed yet. No OCR code exists.
+- **The web UI is no longer a placeholder (2026-10-19).** `apps/web` implements
+  the house style from [`services/analytics/DESIGN.md`](services/analytics/DESIGN.md):
+  colour and type tokens, Montserrat + Inter self-hosted, button/citation
+  primitives, and a welcome page with an illustrative cited answer. The copy is
+  still placeholder; the chat, live citations and the PDF viewer are the next
+  frontend steps.
 
 ## Next up
 
@@ -31,6 +64,208 @@ Continue the build order:
 
 ## Recently done
 
+- **2026-10-19 — Web design system and welcome page.** `apps/web/app/globals.css`
+  is now the web port of the analytics style guide: brand and neutral tokens,
+  the `11 · 12 · 14 · 16 · 20 · 24 · 32 · 44 · 64` type scale, card radius and
+  shadows. Montserrat and Inter are **self-hosted** (`app/fonts/*.woff2`,
+  latin subset) through `next/font/local`, so the build needs no network and
+  French accents are covered. `lib/utils.ts` extends `tailwind-merge` with the
+  named scale — without it, `text-caption` and `text-white` collide and navy
+  buttons lose their label (caught in a headless screenshot, not by `tsc`).
+  New primitives: `Brand` (original 251×123 mark, never recoloured),
+  `Button`/`ButtonLink` (primary, secondary, ghost, gold-fill), `CitationChip`,
+  `SiteHeader`, `SiteFooter`, and `AnswerPreview`. The page itself is
+  `app/page.tsx`: hero, corpus band, three-step method, navy CTA, footer.
+  The preview cites **RDCCF Vol. V (juin 2026), p. 19 and p. 23** — real
+  sections of a document already in `data/processed`. Copy is deliberately
+  provisional. `bun run build` passes; desktop (1440) and mobile (390) checked
+  with Chrome headless.
+- **2026-10-18 — Full-corpus OCR batch started on Kaggle.**
+  Corpus profile: **116 documents, 1 192 pages, 127 MiB** — 336 scanned pages
+  (28%), 217 with tables, 72 with figures; 72 born-digital / 20 hybrid / 24 fully
+  scanned; years 2018–2026. At the measured **14.9 s/page** (T4, charts on) the
+  batch is **~4.9 h**.
+  Kaggle turned out to be the better host than Colab: **12 h sessions, 29 GB RAM,
+  T4 ×2, 30 GPU h/week**, driven headlessly with `kaggle kernels push`
+  (CLI 2.2.4, `KGAT_…` token). Private dataset `lourvensluxamar/brh-ocr-code`
+  holds `brh_core` + `urls.json`; kernel `lourvensluxamar/brh-ocr-batch`
+  installs the OCR stack, downloads the 116 PDFs from brh.ht with `sha256`
+  verification, builds the manifest, runs the batch, and zips the output to
+  `/kaggle/working`. State lives in `/kaggle/working/ocr/state.jsonl` and is
+  saved as kernel output, so a re-push resumes rather than restarts.
+- **2026-10-18 — Batch OCR is production code now, not an experiment.**
+  `brh_core.ingestion.ocr` (manifest → ledger → per-document output) +
+  `brh_core.ingestion.engines` (PaddleOCR-VL behind a `parse()` protocol, heavy
+  import deferred) + `brh_core.ingestion.markdown` (markup normaliser).
+  **Resumable by construction:** `manifest.jsonl` keys documents by `sha256`;
+  `state.jsonl` is append-only (`started`/`done`/`failed`, every event carrying
+  batch id and attempt); status is a replay, never a second field that can drift.
+  `done` skips, `--retry-failed` retries, `--max-attempts` marks exhausted,
+  `--force` redoes. A failed document never leaves a half-written `document.md`
+  (staged + atomic replace). Output: `<out>/<sha>/document.md` with
+  `<!-- page N -->`, `assets/pNNN/`, `meta.json`. CLI:
+  `python -m brh_core.ingestion.ocr {manifest,run,status}`.
+  `scripts/colab-ocr.sh` runs the whole thing on a Colab VM: installs the OCR
+  stack, puts `brh_core` on `PYTHONPATH` (no Postgres/Pinecone), builds the
+  manifest, runs, prints status. **`brh_core/ingestion/__init__` is now lazy** —
+  importing the OCR runner used to pull psycopg and psycopg_pool through
+  `pipeline`, which defeated "runs anywhere"; verified: zero heavy modules.
+  Tests: `packages/core/tests/test_ocr_batch.py`, 10 offline cases against a fake
+  engine (skip-done, retry, exhaustion, limit, missing source, atomicity, cleaning).
+  Spec: `docs/architecture/ocr-batch.md`.
+- **2026-10-18 — PaddleOCR-VL output layout, settled.** The pipeline writes one
+  directory per page (`raw/pages/<sha>/pNNN/`) holding `<sha>_N.md` — **N is a
+  0-based page index**, so `p001` holds `_0.md`; the directory is the page number
+  — plus `imgs/` with the Figure crops named by box. Those `imgs/…` paths are
+  relative to the page directory, so they are **dead in the merged document**
+  (14 references across the six files). `clean.py` now copies them to
+  `clean/assets/<sha>/pNNN/` and rewrites them as `![](assets/…)`: 14 figures,
+  0 broken links, 888 kB, and the output directory is self-contained.
+  Tables: 5 stay HTML because their rows have different cell counts (no merged
+  cells in this set) — padding them would shift values by a column, so only the
+  styling is dropped. `--drop-images` is there for a text-only corpus.
+- **2026-10-18 — PaddleOCR-VL chosen; clean output and charts.** Two fixes on top
+  of the run. **(1) Markup.** PaddleOCR writes HTML tables with a style attribute
+  on every cell and `<div style=…>` around captions — `paddleocr/clean.py` turns
+  simple tables into GFM pipe tables, strips every attribute from the rest,
+  unwraps divs and unescapes entities: **68 948 → 40 452 chars (59%)**, tags
+  1 455 → 897. The wide table now looks exactly like LlamaParse's.
+  **(2) Charts.** `use_chart_recognition=True` (off by default) reads a chart as
+  data: `63b4ca02` p7 returns 20 rows of `Date | Infl_m | Infl_y`. F1 on the chart
+  pages rises 0.340 → 0.428 and 0.646 → 0.754; a non-chart page is unchanged
+  (0.996). WER rises on chart pages because the recovered series is text the
+  text layer never had — chart pages must be scored on series recovery, not WER.
+  Cost: +34% time and +60% output on `110b25ca`. Chosen config:
+  `PaddleOCRVL(engine="transformers", use_chart_recognition=True)` + `clean.py`.
+  Colab reclaimed a VM mid-run once; the chart pass was re-run on the two
+  chart-bearing documents only (19 pages, 64 504 chars, 311 s).
+- **2026-10-18 — OCR candidate 3: PaddleOCR-VL 0.9B, and a scoring bug worth
+  remembering.** `experiments/paddleocr/` holds the run (Colab T4, PaddleOCR 3.7.0,
+  `PaddleOCRVL(engine="transformers")` so torch does the work and no Paddle GPU
+  wheel is needed): **6/6 documents, 68 948 chars, 401 s** — the slowest, ~15 s/page,
+  and the most verbose (HTML tables). Four-way on the 18 born-digital pages:
+  **MinerU 0.907 / PaddleOCR-VL 0.906 / Docling 0.895 / LlamaParse 0.885**; F1 ≥
+  0.98 is 10 / 10 / **11** / 7; WER ≤ 0.10 is 8 / 8 / **9** / 8. On the scan it
+  reads the body cleanly (unlike Docling) but drops the letterhead like MinerU.
+  **The bug:** PaddleOCR emits HTML tables with `style='text-align: center;
+  word-wrap: break-word;'` on every cell, and `markdown_to_text` does not strip
+  tags — every cell's style text entered the word counts, WER hit 4.0 and the
+  engine scored 0.660. `compare_ocr.py` now strips tags for *all* engines, which
+  is why Docling's numbers moved from 0.890/10/8 to 0.895/11/9. Score the text,
+  not the markup.
+  Context: PaddleOCR-VL-1.5 is SOTA on OmniDocBench v1.5 (94.5% vs MinerU2.5's
+  90.67%), yet here it is level with MinerU — that benchmark is mostly Chinese and
+  English and weights formulas/tables, this corpus is French, table-heavy and
+  partly scanned.
+- **2026-10-18 — OCR candidate 2: Docling 2.140.0, and a correction to MinerU.**
+  `experiments/docling/` holds the run (Colab T4, `do_ocr`, tables, EasyOCR
+  `lang=["fr"]`): **6/6 documents, 46 268 chars, 71.8 s**, and it keeps page
+  breaks via `page_break_placeholder` — MinerU cannot. Three-way on the 18
+  born-digital pages (`experiments/compare_ocr.py`): **LlamaParse 0.885 / 7 pages
+  ≥0.98, MinerU 0.907 / 10, Docling 0.890 / 10**; WER ≤ 0.10 is 8 each. Docling
+  wins nothing structural but matches MinerU on the wide table (1.000 / 0.000)
+  and loses on charts (0.351 vs 0.364 vs LlamaParse 0.483).
+  **The scan is the split:** on `f2d799b9` Docling drops the letterhead *and*
+  mis-reads the body (`déclarntions`, `circulairc`, `trnnsfert`, `Gdes 5,000.9`),
+  while MinerU reads it cleanly.
+  **Correction:** MinerU *did* capture `CIRCULAIRE No 95-1A` — it types the
+  letterhead as `header` and the footer as `footer`, and its **markdown writer
+  omits both**, so only `raw/<sha>.json` has them. For page-level citations,
+  render from the page tree, not the markdown. Gotcha: Docling 2.x no longer
+  bundles EasyOCR (`ImportError` on every file until `pip install easyocr`).
+- **2026-10-18 — OCR candidate 1: MinerU 4.0.12, run for real on a Colab T4.**
+  `experiments/mineru/` holds the run: **27 pages, 37 503 chars, 138 s**, tier
+  `standard` (small models + VLM), `ocr_mode="auto"`, 6/6 documents. Scored the
+  same way as the reference: **mean word F1 0.907 vs LlamaParse's 0.885**, pages
+  at F1 ≥ 0.98 **10 vs 7**, WER ≤ 0.10 **8 vs 8**. It is *perfect* on the wide
+  financial table (`f31dfee9`: 1.000 F1, 0.000 WER) and cleaner on the two-column
+  glossary (`110b25ca` p9: 0.997/0.006 vs 0.969/0.065). Charts beat both: 0.364
+  vs 0.483 on `63b4ca02` p7, 0.611 vs 0.564 on `110b25ca` p6 — neither is a
+  transcription there.
+  Two gotchas cost real time, both recorded in the README: **Colab ships Python
+  3.13 and vLLM has no wheels for it** (the install "hangs" building from source —
+  use a 3.12 venv), and **vLLM spawns its engine core, so entry scripts need
+  `if __name__ == "__main__":`** or the child re-runs the parse. Also MinerU
+  inlines page images as base64 in the markdown; `run.py` collapses them.
+  `mineru/score.py` reproduces the comparison; no API key, no cost.
+  Colab was driven headlessly with `google-colab-cli` (`colab new/exec/download/stop`),
+  which needs a one-time OAuth code — `OAUTHLIB_RELAX_TOKEN_SCOPE=1` was required
+  because the granted scope set omits `cloud-platform`. HF Jobs was tried as a
+  fallback and refused a fine-grained token (`403` on the jobs-artifacts bucket).
+- **2026-10-17 — OCR candidates: MinerU first (notebook).**
+  `experiments/notebooks/0003-mineru-ocr.ipynb` runs **MinerU 4.0** on Colab (T4)
+  over the six benchmark PDFs. MinerU 4 renamed everything — no `magic-pdf`, no
+  `-b pipeline`, extras are `torch`/`full` — so the notebook uses
+  `mineru.parser.parse(path, tier=..., ocr_mode=...)`. Settings: `tier="standard"`
+  (small models + VLM), `ocr_mode="auto"` (text layer where present, OCR where
+  not). **There is no `fr` language code**: `ch` is the model that covers Latin,
+  and `-l/--lang` only applies to the legacy `pipeline` backend, so `standard`
+  ignores it and `fr` raises `ValueError`. Inputs are downloaded from brh.ht and
+  verified by `sha256` (all six URLs return the exact manifest byte counts), so
+  the run needs no upload. Smoke test is `110b25ca` p9 (the two-column glossary)
+  before the full run; output is `.md` + `.json` per document plus `results.json`.
+  Not yet executed on Colab.
+- **2026-10-17 — The reference and the dataset (phase 1b, continued).**
+  `experiments/gold/reference/<sha256>.md` holds the reference **per document**
+  (not per page), with `<!-- page N -->` markers so citations stay page-level;
+  `.txt` is derived from it, so the two cannot disagree. Built by
+  `build_reference.py`: **27 pages, 39 323 characters, 390 credits**, tier
+  `agentic`, French OCR, and — from the sibling's `llamaparse` skill —
+  `specialized_chart_parsing: "agentic"`, which returns a chart as a **data
+  table** instead of axis labels, and describes figures.
+  **Correction to an earlier claim:** LlamaParse's `text` expansion does merge
+  `110b25ca` p9's columns line by line, but its **markdown reads them correctly**
+  (`Inflation sous-jacente … les mouvements saisonniers, conjoncturels, et les
+  chocs …`). The column failure was our choice of expansion, not its error, and
+  the first version of the README blamed the wrong party. Scoring is now word F1
+  (content) + **WER** (order) against the PDF text layer: WER, not CER, because
+  markdown rewraps lines and promotes headings (TOC page: CER 0.405 vs WER 0.016).
+  Tables are excluded from the order score (text layer is column-major, markdown
+  row-major) and chart/figure pages are marked `semantic` (1.6–2.4× the word
+  count — richer than a transcription). Result: content `verified` 7, `review` 7,
+  `semantic` 4, `unverified` 9; order `ok` 4, n/a 23.
+  **`experiments/gold/dataset.jsonl`** is now the deliverable: 27 rows, one per
+  page, with `source.pdf`+`page`, `reference_md`/`reference_txt`, class, status
+  and the exact parse provenance. `build_dataset.py --check` fails if it drifts
+  from the reference. `build_reference.py` has `--recheck` (re-score from the
+  stored markdown, no credits) and `--force` (re-parse). Needs
+  `LLAMA_CLOUD_API_KEY`; `llama-cloud` is an `experiments/` dependency.
+- **2026-10-16 — Benchmark document set (phase 1b).** Profiled all **1 192 pages**
+  of the corpus sample, then shortlisted **22 whole documents (141 pages)** covering
+  every technical class present — `digital`/`scan` × resolution × content
+  (`text-only`, `table`, `figure`, `2col`, `cover`), plus `blank`. A human then
+  picked **6 documents (27 pages, 4.1 MB)** from that shortlist as the evaluation
+  set; `build_manifest.py` verifies each file against its own `sha256` and derives
+  the classes it covers. The pick is lean — a third of the shortlist's pages — and
+  **misses 5 classes**, which the manifest reports on every run instead of
+  filling. Note: adding `1d275de7`, `ee8e0a16` and `a9e44cba`
+  (38 pages, 2.5 MB) would close all five.
+  **Selection is per document, not per page**: a benchmark entry is a file, and
+  page-level selection had hidden that 11 documents are *hybrid*. Learned the hard
+  way: size caps must be a pool filter (breadth-first greedy reached 424 pages /
+  42 MB) and year coverage must be a goal, not a tie-break (2021 silently fell
+  out). Rendering a contact sheet also showed `find_tables()` firing on covers and
+  chart grids, and that **no scanned page with a data table exists** in the
+  sample. Also corrected the OCR workload: **336 pages have no text layer
+  (28.2%)**, not 242.
+
+- **2026-10-15 — OCR evaluation research (phase 0), and the sample that corrected
+  it (phase 1a).** The first pass measured the only 27 documents the backfill had
+  reached: **78% born-digital / 19% image-only / 4% scan+text**, scans at
+  **74–75 dpi**. That sample was biased — the queue orders `wp_modified ASC`, so
+  25 of 28 resolved documents were 2018 circulars. `make inventory
+  ARGS="--sample 90"` (10 documents per publication year; the selector is
+  `pipeline.stratified_sample`) re-measured it over **116 documents / 1 192
+  pages**: **75.9% born-digital, 20.7% image-only (242 pages need OCR), 3.4%
+  suspect text layer**, scans at a **median 150 dpi, 96% below 300** — but *not*
+  uniformly: 18 of the 24 scans sit in **2018 (11) and 2022 (7)**, 2021 and 2025
+  have none, and two **2026** documents are scanned too. The 2022 set is a batch
+  of `Circulaire 12x-pdf` scans. Also reviewed the engine landscape (OmniDocBench
+  v1.7, olmOCR-Bench, a 22-engine four-track study), CPU throughput, licensing,
+  and evaluation methodology — including that **ground-truth noise alone sets a
+  4–7% CER floor**, which is why half of phase 1 is measuring our own
+  transcription disagreement. Plan:
+  `docs/plans/2026-10-15-ocr-evaluation-design.md`.
 - **2026-10-15 — Analytics scope + BRH design guide.** `services/analytics`
   (`brh_analytics`, a new uv workspace member) opens the stats/charts/social
   track. The palette was sampled from `brh.ht` itself — the site logo is a flat
@@ -110,3 +345,26 @@ Continue the build order:
   their size stays unknown until the `HEAD` at download time. `--stats` reports
   `outstanding_sized` so the partial `outstanding_bytes` is not mistaken for the
   whole corpus.
+- **The backfill consumes the oldest documents first.** The queue orders by
+  `wp_modified ASC` (nulls first), so a plain `--limit` describes 2018 and
+  nothing else. Use **`make inventory ARGS="--sample N"`** instead when you want
+  to know what the corpus *contains*: it takes one document from every
+  publication year in turn. This is not a nicety — the first 28-document read of
+  the corpus missed that the scans are concentrated in two years.
+- **This machine has no GPU** (8 vCPU, 15 GB RAM, no `nvidia-smi`). OCR
+  candidates must be scored on CPU, or a GPU acquired deliberately — the whole
+  candidate ladder depends on which.
+- **Scans are low-resolution and unevenly distributed.** Over 116 documents:
+  median **150 dpi**, 25% below 150, 96% below 300 (the literature assumes
+  300–400). But they are concentrated — 2018 has 11, 2022 has 7 of the 24, and
+  2021/2025 have none — and the 2022 set is a batch of `Circulaire 12x-pdf`
+  scans. Two **2026** documents are scanned as well, so this is not a legacy
+  problem. Upscaling/deskewing is a real experimental arm, not a detail.
+- **Count pages, not documents.** 336 of 1 192 pages have no text layer (28.2%),
+  but only 242 of those belong to the 24 wholly-scanned documents: **11 documents
+  are hybrid**, carrying scanned pages among digital ones. A per-document verdict
+  under-counts the work by a third, and means the ingestion router must decide
+  **per page**, not per document.
+- **Never trust a text layer you did not produce.** 4 of the 116 documents carry
+  both a real text layer and ~full raster coverage — possibly a previous OCR of
+  unknown quality. The ingestion router must verify such a layer, not trust it.
