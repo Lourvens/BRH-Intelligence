@@ -48,8 +48,12 @@ python -c "import brh_core.ingestion.ocr as m; print('  brh_core ok:', m.__name_
 
 echo "== manifest"
 mkdir -p "$OUT_DIR"
-# MANIFEST lets a page-balanced manifest from scripts/plan_batches.py be used
-# instead of rebuilding one from the directory (the order is what balances shards).
+if [ -n "${URLS:-}" ]; then
+    echo "  fetching shard $SHARD from $URLS"
+    python scripts/fetch_shard.py --urls "$URLS" --shard "${SHARD:-0/1}" \
+        --out-dir "$PDF_DIR" --manifest "$OUT_DIR/manifest.jsonl" \
+        --limit "${LIMIT:-0}"
+fi
 if [ -n "${MANIFEST:-}" ]; then
     echo "  using $MANIFEST"
 else
