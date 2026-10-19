@@ -255,6 +255,24 @@ def bench_a100(sha: str, pages: int = 3) -> dict:
 # --- local side -------------------------------------------------------------
 
 
+# Optional static shard for shared corpora: "0/2" takes even documents, "1/2" odd.
+# Same rule as `brh_core.ingestion.ocr run --shard`, over the same manifest order,
+# so a Colab worker and this cluster never touch the same document.
+SHARD = os.environ.get("BRH_SHARD", "")
+
+
+def _shard_of(shas: list[str]) -> list[str]:
+    if not SHARD:
+        return shas
+    try:
+        index, total = (int(part) for part in SHARD.split("/", 1))
+    except ValueError:
+        raise SystemExit(f"BRH_SHARD expects I/N, got {SHARD!r}") from None
+    if total < 1 or not 0 <= index < total:
+        raise SystemExit(f"BRH_SHARD {SHARD}: need 0 <= I < N")
+    return shas[index::total]
+
+
 def _remaining() -> list[str]:
     """Manifest hashes whose ``document.md`` is missing, empty, or absent."""
     manifest = LOCAL_OCR / "manifest.jsonl"
@@ -268,7 +286,7 @@ def _remaining() -> list[str]:
         for entry in volume.listdir("/ocr", recursive=True)
         if entry.path.endswith("/document.md") and entry.size > 0
     }
-    return [sha for sha in wanted if sha not in present]
+    return _shard_of([sha for sha in wanted if sha not in present])
 
 
 def _largest_remaining(count: int) -> list[str]:
