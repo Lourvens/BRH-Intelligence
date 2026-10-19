@@ -26,6 +26,8 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -378,6 +380,19 @@ def run_urls(limit: int = 0, detach: bool = False) -> None:
     rows = [json.loads(line) for line in source.read_text().splitlines() if line.strip()]
     urls = _shard_of([row["url"] for row in rows])
     batch = urls[:limit] if limit else urls
+
+    # Refuse to start when the workspace credit is under the floor. Dispatching
+    # is the one decision that spends money, so it is the one that gets checked.
+    floor = os.environ.get("BRH_MIN_REMAINING", "5")
+    guard = Path(__file__).parent / "spend_guard.py"
+    if os.environ.get("BRH_SPEND_GUARD", "1") == "1" and guard.is_file():
+        check = subprocess.run([sys.executable, str(guard), "--check", "--floor", floor],
+                               capture_output=True, text=True)
+        print(check.stdout.strip().splitlines()[-1] if check.stdout.strip() else "")
+        if check.returncode != 0:
+            print(f"credit is below ${floor} — not dispatching")
+            return
+
     groups = [batch[i:i + URLS_PER_CONTAINER] for i in range(0, len(batch), URLS_PER_CONTAINER)]
     print(f"dispatching {len(batch)} of {len(urls)} url(s) in {len(groups)} container(s) "
           f"on {BATCH_GPU}, max {MAX_CONTAINERS} at a time, "
