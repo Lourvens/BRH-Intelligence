@@ -7,18 +7,19 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
-- **OCR extraction is running on a Modal GPU cluster (2026-10-19).** 42 of 116
-  documents are extracted (409 pages) — PaddleOCR-VL 0.9B, `transformers`
-  backend, chart recognition on. The batch is manifest → per-document ledger →
-  `document.md`; 15 page-capped containers (≤ 50 pages each) run 8 at a time on
-  A100-80GB in two waves, and `scripts/modal-pull.sh` downloads the volume and
-  merges the per-document ledgers into `data/ocr/state.jsonl`.
+- **OCR extraction is running on a Modal GPU cluster (2026-10-19).** 84 of 116
+  documents are extracted (997 pages, 1.96 M chars, 132 figures) — PaddleOCR-VL
+  0.9B, `transformers` backend, chart recognition on. The batch is manifest →
+  per-document ledger → `document.md`; containers hold ≤ 50 pages each, and
+  `scripts/modal-pull.sh` downloads the volume and merges the per-document
+  ledgers into `data/ocr/state.jsonl`. Output is committed to git as it lands,
+  so the volume is a cache, not the only copy.
   - Measured on real documents: **8.7 s/page** including model load, 6.6 s/page
-    on the 41-page document, so the whole remaining corpus is ~2 GPU-hours.
-  - **The GPU choice is open**: L4 measured 7.2–10.1 s/page, T4 9.4–13.4, and
-    A100-80GB 9.4–14.7 at three times L4's price. The pipeline is latency-bound
-    at batch size 1, so A100 buys nothing; it is being used because it was asked
-    for, not because it measured best.
+    on the 41-page document.
+  - **Cost is pages × s/page × price, not concurrency.** Per page: L4 $0.0019,
+    T4 $0.0019, A100-80GB $0.0083. A100 measured *slower* (9.4–14.7 s/page vs
+    L4's 7.2–10.1), so the default is now **L4 with 2 containers** — the A100
+    waves cost ~$7.8 for work that L4 would have done for ~$2.2.
   - Free Colab and Kaggle only offer T4 (compute 7.5), and PaddleOCR documents
     that vLLM is not recommended below 8.0 — L4/A100 are what make vLLM possible.
     The `transformers` engine and vLLM cannot share an environment, so that

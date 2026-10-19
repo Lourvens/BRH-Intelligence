@@ -1,0 +1,158 @@
+<!-- page 1 -->
+
+![](assets/p001/img_in_image_box_140_279_370_410.jpg)
+
+Banque de la République d'Haïti
+
+![](assets/p001/img_in_image_box_276_630_946_964.jpg)
+
+Note mensuelle d'inflation
+
+Septembre 2022
+
+<!-- page 2 -->
+
+## Table des matières
+
+I.- Introduction.....2
+II.- Évolution de l'inflation courante en septembre 2022.....2
+III.- Évolution des principales fonctions de consommation en septembre 2022.....3
+IV.- Évolution de l'inflation selon l'origine des produits et les régions géographiques du pays.....4
+V.- Facteurs explicatifs de l'évolution de l'inflation en rythme mensuel .....5
+VI.- Prévisions d'inflation .....6
+
+<!-- page 3 -->
+
+### I. - Introduction
+
+Cette note analyse l'évolution de l'indice des prix à la consommation (IPC) en Haïti au cours du mois de septembre 2022. Elle apporte quelques éléments explicatifs permettant de comprendre les facteurs qui influencent la variation mensuelle de l'IPC.
+
+### II. - Évolution de l'inflation courante en septembre 2022
+
+L’indice des prix à la consommation (IPC) a été estimé à 250,2 en septembre 2022 contre 234,9 le mois précédent et 180,1 un an plus tôt. Ainsi, en rythme mensuel, l’inflation est passée de 3,2 % en août 2022 à 6,5 % en septembre 2022. Parallèlement, sur base annuelle, le taux d’inflation a connu une accélération de 6,7 points de pourcentage par rapport au mois d’août pour se porter à 38,7 % en septembre 2022.
+
+D’octobre 2021 à septembre 2022, l’inflation mensuelle a évolué autour d’une moyenne de 2,8 % contre 1 % au cours de la même période de l’exercice fiscal 2020-2021. Ce taux moyen d’inflation mensuel est supérieur à celui de nos principaux partenaires commerciaux au cours de la même période (République Dominicaine : 0,69 % et les États-Unis : 0,65 %). Cumulé d’octobre 2021 à septembre 2022, le taux d’inflation mensuel s’est porté à 33,3 %, soit près de trois fois le niveau (12,4 %) enregistré au cours de la même période un an auparavant.
+
+Graphique 1. Évolution de l'inflation annuelle de septembre 2020 à septembre 2022 (en %)
+
+| Month | Inflation Rate | Unemployment Income Increase |
+| --- | --- | --- |
+| Sep/20 | 25.8 | 0.6 |
+| Oct/20 | 21.8 | 1.8 |
+| Nov/20 | 20.8 | 0.8 |
+| Dec/20 | 20.2 | 1.2 |
+| Jan/21 | 19.8 | 1.3 |
+| Feb/21 | 19.2 | 1.3 |
+| Mar/21 | 18.5 | 1.2 |
+| Apr/21 | 17.5 | 1.2 |
+| May/21 | 15.5 | 1.3 |
+| Jun/21 | 14.0 | 1.4 |
+| Jul/21 | 13.0 | 1.9 |
+| Aug/21 | 11.5 | 1.8 |
+| Sep/21 | 13.5 | 1.5 |
+| Oct/21 | 20.0 | 4.8 |
+| Nov/21 | 24.5 | 4.8 |
+| Dec/21 | 24.5 | 1.2 |
+| Jan/22 | 24.0 | 0.8 |
+| Feb/22 | 25.0 | 1.8 |
+| Mar/22 | 25.5 | 1.6 |
+| Apr/22 | 26.0 | 1.5 |
+| May/22 | 27.0 | 1.8 |
+| Jun/22 | 28.5 | 2.2 |
+| Jul/22 | 30.0 | 3.0 |
+| Aug/22 | 31.5 | 3.0 |
+| Sep/22 | 38.0 | 6.5 |
+
+Source : IHSI
+
+<!-- page 4 -->
+
+### III. - Évolution des principales fonctions de consommation en septembre 2022
+
+L’accélération du rythme de croissance de l’IPC en variation mensuelle a été le résultat des mouvements à la hausse de l’indice des prix de la totalité des fonctions de consommation : « Produits alimentaires et boissons non alcoolisées » (8,2 % contre 3,9 %), « Boissons alcoolisées, tabac et stupéfiants » (4,2 % contre 2,5 %), « Articles d’habillement et chaussures » (5,3 % contre 3,6 %), « Logement, eau, gaz, électricité » (4,6 % contre 1,8 %), « Meubles, articles de ménage et entretien courant du foyer » (5,7 % contre 3,5 %), « Santé » (5,1 % contre 3,1 %), « Transport » (2,8 % contre 2 %), « Communication » (3,9 % contre 1,9 %), « Loisirs » (4,2 % contre 2,2 %), « Enseignement » (4,2 % contre 0 %) « Restaurants » (5,4 % contre 3,6 %), et enfin « Biens et services divers » (4,9 % contre 3,3 %).
+
+Parallèlement, en glissement annuel, les indices de prix de toutes les divisions de consommation a augmenté en septembre 2022 hormis le poste « Enseignement (- 0,8 pp à 7,1 %). Ainsi, les variations les plus prononcées ont été observées au niveau des indices des fonctions de consommation suivantes: « Produits alimentaires et boissons non alcoolisées » (+9,1 pp à 44,3 %), « Boissons alcoolisées, tabac et stupéfiants » (+3,9 pp à 25,3 %), « Articles d’habillement et chaussures » (+5,9 pp à 40,9 %), « Logement, eau, gaz, électricité » (+3,3 pp à 32,3 %), « Meubles, articles de ménage et entretien courant du foyer » (+6 % pp à 36,6 %), « Santé » (+3,7 pp à 31,2 %), « Transport » (+3,5 pp à 39,5 %) « Communication » (+4,3 pp à 14,8 %), « Restaurants » (+3,4 pp à 31,1 %) et « Biens et services divers » (+4,4 pp¹ à 33,4 %). Par ailleurs, le poste « Produits alimentaires et boissons non alcoolisées » qui représente 48,5 % du panier de consommation, a contribué à hauteur de 63,39 % à l’inflation mensuelle et 56,71 % à l’évolution de l’IPC en rythme annuel.
+
+<!-- page 5 -->
+
+Tableau 1. Contributions à l'inflation mensuelle et annuelle en septembre (en %)
+
+<table><tr><td>September 2022</td></tr><tr><td>Poste</td><td>Pondération</td><td>Contribution à l'inflation mensuelle</td><td>Contribution à l'inflation annuelle</td></tr><tr><td></td><td>en %</td><td>en %</td></tr><tr><td>Indice Général</td><td>100,00</td><td>100,00</td><td>100,00</td></tr><tr><td>Produits alimentaires et boissons non alcoolisées</td><td>48,50</td><td>63,39</td><td>56,71</td></tr><tr><td>Boissons alcoolisés, tabac et stupéfiants</td><td>1,42</td><td>0,95</td><td>0,95</td></tr><tr><td>Articles d'habillement et chaussures</td><td>5,55</td><td>4,71</td><td>5,99</td></tr><tr><td>Logement, eau, gaz, électricité et autres combustibles</td><td>14,14</td><td>10,34</td><td>12,07</td></tr><tr><td>Meubles, articles de ménages et entretien courant du foyer</td><td>5,32</td><td>4,82</td><td>5,14</td></tr><tr><td>Santé</td><td>2,56</td><td>2,10</td><td>2,11</td></tr><tr><td>Transports</td><td>9,10</td><td>4,09</td><td>9,49</td></tr><tr><td>Communications</td><td>2,23</td><td>1,39</td><td>0,87</td></tr><tr><td>Loisirs</td><td>1,52</td><td>1,03</td><td>0,89</td></tr><tr><td>Enseignement</td><td>3,91</td><td>2,63</td><td>0,73</td></tr><tr><td>Restaurants</td><td>0,49</td><td>0,43</td><td>0,40</td></tr><tr><td>Biens et services divers</td><td>5,26</td><td>4,12</td><td>4,64</td></tr></table>
+
+Source: Calculs de la BRH/MAE
+
+### IV. - Évolution de l'inflation selon l'origine des produits et les régions géographiques du pays
+
+L'inflation annuelle des produits importés ainsi que celle des produits locaux ont affiché le même comportement que l'inflation globale en glissement annuel. En effet, en septembre 2022, l'IPC des produits importés a crû de 52 % contre 44,8 % un mois auparavant. Pour sa part, la variation de l'IPC des produits locaux s'est portée à 30,9 %, marquant ainsi une hausse de 6,3 pp par rapport à son niveau au mois précédent.
+
+S'agissant de l'évolution de l'inflation au niveau de toutes les zones géographiques du pays, elle a été caractérisée par une accélération tant sur base mensuelle qu'en glissement annuel. En effet, en variation mensuelle, la plus forte croissance a été constatée au niveau de la région Reste Ouest (+3,4 pp à 6,5 %). Par ailleurs, l'inflation mensuelle dans les régions : « Aire Métropolitaine » et « Sud », s'est accélérée de 3,3 pp pour se porter à 6,7 %, alors que celle des zones « Nord » et « Transversale » s'est accru de
+
+<!-- page 6 -->
+
+3,2 pp et 3,1 pp pour s’établir respectivement à 6,5 % et 6,3 %. En glissement annuel, le taux d’inflation dans l’« Aire Métropolitaine » s’est porté à 39,5 % contre 32,7 %, « Reste Ouest » (38,3 % contre 31,7 %), « Nord » (37,5 % contre 30,9 %), « Sud » (41,4 % contre 34,2 %) et « Transversale » (36,9 % contre 30,6 %).
+
+### V. - Facteurs explicatifs de l'évolution de l'inflation mensuelle en septembre 2022
+
+L'accélération substantielle du taux d'inflation mensuel en septembre 2022 est attribuable notamment à la dégradation du climat sécuritéaire combinée aux troubles socio-politiques, la rareté de produits pétroliers ainsi que la révision de leurs prix à la hausse.
+
+En septembre 2022, le climat d'insécurité qui persiste dans le pays continue d'affecter négativement les circuits de commercialisation des biens et services dans l'économie. À cela s'ajoutent les troubles socio-politiques caractérisés par des actes de pillage et de vandalisme de nombreuses entreprises. Ces faits ont engendré des situations de rupture de stock de certains produits en raison des goulots d'étranglement dans les chaînes d'approvisionnement et ont contribué au renchérissement de la plupart des biens et services au niveau local. De plus, la pénurie du carburant et son prix élevé sur le marché informel a provoqué une augmentation des coûts du transport et, par ricochet, de ceux de la majorité des biens et services retenus dans le panier de consommation considérant le caractère transversal de ce produit. Pris ensemble, ces différents facteurs ont exacerbé les pressions inflationnistes, donnant ainsi lieu à une accélération importante du rythme de progression de l'IPC.
+
+## VI- Prévisions d'inflation
+
+Les prévisions d'inflation réalisées par la Direction Monnaie Analyse Économique (MAE) mettent en perspective une évolution contrastée de l'inflation annuelle et mensuelle pour les mois d'octobre, de novembre et de décembre 2022. Considérée sur une base mensuelle, l'inflation devrait se porter à 11 % en octobre 2022 pour ensuite ralentir à 7,3 %, 5,7 % pour les mois de novembre et décembre 2022 respectivement. Parallèlement, en glissement annuel, l'inflation maintiendrait sa tendance haussière en se portant, dans un premier temps, à 47,2 % en octobre pour ensuite progresser à 50,9 % et à 57,9 % respectivement en novembre et en décembre 2022.
+
+<!-- page 7 -->
+
+Graphique. 2. Prévisions de l'inflation en variation mensuelle et annuelle sur trois mois (en %)
+
+| Date | Infl_m | Infl_y |
+| --- | --- | --- |
+| Oct-19 | 1.8 | 2.5 |
+| Dec-19 | 1.7 | 2.6 |
+| Feb-20 | 1.5 | 2.7 |
+| Apr-20 | 1.8 | 2.9 |
+| Jun-20 | 2.5 | 3.4 |
+| Aug-20 | 3.2 | 4.2 |
+| Oct-20 | -1.0 | 2.8 |
+| Dec-20 | 1.0 | 2.2 |
+| Feb-21 | 1.2 | 1.9 |
+| Apr-21 | 1.0 | 1.5 |
+| Jun-21 | 1.0 | 1.2 |
+| Aug-21 | 2.0 | 0.8 |
+| Oct-21 | 4.5 | 2.0 |
+| Dec-21 | 4.8 | 3.5 |
+| Feb-22 | 0.8 | 3.2 |
+| Apr-22 | 2.0 | 3.5 |
+| Jun-22 | 1.8 | 4.0 |
+| Aug-22 | 3.2 | 5.0 |
+| Oct-22 | 11.0 | 47.2 |
+| Dec-22 | 5.7 | 57.9 |
+
+Sources : Prévisions du Service de Modélisation et Prévisions Macrééconomiques de la BRH
+
+<!-- page 8 -->
+
+Tableau No. 2
+
+Indice des prix à la consommation (IPC) par postes de dépenses Variation et Contribution à l'inflation mensuelle et annuelle en septembre 2022
+
+<table><tr><td>Poste</td><td>IPC</td><td>Variation IPC (%)</td></tr><tr><td>Septembre 2021</td><td>Août 2022</td><td>Septembre 2022</td><td>Mensuelle</td><td>Annuelle</td></tr><tr><td>Indice général</td><td>180,4</td><td>234,9</td><td>250,2</td><td>6,5</td><td>38,7</td></tr><tr><td>Produits alimentaires et boissons non alcoolisées</td><td>198,2</td><td>264,4</td><td>286</td><td>8,2</td><td>44,3</td></tr><tr><td>Boissons alcoolisés, tabac et stupéfiants</td><td>138,6</td><td>166,7</td><td>173,7</td><td>4,2</td><td>25,3</td></tr><tr><td>Articles d'habillement et chaussures</td><td>191,6</td><td>256,4</td><td>270</td><td>5,3</td><td>40,9</td></tr><tr><td>Logement, eau, gaz, électricité et autres combustibles</td><td>166</td><td>210,1</td><td>219,7</td><td>4,6</td><td>32,3</td></tr><tr><td>Meubles, articles de ménages et entretien courant du foyer</td><td>180,2</td><td>232,9</td><td>246,1</td><td>5,7</td><td>36,6</td></tr><tr><td>Santé</td><td>249,6</td><td>311,4</td><td>327,4</td><td>5,1</td><td>31,2</td></tr><tr><td>Transports</td><td>125,8</td><td>170,7</td><td>175,5</td><td>2,8</td><td>39,5</td></tr><tr><td>Communications</td><td>114,1</td><td>126,1</td><td>131</td><td>3,9</td><td>14,8</td></tr><tr><td>Loisirs</td><td>190</td><td>222,6</td><td>232</td><td>4,2</td><td>22,1</td></tr><tr><td>Enseignement</td><td>136,5</td><td>140,3</td><td>146,2</td><td>4,2</td><td>7,1</td></tr><tr><td>Restaurants</td><td>211,9</td><td>263,6</td><td>277,9</td><td>5,4</td><td>31,1</td></tr><tr><td>Biens et services divers</td><td>171,6</td><td>218,3</td><td>229</td><td>4,9</td><td>33,4</td></tr></table>
+
+Sources : IHSI et calculs du Service de la Macrééconomie et Analyse de Conjoncture de la MAE
+
+<!-- page 9 -->
+
+Glossaire
+
+| Variation mensuelle | : Variation par rapport au mois précédent. |
+| --- | --- |
+| Glissement annuel | : Variation par rapport au même mois de l'année antérieure. |
+| Inflation | : Mouvement persistant à la hausse du niveau général des prix. |
+| Désinflation | : Ralentissement de la croissance des prix. |
+| Déflation | : Baisse du niveau général des prix associée à une contraction de la masse monétaire et du crédit. |
+| Inflation sous-jacente | : Tendance de long terme des prix, tout en excluant la volatilité, les mouvements saisonniers, conjoncturels, et les chocs qui affectent les composantes du panier considéré. |
+| Région Nord | : Elle couvre les départementes du Nord, Nord-Est et Nord-Ouest. |
+| Région Sud | : Elle comprend les départementes du Sud de la Grand-Anse et des Nippes. |
+| Région Reste Ouest | : Y sont incluses les départementes du Sud-Est et de l'Ouest à l'exception de l'aire métropolitaine |
+| Région Transversale | : Elle regroupe les départementes du Centre et de l'Artibonite. |
+| Aire Métropolitaine | : Elle contient les villes de Port-au-Prince, de Delmas, de Pétion-Ville, de Carrefour et de Croix des Bouquets. |

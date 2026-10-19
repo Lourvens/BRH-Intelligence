@@ -1,0 +1,12 @@
+{
+ "sha256": "810c92ac5fbcb0b5f4819da51f0a7a1b38dd34609590b90f51794a2af8201e40",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "pages": 16,
+ "chars": 41012,
+ "figures": 1,
+ "seconds": 284.9,
+ "gpu": "A100-80GB",
+ "chart_recognition": true,
+ "finished_at": "2026-10-19T16:16:16Z"
+}
