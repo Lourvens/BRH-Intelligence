@@ -54,10 +54,11 @@ export function SiteHeader() {
           </div>
 
           <a
-            href="#demo"
+            href="/assistant"
             className="inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-2 text-caption font-semibold text-white shadow-sm transition-colors hover:bg-navy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure focus-visible:ring-offset-2"
           >
-            <span>Voir un exemple</span>
+            <span className="sm:hidden">Assistant</span>
+            <span className="hidden sm:inline">Ouvrir l’assistant</span>
             <ArrowRight className="size-3.5" aria-hidden />
           </a>
         </div>

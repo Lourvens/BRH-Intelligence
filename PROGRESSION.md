@@ -60,12 +60,26 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   four use cases, sourced-search comparison, FAQ, access CTA and institutional
   footer. The navbar points at the new `#pipeline`, `#corpus`, `#usages`,
   `#comparatif` and `#faq` anchors. Components live in `components/home/*` and
-  `components/home/hero/*`; the largest TS/TSX file is `hero-showcase.tsx` at
-  180 lines. The hero `Rejouer` and citation-copy controls are interactive. All
-  live-index, guaranteed-accuracy, certification, 40-year, confidence, latency
-  and vault-style claims were replaced with the real 1 169 PDFs / 34 transcribed
-  documents / 1 192 profiled pages and the inflation note (28,3 %, p. 3). The
-  chat, live citations and the PDF viewer are the next frontend steps.
+  `components/home/hero/*`; the largest TS/TSX file is
+  `assistant-shell.tsx` at 215 lines. The hero `Rejouer` and citation-copy
+  controls are interactive. All live-index, guaranteed-accuracy, certification,
+  40-year, confidence, latency and vault-style claims were replaced with the real
+  1 169 PDFs / 34 transcribed documents / 1 192 profiled pages and the inflation
+  note (28,3 %, p. 3).
+
+- **The assistant shell is implemented at `/assistant` (2026-10-19).** Full
+  three-panel workspace: conversation rail, chat with empty state/composer/
+  refusals, and a source rail. Assistant messages support inline numbered
+  citations, source detail/copy, and generated **chart** and **graph** artifacts.
+  Artifacts are schema-driven: `TableArtifact` + `UIDecision` select table,
+  chart type (`line`/`bar`/`area`) or graph; charts/graphs are derived from
+  rows, and invalid decisions fall back to a semantic table. It currently runs
+  on clearly marked local demo transcripts in `lib/chat/*`; `lib/agent.ts` wraps
+  the real LangGraph `useStream` SDK and is the swap-in point for live
+  messages/threads. `lib/chat/open-intelligent-ui.ts` records the hybrid
+  A2UI/Open Generative UI routing contract; the CopilotKit runtime is not
+  enabled yet. Auto-scroll pauses when the reader scrolls up. The landing
+  header and closing CTA now open `/assistant`.
 
 ## Next up
 
@@ -79,6 +93,23 @@ Continue the build order:
    the files the inventory has already downloaded. Verify with `make ingest`.
 
 ## Recently done
+
+- **2026-10-19 — Assistant chat UI created at `/assistant`.** Full app shell:
+  conversation history rail, chat panel with empty state, suggestions, composer,
+  stop state and refusal card; source rail with citation detail/copy; mobile
+  drawers. Assistant messages support inline source markers plus generated
+  **chart** and **graph** artifacts. Artifacts use a table schema + JSON
+  `UIDecision` contract (`lib/chat/decision.ts`): the decision chooses table,
+  chart type or graph; charts/graphs derive from rows, and invalid decisions
+  fall back to a table. Added the hybrid Open Intelligent UI routing contract
+  (`lib/chat/open-intelligent-ui.ts`): table → A2UI, chart/graph → Open
+  Generative UI, disabled by default. The page runs on local demo transcripts in
+  `lib/chat/*` (clearly marked “Démo”); `lib/agent.ts` wraps the LangGraph
+  `useStream` hook. Landing header and closing CTA link to the new page. Added
+  design notes in `docs/plans/2026-10-19-agent-chat-ui-design.md`. Every TS/TSX
+  file stays under 250 lines (`assistant-shell.tsx` is largest at 215).
+  `bun run typecheck` and `bun run build` pass; 1440px and 390px checked with
+  `agent-browser`, including chart/graph artifacts and source drawers.
 
 - **2026-10-19 — Rest sections rebuilt from Stitch.** Replaced the previous
   corpus/questions/method/limits/CTA/footer stack with screen

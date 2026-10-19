@@ -2,11 +2,13 @@
 
 Next.js 16 (App Router) + React 19 + Tailwind v4.
 
-**Status: Stitch landing page implemented.** The page follows the new full
-reference: the `b961…` hero plus the `027b…` sections — pipeline, corpus, use
-cases, comparison, FAQ, access CTA and footer. The chat, live citations and PDF
-viewer are next. The design system (tokens, fonts, BRH logo, button and
-citation-chip primitives) remains the source of truth.
+**Status: Stitch landing page + assistant shell.** The landing page follows the
+`b961…` hero plus the `027b…` sections. `/assistant` is a full three-panel chat
+workspace running on local demo transcripts, with sources, inline citations and
+chart/graph artifacts. `lib/agent.ts` now wraps the LangGraph `useStream` hook;
+the live graph connection and PDF viewer are next. The design system (tokens,
+fonts, BRH logo, button and citation-chip primitives) remains the source of
+truth.
 
 ## Run
 
@@ -38,6 +40,24 @@ figures. All UI files stay **under 250 lines**.
 The type scale is named (`text-micro` → `text-hero`) and `lib/utils.ts` teaches
 `tailwind-merge` about it, so a size class never swallows a text colour.
 
+## Assistant artifacts
+
+Agent visual output is data-first:
+
+- `TableArtifact` carries columns, rows, provenance and a JSON `UIDecision`.
+- The decision model picks `blockType` (`table`, `chart`, `graph`) and, for
+  charts, `chartType` (`line`, `bar`, `area`) plus `x`/`y` column keys.
+- `resolveArtifactBlock` validates the decision against the schema; invalid
+  decisions fall back to a semantic table.
+- `graphData` builds nodes and edges from edge-source/edge-target columns, so
+  graphs are generated from the table, not hand-authored nodes.
+
+The hybrid Open Intelligent UI contract lives in
+`lib/chat/open-intelligent-ui.ts`: tables map to A2UI, charts/graphs map to
+Open Generative UI. The native BRH renderer stays the default until the
+CopilotKit runtime and an agent with `generateSandboxedUi` are enabled
+(`NEXT_PUBLIC_OPEN_INTELLIGENT_UI`).
+
 ## Stitch workflow
 
 The landing page is rebuilt from Stitch references, one section at a time. When
@@ -65,6 +85,11 @@ implementing it.
 |---|---|---|
 | `app/layout.tsx`, `app/globals.css` | ✅ | Fonts, metadata, design tokens, base styles, dot-grid utilities |
 | `app/page.tsx` | ✅ landing page | `b961…` hero + `027b…` sections |
+| `app/assistant/page.tsx` | ✅ assistant | Three-panel chat shell, demo transcripts |
+| `components/assistant/*` | ✅ | Sidebar, chat, message, sources, chart/graph artifacts |
+| `lib/chat/*` | ✅ demo | Table schema, decision validation, threads, citations, artifacts |
+| `lib/chat/decision.ts` | ✅ | Validates `UIDecision` and derives chart/graph data from table rows |
+| `lib/chat/open-intelligent-ui.ts` | ✅ contract | Table→A2UI / chart-graph→Open Generative UI routing |
 | `components/site-header.tsx` | ✅ | Sticky institutional navbar |
 | `components/home/hero.tsx` | ✅ | Hero copy, CTAs and section shell |
 | `components/home/hero/*` | ✅ | Showcase, answer/document panes, archive strip, trust band, data |
@@ -79,22 +104,20 @@ implementing it.
 | `components/ui/button.tsx` | ✅ | Button primitive |
 | `components/ui/citation-chip.tsx` | ✅ | Citation primitive |
 | `lib/content/navigation.ts` | ✅ | Shared navbar/footer links |
-| `lib/agent.ts` | ⬜ contract + stub | `AgentState`/`Citation` types and `useAgent()` |
+| `lib/agent.ts` | ✅ SDK boundary | `AgentState`/`Citation` types + `useAgent()` wrapping `useStream` |
 | `lib/utils.ts` | ✅ | `cn()` + tailwind-merge config |
 
 ## What to build
 
-1. **`lib/agent.ts`** — wrap `useStream` from
-   `@langchain/langgraph-sdk/react`, pointed at `NEXT_PUBLIC_LANGGRAPH_URL`.
-   It returns `messages` (conversation), `values` (graph state, incl.
-   `citations`), plus `submit`, `stop`, `isLoading`, `error`, `threadId`.
-2. **Chat UI** — a message list + composer. Render `values.citations` under the
-   latest answer using `components/ui/citation-chip.tsx`.
-3. **Citation chips** — the agent cites with `[n]`; parse those markers and link
-   each to `/documents/{slug}?page={n}`.
-4. **PDF route + viewer** — `app/api/pdfs/[slug]/route.ts` streams a source PDF
+1. **Live agent wiring** — connect the `/assistant` shell to `useAgent` from
+   `lib/agent.ts`, replacing the local demo controller. Use SDK thread history
+   for the sidebar and render `stream.messages` / `values.citations`.
+2. **Streaming states** — map `isLoading`, tool progress, errors and refusal
+   updates into the existing chat/status components; keep the stop control.
+3. **PDF route + viewer** — `app/api/pdfs/[slug]/route.ts` streams a source PDF
    (resolve `slug → file` via `data/processed/catalog.json`), and
    `app/documents/[slug]/page.tsx` embeds it with `#page=N`.
+4. **Persistence** — replace demo threads with the real thread store.
 
 ## How citations will open the right page
 

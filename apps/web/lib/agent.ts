@@ -6,12 +6,9 @@
  * The agent graph is deployed to LangGraph Platform and consumed with the
  * official SDK's `useStream` hook. This module is the single place the app
  * talks to it.
- *
- * TODO: implement `useAgent` by wrapping `useStream` from
- * `@langchain/langgraph-sdk/react`, pointed at `NEXT_PUBLIC_LANGGRAPH_URL`.
- * It returns `messages` (the conversation), `values` (graph state, incl.
- * citations), plus `submit`, `stop`, `isLoading`, `error`, and `threadId`.
  */
+
+import { useStream } from "@langchain/langgraph-sdk/react";
 
 /** A clickable reference to a source page, produced by the agent graph. */
 export type Citation = {
@@ -25,10 +22,7 @@ export type Citation = {
   source_url?: string | null;
 };
 
-/**
- * The graph state, mirroring `brh_agent.state.AgentState`.
- * Keep this in sync with the backend.
- */
+/** The graph state, mirroring `brh_agent.state.AgentState`. */
 export type AgentState = {
   messages: unknown[];
   question?: string;
@@ -42,6 +36,20 @@ export const API_URL =
 export const ASSISTANT_ID =
   process.env.NEXT_PUBLIC_LANGGRAPH_ASSISTANT_ID ?? "agent";
 
-export function useAgent(): never {
-  throw new Error("TODO: wrap useStream from @langchain/langgraph-sdk/react");
+/**
+ * The real LangGraph stream. It is intentionally not used by the demo landing
+ * page yet: the graph nodes are still scaffolds. This hook is the boundary the
+ * chat shell will use once the server returns answers.
+ */
+export function useAgent(options: {
+  threadId?: string | null;
+  onThreadId?: (threadId: string) => void;
+} = {}) {
+  return useStream({
+    assistantId: ASSISTANT_ID,
+    apiUrl: API_URL,
+    threadId: options.threadId,
+    onThreadId: options.onThreadId,
+    fetchStateHistory: { limit: 20 },
+  });
 }
