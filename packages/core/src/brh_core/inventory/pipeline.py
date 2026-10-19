@@ -21,6 +21,8 @@ the inventory ends when bytes are on disk with a ledger row.
 
 from __future__ import annotations
 
+from collections import Counter
+from collections.abc import Iterable
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 
@@ -31,6 +33,7 @@ from brh_core.inventory.store import ContentStore
 
 DEFAULT_SCOPE = "brh.ht/media/pdf"
 _EPOCH = datetime.min.replace(tzinfo=UTC)
+UNKNOWN_YEAR = "unknown"
 
 
 @dataclass(frozen=True, slots=True)
@@ -48,6 +51,8 @@ class InventoryReport:
     failed: int = 0
     bytes_written: int = 0
     failures: tuple[tuple[str, str], ...] = field(default_factory=tuple)
+    by_year: dict[str, int] = field(default_factory=dict)
+    """Publication years of the documents *selected* this run, oldest first."""
 
     @property
     def counts(self) -> dict[str, int]:
@@ -68,6 +73,47 @@ def item_key(item: MediaItem) -> tuple[datetime, str]:
     return (item.modified_gmt or _EPOCH, item.source_url)
 
 
+def stratified_sample(candidates: Iterable[tuple[str, int | None]], limit: int) -> list[str]:
+    """Pick ``limit`` documents spread across publication years.
+
+    Round-robin by year — the first document of every year, then the second, and
+    so on — so a bounded run covers the whole publication history instead of the
+    head of the queue, which is what a plain ``--limit`` gives and why the first
+    28 documents we downloaded were all 2018 circulars.
+
+    Deterministic: the input order decides which document represents its year,
+    and documents with no date form one group at the end.
+    """
+    buckets: dict[int | None, list[str]] = {}
+    for url, year in candidates:
+        buckets.setdefault(year, []).append(url)
+
+    years = sorted(buckets, key=lambda year: (year is None, year or 0))
+    picked: list[str] = []
+    depth = 0
+    while len(picked) < limit:
+        added = False
+        for year in years:
+            if depth < len(buckets[year]):
+                picked.append(buckets[year][depth])
+                added = True
+                if len(picked) == limit:
+                    break
+        if not added:
+            break
+        depth += 1
+    return picked
+
+
+def year_distribution(
+    candidates: Iterable[tuple[str, int | None]], selected: Iterable[str]
+) -> dict[str, int]:
+    """How the selection spreads across years, oldest first."""
+    years = {url: year for url, year in candidates}
+    counts = Counter(UNKNOWN_YEAR if years[url] is None else str(years[url]) for url in selected)
+    return dict(sorted(counts.items()))
+
+
 def run_inventory(
     settings: Settings,
     *,
@@ -76,6 +122,7 @@ def run_inventory(
     store: ContentStore | None = None,
     since: datetime | None = None,
     limit: int | None = None,
+    sample: int | None = None,
     force: bool = False,
     dry_run: bool = False,
     scope: str = DEFAULT_SCOPE,
@@ -91,17 +138,25 @@ def run_inventory(
     run_id = "dry-run" if dry_run else ledger.start_run(scope=scope, mode=mode, watermark=since)
 
     new_urls = 0
+    by_year: dict[str, int] = {}
     if dry_run:
         resolved = ledger.resolved_urls()
-        selected_urls = [
-            item.source_url
-            for item in items
-            if item.source_url and item.source_url not in resolved
+        listed = [
+            item.source_url for item in items if item.source_url and item.source_url not in resolved
         ]
-        if limit is not None:
-            selected_urls = selected_urls[:limit]
     else:
         new_urls = ledger.catalogue(items, run_id)
+        listed = []
+
+    if sample is not None:
+        # A stratified sample ignores the queue's order on purpose: it is the
+        # whole point of asking for one.
+        candidates = ledger.sample_candidates(since=since)
+        selected_urls = stratified_sample(candidates, sample)
+        by_year = year_distribution(candidates, selected_urls)
+    elif dry_run:
+        selected_urls = listed[:limit] if limit is not None else listed
+    else:
         selected_urls = ledger.queue(limit=limit, since=since, include_resolved=force)
 
     downloaded = duplicated = unchanged = failed = bytes_written = 0
@@ -193,6 +248,7 @@ def run_inventory(
         failed=failed,
         bytes_written=bytes_written,
         failures=tuple(failures),
+        by_year=by_year,
     )
 
     if not dry_run:

@@ -7,7 +7,11 @@ with its dates and fetch status so nothing is downloaded twice.
 
 from brh_core.inventory.discovery import MediaItem, RemoteStat, WordPressMediaClient
 from brh_core.inventory.ledger import InventoryLedger, UrlState
-from brh_core.inventory.pipeline import InventoryReport, run_inventory
+from brh_core.inventory.pipeline import (
+    InventoryReport,
+    run_inventory,
+    stratified_sample,
+)
 from brh_core.inventory.store import ContentStore, SavedContent
 
 __all__ = [
@@ -20,4 +24,5 @@ __all__ = [
     "UrlState",
     "WordPressMediaClient",
     "run_inventory",
+    "stratified_sample",
 ]

@@ -69,9 +69,7 @@ class InventoryLedger:
 
     # --- run lifecycle -------------------------------------------------
 
-    def start_run(
-        self, *, scope: str, mode: str, watermark: datetime | None = None
-    ) -> str:
+    def start_run(self, *, scope: str, mode: str, watermark: datetime | None = None) -> str:
         """Open a run row and return its id."""
         with self._pool.connection() as conn:
             row = conn.execute(
@@ -160,6 +158,26 @@ class InventoryLedger:
                 {"include": include_resolved, "since": since, "limit": limit},
             ).fetchall()
         return [row["url"] for row in rows]
+
+    def sample_candidates(self, *, since: datetime | None = None) -> list[tuple[str, int | None]]:
+        """Unresolved rows as ``(url, publication year)``, oldest modified first.
+
+        Input for :func:`brh_core.inventory.pipeline.stratified_sample`. Ordering
+        decides which document represents its year, so it is deterministic.
+        """
+        with self._pool.connection() as conn:
+            rows = conn.execute(
+                """
+                SELECT url, extract(year FROM wp_date)::int AS year
+                FROM corpus.crawl_urls
+                WHERE status IN ('pending', 'failed')
+                  AND (%(since)s::timestamptz IS NULL
+                       OR wp_modified > %(since)s::timestamptz)
+                ORDER BY wp_modified ASC NULLS FIRST, url ASC
+                """,
+                {"since": since},
+            ).fetchall()
+        return [(row["url"], row["year"]) for row in rows]
 
     def resolved_urls(self) -> set[str]:
         """URLs already dealt with — used by ``--dry-run`` to preview the queue."""

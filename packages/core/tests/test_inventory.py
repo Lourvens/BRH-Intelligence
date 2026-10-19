@@ -17,7 +17,7 @@ import httpx
 from brh_core.config import Settings
 from brh_core.inventory.discovery import WordPressMediaClient
 from brh_core.inventory.ledger import UrlState
-from brh_core.inventory.pipeline import run_inventory
+from brh_core.inventory.pipeline import run_inventory, stratified_sample
 from brh_core.inventory.store import ContentStore
 
 BASE = "https://www.brh.ht"
@@ -30,14 +30,16 @@ PDF_C = b"%PDF-1.4 charlie\n" + b"c" * 128
 PDF_D = b"%PDF-1.4 delta\n" + b"d" * 1024
 
 
-def _item(wp_id: int, slug: str, modified: str, filesize: int | None = None) -> dict:
+def _item(
+    wp_id: int, slug: str, modified: str, filesize: int | None = None, published=None
+) -> dict:
     return {
         "id": wp_id,
         "slug": slug,
         "title": {"rendered": slug.title()},
         "source_url": f"{UPLOADS}/{slug}.pdf",
         "mime_type": "application/pdf",
-        "date_gmt": "2026-10-01T08:00:00",
+        "date_gmt": published or "2026-10-01T08:00:00",
         "modified_gmt": modified,
         "media_details": {"filesize": filesize},
     }
@@ -98,6 +100,7 @@ class FakeLedger:
                     "last_modified": None,
                     "content_length": item.filesize,  # declared size, known pre-download
                     "wp_modified": item.modified_gmt,
+                    "wp_date": item.date_gmt,
                 }
                 new += 1
             else:
@@ -120,6 +123,18 @@ class FakeLedger:
             and (since is None or (row["wp_modified"] and row["wp_modified"] > since))
         ]
         return urls[:limit] if limit is not None else urls
+
+    def sample_candidates(self, *, since=None) -> list[tuple[str, int | None]]:
+        ordered = sorted(
+            self.rows.items(),
+            key=lambda kv: (kv[1]["wp_modified"] or datetime.min.replace(tzinfo=UTC), kv[0]),
+        )
+        return [
+            (url, row["wp_date"].year if row["wp_date"] else None)
+            for url, row in ordered
+            if row["status"] in ("pending", "failed")
+            and (since is None or (row["wp_modified"] and row["wp_modified"] > since))
+        ]
 
     def resolved_urls(self) -> set[str]:
         return {
@@ -201,9 +216,7 @@ def _transport(
 
 
 def _client(requests: list[httpx.Request], *, media=None, fail_paths=None, **kwargs):
-    transport = _transport(
-        requests, media=media or MEDIA_PAGES, fail_paths=fail_paths or set()
-    )
+    transport = _transport(requests, media=media or MEDIA_PAGES, fail_paths=fail_paths or set())
     return WordPressMediaClient(
         base_url=BASE, user_agent="test", delay=0.0, transport=transport, **kwargs
     )
@@ -278,9 +291,7 @@ def test_bounded_runs_keep_advancing(tmp_path):
     ledger = FakeLedger()
 
     def run() -> object:
-        return run_inventory(
-            settings, ledger=ledger, client=_client([]), store=store, limit=2
-        )
+        return run_inventory(settings, ledger=ledger, client=_client([]), store=store, limit=2)
 
     first, second, third, fourth = run(), run(), run(), run()
 
@@ -360,9 +371,7 @@ def test_dry_run_writes_nothing(tmp_path):
     store = ContentStore(tmp_path / "web")
     ledger = FakeLedger()
 
-    report = run_inventory(
-        settings, ledger=ledger, client=_client([]), store=store, dry_run=True
-    )
+    report = run_inventory(settings, ledger=ledger, client=_client([]), store=store, dry_run=True)
 
     assert report.catalogued == 5
     assert report.selected == 5
@@ -370,3 +379,69 @@ def test_dry_run_writes_nothing(tmp_path):
     assert ledger.rows == {}
     assert ledger.runs == {}
     assert not (tmp_path / "web").exists()
+
+
+# publication years deliberately disagree with the order documents were modified
+SAMPLE_MEDIA = {
+    1: [
+        _item(1, "alpha", "2026-10-14T12:00:00", len(PDF_A), "2018-08-08T00:00:00"),
+        _item(2, "bravo", "2026-10-14T12:01:00", len(PDF_B), "2018-08-09T00:00:00"),
+        _item(3, "charlie", "2026-10-14T12:02:00", len(PDF_C), "2026-10-01T00:00:00"),
+    ],
+    2: [
+        _item(4, "delta", "2026-10-14T12:03:00", len(PDF_D), "2021-05-05T00:00:00"),
+        _item(5, "alpha-copy", "2026-10-14T12:04:00", len(PDF_A), "2018-08-10T00:00:00"),
+    ],
+}
+
+
+def _urls_for(*slugs: str) -> list[str]:
+    return sorted(
+        item["source_url"]
+        for page in SAMPLE_MEDIA.values()
+        for item in page
+        if item["slug"] in slugs
+    )
+
+
+def test_stratified_sample_takes_one_from_each_year_first():
+    candidates = [("a", 2018), ("b", 2018), ("c", 2018), ("d", 2026)]
+
+    assert stratified_sample(candidates, 2) == ["a", "d"]
+    # the second pass supplies the year that still has documents left
+    assert stratified_sample(candidates, 4) == ["a", "d", "b", "c"]
+
+
+def test_stratified_sample_is_bounded_and_deterministic():
+    candidates = [("a", 2020), ("b", 2021)]
+
+    assert stratified_sample(candidates, 9) == ["a", "b"]  # fewer documents than asked
+    assert stratified_sample(candidates, 0) == []
+    assert stratified_sample([], 5) == []
+    assert stratified_sample(candidates, 1) == stratified_sample(candidates, 1)
+
+
+def test_stratified_sample_puts_undated_documents_last():
+    assert stratified_sample([("a", None), ("b", 2020)], 2) == ["b", "a"]
+
+
+def test_sample_spreads_the_download_across_publication_years(tmp_path):
+    settings = _settings(tmp_path)
+    store = ContentStore(tmp_path / "web")
+    ledger = FakeLedger()
+
+    report = run_inventory(
+        settings,
+        ledger=ledger,
+        client=_client([], media=SAMPLE_MEDIA),
+        store=store,
+        sample=3,
+    )
+
+    # the queue would take the three oldest by wp_modified (alpha, bravo,
+    # charlie) — two publication years, nothing from 2021
+    assert report.selected == 3
+    assert report.by_year == {"2018": 1, "2021": 1, "2026": 1}
+    downloaded = sorted(url for url, row in ledger.rows.items() if row["status"] == "downloaded")
+    assert downloaded == _urls_for("alpha", "charlie", "delta")
+    assert report.failed == 0
