@@ -117,6 +117,25 @@ def _write_atomic(path: Path, text: str) -> None:
     temporary.replace(path)
 
 
+def _fetch(url: str) -> tuple[str, Path]:
+    """Download one PDF into the volume, content-addressed (see fetch.py)."""
+    from brh_core.ingestion.fetch import fetch_pdf
+
+    return fetch_pdf(url, PDFS)
+
+
+def _ocr_url(url: str, gpu: str, *, engine=None) -> dict:
+    """Fetch a URL, then OCR it unless that exact content is already extracted."""
+    try:
+        digest, _ = _fetch(url)
+    except Exception as error:
+        return {"url": url, "status": "fetch-failed", "gpu": gpu,
+                "error": f"{type(error).__name__}: {error}"}
+    result = _ocr(digest, gpu, engine=engine)
+    result["url"] = url
+    return result
+
+
 def _ocr(sha: str, gpu: str, *, engine=None, chart_recognition: bool = True,
          page_limit: int | None = None) -> dict:
     """OCR one document. ``page_limit`` turns it into a benchmark that writes nothing."""
@@ -297,6 +316,71 @@ def _largest_remaining(count: int) -> list[str]:
         for row in json.loads(profiles.read_text()):
             pages[row["sha"]] = row["pages_in_doc"]
     return sorted(_remaining(), key=lambda sha: -pages.get(sha, 0))[:count]
+
+
+@app.function(
+    gpu=BATCH_GPU,
+    timeout=3600,
+    volumes=MOUNTS,
+    max_containers=MAX_CONTAINERS,
+    scaledown_window=SCALEDOWN_SECONDS,
+    retries=2,
+)
+def ocr_url_group(urls: list[str]) -> list[dict]:
+    """Fetch and OCR a handful of documents, model loaded once per group."""
+    from brh_core.ingestion.engines import PaddleOcrVlEngine
+
+    engine = PaddleOcrVlEngine(chart_recognition=True)
+    results = [_ocr_url(url, BATCH_GPU, engine=engine) for url in urls]
+    skipped = sum(1 for row in results if row["status"] == "skipped")
+    failed = sum(1 for row in results if row["status"] == "fetch-failed")
+    print(f"group: {len(results)} urls, {skipped} already extracted, {failed} fetch failed",
+          flush=True)
+    return results
+
+
+URLS_PER_CONTAINER = int(os.environ.get("BRH_URLS_PER_CONTAINER", "5"))
+
+
+@app.local_entrypoint()
+def run_urls(limit: int = 0, detach: bool = False) -> None:
+    """Dispatch the catalogue's outstanding URLs (no local PDFs involved).
+
+    Without ``--detach`` this waits and reports, because ``modal run`` stops the
+    app as soon as the local entrypoint returns — a fire-and-forget dispatch
+    would be killed before its containers fetched anything.
+    """
+    source = Path(os.environ.get("BRH_URLS", LOCAL_OCR / "urls.jsonl"))
+    if not source.is_file():
+        print(f"no url list at {source} — run scripts/export_urls.py first")
+        return
+    rows = [json.loads(line) for line in source.read_text().splitlines() if line.strip()]
+    urls = _shard_of([row["url"] for row in rows])
+    batch = urls[:limit] if limit else urls
+    groups = [batch[i:i + URLS_PER_CONTAINER] for i in range(0, len(batch), URLS_PER_CONTAINER)]
+    print(f"dispatching {len(batch)} of {len(urls)} url(s) in {len(groups)} container(s) "
+          f"on {BATCH_GPU}, max {MAX_CONTAINERS} at a time, "
+          f"{URLS_PER_CONTAINER} document(s) each")
+
+    if detach:
+        ocr_url_group.spawn_map(groups)
+        print("dispatched; follow with `modal run scripts/modal_ocr.py::status`")
+        return
+
+    results = [row for group in ocr_url_group.map(groups) for row in group]
+    done = [r for r in results if r["status"] == "done"]
+    skipped = [r for r in results if r["status"] == "skipped"]
+    failed = [r for r in results if r["status"] not in {"done", "skipped"}]
+    pages = sum(r.get("pages", 0) for r in done)
+    seconds = sum(r.get("seconds", 0) or 0 for r in done)
+    print(f"\n{len(done)} done ({pages} pages, {seconds:.0f}s), "
+          f"{len(skipped)} already extracted, {len(failed)} failed")
+    for row in failed:
+        print(f"  {row['status']:<13} {row['url'][:90]}")
+        if row.get("error"):
+            print(f"                {row['error'][:120]}")
+    if failed:
+        raise SystemExit(1)
 
 
 @app.local_entrypoint()
