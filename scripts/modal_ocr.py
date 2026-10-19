@@ -335,14 +335,20 @@ def _largest_remaining(count: int) -> list[str]:
 
 @app.function(
     gpu=BATCH_GPU,
-    timeout=3600,
+    timeout=7200,
     volumes=MOUNTS,
     max_containers=MAX_CONTAINERS,
     scaledown_window=SCALEDOWN_SECONDS,
-    retries=2,
+    retries=1,
 )
 def ocr_url_group(urls: list[str]) -> list[dict]:
-    """Fetch and OCR a handful of documents, model loaded once per group."""
+    """Fetch and OCR a few documents, model loaded once per group.
+
+    Three documents per group, not five: this corpus has documents that cost
+    1 690 s on their own, and five of those exceeded the old 3 600 s timeout —
+    the whole group was cancelled and retried, wasting every document in it.
+    A group must not be able to exceed its timeout by construction.
+    """
     from brh_core.ingestion.engines import PaddleOcrVlEngine
 
     engine = PaddleOcrVlEngine(chart_recognition=True)
@@ -354,7 +360,7 @@ def ocr_url_group(urls: list[str]) -> list[dict]:
     return results
 
 
-URLS_PER_CONTAINER = int(os.environ.get("BRH_URLS_PER_CONTAINER", "5"))
+URLS_PER_CONTAINER = int(os.environ.get("BRH_URLS_PER_CONTAINER", "3"))
 
 
 @app.local_entrypoint()
