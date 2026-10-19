@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { DrawPath } from "@/components/motion/draw-path";
 import { easeOut } from "@/components/motion/tokens";
@@ -19,9 +19,7 @@ const bezier = (targetY: number) =>
  * Retrieval is selective, not magic: one question, four candidate documents,
  * one path that lands on the cited page.
  */
-export function RetrievalFan() {
-  const reduce = useReducedMotion();
-
+export function RetrievalFan({ tone = "light" }: { tone?: "light" | "dark" }) {
   return (
     <svg
       viewBox="0 0 520 300"
@@ -43,7 +41,7 @@ export function RetrievalFan() {
       </defs>
 
       <motion.g
-        initial={reduce ? false : { opacity: 0, x: -8 }}
+        initial={{ opacity: 0, x: -8 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.5, ease: easeOut }}
@@ -87,7 +85,13 @@ export function RetrievalFan() {
         <DrawPath
           key={card.label}
           d={bezier(card.y + 26)}
-          className={card.selected ? "text-azure" : "text-slate/40"}
+          className={
+            card.selected
+              ? "text-azure"
+              : tone === "dark"
+                ? "text-white/25"
+                : "text-slate/40"
+          }
           strokeWidth={card.selected ? 1.8 : 1}
           duration={0.8}
           delay={0.15 + index * 0.1}
@@ -98,7 +102,7 @@ export function RetrievalFan() {
       {cards.map((card, index) => (
         <motion.g
           key={card.label}
-          initial={reduce ? false : { opacity: 0, x: 10 }}
+          initial={{ opacity: 0, x: 10 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{

@@ -1,11 +1,12 @@
 import type { SVGProps } from "react";
 
 /**
- * The page's custom icon set. 24px grid, 1.5px strokes, `currentColor`, no
- * fills — they are illustrations first, UI icons second. Lucide stays for
- * micro-UI (arrows, checks, external links).
+ * Contextual icon set for BRH Intelligence.
+ * 24px grid, 1.5px strokes, currentColor, accessible glyphs.
+ * Every icon is carefully paired with central banking, macroeconomic data,
+ * OCR document processing, vector search, or cryptographic citation.
  */
-type IconProps = SVGProps<SVGSVGElement>;
+export type IconProps = SVGProps<SVGSVGElement>;
 
 function Glyph({ children, ...props }: IconProps) {
   return (
@@ -24,19 +25,80 @@ function Glyph({ children, ...props }: IconProps) {
   );
 }
 
-/** A document page with a cited line. */
+/** Central Bank / Institutional authority building */
+export function BankInstitutionIcon(props: IconProps) {
+  return (
+    <Glyph {...props}>
+      <path d="M3 9.5 12 4l9 5.5" />
+      <path d="M5 10v9M9 10v9M15 10v9M19 10v9" />
+      <path d="M2 19h20M2 22h20" />
+      <circle cx="12" cy="7.5" r="1" fill="currentColor" />
+    </Glyph>
+  );
+}
+
+/** Monetary Policy & Interest rate vector */
+export function MonetaryPolicyIcon(props: IconProps) {
+  return (
+    <Glyph {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 14.5l3-3 2 2 3.5-3.5" />
+      <path d="M14 10h2.5V12.5" />
+      <path d="M12 6v1M12 17v1" />
+    </Glyph>
+  );
+}
+
+/** Inflation & Macroeconomic Trend */
+export function InflationTrendIcon(props: IconProps) {
+  return (
+    <Glyph {...props}>
+      <path d="M3 20h18" />
+      <path d="M4 16.5l5.5-5.5 4 4L20 7" />
+      <path d="M15.5 7H20v4.5" />
+      <circle cx="9.5" cy="11" r="1" fill="currentColor" />
+      <circle cx="13.5" cy="15" r="1" fill="currentColor" />
+      <circle cx="20" cy="7" r="1.5" fill="currentColor" />
+    </Glyph>
+  );
+}
+
+/** Credit Bureau & Financial Inclusion */
+export function CreditBureauIcon(props: IconProps) {
+  return (
+    <Glyph {...props}>
+      <rect x="3" y="5" width="18" height="14" rx="3" />
+      <path d="M3 10h18" />
+      <path d="M7 15h3M14 15h3" />
+      <circle cx="6.5" cy="7.5" r="0.75" fill="currentColor" />
+    </Glyph>
+  );
+}
+
+/** Targeted OCR Page & Bounding Box extraction */
+export function OcrScanIcon(props: IconProps) {
+  return (
+    <Glyph {...props}>
+      <path d="M4 7V4h3M17 4h3v3M4 17v3h3M17 20h3v-3" />
+      <rect x="7.5" y="7.5" width="9" height="9" rx="1.5" strokeDasharray="2 2" />
+      <line x1="6" y1="12" x2="18" y2="12" stroke="currentColor" strokeWidth={1.75} />
+    </Glyph>
+  );
+}
+
+/** Exact Document Page with Citation Pin */
 export function PageSourceIcon(props: IconProps) {
   return (
     <Glyph {...props}>
       <path d="M6.5 3.5h7L18 8v12.5H6.5z" />
       <path d="M13.5 3.5V8H18" />
       <path d="M9.5 12h5M9.5 14.5h5M9.5 17h3" />
-      <circle cx="16.5" cy="17" r="1.4" />
+      <circle cx="16.5" cy="17" r="1.4" fill="currentColor" />
     </Glyph>
   );
 }
 
-/** A quotation mark that reads as a citation, not a chat bubble. */
+/** A quotation mark that reads as a verified citation */
 export function QuoteMarkIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -46,7 +108,7 @@ export function QuoteMarkIcon(props: IconProps) {
   );
 }
 
-/** A gate: the explicit refusal branch. */
+/** Explicit Refusal Gate (Zero Hallucination) */
 export function RefusalGateIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -58,7 +120,17 @@ export function RefusalGateIcon(props: IconProps) {
   );
 }
 
-/** Verified source / no advice without evidence. */
+/** Authentic Seal / Provenance Verification */
+export function AuthenticSealIcon(props: IconProps) {
+  return (
+    <Glyph {...props}>
+      <path d="M12 2l2.6 2.3 3.5-.3 1.1 3.3 3.1 1.7-1 3.3 1.9 2.9-2.2 2.7.2 3.5-3.4 1-1.8 3.1-3-1.6L9 25.8l-1.8-3.1-3.4-1 .2-3.5-2.2-2.7 1.9-2.9-1-3.3 3.1-1.7 1.1-3.3 3.5.3z" />
+      <path d="m9 12 2.2 2.2L15.5 10" />
+    </Glyph>
+  );
+}
+
+/** Verified Shield */
 export function ShieldCheckIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -68,7 +140,7 @@ export function ShieldCheckIcon(props: IconProps) {
   );
 }
 
-/** French-first corpus. Two speech bubbles, no flag. */
+/** French-first corpus / Official Language */
 export function LanguageIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -78,7 +150,7 @@ export function LanguageIcon(props: IconProps) {
   );
 }
 
-/** MCP / shared retrieval core. */
+/** FastMCP / Unified Protocol Plug */
 export function PlugIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -89,7 +161,7 @@ export function PlugIcon(props: IconProps) {
   );
 }
 
-/** Document families / archive. */
+/** Document Stack / Central Bank Archive */
 export function BookStackIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -100,7 +172,7 @@ export function BookStackIcon(props: IconProps) {
   );
 }
 
-/** A single, sourced answer. */
+/** Spark / Synthesized Intelligence */
 export function SparkIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -111,7 +183,7 @@ export function SparkIcon(props: IconProps) {
   );
 }
 
-/** Retrieval: a question with a beam into the corpus. */
+/** Vector Search Beam */
 export function SearchBeamIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -122,7 +194,7 @@ export function SearchBeamIcon(props: IconProps) {
   );
 }
 
-/** Archive / dated perimeter. */
+/** Historical Archive Timeline */
 export function ClockIcon(props: IconProps) {
   return (
     <Glyph {...props}>
@@ -132,7 +204,32 @@ export function ClockIcon(props: IconProps) {
   );
 }
 
-/** Architecture: pages and their layers. */
+/** LangGraph Reasoning Nodes */
+export function LangGraphNodeIcon(props: IconProps) {
+  return (
+    <Glyph {...props}>
+      <circle cx="6" cy="6" r="3" />
+      <circle cx="18" cy="6" r="3" />
+      <circle cx="12" cy="18" r="3" />
+      <path d="M8.5 7.5l7 7M15.5 7.5l-7 7M9 6h6" />
+    </Glyph>
+  );
+}
+
+/** Vector Database Embeddings */
+export function VectorDatabaseIcon(props: IconProps) {
+  return (
+    <Glyph {...props}>
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M3 5v6c0 1.66 4.03 3 9 3s9-1.34 9-3V5" />
+      <path d="M3 11v6c0 1.66 4.03 3 9 3s9-1.34 9-3v-6" />
+      <circle cx="8" cy="11" r="1" fill="currentColor" />
+      <circle cx="16" cy="17" r="1" fill="currentColor" />
+    </Glyph>
+  );
+}
+
+/** Layers Architecture */
 export function LayersIcon(props: IconProps) {
   return (
     <Glyph {...props}>

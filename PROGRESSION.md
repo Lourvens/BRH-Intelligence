@@ -52,12 +52,14 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   machine shortlist, 27 pages, in `experiments/gold/documents/`, with
   `build_manifest.py` adopting them and reporting that **5 of the 13 classes are
   uncovered**. Not transcribed yet. No OCR code exists.
-- **The web UI is no longer a placeholder (2026-10-19).** `apps/web` implements
-  the house style from [`services/analytics/DESIGN.md`](services/analytics/DESIGN.md):
-  colour and type tokens, Montserrat + Inter self-hosted, button/citation
-  primitives, and a welcome page with an illustrative cited answer. The copy is
-  still placeholder; the chat, live citations and the PDF viewer are the next
-  frontend steps.
+- **The web UI is no longer a placeholder (2026-10-19).** `apps/web` now
+  implements the house style from [`services/analytics/DESIGN.md`](services/analytics/DESIGN.md)
+  and a Stitch-led modern landing page: spotlight/beams, a bento corpus grid, an
+  animated metrics band, an interactive agent console, a dark pipeline section,
+  filterable example questions, and a closing CTA. Copy is split by section under
+  `lib/content/`; the hero is split under `components/home/hero/`; every TS/TSX
+  file is **under 250 lines**. The chat, live citations and the PDF viewer are
+  the next frontend steps.
 
 ## Next up
 
@@ -72,6 +74,22 @@ Continue the build order:
 
 ## Recently done
 
+- **2026-10-19 — Stitch-led landing redesign, and the file-size split.**
+  Stitch project `14932998564978548471` (design system
+  `assets/9aec97cf64f84d10aadabea4bce0f6c6`) produced a desktop screen
+  (`…/screens/401097e628ce48af966647703191c905`) and a 390px mobile screen
+  (`…/screens/8b717e14e701499da428e788e1ccc756`). The React implementation keeps
+  the same editorial navy/azure/gold system but adds Aceternity-style
+  spotlight/beams, a bento corpus grid, animated counters and a dark pipeline.
+  The hero is now `components/home/hero.tsx` plus
+  `hero/{agent-console,sourced-answer,source-document,query-presets,hero-trust}`;
+  content is split across `lib/content/{hero,corpus,questions,method,closing}.ts`.
+  **Every TS/TSX file is under 250 lines** (largest: `interactive-pipeline.tsx`,
+  242). Marketing claims were corrected: no “RAG en ligne”, “confiance 99,4 %”,
+  “100 % citations vérifiées” or “Tesseract” — the header says
+  “Archive 2018—2026”, the metrics use 34 transcribed documents, and the OCR
+  visual says PaddleOCR-VL. `bun run typecheck` and `bun run build` pass; desktop
+  and mobile checked with `agent-browser`.
 - **2026-10-19 — Web design system and welcome page.** `apps/web/app/globals.css`
   is now the web port of the analytics style guide: brand and neutral tokens,
   the `11 · 12 · 14 · 16 · 20 · 24 · 32 · 44 · 64` type scale, card radius and

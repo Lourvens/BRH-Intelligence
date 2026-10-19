@@ -26,7 +26,7 @@ export function QuestionsSection() {
     <section
       id="questions"
       aria-labelledby="titre-questions"
-      className="scroll-mt-20"
+      className="scroll-mt-20 border-y border-border bg-surface-alt"
     >
       <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-24">
         <Reveal>

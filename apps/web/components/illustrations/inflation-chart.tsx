@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { DrawPath } from "@/components/motion/draw-path";
 import { corpus, inflationSeries } from "@/lib/content/home";
@@ -31,7 +31,6 @@ const axisLabels = [0, 2, 4, 7];
  * highlighted final point, horizontal gridlines only — the DESIGN.md rules.
  */
 export function InflationChart() {
-  const reduce = useReducedMotion();
   const last = inflationSeries.length - 1;
 
   return (
@@ -80,7 +79,7 @@ export function InflationChart() {
         <motion.path
           d={area}
           fill="var(--color-navy)"
-          initial={reduce ? { opacity: 0.06 } : { opacity: 0 }}
+          initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.06 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.8, delay: 0.35 }}
@@ -105,7 +104,7 @@ export function InflationChart() {
             }
             stroke="var(--color-surface)"
             strokeWidth={2}
-            initial={reduce ? false : { opacity: 0 }}
+            initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.3, delay: 0.75 + index * 0.06 }}
@@ -134,9 +133,12 @@ export function InflationChart() {
         </text>
       </svg>
 
-      <figcaption className="mt-4 border-t border-border pt-3 text-micro text-ink-muted">
-        <span className="sr-only">{corpus.chartSummary}</span>
-        <span aria-hidden>{corpus.chartSource}</span>
+      <p className="mt-4 text-small leading-relaxed text-ink-muted">
+        {corpus.chartSummary}
+      </p>
+
+      <figcaption className="mt-3 border-t border-border pt-3 text-micro text-ink-muted">
+        {corpus.chartSource}
       </figcaption>
     </figure>
   );

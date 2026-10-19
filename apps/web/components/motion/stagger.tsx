@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, stagger, useReducedMotion } from "framer-motion";
+import { motion, stagger } from "framer-motion";
 import type { ReactNode } from "react";
 import type { Variants } from "framer-motion";
 
@@ -32,8 +32,6 @@ export function Stagger({
   once?: boolean;
   amount?: number;
 }) {
-  const reduce = useReducedMotion();
-
   const variants: Variants = {
     hidden: {},
     show: {
@@ -47,8 +45,8 @@ export function Stagger({
     <motion.div
       data-reveal
       className={cn(className)}
-      initial={reduce ? false : "hidden"}
-      whileInView={reduce ? undefined : "show"}
+      initial="hidden"
+      whileInView="show"
       viewport={{ once, amount }}
       variants={variants}
     >
@@ -64,14 +62,11 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
-
   return (
     <motion.div
       data-reveal
       className={cn(className)}
       variants={itemVariants}
-      initial={reduce ? false : undefined}
     >
       {children}
     </motion.div>

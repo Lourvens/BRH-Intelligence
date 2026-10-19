@@ -2,9 +2,10 @@
 
 Next.js 16 (App Router) + React 19 + Tailwind v4.
 
-**Status: UI foundation + welcome page.** The design system is implemented and
-the landing page renders. The chat, live citations and the PDF viewer are next
-(see the build order in the root `README.md`).
+**Status: redesigned landing page.** The design system is implemented and the
+welcome page now uses the Stitch-led redesign (spotlight, beams, bento corpus,
+animated counters, interactive agent console). The chat, live citations and the
+PDF viewer are next (see the build order in the root `README.md`).
 
 ## Run
 
@@ -28,24 +29,46 @@ and its palette. The web app ports it rather than inventing a second style:
 | `public/brh-logo.png` | The original BRH mark (251×123). Never recolour or stretch it. |
 | `components/ui/button.tsx` | Primary / secondary / ghost / gold buttons. |
 | `components/ui/citation-chip.tsx` | The source chip the chat will reuse. |
+| `components/ui/{spotlight,background-beams,bento-grid,counter}.tsx` | Aceternity-style visual primitives. |
+| `components/home/hero/*` | Hero shell, agent console, sourced answer, source document, trust strip. |
 
 Rules worth repeating: `navy` leads, `gold` is a **fill only** (use `gold-ink`
 for lines/labels), charts plot on `surface` not `bg`, and numbers use tabular
-figures.
+figures. All UI files stay **under 250 lines**; the hero is split into
+`hero.tsx` + `hero/{agent-console,sourced-answer,source-document,query-presets,hero-trust}`.
 
 The type scale is named (`text-micro` → `text-hero`) and `lib/utils.ts` teaches
 `tailwind-merge` about it, so a size class never swallows a text colour.
+
+## Stitch design source
+
+The redesign was produced in Stitch, then implemented in React:
+
+- Project: `projects/14932998564978548471` — *BRH Intelligence — Modern Landing Redesign*
+- Design system: `assets/9aec97cf64f84d10aadabea4bce0f6c6`
+- Desktop screen: `projects/14932998564978548471/screens/401097e628ce48af966647703191c905`
+- Mobile screen: `projects/14932998564978548471/screens/8b717e14e701499da428e788e1ccc756`
+
+The UI uses the real OCR corpus for examples: inflation `28,3 %` (note of November
+2025, p. 3), BRH creation `17 août 1979` (p. 5), BIC `Avril 2013` (p. 5), and
+`97` savings/credit cooperatives (p. 10).
 
 ## What exists
 
 | Path | State | Responsibility |
 |---|---|---|
 | `app/layout.tsx`, `app/globals.css` | ✅ | Fonts, metadata, design tokens, base styles |
-| `app/page.tsx` | ✅ welcome page | Hero, corpus band, method, CTA |
+| `app/page.tsx` | ✅ landing page | Hero → metrics → corpus → method → examples → limits → CTA |
+| `components/home/hero.tsx` | ✅ | Hero shell (headline, CTAs, spotlight/beams) |
+| `components/home/hero/*` | ✅ | Agent console, answer/source panes, presets, trust strip |
+| `components/home/corpus-bento.tsx` | ✅ | Real inflation chart, typology, OCR visual, refusal comparison |
+| `components/home/interactive-pipeline.tsx` | ✅ | Dark 5-step pipeline / architecture |
+| `components/home/questions-showcase.tsx` | ✅ | Filterable real questions with citations |
+| `components/home/transparency-section.tsx` | ✅ | Perimeter and limits |
+| `components/home/radiant-cta.tsx` | ✅ | Closing call to action |
 | `components/brand.tsx` | ✅ | BRH lockup on light surfaces |
 | `components/site-header.tsx`, `site-footer.tsx` | ✅ | Shared shell |
-| `components/answer-preview.tsx` | ✅ illustrative | Shows the answer + citation shape |
-| `components/ui/*` | ✅ | Button and citation-chip primitives |
+| `lib/content/*` | ✅ | Copy split by section (`hero`, `corpus`, `questions`, `method`, `closing`) |
 | `lib/agent.ts` | ⬜ contract + stub | `AgentState`/`Citation` types and `useAgent()` |
 | `lib/utils.ts` | ✅ | `cn()` + tailwind-merge config |
 

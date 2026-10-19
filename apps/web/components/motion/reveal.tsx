@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { ComponentProps } from "react";
 
 import { cn } from "@/lib/utils";
@@ -16,7 +16,8 @@ type RevealProps = ComponentProps<"div"> & {
 
 /**
  * A single scroll reveal. Keep one wrapper per group rather than one per child;
- * stagger inside the group with `<Stagger>`.
+ * stagger inside the group with `<Stagger>`. `MotionConfig` disables the
+ * positional part for reduced-motion users; the short opacity fade remains.
  */
 export function Reveal({
   children,
@@ -27,14 +28,12 @@ export function Reveal({
   amount = 0.25,
   ...rest
 }: RevealProps) {
-  const reduce = useReducedMotion();
-
   return (
     <motion.div
       data-reveal
       className={cn(className)}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, amount, margin: "0px 0px -10% 0px" }}
       transition={{ duration: 0.55, delay, ease: easeOut }}
       {...(rest as ComponentProps<typeof motion.div>)}

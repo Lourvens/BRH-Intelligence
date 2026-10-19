@@ -22,7 +22,7 @@ export function DocumentStack({ className }: { className?: string }) {
     >
       <motion.div
         className="relative h-full w-full"
-        initial={reduce ? false : { opacity: 0, y: 14 }}
+        initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.6, ease: easeOut }}

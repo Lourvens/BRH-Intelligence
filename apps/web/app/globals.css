@@ -132,3 +132,31 @@
   line-height: 1.5;
   text-transform: uppercase;
 }
+
+/* A faint technical dot grid behind the hero; the mask keeps it off the copy. */
+@utility hero-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-navy) 40%, transparent) 2px,
+    transparent 2.2px
+  );
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 65% at 50% 30%,
+    black 0%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    ellipse 80% 65% at 50% 30%,
+    black 0%,
+    transparent 75%
+  );
+}
+
+/* The same grid, inverted for the navy demo stage. */
+@utility hero-grid-dark {
+  background-image: radial-gradient(
+    color-mix(in srgb, white 28%, transparent) 1px,
+    transparent 1.4px
+  );
+  background-size: 22px 22px;
+}

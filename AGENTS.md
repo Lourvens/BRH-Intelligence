@@ -70,6 +70,24 @@ make lab                           # JupyterLab for experiments/
   `tsc --noEmit`. `apps/web/package.json` is the source of truth.
 - Ruff excludes `experiments/` (notebook cells trip it).
 
+## Browser verification
+
+Use the `agent-browser` CLI for preview checks, screenshots and interaction —
+it is the preferred browser harness in this repo. Start the app (`bun dev` from
+`apps/web`), then:
+
+```bash
+agent-browser --args "--no-sandbox" open http://localhost:3000
+agent-browser set viewport 1440 1200
+agent-browser screenshot --full /tmp/opencode/<name>.png
+agent-browser errors
+agent-browser close
+```
+
+`--no-sandbox` is required in this container. For a static HTML mock, open
+`file:///...` with `--args "--no-sandbox,--allow-file-access-from-files"`.
+Do not fall back to raw Chrome headless flags unless the CLI cannot do the job.
+
 ## Gotchas that cost time
 
 - **`langgraph dev` overrides shell env.** `services/agent/langgraph.json` sets

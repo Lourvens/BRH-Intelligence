@@ -32,9 +32,8 @@ export function DrawPath({
       vectorEffect="non-scaling-stroke"
       className={className}
       markerEnd={markerEnd}
-      initial={
-        reduce ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }
-      }
+      initial={{ pathLength: 0, opacity: 0 }}
+      animate={reduce ? { pathLength: 1, opacity: 1 } : undefined}
       whileInView={reduce ? undefined : { pathLength: 1, opacity: 1 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{
