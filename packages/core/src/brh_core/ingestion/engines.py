@@ -62,6 +62,15 @@ class PaddleOcrVlEngine:
     device: str | None = None
     chart_recognition: bool = True
     backend: str = "transformers"
+    # Backend knobs, passed straight through as PaddleOCR's `engine_config`.
+    # Measured on a T4 (3 pages, real document), every override loses:
+    #   default bf16   14.7 s/page
+    #   float32        44.1 s/page  (3x slower)
+    #   bf16 explicit  fails: "cv worker: Got unsupported ScalarType BFloat16"
+    #   sdpa           fails: HGNetV2Backbone does not support it
+    #   max_pixels     14.8 s/page at both 640 and 480 — no measurable effect
+    # So this stays None unless a future engine version changes the picture.
+    engine_config: dict[str, object] | None = None
     name: str = field(default="paddleocr-vl", init=False)
     _pipeline: object | None = field(default=None, init=False, repr=False)
 
@@ -77,6 +86,8 @@ class PaddleOcrVlEngine:
         }
         if self.device:
             options["device"] = self.device
+        if self.engine_config:
+            options["engine_config"] = self.engine_config
         return PaddleOCRVL(**options)
 
     def parse(self, pdf: Path, workdir: Path) -> OcrDocument:

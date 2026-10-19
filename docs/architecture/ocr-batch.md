@@ -168,29 +168,64 @@ vLLM is the lever that would change this, but PaddleOCR documents that the
 `transformers` engine and vLLM cannot share an environment, so it needs its own
 image and a two-process server/client split.
 
-## Splitting the corpus between machines
+## Three runners
 
-Two runners can share one manifest without a queue or a lock:
+The corpus can be split across machines that never coordinate, because
+`--shard I/N` is a pure function of manifest order. With five shards over 116
+documents each worker gets 22-24 documents, which keeps every Colab/Kaggle batch
+under the 30-document ceiling those platforms need:
 
-```bash
-python -m brh_core.ingestion.ocr run --manifest … --out … --shard 0/2
-python -m brh_core.ingestion.ocr run --manifest … --out … --shard 1/2
-```
+| runner | GPUs | shard | limit per batch |
+|---|---|---|---|
+| Modal | 2 × L4 | `0/5`, `1/5` | ≤ 50 pages per container |
+| Colab | 1 × T4 | `2/5` | 23 documents, `MAX_PAGES` per session, output on Drive |
+| Kaggle | 2 × T4 | `3/5`, `4/5` | 23 documents per GPU, one output dir each |
+
+Kaggle's "T4 x2" is two separate 16 GB cards, so the parallelism is
+data-parallel: `scripts/kaggle-ocr.sh` starts one process per card with
+`CUDA_VISIBLE_DEVICES`, each writing its own directory, then unions them with
+`scripts/merge_ocr.py`. Two writers must never share one `state.jsonl`.
+
+Colab output belongs on Drive (`--out /content/drive/MyDrive/brh-ocr/ocr`), or a
+disconnect loses the whole VM's work rather than one document.
+
+## Tensor knobs that do not exist
+
+Measured on a T4, three pages of a real document — every override is worse than
+the default or does not compile:
+
+| setting | result |
+|---|---|
+| default (bf16) | **14.7 s/page** |
+| `dtype=float32` | 44.1 s/page — 3x slower |
+| `dtype=bfloat16` explicit | fails: `cv worker: Got unsupported ScalarType BFloat16` |
+| `attn_implementation=sdpa` | fails: `HGNetV2Backbone does not support ... scaled_dot_product_attention` |
+| `attn_implementation=flash_attention_2` | needs Ampere; T4 is Turing 7.5 |
+| `max_pixels` 640 / 480 | 14.8 s/page — no measurable effect |
+| `dtype=float16` | unsupported: the checkpoint pins bf16 |
+
+So there is no tensor-level acceleration left on a T4, and vLLM — the one lever
+that would change the shape of the problem — is documented as unstable below
+compute capability 8.0. The remaining speed comes from hardware (L4 over T4, two
+cards instead of one) and from doing less work (text-layer extraction for
+born-digital pages), not from flags.
+
+## Sharding without coordination
 
 `--shard I/N` takes every N-th document starting at I. The split is a pure
 function of manifest order, so the two sets are disjoint by construction; each
-side keeps its own ledger and the results are unioned
-(`scripts/merge_ocr.py`, which `modal-pull.sh` calls).
+side keeps its own ledger and the results are unioned by `scripts/merge_ocr.py`,
+which `modal-pull.sh` also uses.
+
+```bash
+python -m brh_core.ingestion.ocr run --manifest ... --out ... --shard 0/5
+BRH_SHARD=1/5 modal run --detach scripts/modal_ocr.py::run
+```
 
 `--max-pages P` stops a run after roughly P pages. A document is never split, so
-a single longer document still runs — that is what keeps a small budget from
-deadlocking. On Colab the budget is the unit of loss: `/content` is erased when
-the runtime dies, so a session should be short enough that losing it is cheap.
+a single longer document still runs — which is what keeps a small budget from
+deadlocking. On Colab the budget is the unit of loss unless the output is on
+Drive: `/content` is erased when the runtime dies.
 
-**Put Colab output on Google Drive.** With `--out /content/drive/MyDrive/brh-ocr/ocr`
-a disconnect costs one document instead of the whole session, which is the same
-guarantee Modal gets from its volume — and it makes a 100-page budget safe.
-Models and `pip` still have to be re-fetched per session (~3 min); that is the
-price of free compute, not something the batch size can fix.
-
-
+Models and `pip` still have to be re-fetched per Colab session (~3 min); that is
+the price of free compute, not something the batch size can fix.
