@@ -66,7 +66,7 @@ class FakeEngine:
 def make_pdf(directory: Path, name: str = "doc") -> ManifestItem:
     directory.mkdir(parents=True, exist_ok=True)
     pdf = directory / f"{name}.pdf"
-    pdf.write_bytes(b"%PDF-1.4 fake")
+    pdf.write_bytes(b"%PDF-1.4 fake " + name.encode())  # distinct bytes, distinct sha
     return ManifestItem(sha256=hashlib.sha256(pdf.read_bytes()).hexdigest(), path=pdf)
 
 
@@ -188,6 +188,48 @@ def test_limit_bounds_a_batch(tmp_path: Path) -> None:
 
     assert len(report.done) == 2
     assert Ledger(out / LEDGER).replay().keys() == set(report.done)
+
+
+def test_shards_are_disjoint_and_cover_the_manifest(tmp_path: Path) -> None:
+    """Two machines on one manifest: no document may be done twice."""
+    items = [make_pdf(tmp_path / "in", f"doc{i}") for i in range(6)]
+    first, second = FakeEngine(), FakeEngine()
+
+    left = run_batch(items, tmp_path / "left", first, batch="b", shard=(0, 2), log=quiet)
+    right = run_batch(items, tmp_path / "right", second, batch="b", shard=(1, 2), log=quiet)
+
+    assert set(left.done).isdisjoint(right.done)
+    assert set(left.done) | set(right.done) == {item.sha256 for item in items}
+    assert len(first.calls) == len(second.calls) == 3
+
+
+def test_max_pages_stops_after_the_budget(tmp_path: Path) -> None:
+    items = [make_pdf(tmp_path / "in", f"doc{i}") for i in range(5)]
+    engine = FakeEngine(pages=2)
+
+    report = run_batch(items, tmp_path / "out", engine, batch="b", max_pages=4, log=quiet)
+
+    assert len(report.done) == 2
+    assert report.pages == 4
+
+
+def test_a_document_longer_than_the_budget_still_runs(tmp_path: Path) -> None:
+    """The budget must not deadlock on a document that can never fit."""
+    item = make_pdf(tmp_path / "in", "long")
+
+    report = run_batch([item], tmp_path / "out", FakeEngine(pages=10), batch="b",
+                       max_pages=3, log=quiet)
+
+    assert report.done == [item.sha256]
+    assert report.pages == 10
+
+
+@pytest.mark.parametrize("shard", [(2, 2), (0, 0), (-1, 2)])
+def test_a_bad_shard_is_rejected(tmp_path: Path, shard: tuple[int, int]) -> None:
+    item = make_pdf(tmp_path / "in")
+
+    with pytest.raises(ValueError, match="bad shard"):
+        run_batch([item], tmp_path / "out", FakeEngine(), shard=shard, log=quiet)
 
 
 def test_a_missing_source_is_recorded_as_failed(tmp_path: Path) -> None:

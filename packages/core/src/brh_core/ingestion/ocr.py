@@ -216,6 +216,7 @@ class BatchReport:
     exhausted: list[str] = field(default_factory=list)
     failed: list[tuple[str, str]] = field(default_factory=list)
     seconds: float = 0.0
+    pages: int = 0
 
     @property
     def ok(self) -> bool:
@@ -232,19 +233,39 @@ def run_batch(
     force: bool = False,
     max_attempts: int = 3,
     limit: int | None = None,
+    shard: tuple[int, int] | None = None,
+    max_pages: int | None = None,
     log: Callable[[str], None] = print,
 ) -> BatchReport:
-    """OCR every manifest item that still needs it."""
+    """OCR every manifest item that still needs it.
+
+    ``shard=(i, n)`` keeps every n-th document starting at i (0-based), which is
+    what lets two machines work the same manifest without ever touching the same
+    document: the split is a pure function of manifest order, so it needs no
+    lock, no queue and no coordination. ``max_pages`` stops a run once roughly
+    that many pages are done — the unit for a Colab session, where a disconnect
+    loses the VM's whole working directory.
+    """
     batch = batch or datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+    if shard is not None:
+        index, total = shard
+        if total < 1 or not 0 <= index < total:
+            raise ValueError(f"bad shard {index}/{total}: need 0 <= index < total")
+        items = list(items)[index::total]
     out_dir.mkdir(parents=True, exist_ok=True)
     ledger = Ledger(out_dir / LEDGER)
     states = ledger.replay()
     report = BatchReport(batch=batch)
     started = time.monotonic()
     processed = 0
+    pages_done = 0
 
     for item in items:
         if limit is not None and processed >= limit:
+            break
+        # Checked after at least one document so a document longer than the
+        # budget cannot deadlock the loop by never fitting.
+        if max_pages is not None and processed and pages_done >= max_pages:
             break
 
         state = states.get(item.sha256, DocState())
@@ -306,6 +327,8 @@ def run_batch(
                           pages=len(parsed.pages), chars=len(markdown),
                           figures=figures, seconds=elapsed)
             report.done.append(item.sha256)
+            report.pages += len(parsed.pages)
+            pages_done += len(parsed.pages)
             log(f"{item.sha256[:8]}  ok  {len(parsed.pages):>3} pages  "
                 f"{len(markdown):>7,} chars  {figures:>2} fig  {elapsed:>6.1f}s")
         except Exception as exc:  # one document must not end the batch
@@ -322,6 +345,19 @@ def run_batch(
 
 
 # --- cli --------------------------------------------------------------------
+
+
+def _parse_shard(value: str | None) -> tuple[int, int] | None:
+    """``"1/3"`` -> ``(1, 3)``; anything else is a usage error."""
+    if value is None:
+        return None
+    try:
+        index, total = (int(part) for part in value.split("/", 1))
+    except ValueError:
+        raise SystemExit(f"--shard expects I/N, got {value!r}") from None
+    if total < 1 or not 0 <= index < total:
+        raise SystemExit(f"--shard {value}: need 0 <= I < N")
+    return index, total
 
 
 def _engine(args: argparse.Namespace) -> Engine:
@@ -349,6 +385,20 @@ def main(argv: list[str] | None = None) -> int:
     run_cmd.add_argument("--force", action="store_true", help="Re-OCR even completed documents.")
     run_cmd.add_argument("--max-attempts", type=int, default=3)
     run_cmd.add_argument("--limit", type=int, default=None)
+    run_cmd.add_argument(
+        "--shard",
+        default=None,
+        metavar="I/N",
+        help="Only every N-th document starting at I (0-based); shards are disjoint, "
+             "so two machines can share one manifest without duplicate work.",
+    )
+    run_cmd.add_argument(
+        "--max-pages",
+        type=int,
+        default=None,
+        dest="max_pages",
+        help="Stop after roughly this many pages; a document is never split.",
+    )
 
     status_cmd = sub.add_parser("status", help="Replay the ledger and print counts.")
     status_cmd.add_argument("--out", type=Path, required=True)
@@ -383,11 +433,13 @@ def main(argv: list[str] | None = None) -> int:
         force=args.force,
         max_attempts=args.max_attempts,
         limit=args.limit,
+        shard=_parse_shard(args.shard),
+        max_pages=args.max_pages,
     )
     print()
     print(f"batch {report.batch}: {len(report.done)} done, {len(report.skipped)} skipped, "
           f"{len(report.failed)} failed, {len(report.exhausted)} exhausted  "
-          f"({report.seconds:.1f}s)")
+          f"({report.pages} pages, {report.seconds:.1f}s)")
     return 0 if report.ok else 1
 
 

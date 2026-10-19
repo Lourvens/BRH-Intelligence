@@ -168,3 +168,29 @@ vLLM is the lever that would change this, but PaddleOCR documents that the
 `transformers` engine and vLLM cannot share an environment, so it needs its own
 image and a two-process server/client split.
 
+## Splitting the corpus between machines
+
+Two runners can share one manifest without a queue or a lock:
+
+```bash
+python -m brh_core.ingestion.ocr run --manifest … --out … --shard 0/2
+python -m brh_core.ingestion.ocr run --manifest … --out … --shard 1/2
+```
+
+`--shard I/N` takes every N-th document starting at I. The split is a pure
+function of manifest order, so the two sets are disjoint by construction; each
+side keeps its own ledger and the results are unioned
+(`scripts/merge_ocr.py`, which `modal-pull.sh` calls).
+
+`--max-pages P` stops a run after roughly P pages. A document is never split, so
+a single longer document still runs — that is what keeps a small budget from
+deadlocking. On Colab the budget is the unit of loss: `/content` is erased when
+the runtime dies, so a session should be short enough that losing it is cheap.
+
+**Put Colab output on Google Drive.** With `--out /content/drive/MyDrive/brh-ocr/ocr`
+a disconnect costs one document instead of the whole session, which is the same
+guarantee Modal gets from its volume — and it makes a 100-page budget safe.
+Models and `pip` still have to be re-fetched per session (~3 min); that is the
+price of free compute, not something the batch size can fix.
+
+
