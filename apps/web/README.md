@@ -48,7 +48,7 @@ implementing it.
   *BRH Intelligence — Hero Section Réinventée* (desktop, 2560px).
   Implemented: navbar, hero, corpus, questions, method, limits, CTA and footer.
   The HTML source was used as the layout reference; copy that claimed live
-  indexing, zero hallucination, confidence scores or latency was replaced with
+  indexing, guaranteed accuracy, confidence scores or latency was replaced with
   corpus facts.
 - Previous redesign (removed): project `14932998564978548471`, desktop screen
   `401097e628ce48af966647703191c905`, mobile screen

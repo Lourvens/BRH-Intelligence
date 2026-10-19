@@ -61,7 +61,7 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   live in `components/home/*`; every file is under 250 lines (largest:
   `hero-console.tsx`, 242). The hero filters/examples/replay control are
   interactive; nav anchors scroll with the sticky header. Stitch’s live-index,
-  zero-hallucination, confidence and latency claims were replaced with the real
+  guaranteed-accuracy, confidence and latency claims were replaced with the real
   34-document / 1 192-page sample and page-level citations. The chat, live
   citations and the PDF viewer are the next frontend steps.
 
@@ -86,7 +86,7 @@ Continue the build order:
   CTA; navy footer. Added `public/brh-corpus-archive.jpg`, shared
   `lib/content/navigation.ts` and `components/home/section-heading.tsx`.
   Corrected Stitch overclaims again: “exhaustive/indexed”, “certified”,
-  “zero hallucination”, confidence/latency figures and fake retrieval scores are
+  “guaranteed accuracy”, confidence/latency figures and fake retrieval scores are
   gone; the page uses 1 169 PDFs, 34 transcribed documents, 1 192 profiled pages
   and the real 2018—2026 sample. Every TS/TSX file stays under 250 lines
   (`hero-console.tsx` is largest at 242). `bun run typecheck` and
@@ -102,7 +102,7 @@ Continue the build order:
   then the four trust cards. Real corpus content: inflation `28,3 %` (p. 3),
   BRH creation `17 août 1979` (p. 5), BIC `avril 2013` (p. 5), 34 transcribed
   documents and 1 192 profiled pages. Removed the reference’s fabricated
-  confidence/latency/zero-hallucination/100%-coverage copy. Components split
+  confidence/latency/perfect-coverage copy. Components split
   under `components/home/hero/*`; every TS/TSX file is under 250 lines.
   `bun run typecheck` and `bun run build` pass; desktop and 390px layouts checked
   with `agent-browser`, including filter, quick-example and CTA interactions.
