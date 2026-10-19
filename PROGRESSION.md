@@ -52,14 +52,14 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   machine shortlist, 27 pages, in `experiments/gold/documents/`, with
   `build_manifest.py` adopting them and reporting that **5 of the 13 classes are
   uncovered**. Not transcribed yet. No OCR code exists.
-- **The web UI is no longer a placeholder (2026-10-19).** `apps/web` now
-  implements the house style from [`services/analytics/DESIGN.md`](services/analytics/DESIGN.md)
-  and a Stitch-led modern landing page: spotlight/beams, a bento corpus grid, an
-  animated metrics band, an interactive agent console, a dark pipeline section,
-  filterable example questions, and a closing CTA. Copy is split by section under
-  `lib/content/`; the hero is split under `components/home/hero/`; every TS/TSX
-  file is **under 250 lines**. The chat, live citations and the PDF viewer are
-  the next frontend steps.
+- **The web landing page is a blank canvas (2026-10-19).** The previous
+  Stitch/Aceternity landing implementation was removed after it failed to take
+  effect as intended. `apps/web/app/page.tsx` renders an empty `<main>`; the
+  `components/home`, illustration, site-chrome and content-module trees are
+  gone. The design system stays — tokens/fonts/logo plus the button and
+  citation-chip primitives. The page will be rebuilt section by section from the
+  next Stitch reference; record each project/screen ID in `apps/web/README.md`
+  before implementing it. The chat, live citations and the PDF viewer follow.
 
 ## Next up
 
@@ -73,6 +73,16 @@ Continue the build order:
    the files the inventory has already downloaded. Verify with `make ingest`.
 
 ## Recently done
+
+- **2026-10-19 — Landing page reset to a blank canvas.** The prior
+  Stitch/Aceternity implementation was deleted rather than layered over: all
+  `components/home`, `components/illustrations`, site chrome (`site-header`,
+  `site-footer`, `mobile-nav`, `brand`), landing motion helpers, `lib/content`,
+  and the old landing-only UI primitives are gone. `app/page.tsx` is an empty
+  `<main>`; `globals.css` keeps the design tokens/fonts/base styles and drops
+  the hero-grid utilities. `bun run typecheck` and `bun run build` pass; the
+  blank page was checked in `agent-browser`. Next: implement the next Stitch
+  reference one section at a time.
 
 - **2026-10-19 — Stitch-led landing redesign, and the file-size split.**
   Stitch project `14932998564978548471` (design system
