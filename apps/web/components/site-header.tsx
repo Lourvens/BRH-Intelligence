@@ -34,27 +34,16 @@ export function SiteHeader() {
 
         <nav
           aria-label="Navigation principale"
-          className="hidden items-center gap-7 md:flex"
+          className="hidden items-center gap-5 lg:flex"
         >
-          {navigation.map((item, index) => (
-            <span key={item.href} className="flex items-center gap-7">
-              <a
-                href={item.href}
-                aria-current={index === 0 ? "location" : undefined}
-                className={
-                  index === 0
-                    ? "border-b-2 border-azure pb-1 text-small font-semibold text-navy"
-                    : "text-small font-medium text-ink-muted transition-colors hover:text-navy"
-                }
-              >
-                {item.label}
-              </a>
-              {index < navigation.length - 1 ? (
-                <span aria-hidden className="text-caption text-ink-muted/40">
-                  ·
-                </span>
-              ) : null}
-            </span>
+          {navigation.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-small font-medium text-ink-muted transition-colors hover:text-navy"
+            >
+              {item.label}
+            </a>
           ))}
         </nav>
 

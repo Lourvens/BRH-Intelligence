@@ -2,11 +2,11 @@
 
 Next.js 16 (App Router) + React 19 + Tailwind v4.
 
-**Status: Stitch landing page implemented.** The page now follows the full
-reference screen: sticky navbar, hero, corpus, example questions, method, limits,
-closing CTA and footer. The chat, live citations and PDF viewer are next. The
-design system (tokens, fonts, BRH logo, button and citation-chip primitives)
-remains the source of truth.
+**Status: Stitch landing page implemented.** The page follows the new full
+reference: the `b961…` hero plus the `027b…` sections — pipeline, corpus, use
+cases, comparison, FAQ, access CTA and footer. The chat, live citations and PDF
+viewer are next. The design system (tokens, fonts, BRH logo, button and
+citation-chip primitives) remains the source of truth.
 
 ## Run
 
@@ -44,32 +44,38 @@ The landing page is rebuilt from Stitch references, one section at a time. When
 a new reference is supplied, record its project and screen IDs here before
 implementing it.
 
-- Current reference: screen `296a96a976eb48cdb85d9cc1277275c0` —
-  *BRH Intelligence — Hero Section Réinventée* (desktop, 2560px).
-  Implemented: navbar, hero, corpus, questions, method, limits, CTA and footer.
-  The HTML source was used as the layout reference; copy that claimed live
-  indexing, guaranteed accuracy, confidence scores or latency was replaced with
-  corpus facts.
-- Previous redesign (removed): project `14932998564978548471`, desktop screen
-  `401097e628ce48af966647703191c905`, mobile screen
-  `8b717e14e701499da428e788e1ccc756`.
+- Current hero reference: screen `b961ed14011a4dddb1cb2a19b9894f1d` —
+  *BRH Intelligence — Landing Page Hero Officiel* (desktop, 2560px).
+  Implemented: the hero only — centred copy, product showcase and corpus trust
+  band.
+- Current sections reference: screen `027bffa8af21414d94f24317e0b8e889` —
+  *BRH Intelligence — Landing Page Complète Officielle* (desktop, 2560px).
+  Implemented: pipeline, corpus, use cases, comparison, FAQ, access CTA and
+  footer. The navbar keeps the BRH product nav but points at the new anchors.
+- Previous full-page reference: screen `296a96a976eb48cdb85d9cc1277275c0` —
+  replaced by the two screens above.
+- The Stitch HTML was used as the layout reference. Claims about live indexing,
+  guaranteed accuracy, 40 years, confidence scores, latency, OCR certification,
+  legal value and vault-style integrity were replaced with the real corpus
+  facts.
 
 ## What exists
 
 | Path | State | Responsibility |
 |---|---|---|
 | `app/layout.tsx`, `app/globals.css` | ✅ | Fonts, metadata, design tokens, base styles, dot-grid utilities |
-| `app/page.tsx` | ✅ landing page | Stitch screen `296a…` in section order |
+| `app/page.tsx` | ✅ landing page | `b961…` hero + `027b…` sections |
 | `components/site-header.tsx` | ✅ | Sticky institutional navbar |
-| `components/home/hero.tsx` | ✅ | Hero shell, filter/search state and layout |
-| `components/home/hero/*` | ✅ | Search bar, image card, agent console, trust strip, content |
-| `components/home/corpus-section.tsx` | ✅ | Archive, inflation chart, excerpt, taxonomy, metrics |
-| `components/home/questions-section.tsx` | ✅ | Four sourced example questions |
-| `components/home/method-section.tsx` | ✅ | Dark retrieval/refusal method and architecture notes |
-| `components/home/limits-section.tsx` | ✅ | Explicit perimeter |
-| `components/home/closing-cta.tsx` | ✅ | Closing call to action |
+| `components/home/hero.tsx` | ✅ | Hero copy, CTAs and section shell |
+| `components/home/hero/*` | ✅ | Showcase, answer/document panes, archive strip, trust band, data |
+| `components/home/pipeline-section.tsx` | ✅ | Four-step document pipeline |
+| `components/home/corpus-section.tsx` | ✅ | Corpus narrative, metrics, families and archive image |
+| `components/home/usages-section.tsx` | ✅ | Four professional use cases |
+| `components/home/comparison-section.tsx` | ✅ | Sourced search vs general assistant |
+| `components/home/faq-section.tsx` | ✅ | Data, perimeter and freshness FAQ |
+| `components/home/access-cta.tsx` | ✅ | Closing demo/corpus CTA |
 | `components/site-footer.tsx` | ✅ | Institutional footer |
-| `public/brh-archive-vault.jpg`, `public/brh-corpus-archive.jpg` | ✅ | Stitch imagery, locally hosted |
+| `public/brh-corpus-archive.jpg` | ✅ | Stitch archive image, locally hosted |
 | `components/ui/button.tsx` | ✅ | Button primitive |
 | `components/ui/citation-chip.tsx` | ✅ | Citation primitive |
 | `lib/content/navigation.ts` | ✅ | Shared navbar/footer links |

@@ -52,18 +52,20 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   machine shortlist, 27 pages, in `experiments/gold/documents/`, with
   `build_manifest.py` adopting them and reporting that **5 of the 13 classes are
   uncovered**. Not transcribed yet. No OCR code exists.
-- **The web landing page is implemented from Stitch (2026-10-19).** The old
-  landing implementation was reset to a blank canvas, then the full Stitch screen
-  `296a96a976eb48cdb85d9cc1277275c0` (*BRH Intelligence — Hero Section
-  Réinventée*) was rebuilt: sticky navbar, hero with filter/search and agent
-  console, corpus with inflation chart and excerpt, four example questions, dark
-  method/refusal section, limits, closing CTA and institutional footer. Components
-  live in `components/home/*`; every file is under 250 lines (largest:
-  `hero-console.tsx`, 242). The hero filters/examples/replay control are
-  interactive; nav anchors scroll with the sticky header. Stitch’s live-index,
-  guaranteed-accuracy, confidence and latency claims were replaced with the real
-  34-document / 1 192-page sample and page-level citations. The chat, live
-  citations and the PDF viewer are the next frontend steps.
+- **The web landing page uses the new Stitch hero and sections (2026-10-19).**
+  The hero is screen `b961ed14011a4dddb1cb2a19b9894f1d` (*Landing Page Hero
+  Officiel*), and the sections below it are screen
+  `027bffa8af21414d94f24317e0b8e889` (*Landing Page Complète Officielle*):
+  four-step pipeline, corpus narrative + metrics + families + archive image,
+  four use cases, sourced-search comparison, FAQ, access CTA and institutional
+  footer. The navbar points at the new `#pipeline`, `#corpus`, `#usages`,
+  `#comparatif` and `#faq` anchors. Components live in `components/home/*` and
+  `components/home/hero/*`; the largest TS/TSX file is `hero-showcase.tsx` at
+  180 lines. The hero `Rejouer` and citation-copy controls are interactive. All
+  live-index, guaranteed-accuracy, certification, 40-year, confidence, latency
+  and vault-style claims were replaced with the real 1 169 PDFs / 34 transcribed
+  documents / 1 192 profiled pages and the inflation note (28,3 %, p. 3). The
+  chat, live citations and the PDF viewer are the next frontend steps.
 
 ## Next up
 
@@ -78,6 +80,35 @@ Continue the build order:
 
 ## Recently done
 
+- **2026-10-19 — Rest sections rebuilt from Stitch.** Replaced the previous
+  corpus/questions/method/limits/CTA/footer stack with screen
+  `027bffa8af21414d94f24317e0b8e889` (project `14932998564978548471`): four-step
+  pipeline, corpus narrative + real metrics + three document families + archive
+  image, four professional use cases, a sourced-search comparison table (with a
+  mobile card fallback), four-item FAQ, access CTA and a five-column footer. The
+  navbar now points at `#pipeline`, `#corpus`, `#usages`, `#comparatif` and
+  `#faq`. Removed Stitch’s unfounded precision, certification, legal-value,
+  40-year, 24/7, live-index, confidence/latency, integrity and fake institutional
+  endorsement claims; the copy uses 1 169 PDFs, 34 transcribed documents, 1 192
+  profiled pages and the 2018—2026 sample. Deleted the superseded
+  chart/questions/method/limits components. `bun run typecheck` and
+  `bun run build` pass; 1440px and 390px layouts plus the mobile comparison
+  cards checked with `agent-browser`.
+
+- **2026-10-19 — New Stitch hero implemented.** Replaced the previous hero with
+  screen `b961ed14011a4dddb1cb2a19b9894f1d` (*Landing Page Hero Officiel*,
+  project `14932998564978548471`). The new hero has the large gradient headline,
+  corpus CTAs, a browser-framed product showcase (query bar, three grounding
+  steps, sourced answer + document inspector), archive strip, corpus trust tags
+  and three real metrics. Replaced the Stitch copy’s live/guaranteed claims with
+  the inflation note (`28,3 %`, p. 3), 1 169 PDFs, 34 transcribed documents and
+  1 192 profiled pages; removed the reference’s unfounded trust badges,
+  confidence/latency figures, the 40-year claim and fake institutional
+  endorsements. Added `Rejouer` and citation-copy interactions. Removed the
+  now-unused vault image. Largest TS/TSX file: `hero-showcase.tsx` at 180 lines.
+  `bun run typecheck` and `bun run build` pass; 1440px and 390px layouts checked
+  with `agent-browser`.
+
 - **2026-10-19 — Stitch landing page completed.** Implemented the remaining
   sections of screen `296a96a976eb48cdb85d9cc1277275c0` (project
   `14932998564978548471`): corpus archive + inflation SVG chart + sourced
@@ -88,10 +119,10 @@ Continue the build order:
   Corrected Stitch overclaims again: “exhaustive/indexed”, “certified”,
   “guaranteed accuracy”, confidence/latency figures and fake retrieval scores are
   gone; the page uses 1 169 PDFs, 34 transcribed documents, 1 192 profiled pages
-  and the real 2018—2026 sample. Every TS/TSX file stays under 250 lines
-  (`hero-console.tsx` is largest at 242). `bun run typecheck` and
-  `bun run build` pass; desktop anchor navigation and 390px layouts checked in
-  `agent-browser` (including the chart labels and mobile stacking).
+  and the real 2018—2026 sample. Every TS/TSX file stays under 250 lines.
+  `bun run typecheck` and `bun run build` pass; desktop anchor navigation and
+  390px layouts checked in `agent-browser` (including the chart labels and mobile
+  stacking).
 
 - **2026-10-19 — Stitch navbar + hero implemented.** Started from the blank
   canvas and rebuilt the top of the page from screen

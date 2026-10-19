@@ -1,9 +1,10 @@
-import { ClosingCta } from "@/components/home/closing-cta";
+import { AccessCta } from "@/components/home/access-cta";
+import { ComparisonSection } from "@/components/home/comparison-section";
 import { CorpusSection } from "@/components/home/corpus-section";
+import { FaqSection } from "@/components/home/faq-section";
 import { Hero } from "@/components/home/hero";
-import { LimitsSection } from "@/components/home/limits-section";
-import { MethodSection } from "@/components/home/method-section";
-import { QuestionsSection } from "@/components/home/questions-section";
+import { PipelineSection } from "@/components/home/pipeline-section";
+import { UsagesSection } from "@/components/home/usages-section";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
@@ -13,11 +14,12 @@ export default function Home() {
       <SiteHeader />
       <main id="contenu">
         <Hero />
+        <PipelineSection />
         <CorpusSection />
-        <QuestionsSection />
-        <MethodSection />
-        <LimitsSection />
-        <ClosingCta />
+        <UsagesSection />
+        <ComparisonSection />
+        <FaqSection />
+        <AccessCta />
       </main>
       <SiteFooter />
     </div>

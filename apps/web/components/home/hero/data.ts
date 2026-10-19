@@ -1,82 +1,57 @@
-export type HeroPreset = {
-  id: string;
-  filter: string;
-  question: string;
-  category: string;
-  answerLead: string;
-  answerHighlight: string;
-  answerTail: string;
-  documentTitle: string;
-  documentMeta: string;
-  page: number;
-};
-
 export const heroCopy = {
-  eyebrow: "Recherche documentaire · Banque de la République d’Haïti",
-  titleLead: "Posez une question.",
-  titleAccent: "Obtenez la citation exacte.",
+  eyebrow:
+    "Le moteur d’intelligence documentaire de la Banque de la République d’Haïti",
+  titleLead: "Les publications de la BRH.",
+  titleAccent:
+    "Interrogeables en langage naturel, sourcées page par page.",
   intro:
-    "Recherche sémantique sur les rapports, notes et circulaires publiés par la Banque de la République d’Haïti. Chaque réponse renvoie au document et à la page qui la soutiennent.",
-  searchLabel: "Recherche sémantique dans 1 192 pages profilées :",
-  quickLabel: "Exemples rapides :",
-  indexNote: "34 documents transcrits",
+    "Accédez aux rapports, notes et circulaires publiés par la Banque de la République d’Haïti. Chaque réponse s’appuie sur un passage retrouvé et renvoie au document et à la page.",
+  primaryCta: "Explorer le corpus",
+  secondaryCta: "Voir une réponse citée",
+  assurances: ["Corpus francophone", "Citations page par page", "Refus explicite"],
 } as const;
 
-export const heroFilters = [
-  { id: "all", label: "Toutes les publications" },
-  { id: "inflation", label: "Notes d’inflation" },
-  { id: "institution", label: "Institution" },
-  { id: "credit", label: "Crédit" },
+export const demo = {
+  question: "Quel était le taux d’inflation annuel en novembre 2025 ?",
+  category: "Inflation",
+  answerLabel: "Inflation annuelle en Haïti",
+  answerValue: "28,3\u00A0%",
+  answerDetail: "glissement annuel · novembre 2025",
+  answerBadge: "Nov. 2025",
+  quote:
+    "En novembre 2025, le taux d’inflation s’est décéléré tant en variation mensuelle qu’en rythme annuel. Sur une base annuelle, il est passé de 32,2 % en octobre 2025 à 28,3 % au cours du mois sous revue.",
+  quoteHighlight: "28,3 %",
+  source: "Note mensuelle d’inflation — novembre 2025",
+  sourceMeta: "IHSI / BRH · p. 3",
+  page: 3,
+  totalPages: 10,
+  documentCode: "Note mensuelle · nov. 2025",
+} as const;
+
+export const heroTags = [
+  {
+    title: "Banque de la République d’Haïti",
+    detail: "Publications officielles",
+  },
+  { title: "IHSI", detail: "Statistiques" },
+  { title: "brh.ht", detail: "Archive publique" },
+  { title: "Économistes & chercheurs", detail: "Cas d’usage" },
 ] as const;
 
-export const heroPresets: readonly HeroPreset[] = [
+export const heroMetrics = [
   {
-    id: "inflation",
-    filter: "inflation",
-    question: "Quel était le taux d’inflation annuel en novembre 2025 ?",
-    category: "Note d’inflation",
-    answerLead:
-      "En novembre 2025, l’inflation annuelle en Haïti s’est établie à",
-    answerHighlight: "28,3\u00A0%",
-    answerTail: ", contre 32,2\u00A0% en octobre 2025.",
-    documentTitle: "Note mensuelle d’inflation — novembre 2025",
-    documentMeta: "IHSI / BRH · p. 3",
-    page: 3,
+    value: "1\u202F169",
+    label: "PDF recensés",
+    detail: "Inventaire brh.ht",
   },
   {
-    id: "institution",
-    filter: "institution",
-    question: "Quand la Banque de la République d’Haïti a‑t‑elle été créée ?",
-    category: "Institution",
-    answerLead: "La BRH a été créée par la loi du",
-    answerHighlight: "17 août 1979",
-    answerTail: ", après la scission de la BNRH.",
-    documentTitle: "Les banques centrales : histoire et rôle",
-    documentMeta: "Document d’information · p. 5",
-    page: 5,
+    value: "34",
+    label: "Documents transcrits",
+    detail: "Transcription OCR",
   },
   {
-    id: "credit",
-    filter: "credit",
-    question: "Quand le Bureau d’Information sur le Crédit a‑t‑il vu le jour ?",
-    category: "Crédit",
-    answerLead:
-      "Le Bureau d’Information sur le Crédit (BIC) a été mis en service en",
-    answerHighlight: "avril 2013",
-    answerTail: ", après la création du BCNH en 2005.",
-    documentTitle: "Importance du Bureau de Crédit dans l’Économie",
-    documentMeta: "Document d’information · p. 5",
-    page: 5,
+    value: "1\u202F192",
+    label: "Pages profilées",
+    detail: "Échantillon OCR",
   },
-];
-
-export const heroExamples = [
-  { id: "inflation", label: "Inflation annuelle en novembre 2025" },
-  { id: "credit", label: "Date de création du Bureau de Crédit" },
-] as const;
-
-export const heroStats = [
-  { label: "Docs transcrits", value: "34", unit: "docs" },
-  { label: "Pages profilées", value: "1\u202F192", unit: "pages" },
-  { label: "Période couverte", value: "2018—2026", unit: "" },
 ] as const;
