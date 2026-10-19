@@ -46,7 +46,7 @@ export const heroPresets: readonly HeroPreset[] = [
   {
     id: "institution",
     filter: "institution",
-    question: "Quand la Banque de la République d’Haïti a-t-elle été créée ?",
+    question: "Quand la Banque de la République d’Haïti a‑t‑elle été créée ?",
     category: "Institution",
     answerLead: "La BRH a été créée par la loi du",
     answerHighlight: "17 août 1979",
@@ -58,7 +58,7 @@ export const heroPresets: readonly HeroPreset[] = [
   {
     id: "credit",
     filter: "credit",
-    question: "Quand le Bureau d’Information sur le Crédit a-t-il vu le jour ?",
+    question: "Quand le Bureau d’Information sur le Crédit a‑t‑il vu le jour ?",
     category: "Crédit",
     answerLead:
       "Le Bureau d’Information sur le Crédit (BIC) a été mis en service en",

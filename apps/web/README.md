@@ -2,11 +2,11 @@
 
 Next.js 16 (App Router) + React 19 + Tailwind v4.
 
-**Status: Stitch navbar + hero implemented.** The previous landing-page
-implementation was removed and the page is being rebuilt from Stitch, one
-section at a time. The sticky navbar and the hero are now in place; the corpus,
-method and limits sections are intentionally still absent. The design system
-(tokens, fonts, BRH logo, button and citation-chip primitives) remains.
+**Status: Stitch landing page implemented.** The page now follows the full
+reference screen: sticky navbar, hero, corpus, example questions, method, limits,
+closing CTA and footer. The chat, live citations and PDF viewer are next. The
+design system (tokens, fonts, BRH logo, button and citation-chip primitives)
+remains the source of truth.
 
 ## Run
 
@@ -46,9 +46,10 @@ implementing it.
 
 - Current reference: screen `296a96a976eb48cdb85d9cc1277275c0` —
   *BRH Intelligence — Hero Section Réinventée* (desktop, 2560px).
-  Implemented: navbar + hero only. The HTML source was used as the layout
-  reference; copy that claimed live indexing, zero hallucination, confidence
-  scores or latency was replaced with corpus facts.
+  Implemented: navbar, hero, corpus, questions, method, limits, CTA and footer.
+  The HTML source was used as the layout reference; copy that claimed live
+  indexing, zero hallucination, confidence scores or latency was replaced with
+  corpus facts.
 - Previous redesign (removed): project `14932998564978548471`, desktop screen
   `401097e628ce48af966647703191c905`, mobile screen
   `8b717e14e701499da428e788e1ccc756`.
@@ -58,30 +59,34 @@ implementing it.
 | Path | State | Responsibility |
 |---|---|---|
 | `app/layout.tsx`, `app/globals.css` | ✅ | Fonts, metadata, design tokens, base styles, dot-grid utilities |
-| `app/page.tsx` | ✅ navbar + hero | Stitch screen `296a…`; no lower sections yet |
+| `app/page.tsx` | ✅ landing page | Stitch screen `296a…` in section order |
 | `components/site-header.tsx` | ✅ | Sticky institutional navbar |
 | `components/home/hero.tsx` | ✅ | Hero shell, filter/search state and layout |
 | `components/home/hero/*` | ✅ | Search bar, image card, agent console, trust strip, content |
-| `public/brh-archive-vault.jpg` | ✅ | Stitch hero image, locally hosted |
+| `components/home/corpus-section.tsx` | ✅ | Archive, inflation chart, excerpt, taxonomy, metrics |
+| `components/home/questions-section.tsx` | ✅ | Four sourced example questions |
+| `components/home/method-section.tsx` | ✅ | Dark retrieval/refusal method and architecture notes |
+| `components/home/limits-section.tsx` | ✅ | Explicit perimeter |
+| `components/home/closing-cta.tsx` | ✅ | Closing call to action |
+| `components/site-footer.tsx` | ✅ | Institutional footer |
+| `public/brh-archive-vault.jpg`, `public/brh-corpus-archive.jpg` | ✅ | Stitch imagery, locally hosted |
 | `components/ui/button.tsx` | ✅ | Button primitive |
 | `components/ui/citation-chip.tsx` | ✅ | Citation primitive |
+| `lib/content/navigation.ts` | ✅ | Shared navbar/footer links |
 | `lib/agent.ts` | ⬜ contract + stub | `AgentState`/`Citation` types and `useAgent()` |
 | `lib/utils.ts` | ✅ | `cn()` + tailwind-merge config |
 
 ## What to build
 
-1. **Landing sections** — the navbar and hero are done; implement the next
-   Stitch reference sections one at a time. Add a component only when that
-   section has a reference, and keep each file under 250 lines.
-2. **`lib/agent.ts`** — wrap `useStream` from
+1. **`lib/agent.ts`** — wrap `useStream` from
    `@langchain/langgraph-sdk/react`, pointed at `NEXT_PUBLIC_LANGGRAPH_URL`.
    It returns `messages` (conversation), `values` (graph state, incl.
    `citations`), plus `submit`, `stop`, `isLoading`, `error`, `threadId`.
-3. **Chat UI** — a message list + composer. Render `values.citations` under the
+2. **Chat UI** — a message list + composer. Render `values.citations` under the
    latest answer using `components/ui/citation-chip.tsx`.
-4. **Citation chips** — the agent cites with `[n]`; parse those markers and link
+3. **Citation chips** — the agent cites with `[n]`; parse those markers and link
    each to `/documents/{slug}?page={n}`.
-5. **PDF route + viewer** — `app/api/pdfs/[slug]/route.ts` streams a source PDF
+4. **PDF route + viewer** — `app/api/pdfs/[slug]/route.ts` streams a source PDF
    (resolve `slug → file` via `data/processed/catalog.json`), and
    `app/documents/[slug]/page.tsx` embeds it with `#page=N`.
 

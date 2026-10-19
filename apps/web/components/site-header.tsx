@@ -2,12 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const navigation = [
-  { label: "Aperçu", href: "#apercu" },
-  { label: "Corpus", href: "#corpus" },
-  { label: "Méthode", href: "#methode" },
-  { label: "Limites", href: "#limites" },
-];
+import { navigation } from "@/lib/content/navigation";
 
 export function SiteHeader() {
   return (
