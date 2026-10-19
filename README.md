@@ -68,7 +68,7 @@ brh-intelligence/
 │   ├── app.py                   ✅ real  (Streamlit dashboard)
 │   ├── DESIGN.md                ✅ real  (the style guide — binding)
 │   └── inventory/               ✅ real  (the crawl ledger → six findings)
-├── apps/web/            # Next.js   — blank canvas; Stitch rebuild in progress
+├── apps/web/            # Next.js   — Stitch navbar + hero; lower sections next
 ├── docs/                # ADRs, architecture, plan, runbook
 └── docker-compose.yml   # local Postgres
 ```

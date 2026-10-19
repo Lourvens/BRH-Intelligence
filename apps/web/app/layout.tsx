@@ -45,7 +45,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="fr" className={`${inter.variable} ${montserrat.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <a
+          href="#contenu"
+          className="sr-only rounded-full bg-navy px-4 py-2 text-small font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
+        >
+          Aller au contenu
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

@@ -2,10 +2,11 @@
 
 Next.js 16 (App Router) + React 19 + Tailwind v4.
 
-**Status: blank canvas for the Stitch rebuild.** The previous landing-page
-implementation was removed. `app/page.tsx` renders an empty `<main>`; the design
-system (tokens, fonts, BRH logo, button and citation-chip primitives) remains.
-The page will be rebuilt section by section from the next Stitch reference.
+**Status: Stitch navbar + hero implemented.** The previous landing-page
+implementation was removed and the page is being rebuilt from Stitch, one
+section at a time. The sticky navbar and the hero are now in place; the corpus,
+method and limits sections are intentionally still absent. The design system
+(tokens, fonts, BRH logo, button and citation-chip primitives) remains.
 
 ## Run
 
@@ -43,7 +44,11 @@ The landing page is rebuilt from Stitch references, one section at a time. When
 a new reference is supplied, record its project and screen IDs here before
 implementing it.
 
-- Current reference: **pending**.
+- Current reference: screen `296a96a976eb48cdb85d9cc1277275c0` —
+  *BRH Intelligence — Hero Section Réinventée* (desktop, 2560px).
+  Implemented: navbar + hero only. The HTML source was used as the layout
+  reference; copy that claimed live indexing, zero hallucination, confidence
+  scores or latency was replaced with corpus facts.
 - Previous redesign (removed): project `14932998564978548471`, desktop screen
   `401097e628ce48af966647703191c905`, mobile screen
   `8b717e14e701499da428e788e1ccc756`.
@@ -52,8 +57,12 @@ implementing it.
 
 | Path | State | Responsibility |
 |---|---|---|
-| `app/layout.tsx`, `app/globals.css` | ✅ | Fonts, metadata, design tokens, base styles |
-| `app/page.tsx` | ⬜ empty | Blank canvas; no page sections yet |
+| `app/layout.tsx`, `app/globals.css` | ✅ | Fonts, metadata, design tokens, base styles, dot-grid utilities |
+| `app/page.tsx` | ✅ navbar + hero | Stitch screen `296a…`; no lower sections yet |
+| `components/site-header.tsx` | ✅ | Sticky institutional navbar |
+| `components/home/hero.tsx` | ✅ | Hero shell, filter/search state and layout |
+| `components/home/hero/*` | ✅ | Search bar, image card, agent console, trust strip, content |
+| `public/brh-archive-vault.jpg` | ✅ | Stitch hero image, locally hosted |
 | `components/ui/button.tsx` | ✅ | Button primitive |
 | `components/ui/citation-chip.tsx` | ✅ | Citation primitive |
 | `lib/agent.ts` | ⬜ contract + stub | `AgentState`/`Citation` types and `useAgent()` |
@@ -61,9 +70,9 @@ implementing it.
 
 ## What to build
 
-1. **Landing sections** — implement the next Stitch reference one section at a
-   time. Add a component only when that section has a reference, and keep each
-   file under 250 lines.
+1. **Landing sections** — the navbar and hero are done; implement the next
+   Stitch reference sections one at a time. Add a component only when that
+   section has a reference, and keep each file under 250 lines.
 2. **`lib/agent.ts`** — wrap `useStream` from
    `@langchain/langgraph-sdk/react`, pointed at `NEXT_PUBLIC_LANGGRAPH_URL`.
    It returns `messages` (conversation), `values` (graph state, incl.

@@ -132,3 +132,21 @@
   line-height: 1.5;
   text-transform: uppercase;
 }
+
+/* Institutional dot grid used by the hero; the light variant sits on navy. */
+@utility dot-grid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-navy) 22%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+}
+
+@utility dot-grid-light {
+  background-image: radial-gradient(
+    color-mix(in srgb, white 30%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 20px 20px;
+}
+

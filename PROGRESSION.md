@@ -52,14 +52,18 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   machine shortlist, 27 pages, in `experiments/gold/documents/`, with
   `build_manifest.py` adopting them and reporting that **5 of the 13 classes are
   uncovered**. Not transcribed yet. No OCR code exists.
-- **The web landing page is a blank canvas (2026-10-19).** The previous
-  Stitch/Aceternity landing implementation was removed after it failed to take
-  effect as intended. `apps/web/app/page.tsx` renders an empty `<main>`; the
-  `components/home`, illustration, site-chrome and content-module trees are
-  gone. The design system stays — tokens/fonts/logo plus the button and
-  citation-chip primitives. The page will be rebuilt section by section from the
-  next Stitch reference; record each project/screen ID in `apps/web/README.md`
-  before implementing it. The chat, live citations and the PDF viewer follow.
+- **The web landing page is being rebuilt from Stitch (2026-10-19).** The old
+  landing implementation was reset to a blank canvas, then the sticky navbar and
+  hero were implemented from Stitch screen `296a96a976eb48cdb85d9cc1277275c0`
+  (*BRH Intelligence — Hero Section Réinventée*). The hero follows the reference:
+  centred badge/headline, filter-and-search card, image card, dark agent console
+  and trust strip. Components live in `components/home/hero/*` plus
+  `components/site-header.tsx`; every file is under 250 lines (largest:
+  `hero-console.tsx`, 242). The filter chips, quick examples and “Rejouer”
+  control are interactive; the corpus, method and limits sections do not exist
+  yet. Stitch’s “zero hallucination”, live-index, confidence and latency claims
+  were replaced with the real 34-document / 1 192-page sample and page-level
+  citations. The chat, live citations and the PDF viewer follow.
 
 ## Next up
 
@@ -73,6 +77,20 @@ Continue the build order:
    the files the inventory has already downloaded. Verify with `make ingest`.
 
 ## Recently done
+
+- **2026-10-19 — Stitch navbar + hero implemented.** Started from the blank
+  canvas and rebuilt the top of the page from screen
+  `296a96a976eb48cdb85d9cc1277275c0` (project `14932998564978548471`). The
+  sticky navbar uses the real BRH logo and the reference’s status/CTA layout.
+  The hero mirrors the Stitch HTML: centred badge and headline, filter/search
+  card, 5/7 split with a locally hosted archive image and a dark agent console,
+  then the four trust cards. Real corpus content: inflation `28,3 %` (p. 3),
+  BRH creation `17 août 1979` (p. 5), BIC `avril 2013` (p. 5), 34 transcribed
+  documents and 1 192 profiled pages. Removed the reference’s fabricated
+  confidence/latency/zero-hallucination/100%-coverage copy. Components split
+  under `components/home/hero/*`; every TS/TSX file is under 250 lines.
+  `bun run typecheck` and `bun run build` pass; desktop and 390px layouts checked
+  with `agent-browser`, including filter, quick-example and CTA interactions.
 
 - **2026-10-19 — Landing page reset to a blank canvas.** The prior
   Stitch/Aceternity implementation was deleted rather than layered over: all
