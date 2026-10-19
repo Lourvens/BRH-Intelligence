@@ -7,25 +7,32 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
-- **OCR extraction is running on a Modal GPU cluster (2026-10-19).** 84 of 116
-  documents are extracted (997 pages, 1.96 M chars, 132 figures) — PaddleOCR-VL
-  0.9B, `transformers` backend, chart recognition on. The batch is manifest →
-  per-document ledger → `document.md`; containers hold ≤ 50 pages each, and
-  `scripts/modal-pull.sh` downloads the volume and merges the per-document
-  ledgers into `data/ocr/state.jsonl`. Output is committed to git as it lands,
-  so the volume is a cache, not the only copy.
-  - Measured on real documents: **8.7 s/page** including model load, 6.6 s/page
-    on the 41-page document.
+- **OCR extraction is complete (2026-10-19).** All 116 documents — 1 192 pages,
+  2.50 M characters, 144 figures — are extracted and committed under `data/ocr/`.
+  PaddleOCR-VL 0.9B, `transformers` backend, chart recognition on. The pipeline is
+  manifest → per-document ledger → `document.md`; containers hold ≤ 50 pages each,
+  and `scripts/modal-pull.sh` downloads the volume and merges it with
+  `scripts/merge_ocr.py`. `scripts/verify_ocr.py` checks every document (contiguous
+  page markers, marker count vs `meta.json`, every image reference resolving) and
+  `scripts/purge_ocr.py` removes the scratch — `.work/`, `*.tmp`, `_ledger/` —
+  without touching a document. Both are safe to run repeatedly.
+  - Measured: 8.7 s/page overall, but dense statistical tables dominate — the
+    65-page `93cdb8c0` took 1 690 s (26 s/page, 733 K chars).
   - **Cost is pages × s/page × price, not concurrency.** Per page: L4 $0.0019,
     T4 $0.0019, A100-80GB $0.0083. A100 measured *slower* (9.4–14.7 s/page vs
-    L4's 7.2–10.1), so the default is now **L4 with 2 containers** — the A100
-    waves cost ~$7.8 for work that L4 would have done for ~$2.2.
+    L4's 7.2–10.1), so the default is **L4 with 2 containers** — the A100 waves
+    cost ~$7.8 for work that L4 would have done for ~$2.2.
+  - Two machines can share a corpus without duplicate work: `run --shard I/N`
+    and `BRH_SHARD=I/N` slice the same manifest order, disjoint by construction
+    (verified: 116 documents, 58 each, zero overlap). `--max-pages` bounds a
+    session; on Colab, `--out` should live on Google Drive so a disconnect costs
+    one document instead of the session.
   - Free Colab and Kaggle only offer T4 (compute 7.5), and PaddleOCR documents
     that vLLM is not recommended below 8.0 — L4/A100 are what make vLLM possible.
     The `transformers` engine and vLLM cannot share an environment, so that
     comparison needs its own image and a server/client split.
-  - A document that already has `document.md` is never redone, so re-dispatching,
-    chunking, or restarting costs nothing.
+  - A document that already has a non-empty `document.md` is never redone, so
+    re-dispatching, chunking, or restarting costs nothing.
 - **BRH inventory (front half) is implemented** — `make inventory` catalogues
   every PDF on `brh.ht` (the ledger lists the whole corpus, pending or resolved)
   and downloads the missing ones content-addressed into `data/raw/web/`.
