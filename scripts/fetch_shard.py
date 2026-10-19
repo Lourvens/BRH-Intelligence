@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 from brh_core.ingestion.fetch import NotAPdf, fetch_pdf
-from brh_core.ingestion.ocr import manifest_from_dir, write_manifest
+from brh_core.ingestion.ocr import ManifestItem, write_manifest
 
 
 def parse_shard(value: str) -> tuple[int, int]:
@@ -35,12 +35,25 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out-dir", required=True, type=Path)
     parser.add_argument("--manifest", required=True, type=Path)
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--skip-shas", default=None, type=Path,
+                        help="One sha256 per line; those documents are fetched and dropped.")
+    parser.add_argument("--skip-urls", default=None, type=Path,
+                        help="One URL per line; filtered out before downloading.")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
 
     index, total = parse_shard(args.shard)
     rows = [json.loads(line) for line in args.urls.read_text().splitlines() if line.strip()]
     shard = rows[index::total]
+    if args.skip_urls and args.skip_urls.is_file():
+        done_urls = {
+            line.strip()
+            for line in args.skip_urls.read_text().splitlines()
+            if line.strip()
+        }
+        before = len(shard)
+        shard = [row for row in shard if row["url"] not in done_urls]
+        print(f"  {before - len(shard)} url(s) already extracted, filtered before download")
     if args.limit:
         shard = shard[:args.limit]
 
@@ -53,10 +66,23 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
-    failures = 0
+    skip: set[str] = set()
+    if args.skip_shas and args.skip_shas.is_file():
+        skip = {line.strip() for line in args.skip_shas.read_text().splitlines() if line.strip()}
+        print(f"  skipping {len(skip)} already-extracted document(s)")
+
+    failures = skipped = 0
+    items: list[ManifestItem] = []
     for number, row in enumerate(shard, 1):
         try:
             digest, path = fetch_pdf(row["url"], args.out_dir)
+            if digest in skip:
+                # The bytes told us this document already exists somewhere else.
+                path.unlink(missing_ok=True)
+                skipped += 1
+                print(f"  [{number}/{len(shard)}] {digest[:8]} already extracted", flush=True)
+                continue
+            items.append(ManifestItem(sha256=digest, path=path))
             print(f"  [{number}/{len(shard)}] {digest[:8]} {path.stat().st_size // 1024} kB",
                   flush=True)
         except NotAPdf as error:
@@ -66,9 +92,9 @@ def main(argv: list[str] | None = None) -> int:
             failures += 1
             print(f"  [{number}/{len(shard)}] failed: {type(error).__name__}: {error}", flush=True)
 
-    items = manifest_from_dir(args.out_dir)
     write_manifest(items, args.manifest)
-    print(f"manifest {args.manifest}: {len(items)} document(s), {failures} fetch failure(s)")
+    print(f"manifest {args.manifest}: {len(items)} document(s), "
+          f"{skipped} already extracted, {failures} fetch failure(s)")
     return 1 if failures else 0
 
 

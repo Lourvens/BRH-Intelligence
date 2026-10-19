@@ -96,6 +96,7 @@ MOUNTS = {"/data": volume}
 PDFS = Path("/data/pdfs")
 OUT = Path("/data/ocr")
 LEDGER = OUT / "_ledger"
+URLMAP = Path("/data/urls")  # sha256 -> source URL, so a URL can be skipped before fetching
 
 
 def _is_done(doc_dir: Path) -> bool:
@@ -131,9 +132,23 @@ def _ocr_url(url: str, gpu: str, *, engine=None) -> dict:
     except Exception as error:
         return {"url": url, "status": "fetch-failed", "gpu": gpu,
                 "error": f"{type(error).__name__}: {error}"}
+    _record_url(digest, url)
     result = _ocr(digest, gpu, engine=engine)
     result["url"] = url
     return result
+
+
+def _record_url(digest: str, url: str) -> None:
+    """Remember which URL produced this hash.
+
+    Without it a shard can only learn a document is done *after* downloading it —
+    one wasted fetch per duplicate. With it, `export_done` hands every runner a
+    URL list that excludes finished work before any bytes move.
+    """
+    URLMAP.mkdir(parents=True, exist_ok=True)
+    path = URLMAP / digest
+    if not path.is_file():
+        path.write_text(url + "\n", encoding="utf-8")
 
 
 def _ocr(sha: str, gpu: str, *, engine=None, chart_recognition: bool = True,
@@ -458,6 +473,31 @@ def run(limit: int = 0) -> None:
               + ", ".join(f"{g[0][:8]} ({pages.get(g[0], 0)}p)" for g in over))
     ocr_group.spawn_map(groups)  # durable: run with --detach to close the terminal
     print("dispatched; follow with `modal run scripts/modal_ocr.py::status`")
+
+
+@app.function(volumes=MOUNTS, timeout=300)
+def _url_map() -> dict[str, str]:
+    mapping: dict[str, str] = {}
+    if URLMAP.is_dir():
+        for path in URLMAP.iterdir():
+            if path.is_file():
+                mapping[path.name] = path.read_text(encoding="utf-8").strip()
+    return mapping
+
+
+@app.local_entrypoint()
+def export_done() -> None:
+    """Write the two skip lists runners consume, from the volume's own state."""
+    entries = volume.listdir("/ocr", recursive=True)
+    done = {entry.path.split("/")[-2] for entry in entries
+            if entry.path.endswith("/document.md") and entry.size > 0}
+    (LOCAL_OCR / "done_shas.txt").write_text("\n".join(sorted(done)) + "\n", encoding="utf-8")
+
+    mapping = _url_map.remote()
+    urls = sorted({url for url in mapping.values() if url})
+    (LOCAL_OCR / "done_urls.txt").write_text("\n".join(urls) + "\n", encoding="utf-8")
+    print(f"{len(done)} document(s) -> done_shas.txt")
+    print(f"{len(urls)} source url(s) -> done_urls.txt")
 
 
 @app.local_entrypoint()
