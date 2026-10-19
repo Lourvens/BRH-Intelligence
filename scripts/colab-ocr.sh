@@ -48,7 +48,14 @@ python -c "import brh_core.ingestion.ocr as m; print('  brh_core ok:', m.__name_
 
 echo "== manifest"
 mkdir -p "$OUT_DIR"
-python -m brh_core.ingestion.ocr manifest --from-dir "$PDF_DIR" --out "$OUT_DIR/manifest.jsonl"
+# MANIFEST lets a page-balanced manifest from scripts/plan_batches.py be used
+# instead of rebuilding one from the directory (the order is what balances shards).
+if [ -n "${MANIFEST:-}" ]; then
+    echo "  using $MANIFEST"
+else
+    MANIFEST="$OUT_DIR/manifest.jsonl"
+    python -m brh_core.ingestion.ocr manifest --from-dir "$PDF_DIR" --out "$MANIFEST"
+fi
 
 EXTRA=()
 if [ -n "$SHARD" ]; then
@@ -62,7 +69,7 @@ fi
 
 echo "== batch"
 python -m brh_core.ingestion.ocr run \
-    --manifest "$OUT_DIR/manifest.jsonl" \
+    --manifest "$MANIFEST" \
     --out "$OUT_DIR" \
     ${DEVICE:+--device "$DEVICE"} \
     "${EXTRA[@]}" \

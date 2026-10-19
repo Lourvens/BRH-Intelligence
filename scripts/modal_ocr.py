@@ -275,7 +275,7 @@ def _shard_of(shas: list[str]) -> list[str]:
 
 def _remaining() -> list[str]:
     """Manifest hashes whose ``document.md`` is missing, empty, or absent."""
-    manifest = LOCAL_OCR / "manifest.jsonl"
+    manifest = Path(os.environ.get("BRH_MANIFEST", LOCAL_OCR / "manifest.jsonl"))
     wanted = [
         json.loads(line)["sha256"]
         for line in manifest.read_text().splitlines()

@@ -40,9 +40,14 @@ echo "== gpUs"
 python -c "import torch; print(' ', [torch.cuda.get_device_name(i) for i in range(torch.cuda.device_count())])"
 
 mkdir -p "$OUT_DIR/gpu0" "$OUT_DIR/gpu1"
-python -m brh_core.ingestion.ocr manifest --from-dir "$PDF_DIR" --out "$OUT_DIR/manifest.jsonl"
+if [ -n "${MANIFEST:-}" ]; then
+    echo "== using $MANIFEST"
+else
+    MANIFEST="$OUT_DIR/manifest.jsonl"
+    python -m brh_core.ingestion.ocr manifest --from-dir "$PDF_DIR" --out "$MANIFEST"
+fi
 
-common=(--manifest "$OUT_DIR/manifest.jsonl")
+common=(--manifest "$MANIFEST")
 [ -n "$DTYPE" ] && common+=(--dtype "$DTYPE")
 [ -n "$ATTN" ] && common+=(--attn "$ATTN")
 common+=("$@")

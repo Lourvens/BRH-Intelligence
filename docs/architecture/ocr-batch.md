@@ -210,6 +210,40 @@ compute capability 8.0. The remaining speed comes from hardware (L4 over T4, two
 cards instead of one) and from doing less work (text-layer extraction for
 born-digital pages), not from flags.
 
+## Running the next corpus
+
+`scripts/plan_batches.py` turns a manifest into the three-platform split and
+checks the rules before anything is spent:
+
+```bash
+uv run python scripts/plan_batches.py --shards 4 --emit data/ocr/batches
+```
+
+```
+corpus: 116 documents, 1192 pages
+shard  worker    docs  pages  largest
+0/4    modal       29    320       67   ! 67-page doc runs alone (>50 budget)
+1/4    colab       29    307       67
+2/4    kaggle      29    290       65
+3/4    kaggle      29    275       56
+```
+
+It sorts by page count before slicing. In manifest order a split put 373 pages on
+one worker and 148 on another — a wave waits on its slowest worker, so that
+imbalance is wall time for nothing. Size-sorted, the same four shards spread 14%.
+
+The emitted `manifest.balanced.jsonl` is the same documents in a different order,
+so every runner still takes `--shard I/N` and the sets stay disjoint.
+
+Merge when the three finish:
+
+```bash
+bash scripts/modal-pull.sh data/ocr
+uv run python scripts/merge_ocr.py --from <colab-or-kaggle-output>
+uv run python scripts/verify_ocr.py
+uv run python scripts/purge_ocr.py --apply --ledger
+```
+
 ## Sharding without coordination
 
 `--shard I/N` takes every N-th document starting at I. The split is a pure
