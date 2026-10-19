@@ -32,7 +32,13 @@ def _manifest() -> list[str]:
 
 
 def _present() -> set[str]:
-    return {entry.path.rsplit("/", 1)[-1] for entry in volume.listdir("/ocr", recursive=False)}
+    """Documents with a non-empty document.md — the only definition of extracted."""
+    entries = volume.listdir("/ocr", recursive=True)
+    return {
+        entry.path.split("/")[-2]
+        for entry in entries
+        if entry.path.endswith("/document.md") and entry.size > 0
+    }
 
 
 def _remaining() -> list[str]:

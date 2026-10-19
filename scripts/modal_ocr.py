@@ -25,6 +25,7 @@ or a chunk of one — never redoes work.
 from __future__ import annotations
 
 import json
+import os
 import time
 from pathlib import Path
 
@@ -36,8 +37,19 @@ LOCAL_DATA = ROOT / "data"
 LOCAL_OCR = LOCAL_DATA / "ocr"
 LOCAL_PDFS = LOCAL_DATA / "raw" / "web"
 
-BATCH_GPU = "A100-80GB"  # $2.50/h — requested; measured 9-15 s/page vs L4's 7-10
-MAX_CONTAINERS = 8  # Starter plan allows 10 concurrent GPUs
+# Cost is GPU-hours: pages x seconds-per-page, whatever the concurrency. Two
+# things actually reduce the bill, and both are set here:
+#   * the cheapest GPU that is also the fastest at batch size 1 — L4 measured
+#     7.2-10.1 s/page against A100's 9.4-14.7, at a third of the price;
+#   * few containers. Concurrency buys wall-clock, not savings, and every extra
+#     container pays another model load plus the post-run scaledown window.
+BATCH_GPU = os.environ.get("BRH_GPU", "L4")
+MAX_CONTAINERS = int(os.environ.get("BRH_MAX_CONTAINERS", "2"))
+SCALEDOWN_SECONDS = int(os.environ.get("BRH_SCALEDOWN", "10"))  # default is 60
+
+# Measured on this corpus, inference only (bench on 3 pages of two documents).
+MEASURED_S_PER_PAGE = {"L4": 8.6, "T4": 11.4, "A100-80GB": 12.0}
+GPU_PRICE_PER_HOUR = {"L4": 0.80, "T4": 0.59, "A100-80GB": 2.50}
 
 
 def _bake_models() -> None:
@@ -86,6 +98,25 @@ OUT = Path("/data/ocr")
 LEDGER = OUT / "_ledger"
 
 
+def _is_done(doc_dir: Path) -> bool:
+    """A document counts as extracted only when its markdown is complete.
+
+    Zero bytes means an interrupted write, not an empty document: treating it as
+    done would silently ship a blank page set, and re-OCR is far cheaper than
+    that. The atomic write in ``_ocr`` means readers never see a partial file,
+    but the size check also covers volumes written by older runs.
+    """
+    document = doc_dir / "document.md"
+    return document.is_file() and document.stat().st_size > 0
+
+
+def _write_atomic(path: Path, text: str) -> None:
+    """Write via a temporary neighbour and rename, so a kill never truncates."""
+    temporary = path.with_name(f".{path.name}.tmp")
+    temporary.write_text(text, encoding="utf-8")
+    temporary.replace(path)
+
+
 def _ocr(sha: str, gpu: str, *, engine=None, chart_recognition: bool = True,
          page_limit: int | None = None) -> dict:
     """OCR one document. ``page_limit`` turns it into a benchmark that writes nothing."""
@@ -98,7 +129,7 @@ def _ocr(sha: str, gpu: str, *, engine=None, chart_recognition: bool = True,
     started = time.time()
     pdf = PDFS / f"{sha}.pdf"
     doc_dir = OUT / sha
-    if page_limit is None and (doc_dir / "document.md").is_file():
+    if page_limit is None and _is_done(doc_dir):
         return {"sha": sha, "status": "skipped", "gpu": gpu}
 
     if not pdf.is_file():
@@ -142,7 +173,7 @@ def _ocr(sha: str, gpu: str, *, engine=None, chart_recognition: bool = True,
 
     doc_dir.mkdir(parents=True, exist_ok=True)
     markdown, figures = assemble(document, doc_dir)
-    (doc_dir / "document.md").write_text(markdown, encoding="utf-8")
+    _write_atomic(doc_dir / "document.md", markdown)
     meta = {
         "sha256": sha,
         "engine": document.engine,
@@ -155,7 +186,7 @@ def _ocr(sha: str, gpu: str, *, engine=None, chart_recognition: bool = True,
         "chart_recognition": chart_recognition,
         "finished_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
-    (doc_dir / "meta.json").write_text(json.dumps(meta, indent=1), encoding="utf-8")
+    _write_atomic(doc_dir / "meta.json", json.dumps(meta, indent=1))
 
     LEDGER.mkdir(parents=True, exist_ok=True)
     with (LEDGER / f"{sha}.jsonl").open("a", encoding="utf-8") as handle:
@@ -183,13 +214,24 @@ DOCS_PER_CONTAINER = 8  # fallback when a document has no recorded page count
 MAX_PAGES_PER_GROUP = 50  # hard cap per container; a longer single document runs alone
 
 
-@app.function(gpu=BATCH_GPU, timeout=3600, volumes=MOUNTS, max_containers=MAX_CONTAINERS, retries=2)
+@app.function(
+    gpu=BATCH_GPU,
+    timeout=3600,
+    volumes=MOUNTS,
+    max_containers=MAX_CONTAINERS,
+    scaledown_window=SCALEDOWN_SECONDS,
+    retries=2,
+)
 def ocr_group(shas: list[str]) -> list[dict]:
     """Several documents in one container: the model loads once."""
     from brh_core.ingestion.engines import PaddleOcrVlEngine
 
     engine = PaddleOcrVlEngine(chart_recognition=True)
-    return [_ocr(sha, BATCH_GPU, engine=engine) for sha in shas]
+    results = [_ocr(sha, BATCH_GPU, engine=engine) for sha in shas]
+    skipped = sum(1 for row in results if row["status"] == "skipped")
+    if skipped:
+        print(f"group: {skipped}/{len(results)} already extracted, not redone", flush=True)
+    return results
 
 
 # --- benchmarks -------------------------------------------------------------
@@ -214,14 +256,18 @@ def bench_a100(sha: str, pages: int = 3) -> dict:
 
 
 def _remaining() -> list[str]:
-    """Manifest hashes with no document directory in the volume."""
+    """Manifest hashes whose ``document.md`` is missing, empty, or absent."""
     manifest = LOCAL_OCR / "manifest.jsonl"
     wanted = [
         json.loads(line)["sha256"]
         for line in manifest.read_text().splitlines()
         if line.strip()
     ]
-    present = {entry.path.rsplit("/", 1)[-1] for entry in volume.listdir("/ocr", recursive=False)}
+    present = {
+        entry.path.split("/")[-2]
+        for entry in volume.listdir("/ocr", recursive=True)
+        if entry.path.endswith("/document.md") and entry.size > 0
+    }
     return [sha for sha in wanted if sha not in present]
 
 
@@ -297,6 +343,13 @@ def run(limit: int = 0) -> None:
     print(f"dispatching {len(batch)} of {len(remaining)} remaining documents "
           f"({total} pages) in {len(groups)} container(s) on {BATCH_GPU}, "
           f"max {MAX_CONTAINERS} at a time, <= {MAX_PAGES_PER_GROUP} pages each")
+    rate = MEASURED_S_PER_PAGE.get(BATCH_GPU)
+    price = GPU_PRICE_PER_HOUR.get(BATCH_GPU)
+    if rate and price:
+        gpu_hours = total * rate / 3600
+        print(f"  estimated {gpu_hours:.2f} GPU-hours = ${gpu_hours * price:.2f} "
+              f"(at {rate:.1f} s/page, ${price:.2f}/h); "
+              f"wall time about {gpu_hours / max(MAX_CONTAINERS, 1) * 60:.0f} min")
     if over:
         print(f"  {len(over)} container(s) hold a single document longer than "
               f"{MAX_PAGES_PER_GROUP} pages: "
