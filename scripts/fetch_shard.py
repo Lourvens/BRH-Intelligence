@@ -54,10 +54,11 @@ def main(argv: list[str] | None = None) -> int:
         before = len(shard)
         shard = [row for row in shard if row["url"] not in done_urls]
         print(f"  {before - len(shard)} url(s) already extracted, filtered before download")
-    if args.limit:
-        shard = shard[:args.limit]
+    # No pre-truncation here: `--limit` means *new* documents, and whether a
+    # document is new is only known after fetching and hashing it. Truncating
+    # first made a chunk refetch the same already-done URLs and deliver nothing.
 
-    print(f"shard {index}/{total}: {len(shard)} of {len(rows)} url(s)")
+    print(f"shard {index}/{total}: {len(shard)} url(s)")
     if args.dry_run:
         for row in shard[:10]:
             print(f"  {row['url']}")
@@ -74,6 +75,9 @@ def main(argv: list[str] | None = None) -> int:
     failures = skipped = 0
     items: list[ManifestItem] = []
     for number, row in enumerate(shard, 1):
+        if args.limit and len(items) >= args.limit:
+            print(f"  reached the {args.limit}-document limit")
+            break
         try:
             digest, path = fetch_pdf(row["url"], args.out_dir)
             if digest in skip:
