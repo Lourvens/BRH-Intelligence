@@ -98,3 +98,58 @@ export const bicGraph: TableArtifact = {
     },
   },
 };
+
+export const bicConsultationsChart: TableArtifact = {
+  type: "table",
+  id: "bic-consultations-2016-2022",
+  title: "Consultations du BIC, 2016—2022",
+  subtitle: "Rapports HIT et non-HIT · exercices annuels",
+  source: "BIC · Importance du Bureau de Crédit dans l’Économie, p. 6",
+  schema: {
+    columns: [
+      { key: "period", label: "Période", type: "string", role: "dimension" },
+      { key: "hit", label: "Consultations HIT", type: "number", role: "measure", format: "integer" },
+      { key: "nonHit", label: "Consultations non-HIT", type: "number", role: "measure", format: "integer" },
+    ],
+    rows: [
+      { period: "16-17", hit: 11103, nonHit: 8893 },
+      { period: "17-18", hit: 107166, nonHit: 44188 },
+      { period: "18-19", hit: 109313, nonHit: 24749 },
+      { period: "19-20", hit: 73681, nonHit: 13011 },
+      { period: "20-21", hit: 70084, nonHit: 16226 },
+      { period: "21-22", hit: 49423, nonHit: 13240 },
+    ],
+  },
+  decision: {
+    blockType: "chart",
+    chartType: "line",
+    x: "period",
+    y: ["hit", "nonHit"],
+    unit: "consultations",
+  },
+};
+
+export const servicePointsDonut: TableArtifact = {
+  type: "table",
+  id: "full-branches-2013",
+  title: "Agences complètes par type",
+  subtitle: "445 agences · décembre 2013",
+  source: "BRH · Stratégie Nationale d’Inclusion Financière, p. 9",
+  schema: {
+    columns: [
+      { key: "category", label: "Type", type: "category", role: "dimension" },
+      { key: "count", label: "Agences", type: "number", role: "measure", format: "integer" },
+    ],
+    rows: [
+      { category: "Banques", count: 175 },
+      { category: "Coopératives", count: 98 },
+      { category: "IMFs", count: 172 },
+    ],
+  },
+  decision: {
+    blockType: "chart",
+    chartType: "donut",
+    x: "category",
+    y: "count",
+  },
+};

@@ -39,3 +39,23 @@ export const cooperativesCitation: ChatCitation = {
   source: "Document d’information",
   kind: "Inclusion financière",
 };
+
+export const servicePointsCitation: ChatCitation = {
+  id: "inclusion-financiere-p9",
+  title: "Stratégie Nationale d’Inclusion Financière",
+  page: 9,
+  snippet:
+    "En décembre 2013, le système financier comptait 2 476 points de service, dont 445 agences complètes et 2 031 points de cash-in/cash-out.",
+  source: "BRH · Tableau des points de service",
+  kind: "Inclusion financière",
+};
+
+export const bicConsultationsCitation: ChatCitation = {
+  id: "bureau-credit-p6",
+  title: "Importance du Bureau de Crédit dans l’Économie",
+  page: 6,
+  snippet:
+    "Entre 2016-17 et 2021-22, les consultations HIT ont reculé de 107 166 à 49 423, tandis que les consultations non-HIT sont passées de 44 188 à 13 240.",
+  source: "BIC · Historique des consultations",
+  kind: "Crédit",
+};

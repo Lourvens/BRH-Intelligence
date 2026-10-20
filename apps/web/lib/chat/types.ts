@@ -26,13 +26,13 @@ export type TableColumn = {
 
 export type TableRow = Record<string, string | number | null>;
 
-export type ChartType = "line" | "bar" | "area";
+export type ChartType = "line" | "bar" | "area" | "pie" | "donut" | "scatter";
 
 export type UIDecision = {
   blockType: "chart" | "graph" | "table";
   chartType?: ChartType;
   x?: string;
-  y?: string;
+  y?: string | string[];
   unit?: string;
   graph?: {
     source: string;

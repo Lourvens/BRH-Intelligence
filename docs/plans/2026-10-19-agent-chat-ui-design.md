@@ -68,7 +68,8 @@ Artifacts are data-first, not chart-first:
 
 - `TableArtifact` carries columns, rows, provenance and a JSON `UIDecision`.
 - The decision model (Jev-compatible contract) selects `blockType` and, for
-  charts, `chartType` (`line`, `bar`, `area`) plus `x`/`y` bindings.
+  charts, `chartType` (`line`, `bar`, `area`, `pie`, `donut`, `scatter`) plus
+  `x`/`y` bindings. `y` may be one column or several for multi-line charts.
 - `resolveArtifactBlock` validates the decision against the table schema:
   invalid or incomplete decisions fall back to a semantic table.
 - `chartPoints` and `graphData` derive render data from rows. The graph is built

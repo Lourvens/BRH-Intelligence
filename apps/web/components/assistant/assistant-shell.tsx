@@ -2,10 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { suggestedQuestions } from "@/lib/chat/suggestions";
+
 import {
   demoThreads,
   findDemoAnswer,
-  suggestedQuestions,
 } from "@/lib/chat/demo";
 import type { ChatThread } from "@/lib/chat/types";
 

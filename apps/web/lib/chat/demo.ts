@@ -1,16 +1,23 @@
 import {
   bicCitation,
+  bicConsultationsCitation,
   brhCitation,
   cooperativesCitation,
   inflationCitation,
+  servicePointsCitation,
 } from "./citations";
-import { bicGraph, inflationChart } from "./artifacts";
+import {
+  bicConsultationsChart,
+  bicGraph,
+  inflationChart,
+  servicePointsDonut,
+} from "./artifacts";
+import { chartGallery } from "./gallery";
 import type {
   ChatArtifact,
   ChatCitation,
   ChatMessage,
   ChatThread,
-  SuggestedQuestion,
 } from "./types";
 
 function assistant(
@@ -119,33 +126,62 @@ export const demoThreads: ChatThread[] = [
       },
     ],
   },
-];
-
-export const suggestedQuestions: SuggestedQuestion[] = [
   {
-    id: "inflation",
-    category: "Inflation",
-    question: "Quel était le taux d’inflation annuel en novembre 2025 ?",
-    threadId: "inflation-nov-2025",
+    id: "bic-consultations",
+    title: "Consultations du BIC",
+    updatedAt: "6 oct.",
+    group: "Cette semaine",
+    messages: [
+      {
+        id: "bic-consultations-q",
+        role: "user",
+        content: "Comment ont évolué les consultations de rapports de crédit du BIC ?",
+      },
+      assistant(
+        "bic-consultations-a",
+        "Entre 2016-17 et 2021-22, les consultations HIT ont reculé de 107 166 à 49 423, tandis que les consultations non-HIT sont passées de 44 188 à 13 240.",
+        [bicConsultationsCitation],
+        [bicConsultationsChart],
+      ),
+    ],
   },
   {
-    id: "brh",
-    category: "Institution",
-    question: "Quand la BRH a-t-elle été créée ?",
-    threadId: "creation-brh",
+    id: "service-points",
+    title: "Agences complètes",
+    updatedAt: "5 oct.",
+    group: "Cette semaine",
+    messages: [
+      {
+        id: "service-points-q",
+        role: "user",
+        content: "Comment se répartissent les agences complètes du système financier ?",
+      },
+      assistant(
+        "service-points-a",
+        "En décembre 2013, le système financier comptait 445 agences complètes : 175 banques, 98 coopératives et 172 institutions de microfinance.",
+        [servicePointsCitation],
+        [servicePointsDonut],
+      ),
+    ],
   },
   {
-    id: "cooperatives",
-    category: "Inclusion financière",
-    question:
-      "Combien de coopératives d’épargne et de crédit la BRH supervise-t-elle ?",
-    threadId: "cooperatives",
-  },
-  {
-    id: "bic",
-    category: "Crédit",
-    question: "Quand le Bureau d’Information sur le Crédit a-t-il vu le jour ?",
-    threadId: "bureau-credit",
+    id: "chart-gallery",
+    title: "Galerie de graphiques",
+    updatedAt: "4 oct.",
+    group: "Cette semaine",
+    messages: [
+      {
+        id: "chart-gallery-q",
+        role: "user",
+        content: "Montre-moi les types de graphiques disponibles.",
+      },
+      assistant(
+        "chart-gallery-a",
+        "Aperçu des visualisations générées à partir des tables du corpus : courbe, aire, barres, camembert et donut. Les données restent celles du document source.",
+        [inflationCitation, servicePointsCitation],
+        chartGallery,
+      ),
+    ],
   },
 ];
 
@@ -165,8 +201,20 @@ const matchRules = [
   { threadId: "creation-brh", words: ["création", "créée", "1979", "bnrh"] },
   { threadId: "bureau-credit", words: ["bureau", "crédit", "bic", "2013"] },
   {
+    threadId: "bic-consultations",
+    words: ["consultation", "consultations", "hit", "non-hit"],
+  },
+  {
+    threadId: "service-points",
+    words: ["point de service", "points de service", "agences", "banques", "imf"],
+  },
+  {
     threadId: "cooperatives",
     words: ["coopérative", "coopératives", "97", "inclusion"],
+  },
+  {
+    threadId: "chart-gallery",
+    words: ["graphique", "graphiques", "visualisation", "galerie", "camembert"],
   },
 ];
 

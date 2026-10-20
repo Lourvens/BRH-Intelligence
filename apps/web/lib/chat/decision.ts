@@ -15,6 +15,22 @@ export type GraphViewEdge = {
   label?: string;
 };
 
+export type ChartSeries = {
+  key: string;
+  label: string;
+  color: string;
+  points: { label: string; value: number }[];
+};
+
+const SERIES_COLORS = [
+  "var(--color-navy)",
+  "var(--color-azure)",
+  "var(--color-gold-ink)",
+  "var(--color-purple)",
+  "var(--color-teal)",
+  "var(--color-steel)",
+];
+
 function keysOf(artifact: TableArtifact) {
   return new Set(artifact.schema.columns.map((column) => column.key));
 }
@@ -36,13 +52,14 @@ export function resolveArtifactBlock(artifact: TableArtifact): ResolvedBlock {
   const decision = artifact.decision;
 
   if (decision.blockType === "chart") {
-    const points = chartPoints(artifact);
+    const yKeys = Array.isArray(decision.y) ? decision.y : decision.y ? [decision.y] : [];
+    const series = chartSeries(artifact);
     if (
       decision.x &&
-      decision.y &&
+      yKeys.length > 0 &&
       keys.has(decision.x) &&
-      keys.has(decision.y) &&
-      points.length > 0
+      yKeys.every((key) => keys.has(key)) &&
+      series.some((item) => item.points.length > 0)
     ) {
       return "chart";
     }
@@ -62,25 +79,44 @@ export function resolveArtifactBlock(artifact: TableArtifact): ResolvedBlock {
   return "table";
 }
 
-export function chartPoints(artifact: TableArtifact) {
-  const { x, y } = artifact.decision;
-  if (!x || !y) return [];
+export function chartYKeys(artifact: TableArtifact) {
+  const { y } = artifact.decision;
+  if (Array.isArray(y)) return y;
+  return y ? [y] : [];
+}
 
-  return artifact.schema.rows
-    .map((row) => {
-      const label = cell(row, x);
-      const value = numberCell(row, y);
-      if (!label || Number.isNaN(value)) return null;
-      return { label, value };
-    })
-    .filter((point): point is { label: string; value: number } => point != null);
+export function chartSeries(artifact: TableArtifact): ChartSeries[] {
+  const { x } = artifact.decision;
+  if (!x) return [];
+
+  return chartYKeys(artifact).map((key, index) => {
+    const column = artifact.schema.columns.find((item) => item.key === key);
+    const points = artifact.schema.rows
+      .map((row) => {
+        const label = cell(row, x);
+        const value = numberCell(row, key);
+        if (!label || Number.isNaN(value)) return null;
+        return { label, value };
+      })
+      .filter((point): point is { label: string; value: number } => point != null);
+
+    return {
+      key,
+      label: column?.label ?? key,
+      color: SERIES_COLORS[index % SERIES_COLORS.length],
+      points,
+    };
+  });
+}
+
+export function chartPoints(artifact: TableArtifact) {
+  return chartSeries(artifact)[0]?.points ?? [];
 }
 
 export function chartUnit(artifact: TableArtifact) {
   if (artifact.decision.unit) return artifact.decision.unit;
-  const y = artifact.schema.columns.find(
-    (column) => column.key === artifact.decision.y,
-  );
+  const yKey = chartYKeys(artifact)[0];
+  const y = artifact.schema.columns.find((column) => column.key === yKey);
   return y?.format === "percent" ? "%" : "";
 }
 

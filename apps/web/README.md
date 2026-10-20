@@ -49,6 +49,8 @@ Agent visual output is data-first:
   charts, `chartType` (`line`, `bar`, `area`) plus `x`/`y` column keys.
 - `resolveArtifactBlock` validates the decision against the schema; invalid
   decisions fall back to a semantic table.
+- Chart types: line (including multiple series), bar, area, pie, donut and
+  scatter. The renderer accepts one or more `y` columns.
 - `graphData` builds nodes and edges from edge-source/edge-target columns, so
   graphs are generated from the table, not hand-authored nodes.
 

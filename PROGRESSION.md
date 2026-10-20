@@ -100,9 +100,11 @@ Continue the build order:
   drawers. Assistant messages support inline source markers plus generated
   **chart** and **graph** artifacts. Artifacts use a table schema + JSON
   `UIDecision` contract (`lib/chat/decision.ts`): the decision chooses table,
-  chart type or graph; charts/graphs derive from rows, and invalid decisions
-  fall back to a table. Added the hybrid Open Intelligent UI routing contract
-  (`lib/chat/open-intelligent-ui.ts`): table → A2UI, chart/graph → Open
+  chart type (line, multi-line, bar, area, pie, donut, scatter) or graph;
+  charts/graphs derive from rows, and invalid decisions fall back to a table.
+  Added a demo gallery thread covering area, pie and bar next to the line,
+  multi-line and donut examples. Added the hybrid Open Intelligent UI routing
+  contract (`lib/chat/open-intelligent-ui.ts`): table → A2UI, chart/graph → Open
   Generative UI, disabled by default. The page runs on local demo transcripts in
   `lib/chat/*` (clearly marked “Démo”); `lib/agent.ts` wraps the LangGraph
   `useStream` hook. Landing header and closing CTA link to the new page. Added
