@@ -2,18 +2,28 @@
 
 import { useEffect, useRef, useState } from "react";
 
-import { suggestedQuestions } from "@/lib/chat/suggestions";
-
 import {
-  demoThreads,
-  findDemoAnswer,
-} from "@/lib/chat/demo";
+  Sidebar,
+  SidebarInset,
+  SidebarProvider,
+} from "@/components/ui/sidebar";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { demoThreads, findDemoAnswer } from "@/lib/chat/demo";
+import { suggestedQuestions } from "@/lib/chat/suggestions";
 import type { ChatThread } from "@/lib/chat/types";
+import { cn } from "@/lib/utils";
 
 import { ChatHeader } from "./chat-header";
 import { ChatPanel } from "./chat-panel";
-import { Sidebar } from "./sidebar";
+import { ConversationSidebar } from "./sidebar";
 import { SourcesPanel } from "./sources-panel";
+import { SourcesRail } from "./sources-rail";
 
 export function AssistantShell() {
   const [threads, setThreads] = useState<ChatThread[]>(demoThreads);
@@ -22,14 +32,30 @@ export function AssistantShell() {
     null,
   );
   const [isThinking, setIsThinking] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sourcesOpen, setSourcesOpen] = useState(false);
+  const [sourcesCollapsed, setSourcesCollapsed] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
+  }, []);
+
+  useEffect(() => {
+    function handleShortcut(event: KeyboardEvent) {
+      if (
+        (event.metaKey || event.ctrlKey) &&
+        event.key.toLowerCase() === "j" &&
+        window.matchMedia("(min-width: 1280px)").matches
+      ) {
+        event.preventDefault();
+        setSourcesCollapsed((current) => !current);
+      }
+    }
+
+    window.addEventListener("keydown", handleShortcut);
+    return () => window.removeEventListener("keydown", handleShortcut);
   }, []);
 
   const activeThread =
@@ -46,14 +72,12 @@ export function AssistantShell() {
     const firstCitation = thread?.messages.flatMap((m) => m.citations ?? [])[0];
     setActiveThreadId(threadId);
     setSelectedCitationId(firstCitation?.id ?? null);
-    setSidebarOpen(false);
     setSourcesOpen(false);
   }
 
   function newThread() {
     setActiveThreadId(null);
     setSelectedCitationId(null);
-    setSidebarOpen(false);
     setSourcesOpen(false);
   }
 
@@ -132,24 +156,20 @@ export function AssistantShell() {
   }
 
   return (
-    <div
-      id="contenu"
-      className="flex h-dvh overflow-hidden bg-bg text-ink"
-    >
-      <aside className="hidden w-[280px] shrink-0 border-r border-border bg-surface lg:block">
-        <Sidebar
+    <SidebarProvider className="h-dvh overflow-hidden">
+      <Sidebar collapsible="icon" className="border-r border-border">
+        <ConversationSidebar
           threads={threads}
           activeThreadId={activeThreadId}
           onSelectThread={selectThread}
           onNewThread={newThread}
         />
-      </aside>
+      </Sidebar>
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      <SidebarInset className="min-h-0 overflow-hidden bg-bg">
         <ChatHeader
           title={activeThread?.title ?? "Nouvelle conversation"}
           citationCount={citations.length}
-          onOpenSidebar={() => setSidebarOpen(true)}
           onOpenSources={() => setSourcesOpen(true)}
         />
         <div className="flex min-h-0 flex-1">
@@ -163,54 +183,49 @@ export function AssistantShell() {
             onSubmit={submitQuestion}
             onStop={stopThinking}
           />
-          <aside className="hidden w-[320px] shrink-0 border-l border-border xl:block">
-            <SourcesPanel
-              citations={citations}
-              selected={selectedCitation}
-              onSelect={selectCitation}
-            />
+          <aside
+            className={cn(
+              "hidden shrink-0 border-l border-border xl:flex",
+              sourcesCollapsed ? "w-12" : "w-[320px]",
+            )}
+          >
+            {sourcesCollapsed ? (
+              <SourcesRail
+                count={citations.length}
+                onOpen={() => setSourcesCollapsed(false)}
+              />
+            ) : (
+              <SourcesPanel
+                citations={citations}
+                selected={selectedCitation}
+                onSelect={selectCitation}
+                onCollapse={() => setSourcesCollapsed(true)}
+              />
+            )}
           </aside>
         </div>
-      </div>
+      </SidebarInset>
 
-      {sidebarOpen ? (
-        <div className="fixed inset-0 z-50 flex lg:hidden">
-          <button
-            type="button"
-            aria-label="Fermer les conversations"
-            onClick={() => setSidebarOpen(false)}
-            className="absolute inset-0 bg-navy/30 backdrop-blur-sm"
+      <Sheet open={sourcesOpen} onOpenChange={setSourcesOpen}>
+        <SheetContent
+          side="right"
+          showCloseButton={false}
+          className="w-[min(320px,90vw)] gap-0 p-0 sm:max-w-[360px]"
+        >
+          <SheetHeader className="sr-only">
+            <SheetTitle>Sources documentaires</SheetTitle>
+            <SheetDescription>
+              Les documents et pages qui soutiennent la réponse.
+            </SheetDescription>
+          </SheetHeader>
+          <SourcesPanel
+            citations={citations}
+            selected={selectedCitation}
+            onSelect={selectCitation}
+            onClose={() => setSourcesOpen(false)}
           />
-          <aside className="relative z-10 h-full w-[min(280px,88vw)] bg-surface shadow-2xl">
-            <Sidebar
-              threads={threads}
-              activeThreadId={activeThreadId}
-              onSelectThread={selectThread}
-              onNewThread={newThread}
-              onClose={() => setSidebarOpen(false)}
-            />
-          </aside>
-        </div>
-      ) : null}
-
-      {sourcesOpen ? (
-        <div className="fixed inset-0 z-50 flex justify-end xl:hidden">
-          <button
-            type="button"
-            aria-label="Fermer les sources"
-            onClick={() => setSourcesOpen(false)}
-            className="absolute inset-0 bg-navy/30 backdrop-blur-sm"
-          />
-          <aside className="relative z-10 h-full w-[min(320px,90vw)] shadow-2xl">
-            <SourcesPanel
-              citations={citations}
-              selected={selectedCitation}
-              onSelect={selectCitation}
-              onClose={() => setSourcesOpen(false)}
-            />
-          </aside>
-        </div>
-      ) : null}
-    </div>
+        </SheetContent>
+      </Sheet>
+    </SidebarProvider>
   );
 }

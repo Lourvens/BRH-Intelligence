@@ -1,76 +1,63 @@
-import Link from "next/link";
-import type { ComponentProps } from "react";
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { cn } from "@/lib/utils"
+import { Slot } from "radix-ui"
 
-import { cn } from "@/lib/utils";
+const buttonVariants = cva(
+  "inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:bg-destructive/60 dark:focus-visible:ring-destructive/40",
+        outline:
+          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost:
+          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2 has-[>svg]:px-3",
+        xs: "h-6 gap-1 rounded-md px-2 text-xs has-[>svg]:px-1.5 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-8 gap-1.5 rounded-md px-3 has-[>svg]:px-2.5",
+        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        icon: "size-9",
+        "icon-xs": "size-6 rounded-md [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-8",
+        "icon-lg": "size-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
 
-type Variant = "primary" | "secondary" | "ghost" | "gold";
-type Size = "sm" | "md" | "lg";
-
-const base =
-  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:pointer-events-none disabled:opacity-50";
-
-const variants: Record<Variant, string> = {
-  primary: "bg-navy text-white hover:bg-navy-deep",
-  secondary:
-    "border border-border bg-surface text-navy hover:border-navy/25 hover:bg-surface-alt",
-  ghost: "text-navy hover:bg-surface-alt",
-  // Gold is a fill colour only. Navy on gold stays readable; never gold on white.
-  // The white focus ring assumes the gold button sits on the navy CTA band.
-  gold:
-    "bg-gold text-navy hover:brightness-95 focus-visible:ring-white focus-visible:ring-offset-navy-deep",
-};
-
-const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-caption",
-  md: "h-11 px-5 text-small",
-  lg: "h-12 px-6 text-body",
-};
-
-export function buttonClasses({
-  variant = "primary",
-  size = "md",
+function Button({
   className,
-}: {
-  variant?: Variant;
-  size?: Size;
-  className?: string;
-} = {}) {
-  return cn(base, variants[variant], sizes[size], className);
-}
-
-type ButtonProps = ComponentProps<"button"> & {
-  variant?: Variant;
-  size?: Size;
-};
-
-export function Button({
-  className,
-  variant,
-  size,
-  type = "button",
+  variant = "default",
+  size = "default",
+  asChild = false,
   ...props
-}: ButtonProps) {
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean
+  }) {
+  const Comp = asChild ? Slot.Root : "button"
+
   return (
-    <button
-      type={type}
-      className={buttonClasses({ variant, size, className })}
+    <Comp
+      data-slot="button"
+      data-variant={variant}
+      data-size={size}
+      className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
-  );
+  )
 }
 
-type ButtonLinkProps = ComponentProps<typeof Link> & {
-  variant?: Variant;
-  size?: Size;
-};
-
-export function ButtonLink({
-  className,
-  variant,
-  size,
-  ...props
-}: ButtonLinkProps) {
-  return (
-    <Link className={buttonClasses({ variant, size, className })} {...props} />
-  );
-}
+export { Button, buttonVariants }

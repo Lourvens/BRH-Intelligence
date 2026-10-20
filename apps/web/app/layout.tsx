@@ -17,6 +17,23 @@ const montserrat = localFont({
   weight: "100 900",
 });
 
+const sourceSerif = localFont({
+  src: [
+    {
+      path: "./fonts/source-serif-4-latin.woff2",
+      weight: "200 900",
+      style: "normal",
+    },
+    {
+      path: "./fonts/source-serif-4-italic-latin.woff2",
+      weight: "200 900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-source-serif",
+  display: "swap",
+});
+
 const description =
   "Posez vos questions sur les publications officielles de la Banque de la République d'Haïti. Réponses en français, avec le document et la page exacte.";
 
@@ -44,7 +61,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${inter.variable} ${montserrat.variable}`}>
+    <html
+      lang="fr"
+      className={`${inter.variable} ${montserrat.variable} ${sourceSerif.variable}`}
+    >
       <body className="antialiased">
         <a
           href="#contenu"

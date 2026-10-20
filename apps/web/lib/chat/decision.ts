@@ -22,7 +22,7 @@ export type ChartSeries = {
   points: { label: string; value: number }[];
 };
 
-const SERIES_COLORS = [
+export const SERIES_COLORS = [
   "var(--color-navy)",
   "var(--color-azure)",
   "var(--color-gold-ink)",

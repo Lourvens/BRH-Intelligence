@@ -3,6 +3,8 @@
 import { ArrowUp, Loader2, Search, ShieldCheck, Square } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import type { ChatThread, SuggestedQuestion } from "@/lib/chat/types";
 
 import { EmptyState } from "./empty-state";
@@ -106,7 +108,7 @@ export function ChatPanel({
       <div className="shrink-0 border-t border-border bg-bg/95 px-4 py-3 backdrop-blur sm:px-6 sm:py-4">
         <div className="mx-auto max-w-[820px]">
           <div className="rounded-2xl border border-border bg-surface p-2 shadow-sm transition-colors focus-within:border-navy/30">
-            <textarea
+            <Textarea
               ref={textareaRef}
               value={draft}
               rows={1}
@@ -117,9 +119,9 @@ export function ChatPanel({
                   handleSubmit();
                 }
               }}
-              placeholder="Posez une question sur la BRH…"
+              placeholder="Posez une question sur la BRH (circulaires, politique monétaire, conjoncture, BIC)…"
               aria-label="Votre question"
-              className="min-h-[48px] max-h-36 w-full resize-none bg-transparent px-3 py-2.5 text-small text-ink outline-none placeholder:text-ink-muted/70"
+              className="min-h-[48px] max-h-36 resize-none border-0 bg-transparent px-3 py-2.5 text-small text-ink shadow-none field-sizing-fixed focus-visible:border-transparent focus-visible:ring-0"
             />
             <div className="flex items-center justify-between gap-3 px-2 pb-0.5">
               <span className="hidden text-[10px] text-ink-muted sm:inline">
@@ -130,24 +132,27 @@ export function ChatPanel({
               </span>
 
               {isThinking ? (
-                <button
+                <Button
                   type="button"
+                  variant="outline"
+                  size="sm"
                   onClick={onStop}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface px-2.5 py-1.5 text-[11px] font-medium text-ink-muted transition-colors hover:bg-surface-alt"
+                  className="gap-1.5 rounded-lg border-border bg-surface px-2.5 text-[11px] font-medium text-ink-muted hover:bg-surface-alt"
                 >
                   <Square className="size-3 fill-current" aria-hidden />
                   Arrêter
-                </button>
+                </Button>
               ) : (
-                <button
+                <Button
                   type="button"
+                  size="icon"
                   onClick={handleSubmit}
                   disabled={!draft.trim()}
                   aria-label="Envoyer la question"
-                  className="grid size-9 place-items-center rounded-xl bg-navy text-white shadow-sm transition-colors hover:bg-navy-deep disabled:cursor-not-allowed disabled:opacity-40"
+                  className="size-9 rounded-xl bg-navy text-white shadow-sm hover:bg-navy-deep disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <ArrowUp className="size-4" aria-hidden />
-                </button>
+                </Button>
               )}
             </div>
           </div>

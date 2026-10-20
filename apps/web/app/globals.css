@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 /*
  * BRH design system.
@@ -62,6 +63,36 @@
 @theme inline {
   --font-sans: var(--type-sans);
   --font-display: var(--type-display);
+  --font-reading: var(--type-reading);
+
+  /* shadcn/ui aliases: keep every primitive on the BRH palette. */
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-ink);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-ink);
+  --color-popover: var(--color-surface);
+  --color-popover-foreground: var(--color-ink);
+  --color-primary: var(--color-navy);
+  --color-primary-foreground: var(--color-surface);
+  --color-secondary: var(--color-surface-alt);
+  --color-secondary-foreground: var(--color-navy);
+  --color-muted: var(--color-surface-alt);
+  --color-muted-foreground: var(--color-ink-muted);
+  --color-accent: var(--color-surface-alt);
+  --color-accent-foreground: var(--color-navy);
+  --color-destructive: var(--color-scarlet);
+  --color-destructive-foreground: var(--color-surface);
+  --color-input: var(--color-border);
+  --color-ring: var(--color-azure);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
 }
 
 :root {
@@ -69,6 +100,15 @@
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --type-display: var(--font-montserrat), ui-sans-serif, system-ui,
     -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --type-reading: var(--font-source-serif), Georgia, "Times New Roman", serif;
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-ink);
+  --sidebar-primary: var(--color-navy);
+  --sidebar-primary-foreground: var(--color-surface);
+  --sidebar-accent: var(--color-surface-alt);
+  --sidebar-accent-foreground: var(--color-navy);
+  --sidebar-border: var(--color-border);
+  --sidebar-ring: var(--color-azure);
 }
 
 @layer base {
@@ -82,6 +122,7 @@
     background-color: var(--color-bg);
     color: var(--color-ink);
     font-family: var(--type-sans);
+    font-optical-sizing: auto;
     font-variant-numeric: tabular-nums;
     text-rendering: optimizeLegibility;
   }

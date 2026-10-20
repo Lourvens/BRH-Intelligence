@@ -26,4 +26,17 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     question: "Quand le Bureau d’Information sur le Crédit a-t-il vu le jour ?",
     threadId: "bureau-credit",
   },
+  {
+    id: "synthese",
+    category: "Synthèse",
+    question: "Génère une note de synthèse longue sur les publications de la BRH.",
+    threadId: "note-de-synthese",
+  },
+  {
+    id: "arbre",
+    category: "Graphe",
+    question:
+      "Montre-moi l’arbre institutionnel qui relie la BRH, le BIC et les indicateurs du corpus.",
+    threadId: "institution-tree",
+  },
 ];

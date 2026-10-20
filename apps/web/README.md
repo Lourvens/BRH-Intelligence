@@ -28,9 +28,9 @@ and its palette. The web app ports it rather than inventing a second style:
 | Where | What |
 |---|---|
 | `app/globals.css` | Colour, type, radius and shadow tokens. The only place a hex is written. |
-| `app/fonts/` | Self-hosted Montserrat + Inter (SIL OFL, latin subset) — no build-time network. |
+| `app/fonts/` | Self-hosted Montserrat, Inter and Source Serif 4 (SIL OFL, latin subset) — no build-time network. |
 | `public/brh-logo.png` | The original BRH mark (251×123). Never recolour or stretch it. |
-| `components/ui/button.tsx` | Primary / secondary / ghost / gold buttons. |
+| `components/ui/*` | shadcn/ui primitives (`sidebar`, `tabs`, `card`, `button`, `sheet`, `tooltip`, …). |
 | `components/ui/citation-chip.tsx` | The source chip the chat will reuse. |
 
 Rules worth repeating: `navy` leads, `gold` is a **fill only** (use `gold-ink`
@@ -40,14 +40,23 @@ figures. All UI files stay **under 250 lines**.
 The type scale is named (`text-micro` → `text-hero`) and `lib/utils.ts` teaches
 `tailwind-merge` about it, so a size class never swallows a text colour.
 
+Type roles: **Montserrat** for display, **Inter** for UI and chart labels,
+**Source Serif 4** (`font-reading`) for long-form reading — assistant answers,
+document artifacts, blockquotes and source excerpts. Keep reading text at
+15–16px with a ~1.7 line-height.
+
 ## UI libraries
 
-Charts use **visx** by default (brand-critical, up to six series), or
-**Apache ECharts** when the task needs dense data, many chart types, or advanced
-interaction. Components use **shadcn/ui** (`components.json`, new-york, Tailwind
-v4); install with `bunx shadcn@latest add <component>`. The existing custom SVG
-chart files are legacy and must be migrated on touch. See the binding rules in
-`AGENTS.md` and query Context7 for unfamiliar visx/ECharts/shadcn APIs.
+Charts use **visx** for brand-critical, low-density bespoke work, or
+**Apache ECharts** when the task needs many chart types, dense data, or advanced
+interaction. The assistant chart renderer is ECharts; graphs detect trees and
+use ECharts `tree`, fall back to ECharts `graph` for DAGs/cycles, and offer a
+lazy-loaded **Mermaid** flowchart in a shadcn `Tabs` switcher. Charts and graphs
+open a shadcn `Dialog` focus mode from the **Agrandir** button. Components use
+**shadcn/ui** (`components.json`, new-york, Tailwind v4); install with
+`bunx shadcn@latest add <component>`. Do not add custom SVG chart paths. See the
+binding rules in `AGENTS.md` and query Context7 for unfamiliar
+visx/ECharts/Mermaid/shadcn APIs.
 
 ## Assistant artifacts
 
@@ -61,7 +70,10 @@ Agent visual output is data-first:
 - Chart types: line (including multiple series), bar, area, pie, donut and
   scatter. The renderer accepts one or more `y` columns.
 - `graphData` builds nodes and edges from edge-source/edge-target columns, so
-  graphs are generated from the table, not hand-authored nodes.
+  graphs are generated from the table, not hand-authored nodes. Graph artifacts
+  detect trees (`lib/chat/graph.ts`) and expose **Arbre** (ECharts tree),
+  **Réseau** (draggable/zoomable ECharts graph) and **Diagramme** (Mermaid
+  flowchart) views behind shadcn `Tabs`.
 - The message renders a collapsed **Décision de présentation** card with the
   JSON decision, so the renderer choice is inspectable.
 
@@ -87,8 +99,15 @@ implementing it.
   footer. The navbar keeps the BRH product nav but points at the new anchors.
 - Assistant reference: screen `81afab0033054e6d9c1f58636ea87fb8` —
   *BRH Intelligence — Assistant Documentaire Chat Workspace* (desktop, 2560px).
-  Implemented as the `/assistant` three-pane workspace, with a custom chart
-  sheet, source inspector, decision card and mobile drawers.
+  Implemented as the `/assistant` three-pane workspace, with ECharts artifacts,
+  source inspector, decision card and mobile drawers.
+- Collapsible rails exploration: screen
+  `1dcc653cdff9474297b37ef2d5d12c99` — *BRH Intelligence — Exploration Rails
+  Rétractables (Déplié vs Replié)*. Implemented as the icon sidebar and the
+  48px source rail.
+- Focus-mode exploration: generated in the same Stitch project from the
+  "Agrandir" prompt. Implemented as the shadcn `Dialog` in
+  `components/assistant/artifacts/expandable-visualization.tsx`.
 - Previous full-page reference: screen `296a96a976eb48cdb85d9cc1277275c0` —
   replaced by the screens above.
 - The Stitch HTML was used as the layout reference. Claims about live indexing,

@@ -1,0 +1,98 @@
+import type { TableArtifact } from "./types";
+
+export const institutionalTree: TableArtifact = {
+  type: "table",
+  id: "brh-institutional-tree",
+  title: "Arbre institutionnel de la BRH",
+  subtitle: "De la banque centrale aux usages du BIC",
+  source: "Documents d’information BRH · p. 5, 6, 9, 10",
+  schema: {
+    columns: [
+      { key: "from", label: "Nœud", type: "string", role: "edge-source" },
+      { key: "to", label: "Branche", type: "string", role: "edge-target" },
+      { key: "relation", label: "Relation", type: "string", role: "label" },
+      {
+        key: "fromKind",
+        label: "Type du nœud",
+        type: "category",
+        role: "node-kind",
+      },
+      {
+        key: "toKind",
+        label: "Type de la branche",
+        type: "category",
+        role: "node-kind",
+      },
+      { key: "page", label: "Page", type: "number", role: "page" },
+    ],
+    rows: [
+      {
+        from: "Banque de la République d’Haïti",
+        to: "Bureau d’Information sur le Crédit",
+        relation: "met en service",
+        fromKind: "Institution",
+        toKind: "Crédit",
+        page: 5,
+      },
+      {
+        from: "Banque de la République d’Haïti",
+        to: "Supervision des coopératives",
+        relation: "supervise",
+        fromKind: "Institution",
+        toKind: "Supervision",
+        page: 10,
+      },
+      {
+        from: "Banque de la République d’Haïti",
+        to: "Stratégie d’inclusion financière",
+        relation: "publie",
+        fromKind: "Institution",
+        toKind: "Cadre",
+        page: 9,
+      },
+      {
+        from: "Bureau d’Information sur le Crédit",
+        to: "Consultations HIT",
+        relation: "documente",
+        fromKind: "Crédit",
+        toKind: "Indicateur",
+        page: 6,
+      },
+      {
+        from: "Bureau d’Information sur le Crédit",
+        to: "Consultations non-HIT",
+        relation: "documente",
+        fromKind: "Crédit",
+        toKind: "Indicateur",
+        page: 6,
+      },
+      {
+        from: "Supervision des coopératives",
+        to: "97 coopératives",
+        relation: "recense",
+        fromKind: "Supervision",
+        toKind: "Institution",
+        page: 10,
+      },
+      {
+        from: "Stratégie d’inclusion financière",
+        to: "2 476 points de service",
+        relation: "recense",
+        fromKind: "Cadre",
+        toKind: "Indicateur",
+        page: 9,
+      },
+    ],
+  },
+  decision: {
+    blockType: "graph",
+    graph: {
+      source: "from",
+      target: "to",
+      label: "relation",
+      sourceKind: "fromKind",
+      targetKind: "toKind",
+      page: "page",
+    },
+  },
+};

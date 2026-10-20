@@ -140,13 +140,28 @@ data, or advanced interaction → ECharts**. Both must use the tokens in
 `app/globals.css`, keep charts on `surface`, omit gradients on the data, and
 carry a provenance line.
 
-The current `components/assistant/artifacts/cartesian-chart.tsx` and
-`pie-artifact.tsx` are legacy hand-rolled SVG. Do not extend them; replace them
-with visx/ECharts when touching the chart renderer. Never add a new custom SVG
-chart path.
+The assistant chart renderer is **ECharts** because it renders many chart types
+from one table schema. Do not reintroduce hand-rolled SVG chart paths. For
+relationship graphs, use the **ECharts tree** or **`graph` series** for the
+data-derived view and **Mermaid** for the flowchart/diagram view; switch them
+with shadcn `Tabs`. Detect trees from the edge table (`lib/chat/graph.ts`) and
+fall back to a force graph for DAGs, cycles or multiple roots. Mermaid is
+lazy-loaded (`import("mermaid")`) so the diagram renderer stays out of the
+initial bundle. Artifact focus mode is a shadcn `Dialog` opened from the
+`ExpandableVisualization` button; do not hand-roll a modal.
 
 Always use Context7 before adopting an unfamiliar API:
-`/airbnb/visx`, `/apache/echarts-website`, `/apache/echarts-handbook`.
+`/airbnb/visx`, `/apache/echarts-website`, `/apache/echarts-handbook`,
+`/mermaid-js/mermaid`.
+
+### Typography
+
+- **Inter** for UI text, controls, captions and chart labels.
+- **Montserrat** for display headings and short eyebrows.
+- **Source Serif 4** for long-form reading: assistant answers, document
+  artifacts, blockquotes and source excerpts. Use the `font-reading` utility;
+  do not set long prose in Inter. Reading text is 15–16px with line-height
+  around 1.7.
 
 ### Components
 

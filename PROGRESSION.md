@@ -1,6 +1,6 @@
 # Progression
 
-Last updated: 2026-10-19 (OCR batch on Modal)
+Last updated: 2026-10-20 (assistant UI libraries, graph views, reading font)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
@@ -82,6 +82,17 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   records the hybrid A2UI/Open Generative UI routing contract; the CopilotKit
   runtime is not enabled yet. Auto-scroll pauses when the reader scrolls up. The
   landing header and closing CTA open `/assistant`.
+  - The workspace now uses the shadcn `Sidebar` dashboard shell and `Sheet` for
+    mobile sources. The left rail collapses to an icon rail; the right source
+    inspector collapses to a 48px vertical rail (⌘/Ctrl+J). Charts and graphs
+    open a shadcn `Dialog` focus mode from an **Agrandir** button. Charts are
+    ECharts; graph artifacts detect trees (`lib/chat/graph.ts`) and expose
+    **Arbre** (ECharts tree), **Réseau** (force graph) and **Diagramme**
+    (lazy-loaded Mermaid) views under shadcn `Tabs`. A complex 8-node tree demo
+    lives in `lib/chat/tree-artifact.ts` + `tree-demo.ts`. Long-form answers use
+    Source Serif 4 (`font-reading`), while UI text stays Inter and display
+    headings stay Montserrat. The long-form demo `lib/chat/long-document.ts`
+    exercises headings, paragraphs, quotes, lists, a table and citations.
 
 ## Next up
 
@@ -96,6 +107,21 @@ Continue the build order:
 
 ## Recently done
 
+- **2026-10-20 — Assistant libraries: ECharts, shadcn dashboard, Mermaid graphs,
+  reading typography.** Migrated the chart renderer from hand-rolled SVG to
+  ECharts (line, multi-line, area, bar, pie, donut, scatter) and removed
+  `cartesian-chart.tsx` / `pie-artifact.tsx`. Rebuilt the assistant shell around
+  shadcn `Sidebar`/`SidebarInset` and `Sheet`, and moved buttons, tabs, cards,
+  inputs, badges and tooltips to shadcn primitives. Graph artifacts now render
+  two views: a draggable/zoomable ECharts `graph` network and a lazy-loaded
+  Mermaid flowchart, using the same table-derived nodes/edges. Added a long-form
+  demo document (`lib/chat/long-document.ts`) with headings, paragraphs,
+  blockquotes, lists, a table, links and citations, and a real Markdown renderer
+  (`react-markdown` + GFM). Long-form reading now uses self-hosted **Source
+  Serif 4** (`font-reading`); Inter remains the UI face and Montserrat the
+  display face. Collapsible rails were explored in Stitch screen
+  `1dcc653cdff9474297b37ef2d5d12c99`, and focus-mode UI was explored in the
+  same project. `bun run typecheck` and `bun run build` pass.
 - **2026-10-19 — Assistant workspace rebuilt from Stitch.** Generated screen
   `81afab0033054e6d9c1f58636ea87fb8` (*Assistant Documentaire Chat Workspace*)
   and rebuilt `/assistant` against it: 280px conversation rail, 56px contextual

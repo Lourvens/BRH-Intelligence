@@ -13,13 +13,14 @@ import {
   servicePointsDonut,
 } from "./artifacts";
 import { chartGallery } from "./gallery";
+import { longDocumentThread } from "./long-document";
+import { treeThread } from "./tree-demo";
 import type {
   ChatArtifact,
   ChatCitation,
   ChatMessage,
   ChatThread,
 } from "./types";
-
 function assistant(
   id: string,
   content: string,
@@ -183,6 +184,8 @@ export const demoThreads: ChatThread[] = [
       ),
     ],
   },
+  longDocumentThread,
+  treeThread,
 ];
 
 export const refusalAnswer: ChatMessage = {
@@ -216,8 +219,13 @@ const matchRules = [
     threadId: "chart-gallery",
     words: ["graphique", "graphiques", "visualisation", "galerie", "camembert"],
   },
+  {
+    threadId: "note-de-synthese",
+    words: ["synthèse", "note de synthèse", "lecture longue", "longue"],
+  },
 ];
 
+matchRules.push({ threadId: "institution-tree", words: ["arbre", "hiérarchie", "institutionnel"] });
 function normalize(value: string) {
   return value
     .toLowerCase()
