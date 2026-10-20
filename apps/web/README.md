@@ -78,9 +78,10 @@ Agent visual output is data-first:
   diagrams default to vertical orientation with a manual vertical/horizontal
   toggle. The demo `showcase-multimessage` thread walks through area, multi-line,
   donut, bar, tree and network artifacts in one conversation.
-- Citations carry a `pdfUrl`; the source inspector and message source list open
-  the PDF in a new tab, with the page deep link (`#page=N`) built by
-  `brh_core.citations`.
+- Citations carry a `pdfUrl`; the source inspector and message source list show
+  the URL and open the PDF in a new tab, with the page deep link (`#page=N`)
+  built by `brh_core.citations`. The in-chat source block is a shadcn
+  `Collapsible` with a `ScrollArea`; the inspector uses `ScrollArea` too.
 - The message renders a collapsed **Décision de présentation** card with the
   JSON decision, so the renderer choice is inspectable.
 

@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   Check,
   Copy,
-  ExternalLink,
   FileSearch,
   FileText,
   PanelRightClose,
@@ -16,6 +15,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Tooltip,
   TooltipContent,
@@ -23,7 +23,8 @@ import {
 } from "@/components/ui/tooltip";
 import { uniqueCitations } from "@/lib/chat/citations";
 import type { ChatCitation } from "@/lib/chat/types";
-import { cn } from "@/lib/utils";
+
+import { SourceList } from "./source-list";
 
 export function SourcesPanel({
   citations,
@@ -114,7 +115,8 @@ export function SourcesPanel({
           </p>
         </div>
       ) : (
-        <div className="min-h-0 flex-1 overflow-y-auto p-4">
+        <ScrollArea className="min-h-0 flex-1">
+          <div className="p-4">
           <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-gold-ink">
             Source principale citée
           </div>
@@ -145,21 +147,20 @@ export function SourcesPanel({
               </div>
 
               {selected.pdfUrl ? (
-                <Button
-                  asChild
-                  size="sm"
-                  className="mt-3 w-full gap-1.5 rounded-lg bg-navy text-[11px] text-white hover:bg-navy-deep"
-                >
+                <div className="mt-3 rounded-lg border border-azure/25 bg-azure/5 p-2.5">
+                  <div className="mb-1 flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-teal">
+                    <FileText className="size-3" aria-hidden />
+                    PDF source
+                  </div>
                   <a
                     href={selected.pdfUrl}
                     target="_blank"
                     rel="noreferrer"
+                    className="block break-all font-mono text-[10px] leading-snug text-teal underline decoration-azure/40 underline-offset-2 hover:text-navy"
                   >
-                    <FileText className="size-3.5" aria-hidden />
-                    Ouvrir le PDF source
-                    <ExternalLink className="size-3" aria-hidden />
+                    {selected.pdfUrl}
                   </a>
-                </Button>
+                </div>
               ) : null}
 
               <div className="mt-3 flex items-center gap-2">
@@ -201,36 +202,15 @@ export function SourcesPanel({
               <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
                 Toutes les sources
               </div>
-              <div className="space-y-1.5">
-                {unique.map((citation, index) => (
-                  <button
-                    key={citation.id}
-                    type="button"
-                    onClick={() => onSelect(citation.id)}
-                    className={cn(
-                      "flex w-full items-start gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors",
-                      citation.id === selected.id
-                        ? "border-azure/40 bg-azure/5"
-                        : "border-transparent hover:bg-surface-alt",
-                    )}
-                  >
-                    <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-white">
-                      {index + 1}
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block truncate text-[11px] font-medium text-navy">
-                        {citation.title}
-                      </span>
-                      <span className="text-[10px] text-ink-muted">
-                        p. {citation.page}
-                      </span>
-                    </span>
-                  </button>
-                ))}
-              </div>
+              <SourceList
+                citations={unique}
+                selectedId={selected.id}
+                onSelect={onSelect}
+              />
             </div>
           ) : null}
-        </div>
+          </div>
+        </ScrollArea>
       )}
 
       <div className="shrink-0 border-t border-border px-4 py-3 text-[10px] leading-relaxed text-ink-muted">

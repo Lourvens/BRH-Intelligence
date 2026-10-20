@@ -1,5 +1,11 @@
-import { ExternalLink, FileText, Landmark, ShieldAlert } from "lucide-react";
+import { ChevronDown, FileText, Landmark, ShieldAlert } from "lucide-react";
 
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { uniqueCitations } from "@/lib/chat/citations";
 import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/lib/chat/types";
@@ -92,57 +98,86 @@ export function Message({
           ) : null}
 
           {citations?.length ? (
-            <div className="mt-4 border-t border-border pt-3">
-              <div className="mb-2 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
-                <FileText className="size-3.5" aria-hidden />
-                Sources
-              </div>
-              <div className="flex flex-col gap-2">
-                {citations.map((citation, index) => {
-                  const active = citation.id === selectedCitationId;
+            <Collapsible className="mt-4 border-t border-border pt-3">
+              <CollapsibleTrigger asChild>
+                <button
+                  type="button"
+                  className="group flex w-full items-center justify-between gap-2 rounded-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure focus-visible:ring-offset-2"
+                >
+                  <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
+                    <FileText className="size-3.5" aria-hidden />
+                    Sources ({citations.length})
+                  </span>
+                  <ChevronDown
+                    className="size-3.5 text-ink-muted transition-transform group-data-[state=open]:rotate-180"
+                    aria-hidden
+                  />
+                </button>
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <ScrollArea
+                  className={cn(
+                    "mt-2 w-full pr-2",
+                    citations.length > 3 ? "h-56" : "max-h-56",
+                  )}
+                >
+                  <div className="flex flex-col gap-2">
+                    {citations.map((citation, index) => {
+                      const active = citation.id === selectedCitationId;
+                      const itemClass = cn(
+                        "flex w-full min-w-0 items-start gap-2 rounded-lg border px-2.5 py-2 text-left text-[11px] transition-colors",
+                        active
+                          ? "border-azure/50 bg-azure/5"
+                          : "border-border bg-bg hover:border-navy/25",
+                      );
 
-                  return (
-                    <div
-                      key={citation.id}
-                      className="flex items-center gap-1.5"
-                    >
-                      <button
-                        type="button"
-                        aria-pressed={active}
-                        onClick={() => onSelectCitation(citation.id)}
-                        className={cn(
-                          "flex min-w-0 flex-1 items-center gap-2 rounded-lg border px-2.5 py-2 text-left text-[11px] transition-colors",
-                          active
-                            ? "border-azure/50 bg-azure/5"
-                            : "border-border bg-bg hover:border-navy/25",
-                        )}
-                      >
-                        <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-white">
-                          {index + 1}
-                        </span>
-                        <span className="line-clamp-2 min-w-0 flex-1 text-[11px] font-medium leading-snug text-navy">
-                          {citation.title}
-                        </span>
-                        <span className="shrink-0 font-mono text-[10px] text-ink-muted">
-                          p.&nbsp;{citation.page}
-                        </span>
-                      </button>
-                      {citation.pdfUrl ? (
+                      const content = (
+                        <>
+                          <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-white">
+                            {index + 1}
+                          </span>
+                          <span className="min-w-0 flex-1">
+                            <span className="block text-[11px] font-medium leading-snug text-navy">
+                              {citation.title}
+                            </span>
+                            <span className="mt-0.5 block text-[10px] text-ink-muted">
+                              {citation.source} · p. {citation.page}
+                            </span>
+                            {citation.pdfUrl ? (
+                              <span className="mt-1 block break-all font-mono text-[9px] leading-snug text-teal underline decoration-azure/40 underline-offset-2">
+                                {citation.pdfUrl}
+                              </span>
+                            ) : null}
+                          </span>
+                        </>
+                      );
+
+                      return citation.pdfUrl ? (
                         <a
+                          key={citation.id}
                           href={citation.pdfUrl}
                           target="_blank"
                           rel="noreferrer"
-                          aria-label={`Ouvrir le PDF de ${citation.title}`}
-                          className="grid size-8 shrink-0 place-items-center rounded-lg border border-border bg-surface text-teal transition-colors hover:bg-surface-alt hover:text-navy"
+                          onClick={() => onSelectCitation(citation.id)}
+                          className={itemClass}
                         >
-                          <ExternalLink className="size-3.5" aria-hidden />
+                          {content}
                         </a>
-                      ) : null}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+                      ) : (
+                        <button
+                          key={citation.id}
+                          type="button"
+                          onClick={() => onSelectCitation(citation.id)}
+                          className={itemClass}
+                        >
+                          {content}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </ScrollArea>
+              </CollapsibleContent>
+            </Collapsible>
           ) : null}
         </div>
       </div>
