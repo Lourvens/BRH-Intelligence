@@ -1,4 +1,4 @@
-import { ArrowRight, Check, PlayCircle, Sparkles } from "lucide-react";
+import { ArrowRight, Check, MessageSquare, PlayCircle, Sparkles } from "lucide-react";
 
 import { heroCopy } from "./hero/data";
 import { HeroShowcase } from "./hero/hero-showcase";
@@ -48,7 +48,7 @@ export function Hero() {
             {heroCopy.intro}
           </p>
 
-          <div className="mt-9 flex w-full max-w-md flex-col items-center justify-center gap-3.5 sm:flex-row">
+          <div className="mt-9 flex w-full max-w-2xl flex-col items-center justify-center gap-3.5 sm:flex-row">
             <a
               href="#corpus"
               className="group inline-flex w-full items-center justify-center gap-2.5 whitespace-nowrap rounded-xl bg-navy px-7 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-navy/20 transition-all duration-200 hover:bg-navy-deep hover:shadow-xl sm:w-auto"
@@ -62,6 +62,14 @@ export function Hero() {
             >
               <PlayCircle className="size-5 text-teal" aria-hidden />
               {heroCopy.secondaryCta}
+            </a>
+            <a
+              href="/assistant"
+              className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-azure/40 bg-azure/5 px-6 py-3.5 text-[15px] font-semibold text-navy shadow-sm transition-colors hover:border-azure/70 hover:bg-azure/10 sm:w-auto"
+            >
+              <MessageSquare className="size-4 text-teal" aria-hidden />
+              {heroCopy.assistantCta}
+              <ArrowRight className="size-4 text-teal transition-transform group-hover:translate-x-0.5" aria-hidden />
             </a>
           </div>
 

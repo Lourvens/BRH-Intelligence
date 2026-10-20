@@ -8,6 +8,7 @@ export const heroCopy = {
     "Accédez aux rapports, notes et circulaires publiés par la Banque de la République d’Haïti. Chaque réponse s’appuie sur un passage retrouvé et renvoie au document et à la page.",
   primaryCta: "Explorer le corpus",
   secondaryCta: "Voir une réponse citée",
+  assistantCta: "Ouvrir l’assistant",
   assurances: ["Corpus francophone", "Citations page par page", "Refus explicite"],
 } as const;
 
