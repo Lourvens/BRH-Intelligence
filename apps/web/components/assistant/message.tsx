@@ -38,14 +38,12 @@ export function Message({
   }
 
   return (
-    <div className="flex items-start gap-3">
-      <div className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold shadow-sm">
-        <Landmark className="size-4" aria-hidden />
-      </div>
-
-      <div className="min-w-0 flex-1">
-        <div className="mb-1 flex flex-wrap items-center gap-2 text-[11px]">
-          <span className="font-semibold text-navy">BRH Intelligence</span>
+    <div className="min-w-0">
+      <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[11px]">
+        <div className="grid size-7 shrink-0 place-items-center rounded-lg bg-navy text-gold shadow-sm">
+          <Landmark className="size-3.5" aria-hidden />
+        </div>
+        <span className="font-semibold text-navy">BRH Intelligence</span>
           <span className="text-ink-muted">·</span>
           <span className="text-ink-muted">Assistant documentaire</span>
           <span
@@ -179,7 +177,6 @@ export function Message({
               </CollapsibleContent>
             </Collapsible>
           ) : null}
-        </div>
       </div>
     </div>
   );
