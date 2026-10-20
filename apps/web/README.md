@@ -53,6 +53,8 @@ Agent visual output is data-first:
   scatter. The renderer accepts one or more `y` columns.
 - `graphData` builds nodes and edges from edge-source/edge-target columns, so
   graphs are generated from the table, not hand-authored nodes.
+- The message renders a collapsed **Décision de présentation** card with the
+  JSON decision, so the renderer choice is inspectable.
 
 The hybrid Open Intelligent UI contract lives in
 `lib/chat/open-intelligent-ui.ts`: tables map to A2UI, charts/graphs map to
@@ -74,8 +76,12 @@ implementing it.
   *BRH Intelligence — Landing Page Complète Officielle* (desktop, 2560px).
   Implemented: pipeline, corpus, use cases, comparison, FAQ, access CTA and
   footer. The navbar keeps the BRH product nav but points at the new anchors.
+- Assistant reference: screen `81afab0033054e6d9c1f58636ea87fb8` —
+  *BRH Intelligence — Assistant Documentaire Chat Workspace* (desktop, 2560px).
+  Implemented as the `/assistant` three-pane workspace, with a custom chart
+  sheet, source inspector, decision card and mobile drawers.
 - Previous full-page reference: screen `296a96a976eb48cdb85d9cc1277275c0` —
-  replaced by the two screens above.
+  replaced by the screens above.
 - The Stitch HTML was used as the layout reference. Claims about live indexing,
   guaranteed accuracy, 40 years, confidence scores, latency, OCR certification,
   legal value and vault-style integrity were replaced with the real corpus
@@ -87,8 +93,8 @@ implementing it.
 |---|---|---|
 | `app/layout.tsx`, `app/globals.css` | ✅ | Fonts, metadata, design tokens, base styles, dot-grid utilities |
 | `app/page.tsx` | ✅ landing page | `b961…` hero + `027b…` sections |
-| `app/assistant/page.tsx` | ✅ assistant | Three-panel chat shell, demo transcripts |
-| `components/assistant/*` | ✅ | Sidebar, chat, message, sources, chart/graph artifacts |
+| `app/assistant/page.tsx` | ✅ assistant | Three-panel Stitch workspace, demo transcripts |
+| `components/assistant/*` | ✅ | Sidebar, chat, message content, sources, decision card, chart/graph artifacts |
 | `lib/chat/*` | ✅ demo | Table schema, decision validation, threads, citations, artifacts |
 | `lib/chat/decision.ts` | ✅ | Validates `UIDecision` and derives chart/graph data from table rows |
 | `lib/chat/open-intelligent-ui.ts` | ✅ contract | Table→A2UI / chart-graph→Open Generative UI routing |

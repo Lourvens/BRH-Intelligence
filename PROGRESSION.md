@@ -68,18 +68,20 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   note (28,3 %, p. 3).
 
 - **The assistant shell is implemented at `/assistant` (2026-10-19).** Full
-  three-panel workspace: conversation rail, chat with empty state/composer/
-  refusals, and a source rail. Assistant messages support inline numbered
-  citations, source detail/copy, and generated **chart** and **graph** artifacts.
-  Artifacts are schema-driven: `TableArtifact` + `UIDecision` select table,
-  chart type (`line`/`bar`/`area`) or graph; charts/graphs are derived from
-  rows, and invalid decisions fall back to a semantic table. It currently runs
-  on clearly marked local demo transcripts in `lib/chat/*`; `lib/agent.ts` wraps
-  the real LangGraph `useStream` SDK and is the swap-in point for live
-  messages/threads. `lib/chat/open-intelligent-ui.ts` records the hybrid
-  A2UI/Open Generative UI routing contract; the CopilotKit runtime is not
-  enabled yet. Auto-scroll pauses when the reader scrolls up. The landing
-  header and closing CTA now open `/assistant`.
+  three-panel workspace rebuilt from Stitch screen
+  `81afab0033054e6d9c1f58636ea87fb8`: conversation rail, chat with empty state /
+  composer / refusals, and a source rail. Assistant messages support inline
+  numbered citations, source detail/copy, and generated **chart** and **graph**
+  artifacts. Artifacts are schema-driven: `TableArtifact` + `UIDecision` select
+  table, chart type (`line`, multi-line, `bar`, `area`, `pie`, `donut`,
+  `scatter`) or graph; charts/graphs are derived from rows, and invalid decisions
+  fall back to a semantic table. A collapsible decision card exposes the JSON
+  decision. It currently runs on clearly marked local demo transcripts in
+  `lib/chat/*`; `lib/agent.ts` wraps the real LangGraph `useStream` SDK and is the
+  swap-in point for live messages/threads. `lib/chat/open-intelligent-ui.ts`
+  records the hybrid A2UI/Open Generative UI routing contract; the CopilotKit
+  runtime is not enabled yet. Auto-scroll pauses when the reader scrolls up. The
+  landing header and closing CTA open `/assistant`.
 
 ## Next up
 
@@ -93,6 +95,20 @@ Continue the build order:
    the files the inventory has already downloaded. Verify with `make ingest`.
 
 ## Recently done
+
+- **2026-10-19 — Assistant workspace rebuilt from Stitch.** Generated screen
+  `81afab0033054e6d9c1f58636ea87fb8` (*Assistant Documentaire Chat Workspace*)
+  and rebuilt `/assistant` against it: 280px conversation rail, 56px contextual
+  header, 320px source inspector, long-form answer with inline citation,
+  multi-line chart with peak callout, source provenance, collapsed JSON decision
+  card, and responsive drawers. The answer copy was expanded to three factual
+  BIC sequences. Replaced the Stitch copy’s “certified/statutaire/confidence”
+  claims with “Réponse sourcée” and no confidence score. Added a mock chart
+  gallery (area/pie/bar), multi-line BIC consultations, donut agencies, and the
+  existing graph/table/line examples. Chart renderer now supports line,
+  multi-series line, bar, area, pie, donut and scatter from table schemas.
+  `bun run typecheck` and `bun run build` pass; desktop 1440 and mobile 390
+  checked with `agent-browser`.
 
 - **2026-10-19 — Assistant chat UI created at `/assistant`.** Full app shell:
   conversation history rail, chat panel with empty state, suggestions, composer,

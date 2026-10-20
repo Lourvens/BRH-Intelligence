@@ -136,7 +136,7 @@ export function AssistantShell() {
       id="contenu"
       className="flex h-dvh overflow-hidden bg-bg text-ink"
     >
-      <aside className="hidden w-72 shrink-0 border-r border-border bg-surface lg:block">
+      <aside className="hidden w-[280px] shrink-0 border-r border-border bg-surface lg:block">
         <Sidebar
           threads={threads}
           activeThreadId={activeThreadId}
@@ -163,7 +163,7 @@ export function AssistantShell() {
             onSubmit={submitQuestion}
             onStop={stopThinking}
           />
-          <aside className="hidden w-80 shrink-0 border-l border-border xl:block">
+          <aside className="hidden w-[320px] shrink-0 border-l border-border xl:block">
             <SourcesPanel
               citations={citations}
               selected={selectedCitation}
@@ -181,7 +181,7 @@ export function AssistantShell() {
             onClick={() => setSidebarOpen(false)}
             className="absolute inset-0 bg-navy/30 backdrop-blur-sm"
           />
-          <aside className="relative z-10 h-full w-[min(20rem,85vw)] bg-surface shadow-2xl">
+          <aside className="relative z-10 h-full w-[min(280px,88vw)] bg-surface shadow-2xl">
             <Sidebar
               threads={threads}
               activeThreadId={activeThreadId}
@@ -201,7 +201,7 @@ export function AssistantShell() {
             onClick={() => setSourcesOpen(false)}
             className="absolute inset-0 bg-navy/30 backdrop-blur-sm"
           />
-          <aside className="relative z-10 h-full w-[min(21rem,88vw)] shadow-2xl">
+          <aside className="relative z-10 h-full w-[min(320px,90vw)] shadow-2xl">
             <SourcesPanel
               citations={citations}
               selected={selectedCitation}

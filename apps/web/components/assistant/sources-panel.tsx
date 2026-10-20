@@ -42,14 +42,14 @@ export function SourcesPanel({
 
   return (
     <div className="flex h-full flex-col bg-surface">
-      <div className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
+      <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
         <div>
           <h2 className="font-display text-caption font-bold text-navy">
-            Sources
+            Sources documentaires
           </h2>
           <p className="text-[10px] text-ink-muted">
             {citations.length
-              ? `${citations.length} référence${citations.length > 1 ? "s" : ""}`
+              ? `${citations.length} référence${citations.length > 1 ? "s" : ""} active${citations.length > 1 ? "s" : ""}`
               : "Aucune référence"}
           </p>
         </div>
@@ -79,6 +79,9 @@ export function SourcesPanel({
         </div>
       ) : (
         <div className="min-h-0 flex-1 overflow-y-auto p-4">
+          <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-gold-ink">
+            Source principale citée
+          </div>
           <div className="rounded-xl border border-border bg-bg p-4">
             <div className="mb-3 flex items-start gap-2.5">
               <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold">
@@ -97,7 +100,7 @@ export function SourcesPanel({
               </div>
             </div>
 
-            <div className="rounded-lg border border-border bg-surface p-3 text-[11px] italic leading-relaxed text-ink">
+            <div className="rounded-lg border border-border border-l-2 border-l-azure bg-surface p-3 text-[11px] italic leading-relaxed text-ink">
               « {selected.snippet} »
             </div>
 

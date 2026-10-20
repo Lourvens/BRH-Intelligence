@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/lib/chat/types";
 
 import { Artifact } from "./artifacts/artifact";
+import { DecisionCard } from "./artifacts/decision-card";
+import { MessageContent } from "./message-content";
 
 export function Message({
   message,
@@ -17,7 +19,7 @@ export function Message({
   if (message.role === "user") {
     return (
       <div className="flex justify-end">
-        <div className="max-w-[88%] rounded-2xl rounded-br-md bg-navy px-4 py-3 text-small leading-relaxed text-white shadow-sm sm:max-w-[75%]">
+        <div className="max-w-[88%] rounded-2xl rounded-br-md bg-navy px-4 py-3 text-small leading-relaxed text-white shadow-sm sm:max-w-[620px]">
           {message.content}
         </div>
       </div>
@@ -30,11 +32,21 @@ export function Message({
         <Landmark className="size-4" aria-hidden />
       </div>
 
-      <div className="min-w-0 max-w-[88%] sm:max-w-[80%]">
-        <div className="mb-1 flex items-center gap-2 text-[11px]">
+      <div className="min-w-0 flex-1">
+        <div className="mb-1 flex flex-wrap items-center gap-2 text-[11px]">
           <span className="font-semibold text-navy">BRH Intelligence</span>
           <span className="text-ink-muted">·</span>
           <span className="text-ink-muted">Assistant documentaire</span>
+          <span
+            className={cn(
+              "rounded border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider",
+              message.refused
+                ? "border-gold/50 bg-gold/15 text-gold-ink"
+                : "border-azure/25 bg-azure/5 text-teal",
+            )}
+          >
+            {message.refused ? "Refus explicite" : "Réponse sourcée"}
+          </span>
         </div>
 
         <div
@@ -58,20 +70,11 @@ export function Message({
               </div>
             </div>
           ) : (
-            <p className="text-small leading-relaxed text-ink">
-              {message.content}
-              {message.citations?.map((citation, index) => (
-                <button
-                  key={citation.id}
-                  type="button"
-                  onClick={() => onSelectCitation(citation.id)}
-                  aria-label={`Voir la source ${index + 1}`}
-                  className="ml-1 align-super font-mono text-[9px] font-bold text-teal hover:underline"
-                >
-                  [{index + 1}]
-                </button>
-              ))}
-            </p>
+            <MessageContent
+              content={message.content}
+              citations={message.citations}
+              onSelectCitation={onSelectCitation}
+            />
           )}
 
           {message.artifacts?.length ? (
@@ -79,6 +82,7 @@ export function Message({
               {message.artifacts.map((artifact) => (
                 <Artifact key={artifact.id} artifact={artifact} />
               ))}
+              <DecisionCard artifact={message.artifacts[0]} />
             </div>
           ) : null}
 

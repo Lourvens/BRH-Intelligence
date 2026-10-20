@@ -139,7 +139,7 @@ export const demoThreads: ChatThread[] = [
       },
       assistant(
         "bic-consultations-a",
-        "Entre 2016-17 et 2021-22, les consultations HIT ont reculé de 107 166 à 49 423, tandis que les consultations non-HIT sont passées de 44 188 à 13 240.",
+        "Selon les données officielles du Bureau d’Information sur le Crédit (BIC), les consultations de rapports de crédit ont connu une montée en charge rapide après l’exercice 2016—2017.\n\nLa trajectoire se lit en trois temps :\n\n- **Montée en charge (2017—2019)** : les consultations HIT passent de 11 103 à 109 313, avec un sommet en 2018—2019.\n- **Repli (2019—2021)** : elles redescendent à 73 681 puis 70 084.\n- **Dernier exercice (2021—2022)** : 49 423 consultations HIT et 13 240 non-HIT, pour un total de 62 663.",
         [bicConsultationsCitation],
         [bicConsultationsChart],
       ),

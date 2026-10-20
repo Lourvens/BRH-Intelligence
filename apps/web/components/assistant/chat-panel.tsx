@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUp, Loader2, Search, Square } from "lucide-react";
+import { ArrowUp, Loader2, Search, ShieldCheck, Square } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 import type { ChatThread, SuggestedQuestion } from "@/lib/chat/types";
@@ -72,7 +72,7 @@ export function ChatPanel({
         {!thread && !isThinking ? (
           <EmptyState suggestions={suggestions} onSelect={onSelectSuggestion} />
         ) : (
-          <div className="mx-auto flex max-w-3xl flex-col gap-6 px-4 py-8 sm:px-6">
+          <div className="mx-auto flex max-w-[820px] flex-col gap-6 px-4 py-8 sm:px-6">
             {thread?.messages.map((message) => (
               <Message
                 key={message.id}
@@ -104,7 +104,7 @@ export function ChatPanel({
       </div>
 
       <div className="shrink-0 border-t border-border bg-bg/95 px-4 py-3 backdrop-blur sm:px-6 sm:py-4">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-[820px]">
           <div className="rounded-2xl border border-border bg-surface p-2 shadow-sm transition-colors focus-within:border-navy/30">
             <textarea
               ref={textareaRef}
@@ -151,9 +151,13 @@ export function ChatPanel({
               )}
             </div>
           </div>
-          <p className="mt-2 text-center text-[10px] text-ink-muted">
-            Les réponses peuvent contenir des erreurs. Vérifiez la page citée.
-          </p>
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] text-ink-muted sm:justify-between">
+            <span>Les réponses peuvent contenir des erreurs. Vérifiez la page citée.</span>
+            <span className="hidden items-center gap-1 sm:inline-flex">
+              <ShieldCheck className="size-3 text-teal" aria-hidden />
+              Recherche documentaire · sources citées
+            </span>
+          </div>
         </div>
       </div>
     </section>

@@ -29,7 +29,7 @@ export function Sidebar({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
+      <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
         <Link
           href="/"
           aria-label="BRH Intelligence — accueil"
@@ -79,7 +79,7 @@ export function Sidebar({
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Rechercher une conversation"
+            placeholder="Rechercher dans l’historique…"
             aria-label="Rechercher une conversation"
             className="h-9 w-full rounded-lg border border-border bg-bg pl-8 pr-3 text-[11px] text-ink outline-none placeholder:text-ink-muted/70 focus:border-navy/30"
           />
@@ -107,10 +107,10 @@ export function Sidebar({
                       onClick={() => onSelectThread(thread.id)}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "flex w-full items-start gap-2 rounded-lg px-2 py-2 text-left transition-colors",
+                        "flex w-full items-start gap-2 rounded-lg border-l-2 px-2 py-2 text-left transition-colors",
                         active
-                          ? "bg-surface-alt text-navy"
-                          : "text-ink-muted hover:bg-surface-alt/70 hover:text-navy",
+                          ? "border-azure bg-azure/5 text-navy"
+                          : "border-transparent text-ink-muted hover:bg-surface-alt/70 hover:text-navy",
                       )}
                     >
                       <MessageSquare className="mt-0.5 size-3.5 shrink-0" aria-hidden />
@@ -147,7 +147,7 @@ export function Sidebar({
           className="flex items-center gap-2 rounded-lg px-2 py-2 text-[11px] font-medium text-ink-muted transition-colors hover:bg-surface-alt hover:text-navy"
         >
           <ArrowLeft className="size-3.5" aria-hidden />
-          Retour au site
+          Retour au portail officiel
         </Link>
       </div>
     </div>
