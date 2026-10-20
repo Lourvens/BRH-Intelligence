@@ -1,20 +1,8 @@
 "use client";
 
-import {
-  ArrowUpRight,
-  Check,
-  Copy,
-  FileSearch,
-  FileText,
-  PanelRightClose,
-  X,
-} from "lucide-react";
-import Link from "next/link";
-import { useState } from "react";
+import { FileSearch, PanelRightClose, X } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Tooltip,
@@ -24,6 +12,7 @@ import {
 import { uniqueCitations } from "@/lib/chat/citations";
 import type { ChatCitation } from "@/lib/chat/types";
 
+import { SourceDetail } from "./source-detail";
 import { SourceList } from "./source-list";
 
 export function SourcesPanel({
@@ -39,22 +28,7 @@ export function SourcesPanel({
   onClose?: () => void;
   onCollapse?: () => void;
 }) {
-  const [copied, setCopied] = useState(false);
   const unique = uniqueCitations(citations);
-
-  async function copyCitation() {
-    if (!selected) return;
-    try {
-      const pdf = selected.pdfUrl ? `\n${selected.pdfUrl}` : "";
-      await navigator.clipboard.writeText(
-        `« ${selected.snippet} » — ${selected.title}, p. ${selected.page}${pdf}`,
-      );
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
-    } catch {
-      setCopied(false);
-    }
-  }
 
   return (
     <div className="flex h-full w-full min-w-0 shrink-0 flex-col overflow-hidden bg-surface">
@@ -79,7 +53,7 @@ export function SourcesPanel({
                   size="icon-sm"
                   onClick={onCollapse}
                   aria-label="Replier les sources"
-                  className="text-ink-muted hover:bg-surface-alt"
+                  className="text-ink-muted transition-[background-color,color,transform] duration-150 hover:bg-surface-alt hover:text-navy-ink active:scale-95 motion-reduce:transition-none"
                 >
                   <PanelRightClose className="size-4" aria-hidden />
                 </Button>
@@ -94,7 +68,7 @@ export function SourcesPanel({
               size="icon-sm"
               onClick={onClose}
               aria-label="Fermer les sources"
-              className="text-ink-muted hover:bg-surface-alt xl:hidden"
+              className="text-ink-muted transition-[background-color,color,transform] duration-150 hover:bg-surface-alt hover:text-navy-ink active:scale-95 motion-reduce:transition-none xl:hidden"
             >
               <X className="size-4" />
             </Button>
@@ -120,98 +94,20 @@ export function SourcesPanel({
           className="min-h-0 w-full flex-1 overscroll-contain [&_[data-slot=scroll-area-viewport]]:overflow-x-hidden"
         >
           <div className="w-full min-w-0 max-w-full overflow-hidden pb-6 pl-4 pr-6 pt-4">
-          <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
-            Source principale citée
-          </div>
-          <Card className="w-full min-w-0 max-w-full gap-0 overflow-hidden rounded-xl border-border bg-gradient-to-b from-surface to-bg py-0 shadow-none">
-            <CardContent className="min-w-0 p-4">
-              <div className="mb-3 flex items-start gap-2.5">
-                <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold">
-                  <FileText className="size-4" aria-hidden />
+            <SourceDetail key={selected.id} citation={selected} />
+
+            {unique.length > 1 ? (
+              <div className="mt-5 w-full min-w-0">
+                <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
+                  Toutes les sources
                 </div>
-                <div className="min-w-0">
-                  <Badge
-                    variant="outline"
-                    className="mb-1 rounded border-azure/25 bg-azure/5 px-1.5 py-0 text-[9px] font-bold uppercase tracking-wider text-teal"
-                  >
-                    {selected.kind}
-                  </Badge>
-                  <h3 className="font-reading text-[13px] font-semibold leading-snug text-navy-ink">
-                    {selected.title}
-                  </h3>
-                  <p className="mt-0.5 text-[10px] text-ink-muted">
-                    {selected.source} · page {selected.page}
-                  </p>
-                </div>
+                <SourceList
+                  citations={unique}
+                  selectedId={selected.id}
+                  onSelect={onSelect}
+                />
               </div>
-
-              <div className="rounded-lg border border-gold/20 border-l-2 border-l-gold bg-gold/10 p-3 font-reading text-[12px] italic leading-6 text-ink">
-                « {selected.snippet} »
-              </div>
-
-              {selected.pdfUrl ? (
-                <div className="mt-3 rounded-lg border border-azure/25 bg-azure/5 p-2.5">
-                  <div className="mb-1 flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-teal">
-                    <FileText className="size-3" aria-hidden />
-                    PDF source
-                  </div>
-                  <a
-                    href={selected.pdfUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="block break-all font-mono text-[10px] leading-snug text-teal underline decoration-azure/40 underline-offset-2 hover:text-navy-ink"
-                  >
-                    {selected.pdfUrl}
-                  </a>
-                </div>
-              ) : null}
-
-              <div className="mt-3 flex items-center gap-2">
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={copyCitation}
-                  className="flex-1 gap-1.5 rounded-lg border-border bg-surface text-[11px] font-medium text-navy-ink hover:bg-surface-alt"
-                >
-                  {copied ? (
-                    <Check className="size-3.5 text-emerald" aria-hidden />
-                  ) : (
-                    <Copy className="size-3.5 text-teal" aria-hidden />
-                  )}
-                  {copied ? "Citation copiée" : "Copier la citation"}
-                </Button>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      asChild
-                      variant="secondary"
-                      size="icon-sm"
-                      className="rounded-lg bg-surface-alt text-navy-ink hover:bg-border/60"
-                    >
-                      <Link href="/#corpus" aria-label="Explorer le corpus">
-                        <ArrowUpRight className="size-3.5" aria-hidden />
-                      </Link>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Explorer le corpus</TooltipContent>
-                </Tooltip>
-              </div>
-            </CardContent>
-          </Card>
-
-          {unique.length > 1 ? (
-            <div className="mt-5 w-full min-w-0">
-              <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
-                Toutes les sources
-              </div>
-              <SourceList
-                citations={unique}
-                selectedId={selected.id}
-                onSelect={onSelect}
-              />
-            </div>
-          ) : null}
+            ) : null}
           </div>
         </ScrollArea>
       )}
