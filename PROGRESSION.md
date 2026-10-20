@@ -1,38 +1,29 @@
 # Progression
 
-Last updated: 2026-10-20 (assistant UI libraries, graph views, reading font)
+Last updated: 2026-10-20 (corpus analytics family)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
-- **OCR extraction is complete (2026-10-19).** All 116 documents — 1 192 pages,
-  2.50 M characters, 144 figures — are extracted and committed under `data/ocr/`.
-  PaddleOCR-VL 0.9B, `transformers` backend, chart recognition on. The pipeline is
-  manifest → per-document ledger → `document.md`; containers hold ≤ 50 pages each,
-  and `scripts/modal-pull.sh` downloads the volume and merges it with
-  `scripts/merge_ocr.py`. `scripts/verify_ocr.py` checks every document (contiguous
-  page markers, marker count vs `meta.json`, every image reference resolving) and
-  `scripts/purge_ocr.py` removes the scratch — `.work/`, `*.tmp`, `_ledger/` —
-  without touching a document. Both are safe to run repeatedly.
-  - Measured: 8.7 s/page overall, but dense statistical tables dominate — the
-    65-page `93cdb8c0` took 1 690 s (26 s/page, 733 K chars).
-  - **Cost is pages × s/page × price, not concurrency.** Per page: L4 $0.0019,
-    T4 $0.0019, A100-80GB $0.0083. A100 measured *slower* (9.4–14.7 s/page vs
-    L4's 7.2–10.1), so the default is **L4 with 2 containers** — the A100 waves
-    cost ~$7.8 for work that L4 would have done for ~$2.2.
-  - Two machines can share a corpus without duplicate work: `run --shard I/N`
-    and `BRH_SHARD=I/N` slice the same manifest order, disjoint by construction
-    (verified: 116 documents, 58 each, zero overlap). `--max-pages` bounds a
-    session; on Colab, `--out` should live on Google Drive so a disconnect costs
-    one document instead of the session.
-  - Free Colab and Kaggle only offer T4 (compute 7.5), and PaddleOCR documents
-    that vLLM is not recommended below 8.0 — L4/A100 are what make vLLM possible.
-    The `transformers` engine and vLLM cannot share an environment, so that
-    comparison needs its own image and a server/client split.
-  - A document that already has a non-empty `document.md` is never redone, so
-    re-dispatching, chunking, or restarting costs nothing.
+- **OCR extraction is in progress across three runners (2026-10-20).** The
+  catalogue is 1 169 PDFs; **363 are extracted** (31%), 806 remain.
+  - Modal is **stopped by budget**: $25.45 of the $30 credit is spent and the
+    spend guard refuses to dispatch below $5. The last run was left to finish;
+    no further Modal work is planned without new credit.
+  - Kaggle (`brh-ocr-batch`, two T4s) and Colab carry the rest for free.
+    Kaggle does ~78 documents per kernel version; Colab runs 12-document chunks
+    with a 3-minute pull loop, and each document gets its own process under a
+    40-minute cap (a single hung document stalled two chunks).
+  - Skip lists are the union of the volume and the checkout
+    (`scripts/modal_ocr.py::export_done`); a document is skipped before
+    download when its URL is mapped, after hashing otherwise.
+  - Cost tracks characters per page (r 0,67), not document length: 22.6 s/page
+    on average, 136.8 at the worst. Dense tables dominate.
+  - Per-page rates: L4 $0.0019, T4 $0.0019, A100-80GB $0.0083. The PaddlePaddle
+    backend measured 4.6x slower than transformers on a T4 and is not used.
+
 - **Citation deep links are implemented** — `brh_core.citations` now builds
   `pdf_url`s (`…/slug.pdf#page=N`), collapses snippets, and assembles citations
   from retrieved chunks; offline tests cover the contract. The assistant source
@@ -46,8 +37,9 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 - **The rest of the repo is still a scaffold**: structure, contracts, config, and
   wiring only. See the build order in [`README.md`](README.md).
 - **A second track, `services/analytics`**, generates the stats, charts and
-  social-media assets. Its `inventory` family is live (six posts, rendered from
-  the crawl ledger); the next family waits on corpus ingestion.
+  social-media assets. Its `inventory` family draws from the crawl ledger (six
+  posts); its `corpus` family now draws from the extraction records and the
+  per-page profile (eight posts). Both render from `python -m brh_analytics`.
 - **A third track, OCR evaluation, is mid-phase 1.** The plan is
   `docs/plans/2026-10-15-ocr-evaluation-design.md`: corpus composition (measured),
   the engine landscape, the three scoring axes (quality / efficiency /
@@ -115,6 +107,31 @@ Continue the build order:
    the files the inventory has already downloaded. Verify with `make ingest`.
 
 ## Recently done
+
+- **2026-10-20 — Corpus analytics family (`brh_analytics.corpus`).** The first
+  stats over what OCR actually produced, not what the site lists. Sources:
+  `data/ocr/<sha256>/meta.json` (182 documents, 2 215 pages, 5,6 M characters,
+  160 figures, 13 h 53 of compute), `experiments/gold/page-profiles.json` (the
+  116-document, 1 192-page per-page sample) and `corpus.crawl_urls` for coverage
+  only. Eight findings: `couverture` (182/1 169 = 15,6 %), `reste` (1 053
+  undownloaded, 480 from 2018), `volume` (seven 67-page documents hold 21,2 % of
+  pages), `rythme` (22,6 s/page, p90 56,9, max 136,8), `queue` (11 documents
+  >20 min, slowest 32 min 20 s), and three sample posts — `pages` (336 scanned
+  pages, 28,2 %), `hybride` (20 mixed documents hiding 94 scanned pages) and
+  `tableaux` (217 pages with tables, none scanned).
+  - Measured, not estimated: the mean is **22,6 s/page** (not the earlier
+    8,7 s/page figure), and the cost correlates with characters per page
+    (r≈0,67), not document length. `pages` is the first chart to label a share
+    per year, via a new `formatter` hook on `charts.per_year`; `charts.histogram`
+    is the new distribution primitive. Neither adds a colour.
+  - The 182 is local and verifiable: `state.jsonl` replays to the same set once
+    duplicate `done` events are collapsed (201 events → 182 shas). Remote volume
+    documents are not counted. The catalogue records only 116 downloads because
+    the OCR batches fetch PDFs outside the inventory; the `couverture` caption
+    says so rather than pretending the two agree.
+  - Postgres is optional here: a failed catalogue read warns and drops only the
+    two coverage posts. `tests/test_corpus.py` (22 offline cases) and
+    `tests/test_formatting.py` (4) pass with no services.
 
 - **2026-10-20 — Assistant libraries: ECharts, shadcn dashboard, Mermaid graphs,
   reading typography.** Migrated the chart renderer from hand-rolled SVG to
