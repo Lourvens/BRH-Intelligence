@@ -40,24 +40,6 @@ export function Message({
 
   return (
     <div className="min-w-0">
-      <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[11px]">
-        <span
-          className={cn(
-            "rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider",
-            message.refused
-              ? "border border-gold/50 bg-gold/15 text-gold-ink"
-              : "bg-navy text-white",
-          )}
-        >
-          {message.refused ? "Refus explicite" : "Réponse sourcée"}
-        </span>
-        {!message.refused && citations?.length ? (
-          <span className="rounded-full border border-gold/60 bg-gold/30 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-navy">
-            Source citée
-          </span>
-        ) : null}
-      </div>
-
         <div
           className={cn(
             "rounded-2xl rounded-tl-md p-4 sm:p-5",

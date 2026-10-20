@@ -3,7 +3,7 @@
 import { ArrowLeft, Plus, Search, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -149,7 +149,7 @@ export function ConversationSidebar({
             />
             <SidebarInput
               value={query}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setQuery(event.target.value)}
               placeholder="Rechercher dans l’historique…"
               aria-label="Rechercher une conversation"
               className="h-9 border-border bg-bg pl-8 text-[11px] focus-visible:border-navy/30"
