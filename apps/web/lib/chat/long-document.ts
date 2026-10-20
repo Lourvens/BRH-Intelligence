@@ -92,8 +92,8 @@ Pour prolonger la lecture, on peut consulter [la présentation du corpus](/#corp
 export const longDocumentThread: ChatThread = {
   id: "note-de-synthese",
   title: "Note de synthèse — lecture longue",
-  updatedAt: "3 oct.",
-  group: "Cette semaine",
+  updatedAt: "10:42",
+  group: "Aujourd’hui",
   messages: [
     {
       id: "note-q",

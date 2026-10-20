@@ -10,8 +10,8 @@ import type { ChatThread } from "./types";
 export const treeThread: ChatThread = {
   id: "institution-tree",
   title: "Arbre institutionnel",
-  updatedAt: "2 oct.",
-  group: "Cette semaine",
+  updatedAt: "10:38",
+  group: "Aujourd’hui",
   messages: [
     {
       id: "tree-q",
