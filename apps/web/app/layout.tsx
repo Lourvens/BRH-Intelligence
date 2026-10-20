@@ -2,6 +2,14 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { JsonLd } from "@/components/seo/json-ld";
+import {
+  OG_IMAGE,
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 
 import "./globals.css";
 
@@ -36,27 +44,55 @@ const sourceSerif = localFont({
   display: "swap",
 });
 
-const description =
-  "Posez vos questions sur les publications officielles de la Banque de la République d'Haïti. Réponses en français, avec le document et la page exacte.";
-
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "BRH Intelligence — Les publications de la BRH, sourcées",
     template: "%s · BRH Intelligence",
   },
-  description,
-  applicationName: "BRH Intelligence",
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  category: "Finance",
+  keywords: SITE_KEYWORDS,
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "fr_HT",
-    siteName: "BRH Intelligence",
+    url: "/",
+    siteName: SITE_NAME,
+    title: "BRH Intelligence — Les publications de la BRH, sourcées",
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
     title: "BRH Intelligence",
-    description,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE.url],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f9fc",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f9fc" },
+    { media: "(prefers-color-scheme: dark)", color: "#070e1c" },
+  ],
 };
 
 export default function RootLayout({
@@ -69,6 +105,29 @@ export default function RootLayout({
       className={`${inter.variable} ${montserrat.variable} ${sourceSerif.variable}`}
     >
       <body className="antialiased">
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Organization",
+                "@id": `${SITE_URL}/#organization`,
+                name: "Banque de la République d’Haïti",
+                alternateName: "BRH",
+                url: "https://www.brh.ht/",
+              },
+              {
+                "@type": "WebSite",
+                "@id": `${SITE_URL}/#website`,
+                url: SITE_URL,
+                name: SITE_NAME,
+                description: SITE_DESCRIPTION,
+                inLanguage: "fr",
+                publisher: { "@id": `${SITE_URL}/#organization` },
+              },
+            ],
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
