@@ -15,7 +15,7 @@ Charts render at ``SCALE`` times their final size and are downsampled by
 from __future__ import annotations
 
 import io
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 
 import matplotlib
 from matplotlib.backends.backend_agg import FigureCanvasAgg
@@ -88,35 +88,34 @@ def to_image(figure: Figure, width: int, height: int) -> Image.Image:
         return rendered.convert("RGB").resize((width, height), Image.LANCZOS)
 
 
-def per_year(
-    counts: Mapping[int, int],
+def _vertical_bars(
+    labels: Sequence[str],
+    values: Sequence[float],
     *,
-    width: int = 940,
-    height: int = 420,
-    highlight: int | None = None,
+    formatter: Callable[[float], str],
+    highlight: int | None,
+    highlight_colour: str,
+    width: int,
+    height: int,
 ) -> Figure:
-    """Vertical bars, one per year, each labelled directly.
-
-    With every bar labelled the value axis is redundant, so there is none — the
-    annotation *is* the scale.
-    """
-    years = list(counts)
-    values = [counts[year] for year in years]
-    ceiling = max(values, default=1)
+    """Vertical bars, each labelled directly — no value axis, no tick marks."""
+    ceiling = max(values, default=1) or 1
 
     figure = _figure(width, height)
     axes = figure.add_axes((0.015, 0.11, 0.975, 0.80))
     axes.bar(
-        [str(year) for year in years],
+        list(labels),
         values,
         width=0.6,
-        color=[palette.GOLD if year == highlight else palette.NAVY for year in years],
+        color=[
+            highlight_colour if index == highlight else palette.NAVY for index in range(len(values))
+        ],
     )
     for index, value in enumerate(values):
         axes.text(
             index,
             value + ceiling * 0.02,
-            fr_number(value),
+            formatter(value),
             ha="center",
             va="bottom",
             fontsize=11,
@@ -128,6 +127,55 @@ def per_year(
     axes.tick_params(axis="x", labelsize=12)
     _strip(axes)
     return figure
+
+
+def per_year(
+    counts: Mapping[int, int],
+    *,
+    width: int = 940,
+    height: int = 420,
+    highlight: int | None = None,
+    formatter: Callable[[float], str] = fr_number,
+) -> Figure:
+    """Vertical bars, one per year, each labelled directly.
+
+    With every bar labelled the value axis is redundant, so there is none — the
+    annotation *is* the scale. ``formatter`` exists so a share per year can be
+    labelled in percent without the caller drawing its own bars.
+    """
+    years = list(counts)
+    return _vertical_bars(
+        [str(year) for year in years],
+        [counts[year] for year in years],
+        formatter=formatter,
+        highlight=years.index(highlight) if highlight in years else None,
+        highlight_colour=palette.GOLD,
+        width=width,
+        height=height,
+    )
+
+
+def histogram(
+    bins: Sequence[tuple[str, int]],
+    *,
+    width: int = 940,
+    height: int = 420,
+) -> Figure:
+    """Vertical bars for a distribution — ``(bucket label, count)``, in order.
+
+    The bins are the caller's: binning is a decision about the data, not about
+    drawing, and a chart that guessed would hide that decision. Every bar is
+    labelled, so there is no value axis.
+    """
+    return _vertical_bars(
+        [label for label, _ in bins],
+        [count for _, count in bins],
+        formatter=fr_number,
+        highlight=None,
+        highlight_colour=palette.GOLD,
+        width=width,
+        height=height,
+    )
 
 
 def horizontal_bars(

@@ -193,10 +193,34 @@ One idea per asset. If a post needs two charts, it is two posts.
 ratio 251×123 ≈ 2.04:1). Clear space on all sides = the height of the `B`.
 On navy, use the white version.
 
+## Icons and illustrations
+
+Both are vocabulary, not decoration. They may name a category, a machine or a
+warning; they may never stand in for a number, a label or a chart.
+
+**Icons.** 24×24 grid, one colour from `palette`, 1.75 px stroke at 24 px and
+scaled with the icon (never below 1 px). One icon per block, always beside the
+text it labels, never as the only content of a block. Use them for provenance
+badges, machine/GPU rows, document kinds and data-quality warnings. Borrow path
+data from Lucide (ISC) and commit it: renders are offline, so nothing is fetched
+at draw time.
+
+**Illustrations.** Flat geometry built from palette tokens on `SURFACE` — no
+gradients, no shadows, no stock art. They explain structure (a pipeline, a
+document becoming pages, scanned versus born-digital) and are allowed only when
+the finding has no series to chart. Label the parts; an unlabelled illustration
+is decoration.
+
+**Never** — emoji · fetched or stock assets · raster logos other than the brand
+PNG · a colour outside `palette` · an icon or illustration where a chart would
+answer "how many" or "where" · more than one illustration per asset.
+
 ## Rules
 
 **Do** — one idea per asset · left-align · always show a source and a date ·
-lead with `navy` · keep whitespace · use tabular figures.
+lead with `navy` · keep whitespace · use tabular figures · **state the scope of
+the data**: a figure measured on a sample says so, in the eyebrow or the
+caption, and is never charted as if it covered the corpus.
 
 **Don't** — tint the background behind charts · use the raw gold `#E8D833` for
 text (that is what `gold-ink` is for) · mix more than four type sizes on one
@@ -216,6 +240,7 @@ invent colours outside this palette.
 | `swatches.py` | Renders `assets/palette.png`. |
 | `app.py` | The Streamlit dashboard. |
 | `inventory/` | The inventory family: its source and its copy. |
+| `corpus/` | The corpus family: extraction records, page profiles, coverage. |
 
 A family is a package under `src/brh_analytics/` exposing `build()`. Charts and
 posts stay family-agnostic so the next family inherits the whole design system

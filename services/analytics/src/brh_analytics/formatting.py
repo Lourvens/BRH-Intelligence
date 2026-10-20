@@ -49,6 +49,22 @@ def fr_date_short(value: date) -> str:
     return f"{value.day:02d}/{value.month:02d}/{value.year}"
 
 
+def fr_duration(seconds: float) -> str:
+    """``87`` -> ``1 min 27 s``; ``1940`` -> ``32 min 20 s``; ``50007`` -> ``13 h 53``.
+
+    Rounded to the second: a duration is a cost, and pretending to centisecond
+    precision would be the kind of false accuracy this project avoids.
+    """
+    total = round(seconds)
+    if total < 60:
+        return f"{fr_number(total)} s"
+    minutes, rest = divmod(total, 60)
+    if minutes < 60:
+        return f"{fr_number(minutes)} min {rest:02d} s" if rest else f"{fr_number(minutes)} min"
+    hours, minutes = divmod(minutes, 60)
+    return f"{fr_number(hours)} h {minutes:02d}" if minutes else f"{fr_number(hours)} h"
+
+
 def fr_bytes(value: int) -> str:
     """Decimal units, French convention: ``506`` MB rather than ``483`` MiB.
 

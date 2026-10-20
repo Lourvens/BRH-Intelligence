@@ -8,7 +8,7 @@ to have been parsed, which is why this family could be built before ingestion.
 from __future__ import annotations
 
 from brh_analytics.finding import Finding
-from brh_analytics.formatting import fr_bytes
+from brh_analytics.formatting import fr_bytes, fr_number
 from brh_analytics.inventory import findings, ledger
 
 SLUG = "inventory"
@@ -36,7 +36,7 @@ def tables() -> dict[str, list[dict[str, object]]]:
             {"Année": year, "Documents": count} for year, count in inventory.count_by_year().items()
         ],
         "Tailles": [
-            {"Mesure": "documents avec taille connue", "Valeur": len(inventory.sizes)},
+            {"Mesure": "documents avec taille connue", "Valeur": fr_number(len(inventory.sizes))},
             {"Mesure": "total connu", "Valeur": fr_bytes(inventory.known_size_total)},
             {"Mesure": "médiane", "Valeur": fr_bytes(inventory.median_size or 0)},
             {

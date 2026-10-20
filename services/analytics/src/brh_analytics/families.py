@@ -10,7 +10,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from brh_analytics import inventory
+from brh_analytics import corpus, inventory
 from brh_analytics.finding import Finding
 
 
@@ -33,5 +33,12 @@ FAMILIES: tuple[Family, ...] = (
         subtitle=inventory.SUBTITLE,
         build=inventory.build,
         tables=inventory.tables,
+    ),
+    Family(
+        slug=corpus.SLUG,
+        title=corpus.TITLE,
+        subtitle=corpus.SUBTITLE,
+        build=corpus.build,
+        tables=corpus.tables,
     ),
 )
