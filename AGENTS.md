@@ -115,6 +115,56 @@ Do not fall back to raw Chrome headless flags unless the CLI cannot do the job.
 - `data/processed/catalog.json` and the sibling Markdown under `data/` are
   leftovers from an earlier run, not sources of truth.
 
+## UI libraries (binding)
+
+Use maintained libraries for UI and charts. Do **not** hand-roll dialogs,
+dropdowns, sheets, tooltips, or chart geometry.
+
+### Charts
+
+Pick the library by task, not by habit:
+
+- **visx** (`@visx/xychart`, `@visx/shape`, `@visx/scale`, `@visx/axis`,
+  `@visx/grid`, `@visx/responsive`, `@visx/tooltip`) — default for
+  brand-critical, low/medium-density charts where the BRH look matters: line,
+  multi-line, area, bar, pie/donut, custom annotations. `XYChart` covers
+  animated series + axes + grid + tooltip; `ParentSize`/`ScaleSVG` cover
+  responsiveness. Keep to six series.
+- **Apache ECharts** (`echarts` + a thin React wrapper) — when the task needs
+  many chart types from one schema, dense/large tables, zoom/brush, maps,
+  heatmaps, or canvas performance. Build one option object from the table
+  schema; do not import the world per chart.
+
+Rule of thumb: **≤ 6 series and brand-critical → visx**. **Many types, dense
+data, or advanced interaction → ECharts**. Both must use the tokens in
+`app/globals.css`, keep charts on `surface`, omit gradients on the data, and
+carry a provenance line.
+
+The current `components/assistant/artifacts/cartesian-chart.tsx` and
+`pie-artifact.tsx` are legacy hand-rolled SVG. Do not extend them; replace them
+with visx/ECharts when touching the chart renderer. Never add a new custom SVG
+chart path.
+
+Always use Context7 before adopting an unfamiliar API:
+`/airbnb/visx`, `/apache/echarts-website`, `/apache/echarts-handbook`.
+
+### Components
+
+Use **shadcn/ui**. `apps/web/components.json` is configured for the
+`new-york` style, Tailwind v4 (`app/globals.css`), RSC, and lucide icons.
+
+```bash
+bunx shadcn@latest add button dialog sheet dropdown-menu tooltip input textarea
+```
+
+- Install/update primitives with the CLI; do not hand-roll a parallel dialog,
+  sheet, popover, or dropdown.
+- Compose shadcn primitives; keep BRH wrappers/tokens for brand surfaces.
+- Use `Sheet` for mobile conversation/source rails, `Dialog` for confirmations,
+  `Tooltip` for icon-only actions, and `DropdownMenu` for compact menus.
+- Use `lucide-react` for icons (the configured shadcn icon library).
+- Query Context7 `/shadcn-ui/ui` before setup, registries, or component APIs.
+
 ## Conventions that differ from defaults
 
 - Domain models are **frozen** pydantic — construct new instances, don't mutate.

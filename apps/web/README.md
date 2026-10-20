@@ -40,6 +40,15 @@ figures. All UI files stay **under 250 lines**.
 The type scale is named (`text-micro` → `text-hero`) and `lib/utils.ts` teaches
 `tailwind-merge` about it, so a size class never swallows a text colour.
 
+## UI libraries
+
+Charts use **visx** by default (brand-critical, up to six series), or
+**Apache ECharts** when the task needs dense data, many chart types, or advanced
+interaction. Components use **shadcn/ui** (`components.json`, new-york, Tailwind
+v4); install with `bunx shadcn@latest add <component>`. The existing custom SVG
+chart files are legacy and must be migrated on touch. See the binding rules in
+`AGENTS.md` and query Context7 for unfamiliar visx/ECharts/shadcn APIs.
+
 ## Assistant artifacts
 
 Agent visual output is data-first:
