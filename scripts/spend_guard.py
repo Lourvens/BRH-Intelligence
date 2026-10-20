@@ -21,7 +21,11 @@ import time
 
 
 def modal(*args: str) -> str:
-    return subprocess.run(["modal", *args], capture_output=True, text=True, check=True).stdout
+    # `python -m modal` rather than the `modal` binary: this runs from whatever
+    # interpreter launched it, where the entry point may not be on PATH.
+    return subprocess.run(
+        [sys.executable, "-m", "modal", *args], capture_output=True, text=True, check=True
+    ).stdout
 
 
 def remaining(monthly_credit: float) -> tuple[float, float]:
@@ -70,7 +74,8 @@ def main(argv: list[str] | None = None) -> int:
             apps = running_apps(args.app_prefix)
             for app_id in apps:
                 print(f"stopping {app_id}")
-                subprocess.run(["modal", "app", "stop", "-y", app_id], check=False)
+                subprocess.run([sys.executable, "-m", "modal", "app", "stop", "-y", app_id],
+                               check=False)
             print("guard tripped; work already written stays on the volume")
             return 0
 
