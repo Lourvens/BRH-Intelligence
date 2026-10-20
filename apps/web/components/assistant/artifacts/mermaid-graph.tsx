@@ -16,11 +16,12 @@ function buildDiagram(
   colors: string[],
   surface: string,
   ink: string,
+  orientation: "TD" | "LR",
 ) {
   const { nodes, edges } = graphData(artifact);
   const ids = new Map(nodes.map((node, index) => [node.id, `n${index}`]));
   const kinds = [...new Set(nodes.map((node) => node.kind))];
-  const lines = ["flowchart LR"];
+  const lines = [`flowchart ${orientation}`];
 
   nodes.forEach((node, index) => {
     const meta = [node.kind, node.page ? `p. ${node.page}` : null]
@@ -51,9 +52,11 @@ function buildDiagram(
 export function MermaidGraph({
   artifact,
   expanded = false,
+  orientation = "LR",
 }: {
   artifact: TableArtifact;
   expanded?: boolean;
+  orientation?: "TD" | "LR";
 }) {
   const [svg, setSvg] = useState("");
   const [failed, setFailed] = useState(false);
@@ -102,6 +105,7 @@ export function MermaidGraph({
         colors,
         cssColor("var(--color-surface)"),
         cssColor("var(--color-ink)"),
+        orientation,
       );
       const id = `mermaid-${artifact.id.replace(/[^a-z0-9]/gi, "-")}-${Date.now()}`;
       const result = await mermaid.render(id, diagram);
@@ -115,7 +119,7 @@ export function MermaidGraph({
     return () => {
       cancelled = true;
     };
-  }, [artifact]);
+  }, [artifact, orientation]);
 
   if (failed) {
     return (

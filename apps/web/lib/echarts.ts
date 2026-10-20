@@ -4,7 +4,6 @@ import {
   LineChart,
   PieChart,
   ScatterChart,
-  TreeChart,
 } from "echarts/charts";
 import {
   AriaComponent,
@@ -21,7 +20,6 @@ echarts.use([
   PieChart,
   ScatterChart,
   GraphChart,
-  TreeChart,
   GridComponent,
   TooltipComponent,
   LegendComponent,

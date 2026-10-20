@@ -49,9 +49,10 @@ document artifacts, blockquotes and source excerpts. Keep reading text at
 
 Charts use **visx** for brand-critical, low-density bespoke work, or
 **Apache ECharts** when the task needs many chart types, dense data, or advanced
-interaction. The assistant chart renderer is ECharts; graphs detect trees and
-use ECharts `tree`, fall back to ECharts `graph` for DAGs/cycles, and offer a
-lazy-loaded **Mermaid** flowchart in a shadcn `Tabs` switcher. Charts and graphs
+interaction. The assistant chart renderer is ECharts; graphs detect trees
+(`lib/chat/graph.ts`), use a lazy-loaded **Mermaid** diagram as the hierarchical
+view, and offer an ECharts force `graph` for networks. Long trees default to a
+vertical Mermaid layout with a vertical/horizontal toggle. Charts and graphs
 open a shadcn `Dialog` focus mode from the **Agrandir** button. Components use
 **shadcn/ui** (`components.json`, new-york, Tailwind v4); install with
 `bunx shadcn@latest add <component>`. Do not add custom SVG chart paths. See the
@@ -71,12 +72,12 @@ Agent visual output is data-first:
   scatter. The renderer accepts one or more `y` columns.
 - `graphData` builds nodes and edges from edge-source/edge-target columns, so
   graphs are generated from the table, not hand-authored nodes. Graph artifacts
-  detect trees (`lib/chat/graph.ts`) and expose **Arbre** (ECharts tree),
-  **Réseau** (force graph with free circular nodes) and **Diagramme** (Mermaid
-  flowchart) views behind shadcn `Tabs`. Non-tree graphs with cycles or multiple
-  paths skip the tree view and fall back to the network. The demo
-  `showcase-multimessage` thread walks through area, multi-line, donut, bar,
-  tree and network artifacts in one conversation.
+  detect trees (`lib/chat/graph.ts`) and expose **Réseau** (ECharts force graph
+  with circular nodes) and **Diagramme** (lazy Mermaid flowchart) views behind
+  shadcn `Tabs`. Trees default to the diagram, non-trees to the network, and long
+  diagrams default to vertical orientation with a manual vertical/horizontal
+  toggle. The demo `showcase-multimessage` thread walks through area, multi-line,
+  donut, bar, tree and network artifacts in one conversation.
 - The message renders a collapsed **Décision de présentation** card with the
   JSON decision, so the renderer choice is inspectable.
 

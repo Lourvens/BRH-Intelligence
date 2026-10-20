@@ -86,9 +86,10 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
     mobile sources. The left rail collapses to an icon rail; the right source
     inspector collapses to a 48px vertical rail (⌘/Ctrl+J). Charts and graphs
     open a shadcn `Dialog` focus mode from an **Agrandir** button. Charts are
-    ECharts; graph artifacts detect trees (`lib/chat/graph.ts`) and expose
-    **Arbre** (ECharts tree), **Réseau** (force graph) and **Diagramme**
-    (lazy-loaded Mermaid) views under shadcn `Tabs`. A complex 8-node tree demo
+    ECharts; graph artifacts detect trees (`lib/chat/graph.ts`), default trees to
+    a Mermaid **Diagramme** and non-trees to **Réseau** (ECharts force graph).
+    Long diagrams default to vertical (`TD`) with a vertical/horizontal toggle.
+    A complex 8-node tree demo
     lives in `lib/chat/tree-artifact.ts` + `tree-demo.ts`; a true 8-node network
     with cycles lives in `lib/chat/network-artifact.ts`. The
     `showcase-multimessage` thread is a single conversation with area,
@@ -124,11 +125,11 @@ Continue the build order:
   Serif 4** (`font-reading`); Inter remains the UI face and Montserrat the
   display face. Collapsible rails were explored in Stitch screen
   `1dcc653cdff9474297b37ef2d5d12c99`, and focus-mode UI was explored in the
-  same project. The network view now uses free circular nodes in a force layout,
-  while the tree/diagram views keep boxed nodes, so the three graph modes are
-  visually distinct. A multi-message showcase thread covers area, multi-line,
-  donut, bar, tree and network artifacts. `bun run typecheck` and `bun run build`
-  pass.
+  same project. The network view uses free circular nodes in a force layout,
+  while the diagram view uses Mermaid boxes and can switch between vertical and
+  horizontal orientation. A multi-message showcase thread covers area,
+  multi-line, donut, bar, tree and network artifacts. `bun run typecheck` and
+  `bun run build` pass.
 - **2026-10-19 — Assistant workspace rebuilt from Stitch.** Generated screen
   `81afab0033054e6d9c1f58636ea87fb8` (*Assistant Documentaire Chat Workspace*)
   and rebuilt `/assistant` against it: 280px conversation rail, 56px contextual

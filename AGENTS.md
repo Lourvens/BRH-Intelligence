@@ -142,10 +142,12 @@ carry a provenance line.
 
 The assistant chart renderer is **ECharts** because it renders many chart types
 from one table schema. Do not reintroduce hand-rolled SVG chart paths. For
-relationship graphs, use the **ECharts tree** or **`graph` series** for the
-data-derived view and **Mermaid** for the flowchart/diagram view; switch them
-with shadcn `Tabs`. Detect trees from the edge table (`lib/chat/graph.ts`) and
-fall back to a force graph for DAGs, cycles or multiple roots. Mermaid is
+relationship graphs, use the **ECharts `graph` series** for the network view and
+**Mermaid** for the hierarchical diagram view; switch them with shadcn `Tabs`.
+Detect trees from the edge table (`lib/chat/graph.ts`) to choose the default
+diagram and its orientation, and fall back to the network view for DAGs, cycles
+or multiple roots. Long trees default to a vertical (`TD`) Mermaid diagram with
+a vertical/horizontal toggle. Mermaid is
 lazy-loaded (`import("mermaid")`) so the diagram renderer stays out of the
 initial bundle. Artifact focus mode is a shadcn `Dialog` opened from the
 `ExpandableVisualization` button; do not hand-roll a modal.
