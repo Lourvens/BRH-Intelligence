@@ -31,7 +31,7 @@ export function Message({
   if (message.role === "user") {
     return (
       <div className="flex justify-end">
-        <div className="max-w-[88%] rounded-2xl rounded-br-md bg-navy px-4 py-3 text-small leading-relaxed text-white shadow-sm sm:max-w-[620px]">
+        <div className="max-w-[88%] rounded-2xl rounded-br-md bg-navy px-4 py-3 text-small leading-relaxed text-white sm:max-w-[620px]">
           {message.content}
         </div>
       </div>
@@ -60,10 +60,8 @@ export function Message({
 
         <div
           className={cn(
-            "rounded-2xl rounded-tl-md border bg-gradient-to-b from-surface to-bg p-4 shadow-sm sm:p-5",
-            message.refused
-              ? "border-gold/50 bg-gold/10"
-              : "border-border",
+            "rounded-2xl rounded-tl-md p-4 sm:p-5",
+            message.refused ? "bg-gold/10" : "bg-surface",
           )}
         >
           {message.refused ? (

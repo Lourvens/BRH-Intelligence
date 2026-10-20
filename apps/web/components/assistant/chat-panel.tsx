@@ -101,7 +101,7 @@ export function ChatPanel({
                   <div className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold shadow-sm">
                     <Search className="size-4" aria-hidden />
                   </div>
-                  <div className="rounded-2xl rounded-tl-md border border-border bg-surface p-4 shadow-sm">
+                  <div className="rounded-2xl rounded-tl-md bg-surface p-4">
                     <div className="flex items-center gap-2 text-small font-medium text-navy">
                       <Loader2 className="size-4 animate-spin text-teal" aria-hidden />
                       Recherche dans le corpus…
