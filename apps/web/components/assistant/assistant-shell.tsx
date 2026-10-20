@@ -200,8 +200,8 @@ export function AssistantShell() {
           />
           <aside
             className={cn(
-              "hidden shrink-0 border-l border-border xl:flex",
-              sourcesCollapsed ? "w-12" : "w-[320px]",
+              "hidden shrink-0 overflow-hidden border-l border-border xl:flex",
+              sourcesCollapsed ? "w-12" : "w-[360px]",
             )}
           >
             {sourcesCollapsed ? (
@@ -225,7 +225,7 @@ export function AssistantShell() {
         <SheetContent
           side="right"
           showCloseButton={false}
-          className="w-[min(320px,90vw)] gap-0 p-0 sm:max-w-[360px]"
+          className="w-[min(360px,92vw)] gap-0 p-0 sm:max-w-[400px]"
         >
           <SheetHeader className="sr-only">
             <SheetTitle>Sources documentaires</SheetTitle>

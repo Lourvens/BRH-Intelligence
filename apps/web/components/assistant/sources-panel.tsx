@@ -57,7 +57,7 @@ export function SourcesPanel({
   }
 
   return (
-    <div className="flex h-full w-full min-w-0 shrink-0 flex-col bg-surface">
+    <div className="flex h-full w-full min-w-0 shrink-0 flex-col overflow-hidden bg-surface">
       <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
         <div>
           <h2 className="font-display text-caption font-bold text-navy-ink">
@@ -119,12 +119,12 @@ export function SourcesPanel({
           type="always"
           className="min-h-0 w-full flex-1 overscroll-contain [&_[data-slot=scroll-area-viewport]]:overflow-x-hidden"
         >
-          <div className="w-full min-w-0 pb-6 pl-4 pr-6 pt-4">
+          <div className="w-full min-w-0 max-w-full overflow-hidden pb-6 pl-4 pr-6 pt-4">
           <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
             Source principale citée
           </div>
-          <Card className="gap-0 rounded-xl border-border bg-gradient-to-b from-surface to-bg py-0 shadow-none">
-            <CardContent className="p-4">
+          <Card className="w-full min-w-0 max-w-full gap-0 overflow-hidden rounded-xl border-border bg-gradient-to-b from-surface to-bg py-0 shadow-none">
+            <CardContent className="min-w-0 p-4">
               <div className="mb-3 flex items-start gap-2.5">
                 <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold">
                   <FileText className="size-4" aria-hidden />
