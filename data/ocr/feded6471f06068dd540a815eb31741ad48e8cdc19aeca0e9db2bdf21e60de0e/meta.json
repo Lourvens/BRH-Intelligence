@@ -1,0 +1,12 @@
+{
+ "sha256": "feded6471f06068dd540a815eb31741ad48e8cdc19aeca0e9db2bdf21e60de0e",
+ "batch": "20261020T173837Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/content/pdfs/feded6471f06068dd540a815eb31741ad48e8cdc19aeca0e9db2bdf21e60de0e.pdf",
+ "pages": 67,
+ "chars": 200855,
+ "figures": 1,
+ "seconds": 1917.3,
+ "finished_at": "2026-10-20T18:10:35+00:00"
+}
