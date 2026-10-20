@@ -32,7 +32,7 @@ const steps: PipelineStep[] = [
     title: "Recherche sémantique",
     body: "Les passages les plus proches de la question sont retrouvés dans le corpus, avec leur document et leur page.",
     note: "Passages candidats",
-    tone: "bg-navy/10 text-navy border-navy/15",
+    tone: "bg-navy-ink/10 text-navy-ink border-navy-ink/15",
   },
   {
     number: "03",
@@ -64,7 +64,7 @@ export function PipelineSection() {
             <Workflow className="size-3.5" aria-hidden />
             Architecture &amp; pipeline
           </div>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-navy-ink sm:text-4xl">
             Comment fonctionne BRH Intelligence
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
@@ -91,7 +91,7 @@ export function PipelineSection() {
                     </span>
                     <Icon className="size-6 text-ink-muted" aria-hidden />
                   </div>
-                  <h3 className="mb-2 font-display text-body font-bold text-navy">
+                  <h3 className="mb-2 font-display text-body font-bold text-navy-ink">
                     {step.title}
                   </h3>
                   <p className="text-caption leading-relaxed text-ink-muted">

@@ -40,12 +40,12 @@ export function MessageContent({
 
   const components: Components = {
     h1: ({ children }) => (
-      <h2 className="mt-6 font-reading text-title font-bold leading-tight text-navy first:mt-0">
+      <h2 className="mt-6 font-reading text-title font-bold leading-tight text-navy-ink first:mt-0">
         {children}
       </h2>
     ),
     h2: ({ children }) => (
-      <h3 className="mt-5 font-reading text-lead font-semibold leading-snug text-navy first:mt-0">
+      <h3 className="mt-5 font-reading text-lead font-semibold leading-snug text-navy-ink first:mt-0">
         {children}
       </h3>
     ),
@@ -71,7 +71,7 @@ export function MessageContent({
       );
     },
     strong: ({ children }) => (
-      <strong className="box-decoration-clone rounded-sm bg-gold/30 px-1 py-0.5 font-semibold text-navy">
+      <strong className="box-decoration-clone rounded-sm bg-gold/30 px-1 py-0.5 font-semibold text-navy-ink dark:bg-gold/25">
         {children}
       </strong>
     ),
@@ -89,7 +89,7 @@ export function MessageContent({
       </ul>
     ),
     ol: ({ children }) => (
-      <ol className="list-decimal space-y-1.5 pl-5 text-[15px] leading-[1.7] text-ink-muted marker:font-semibold marker:text-navy">
+      <ol className="list-decimal space-y-1.5 pl-5 text-[15px] leading-[1.7] text-ink-muted marker:font-semibold marker:text-navy-ink">
         {children}
       </ol>
     ),
@@ -105,7 +105,7 @@ export function MessageContent({
       </a>
     ),
     code: ({ children }) => (
-      <code className="rounded bg-surface-alt px-1 py-0.5 font-mono text-[0.85em] text-navy">
+      <code className="rounded bg-surface-alt px-1 py-0.5 font-mono text-[0.85em] text-navy-ink">
         {children}
       </code>
     ),
@@ -123,7 +123,7 @@ export function MessageContent({
       </div>
     ),
     thead: ({ children }) => (
-      <thead className="bg-surface-alt text-navy">{children}</thead>
+      <thead className="bg-surface-alt text-navy-ink">{children}</thead>
     ),
     th: ({ children }) => (
       <th className="border-b border-border px-2.5 py-2 font-semibold">

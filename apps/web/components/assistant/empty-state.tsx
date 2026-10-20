@@ -17,7 +17,7 @@ export function EmptyState({
             <Landmark className="size-3.5" aria-hidden />
             Assistant documentaire
           </span>
-          <h1 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl">
+          <h1 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-navy-ink sm:text-4xl">
             Que cherchez-vous dans les archives ?
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-small leading-relaxed text-ink-muted sm:text-body">
@@ -38,7 +38,7 @@ export function EmptyState({
                 <span className="text-[10px] font-bold uppercase tracking-wider text-teal">
                   {item.category}
                 </span>
-                <ArrowUpRight className="size-4 text-ink-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-navy" aria-hidden />
+                <ArrowUpRight className="size-4 text-ink-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-navy-ink" aria-hidden />
               </span>
               <span className="text-small font-semibold leading-snug text-ink">
                 {item.question}

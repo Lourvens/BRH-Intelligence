@@ -102,7 +102,7 @@ export function ChatPanel({
                     <Search className="size-4" aria-hidden />
                   </div>
                   <div className="rounded-2xl rounded-tl-md bg-surface p-4">
-                    <div className="flex items-center gap-2 text-small font-medium text-navy">
+                    <div className="flex items-center gap-2 text-small font-medium text-navy-ink">
                       <Loader2 className="size-4 animate-spin text-teal" aria-hidden />
                       Recherche dans le corpus…
                     </div>
@@ -120,7 +120,7 @@ export function ChatPanel({
 
       <div className="shrink-0 border-t border-border bg-bg/95 px-4 py-3 backdrop-blur sm:px-6 sm:py-4">
         <div className="mx-auto max-w-[820px]">
-          <div className="rounded-2xl border border-border bg-surface p-2 shadow-sm transition-colors focus-within:border-navy/30">
+          <div className="rounded-2xl border border-border bg-surface p-2 shadow-sm transition-colors focus-within:border-navy-ink/30">
             <Textarea
               ref={textareaRef}
               value={draft}

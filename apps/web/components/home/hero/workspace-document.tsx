@@ -27,7 +27,7 @@ export function WorkspaceDocument() {
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border pb-3">
           <div className="flex items-center gap-2">
             <span className="size-2.5 rounded-full bg-blue" />
-            <span className="text-[11px] font-bold uppercase tracking-wider text-navy">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-navy-ink">
               Document source
             </span>
           </div>
@@ -41,7 +41,7 @@ export function WorkspaceDocument() {
             <span className="rounded bg-navy px-1.5 py-0.5 font-bold text-white">
               Page {demo.page} / {demo.totalPages}
             </span>
-            <span className="rounded border border-gold/50 bg-gold/20 px-1.5 py-0.5 font-mono font-bold text-navy">
+            <span className="rounded border border-gold/50 bg-gold/20 px-1.5 py-0.5 font-mono font-bold text-navy-ink">
               Extrait sourcé
             </span>
           </div>
@@ -53,7 +53,7 @@ export function WorkspaceDocument() {
           </p>
           <div className="my-2 rounded border-l-4 border-gold bg-gold/15 p-2 text-[12px] font-medium text-ink">
             « {quoteBefore}
-            <span className="rounded bg-gold px-1 py-0.5 font-bold text-navy">
+            <span className="rounded bg-gold px-1 py-0.5 font-bold text-navy-deep">
               {demo.quoteHighlight}
             </span>
             {quoteAfter} »
@@ -67,7 +67,7 @@ export function WorkspaceDocument() {
       <div className="flex items-center gap-2">
         <a
           href="#corpus"
-          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2 text-caption font-semibold text-navy shadow-sm transition-colors hover:border-navy"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2 text-caption font-semibold text-navy-ink shadow-sm transition-colors hover:border-navy-ink"
         >
           <FileText className="size-4 text-scarlet" aria-hidden />
           Ouvrir le document source
@@ -77,7 +77,7 @@ export function WorkspaceDocument() {
           onClick={copyCitation}
           title={copied ? "Citation copiée" : "Copier la citation"}
           aria-label={copied ? "Citation copiée" : "Copier la citation"}
-          className="rounded-lg bg-surface-alt p-2 text-ink-muted transition-colors hover:bg-border/60 hover:text-navy"
+          className="rounded-lg bg-surface-alt p-2 text-ink-muted transition-colors hover:bg-border/60 hover:text-navy-ink"
         >
           {copied ? (
             <Check className="size-4 text-emerald" aria-hidden />

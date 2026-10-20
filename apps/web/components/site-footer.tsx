@@ -53,7 +53,7 @@ export function SiteFooter() {
                 height={123}
                 className="h-5 w-auto"
               />
-              <span className="font-display text-caption font-bold text-navy">
+              <span className="font-display text-caption font-bold text-navy-deep">
                 Intelligence
               </span>
             </Link>

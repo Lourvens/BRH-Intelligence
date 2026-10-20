@@ -60,7 +60,7 @@ export function SourcesPanel({
     <div className="flex h-full w-full min-w-0 shrink-0 flex-col bg-surface">
       <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
         <div>
-          <h2 className="font-display text-caption font-bold text-navy">
+          <h2 className="font-display text-caption font-bold text-navy-ink">
             Sources documentaires
           </h2>
           <p className="text-[10px] text-ink-muted">
@@ -107,7 +107,7 @@ export function SourcesPanel({
           <div className="mb-3 grid size-12 place-items-center rounded-2xl bg-surface-alt text-teal">
             <FileSearch className="size-6" aria-hidden />
           </div>
-          <p className="font-display text-small font-bold text-navy">
+          <p className="font-display text-small font-bold text-navy-ink">
             Les sources apparaîtront ici
           </p>
           <p className="mt-1.5 max-w-[220px] text-[11px] leading-relaxed text-ink-muted">
@@ -136,7 +136,7 @@ export function SourcesPanel({
                   >
                     {selected.kind}
                   </Badge>
-                  <h3 className="font-reading text-[13px] font-semibold leading-snug text-navy">
+                  <h3 className="font-reading text-[13px] font-semibold leading-snug text-navy-ink">
                     {selected.title}
                   </h3>
                   <p className="mt-0.5 text-[10px] text-ink-muted">
@@ -159,7 +159,7 @@ export function SourcesPanel({
                     href={selected.pdfUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="block break-all font-mono text-[10px] leading-snug text-teal underline decoration-azure/40 underline-offset-2 hover:text-navy"
+                    className="block break-all font-mono text-[10px] leading-snug text-teal underline decoration-azure/40 underline-offset-2 hover:text-navy-ink"
                   >
                     {selected.pdfUrl}
                   </a>
@@ -172,7 +172,7 @@ export function SourcesPanel({
                   variant="outline"
                   size="sm"
                   onClick={copyCitation}
-                  className="flex-1 gap-1.5 rounded-lg border-border bg-surface text-[11px] font-medium text-navy hover:bg-surface-alt"
+                  className="flex-1 gap-1.5 rounded-lg border-border bg-surface text-[11px] font-medium text-navy-ink hover:bg-surface-alt"
                 >
                   {copied ? (
                     <Check className="size-3.5 text-emerald" aria-hidden />
@@ -187,7 +187,7 @@ export function SourcesPanel({
                       asChild
                       variant="secondary"
                       size="icon-sm"
-                      className="rounded-lg bg-surface-alt text-navy hover:bg-border/60"
+                      className="rounded-lg bg-surface-alt text-navy-ink hover:bg-border/60"
                     >
                       <Link href="/#corpus" aria-label="Explorer le corpus">
                         <ArrowUpRight className="size-3.5" aria-hidden />

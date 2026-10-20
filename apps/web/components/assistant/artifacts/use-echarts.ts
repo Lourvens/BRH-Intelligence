@@ -14,20 +14,31 @@ export function useECharts(
     const node = ref.current;
     if (!node) return;
 
-    const chart = echarts.init(node, undefined, { renderer: "canvas" });
-    const option = buildOption();
-    if (option) chart.setOption(option as Parameters<typeof chart.setOption>[0]);
-
     let disposed = false;
+    let chart: ReturnType<typeof echarts.init> | null = null;
     const observer = new ResizeObserver(() => {
-      if (!disposed) chart.resize();
+      if (!disposed) chart?.resize();
     });
-    observer.observe(node);
+
+    // One frame of delay lets next-themes finish applying the `.dark` class
+    // before the option resolves CSS variables. Without it, the first redraw
+    // after a theme switch can read the previous theme's tokens.
+    const frame = requestAnimationFrame(() => {
+      if (disposed) return;
+
+      chart = echarts.init(node, undefined, { renderer: "canvas" });
+      const option = buildOption();
+      if (option) {
+        chart.setOption(option as Parameters<typeof chart.setOption>[0]);
+      }
+      observer.observe(node);
+    });
 
     return () => {
       disposed = true;
+      cancelAnimationFrame(frame);
       observer.disconnect();
-      chart.dispose();
+      chart?.dispose();
     };
     // The caller owns the dependency list; option builders intentionally stay
     // outside it so a render does not tear down the canvas.

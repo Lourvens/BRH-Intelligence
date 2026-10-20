@@ -33,7 +33,7 @@ export function SourceList({
               {index + 1}
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block truncate text-[11px] font-medium text-navy">
+              <span className="block truncate text-[11px] font-medium text-navy-ink">
                 {citation.title}
               </span>
               <span className="text-[10px] text-ink-muted">
@@ -46,7 +46,7 @@ export function SourceList({
               href={citation.pdfUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-1 block w-full min-w-0 break-all pl-7 font-mono text-[9px] leading-snug text-teal underline decoration-azure/40 underline-offset-2 hover:text-navy"
+              className="mt-1 block w-full min-w-0 break-all pl-7 font-mono text-[9px] leading-snug text-teal underline decoration-azure/40 underline-offset-2 hover:text-navy-ink"
             >
               {citation.pdfUrl}
             </a>

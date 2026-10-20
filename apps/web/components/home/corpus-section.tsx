@@ -20,7 +20,7 @@ const families = [
     title: "Notes de conjoncture & inflation",
     type: "Séries",
     body: "Notes mensuelles, indices des prix et séries statistiques publiées par l’IHSI.",
-    tone: "bg-navy/10 text-navy",
+    tone: "bg-navy-ink/10 text-navy-ink",
   },
   {
     icon: FileText,
@@ -44,7 +44,7 @@ export function CorpusSection() {
               <Library className="size-3.5" aria-hidden />
               Corpus documentaire
             </div>
-            <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-navy sm:text-4xl">
+            <h2 className="font-display text-3xl font-extrabold leading-tight tracking-tight text-navy-ink sm:text-4xl">
               Explorer le corpus, page par page.
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
@@ -63,7 +63,7 @@ export function CorpusSection() {
                       : "text-center sm:text-left"
                   }
                 >
-                  <span className="font-display text-2xl font-extrabold text-navy sm:text-3xl">
+                  <span className="font-display text-2xl font-extrabold text-navy-ink sm:text-3xl">
                     {metric.value}
                   </span>
                   <span className="mt-0.5 block text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
@@ -89,7 +89,7 @@ export function CorpusSection() {
                     </div>
                     <div className="flex-1">
                       <div className="flex flex-wrap items-center justify-between gap-2">
-                        <h3 className="text-caption font-bold text-navy">
+                        <h3 className="text-caption font-bold text-navy-ink">
                           {family.title}
                         </h3>
                         <span className="font-mono text-[11px] text-ink-muted">
@@ -108,7 +108,7 @@ export function CorpusSection() {
 
           <div className="relative lg:col-span-5">
             <div className="relative rounded-3xl border border-border bg-gradient-to-tr from-surface-alt via-bg to-azure/5 p-3 shadow-xl">
-              <div className="overflow-hidden rounded-2xl border border-white/80 bg-surface shadow-inner">
+              <div className="overflow-hidden rounded-2xl border border-white/80 bg-surface shadow-inner dark:border-border">
                 <Image
                   src="/brh-corpus-archive.jpg"
                   alt="Bibliothèque documentaire de la Banque de la République d’Haïti"
@@ -122,7 +122,7 @@ export function CorpusSection() {
                   <Landmark className="size-4" aria-hidden />
                 </div>
                 <div>
-                  <span className="block text-caption font-bold text-navy">
+                  <span className="block text-caption font-bold text-navy-ink">
                     Archive documentaire
                   </span>
                   <span className="text-[10px] text-ink-muted">

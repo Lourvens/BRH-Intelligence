@@ -40,7 +40,7 @@ export function ExpandableVisualization({
             size="icon-sm"
             onClick={() => setOpen(true)}
             aria-label={`Agrandir : ${title}`}
-            className="text-ink-muted hover:bg-surface-alt hover:text-navy"
+            className="text-ink-muted hover:bg-surface-alt hover:text-navy-ink"
           >
             <Maximize2 className="size-3.5" aria-hidden />
           </Button>
@@ -51,7 +51,7 @@ export function ExpandableVisualization({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="flex h-[min(90dvh,900px)] w-[min(1200px,96vw)] max-w-none flex-col gap-0 overflow-hidden bg-surface p-0 sm:max-w-none">
           <DialogHeader className="shrink-0 border-b border-border p-4 pr-12">
-            <DialogTitle className="font-display text-caption font-bold text-navy">
+            <DialogTitle className="font-display text-caption font-bold text-navy-ink">
               {title}
             </DialogTitle>
             <DialogDescription className="text-[10px] text-ink-muted">

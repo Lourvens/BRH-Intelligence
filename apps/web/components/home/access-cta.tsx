@@ -30,7 +30,7 @@ export function AccessCta() {
             <div className="mt-8 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center">
               <a
                 href="/assistant"
-                className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-gold px-8 py-4 text-[15px] font-bold text-navy shadow-lg shadow-navy/20 transition-colors hover:bg-white"
+                className="inline-flex items-center justify-center gap-2.5 rounded-xl bg-gold px-8 py-4 text-[15px] font-bold text-navy-deep shadow-lg shadow-navy/20 transition-colors hover:bg-white"
               >
                 Ouvrir l’assistant
                 <ArrowRight className="size-4" aria-hidden />

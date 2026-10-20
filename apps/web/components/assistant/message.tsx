@@ -50,7 +50,7 @@ export function Message({
             <div className="flex items-start gap-3">
               <ShieldAlert className="mt-0.5 size-5 shrink-0 text-gold-ink" aria-hidden />
               <div>
-                <div className="mb-1 font-display text-caption font-bold text-navy">
+                <div className="mb-1 font-display text-caption font-bold text-navy-ink">
                   Refus explicite
                 </div>
                 <p className="text-small leading-relaxed text-ink">
@@ -80,9 +80,9 @@ export function Message({
               <CollapsibleTrigger asChild>
                 <button
                   type="button"
-                  className="group flex w-full items-center justify-between gap-2 rounded-lg border border-gold/30 bg-gold/10 px-2.5 py-1.5 text-left transition-colors hover:bg-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
+                  className="group flex w-full items-center justify-between gap-2 rounded-lg border border-gold/30 bg-gold/10 px-2.5 py-1.5 text-left transition-colors hover:bg-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-ink focus-visible:ring-offset-2"
                 >
-                  <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-navy">
+                  <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-navy-ink">
                     <FileText className="size-3.5 text-gold-ink" aria-hidden />
                     Sources ({citations.length})
                   </span>
@@ -115,7 +115,7 @@ export function Message({
                             {index + 1}
                           </span>
                           <span className="min-w-0 flex-1">
-                            <span className="block text-[11px] font-medium leading-snug text-navy">
+                            <span className="block text-[11px] font-medium leading-snug text-navy-ink">
                               {citation.title}
                             </span>
                             <span className="mt-0.5 block text-[10px] text-ink-muted">

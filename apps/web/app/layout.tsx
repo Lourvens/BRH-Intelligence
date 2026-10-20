@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import { ThemeProvider } from "@/components/theme-provider";
+
 import "./globals.css";
 
 const inter = localFont({
@@ -63,16 +65,25 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
+      suppressHydrationWarning
       className={`${inter.variable} ${montserrat.variable} ${sourceSerif.variable}`}
     >
       <body className="antialiased">
-        <a
-          href="#contenu"
-          className="sr-only rounded-full bg-navy px-4 py-2 text-small font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          storageKey="brh-theme"
         >
-          Aller au contenu
-        </a>
-        {children}
+          <a
+            href="#contenu"
+            className="sr-only rounded-full bg-navy px-4 py-2 text-small font-medium text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50"
+          >
+            Aller au contenu
+          </a>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

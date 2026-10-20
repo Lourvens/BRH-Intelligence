@@ -14,6 +14,10 @@
   --color-navy: #031a71;
   --color-navy-deep: #05155b;
   --color-navy-700: #012a67;
+  /* Navy as *text/icon* on a page surface. It equals `navy` in light mode and
+     flips to a light blue in `.dark`, so `text-navy-ink` stays readable while
+     `bg-navy` / `from-navy` remain dark primary surfaces. */
+  --color-navy-ink: #031a71;
   --color-blue: #1e4b9e;
   --color-teal: #005b8a;
   --color-azure: #009cdc;
@@ -64,8 +68,17 @@
   --font-sans: var(--type-sans);
   --font-display: var(--type-display);
   --font-reading: var(--type-reading);
+}
 
-  /* shadcn/ui aliases: keep every primitive on the BRH palette. */
+/*
+ * shadcn/ui aliases: keep every primitive on the BRH palette.
+ *
+ * Intentionally *not* `@theme inline`: a non-inline theme variable compiles to
+ * `var(--color-primary)` in utilities, which lets `.dark` retarget the
+ * semantic tokens below. `inline` would bake `var(--color-navy)` into the
+ * utility and silently ignore the dark overrides.
+ */
+@theme {
   --color-background: var(--color-bg);
   --color-foreground: var(--color-ink);
   --color-card: var(--color-surface);
@@ -96,6 +109,7 @@
 }
 
 :root {
+  color-scheme: light;
   --type-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --type-display: var(--font-montserrat), ui-sans-serif, system-ui,
@@ -109,6 +123,63 @@
   --sidebar-accent-foreground: var(--color-navy);
   --sidebar-border: var(--color-border);
   --sidebar-ring: var(--color-azure);
+}
+
+/*
+ * Dark tokens. This block is unlayered and comes after `@theme`, so it wins
+ * over the theme layer without `!important`.
+ *
+ * `navy`, `navy-deep`, `blue` and `gold` deliberately keep their light-mode
+ * values: they are *surface* colours (buttons, the footer, gradient panels,
+ * gold fills). Text and icons use `navy-ink` instead, which flips to a light
+ * blue here. That split is what lets `bg-navy` stay a dark primary surface
+ * while headings remain readable on dark pages.
+ *
+ * `gold-ink` is lightened because the light-mode #A67C00 only clears 3.8:1 on
+ * white; on a dark surface it would drop below AA. Solid `bg-gold` chips pair
+ * with the constant `text-navy-deep`; translucent gold highlights use
+ * `text-navy-ink` (light) so they never become dark-on-dark-brown.
+ */
+.dark {
+  color-scheme: dark;
+  --color-bg: #070e1c;
+  --color-surface: #0d1730;
+  --color-surface-alt: #15213c;
+  --color-border: #263352;
+  --color-ink: #e9eef8;
+  --color-ink-muted: #a3b1c9;
+
+  --color-navy-ink: #c2d4ff;
+  --color-navy-700: #9fbbff;
+
+  --color-gold-ink: #f1d675;
+  --color-teal: #6fd3f2;
+  /* azure keeps its brand value: 5.7:1 on the dark surface, so it still works
+     for focus rings and the second chart series without a lighter variant. */
+  --color-emerald: #5fd6b3;
+  --color-scarlet: #ff7d8e;
+  --color-steel: #8badd9;
+  --color-purple: #b39cf0;
+  --color-slate: #9aa0c0;
+
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-ink);
+  --sidebar-primary: var(--color-navy-ink);
+  --sidebar-primary-foreground: var(--color-bg);
+  --sidebar-accent: var(--color-surface-alt);
+  --sidebar-accent-foreground: var(--color-navy-ink);
+  --sidebar-border: var(--color-border);
+  --sidebar-ring: var(--color-azure);
+
+  /* shadcn semantic tokens that point at a brand colour need retargeting. */
+  --color-primary: var(--color-navy-ink);
+  --color-primary-foreground: var(--color-bg);
+  --color-secondary-foreground: var(--color-navy-ink);
+  --color-accent-foreground: var(--color-navy-ink);
+  /* `scarlet` is lightened for text on dark; a destructive *fill* needs a
+     deeper red so white labels keep their contrast. */
+  --color-destructive: #b3122e;
+  --color-destructive-foreground: var(--color-ink);
 }
 
 @layer base {
@@ -154,8 +225,15 @@
     color: var(--color-surface);
   }
 
+  .dark ::selection {
+    background-color: var(--color-navy-ink);
+    color: var(--color-bg);
+  }
+
   :focus-visible {
-    outline: 2px solid var(--color-navy);
+    /* navy-ink is the same navy in light mode and flips to azure-ish blue in
+       dark, where a navy outline would disappear. */
+    outline: 2px solid var(--color-navy-ink);
     outline-offset: 3px;
   }
 

@@ -27,7 +27,7 @@ export function SourcesRail({
             size="icon-sm"
             onClick={onOpen}
             aria-label="Déplier les sources"
-            className="text-ink-muted hover:bg-surface-alt hover:text-navy"
+            className="text-ink-muted hover:bg-surface-alt hover:text-navy-ink"
           >
             <PanelRightOpen className="size-4" aria-hidden />
           </Button>
@@ -39,7 +39,7 @@ export function SourcesRail({
         type="button"
         onClick={onOpen}
         aria-label={`Ouvrir les sources documentaires (${count})`}
-        className="flex min-h-0 flex-1 flex-col items-center gap-2 rounded-lg px-1 py-2 text-ink-muted transition-colors hover:bg-surface-alt hover:text-navy"
+        className="flex min-h-0 flex-1 flex-col items-center gap-2 rounded-lg px-1 py-2 text-ink-muted transition-colors hover:bg-surface-alt hover:text-navy-ink"
       >
         <BookOpen className="size-4" aria-hidden />
         <span className="[writing-mode:vertical-rl] rotate-180 text-[9px] font-bold uppercase tracking-wider">

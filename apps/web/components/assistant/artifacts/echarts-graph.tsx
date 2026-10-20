@@ -1,5 +1,7 @@
 "use client";
 
+import { useTheme } from "next-themes";
+
 import { graphData, SERIES_COLORS } from "@/lib/chat/decision";
 import type { TableArtifact } from "@/lib/chat/types";
 import { cssColor } from "@/lib/echarts";
@@ -20,7 +22,7 @@ function escapeHtml(value: string) {
   );
 }
 
-function buildGraphOption(artifact: TableArtifact) {
+function buildGraphOption(artifact: TableArtifact, isDark: boolean) {
   const { nodes, edges } = graphData(artifact);
   if (!nodes.length) return null;
 
@@ -28,6 +30,7 @@ function buildGraphOption(artifact: TableArtifact) {
   const navyDeep = cssColor("var(--color-navy-deep)");
   const ink = cssColor("var(--color-ink)");
   const muted = cssColor("var(--color-ink-muted)");
+  const border = cssColor("var(--color-border)");
   const surface = cssColor("var(--color-surface)");
   const steel = cssColor("var(--color-steel)");
   const palette = SERIES_COLORS.map(cssColor);
@@ -79,10 +82,14 @@ function buildGraphOption(artifact: TableArtifact) {
     },
     tooltip: {
       trigger: "item" as const,
-      backgroundColor: navyDeep,
-      borderColor: navy,
+      backgroundColor: isDark ? cssColor("var(--color-surface-alt)") : navyDeep,
+      borderColor: isDark ? border : navy,
       borderWidth: 1,
-      textStyle: { color: "#ffffff", fontSize: 11, fontFamily: "Inter, sans-serif" },
+      textStyle: {
+        color: isDark ? ink : "#ffffff",
+        fontSize: 11,
+        fontFamily: "Inter, sans-serif",
+      },
       formatter: (params: {
         dataType?: string;
         data?: { name?: string; kind?: string; page?: number; relation?: string };
@@ -161,7 +168,11 @@ export function EChartsGraph({
   expanded?: boolean;
 }) {
   const { nodes } = graphData(artifact);
-  const ref = useECharts(() => buildGraphOption(artifact), [artifact]);
+  const { resolvedTheme } = useTheme();
+  const ref = useECharts(
+    () => buildGraphOption(artifact, resolvedTheme === "dark"),
+    [artifact, resolvedTheme],
+  );
 
   if (!nodes.length) return null;
 

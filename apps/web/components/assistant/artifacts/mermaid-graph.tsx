@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
@@ -60,14 +61,19 @@ export function MermaidGraph({
 }) {
   const [svg, setSvg] = useState("");
   const [failed, setFailed] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
+    // `resolvedTheme` is undefined during the first client render. Wait for it
+    // so the diagram is rendered once, with the final tokens.
+    if (!resolvedTheme) return;
+
     let cancelled = false;
     setSvg("");
     setFailed(false);
 
     const colors = [
-      cssColor("var(--color-navy)"),
+      cssColor("var(--color-navy-ink)"),
       cssColor("var(--color-azure)"),
       cssColor("var(--color-gold-ink)"),
       cssColor("var(--color-purple)"),
@@ -76,6 +82,12 @@ export function MermaidGraph({
     ];
 
     async function render() {
+      // Let next-themes apply the theme class before reading CSS variables.
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => resolve()),
+      );
+      if (cancelled) return;
+
       const mermaid = (await import("mermaid")).default;
       mermaid.initialize({
         startOnLoad: false,
@@ -85,7 +97,7 @@ export function MermaidGraph({
         themeVariables: {
           primaryColor: cssColor("var(--color-surface)"),
           primaryTextColor: cssColor("var(--color-ink)"),
-          primaryBorderColor: cssColor("var(--color-navy)"),
+          primaryBorderColor: cssColor("var(--color-navy-ink)"),
           lineColor: cssColor("var(--color-steel)"),
           secondaryColor: cssColor("var(--color-surface-alt)"),
           tertiaryColor: cssColor("var(--color-bg)"),
@@ -119,7 +131,7 @@ export function MermaidGraph({
     return () => {
       cancelled = true;
     };
-  }, [artifact, orientation]);
+  }, [artifact, orientation, resolvedTheme]);
 
   if (failed) {
     return (

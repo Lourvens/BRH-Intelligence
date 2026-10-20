@@ -47,7 +47,7 @@ const usages: Usage[] = [
     query: "Quand le Bureau d’Information sur le Crédit a‑t‑il vu le jour ?",
     left: "Texte intégral",
     right: "Page citée",
-    tone: "bg-navy/10 text-navy",
+    tone: "bg-navy-ink/10 text-navy-ink",
   },
   {
     icon: Newspaper,
@@ -74,7 +74,7 @@ export function UsagesSection() {
             <Users className="size-3.5" aria-hidden />
             Profils métiers
           </div>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-navy-ink sm:text-4xl">
             Cas d’usage &amp; profils
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
@@ -99,7 +99,7 @@ export function UsagesSection() {
                       <Icon className="size-6" aria-hidden />
                     </div>
                     <div>
-                      <h3 className="font-display text-[17px] font-bold text-navy">
+                      <h3 className="font-display text-[17px] font-bold text-navy-ink">
                         {usage.title}
                       </h3>
                       <span className="text-[11px] font-medium text-ink-muted">

@@ -31,15 +31,15 @@ export function Hero() {
               <span className="relative inline-flex size-2 rounded-full bg-teal" />
             </span>
             <Sparkles className="size-3 text-teal" aria-hidden />
-            <span className="text-[10px] font-bold uppercase tracking-wider text-navy sm:text-[11px]">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-navy-ink sm:text-[11px]">
               {heroCopy.eyebrow}
             </span>
           </div>
 
-          <h1 className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-navy sm:text-5xl lg:text-[58px]">
+          <h1 className="font-display text-4xl font-extrabold leading-[1.12] tracking-tight text-navy-ink sm:text-5xl lg:text-[58px]">
             {heroCopy.titleLead}
             <br />
-            <span className="bg-gradient-to-r from-navy via-teal to-navy bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-navy-ink via-teal to-navy-ink bg-clip-text text-transparent">
               {heroCopy.titleAccent}
             </span>
           </h1>
@@ -58,14 +58,14 @@ export function Hero() {
             </a>
             <a
               href="#demo"
-              className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-border bg-surface px-6 py-3.5 text-[15px] font-semibold text-ink shadow-sm transition-colors hover:border-navy/25 hover:bg-surface-alt sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-border bg-surface px-6 py-3.5 text-[15px] font-semibold text-ink shadow-sm transition-colors hover:border-navy-ink/25 hover:bg-surface-alt sm:w-auto"
             >
               <PlayCircle className="size-5 text-teal" aria-hidden />
               {heroCopy.secondaryCta}
             </a>
             <a
               href="/assistant"
-              className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-azure/40 bg-azure/5 px-6 py-3.5 text-[15px] font-semibold text-navy shadow-sm transition-colors hover:border-azure/70 hover:bg-azure/10 sm:w-auto"
+              className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-azure/40 bg-azure/5 px-6 py-3.5 text-[15px] font-semibold text-navy-ink shadow-sm transition-colors hover:border-azure/70 hover:bg-azure/10 sm:w-auto"
             >
               <MessageSquare className="size-4 text-teal" aria-hidden />
               {heroCopy.assistantCta}

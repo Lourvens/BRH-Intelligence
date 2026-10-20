@@ -4,6 +4,8 @@ import Link from "next/link";
 
 import { navigation } from "@/lib/content/navigation";
 
+import { ThemeToggle } from "./theme-toggle";
+
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/95 shadow-[0_1px_3px_rgba(11,23,41,0.03)] backdrop-blur-md">
@@ -11,19 +13,23 @@ export function SiteHeader() {
         <Link
           href="/"
           aria-label="BRH Intelligence — accueil"
-          className="flex shrink-0 items-center gap-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy"
+          className="flex shrink-0 items-center gap-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-ink"
         >
-          <Image
-            src="/brh-logo.png"
-            alt="BRH"
-            width={251}
-            height={123}
-            priority
-            className="h-7 w-auto"
-          />
+          {/* The mark is navy only; on dark surfaces it sits on a white chip so
+              it keeps its official colour and stays visible. */}
+          <span className="inline-flex items-center justify-center dark:rounded-sm dark:bg-white dark:p-0.5">
+            <Image
+              src="/brh-logo.png"
+              alt="BRH"
+              width={251}
+              height={123}
+              priority
+              className="h-7 w-auto"
+            />
+          </span>
           <span className="hidden h-6 w-px bg-border sm:block" />
           <span className="flex flex-col">
-            <span className="font-display text-body font-bold leading-none tracking-tight text-navy">
+            <span className="font-display text-body font-bold leading-none tracking-tight text-navy-ink">
               Intelligence
             </span>
             <span className="mt-1 hidden text-[10px] font-medium leading-none text-ink-muted sm:block">
@@ -40,7 +46,7 @@ export function SiteHeader() {
             <a
               key={item.href}
               href={item.href}
-              className="text-small font-medium text-ink-muted transition-colors hover:text-navy"
+              className="text-small font-medium text-ink-muted transition-colors hover:text-navy-ink"
             >
               {item.label}
             </a>
@@ -52,6 +58,8 @@ export function SiteHeader() {
             <span className="size-2 rounded-full bg-emerald" />
             <span>Archive 2018—2026</span>
           </div>
+
+          <ThemeToggle className="size-8 sm:size-9" />
 
           <a
             href="/assistant"

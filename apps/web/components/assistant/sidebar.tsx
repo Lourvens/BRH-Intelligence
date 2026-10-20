@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, type ChangeEvent } from "react";
 
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -60,16 +61,18 @@ export function ConversationSidebar({
             aria-label="BRH Intelligence — accueil"
             className="flex min-w-0 flex-1 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring"
           >
-            <Image
-              src="/brh-logo.png"
-              alt="BRH"
-              width={251}
-              height={123}
-              className="h-6 w-auto"
-            />
+            <span className="inline-flex shrink-0 items-center justify-center dark:rounded-sm dark:bg-white dark:p-0.5">
+              <Image
+                src="/brh-logo.png"
+                alt="BRH"
+                width={251}
+                height={123}
+                className="h-6 w-auto"
+              />
+            </span>
             <span className="hidden h-5 w-px bg-sidebar-border sm:block" />
             <span className="min-w-0">
-              <span className="block font-display text-caption font-bold leading-none text-navy">
+              <span className="block font-display text-caption font-bold leading-none text-navy-ink">
                 Intelligence
               </span>
               <span className="mt-0.5 block truncate text-[9px] text-ink-muted">
@@ -81,7 +84,7 @@ export function ConversationSidebar({
         {!isMobile ? (
           <SidebarTrigger
             aria-label="Replier ou déplier la navigation"
-            className="size-8 shrink-0 text-ink-muted hover:bg-gold/10 hover:text-navy"
+            className="size-8 shrink-0 text-ink-muted hover:bg-gold/10 hover:text-navy-ink"
           />
         ) : null}
         {isMobile ? (
@@ -134,7 +137,7 @@ export function ConversationSidebar({
                 size="icon"
                 onClick={() => setOpen(true)}
                 aria-label="Rechercher dans l’historique"
-                className="mx-auto size-9 text-ink-muted hover:bg-sidebar-accent hover:text-navy"
+                className="mx-auto size-9 text-ink-muted hover:bg-sidebar-accent hover:text-navy-ink"
               >
                 <Search className="size-4" aria-hidden />
               </Button>
@@ -152,7 +155,7 @@ export function ConversationSidebar({
               onChange={(event: ChangeEvent<HTMLInputElement>) => setQuery(event.target.value)}
               placeholder="Rechercher dans l’historique…"
               aria-label="Rechercher une conversation"
-              className="h-9 border-border bg-bg pl-8 text-[11px] focus-visible:border-navy/30"
+              className="h-9 border-border bg-bg pl-8 text-[11px] focus-visible:border-navy-ink/30"
             />
           </div>
         )}
@@ -184,11 +187,15 @@ export function ConversationSidebar({
             Mode démonstration · réponses préenregistrées
           </Badge>
         ) : null}
+        <ThemeToggle
+          withLabel={!collapsed}
+          className={cn(collapsed && "mx-auto")}
+        />
         <SidebarMenuButton
           asChild
           tooltip="Retour au portail officiel"
           className={cn(
-            "text-[11px] text-ink-muted hover:text-navy",
+            "text-[11px] text-ink-muted hover:text-navy-ink",
             collapsed && "justify-center",
           )}
         >

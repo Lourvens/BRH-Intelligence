@@ -7,7 +7,7 @@ export function TableArtifactView({ artifact }: { artifact: TableArtifact }) {
     <figure className="overflow-hidden rounded-xl border border-border bg-surface">
       <div className="flex items-start justify-between gap-3 border-b border-border px-3.5 py-3">
         <div>
-          <figcaption className="font-display text-caption font-bold text-navy">
+          <figcaption className="font-display text-caption font-bold text-navy-ink">
             {artifact.title}
           </figcaption>
           <p className="text-[10px] text-ink-muted">{artifact.subtitle}</p>
@@ -25,7 +25,7 @@ export function TableArtifactView({ artifact }: { artifact: TableArtifact }) {
               {artifact.schema.columns.map((column) => (
                 <th
                   key={column.key}
-                  className="px-2 py-1.5 font-bold text-navy"
+                  className="px-2 py-1.5 font-bold text-navy-ink"
                 >
                   {column.label}
                 </th>

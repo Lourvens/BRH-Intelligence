@@ -1,5 +1,7 @@
 "use client";
 
+import { useTheme } from "next-themes";
+
 import { chartSeries, chartUnit, SERIES_COLORS } from "@/lib/chat/decision";
 import type { TableArtifact } from "@/lib/chat/types";
 import { cssColor } from "@/lib/echarts";
@@ -7,7 +9,7 @@ import { cssColor } from "@/lib/echarts";
 import { formatTick } from "./chart-utils";
 import { useECharts } from "./use-echarts";
 
-function buildOption(artifact: TableArtifact) {
+function buildOption(artifact: TableArtifact, isDark: boolean) {
   const data = chartSeries(artifact);
   const labels = data[0]?.points.map((point) => point.label) ?? [];
   if (!data.length || !labels.length) return null;
@@ -15,6 +17,7 @@ function buildOption(artifact: TableArtifact) {
   const chartType = artifact.decision.chartType ?? "line";
   const unit = chartUnit(artifact);
   const navy = cssColor("var(--color-navy)");
+  const navyInk = cssColor("var(--color-navy-ink)");
   const navyDeep = cssColor("var(--color-navy-deep)");
   const ink = cssColor("var(--color-ink)");
   const muted = cssColor("var(--color-ink-muted)");
@@ -64,7 +67,7 @@ function buildOption(artifact: TableArtifact) {
               ? {
                   show: true,
                   position: "top" as const,
-                  color: navy,
+                  color: navyInk,
                   fontSize: 9,
                   formatter: (params: { value?: unknown }) => formatTick(Number(params.value), unit),
                 }
@@ -107,11 +110,15 @@ function buildOption(artifact: TableArtifact) {
     },
     tooltip: {
       trigger: isPie ? "item" : "axis",
-      axisPointer: { type: "line", lineStyle: { color: navy } },
-      backgroundColor: navyDeep,
-      borderColor: navy,
+      axisPointer: { type: "line", lineStyle: { color: navyInk } },
+      backgroundColor: isDark ? cssColor("var(--color-surface-alt)") : navyDeep,
+      borderColor: isDark ? border : navy,
       borderWidth: 1,
-      textStyle: { color: "#ffffff", fontSize: 11, fontFamily: "Inter, sans-serif" },
+      textStyle: {
+        color: isDark ? ink : "#ffffff",
+        fontSize: 11,
+        fontFamily: "Inter, sans-serif",
+      },
       formatter: isPie ? "{b}<br/>{c} ({d}%)" : undefined,
     },
     legend: showLegend
@@ -166,7 +173,11 @@ export function EChartsChart({
   artifact: TableArtifact;
   expanded?: boolean;
 }) {
-  const ref = useECharts(() => buildOption(artifact), [artifact]);
+  const { resolvedTheme } = useTheme();
+  const ref = useECharts(() => buildOption(artifact, resolvedTheme === "dark"), [
+    artifact,
+    resolvedTheme,
+  ]);
 
   return (
     <div

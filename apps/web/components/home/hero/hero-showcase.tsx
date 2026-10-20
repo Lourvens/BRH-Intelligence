@@ -24,7 +24,7 @@ export function HeroShowcase() {
     <div id="demo" className="relative mx-auto mt-10 w-full max-w-6xl scroll-mt-24 lg:mt-14">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 -translate-y-4 rounded-3xl bg-gradient-to-tr from-azure/10 via-navy/10 to-gold/10 blur-2xl"
+        className="pointer-events-none absolute inset-0 -z-10 -translate-y-4 rounded-3xl bg-gradient-to-tr from-azure/10 via-navy-ink/10 to-gold/10 blur-2xl"
       />
 
       <div className="absolute -top-4 right-8 z-30 hidden items-center gap-2 rounded-full border border-emerald/20 bg-surface px-4 py-2 text-caption font-semibold text-emerald shadow-md sm:inline-flex [animation-duration:3s] animate-bounce">
@@ -52,7 +52,7 @@ export function HeroShowcase() {
         </div>
 
         <div className="bg-surface p-4 sm:p-6 lg:p-8">
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-gradient-to-r from-navy via-navy-deep to-teal p-3 px-4 text-white shadow-md">
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-gradient-to-r from-navy via-navy-deep to-teal p-3 px-4 text-white shadow-md dark:to-teal/40">
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-2.5 py-1 font-mono text-[11px] font-semibold text-white">
                 <span className="size-2 animate-pulse rounded-full bg-emerald" />
@@ -89,11 +89,11 @@ export function HeroShowcase() {
                     <span className="text-[10px] font-bold uppercase tracking-wider text-teal">
                       Requête documentaire
                     </span>
-                    <span className="rounded bg-surface-alt px-1.5 py-0.5 text-[9px] font-bold text-navy">
+                    <span className="rounded bg-surface-alt px-1.5 py-0.5 text-[9px] font-bold text-navy-ink">
                       DÉMONSTRATION
                     </span>
                   </div>
-                  <p className="line-clamp-2 text-small font-semibold leading-snug text-navy sm:truncate sm:text-[15px]">
+                  <p className="line-clamp-2 text-small font-semibold leading-snug text-navy-ink sm:truncate sm:text-[15px]">
                     « {demo.question} »
                   </p>
                 </div>
@@ -129,7 +129,7 @@ export function HeroShowcase() {
                     1
                   </span>
                   <div>
-                    <span className="block font-bold text-navy">
+                    <span className="block font-bold text-navy-ink">
                       Compréhension de l’intention
                     </span>
                     <span className="text-[11px] text-ink-muted">
@@ -142,7 +142,7 @@ export function HeroShowcase() {
                     2
                   </span>
                   <div>
-                    <span className="block font-bold text-navy">
+                    <span className="block font-bold text-navy-ink">
                       Rapprochement documentaire
                     </span>
                     <span className="text-[11px] text-ink-muted">

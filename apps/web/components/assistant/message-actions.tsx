@@ -86,7 +86,7 @@ export function MessageActions({
         onClick={copyAnswer}
         aria-label="Copier la réponse et ses sources"
         className={cn(
-          "group h-7 gap-1.5 rounded-md px-2 text-[10px] font-medium text-ink-muted transition-all duration-200 hover:bg-surface-alt hover:text-navy active:scale-95",
+          "group h-7 gap-1.5 rounded-md px-2 text-[10px] font-medium text-ink-muted transition-all duration-200 hover:bg-surface-alt hover:text-navy-ink active:scale-95",
           copied === "done" && "bg-emerald/5 text-emerald hover:text-emerald",
         )}
       >
@@ -105,7 +105,7 @@ export function MessageActions({
         onClick={shareAnswer}
         aria-label="Partager la réponse"
         className={cn(
-          "group h-7 gap-1.5 rounded-md px-2 text-[10px] font-medium text-ink-muted transition-all duration-200 hover:bg-surface-alt hover:text-navy active:scale-95",
+          "group h-7 gap-1.5 rounded-md px-2 text-[10px] font-medium text-ink-muted transition-all duration-200 hover:bg-surface-alt hover:text-navy-ink active:scale-95",
           shared !== "idle" && "bg-azure/5 text-teal hover:text-teal",
         )}
       >

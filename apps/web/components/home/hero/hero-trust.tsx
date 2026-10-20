@@ -30,8 +30,8 @@ export function HeroTrust() {
               key={tag.title}
               className="flex flex-col items-center justify-center rounded-xl border border-border bg-surface/70 p-3.5 shadow-sm transition-colors hover:bg-surface"
             >
-              <Icon className="mb-1 size-5 text-navy" aria-hidden />
-              <span className="font-display text-caption font-bold text-navy">
+              <Icon className="mb-1 size-5 text-navy-ink" aria-hidden />
+              <span className="font-display text-caption font-bold text-navy-ink">
                 {tag.title}
               </span>
               <span className="text-[10px] text-ink-muted">{tag.detail}</span>
@@ -53,7 +53,7 @@ export function HeroTrust() {
                 <Icon className="size-5" aria-hidden />
               </div>
               <div>
-                <div className="font-display text-3xl font-extrabold text-navy">
+                <div className="font-display text-3xl font-extrabold text-navy-ink">
                   {metric.value}
                 </div>
                 <div className="mt-0.5 font-display text-caption font-semibold text-ink">

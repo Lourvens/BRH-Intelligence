@@ -23,7 +23,9 @@ export type ChartSeries = {
 };
 
 export const SERIES_COLORS = [
-  "var(--color-navy)",
+  // navy-ink is the same navy in light mode and a light blue in dark mode, so
+  // the first series stays visible on a dark plot without a second palette.
+  "var(--color-navy-ink)",
   "var(--color-azure)",
   "var(--color-gold-ink)",
   "var(--color-purple)",

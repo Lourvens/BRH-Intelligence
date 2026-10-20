@@ -6,7 +6,7 @@ export function DecisionCard({ artifact }: { artifact: ChatArtifact }) {
   return (
     <details className="group rounded-xl border border-border bg-surface">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3.5 py-3">
-        <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-navy">
+        <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-navy-ink">
           <Braces className="size-3.5 text-teal" aria-hidden />
           Décision de présentation
         </span>

@@ -46,7 +46,7 @@ export function FaqSection() {
             <CircleHelp className="size-3.5" aria-hidden />
             FAQ
           </div>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-navy-ink sm:text-4xl">
             Questions fréquentes
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted">
@@ -63,7 +63,7 @@ export function FaqSection() {
                 key={item.question}
                 className="rounded-2xl border border-border bg-surface p-6 shadow-sm"
               >
-                <h3 className="flex items-start justify-between gap-4 font-display text-body font-bold text-navy">
+                <h3 className="flex items-start justify-between gap-4 font-display text-body font-bold text-navy-ink">
                   <span>{item.question}</span>
                   <Icon className="mt-0.5 size-5 shrink-0 text-teal" aria-hidden />
                 </h3>

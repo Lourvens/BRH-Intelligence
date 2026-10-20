@@ -39,7 +39,7 @@ export function ComparisonSection() {
             <Scale className="size-3.5" aria-hidden />
             Comparaison
           </div>
-          <h2 className="font-display text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+          <h2 className="font-display text-3xl font-extrabold tracking-tight text-navy-ink sm:text-4xl">
             Recherche documentaire vs réponse générative
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
@@ -54,7 +54,7 @@ export function ComparisonSection() {
               key={row.criterion}
               className="rounded-2xl border border-border bg-surface p-4 shadow-sm"
             >
-              <div className="font-display text-small font-bold text-navy">
+              <div className="font-display text-small font-bold text-navy-ink">
                 {row.criterion}
               </div>
               <div className="text-[11px] text-ink-muted">{row.detail}</div>
@@ -63,7 +63,7 @@ export function ComparisonSection() {
                   <span className="text-[10px] font-bold uppercase tracking-wider text-teal">
                     BRH Intelligence
                   </span>
-                  <span className="mt-1 flex items-center gap-1.5 text-caption font-semibold text-navy">
+                  <span className="mt-1 flex items-center gap-1.5 text-caption font-semibold text-navy-ink">
                     <Check className="size-4 shrink-0 text-emerald" aria-hidden />
                     {row.brh}
                   </span>
@@ -87,7 +87,7 @@ export function ComparisonSection() {
             <table className="w-full min-w-[640px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="w-1/3 bg-surface-alt/80 p-5 text-caption font-bold text-navy">
+                  <th className="w-1/3 bg-surface-alt/80 p-5 text-caption font-bold text-navy-ink">
                     Critère
                   </th>
                   <th className="w-1/3 border-r border-navy bg-navy p-5 text-caption font-bold text-white">
@@ -104,13 +104,13 @@ export function ComparisonSection() {
               <tbody className="divide-y divide-border text-caption">
                 {rows.map((row) => (
                   <tr key={row.criterion}>
-                    <td className="p-5 font-semibold text-navy">
+                    <td className="p-5 font-semibold text-navy-ink">
                       {row.criterion}
                       <span className="mt-0.5 block text-[11px] font-normal text-ink-muted">
                         {row.detail}
                       </span>
                     </td>
-                    <td className="border-r border-azure/10 bg-azure/5 p-5 font-semibold text-navy">
+                    <td className="border-r border-azure/10 bg-azure/5 p-5 font-semibold text-navy-ink">
                       <span className="flex items-center gap-1.5">
                         <Check className="size-4 shrink-0 text-emerald" aria-hidden />
                         {row.brh}
