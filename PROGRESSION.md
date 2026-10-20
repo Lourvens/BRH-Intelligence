@@ -8,10 +8,14 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 ## Active
 
 - **OCR extraction is in progress across three runners (2026-10-20).** The
-  catalogue is 1 169 PDFs; **363 are extracted** (31%), 806 remain.
+  catalogue is 1 169 PDFs; **357 are extracted** (30.5%), 812 remain. The
+  checkout is the whole corpus: the Modal volume was pulled with
+  `modal volume get brh-ocr /ocr` and merged, so 173 documents that existed
+  only on the volume are now committed (5 482 pages).
   - Modal is **stopped by budget**: $25.45 of the $30 credit is spent and the
     spend guard refuses to dispatch below $5. The last run was left to finish;
-    no further Modal work is planned without new credit.
+    no further Modal work is planned without new credit. A volume is not a
+    backup: pull it before the credit runs out, not after.
   - Kaggle (`brh-ocr-batch`, two T4s) and Colab carry the rest for free.
     Kaggle does ~78 documents per kernel version; Colab runs 12-document chunks
     with a 3-minute pull loop, and each document gets its own process under a
