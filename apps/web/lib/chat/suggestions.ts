@@ -2,19 +2,6 @@ import type { SuggestedQuestion } from "./types";
 
 export const suggestedQuestions: SuggestedQuestion[] = [
   {
-    id: "synthese",
-    category: "Synthèse",
-    question: "Génère une note de synthèse longue sur les publications de la BRH.",
-    threadId: "note-de-synthese",
-  },
-  {
-    id: "arbre",
-    category: "Graphe",
-    question:
-      "Montre-moi l’arbre institutionnel qui relie la BRH, le BIC et les indicateurs du corpus.",
-    threadId: "institution-tree",
-  },
-  {
     id: "inflation",
     category: "Inflation",
     question: "Quel était le taux d’inflation annuel en novembre 2025 ?",
@@ -38,6 +25,19 @@ export const suggestedQuestions: SuggestedQuestion[] = [
     category: "Crédit",
     question: "Quand le Bureau d’Information sur le Crédit a-t-il vu le jour ?",
     threadId: "bureau-credit",
+  },
+  {
+    id: "synthese",
+    category: "Synthèse",
+    question: "Génère une note de synthèse longue sur les publications de la BRH.",
+    threadId: "note-de-synthese",
+  },
+  {
+    id: "arbre",
+    category: "Graphe",
+    question:
+      "Montre-moi l’arbre institutionnel qui relie la BRH, le BIC et les indicateurs du corpus.",
+    threadId: "institution-tree",
   },
   {
     id: "showcase",
