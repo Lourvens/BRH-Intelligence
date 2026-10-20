@@ -7,11 +7,9 @@ import { Button } from "@/components/ui/button";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export function ChatHeader({
-  title,
   citationCount,
   onOpenSources,
 }: {
-  title: string;
   citationCount: number;
   onOpenSources: () => void;
 }) {
@@ -27,14 +25,9 @@ export function ChatHeader({
         <span className="hidden size-7 shrink-0 place-items-center rounded border border-gold/30 bg-navy text-gold sm:grid">
           <ChartLine className="size-3.5" aria-hidden />
         </span>
-        <div className="min-w-0">
-          <h1 className="truncate font-display text-caption font-bold text-navy">
-            {title}
-          </h1>
-          <p className="truncate text-[10px] text-ink-muted">
-            Agent documentaire · publications officielles de la BRH
-          </p>
-        </div>
+        <p className="min-w-0 truncate text-[10px] font-medium text-ink-muted">
+          Agent documentaire · publications officielles de la BRH
+        </p>
       </div>
 
       <div className="flex shrink-0 items-center gap-2">

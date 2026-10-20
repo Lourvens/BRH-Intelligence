@@ -170,7 +170,6 @@ export function AssistantShell() {
 
       <SidebarInset className="min-h-0 overflow-hidden bg-bg">
         <ChatHeader
-          title={activeThread?.title ?? "Nouvelle conversation"}
           citationCount={citations.length}
           onOpenSources={() => setSourcesOpen(true)}
         />
