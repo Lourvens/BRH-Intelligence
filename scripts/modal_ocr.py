@@ -379,7 +379,24 @@ def run_urls(limit: int = 0, detach: bool = False) -> None:
         return
     rows = [json.loads(line) for line in source.read_text().splitlines() if line.strip()]
     urls = _shard_of([row["url"] for row in rows])
-    batch = urls[:limit] if limit else urls
+
+    # Drop URLs already extracted somewhere else. Without this, `--limit 100`
+    # keeps taking the same first 100 of the shard and every dispatch is a no-op
+    # after the first — which is exactly what happened once.
+    done_urls: set[str] = set()
+    try:
+        done_urls.update(_url_map.remote().values())
+    except Exception as error:
+        print(f"could not read the url map: {type(error).__name__}: {error}")
+    local_done = LOCAL_OCR / "done_urls.txt"
+    if local_done.is_file():
+        done_urls.update(
+            line.strip() for line in local_done.read_text().splitlines() if line.strip()
+        )
+    pending = [url for url in urls if url not in done_urls]
+    print(f"shard {os.environ.get('BRH_SHARD', 'all')}: {len(urls)} url(s), "
+          f"{len(urls) - len(pending)} already extracted, {len(pending)} pending")
+    batch = pending[:limit] if limit else pending
 
     # Refuse to start when the workspace credit is under the floor. Dispatching
     # is the one decision that spends money, so it is the one that gets checked.
@@ -392,6 +409,10 @@ def run_urls(limit: int = 0, detach: bool = False) -> None:
         if check.returncode != 0:
             print(f"credit is below ${floor} — not dispatching")
             return
+
+    if not batch:
+        print("nothing to do: every url in this shard has output")
+        return
 
     groups = [batch[i:i + URLS_PER_CONTAINER] for i in range(0, len(batch), URLS_PER_CONTAINER)]
     print(f"dispatching {len(batch)} of {len(urls)} url(s) in {len(groups)} container(s) "
