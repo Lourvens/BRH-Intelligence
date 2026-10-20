@@ -39,8 +39,9 @@ copy. `inventory` is the live one: `ledger.py` reads `corpus.crawl_urls`,
 
 Above the families sits a shared, **domain-free** layer — `palette.py`,
 `formatting.py`, `assets.py`, `charts.py`, `finding.py`, `posts.py`,
-`families.py`. It must never learn about a domain type: that is what lets the
-next family inherit the whole design system for free.
+`families.py`, and, once a family needs them, `icons.py` and
+`illustrations.py`. It must never learn about a domain type: that is what lets
+the next family inherit the whole design system for free.
 
 Adding a family is a package exposing `build() -> tuple[Finding, ...]` (and
 optionally `tables()` for the dashboard), plus one line in `families.py`.
@@ -59,6 +60,9 @@ Output mirrors the code: `out/<family>/<finding-slug>-<canvas>.png`.
   and say why. A rule that lives only in the code is a rule that will be broken.
 - **Charts are naked.** No title, no legend chrome, no source line: the post
   owns those. `charts.py` takes numbers and labels, never a domain type.
+- **Icons and illustrations obey the palette like everything else**, and they
+  carry meaning or they do not ship: an icon labels, an illustration explains
+  structure. Neither may stand in for a number or a chart.
 - **A bucket is never charted.** "Autres", "Divers", "N/A" outrank real
   categories and contradict the headline. Their size belongs in the caption.
 - **Do not chart the healthy majority when the story is the exception.**
@@ -85,6 +89,27 @@ Honesty is the house style. When the taxonomy is fuzzy or the data incomplete,
 say so in the caption — the `familles` post admits a third of titles resist
 classification, and the `qualite` post is *about* upstream damage. That candour
 is the product, not a hedge.
+
+## Icons and illustrations
+
+You may use both, and you should when a finding is about a *kind* of thing
+rather than a quantity — but they are copy, not ornament.
+
+- **Icons** live in a shared `icons.py` (path data plus a draw helper) so every
+  family inherits one set. 24×24 grid, one palette token per icon, one icon per
+  block, always next to the label it belongs to. Borrow Lucide paths (ISC) and
+  commit them — renders are offline, so never fetch an icon at draw time.
+  Good uses: a provenance badge, a machine/GPU row, a document kind, a
+  data-quality warning.
+- **Illustrations** live in `illustrations.py`, composed from primitives on
+  `SURFACE` with palette tokens. Reach for one when there is no series to
+  chart: a pipeline, a document turning into pages, scanned versus born-digital.
+  Label the parts, or it is decoration.
+- **Never** use either to replace a chart that answers the headline, to replace
+  a label or a number, or as background texture. No emoji, no stock art, no
+  raster logos beyond the brand PNG.
+- Adding an icon set or an illustration is a `DESIGN.md` change in the same
+  commit, exactly like a new chart type. The section there is binding.
 
 ## Verify before claiming anything works
 
