@@ -39,4 +39,11 @@ export const suggestedQuestions: SuggestedQuestion[] = [
       "Montre-moi l’arbre institutionnel qui relie la BRH, le BIC et les indicateurs du corpus.",
     threadId: "institution-tree",
   },
+  {
+    id: "showcase",
+    category: "Galerie",
+    question:
+      "Ouvre la galerie multi-messages : aires, barres, donut, arbre et réseau.",
+    threadId: "showcase-multimessage",
+  },
 ];

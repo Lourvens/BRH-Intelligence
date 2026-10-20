@@ -72,8 +72,11 @@ Agent visual output is data-first:
 - `graphData` builds nodes and edges from edge-source/edge-target columns, so
   graphs are generated from the table, not hand-authored nodes. Graph artifacts
   detect trees (`lib/chat/graph.ts`) and expose **Arbre** (ECharts tree),
-  **Réseau** (draggable/zoomable ECharts graph) and **Diagramme** (Mermaid
-  flowchart) views behind shadcn `Tabs`.
+  **Réseau** (force graph with free circular nodes) and **Diagramme** (Mermaid
+  flowchart) views behind shadcn `Tabs`. Non-tree graphs with cycles or multiple
+  paths skip the tree view and fall back to the network. The demo
+  `showcase-multimessage` thread walks through area, multi-line, donut, bar,
+  tree and network artifacts in one conversation.
 - The message renders a collapsed **Décision de présentation** card with the
   JSON decision, so the renderer choice is inspectable.
 

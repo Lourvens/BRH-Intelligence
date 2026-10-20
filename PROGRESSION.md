@@ -89,7 +89,10 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
     ECharts; graph artifacts detect trees (`lib/chat/graph.ts`) and expose
     **Arbre** (ECharts tree), **Réseau** (force graph) and **Diagramme**
     (lazy-loaded Mermaid) views under shadcn `Tabs`. A complex 8-node tree demo
-    lives in `lib/chat/tree-artifact.ts` + `tree-demo.ts`. Long-form answers use
+    lives in `lib/chat/tree-artifact.ts` + `tree-demo.ts`; a true 8-node network
+    with cycles lives in `lib/chat/network-artifact.ts`. The
+    `showcase-multimessage` thread is a single conversation with area,
+    multi-line, donut, bar, tree and network artifacts. Long-form answers use
     Source Serif 4 (`font-reading`), while UI text stays Inter and display
     headings stay Montserrat. The long-form demo `lib/chat/long-document.ts`
     exercises headings, paragraphs, quotes, lists, a table and citations.
@@ -121,7 +124,11 @@ Continue the build order:
   Serif 4** (`font-reading`); Inter remains the UI face and Montserrat the
   display face. Collapsible rails were explored in Stitch screen
   `1dcc653cdff9474297b37ef2d5d12c99`, and focus-mode UI was explored in the
-  same project. `bun run typecheck` and `bun run build` pass.
+  same project. The network view now uses free circular nodes in a force layout,
+  while the tree/diagram views keep boxed nodes, so the three graph modes are
+  visually distinct. A multi-message showcase thread covers area, multi-line,
+  donut, bar, tree and network artifacts. `bun run typecheck` and `bun run build`
+  pass.
 - **2026-10-19 — Assistant workspace rebuilt from Stitch.** Generated screen
   `81afab0033054e6d9c1f58636ea87fb8` (*Assistant Documentaire Chat Workspace*)
   and rebuilt `/assistant` against it: 280px conversation rail, 56px contextual

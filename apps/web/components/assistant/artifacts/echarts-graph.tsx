@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  graphData,
-  SERIES_COLORS,
-  type GraphViewEdge,
-} from "@/lib/chat/decision";
+import { graphData, SERIES_COLORS } from "@/lib/chat/decision";
 import type { TableArtifact } from "@/lib/chat/types";
 import { cssColor } from "@/lib/echarts";
 
@@ -24,13 +20,6 @@ function escapeHtml(value: string) {
   );
 }
 
-function isLinearChain(edges: GraphViewEdge[]) {
-  return (
-    edges.length > 0 &&
-    edges.every((edge, index) => index === 0 || edge.from === edges[index - 1].to)
-  );
-}
-
 function buildGraphOption(artifact: TableArtifact) {
   const { nodes, edges } = graphData(artifact);
   if (!nodes.length) return null;
@@ -43,43 +32,28 @@ function buildGraphOption(artifact: TableArtifact) {
   const steel = cssColor("var(--color-steel)");
   const palette = SERIES_COLORS.map(cssColor);
   const kinds = [...new Set(nodes.map((node) => node.kind))];
-  const linear = nodes.length <= 4 && isLinearChain(edges);
+  const degree = new Map<string, number>();
+  for (const edge of edges) {
+    degree.set(edge.from, (degree.get(edge.from) ?? 0) + 1);
+    degree.set(edge.to, (degree.get(edge.to) ?? 0) + 1);
+  }
 
-  const data = nodes.map((node, index) => ({
+  const data = nodes.map((node) => ({
     id: node.id,
     name: node.label,
     kind: node.kind,
     page: node.page,
     category: kinds.indexOf(node.kind),
-    symbol: "roundRect" as const,
-    x: linear ? 90 + index * 185 : undefined,
-    y: linear ? 0 : undefined,
-    symbolSize: [148, 48] as [number, number],
+    symbol: "circle" as const,
+    symbolSize: 18 + Math.min((degree.get(node.id) ?? 1) * 4, 18),
     itemStyle: {
-      color: surface,
-      borderColor: palette[kinds.indexOf(node.kind) % palette.length],
-      borderWidth: 3,
+      color: palette[kinds.indexOf(node.kind) % palette.length],
+      borderColor: surface,
+      borderWidth: 2,
       shadowBlur: 6,
       shadowColor: "rgba(11, 23, 41, 0.08)",
     },
   }));
-
-  const paddedData = linear
-    ? [
-        {
-          id: "__pad__",
-          name: "",
-          x: 0,
-          y: 0,
-          symbolSize: 0,
-          silent: true,
-          itemStyle: { opacity: 0 },
-          label: { show: false },
-          tooltip: { show: false },
-        },
-        ...data,
-      ]
-    : data;
 
   const graphEdges = edges.map((edge) => ({
     source: edge.from,
@@ -137,8 +111,8 @@ function buildGraphOption(artifact: TableArtifact) {
     series: [
       {
         type: "graph" as const,
-        layout: linear ? ("none" as const) : ("force" as const),
-        data: paddedData,
+        layout: "force" as const,
+        data,
         edges: graphEdges,
         categories: kinds.map((name, index) => ({
           name,
@@ -152,11 +126,12 @@ function buildGraphOption(artifact: TableArtifact) {
         lineStyle: { color: steel, width: 1.5, curveness: 0.08, opacity: 0.8 },
         label: {
           show: true,
-          position: "inside" as const,
+          position: "bottom" as const,
+          distance: 8,
           color: ink,
           fontSize: 9.5,
           lineHeight: 12,
-          width: 138,
+          width: 132,
           overflow: "break" as const,
           formatter: "{b}",
         },
@@ -167,9 +142,10 @@ function buildGraphOption(artifact: TableArtifact) {
           label: { show: true, width: 140 },
         },
         force: {
-          repulsion: 420,
-          edgeLength: [140, 190],
-          gravity: 0.06,
+          repulsion: 320,
+          edgeLength: [110, 160],
+          gravity: 0.08,
+          initLayout: "circular" as const,
           layoutAnimation: true,
         },
       },
@@ -197,7 +173,7 @@ export function EChartsGraph({
       className={
         expanded
           ? "h-[min(64vh,680px)] w-full bg-bg/40"
-          : "h-[300px] w-full bg-bg/40"
+          : "h-[340px] w-full bg-bg/40"
       }
     />
   );

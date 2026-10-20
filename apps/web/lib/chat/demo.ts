@@ -15,6 +15,7 @@ import {
 import { chartGallery } from "./gallery";
 import { longDocumentThread } from "./long-document";
 import { treeThread } from "./tree-demo";
+import { showcaseThread } from "./showcase";
 import type {
   ChatArtifact,
   ChatCitation,
@@ -29,7 +30,6 @@ function assistant(
 ): ChatMessage {
   return { id, role: "assistant", content, citations, artifacts };
 }
-
 export const demoThreads: ChatThread[] = [
   {
     id: "inflation-nov-2025",
@@ -186,6 +186,7 @@ export const demoThreads: ChatThread[] = [
   },
   longDocumentThread,
   treeThread,
+  showcaseThread,
 ];
 
 export const refusalAnswer: ChatMessage = {
@@ -195,7 +196,6 @@ export const refusalAnswer: ChatMessage = {
     "Le corpus ne contient pas de passage qui soutient cette question. L’agent ne formule pas de réponse sans source.",
   refused: true,
 };
-
 const matchRules = [
   {
     threadId: "inflation-nov-2025",
@@ -226,6 +226,7 @@ const matchRules = [
 ];
 
 matchRules.push({ threadId: "institution-tree", words: ["arbre", "hiérarchie", "institutionnel"] });
+matchRules.push({ threadId: "showcase-multimessage", words: ["multi-messages", "galerie multi", "showcase"] });
 function normalize(value: string) {
   return value
     .toLowerCase()
@@ -240,7 +241,6 @@ export function findDemoAnswer(question: string) {
   );
 
   if (!match) return refusalAnswer;
-
   const thread = demoThreads.find((item) => item.id === match.threadId);
   return (
     thread?.messages.find((message) => message.role === "assistant") ??
