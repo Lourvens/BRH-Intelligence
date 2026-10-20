@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUp, Loader2, Search, ShieldCheck, Square } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -72,48 +72,66 @@ export function ChatPanel({
 
   return (
     <section className="flex min-w-0 flex-1 flex-col bg-bg">
-      <div ref={scrollRef} onScroll={handleScroll} className="min-h-0 flex-1 overflow-y-auto">
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        className="min-h-0 flex-1 overflow-y-auto"
+      >
         {!thread && !isThinking ? (
           <EmptyState suggestions={suggestions} onSelect={onSelectSuggestion} />
         ) : (
           <div className="px-4 pb-8 pt-16 sm:px-6 xl:pt-8">
-            <motion.div
-              key={thread?.id ?? "no-thread"}
-              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: reduceMotion ? 0.01 : 0.18,
-                ease: [0.2, 0, 0, 1],
-              }}
-              className="mx-auto flex max-w-[820px] flex-col gap-6"
-            >
-              {thread?.messages.map((message) => (
-                <Message
-                  key={message.id}
-                  message={message}
-                  selectedCitationId={selectedCitationId}
-                  onSelectCitation={onSelectCitation}
-                />
-              ))}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={thread?.id ?? "no-thread"}
+                initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={
+                  reduceMotion
+                    ? { opacity: 0, transition: { duration: 0.01 } }
+                    : {
+                        opacity: 0,
+                        y: -6,
+                        transition: { duration: 0.12 },
+                      }
+                }
+                transition={{
+                  duration: reduceMotion ? 0.01 : 0.18,
+                  ease: [0.2, 0, 0, 1],
+                }}
+                className="mx-auto flex max-w-[820px] flex-col gap-6"
+              >
+                {thread?.messages.map((message) => (
+                  <Message
+                    key={message.id}
+                    message={message}
+                    selectedCitationId={selectedCitationId}
+                    onSelectCitation={onSelectCitation}
+                  />
+                ))}
 
-              {isThinking ? (
-                <div className="flex items-start gap-3">
-                  <div className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold shadow-sm">
-                    <Search className="size-4" aria-hidden />
-                  </div>
-                  <div className="rounded-2xl rounded-tl-md bg-surface p-4">
-                    <div className="flex items-center gap-2 text-small font-medium text-navy-ink">
-                      <Loader2 className="size-4 animate-spin text-teal" aria-hidden />
-                      Recherche dans le corpus…
+                {isThinking ? (
+                  <div className="flex items-start gap-3">
+                    <div className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold shadow-sm">
+                      <Search className="size-4" aria-hidden />
                     </div>
-                    <p className="mt-1.5 text-[11px] text-ink-muted">
-                      Les passages, le document et la page sont vérifiés avant la
-                      réponse.
-                    </p>
+                    <div className="rounded-2xl rounded-tl-md bg-surface p-4">
+                      <div className="flex items-center gap-2 text-small font-medium text-navy-ink">
+                        <Loader2
+                          className="size-4 animate-spin text-teal"
+                          aria-hidden
+                        />
+                        Recherche dans le corpus…
+                      </div>
+                      <p className="mt-1.5 text-[11px] text-ink-muted">
+                        Les passages, le document et la page sont vérifiés avant
+                        la réponse.
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ) : null}
-            </motion.div>
+                ) : null}
+              </motion.div>
+            </AnimatePresence>
           </div>
         )}
       </div>
@@ -170,7 +188,9 @@ export function ChatPanel({
             </div>
           </div>
           <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[10px] text-ink-muted sm:justify-between">
-            <span>Les réponses peuvent contenir des erreurs. Vérifiez la page citée.</span>
+            <span>
+              Les réponses peuvent contenir des erreurs. Vérifiez la page citée.
+            </span>
             <span className="hidden items-center gap-1 sm:inline-flex">
               <ShieldCheck className="size-3 text-teal" aria-hidden />
               Recherche documentaire · sources citées
