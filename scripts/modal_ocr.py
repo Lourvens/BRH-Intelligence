@@ -529,11 +529,27 @@ def _url_map() -> dict[str, str]:
 
 @app.local_entrypoint()
 def export_done() -> None:
-    """Write the two skip lists runners consume, from the volume's own state."""
+    """Write the skip lists runners consume: volume **plus** this checkout.
+
+    Both halves matter. The volume knows what Modal produced; `data/ocr` knows
+    what Colab and Kaggle produced and were merged locally. Using only the
+    volume made Colab re-OCR 15 documents it had already delivered, because
+    those existed in the repository and not on the volume.
+    """
     entries = volume.listdir("/ocr", recursive=True)
     done = {entry.path.split("/")[-2] for entry in entries
             if entry.path.endswith("/document.md") and entry.size > 0}
+
+    local = 0
+    if LOCAL_OCR.is_dir():
+        for path in LOCAL_OCR.iterdir():
+            document = path / "document.md"
+            if path.is_dir() and document.is_file() and document.stat().st_size > 0:
+                done.add(path.name)
+                local += 1
+
     (LOCAL_OCR / "done_shas.txt").write_text("\n".join(sorted(done)) + "\n", encoding="utf-8")
+    print(f"  {local} document(s) from data/ocr included")
 
     mapping = _url_map.remote()
     urls = sorted({url for url in mapping.values() if url})
