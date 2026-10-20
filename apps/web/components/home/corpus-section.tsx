@@ -1,10 +1,12 @@
 import { FileText, Landmark, Library, ScrollText, TrendingUp } from "lucide-react";
 import Image from "next/image";
 
+import { corpusStats } from "@/lib/corpus-stats";
+
 const metrics = [
-  { value: "1\u202F169", label: "PDF recensés" },
-  { value: "34", label: "Documents transcrits" },
-  { value: "1\u202F192", label: "Pages profilées" },
+  { value: corpusStats.catalogued, label: "PDF recensés" },
+  { value: corpusStats.documents, label: "Documents transcrits" },
+  { value: corpusStats.pages, label: "Pages transcrites" },
 ];
 
 const families = [

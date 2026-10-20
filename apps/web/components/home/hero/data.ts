@@ -1,3 +1,5 @@
+import { corpusStats } from "@/lib/corpus-stats";
+
 export const heroCopy = {
   eyebrow:
     "Le moteur d’intelligence documentaire de la Banque de la République d’Haïti",
@@ -41,18 +43,18 @@ export const heroTags = [
 
 export const heroMetrics = [
   {
-    value: "1\u202F169",
+    value: corpusStats.catalogued,
     label: "PDF recensés",
     detail: "Inventaire brh.ht",
   },
   {
-    value: "34",
+    value: corpusStats.documents,
     label: "Documents transcrits",
     detail: "Transcription OCR",
   },
   {
-    value: "1\u202F192",
-    label: "Pages profilées",
-    detail: "Échantillon OCR",
+    value: corpusStats.pages,
+    label: "Pages transcrites",
+    detail: "Citation page par page",
   },
 ] as const;

@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
+import { corpusStats } from "@/lib/corpus-stats";
+
 import { ArchiveStrip } from "./archive-strip";
 import { demo } from "./data";
 import { WorkspaceAnswer } from "./workspace-answer";
@@ -45,7 +47,7 @@ export function HeroShowcase() {
           <div className="flex shrink-0 items-center gap-3 text-[11px] font-medium text-ink-muted">
             <span className="hidden items-center gap-1 rounded border border-border bg-surface px-2 py-0.5 md:inline-flex">
               <span className="size-1.5 rounded-full bg-emerald" />
-              1 169 PDF recensés
+              {corpusStats.catalogued} PDF recensés
             </span>
             <span className="font-mono text-ink-muted/70">DÉMONSTRATION</span>
           </div>
@@ -66,11 +68,11 @@ export function HeroShowcase() {
             <div className="flex flex-wrap items-center gap-2 font-mono text-[11px]">
               <span className="inline-flex items-center gap-1 rounded border border-white/10 bg-black/20 px-2 py-0.5">
                 <FileText className="size-3 text-azure" aria-hidden />
-                34 documents transcrits
+                {corpusStats.documents} documents transcrits
               </span>
               <span className="hidden items-center gap-1 rounded border border-white/10 bg-black/20 px-2 py-0.5 sm:inline-flex">
                 <BookOpen className="size-3 text-azure" aria-hidden />
-                1 192 pages profilées
+                {corpusStats.pages} pages transcrites
               </span>
               <span className="rounded border border-emerald/30 bg-emerald/20 px-2 py-0.5 font-semibold text-white">
                 Source citée
