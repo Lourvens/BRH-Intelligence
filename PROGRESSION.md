@@ -23,6 +23,9 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   - Skip lists are the union of the volume and the checkout
     (`scripts/modal_ocr.py::export_done`); a document is skipped before
     download when its URL is mapped, after hashing otherwise.
+  - **Every pull commits.** `colab-pull.sh` runs inside the cycle every 150 s,
+    `kaggle-pull.sh` runs from the watcher, `make ocr-pull` covers the volume.
+    Nothing extracted is allowed to exist only on a runner.
   - Cost tracks characters per page (r 0,67), not document length: 22.6 s/page
     on average, 136.8 at the worst. Dense tables dominate.
   - Per-page rates: L4 $0.0019, T4 $0.0019, A100-80GB $0.0083. The PaddlePaddle

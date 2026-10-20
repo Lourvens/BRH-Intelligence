@@ -114,6 +114,12 @@ Do not fall back to raw Chrome headless flags unless the CLI cannot do the job.
   (PyMuPDF, ADR-0005). Its web-ingestion notes are also stale/wrong on the API.
 - `data/processed/catalog.json` and the sibling Markdown under `data/` are
   leftovers from an earlier run, not sources of truth.
+- **Runners are caches, not storage.** A Colab runtime is reclaimed after about
+  an hour; a Kaggle kernel's output disappears when the next version is pushed;
+  a Modal volume outlives the credit that paid for it but is not a backup.
+  `scripts/colab-pull.sh` and `scripts/kaggle-pull.sh` merge **and commit**, and
+  `make ocr-pull` does the same for the volume. Extracted work must never exist
+  only on a runner.
 
 ## UI libraries (binding)
 
