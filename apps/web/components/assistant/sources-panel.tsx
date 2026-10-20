@@ -57,7 +57,7 @@ export function SourcesPanel({
   }
 
   return (
-    <div className="flex h-full flex-col bg-surface">
+    <div className="flex h-full w-full min-w-0 shrink-0 flex-col bg-surface">
       <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
         <div>
           <h2 className="font-display text-caption font-bold text-navy">
@@ -103,7 +103,7 @@ export function SourcesPanel({
       </div>
 
       {!selected ? (
-        <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+        <div className="flex w-full flex-1 flex-col items-center justify-center px-6 text-center">
           <div className="mb-3 grid size-12 place-items-center rounded-2xl bg-surface-alt text-teal">
             <FileSearch className="size-6" aria-hidden />
           </div>
@@ -115,8 +115,8 @@ export function SourcesPanel({
           </p>
         </div>
       ) : (
-        <ScrollArea className="min-h-0 flex-1">
-          <div className="p-4">
+        <ScrollArea type="always" className="min-h-0 w-full flex-1">
+          <div className="w-full min-w-0 p-4">
           <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-gold-ink">
             Source principale citée
           </div>
@@ -198,7 +198,7 @@ export function SourcesPanel({
           </Card>
 
           {unique.length > 1 ? (
-            <div className="mt-5">
+            <div className="mt-5 w-full min-w-0">
               <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
                 Toutes les sources
               </div>

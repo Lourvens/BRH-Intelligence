@@ -74,33 +74,35 @@ export function ChatPanel({
         {!thread && !isThinking ? (
           <EmptyState suggestions={suggestions} onSelect={onSelectSuggestion} />
         ) : (
-          <div className="mx-auto flex max-w-[820px] flex-col gap-6 px-4 py-8 sm:px-6">
-            {thread?.messages.map((message) => (
-              <Message
-                key={message.id}
-                message={message}
-                selectedCitationId={selectedCitationId}
-                onSelectCitation={onSelectCitation}
-              />
-            ))}
+          <div className="px-4 py-8 sm:px-6">
+            <div className="mx-auto flex max-w-[820px] flex-col gap-6">
+              {thread?.messages.map((message) => (
+                <Message
+                  key={message.id}
+                  message={message}
+                  selectedCitationId={selectedCitationId}
+                  onSelectCitation={onSelectCitation}
+                />
+              ))}
 
-            {isThinking ? (
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold shadow-sm">
-                  <Search className="size-4" aria-hidden />
-                </div>
-                <div className="rounded-2xl rounded-tl-md border border-border bg-surface p-4 shadow-sm">
-                  <div className="flex items-center gap-2 text-small font-medium text-navy">
-                    <Loader2 className="size-4 animate-spin text-teal" aria-hidden />
-                    Recherche dans le corpus…
+              {isThinking ? (
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold shadow-sm">
+                    <Search className="size-4" aria-hidden />
                   </div>
-                  <p className="mt-1.5 text-[11px] text-ink-muted">
-                    Les passages, le document et la page sont vérifiés avant la
-                    réponse.
-                  </p>
+                  <div className="rounded-2xl rounded-tl-md border border-border bg-surface p-4 shadow-sm">
+                    <div className="flex items-center gap-2 text-small font-medium text-navy">
+                      <Loader2 className="size-4 animate-spin text-teal" aria-hidden />
+                      Recherche dans le corpus…
+                    </div>
+                    <p className="mt-1.5 text-[11px] text-ink-muted">
+                      Les passages, le document et la page sont vérifiés avant la
+                      réponse.
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ) : null}
+              ) : null}
+            </div>
           </div>
         )}
       </div>
