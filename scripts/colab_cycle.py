@@ -39,10 +39,19 @@ def log(message: str) -> None:
 
 
 def colab(*args: str, stdin: str | None = None, timeout: int = 180) -> subprocess.CompletedProcess:
-    return subprocess.run(
-        ["colab", *args], input=stdin, capture_output=True, text=True,
-        env=ENV, timeout=timeout, check=False,
-    )
+    """Run the CLI, treating a hung reply as failure rather than an exception.
+
+    `colab exec` waits about two minutes for an answer and then hangs. An
+    uncaught TimeoutExpired would end the whole loop, which is exactly the
+    silent stop this script exists to prevent.
+    """
+    try:
+        return subprocess.run(
+            ["colab", *args], input=stdin, capture_output=True, text=True,
+            env=ENV, timeout=timeout, check=False,
+        )
+    except subprocess.TimeoutExpired:
+        return subprocess.CompletedProcess([], 124, "", "timed out")
 
 
 def session_alive() -> bool:
@@ -125,42 +134,50 @@ def pull() -> None:
     subprocess.run(["bash", str(ROOT / "scripts/colab-pull.sh"), SESSION], check=False)
 
 
+def run_cycle(chunk_source: str) -> None:
+    """Bring up one session and keep it producing until it is reclaimed."""
+    subprocess.run(["colab", "stop", "-s", SESSION], env=ENV, capture_output=True)
+    if colab("new", "-s", SESSION, "--gpu", "T4", timeout=300).returncode != 0:
+        log("could not create a session; waiting")
+        time.sleep(120)
+        return
+
+    if not install():
+        log("install failed or session lost")
+        return
+
+    build_payload()
+    if not upload():
+        log("upload failed")
+        return
+
+    encoded = base64.b64encode(chunk_source.encode()).decode()
+    colab(
+        "exec", "-s", SESSION,
+        stdin=(
+            "import base64, pathlib; "
+            f"pathlib.Path('/content/chunk.py').write_bytes(base64.b64decode('{encoded}')); "
+            "print('chunk ready')\n"
+        ),
+    )
+    start_chunk()
+    log("chunk started")
+
+    while session_alive() and running():
+        time.sleep(PULL_EVERY)
+        pull()
+    pull()
+    log("cycle finished or session lost")
+
+
 def main() -> int:
     chunk_source = Path("/tmp/opencode/colab_chunk.py").read_text()
     for cycle in range(1, CYCLES + 1):
         log(f"cycle {cycle}: starting {SESSION}")
-        subprocess.run(["colab", "stop", "-s", SESSION], env=ENV, capture_output=True)
-        if colab("new", "-s", SESSION, "--gpu", "T4", timeout=300).returncode != 0:
-            log("could not create a session; waiting")
-            time.sleep(120)
-            continue
-
-        if not install():
-            log("install failed or session lost")
-            continue
-
-        build_payload()
-        if not upload():
-            log("upload failed")
-            continue
-
-        encoded = base64.b64encode(chunk_source.encode()).decode()
-        colab(
-            "exec", "-s", SESSION,
-            stdin=(
-                "import base64, pathlib; "
-                f"pathlib.Path('/content/chunk.py').write_bytes(base64.b64decode('{encoded}')); "
-                "print('chunk ready')\n"
-            ),
-        )
-        start_chunk()
-        log("chunk started")
-
-        while session_alive() and running():
-            time.sleep(PULL_EVERY)
-            pull()
-        pull()
-        log("cycle finished or session lost")
+        try:
+            run_cycle(chunk_source)
+        except Exception as error:  # one bad cycle must not end the loop
+            log(f"cycle {cycle} failed: {error}")
     return 0
 
 
