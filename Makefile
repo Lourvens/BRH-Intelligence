@@ -1,4 +1,8 @@
-.PHONY: help install sync postgres-up postgres-down migrate ingest inventory analytics analytics-dev agent-dev mcp-dev web-dev test lint fmt check seed lab
+.PHONY: help install sync postgres-up postgres-down migrate ingest inventory ocr-pull analytics analytics-dev agent-dev mcp-dev web-dev test lint fmt check seed lab
+
+# Modal is a runner dependency, not a workspace one; point this at whatever
+# environment has the CLI (e.g. MODAL="/path/to/venv/bin/python -m modal").
+MODAL ?= python -m modal
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -26,6 +30,12 @@ ingest: ## Discover PDFs in data/raw and run the ingestion pipeline
 
 inventory: ## Catalogue brh.ht and download the missing documents (ARGS="--limit 20")
 	uv run python -m brh_core.inventory $(ARGS)
+
+ocr-pull: ## Pull Modal's OCR output into data/ocr — a volume is not a backup
+	rm -rf /tmp/brh-ocr-pull
+	$(MODAL) volume get brh-ocr /ocr /tmp/brh-ocr-pull --force
+	uv run python scripts/merge_ocr.py --from /tmp/brh-ocr-pull/ocr --into data/ocr
+	uv run python scripts/verify_ocr.py
 
 analytics: ## Render the posts into services/analytics/out (ARGS="--size portrait")
 	uv run python -m brh_analytics $(ARGS)
