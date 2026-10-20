@@ -181,6 +181,10 @@ bunx shadcn@latest add button dialog sheet dropdown-menu tooltip input textarea
   `Tooltip` for icon-only actions, and `DropdownMenu` for compact menus.
 - Use `lucide-react` for icons (the configured shadcn icon library).
 - Query Context7 `/shadcn-ui/ui` before setup, registries, or component APIs.
+- Keep colour semantic: **navy** for primary actions and structure, **azure**
+  for links/focus, **gold** for provenance only (source badges, citation
+  highlights, source rail). Gold is a fill; pair it with navy text. Use
+  `gold-ink` for small labels/lines, never raw gold text on white.
 
 ## Conventions that differ from defaults
 

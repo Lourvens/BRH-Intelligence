@@ -20,8 +20,8 @@ export function SourceList({
           className={cn(
             "w-full min-w-0 rounded-lg border px-2.5 py-2 transition-colors",
             citation.id === selectedId
-              ? "border-azure/40 bg-azure/5"
-              : "border-transparent hover:bg-surface-alt",
+              ? "border-gold/50 bg-gold/10"
+              : "border-transparent hover:bg-gold/5",
           )}
         >
           <button
@@ -29,7 +29,7 @@ export function SourceList({
             onClick={() => onSelect(citation.id)}
             className="flex w-full items-start gap-2 text-left"
           >
-            <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-white">
+            <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-gold">
               {index + 1}
             </span>
             <span className="min-w-0 flex-1">

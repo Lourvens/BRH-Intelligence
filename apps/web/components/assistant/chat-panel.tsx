@@ -151,7 +151,7 @@ export function ChatPanel({
                   onClick={handleSubmit}
                   disabled={!draft.trim()}
                   aria-label="Envoyer la question"
-                  className="size-9 rounded-xl bg-navy text-white shadow-sm hover:bg-navy-deep disabled:cursor-not-allowed disabled:opacity-40"
+                  className="size-9 rounded-xl bg-navy text-gold shadow-sm hover:bg-navy-deep disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   <ArrowUp className="size-4" aria-hidden />
                 </Button>

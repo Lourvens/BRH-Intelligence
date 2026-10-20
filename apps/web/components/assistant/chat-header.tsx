@@ -24,7 +24,7 @@ export function ChatHeader({
           aria-label="Afficher ou masquer les conversations"
           className="size-9 shrink-0 text-ink-muted hover:bg-surface-alt"
         />
-        <span className="hidden size-7 shrink-0 place-items-center rounded border border-border bg-surface-alt text-navy sm:grid">
+        <span className="hidden size-7 shrink-0 place-items-center rounded border border-gold/30 bg-navy text-gold sm:grid">
           <ChartLine className="size-3.5" aria-hidden />
         </span>
         <div className="min-w-0">
@@ -55,12 +55,12 @@ export function ChatHeader({
           variant="outline"
           size="sm"
           onClick={onOpenSources}
-          className="gap-1.5 rounded border-azure/40 bg-surface-alt px-2.5 text-[11px] font-medium text-navy hover:bg-border/50 xl:hidden"
+          className="gap-1.5 rounded border-gold/40 bg-gold/10 px-2.5 text-[11px] font-medium text-navy hover:bg-gold/20 xl:hidden"
         >
           <BookOpen className="size-3.5 text-teal" aria-hidden />
           {sourcesLabel}
         </Button>
-        <span className="hidden items-center gap-1.5 rounded border border-azure/30 bg-surface-alt px-2.5 py-1 text-[11px] font-medium text-navy xl:inline-flex">
+        <span className="hidden items-center gap-1.5 rounded border border-gold/40 bg-gold/10 px-2.5 py-1 text-[11px] font-medium text-navy xl:inline-flex">
           <BookOpen className="size-3.5 text-teal" aria-hidden />
           {sourcesLabel}
         </span>

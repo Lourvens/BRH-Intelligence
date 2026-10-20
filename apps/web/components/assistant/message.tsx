@@ -49,19 +49,24 @@ export function Message({
           <span className="text-ink-muted">Assistant documentaire</span>
           <span
             className={cn(
-              "rounded border px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider",
+              "rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider",
               message.refused
-                ? "border-gold/50 bg-gold/15 text-gold-ink"
-                : "border-azure/25 bg-azure/5 text-teal",
+                ? "border border-gold/50 bg-gold/15 text-gold-ink"
+                : "bg-navy text-white",
             )}
           >
             {message.refused ? "Refus explicite" : "Réponse sourcée"}
           </span>
+          {!message.refused && citations?.length ? (
+            <span className="rounded-full border border-gold/60 bg-gold/30 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-navy">
+              Source citée
+            </span>
+          ) : null}
         </div>
 
         <div
           className={cn(
-            "rounded-2xl rounded-tl-md border bg-surface p-4 shadow-sm sm:p-5",
+            "rounded-2xl rounded-tl-md border bg-gradient-to-b from-surface to-bg p-4 shadow-sm sm:p-5",
             message.refused
               ? "border-gold/50 bg-gold/10"
               : "border-border",
@@ -101,14 +106,14 @@ export function Message({
               <CollapsibleTrigger asChild>
                 <button
                   type="button"
-                  className="group flex w-full items-center justify-between gap-2 rounded-md text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure focus-visible:ring-offset-2"
+                  className="group flex w-full items-center justify-between gap-2 rounded-lg border border-gold/30 bg-gold/10 px-2.5 py-1.5 text-left transition-colors hover:bg-gold/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
                 >
-                  <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
-                    <FileText className="size-3.5" aria-hidden />
+                  <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-navy">
+                    <FileText className="size-3.5 text-gold-ink" aria-hidden />
                     Sources ({citations.length})
                   </span>
                   <ChevronDown
-                    className="size-3.5 text-ink-muted transition-transform group-data-[state=open]:rotate-180"
+                    className="size-3.5 text-gold-ink transition-transform group-data-[state=open]:rotate-180"
                     aria-hidden
                   />
                 </button>
@@ -126,13 +131,13 @@ export function Message({
                       const itemClass = cn(
                         "flex w-full min-w-0 items-start gap-2 rounded-lg border px-2.5 py-2 text-left text-[11px] transition-colors",
                         active
-                          ? "border-azure/50 bg-azure/5"
-                          : "border-border bg-bg hover:border-navy/25",
+                          ? "border-gold/50 bg-gold/10"
+                          : "border-border bg-bg hover:border-gold/40 hover:bg-gold/5",
                       );
 
                       const content = (
                         <>
-                          <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-white">
+                          <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-gold">
                             {index + 1}
                           </span>
                           <span className="min-w-0 flex-1">
@@ -180,7 +185,7 @@ export function Message({
           ) : null}
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-2.5">
-            <span className="text-[9px] text-ink-muted">
+            <span className="text-[9px] font-medium text-ink-muted">
               Réponse de démonstration
             </span>
             <MessageActions content={message.content} citations={citations} />

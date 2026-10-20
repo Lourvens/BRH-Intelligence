@@ -58,7 +58,7 @@ export function SourcesPanel({
 
   return (
     <div className="flex h-full w-full min-w-0 shrink-0 flex-col bg-surface">
-      <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
+      <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-gold/30 bg-gold/5 px-4">
         <div>
           <h2 className="font-display text-caption font-bold text-navy">
             Sources documentaires
@@ -104,7 +104,7 @@ export function SourcesPanel({
 
       {!selected ? (
         <div className="flex w-full flex-1 flex-col items-center justify-center px-6 text-center">
-          <div className="mb-3 grid size-12 place-items-center rounded-2xl bg-surface-alt text-teal">
+          <div className="mb-3 grid size-12 place-items-center rounded-2xl bg-gold/15 text-gold-ink">
             <FileSearch className="size-6" aria-hidden />
           </div>
           <p className="font-display text-small font-bold text-navy">
@@ -120,7 +120,7 @@ export function SourcesPanel({
           <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-gold-ink">
             Source principale citée
           </div>
-          <Card className="gap-0 rounded-xl border-border bg-bg py-0 shadow-none">
+          <Card className="gap-0 rounded-xl border-gold/30 bg-gradient-to-b from-surface to-bg py-0 shadow-none">
             <CardContent className="p-4">
               <div className="mb-3 flex items-start gap-2.5">
                 <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold">
@@ -142,13 +142,13 @@ export function SourcesPanel({
                 </div>
               </div>
 
-              <div className="rounded-lg border border-border border-l-2 border-l-azure bg-surface p-3 font-reading text-[12px] italic leading-6 text-ink">
+              <div className="rounded-lg border border-gold/20 border-l-2 border-l-gold bg-gold/10 p-3 font-reading text-[12px] italic leading-6 text-ink">
                 « {selected.snippet} »
               </div>
 
               {selected.pdfUrl ? (
-                <div className="mt-3 rounded-lg border border-azure/25 bg-azure/5 p-2.5">
-                  <div className="mb-1 flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-teal">
+                <div className="mt-3 rounded-lg border border-gold/40 bg-gold/10 p-2.5">
+                  <div className="mb-1 flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-gold-ink">
                     <FileText className="size-3" aria-hidden />
                     PDF source
                   </div>
@@ -169,7 +169,7 @@ export function SourcesPanel({
                   variant="outline"
                   size="sm"
                   onClick={copyCitation}
-                  className="flex-1 gap-1.5 rounded-lg border-border bg-surface text-[11px] font-medium text-navy hover:bg-surface-alt"
+                  className="flex-1 gap-1.5 rounded-lg border-gold/30 bg-gold/5 text-[11px] font-medium text-navy hover:bg-gold/10"
                 >
                   {copied ? (
                     <Check className="size-3.5 text-emerald" aria-hidden />
