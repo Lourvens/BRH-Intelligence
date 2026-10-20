@@ -137,9 +137,17 @@ def pull() -> None:
 def run_cycle(chunk_source: str) -> None:
     """Bring up one session and keep it producing until it is reclaimed."""
     subprocess.run(["colab", "stop", "-s", SESSION], env=ENV, capture_output=True)
-    if colab("new", "-s", SESSION, "--gpu", "T4", timeout=300).returncode != 0:
-        log("could not create a session; waiting")
-        time.sleep(120)
+
+    # A refused assignment (503 from the runtime service, or the daily GPU quota)
+    # is not a finished cycle: retrying inside the cycle keeps CYCLES counting
+    # real chunks, so a busy afternoon does not silently end the loop.
+    for attempt in range(1, 7):
+        if colab("new", "-s", SESSION, "--gpu", "T4", timeout=300).returncode == 0:
+            break
+        log(f"no GPU session available (attempt {attempt}/6); waiting 5 min")
+        time.sleep(300)
+    else:
+        log("giving up on this cycle")
         return
 
     if not install():
