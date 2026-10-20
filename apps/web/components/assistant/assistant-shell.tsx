@@ -14,6 +14,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { uniqueCitations } from "@/lib/chat/citations";
 import { demoThreads, findDemoAnswer } from "@/lib/chat/demo";
 import { suggestedQuestions } from "@/lib/chat/suggestions";
 import type { ChatThread } from "@/lib/chat/types";
@@ -60,8 +61,9 @@ export function AssistantShell() {
 
   const activeThread =
     threads.find((thread) => thread.id === activeThreadId) ?? null;
-  const citations =
-    activeThread?.messages.flatMap((message) => message.citations ?? []) ?? [];
+  const citations = uniqueCitations(
+    activeThread?.messages.flatMap((message) => message.citations ?? []) ?? [],
+  );
   const selectedCitation =
     citations.find((citation) => citation.id === selectedCitationId) ??
     citations[0] ??

@@ -20,6 +20,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { uniqueCitations } from "@/lib/chat/citations";
 import type { ChatCitation } from "@/lib/chat/types";
 import { cn } from "@/lib/utils";
 
@@ -37,6 +38,7 @@ export function SourcesPanel({
   onCollapse?: () => void;
 }) {
   const [copied, setCopied] = useState(false);
+  const unique = uniqueCitations(citations);
 
   async function copyCitation() {
     if (!selected) return;
@@ -59,8 +61,8 @@ export function SourcesPanel({
             Sources documentaires
           </h2>
           <p className="text-[10px] text-ink-muted">
-            {citations.length
-              ? `${citations.length} référence${citations.length > 1 ? "s" : ""} active${citations.length > 1 ? "s" : ""}`
+            {unique.length
+              ? `${unique.length} référence${unique.length > 1 ? "s" : ""} active${unique.length > 1 ? "s" : ""}`
               : "Aucune référence"}
           </p>
         </div>
@@ -174,13 +176,13 @@ export function SourcesPanel({
             </CardContent>
           </Card>
 
-          {citations.length > 1 ? (
+          {unique.length > 1 ? (
             <div className="mt-5">
               <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
                 Toutes les sources
               </div>
               <div className="space-y-1.5">
-                {citations.map((citation, index) => (
+                {unique.map((citation, index) => (
                   <button
                     key={citation.id}
                     type="button"

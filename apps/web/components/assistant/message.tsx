@@ -1,5 +1,6 @@
 import { FileText, Landmark, ShieldAlert } from "lucide-react";
 
+import { uniqueCitations } from "@/lib/chat/citations";
 import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/lib/chat/types";
 
@@ -16,6 +17,10 @@ export function Message({
   selectedCitationId: string | null;
   onSelectCitation: (citationId: string) => void;
 }) {
+  const citations = message.citations
+    ? uniqueCitations(message.citations)
+    : undefined;
+
   if (message.role === "user") {
     return (
       <div className="flex justify-end">
@@ -72,7 +77,7 @@ export function Message({
           ) : (
             <MessageContent
               content={message.content}
-              citations={message.citations}
+              citations={citations}
               onSelectCitation={onSelectCitation}
             />
           )}
@@ -86,14 +91,14 @@ export function Message({
             </div>
           ) : null}
 
-          {message.citations?.length ? (
+          {citations?.length ? (
             <div className="mt-4 border-t border-border pt-3">
               <div className="mb-2 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
                 <FileText className="size-3.5" aria-hidden />
                 Sources
               </div>
               <div className="flex flex-col gap-2">
-                {message.citations.map((citation, index) => {
+                {citations.map((citation, index) => {
                   const active = citation.id === selectedCitationId;
 
                   return (
