@@ -2,6 +2,7 @@ import type { ChatCitation } from "./types";
 
 export const inflationCitation: ChatCitation = {
   id: "inflation-nov-2025-p3",
+  pdfUrl: "https://www.brh.ht/wp-content/uploads/NOTE-MENSUELLE-DINFLATION-DU-MOIS-DOCTOBRE-2025.pdf#page=3",
   title: "Note mensuelle d’inflation — novembre 2025",
   page: 3,
   snippet:
@@ -12,6 +13,7 @@ export const inflationCitation: ChatCitation = {
 
 export const brhCitation: ChatCitation = {
   id: "banques-centrales-p5",
+  pdfUrl: "https://www.brh.ht/wp-content/uploads/2018/08/historique.pdf#page=5",
   title: "Les banques centrales : histoire et rôle",
   page: 5,
   snippet:
@@ -22,6 +24,7 @@ export const brhCitation: ChatCitation = {
 
 export const bicCitation: ChatCitation = {
   id: "bureau-credit-p5",
+  pdfUrl: "https://www.brh.ht/wp-content/uploads/2018/08/trifolio_bic.pdf#page=5",
   title: "Importance du Bureau de Crédit dans l’Économie",
   page: 5,
   snippet:
@@ -32,6 +35,7 @@ export const bicCitation: ChatCitation = {
 
 export const cooperativesCitation: ChatCitation = {
   id: "inclusion-financiere-p10",
+  pdfUrl: "https://www.brh.ht/wp-content/uploads/LIGNES-DIRECTRICES-AUX-COOPERATIVES-DEPARGNE-ET-DE-CREDIT.pdf#page=10",
   title: "Stratégie Nationale d’Inclusion Financière",
   page: 10,
   snippet:
@@ -42,6 +46,7 @@ export const cooperativesCitation: ChatCitation = {
 
 export const servicePointsCitation: ChatCitation = {
   id: "inclusion-financiere-p9",
+  pdfUrl: "https://www.brh.ht/wp-content/uploads/allocutiong1_inclusion_financiere.pdf#page=9",
   title: "Stratégie Nationale d’Inclusion Financière",
   page: 9,
   snippet:
@@ -52,6 +57,7 @@ export const servicePointsCitation: ChatCitation = {
 
 export const bicConsultationsCitation: ChatCitation = {
   id: "bureau-credit-p6",
+  pdfUrl: "https://www.brh.ht/wp-content/uploads/2018/08/trifolio_bic.pdf#page=6",
   title: "Importance du Bureau de Crédit dans l’Économie",
   page: 6,
   snippet:

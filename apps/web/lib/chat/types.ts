@@ -7,6 +7,7 @@ export type ChatCitation = {
   snippet: string;
   source: string;
   kind: string;
+  pdfUrl?: string | null;
 };
 
 export type ChartPoint = {

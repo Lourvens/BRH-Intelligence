@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   Check,
   Copy,
+  ExternalLink,
   FileSearch,
   FileText,
   PanelRightClose,
@@ -43,8 +44,9 @@ export function SourcesPanel({
   async function copyCitation() {
     if (!selected) return;
     try {
+      const pdf = selected.pdfUrl ? `\n${selected.pdfUrl}` : "";
       await navigator.clipboard.writeText(
-        `« ${selected.snippet} » — ${selected.title}, p. ${selected.page}`,
+        `« ${selected.snippet} » — ${selected.title}, p. ${selected.page}${pdf}`,
       );
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
@@ -141,6 +143,24 @@ export function SourcesPanel({
               <div className="rounded-lg border border-border border-l-2 border-l-azure bg-surface p-3 font-reading text-[12px] italic leading-6 text-ink">
                 « {selected.snippet} »
               </div>
+
+              {selected.pdfUrl ? (
+                <Button
+                  asChild
+                  size="sm"
+                  className="mt-3 w-full gap-1.5 rounded-lg bg-navy text-[11px] text-white hover:bg-navy-deep"
+                >
+                  <a
+                    href={selected.pdfUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <FileText className="size-3.5" aria-hidden />
+                    Ouvrir le PDF source
+                    <ExternalLink className="size-3" aria-hidden />
+                  </a>
+                </Button>
+              ) : null}
 
               <div className="mt-3 flex items-center gap-2">
                 <Button

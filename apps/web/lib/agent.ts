@@ -10,6 +10,8 @@
 
 import { useStream } from "@langchain/langgraph-sdk/react";
 
+import type { ChatCitation } from "@/lib/chat/types";
+
 /** A clickable reference to a source page, produced by the agent graph. */
 export type Citation = {
   document_id: string;
@@ -52,4 +54,17 @@ export function useAgent(options: {
     onThreadId: options.onThreadId,
     fetchStateHistory: { limit: 20 },
   });
+}
+
+/** Map the agent's snake_case citation contract to the chat UI type. */
+export function citationToChatCitation(citation: Citation): ChatCitation {
+  return {
+    id: `${citation.document_id}:${citation.page_number}`,
+    title: citation.title,
+    page: citation.page_number,
+    snippet: citation.snippet,
+    source: citation.slug,
+    kind: "Document",
+    pdfUrl: citation.pdf_url,
+  };
 }

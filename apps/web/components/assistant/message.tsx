@@ -1,4 +1,4 @@
-import { FileText, Landmark, ShieldAlert } from "lucide-react";
+import { ExternalLink, FileText, Landmark, ShieldAlert } from "lucide-react";
 
 import { uniqueCitations } from "@/lib/chat/citations";
 import { cn } from "@/lib/utils";
@@ -102,28 +102,43 @@ export function Message({
                   const active = citation.id === selectedCitationId;
 
                   return (
-                    <button
+                    <div
                       key={citation.id}
-                      type="button"
-                      aria-pressed={active}
-                      onClick={() => onSelectCitation(citation.id)}
-                      className={cn(
-                        "flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left text-[11px] transition-colors",
-                        active
-                          ? "border-azure/50 bg-azure/5"
-                          : "border-border bg-bg hover:border-navy/25",
-                      )}
+                      className="flex items-center gap-1.5"
                     >
-                      <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-white">
-                        {index + 1}
-                      </span>
-                      <span className="line-clamp-2 min-w-0 flex-1 text-[11px] font-medium leading-snug text-navy">
-                        {citation.title}
-                      </span>
-                      <span className="shrink-0 font-mono text-[10px] text-ink-muted">
-                        p.&nbsp;{citation.page}
-                      </span>
-                    </button>
+                      <button
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => onSelectCitation(citation.id)}
+                        className={cn(
+                          "flex min-w-0 flex-1 items-center gap-2 rounded-lg border px-2.5 py-2 text-left text-[11px] transition-colors",
+                          active
+                            ? "border-azure/50 bg-azure/5"
+                            : "border-border bg-bg hover:border-navy/25",
+                        )}
+                      >
+                        <span className="grid size-5 shrink-0 place-items-center rounded-full bg-navy text-[10px] font-bold text-white">
+                          {index + 1}
+                        </span>
+                        <span className="line-clamp-2 min-w-0 flex-1 text-[11px] font-medium leading-snug text-navy">
+                          {citation.title}
+                        </span>
+                        <span className="shrink-0 font-mono text-[10px] text-ink-muted">
+                          p.&nbsp;{citation.page}
+                        </span>
+                      </button>
+                      {citation.pdfUrl ? (
+                        <a
+                          href={citation.pdfUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Ouvrir le PDF de ${citation.title}`}
+                          className="grid size-8 shrink-0 place-items-center rounded-lg border border-border bg-surface text-teal transition-colors hover:bg-surface-alt hover:text-navy"
+                        >
+                          <ExternalLink className="size-3.5" aria-hidden />
+                        </a>
+                      ) : null}
+                    </div>
                   );
                 })}
               </div>

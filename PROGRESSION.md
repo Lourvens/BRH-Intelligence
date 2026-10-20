@@ -33,6 +33,11 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
     comparison needs its own image and a server/client split.
   - A document that already has a non-empty `document.md` is never redone, so
     re-dispatching, chunking, or restarting costs nothing.
+- **Citation deep links are implemented** — `brh_core.citations` now builds
+  `pdf_url`s (`…/slug.pdf#page=N`), collapses snippets, and assembles citations
+  from retrieved chunks; offline tests cover the contract. The assistant source
+  inspector and message source list open `pdfUrl` in a new tab and copy it with
+  the citation.
 - **BRH inventory (front half) is implemented** — `make inventory` catalogues
   every PDF on `brh.ht` (the ledger lists the whole corpus, pending or resolved)
   and downloads the missing ones content-addressed into `data/raw/web/`.

@@ -13,7 +13,7 @@ app, all sharing one Python core.
 **Much of it is a scaffold.** A module existing in the tree does not mean it
 works. These still `raise NotImplementedError`:
 
-- `brh_core`: `catalog.py`, `citations.py`, `db/repository.py`,
+- `brh_core`: `catalog.py`, `db/repository.py`,
   `embeddings/{factory,hashing,openai}.py`, `ingestion/{discover,metadata,extract,chunk,pipeline}.py`,
   `retrieval/service.py`, `vectorstore/{factory,memory,pinecone_store}.py`
 - `brh_agent`: `llm.py`, `nodes.py`, `prompts.py`
