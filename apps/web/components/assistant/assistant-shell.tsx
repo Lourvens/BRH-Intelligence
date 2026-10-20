@@ -174,16 +174,16 @@ export function AssistantShell() {
         <div className="pointer-events-none absolute inset-x-3 top-3 z-20 flex items-center justify-between gap-2">
           <SidebarTrigger
             aria-label="Ouvrir les conversations"
-            className="pointer-events-auto size-9 border border-border bg-surface text-ink-muted shadow-sm hover:bg-gold/10 hover:text-navy md:hidden"
+            className="pointer-events-auto size-9 border border-border bg-surface text-ink-muted shadow-sm hover:bg-surface-alt hover:text-navy md:hidden"
           />
           <Button
             type="button"
             variant="outline"
             size="sm"
             onClick={() => setSourcesOpen(true)}
-            className="pointer-events-auto ml-auto gap-1.5 rounded border-gold/40 bg-gold/10 px-2.5 text-[11px] font-medium text-navy hover:bg-gold/20 xl:hidden"
+            className="pointer-events-auto ml-auto gap-1.5 rounded border-border bg-surface-alt px-2.5 text-[11px] font-medium text-navy hover:bg-border/50 xl:hidden"
           >
-            <BookOpen className="size-3.5 text-gold-ink" aria-hidden />
+            <BookOpen className="size-3.5 text-teal" aria-hidden />
             Sources ({citations.length})
           </Button>
         </div>

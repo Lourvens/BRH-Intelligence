@@ -52,13 +52,13 @@ export function ThreadList({
                         "group/thread h-auto min-h-10 items-start rounded-lg border-l-2 px-2 py-2 text-left transition-[background-color,border-color,color,transform] duration-150 active:scale-[0.99] motion-reduce:transition-none",
                         collapsed && "h-8! min-h-0! items-center px-0",
                         active
-                          ? "border-gold bg-gold/10 text-navy"
-                          : "border-transparent text-ink-muted hover:border-gold/40 hover:bg-gold/5 hover:text-navy",
+                          ? "border-azure bg-azure/10 text-navy"
+                          : "border-transparent text-ink-muted hover:bg-azure/5 hover:text-navy",
                       )}
                     >
                       <MessageSquare
                         className={cn(
-                          "size-3.5 shrink-0 transition-[color,transform] duration-150 group-hover/thread:translate-x-0.5 group-hover/thread:text-gold-ink group-data-[active=true]:text-gold-ink motion-reduce:transition-none",
+                          "size-3.5 shrink-0 transition-[color,transform] duration-150 group-hover/thread:translate-x-0.5 group-hover/thread:text-navy group-data-[active=true]:text-teal motion-reduce:transition-none",
                           collapsed ? "mt-0" : "mt-0.5",
                         )}
                         aria-hidden
