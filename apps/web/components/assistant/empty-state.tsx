@@ -10,7 +10,7 @@ export function EmptyState({
   onSelect: (threadId: string) => void;
 }) {
   return (
-    <div className="flex min-h-full items-center justify-center px-4 py-10 sm:px-6">
+    <div className="flex min-h-full items-center justify-center px-4 pb-10 pt-16 sm:px-6 xl:pt-10">
       <div className="w-full max-w-3xl">
         <div className="mb-8 text-center">
           <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-teal shadow-sm">

@@ -76,7 +76,7 @@ export function ChatPanel({
         {!thread && !isThinking ? (
           <EmptyState suggestions={suggestions} onSelect={onSelectSuggestion} />
         ) : (
-          <div className="px-4 py-8 sm:px-6">
+          <div className="px-4 pb-8 pt-16 sm:px-6 xl:pt-8">
             <motion.div
               key={thread?.id ?? "no-thread"}
               initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
