@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowUp, Loader2, Search, ShieldCheck, Square } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -30,6 +31,7 @@ export function ChatPanel({
   onStop: () => void;
 }) {
   const [draft, setDraft] = useState("");
+  const reduceMotion = useReducedMotion();
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const followRef = useRef(true);
@@ -42,7 +44,7 @@ export function ChatPanel({
     const node = scrollRef.current;
     if (!node || !followRef.current) return;
     node.scrollTo({ top: node.scrollHeight, behavior: "smooth" });
-  }, [thread?.messages.length, isThinking]);
+  }, [thread?.id, thread?.messages.length, isThinking]);
 
   function handleScroll() {
     const node = scrollRef.current;
@@ -75,7 +77,16 @@ export function ChatPanel({
           <EmptyState suggestions={suggestions} onSelect={onSelectSuggestion} />
         ) : (
           <div className="px-4 py-8 sm:px-6">
-            <div className="mx-auto flex max-w-[820px] flex-col gap-6">
+            <motion.div
+              key={thread?.id ?? "no-thread"}
+              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: reduceMotion ? 0.01 : 0.18,
+                ease: [0.2, 0, 0, 1],
+              }}
+              className="mx-auto flex max-w-[820px] flex-col gap-6"
+            >
               {thread?.messages.map((message) => (
                 <Message
                   key={message.id}
@@ -102,7 +113,7 @@ export function ChatPanel({
                   </div>
                 </div>
               ) : null}
-            </div>
+            </motion.div>
           </div>
         )}
       </div>

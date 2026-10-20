@@ -1,4 +1,4 @@
-import { ChevronDown, FileText, Landmark, ShieldAlert } from "lucide-react";
+import { ChevronDown, FileText, ShieldAlert } from "lucide-react";
 
 import {
   Collapsible,
@@ -41,28 +41,22 @@ export function Message({
   return (
     <div className="min-w-0">
       <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[11px]">
-        <div className="grid size-7 shrink-0 place-items-center rounded-lg bg-navy text-gold shadow-sm">
-          <Landmark className="size-3.5" aria-hidden />
-        </div>
-        <span className="font-semibold text-navy">BRH Intelligence</span>
-          <span className="text-ink-muted">·</span>
-          <span className="text-ink-muted">Assistant documentaire</span>
-          <span
-            className={cn(
-              "rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider",
-              message.refused
-                ? "border border-gold/50 bg-gold/15 text-gold-ink"
-                : "bg-navy text-white",
-            )}
-          >
-            {message.refused ? "Refus explicite" : "Réponse sourcée"}
+        <span
+          className={cn(
+            "rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider",
+            message.refused
+              ? "border border-gold/50 bg-gold/15 text-gold-ink"
+              : "bg-navy text-white",
+          )}
+        >
+          {message.refused ? "Refus explicite" : "Réponse sourcée"}
+        </span>
+        {!message.refused && citations?.length ? (
+          <span className="rounded-full border border-gold/60 bg-gold/30 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-navy">
+            Source citée
           </span>
-          {!message.refused && citations?.length ? (
-            <span className="rounded-full border border-gold/60 bg-gold/30 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-navy">
-              Source citée
-            </span>
-          ) : null}
-        </div>
+        ) : null}
+      </div>
 
         <div
           className={cn(

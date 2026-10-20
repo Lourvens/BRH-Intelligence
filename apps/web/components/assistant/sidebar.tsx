@@ -14,6 +14,7 @@ import {
   SidebarInput,
   SidebarMenuButton,
   SidebarSeparator,
+  SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
@@ -53,35 +54,36 @@ export function ConversationSidebar({
           collapsed && "justify-center p-1",
         )}
       >
-        <Link
-          href="/"
-          aria-label="BRH Intelligence — accueil"
-          className={cn(
-            "flex min-w-0 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring",
-            collapsed && "justify-center",
-          )}
-        >
-          <Image
-            src="/brh-logo.png"
-            alt="BRH"
-            width={251}
-            height={123}
-            className={cn("h-6 w-auto", collapsed && "h-7")}
+        {!isMobile ? (
+          <SidebarTrigger
+            aria-label="Replier ou déplier la navigation"
+            className="size-8 shrink-0 text-ink-muted hover:bg-gold/10 hover:text-navy"
           />
-          {!collapsed ? (
-            <>
-              <span className="hidden h-5 w-px bg-sidebar-border sm:block" />
-              <span className="min-w-0">
-                <span className="block font-display text-caption font-bold leading-none text-navy">
-                  Intelligence
-                </span>
-                <span className="mt-0.5 block truncate text-[9px] text-ink-muted">
-                  Assistant documentaire
-                </span>
+        ) : null}
+        {!collapsed ? (
+          <Link
+            href="/"
+            aria-label="BRH Intelligence — accueil"
+            className="flex min-w-0 flex-1 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring"
+          >
+            <Image
+              src="/brh-logo.png"
+              alt="BRH"
+              width={251}
+              height={123}
+              className="h-6 w-auto"
+            />
+            <span className="hidden h-5 w-px bg-sidebar-border sm:block" />
+            <span className="min-w-0">
+              <span className="block font-display text-caption font-bold leading-none text-navy">
+                Intelligence
               </span>
-            </>
-          ) : null}
-        </Link>
+              <span className="mt-0.5 block truncate text-[9px] text-ink-muted">
+                Assistant documentaire
+              </span>
+            </span>
+          </Link>
+        ) : null}
         {isMobile ? (
           <Button
             type="button"
@@ -89,7 +91,7 @@ export function ConversationSidebar({
             size="icon-sm"
             onClick={() => setOpenMobile(false)}
             aria-label="Fermer les conversations"
-            className="text-ink-muted md:hidden"
+            className="ml-auto text-ink-muted md:hidden"
           >
             <X className="size-4" />
           </Button>
@@ -116,7 +118,7 @@ export function ConversationSidebar({
           <Button
             type="button"
             onClick={onNewThread}
-            className="w-full rounded-xl bg-navy text-caption text-white shadow-sm hover:bg-navy-deep"
+            className="w-full rounded-xl bg-navy text-caption text-white shadow-sm transition-[background-color,transform] duration-150 hover:bg-navy-deep active:scale-[0.98] motion-reduce:transition-none"
           >
             <Plus className="size-4" aria-hidden />
             Nouvelle conversation

@@ -22,7 +22,7 @@ export function ChatHeader({
       <div className="flex min-w-0 items-center gap-2.5">
         <SidebarTrigger
           aria-label="Afficher ou masquer les conversations"
-          className="size-9 shrink-0 text-ink-muted hover:bg-surface-alt"
+          className="size-9 shrink-0 text-ink-muted hover:bg-surface-alt md:hidden"
         />
         <span className="hidden size-7 shrink-0 place-items-center rounded border border-gold/30 bg-navy text-gold sm:grid">
           <ChartLine className="size-3.5" aria-hidden />
