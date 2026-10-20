@@ -71,13 +71,15 @@ export function MessageContent({
       );
     },
     strong: ({ children }) => (
-      <strong className="font-semibold text-navy">{children}</strong>
+      <strong className="box-decoration-clone rounded-sm bg-gold/30 px-1 py-0.5 font-semibold text-navy">
+        {children}
+      </strong>
     ),
     em: ({ children }) => (
       <em className="italic text-teal">{children}</em>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="rounded-r-lg border-l-2 border-azure bg-azure/5 px-3.5 py-2.5 text-[14px] italic leading-7 text-ink-muted [&>p]:text-[14px] [&>p]:leading-7 [&>p]:text-ink-muted">
+      <blockquote className="rounded-r-lg border-l-2 border-gold bg-gold/10 px-3.5 py-2.5 text-[14px] italic leading-7 text-ink [&>p]:text-[14px] [&>p]:leading-7 [&>p]:text-ink">
         {children}
       </blockquote>
     ),

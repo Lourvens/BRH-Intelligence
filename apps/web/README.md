@@ -37,7 +37,7 @@ Rules worth repeating: `navy` leads, `gold` is a **fill only** (use `gold-ink`
 for lines/labels), charts plot on `surface` not `bg`, and numbers use tabular
 figures. Colour is semantic: **navy** is the primary action, **azure** is the
 link/focus accent, and **gold** marks provenance — source badges, citation
-highlights and the source rail. Pair gold fills with navy text; never use raw
+highlights, quoted passages and emphasized key facts in generated prose. Pair gold fills with navy text; never use raw
 gold text on white. All UI files stay **under 250 lines**.
 
 The type scale is named (`text-micro` → `text-hero`) and `lib/utils.ts` teaches
