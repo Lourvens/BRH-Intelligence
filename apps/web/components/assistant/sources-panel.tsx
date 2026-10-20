@@ -115,8 +115,11 @@ export function SourcesPanel({
           </p>
         </div>
       ) : (
-        <ScrollArea type="always" className="min-h-0 w-full flex-1">
-          <div className="w-full min-w-0 p-4">
+        <ScrollArea
+          type="always"
+          className="min-h-0 w-full flex-1 overscroll-contain [&_[data-slot=scroll-area-viewport]]:overflow-x-hidden"
+        >
+          <div className="w-full min-w-0 pb-6 pl-4 pr-6 pt-4">
           <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
             Source principale citée
           </div>
