@@ -139,6 +139,16 @@
     text-wrap: pretty;
   }
 
+  button:not(:disabled):not([aria-disabled="true"]),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
   ::selection {
     background-color: var(--color-navy);
     color: var(--color-surface);

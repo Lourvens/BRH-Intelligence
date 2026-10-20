@@ -54,12 +54,6 @@ export function ConversationSidebar({
           collapsed && "justify-center p-1",
         )}
       >
-        {!isMobile ? (
-          <SidebarTrigger
-            aria-label="Replier ou déplier la navigation"
-            className="size-8 shrink-0 text-ink-muted hover:bg-gold/10 hover:text-navy"
-          />
-        ) : null}
         {!collapsed ? (
           <Link
             href="/"
@@ -83,6 +77,12 @@ export function ConversationSidebar({
               </span>
             </span>
           </Link>
+        ) : null}
+        {!isMobile ? (
+          <SidebarTrigger
+            aria-label="Replier ou déplier la navigation"
+            className="size-8 shrink-0 text-ink-muted hover:bg-gold/10 hover:text-navy"
+          />
         ) : null}
         {isMobile ? (
           <Button
