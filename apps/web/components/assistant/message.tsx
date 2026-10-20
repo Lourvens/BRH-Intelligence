@@ -12,6 +12,7 @@ import type { ChatMessage } from "@/lib/chat/types";
 
 import { Artifact } from "./artifacts/artifact";
 import { DecisionCard } from "./artifacts/decision-card";
+import { MessageActions } from "./message-actions";
 import { MessageContent } from "./message-content";
 
 export function Message({
@@ -177,6 +178,13 @@ export function Message({
               </CollapsibleContent>
             </Collapsible>
           ) : null}
+
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-2.5">
+            <span className="text-[9px] text-ink-muted">
+              Réponse de démonstration
+            </span>
+            <MessageActions content={message.content} citations={citations} />
+          </div>
       </div>
     </div>
   );
