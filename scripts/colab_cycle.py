@@ -130,13 +130,31 @@ def running() -> bool:
     return "RUN" in probe.stdout
 
 
+def stop_session() -> None:
+    """Best effort, and bounded: a hung stop blocks the whole loop."""
+    try:
+        subprocess.run(
+            ["colab", "stop", "-s", SESSION],
+            env=ENV, capture_output=True, timeout=120, check=False,
+        )
+    except subprocess.TimeoutExpired:
+        log("stop timed out; carrying on")
+
+
 def pull() -> None:
-    subprocess.run(["bash", str(ROOT / "scripts/colab-pull.sh"), SESSION], check=False)
+    """The pull talks to the same CLI, so it gets a deadline too."""
+    try:
+        subprocess.run(
+            ["bash", str(ROOT / "scripts/colab-pull.sh"), SESSION],
+            check=False, timeout=600,
+        )
+    except subprocess.TimeoutExpired:
+        log("pull timed out")
 
 
 def run_cycle(chunk_source: str) -> None:
     """Bring up one session and keep it producing until it is reclaimed."""
-    subprocess.run(["colab", "stop", "-s", SESSION], env=ENV, capture_output=True)
+    stop_session()
 
     # A refused assignment (503 from the runtime service, or the daily GPU quota)
     # is not a finished cycle: retrying inside the cycle keeps CYCLES counting
