@@ -24,6 +24,10 @@ REMOTE_DONE = (
 LIMIT_DOCS = int(os.environ.get("LIMIT_DOCS", "12"))
 PER_DOC_SECONDS = int(os.environ.get("PER_DOC_SECONDS", "2400"))  # 40 min
 
+sys.path.insert(0, f"{ROOT}/scripts")
+
+from claims import Claims  # noqa: E402 - the path insert must come first
+
 env = dict(os.environ, PYTHONPATH=f"{ROOT}/packages/core/src")
 
 
@@ -65,10 +69,17 @@ def main() -> None:
         rows = [json.loads(line) for line in handle if line.strip()]
     print(f"{len(rows)} document(s) to process", flush=True)
 
+    claims = Claims(runner="colab")
+    print(f"claims: {'on' if claims.enabled else 'off (skip list only)'}", flush=True)
+
     timed_out = []
     for number, row in enumerate(rows, 1):
         if row["sha256"] in already_done():
             print(f"[{number}/{len(rows)}] {row['sha256'][:8]} skipped: done elsewhere", flush=True)
+            continue
+        if not claims.claim(row["sha256"]):
+            sha = row["sha256"][:8]
+            print(f"[{number}/{len(rows)}] {sha} claimed by another runner", flush=True)
             continue
         one = "/content/one.jsonl"
         with open(one, "w") as handle:
@@ -79,7 +90,11 @@ def main() -> None:
                       "--out", OUT, "--attn", "eager"])
         if result.returncode == 124:
             timed_out.append(row["sha256"])
-            print(f"  TIMED OUT after {PER_DOC_SECONDS}s", flush=True)
+            claims.release(row["sha256"])
+            print(f"  TIMED OUT after {PER_DOC_SECONDS}s; claim released", flush=True)
+        elif result.returncode != 0:
+            claims.release(row["sha256"])
+            print(f"  failed with {result.returncode}; claim released", flush=True)
 
     if timed_out:
         with open("/content/timed_out.txt", "w") as handle:

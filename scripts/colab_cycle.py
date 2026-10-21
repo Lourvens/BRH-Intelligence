@@ -63,7 +63,7 @@ def build_payload() -> None:
     """Tar the code plus the current skip list, so each cycle is up to date."""
     with tarfile.open(PAYLOAD, "w:gz") as archive:
         archive.add(ROOT / "packages/core/src/brh_core", arcname="packages/core/src/brh_core")
-        for name in ("fetch_shard.py", "merge_ocr.py"):
+        for name in ("fetch_shard.py", "merge_ocr.py", "claims.py", "gpu_worker.py"):
             archive.add(ROOT / "scripts" / name, arcname=f"scripts/{name}")
         archive.add(ROOT / "data/ocr/urls.jsonl", arcname="data/ocr/urls.jsonl")
         archive.add(ROOT / "data/ocr/done_shas.txt", arcname="data/ocr/done_shas.txt")
