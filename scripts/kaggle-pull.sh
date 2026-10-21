@@ -41,4 +41,5 @@ if [ "$COPIED" -gt 0 ]; then
 
 Pulled by scripts/kaggle-pull.sh. A kernel's output is scratch space and the
 version disappears when the next one is pushed." && echo "committed ${COPIED} document(s)"
+    git push origin HEAD >/dev/null 2>&1 && echo "pushed" || echo "push failed; will retry"
 fi

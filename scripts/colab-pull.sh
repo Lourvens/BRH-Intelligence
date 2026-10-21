@@ -43,4 +43,8 @@ if [ "${COPIED:-0}" -gt 0 ]; then
 
 Pulled by scripts/colab-pull.sh. The runtime is reclaimed after about an hour,
 so anything left on it is lost." && echo "committed ${COPIED} document(s)"
+    # Publishing is what makes the skip list live for the other runners: they
+    # read it from raw.githubusercontent.com, so a local-only commit is invisible
+    # to them. Best effort — a failed push must not lose the commit.
+    git push origin HEAD >/dev/null 2>&1 && echo "pushed" || echo "push failed; will retry"
 fi

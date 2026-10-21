@@ -11,28 +11,44 @@ import json
 import os
 import subprocess
 import sys
+import urllib.request
 
 ROOT = "/content/repo"
 OUT = "/content/out"
 DONE = f"{ROOT}/data/ocr/done_shas.txt"
+# The repository is public, so the skip list is already published by `git push`.
+# Reading it costs an outbound GET; a tunnel would only add a way back in.
+REMOTE_DONE = (
+    "https://raw.githubusercontent.com/Lourvens/BRH-Intelligence/main/data/ocr/done_shas.txt"
+)
 LIMIT_DOCS = int(os.environ.get("LIMIT_DOCS", "12"))
 PER_DOC_SECONDS = int(os.environ.get("PER_DOC_SECONDS", "2400"))  # 40 min
 
 env = dict(os.environ, PYTHONPATH=f"{ROOT}/packages/core/src")
 
 
+def remote_done() -> set[str]:
+    """The published list, minutes fresh. Silent when the network is down."""
+    try:
+        with urllib.request.urlopen(REMOTE_DONE, timeout=15) as response:
+            return {line.strip() for line in response.read().decode().splitlines() if line.strip()}
+    except Exception:  # offline or rate limited: fall back to local
+        return set()
+
+
 def already_done() -> set[str]:
-    """The skip list as of the last pull, re-read before every document.
+    """Union of the last pull and the published list, before every document.
 
     Shards are cut over URLs, so two runners can be handed the same document
-    under different URLs. The list is a snapshot, and a chunk lives for hours:
-    a Kaggle version finishing mid-chunk would otherwise be re-OCRed here.
+    under different URLs. A chunk lives for hours, so a Kaggle version landing
+    mid-chunk would otherwise be re-OCRed here.
     """
     try:
         with open(DONE, encoding="utf-8") as handle:
-            return {line.strip() for line in handle if line.strip()}
+            local = {line.strip() for line in handle if line.strip()}
     except FileNotFoundError:
-        return set()
+        local = set()
+    return local | remote_done()
 
 
 def run(command, **kwargs):
