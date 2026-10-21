@@ -767,3 +767,5 @@
 {"ts": "2026-10-21T12:20:27+00:00", "batch": "20261021T122027Z", "sha256": "a4456095e724877af59fd2c846296a1f13d7e7dc157b5fbd858bdf83c855c519", "event": "started", "attempt": 1, "engine": "paddleocr-vl", "engine_version": "3.7.0"}
 {"ts": "2026-10-21T12:54:23+00:00", "batch": "20261021T122027Z", "sha256": "a4456095e724877af59fd2c846296a1f13d7e7dc157b5fbd858bdf83c855c519", "event": "done", "attempt": 1, "pages": 67, "chars": 202026, "figures": 1, "seconds": 2036.2}
 {"ts": "2026-10-21T12:54:29+00:00", "batch": "20261021T125429Z", "sha256": "a999ef06f52301cc6e3b2935fd1016f1fc13ebbc687697cf8fca18b19107a00b", "event": "started", "attempt": 1, "engine": "paddleocr-vl", "engine_version": "3.7.0"}
+{"ts": "2026-10-21T13:26:57+00:00", "batch": "20261021T125429Z", "sha256": "a999ef06f52301cc6e3b2935fd1016f1fc13ebbc687697cf8fca18b19107a00b", "event": "done", "attempt": 1, "pages": 67, "chars": 201717, "figures": 2, "seconds": 1947.3}
+{"ts": "2026-10-21T13:26:59+00:00", "batch": "20261021T132659Z", "sha256": "3a74d12313eaaee10d61b2e2f6acdd80f7a1c9785e8a2d8356b1b4f82dee8995", "event": "started", "attempt": 1, "engine": "paddleocr-vl", "engine_version": "3.7.0"}
