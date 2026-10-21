@@ -22,7 +22,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from claims import Claims  # noqa: E402 - the path insert must come first
+from claims import Claims
+from skiplist import published
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -31,6 +32,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--runner", default="kaggle")
     parser.add_argument("--timeout", type=int, default=2400, help="seconds per document")
+    parser.add_argument("--skip-shas", default=Path("data/ocr/done_shas.txt"), type=Path)
     args = parser.parse_args(argv)
 
     rows = [
@@ -39,11 +41,18 @@ def main(argv: list[str] | None = None) -> int:
         if line.strip()
     ]
     claims = Claims(runner=args.runner)
-    print(f"{len(rows)} document(s), claims {'on' if claims.enabled else 'off'}", flush=True)
+    print(
+        f"{len(rows)} document(s), claims {'on' if claims.enabled else 'off'}",
+        flush=True,
+    )
 
     one = args.manifest.with_suffix(".one.jsonl")
     for number, row in enumerate(rows, 1):
         sha = row["sha256"]
+        # The manifest was cut when the kernel started; this list is minutes old.
+        if sha in published(args.skip_shas):
+            print(f"[{number}/{len(rows)}] {sha[:8]} finished elsewhere", flush=True)
+            continue
         if not claims.claim(sha):
             print(f"[{number}/{len(rows)}] {sha[:8]} claimed elsewhere", flush=True)
             continue
