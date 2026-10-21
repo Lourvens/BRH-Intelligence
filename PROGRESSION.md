@@ -8,11 +8,12 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 ## Active
 
 - **OCR extraction is in progress across three runners (2026-10-20).** The
-  catalogue is 1 169 PDFs; **440 are extracted** (37,6 %), 729 remain
-  (7 917 pages, 20,8 M characters, 405 figures). The checkout is the whole
+  catalogue is 1 169 PDFs; **522 are extracted** (44,7 %), 647 remain
+  (9 566 pages, 25,0 M characters, 481 figures). The checkout is the whole
   corpus: the Modal volume was pulled with `modal volume get brh-ocr /ocr` and
   merged, so 173 documents that existed only on the volume are now committed.
-  Kaggle v10 alone delivered 80 new documents.
+  Kaggle v10 delivered 80 new documents and v11 79; v11 ran 5 h 22 min on two
+  T4s at 27 s/page, which is the rate dense statistical bulletins impose.
   - Modal is **stopped by budget**: $25.45 of the $30 credit is spent and the
     spend guard refuses to dispatch below $5. The last run was left to finish;
     no further Modal work is planned without new credit. A volume is not a
