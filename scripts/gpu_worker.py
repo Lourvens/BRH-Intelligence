@@ -22,7 +22,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from claims import Claims
+from claims import Claims  # noqa: E402 - the path insert must come first
 
 
 def main(argv: list[str] | None = None) -> int:

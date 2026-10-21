@@ -78,8 +78,7 @@ def main() -> None:
             print(f"[{number}/{len(rows)}] {row['sha256'][:8]} skipped: done elsewhere", flush=True)
             continue
         if not claims.claim(row["sha256"]):
-            sha = row["sha256"][:8]
-            print(f"[{number}/{len(rows)}] {sha} claimed by another runner", flush=True)
+            print(f"[{number}/{len(rows)}] {row['sha256'][:8]} claimed by another runner", flush=True)
             continue
         one = "/content/one.jsonl"
         with open(one, "w") as handle:

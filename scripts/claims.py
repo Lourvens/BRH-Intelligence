@@ -19,7 +19,6 @@ Two deliberate choices:
 
 from __future__ import annotations
 
-import contextlib
 import os
 from datetime import UTC, datetime
 
@@ -55,7 +54,7 @@ class Claims:
             collection = client.get_default_database()["claims"]
             collection.create_index("at", expireAfterSeconds=ttl_seconds)
             self._collection = collection
-        except Exception as error:  # degrade to the skip list
+        except Exception as error:  # noqa: BLE001 - degrade to the skip list
             print(f"claims disabled: {error}", flush=True)
             self._collection = None
 
@@ -68,7 +67,7 @@ class Claims:
                 {"_id": sha256, "runner": self.runner, "at": datetime.now(UTC)}
             )
             return True
-        except Exception as error:
+        except Exception as error:  # noqa: BLE001
             if type(error).__name__ == "DuplicateKeyError":
                 return False
             print(f"claim failed for {sha256[:8]}: {error}", flush=True)
@@ -78,5 +77,7 @@ class Claims:
         """Give a failed document back instead of waiting for the TTL."""
         if self._collection is None:
             return
-        with contextlib.suppress(Exception):  # the TTL will clean it up
+        try:
             self._collection.delete_one({"_id": sha256})
+        except Exception:  # noqa: BLE001 - the TTL will clean it up
+            pass
