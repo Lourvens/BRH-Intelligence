@@ -142,11 +142,20 @@ def stop_session() -> None:
 
 
 def pull() -> None:
-    """The pull talks to the same CLI, so it gets a deadline too."""
+    """Collect what finished, then refresh the skip list the chunk reads.
+
+    Without the upload, a chunk keeps the list it started with, so anything
+    another runner delivers mid-chunk is re-OCRed here.
+    """
     try:
         subprocess.run(
             ["bash", str(ROOT / "scripts/colab-pull.sh"), SESSION],
             check=False, timeout=600,
+        )
+        subprocess.run(
+            ["colab", "upload", "-s", SESSION,
+             str(ROOT / "data/ocr/done_shas.txt"), "/content/repo/data/ocr/done_shas.txt"],
+            env=ENV, capture_output=True, timeout=120, check=False,
         )
     except subprocess.TimeoutExpired:
         log("pull timed out")
@@ -197,7 +206,7 @@ def run_cycle(chunk_source: str) -> None:
 
 
 def main() -> int:
-    chunk_source = Path("/tmp/opencode/colab_chunk.py").read_text()
+    chunk_source = (ROOT / "scripts/colab_chunk.py").read_text()
     for cycle in range(1, CYCLES + 1):
         log(f"cycle {cycle}: starting {SESSION}")
         try:

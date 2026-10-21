@@ -14,10 +14,25 @@ import sys
 
 ROOT = "/content/repo"
 OUT = "/content/out"
+DONE = f"{ROOT}/data/ocr/done_shas.txt"
 LIMIT_DOCS = int(os.environ.get("LIMIT_DOCS", "12"))
 PER_DOC_SECONDS = int(os.environ.get("PER_DOC_SECONDS", "2400"))  # 40 min
 
 env = dict(os.environ, PYTHONPATH=f"{ROOT}/packages/core/src")
+
+
+def already_done() -> set[str]:
+    """The skip list as of the last pull, re-read before every document.
+
+    Shards are cut over URLs, so two runners can be handed the same document
+    under different URLs. The list is a snapshot, and a chunk lives for hours:
+    a Kaggle version finishing mid-chunk would otherwise be re-OCRed here.
+    """
+    try:
+        with open(DONE, encoding="utf-8") as handle:
+            return {line.strip() for line in handle if line.strip()}
+    except FileNotFoundError:
+        return set()
 
 
 def run(command, **kwargs):
@@ -36,6 +51,9 @@ def main() -> None:
 
     timed_out = []
     for number, row in enumerate(rows, 1):
+        if row["sha256"] in already_done():
+            print(f"[{number}/{len(rows)}] {row['sha256'][:8]} skipped: done elsewhere", flush=True)
+            continue
         one = "/content/one.jsonl"
         with open(one, "w") as handle:
             handle.write(json.dumps(row) + "\n")
