@@ -31,6 +31,15 @@ CYCLES = int(os.environ.get("CYCLES", "12"))
 PULL_EVERY = int(os.environ.get("PULL_EVERY", "150"))
 PAYLOAD = Path("/tmp/opencode/colab_payload.tgz")
 
+# Everything the chunk imports on the VM. A missing module here kills the chunk
+# at import time, before it fetches anything, and the session then looks idle.
+RUNNER_SCRIPTS = (
+    "fetch_shard.py",
+    "merge_ocr.py",
+    "claims.py",
+    "skiplist.py",
+)
+
 ENV = dict(os.environ, OAUTHLIB_RELAX_TOKEN_SCOPE="1")
 
 
@@ -63,7 +72,7 @@ def build_payload() -> None:
     """Tar the code plus the current skip list, so each cycle is up to date."""
     with tarfile.open(PAYLOAD, "w:gz") as archive:
         archive.add(ROOT / "packages/core/src/brh_core", arcname="packages/core/src/brh_core")
-        for name in ("fetch_shard.py", "merge_ocr.py"):
+        for name in RUNNER_SCRIPTS:
             archive.add(ROOT / "scripts" / name, arcname=f"scripts/{name}")
         archive.add(ROOT / "data/ocr/urls.jsonl", arcname="data/ocr/urls.jsonl")
         archive.add(ROOT / "data/ocr/done_shas.txt", arcname="data/ocr/done_shas.txt")

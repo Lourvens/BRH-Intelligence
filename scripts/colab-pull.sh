@@ -19,8 +19,15 @@ STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
 # colab exec reads its program from stdin — an argument is rejected as "extra".
-printf 'import shutil; shutil.make_archive("/content/out", "zip", "/content/out")' \
-    | colab exec -s "$SESSION" >/dev/null
+# The output directory only exists once the chunk has started OCR, so an early
+# pull must say "nothing yet" instead of raising out of the zip call.
+RESULT="$(printf 'import pathlib, shutil\nout = pathlib.Path("/content/out")\nif out.is_dir():\n    shutil.make_archive("/content/out", "zip", "/content/out")\n    print("ARCHIVED")\nelse:\n    print("EMPTY")\n' \
+    | colab exec -s "$SESSION" 2>&1)"
+
+case "$RESULT" in
+    *ARCHIVED*) ;;
+    *) echo "nothing finished yet"; exit 0 ;;
+esac
 colab download -s "$SESSION" /content/out.zip "$STAGE/out.zip" >/dev/null
 unzip -q "$STAGE/out.zip" -d "$STAGE/x"
 
