@@ -1,0 +1,12 @@
+{
+ "sha256": "ac89d66da631e81afd5f0926c39943d5668865f5698fda54f0beefc65a3c749b",
+ "batch": "20261021T214800Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs0/ac89d66da631e81afd5f0926c39943d5668865f5698fda54f0beefc65a3c749b.pdf",
+ "pages": 6,
+ "chars": 11051,
+ "figures": 2,
+ "seconds": 101.0,
+ "finished_at": "2026-10-21T21:49:41+00:00"
+}

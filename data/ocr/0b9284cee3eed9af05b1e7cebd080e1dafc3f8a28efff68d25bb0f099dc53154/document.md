@@ -1,0 +1,95 @@
+<!-- page 1 -->
+
+# AUX INSTITUTIONS FINANCIÈRES
+
+En application des dispositions des articles 83 et 161 de la loi du 14 mai 2012 portant sur les banques et autres institutions financières, du décret du 5 juin 2020 sur les institutions de microfinance et de la loi du 21 juin 2002 sur les coopératives d'épargne et de crédit, les banques, les sociétés financières de développement, les sociétés de crédit-bail, les sociétés de cartes de crédit, ci-après dénommées « institutions financières de crédit», les sociétés de microfinance agréées et les coopératives d'épargne et de crédit sont tenues de respecter les dispositions suivantes relatives aux prêts octroyés à leur clientèle.
+
+### 1. Moratoire sur les prêts
+
+a. Les institutions financières de crédit peuvent accorder à tout débiteur du système, qui souhaite en bénéficier et qui remplit les conditions d'éligibilité ci-après, un moratoire allant jusqu'au :
+
+31 décembre 2022 pour les prêts accordés aux particuliers ;
+
+31 mars 2023 pour les prêts octroyés aux entreprises.
+
+Les prêts éligibles à ce moratoire sont ceux classifiés Courants ou à Signaler au 30 juin 2022 et qui sont devenus improductifs au 30 septembre 2022 ou qui ont une forte probabilité de le devenir après, suite aux troubles socio-politiques que connait le pays actuellement.
+
+b. Les sociétés de microfinance agréées, les banques ayant des divisions de microcrédit et les coopératives d'épargne et de crédit (CEC) peuvent accorder à leurs clients éligibles qui souhaitent en bénéficier un moratoire allant jusqu'au 31 mars 2023.
+
+Les clients éligibles sont ceux dont les prêts étaient sains au 31 juillet 2022 et qui sont devenus improductifs au 30 septembre 2022 ou qui sont susceptibles de le devenir après, par suite des troubles socio-politiques que connait le pays actuellement.
+
+Pendant la période de moratoire, seul le paiement des intérêts sur les créances est exigé et la classification de crédit des clients bénéficiaires est celle enregistrée au 30 juin 2022 (pour les institutions financières de crédit) ou au 31 juillet 2022 (pour les sociétés de microfinance, les divisions de microcrédit des banques et les coopératives d'épargne et de crédit). Cette classification doit être ainsi communiquée au Bureau d'Information sur le Crédit (BIC) jusqu'à l'expiration de ladite période. Il demeure entendu que l'institution financière doit informer le BIC de la mise en place du moratoire pour les clients bénéficiaires.
+
+<!-- page 2 -->
+
+### 2. Restructuring et provisionnement
+
+a. D'un commun accord avec son client, une institution financière de crédit peut, conformément à la circulaire No 87 sur la classification des prêts et la constitution de provisions pour créances douteuses, procéder à la redéfinition des modalités d'un prêt commercial qui était sain au 30 juin 2022 et qui est devenu improductif au 30 septembre 2022 ou qui a une forte probabilité de le devenir après, suite aux récentes troubles sociopolitiques que connait le pays actuellement. Pour un prêt ainsi restructuré, l'institution financière est autorisée, pour une période d'un (1) an, à appliquer un taux de provisionnement minimum de 5%. Les institutions financières de crédit visées par la présente circulaire ont jusqu'au 31 décembre 2022 pour effectuer de telles restructurations.
+
+Si une entreprise ayant bénéficié du moratoire susmentionné enregistre des arriérées sur le paiement des intérêts pendant trois (3) mois consécutifs durant la période du moratoire, son prêt sera classifié automatiquement improductif et le moratoire deviendra caduque. L'institution financière pourra alors, d'un commun accord avec l'entreprise concernée, restructurer ledit prêt. Pour un prêt ainsi restructuré, l'institution financière est autorisée, pour une période d'un (1) an, à appliquer un taux de provisionnement minimum de 20%. Les institutions financières de crédit visées par la présente circulaire ont jusqu'au 31 mars 2023 pour procéder à de telles restructurations.
+
+Les prêts restructurés par les institutions financières de crédit dans le cadre de la présente circulaire seront reportés à la BRH conformément aux dispositions de la circulaire 87 -ou sa version amendée le cas échéant - avec mention « prêt restructuré  Circ.115-2 » ou « prêt restructuré  Circ.115-2/après moratoire », selon le cas.
+
+b. Les sociétés de microfinance, les divisions de microcrédit des banques et les coopératives d'épargne et de crédit (CEC) peuvent, d'un commun accord avec leurs clients, restructurer des prêts sains au 31 juillet 2022 et devenus improductifs au 30 septembre 2022 ou susceptibles de le devenir après, par suite des troubles socio-politiques affectant actuellement le pays. Pour les prêts ainsi restructurés, ces institutions sont autorisées à appliquer, pour une période maximum de six (6) mois, un taux de provisionnement minimum de 25% dans le cas d'une CEC, ou un taux de provisionnement correspondant à 10% du taux normalement appliqué aux prêts restructurés dans le cas d'une société de microfinance ou division de microcrédit d'une banque. Les sociétés de microfinance, les divisions de microcrédit d'une banque et les coopératives d'épargne et de crédit ont jusqu'au 31 mars 2023 pour procéder à telles restructurations.
+
+Si le prêt d'un client éligible ayant bénéficié d'un moratoire d'une société de microfinance, d'une division de microcrédit d'une banque ou d'une coopérative
+
+<!-- page 3 -->
+
+d’épargne et de crédit a connu des arriérés de paiement durant deux mois consécutifs sur les intérêts au cours de la période du moratoire, il devient automatiquement improductif à l’expiration dudit moratoire. La société de microfinance, la division de microcrédit d’une banque ou la coopérative d’épargne et de crédit peut alors choisir de restructurer ce prêt. Pour ce prêt ainsi restructuré, la CEC est autorisée à appliquer, pour une période maximale de six (6) mois, un taux de provisionnement minimum de 50% et la société de microfinance ou division de microcrédit d’une banque est autorisée à appliquer un taux de provisionnement minimum correspondant à 50% du taux normalement appliqué aux prêts restructurés. Les sociétés de microfinance, les divisions de microcrédit des banques et les coopératives d’épargne et de crédit ont jusqu’au 31 mars 2023 pour procéder à telles restructurations.
+
+### 3. Autres mesures
+
+Pendant la période du moratoire, les bénéficiaires sont exonérés de frais de retard, à l'exception de ceux des sociétés de cartes de crédit.
+
+Par ailleurs, dans le but de s'assurer du maintien de la solidité des fonds propres des institutions financières dans ce contexte d'instabilité socio-économique, les institutions financières visées par la présente circulaire sont tenues de requérir auprès de la BRH une non-objection pour tout projet de distribution de dividendes ou d'intérêt sur les parts permanentes pour l'exercice 2021-2022.
+
+### 4. Rapports
+
+Toutes les institutions financières visées par la présente sont tenues de transmettre électroniquement à la BRH, au 31 décembre 2022 et au 31 mars 2023, un rapport sur les prêts ayant bénéficié d'un moratoire, au plus tard 21 jours après la fin de chacun de ces trimestres.
+
+En outre, les sociétés de microfinance et les CEC doivent, selon la même fréquence, transmettre à la BRH un rapport sur les prêts ayant été l'objet de restructuration au cours de la période permise dans le cadre de la présente.
+
+mettre est en annexe.
+
+### 5. Abrogation et entrée en vigueur
+
+La présente circulaire abroge la circulaire 115-1 du 30 juin 2020 et entre en vigueur le 10 octobre 2022.
+
+Port-au-Prince, le 7 octobre 2022
+
+Jean Baden Dubois
+
+Gouverneur
+
+<!-- page 4 -->
+
+## ANNEXE I
+
+Rapport trimestriel sur les clients bénéficiaires de moratoire/Circulaire 115-2
+
+Nom de l'institution financière ___ Période du.....au .....
+
+| Identification du client (Nom de la personne physique ou de l'entreprise) | Date du moratoire (jj/mm/aaaa) | Encours du prêt à la date d'octroi du moratoire (en gourdes) | Paiement d'intérêt: Courant (C) ou Non courant (NC) |
+| --- | --- | --- | --- |
+| Client 1 |   |   |   |
+| Client 2 |   |   |   |
+| ........ |   |   |   |
+| ........ |   |   |   |
+
+## ANNEXE II
+
+## Rapport trimestriel sur les clients bénéficiaires de restructuration/Circulaire 115-2
+
+Nom de la Société de microfinance ou de la CEC ___ Période du ___ au ___
+
+| Identification du client (Nom de la personne physique ou de l'entreprise) | Date de la restructuration (jj/mm/aaaa) | Encours du prêt à la date de la restructuration (en gourdes) | Type de restructuration $ ^{{*}} $ (M, R) | Comportement du client après restructuration(R, NR) $ ^{{**}} $ |
+| --- | --- | --- | --- | --- |
+| Client 1 |   |   |   |   |
+| Client 2 |   |   |   |   |
+| ........ |   |   |   |   |
+| ........ |   |   |   |   |
+
+ $ ^{*} $ M: prolongation de maturité; R: réduction du principal ou du montant d'intérêt payable.
+
+** R: Régulier; NR: Non régulier.
