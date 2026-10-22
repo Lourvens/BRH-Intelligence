@@ -1,0 +1,1020 @@
+<!-- page 1 -->
+
+## Bulletin Statistique 58
+
+Janvier - Mars 2006
+
+<!-- page 2 -->
+
+## Table des matières
+
+Avertissement .....5
+I- Statistiques monétaires et financières
+Tableau 1.1 Principaux indicateurs monétaires .....10
+Tableau 1.2 Situation monétaire .....11
+Tableau 1.3 Liquidités du système bancaire .....12
+Tableau 1.4 Taux de réserves obligatoires .....12
+Tableau 1.5 Spread sur le marché formel des changes .....12
+Tableau 1.6 Volume des transactions sur le marché formel des changes .....13
+Tableau 1.7 Taux d'intérêt moyens mensuels du système bancaire .....15
+Tableau 1.8 Taux d'intérêt moyens mensuels sur le marché monétaire .....15
+Tableau 1.9 Dépôts du secteur privé .....16
+Tableau 1.10 Dépôts : parts de marché .....17
+Tableau 1.11 Crédit au secteur privé .....18
+Tableau 1.12 Crédit : parts de marché .....19
+Tableau 1.13 Bilan consolidé des banques commerciales .....20
+Tableau 1.14 Bilan de la BRH .....21
+Tableau 1.15 Encours des bons BRH .....22
+Tableau 1.16 Avoirs extérieurs nets de la BRH .....23
+Tableau 1.17 Résultats des activités de la chambre de compensation .....24
+
+Il- Finances publiques
+Tableau 2.1 Résumé des opérations financières des administrations publiques .....28
+Tableau 2.2 Recettes des administrations publiques .....29
+Tableau 2.3 Dépenses des administrations publiques .....30
+Tableau 2.4 Endettement total du secteur public .....31
+Tableau 2.5 Dette publique externe .....32
+
+Ill- Balance des paiements
+Tableau 3.1 Résumé de la balance des paiements .....34
+Tableau 3.2 Principaux produits exportés .....35
+Tableau 3.3 Exportations des industries d'assemblage vers les États-Unis d'Amérique à base de matières premières importées .....36
+Tableau 3.4 Exportations vers les États-Unis d'Amérique à base de matières premières locales .....37
+Tableau 3.5 Importations par grandes catégories de produits .....38
+Tableau 3.5a Importations de produits pétroliers .....39
+Tableau 3.6 Évolution de l'indice du taux de change réel bilatéral Haïti-États-Unis d'Amérique .....40
+
+<!-- page 3 -->
+
+## Table des matières (suite)
+
+## IV- Prix et autres indicateurs économiques
+
+Tableau 4.1 Indice des prix à la consommation (IPC) pour l'ensemble du pays .....42
+Tableau 4.2 Taux d'inflation .....42
+Tableau 4.2 a Taux d'inflation à trois mois .....43
+Tableau 4.2 b Taux d'inflation à six mois .....43
+Tableau 4.3 Taux de change .....44
+Tableau 4.4 Prix moyen de détail de certains produits sur l'ensemble du pays .....45
+Tableau 4.5 Prix moyen des matériaux de construction .....46
+Tableau 4.6 Activités du secteur de la construction à Port-au-Prince .....46
+Tableau 4.7 Nouvelles entreprises déclarées à Port-au-Prince et nombre correspondant d'employés .....47
+Tableau 4.8 Nouvelles entreprises enregistrées à l'ONA et nombre correspondant d'assurés .....47
+Tableau 4.9 Production industrielle de certains biens .....48
+Tableau 4.10 Consommation d'électricité .....49
+Tableau 4.11 Production brute d'électricité .....49
+Tableau 4.12 Prix moyen des principaux produits pétroliers et dérivés sur le marché local .....50
+Tableau 4.13 Véhicules importés enregistrés au port de Port-au-Prince .....51
+Tableau 4.14 Nombre de touristes arrivés au pays .....53
+Tableau 4.15 Mouvements migratoires aériens internationaux .....54
+Tableau 4.16 Pouvoir d'achat de la gourde .....55
+Tableau 4.17 Cours croisé des devises étrangères par rapport à la gourde .....56
+Tableau 4.18 Pluviométrie enregistrée dans certaines villes du pays .....57
+
+## Annexe graphique
+
+Graphique 1 Agrégats M1, M2, M3.....60
+Graphique 2 Contreparties de M3.....61
+Graphique 3 Encours des bons BRH.....62
+Graphique 4 Dépôts du secteur privé.....63
+Graphique 5 Crédit au secteur privé.....64
+Graphique 6 Recettes et dépenses des administrations publiques.....65
+Graphique 7 Endettement total du secteur public.....66
+Graphique 8 Balances commerciale et globale.....67
+Graphique 9 Indice du taux de change réel bilatéral Haiti-États Unis d'Amérique.....68
+Graphique 10 Taux d'inflation (variation mensuelle de l'IPC; novembre 1996=100).....69
+Graphique 11 Taux d'inflation (variation de l'IPC en glissement annuel).....70
+Graphique 12 Taux de change (marché informel; moyenne de période).....71
+
+<!-- page 4 -->
+
+# Avertissement
+
+## Statistiques monétaires et financières
+
+Les statistiques monétaires sont présentées selon les critères de classification établis dans le manuel Guide des Statistiques Monétaires et Bancaires publiées dans Statistiques Financières Internationales de 1987 du Fonds Monétaire International (FMI). Elles représentent des données de stock (fin de période) qui sont collectées mensuellement.
+
+## Finances publiques
+
+Les statistiques des finances publiques sont présentées selon les critères de classification établis dans le Manuel de Référence des Finances Publiques (1986) du FMI. Elles représentent des données de flux qui sont collectées mensuellement et sont enregistrées sur la base des encaissements-décaissements. Ces données subissent un traitement qui tient compte de la spécificité du contexte haïtien. Étant donné qu'Haïti ne dispose pas d'un budget général consolidé, les recettes enregistrées sont celles du Trésor excluant celles des unités de production marchande du secteur public. Les dépenses enregistrées sont celles effectuées par le Trésor pour le compte de l'Administration Centrale et comprennent également les dépenses réalisées sur financement externe pour l'ensemble des administrations publiques.
+
+## Balance des paiements
+
+Les statistiques de la balance des paiements sont des données de flux. Elles sont présentées selon les critères établis dans la 5ème Édition du Manuel de la Balance des Paiements du FMI. Les transactions sur les biens sont enregistrées sur une base brute. Les transferts de capital réfèrent surtout à des annulations d'engagements par un ou plusieurs créanciers qui ne reçoivent rien en échange (remise de dette).
+
+Les transferts courants sont ceux qui ne peuvent être dits transferts de capital. Ils comprennent les transferts en espèces entre administrations publiques destinés à financer leurs dépenses courantes, les transferts en nature (tels que dons d'aliments, de médicaments et d'autres biens de consommation), les envois de fonds de travailleurs émigrés, etc.
+
+La variation des avoirs de réserves est présentée sous forme d'avoirs bruts à l'exclusion des engagements envers le FMI et des engagements envers le Fonds d'investissement vénézuélien (FIV) (enregistrés dans les engagements constituant des réserves pour les autorités étrangères). Ceux-ci sont présentés séparément.
+
+L'indice du taux de change réel bilatéral (1991=100) est calculé à partir de l'indice des prix à la consommation (IPC) des États-Unis produit par le US Department of Labor (1982-84=100). Le changement de base est effectué à partir de la moyenne annuelle de la série pour l'année 1991 (1982-84=100). L'indice du taux de change nominal (1991=100) est calculé de la manière suivante : Taux de référence de fin de période du mois X / Taux de référence moyen pour l'année 1991.
+
+<!-- page 5 -->
+
+## Avertissement (suite)
+
+## Prix et autres indicateurs économiques
+
+Les informations regroupées sous la dénomination Prix et autres indicateurs économiques réfèrent aux données de production, d'emploi, de prix et aussi d'activités de divers secteurs. Il s'agit dans la plupart des cas de données brutes agrégées et tabulées. Ces données correspondent pour la plupart à des informations statistiques disponibles au moment de la compilation; elles sont donc sujettes à modification éventuelle dans le futur. L'indice des prix à la consommation est un indice de Laspeyres (période de base novembre 1996 avec pondération de 1986-1987) qui couvre l'ensemble du territoire national.
+
+Le taux de change de la monnaie nationale par rapport au dollar américain (Gde / $) est aussi présenté au niveau de cette section pour les marchés formel (banques et agents de change) et informel. Le taux de référence de la BRH représente une moyenne pondérée des taux de ces marchés.
+
+## Liste des sigles utilisés dans le Bulletin Statistique
+
+| AGD | Administration Général de Des Douanes |
+| --- | --- |
+| AIB | Autres institutions bancaires |
+| BEL | Banques d'épargne et de logement |
+| BID | Banque Interaméricaine de Développement |
+| BNC | Banque Nationale de Crédit |
+| BRH | Banque de la République d'Haïti |
+| BRI | Banque de Règlements Internationaux |
+| CIF | Cost, Insurance and Freight |
+| DTS | Droits de Tirage Spéciaux |
+| EDH | Électricité d'Haïti |
+| ÉU | États-Unis d'Amérique |
+| FIV | Fonds d'Investissement Vénézuélien |
+| FMI | Fonds Monétaire International |
+| FOB | Free on Board |
+| IFNB | Institutions financières non bancaires |
+| IHSI | Institut Haïtien de Statistique et d'Informatique |
+| IPC | Indice des prix à la consommation |
+| MEF | Ministère de l'Économie et des Finances |
+| MG | Millions de gourdes |
+| OEA | Organisation des États Américains |
+| OFATMA | Office d'Assurance-Accidents du Travail, Maladie et Maternité |
+| OFI | Organisations financières internationales |
+| (-) | Indique une valeur nulles |
+| (...) | Indique la non-disponibilité de données statistiques au moment de la mise sous presse |
+| (0.00) | Indique une valeur presque nulles |
+
+<!-- page 6 -->
+
+# I- Statistiques monétaires et financières
+
+<!-- page 7 -->
+
+Tableau 1.1 Principaux indicateurs monétaires
+
+<table><tr><td>(en millions de gourdes)</td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Monnaie en circulation</td><td>10,036.45</td><td>9,878.43</td><td>9,871.85</td><td>10,247.53</td><td>10,576.15</td><td>10,546.58</td><td>10,429.54</td><td>10,370.76</td><td>12,218.31</td><td>11,223.18</td><td>11,359.49</td><td>11,194.70</td></tr><tr><td>Base monétaire</td><td>32,803.98</td><td>32,415.59</td><td>33,064.15</td><td>33,601.32</td><td>33,441.02</td><td>33,574.11</td><td>33,639.96</td><td>33,797.58</td><td>35,372.53</td><td>35,893.41</td><td>35,473.74</td><td>36,041.52</td></tr><tr><td>M1</td><td>17,696.62</td><td>17,688.49</td><td>18,227.24</td><td>18,624.76</td><td>18,756.76</td><td>18,999.06</td><td>18,916.52</td><td>18,720.68</td><td>20,488.39</td><td>20,448.79</td><td>20,185.81</td><td>19,907.98</td></tr><tr><td>M2</td><td>37,622.66</td><td>37,532.33</td><td>38,192.65</td><td>38,492.11</td><td>38,508.73</td><td>38,838.64</td><td>38,952.24</td><td>38,611.28</td><td>40,489.33</td><td>40,994.38</td><td>40,848.29</td><td>40,976.48</td></tr><tr><td>M3</td><td>63,949.74</td><td>63,778.48</td><td>65,136.30</td><td>65,958.21</td><td>66,494.13</td><td>68,289.72</td><td>67,726.11</td><td>68,029.97</td><td>70,754.68</td><td>71,998.58</td><td>71,789.84</td><td>72,512.67</td></tr><tr><td>Crédit intérieur</td><td>42,873.86</td><td>43,948.52</td><td>45,276.76</td><td>46,669.30</td><td>45,871.02</td><td>46,499.72</td><td>46,643.62</td><td>47,016.89</td><td>48,028.64</td><td>48,822.40</td><td>48,562.20</td><td>47,431.04</td></tr><tr><td>Avoirs extérieurs nets</td><td>17,380.99</td><td>17,207.14</td><td>17,195.37</td><td>16,413.75</td><td>17,759.83</td><td>18,630.13</td><td>17,861.93</td><td>18,382.79</td><td>19,757.84</td><td>19,853.71</td><td>19,735.52</td><td>21,662.61</td></tr><tr><td>Total dépôts en gourdes</td><td>27,586.21</td><td>27,653.91</td><td>28,320.81</td><td>28,244.58</td><td>27,932.58</td><td>28,292.06</td><td>28,522.70</td><td>28,240.52</td><td>28,271.02</td><td>29,771.20</td><td>29,488.80</td><td>29,781.78</td></tr><tr><td>Total dépôts en dollars ÉU  $ ^{{1/}} $</td><td>26,327.08</td><td>26,246.15</td><td>26,943.65</td><td>27,466.10</td><td>27,985.39</td><td>29,451.08</td><td>28,773.88</td><td>29,418.68</td><td>30,265.35</td><td>31,004.20</td><td>30,941.55</td><td>31,536.18</td></tr><tr><td>Indice de dollarisation :</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Dépôts en dollars en % de M3</td><td>41.17</td><td>41.15</td><td>41.37</td><td>41.64</td><td>42.09</td><td>43.13</td><td>42.49</td><td>43.24</td><td>42.78</td><td>43.06</td><td>43.10</td><td>43.49</td></tr><tr><td>Pour mémoire:</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Taux de change de référence (Fin de mois)</td><td>39.0311</td><td>38.7025</td><td>39.9246</td><td>42.0759</td><td>42.3415</td><td>43.0426</td><td>43.0291</td><td>43.0612</td><td>43.0003</td><td>43.4757</td><td>42.9775</td><td>42.6885</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+1/ Convertis en gourdes au taux de référence de fin de mois de la BRH.
+
+<!-- page 8 -->
+
+Tableau 1.2
+
+Situation monétaire
+
+(en millions de gourdes)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Avoirs extérieurs nets</td><td>17,380.99</td><td>17,207.14</td><td>17,195.37</td><td>16,413.75</td><td>17,759.83</td><td>18,630.13</td><td>17,861.93</td><td>18,382.79</td><td>19,757.84</td><td>19,853.71</td><td>19,735.52</td><td>21,662.61</td></tr><tr><td>Avoirs extérieurs  $ ^{{1/}} $</td><td>22,553.15</td><td>22,254.12</td><td>22,348.87</td><td>21,926.83</td><td>23,200.73</td><td>23,938.14</td><td>24,009.61</td><td>24,359.99</td><td>25,507.30</td><td>25,618.58</td><td>25,351.31</td><td>27,114.79</td></tr><tr><td>Engagements extérieurs  $ ^{{y}} $</td><td>-5,172.16</td><td>-5,046.99</td><td>-5,153.50</td><td>-5,513.07</td><td>-5,440.90</td><td>-5,308.02</td><td>-6,147.68</td><td>-5,977.20</td><td>-5,749.46</td><td>-5,764.87</td><td>-5,615.79</td><td>-5,452.19</td></tr><tr><td>Crédit intérieur</td><td>42,873.86</td><td>43,948.52</td><td>45,276.76</td><td>46,669.30</td><td>45,871.02</td><td>46,499.72</td><td>46,643.62</td><td>47,016.89</td><td>48,028.64</td><td>48,822.40</td><td>48,562.20</td><td>47,431.04</td></tr><tr><td>Créances nettes sur secteur public</td><td>19,979.76</td><td>20,877.69</td><td>21,589.91</td><td>21,947.57</td><td>20,823.86</td><td>21,029.63</td><td>20,930.75</td><td>21,000.55</td><td>21,582.65</td><td>22,078.35</td><td>22,204.17</td><td>21,159.50</td></tr><tr><td>Créances nettes sur gouvernement central</td><td>20,347.97</td><td>21,146.75</td><td>21,876.59</td><td>22,226.76</td><td>21,039.47</td><td>21,192.96</td><td>21,028.54</td><td>21,215.47</td><td>21,814.66</td><td>22,317.02</td><td>22,573.65</td><td>21,390.20</td></tr><tr><td>Créances nettes sur collectivités locales</td><td>-100.82</td><td>-93.41</td><td>-80.32</td><td>-75.94</td><td>-62.52</td><td>-61.19</td><td>-70.56</td><td>-89.66</td><td>-146.35</td><td>-151.97</td><td>-144.16</td><td>-112.78</td></tr><tr><td>Créances nettes sur entreprises publiques</td><td>-267.38</td><td>-175.65</td><td>-206.35</td><td>-203.25</td><td>-153.09</td><td>-102.14</td><td>-27.22</td><td>-125.26</td><td>-85.66</td><td>-86.70</td><td>-225.33</td><td>-117.93</td></tr><tr><td>Créances sur secteur privé</td><td>22,894.10</td><td>23,070.82</td><td>23,686.85</td><td>24,721.72</td><td>25,047.16</td><td>25,470.09</td><td>25,712.87</td><td>26,016.34</td><td>26,445.99</td><td>26,744.05</td><td>26,358.03</td><td>26,271.54</td></tr><tr><td>ACTIF = PASSIF</td><td>60,254.85</td><td>61,155.65</td><td>62,472.13</td><td>63,083.05</td><td>63,630.85</td><td>65,129.85</td><td>64,505.55</td><td>65,399.68</td><td>67,786.48</td><td>68,676.11</td><td>68,297.72</td><td>69,093.64</td></tr><tr><td>M3</td><td>63,949.74</td><td>63,778.48</td><td>65,136.30</td><td>65,958.21</td><td>66,494.13</td><td>68,289.72</td><td>67,726.11</td><td>68,029.97</td><td>70,754.68</td><td>71,998.58</td><td>71,789.84</td><td>72,512.67</td></tr><tr><td>M2</td><td>37,622.66</td><td>37,532.33</td><td>38,192.65</td><td>38,492.11</td><td>38,508.73</td><td>38,838.64</td><td>38,952.24</td><td>38,611.28</td><td>40,489.33</td><td>40,994.38</td><td>40,848.29</td><td>40,976.48</td></tr><tr><td>M1</td><td>17,696.62</td><td>17,688.49</td><td>18,227.24</td><td>18,624.76</td><td>18,756.76</td><td>18,999.06</td><td>18,916.52</td><td>18,720.68</td><td>20,488.39</td><td>20,448.79</td><td>20,185.81</td><td>19,907.98</td></tr><tr><td>Monnaie en circulation</td><td>10,036.45</td><td>9,878.43</td><td>9,871.85</td><td>10,247.53</td><td>10,576.15</td><td>10,546.58</td><td>10,429.54</td><td>10,370.76</td><td>12,218.31</td><td>11,223.18</td><td>11,359.49</td><td>11,194.70</td></tr><tr><td>Dépôts à vue</td><td>7,660.17</td><td>7,810.06</td><td>8,355.39</td><td>8,377.22</td><td>8,180.60</td><td>8,452.48</td><td>8,486.98</td><td>8,349.92</td><td>8,270.09</td><td>9,225.61</td><td>8,826.32</td><td>8,713.29</td></tr><tr><td>Quasi-monnaie</td><td>19,926.04</td><td>19,843.85</td><td>19,965.42</td><td>19,867.35</td><td>19,751.98</td><td>19,839.58</td><td>20,035.72</td><td>19,890.61</td><td>20,000.94</td><td>20,545.59</td><td>20,662.48</td><td>21,068.50</td></tr><tr><td>Dépôts d'épargne</td><td>12,179.28</td><td>12,239.44</td><td>12,378.33</td><td>12,429.43</td><td>12,377.86</td><td>12,510.64</td><td>12,498.79</td><td>12,505.86</td><td>12,650.90</td><td>13,024.05</td><td>13,211.16</td><td>13,431.97</td></tr><tr><td>Dépôts à terme et autres</td><td>7,746.76</td><td>7,604.41</td><td>7,587.08</td><td>7,437.92</td><td>7,374.12</td><td>7,328.94</td><td>7,536.93</td><td>7,384.75</td><td>7,350.03</td><td>7,521.54</td><td>7,451.32</td><td>7,636.53</td></tr><tr><td>Dépôts en dollars ÉU  $ ^{{y}} $</td><td>26,327.08</td><td>26,246.15</td><td>26,943.65</td><td>27,466.10</td><td>27,985.39</td><td>29,451.08</td><td>28,773.88</td><td>29,418.68</td><td>30,265.35</td><td>31,004.20</td><td>30,941.55</td><td>31,536.18</td></tr><tr><td>Dépôts à vue</td><td>8,087.28</td><td>7,676.81</td><td>8,013.13</td><td>7,907.51</td><td>8,252.30</td><td>9,179.76</td><td>8,741.36</td><td>9,327.87</td><td>9,774.48</td><td>9,867.83</td><td>10,229.90</td><td>10,276.15</td></tr><tr><td>Dépôts d'épargne</td><td>9,258.12</td><td>9,339.87</td><td>9,486.07</td><td>9,807.91</td><td>9,779.24</td><td>9,832.82</td><td>9,810.43</td><td>9,809.60</td><td>10,191.95</td><td>10,344.00</td><td>10,363.99</td><td>10,663.84</td></tr><tr><td>Dépôts à terme et autres</td><td>8,981.69</td><td>9,229.46</td><td>9,444.45</td><td>9,750.68</td><td>9,953.85</td><td>10,438.50</td><td>10,222.08</td><td>10,281.21</td><td>10,298.93</td><td>10,792.37</td><td>10,347.66</td><td>10,596.19</td></tr><tr><td>Autres postes nets</td><td>-3,694.90</td><td>-2,622.83</td><td>-2,664.17</td><td>-2,875.16</td><td>-2,863.28</td><td>-3,159.87</td><td>-3,220.56</td><td>-2,630.29</td><td>-2,968.20</td><td>-3,322.47</td><td>-3,492.12</td><td>-3,419.02</td></tr><tr><td>Comptes de capital</td><td>6,034.00</td><td>6,846.62</td><td>6,912.77</td><td>6,958.17</td><td>6,933.45</td><td>7,129.35</td><td>7,256.69</td><td>7,351.85</td><td>7,612.73</td><td>7,785.43</td><td>7,696.48</td><td>7,621.71</td></tr><tr><td>Créances nettes interbancaires</td><td>-1,597.35</td><td>-1,237.87</td><td>-1,446.43</td><td>-1,851.73</td><td>-1,415.75</td><td>-1,612.47</td><td>-2,025.74</td><td>-1,815.65</td><td>-1,740.39</td><td>-1,971.89</td><td>-2,611.67</td><td>-2,004.29</td></tr><tr><td>Autres postes non classés</td><td>-8,131.54</td><td>-8,231.57</td><td>-8,130.51</td><td>-7,981.60</td><td>-8,380.98</td><td>-8,676.76</td><td>-8,451.51</td><td>-8,166.49</td><td>-8,840.53</td><td>-9,136.02</td><td>-8,576.94</td><td>-9,036.44</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+1/ Convertis au taux de référence de fin de mois de la BRH.
+
+<!-- page 9 -->
+
+Tableau 1.3
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Solde des encaisses et dépôts de réserves</td><td>11,546.54</td><td>11,509.26</td><td>11,184.27</td><td>11,373.86</td><td>10,925.30</td><td>11,385.76</td><td>10,862.54</td><td>10,851.38</td><td>10,936.12</td><td>11,501.85</td><td>11,828.19</td><td>11,713.36</td></tr><tr><td>Réserves obligatoires</td><td>10,754.01</td><td>10,782.31</td><td>11,005.20</td><td>11,001.24</td><td>10,953.94</td><td>11,178.23</td><td>11,116.69</td><td>11,166.61</td><td>11,283.13</td><td>11,668.60</td><td>12,578.30</td><td>12,273.17</td></tr><tr><td>Position de réserves</td><td>792.53</td><td>726.95</td><td>179.07</td><td>372.62</td><td>-28.64</td><td>207.53</td><td>-254.15</td><td>-315.23</td><td>-347.01</td><td>-166.74</td><td>-750.11</td><td>-559.81</td></tr></table>
+
+Source : Direction du Contrôle du Crédit, BRH.
+
+Tableau 1.4
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Passifs des banques commerciales</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Gourdes</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td></tr><tr><td>Devises</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td><td>31.00</td></tr><tr><td>Passifs des banques d'épargne et de logement</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Gourdes</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td></tr><tr><td>Devises</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td><td>19.50</td></tr></table>
+
+Source : Direction du Contrôle du Crédit, BRH.
+
+Tableau 1.5
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Agents de change</td><td>0.23</td><td>0.30</td><td>0.27</td><td>0.50</td><td>0.28</td><td>0.21</td><td>0.23</td><td>0.23</td><td>0.34</td><td>0.45</td><td>0.49</td><td>0.38</td></tr><tr><td>Banques</td><td>0.40</td><td>0.39</td><td>0.37</td><td>0.49</td><td>0.41</td><td>0.47</td><td>0.42</td><td>0.39</td><td>0.17</td><td>0.42</td><td>0.34</td><td>0.24</td></tr></table>
+
+Source : Direction des Affaires Internationales, BRH.
+
+<!-- page 10 -->
+
+Tableau 1.6
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td></tr><tr><td></td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td></tr><tr><td>Agents de change</td><td>3.11</td><td>2.77</td><td>2.17</td><td>2.16</td><td>3.67</td><td>3.55</td><td>2.58</td><td>2.46</td><td>6.03</td><td>5.90</td><td>4.59</td><td>4.56</td></tr><tr><td>Bayard</td><td>3.11</td><td>2.77</td><td>2.17</td><td>2.16</td><td>3.67</td><td>3.55</td><td>2.58</td><td>2.46</td><td>6.03</td><td>5.90</td><td>4.59</td><td>4.56</td></tr><tr><td>Banques</td><td>92.43</td><td>87.61</td><td>80.49</td><td>80.07</td><td>87.90</td><td>88.37</td><td>87.94</td><td>86.22</td><td>89.75</td><td>84.18</td><td>82.53</td><td>85.09</td></tr><tr><td>Banque de l'Union Haïtienne</td><td>6.34</td><td>6.1</td><td>5.04</td><td>4.89</td><td>6.32</td><td>6.50</td><td>4.37</td><td>4.01</td><td>5.01</td><td>4.78</td><td>4.47</td><td>4.41</td></tr><tr><td>Banque Nationale de Crédit</td><td>7.95</td><td>7.33</td><td>7.14</td><td>7.56</td><td>7.41</td><td>7.58</td><td>8.45</td><td>8.50</td><td>9.30</td><td>8.03</td><td>9.01</td><td>10.64</td></tr><tr><td>Banque Populaire Haïtienne</td><td>2.12</td><td>2.25</td><td>1.68</td><td>1.64</td><td>2.71</td><td>2.7</td><td>1.15</td><td>1.12</td><td>4.07</td><td>3.91</td><td>2.86</td><td>2.91</td></tr><tr><td>Capital Bank</td><td>10.4</td><td>9.64</td><td>8.22</td><td>7.69</td><td>7.65</td><td>8.14</td><td>11.06</td><td>11.27</td><td>12.59</td><td>12.88</td><td>10.98</td><td>10.43</td></tr><tr><td>Citibank NA</td><td>3.77</td><td>3.52</td><td>5.58</td><td>5.44</td><td>3.05</td><td>3.22</td><td>5.78</td><td>5.74</td><td>8.33</td><td>8.04</td><td>4.90</td><td>5.14</td></tr><tr><td>Promobank</td><td>5.18</td><td>5.09</td><td>4.05</td><td>3.85</td><td>4.50</td><td>4.14</td><td>3.49</td><td>3.85</td><td>3.69</td><td>3.72</td><td>3.91</td><td>4.03</td></tr><tr><td>Scotiabank</td><td>1.53</td><td>1.56</td><td>1.64</td><td>1.67</td><td>1.40</td><td>1.41</td><td>1.29</td><td>1.28</td><td>2.43</td><td>2.37</td><td>1.89</td><td>1.94</td></tr><tr><td>Socabank</td><td>10.90</td><td>10.76</td><td>8.95</td><td>8.33</td><td>11.10</td><td>10.99</td><td>5.65</td><td>5.61</td><td>7.34</td><td>5.64</td><td>4.67</td><td>5.35</td></tr><tr><td>Sogebank</td><td>13.37</td><td>13.28</td><td>10.54</td><td>10.62</td><td>11.16</td><td>11.59</td><td>13.99</td><td>12.57</td><td>12.70</td><td>11.30</td><td>12.36</td><td>13.83</td></tr><tr><td>Sogebel</td><td>1.92</td><td>1.91</td><td>1.08</td><td>1.08</td><td>1.64</td><td>1.62</td><td>0.86</td><td>0.84</td><td>1.11</td><td>1.16</td><td>0.91</td><td>0.88</td></tr><tr><td>Unibank</td><td>27.43</td><td>24.64</td><td>25.63</td><td>26.32</td><td>29.89</td><td>29.37</td><td>31.18</td><td>30.77</td><td>22.71</td><td>21.91</td><td>25.49</td><td>24.42</td></tr><tr><td>Socabel</td><td>1.52</td><td>1.53</td><td>0.94</td><td>0.98</td><td>1.07</td><td>1.11</td><td>0.67</td><td>0.66</td><td>0.47</td><td>0.44</td><td>1.08</td><td>1.11</td></tr><tr><td>Total</td><td>95.54</td><td>90.38</td><td>82.66</td><td>82.23</td><td>91.57</td><td>91.92</td><td>90.52</td><td>88.68</td><td>95.78</td><td>90.08</td><td>87.12</td><td>89.65</td></tr></table>
+
+Source : Direction des Affaires Internationales, BRH.
+
+(…) : Données non disponibles
+
+<!-- page 11 -->
+
+Tableau 1.6 (suite)
+
+<table><tr><td></td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td></td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td><td>Achat</td><td>Vente</td></tr><tr><td>Agents de change</td><td>3.09</td><td>3.22</td><td>2.83</td><td>2.80</td><td>4.10</td><td>4.12</td><td>3.00</td><td>2.85</td><td>2.31</td><td>2.41</td><td>3.91</td><td>3.72</td></tr><tr><td>Bayard</td><td>3.09</td><td>3.22</td><td>2.83</td><td>2.80</td><td>4.10</td><td>4.12</td><td>3.00</td><td>2.85</td><td>2.31</td><td>2.41</td><td>3.91</td><td>3.72</td></tr><tr><td>Banques</td><td>80.47</td><td>80.33</td><td>75.73</td><td>81.48</td><td>108.67</td><td>114.46</td><td>81.70</td><td>81.00</td><td>67.81</td><td>66.80</td><td>87.85</td><td>89.05</td></tr><tr><td>Banque de l'Union Haïtienne</td><td>3.37</td><td>3.48</td><td>3.45</td><td>3.12</td><td>6.95</td><td>6.77</td><td>3.54</td><td>3.88</td><td>2.94</td><td>3.25</td><td>3.94</td><td>3.34</td></tr><tr><td>Banque Nationale de Crédit</td><td>5.82</td><td>5.83</td><td>9.17</td><td>10.09</td><td>20.34</td><td>19.21</td><td>9.52</td><td>9.66</td><td>5.21</td><td>6.17</td><td>11.94</td><td>12.26</td></tr><tr><td>Banque Populaire Haïtienne</td><td>1.92</td><td>1.91</td><td>1.93</td><td>1.93</td><td>1.26</td><td>1.42</td><td>1.01</td><td>0.99</td><td>3.14</td><td>2.95</td><td>0.93</td><td>0.98</td></tr><tr><td>Capital Bank</td><td>10.24</td><td>10.28</td><td>7.59</td><td>7.92</td><td>11.96</td><td>11.43</td><td>10.48</td><td>10.13</td><td>7.99</td><td>7.45</td><td>11.35</td><td>12.14</td></tr><tr><td>Citibank NA</td><td>6.57</td><td>6.53</td><td>9.85</td><td>9.49</td><td>11.07</td><td>11.7</td><td>7.94</td><td>7.83</td><td>8.83</td><td>8.84</td><td>10.02</td><td>9.71</td></tr><tr><td>Promobank</td><td>4.14</td><td>3.74</td><td>4.79</td><td>4.93</td><td>4.77</td><td>5.23</td><td>4.07</td><td>3.92</td><td>4.87</td><td>4.00</td><td>4.26</td><td>5.19</td></tr><tr><td>Scotiabank</td><td>2.02</td><td>1.90</td><td>2.49</td><td>2.27</td><td>2.21</td><td>2.18</td><td>1.34</td><td>1.4</td><td>1.44</td><td>1.14</td><td>2.27</td><td>2.25</td></tr><tr><td>Socabank</td><td>4.29</td><td>4.52</td><td>2.41</td><td>6.61</td><td>6.32</td><td>9.51</td><td>3.53</td><td>1.8</td><td>1.8</td><td>1.90</td><td>1.83</td><td>1.25</td></tr><tr><td>Sogebank</td><td>13.08</td><td>12.63</td><td>12.00</td><td>12.58</td><td>16.47</td><td>17.45</td><td>14.25</td><td>14.14</td><td>10.59</td><td>10.86</td><td>14.94</td><td>14.6</td></tr><tr><td>Sogebel</td><td>1.39</td><td>1.37</td><td>1.53</td><td>1.57</td><td>0.98</td><td>0.97</td><td>2.03</td><td>2.04</td><td>1.01</td><td>0.99</td><td>-</td><td>-</td></tr><tr><td>Unibank</td><td>27.12</td><td>27.65</td><td>19.74</td><td>20.23</td><td>25.26</td><td>27.48</td><td>22.98</td><td>23.99</td><td>19.38</td><td>18.64</td><td>26.37</td><td>27.33</td></tr><tr><td>Socabel</td><td>0.51</td><td>0.49</td><td>0.78</td><td>0.74</td><td>1.08</td><td>1.11</td><td>1.01</td><td>1.22</td><td>0.61</td><td>0.61</td><td>-</td><td>-</td></tr><tr><td>Total</td><td>83.56</td><td>83.55</td><td>78.56</td><td>84.28</td><td>112.77</td><td>118.58</td><td>84.70</td><td>83.85</td><td>70.12</td><td>69.21</td><td>91.76</td><td>92.77</td></tr></table>
+
+Source : Direction des Affaires Internationales, BRH.
+
+(…) : Données non disponibles
+
+<!-- page 12 -->
+
+Tableau 1.7
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Prêts</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Gourdes</td><td>30.50</td><td>29.00</td><td>23.00</td><td>25.25</td><td>24.00</td><td>23.00</td><td>25.00</td><td>23.50</td><td>26.50</td><td>27.00</td><td>23.50</td><td>24.00</td></tr><tr><td>Devises</td><td>14.50</td><td>14.50</td><td>11.50</td><td>12.00</td><td>12.00</td><td>11.50</td><td>12.00</td><td>11.50</td><td>12.25</td><td>13.00</td><td>13.00</td><td>13.25</td></tr><tr><td>Dépôts à terme</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Gourdes</td><td>2.75</td><td>2.25</td><td>2.38</td><td>2.38</td><td>4.00</td><td>4.38</td><td>4.50</td><td>5.00</td><td>5.00</td><td>7.00</td><td>4.88</td><td>6.00</td></tr><tr><td>Devises</td><td>2.05</td><td>2.05</td><td>3.13</td><td>4.00</td><td>3.50</td><td>3.75</td><td>2.75</td><td>2.75</td><td>2.75</td><td>2.88</td><td>2.88</td><td>3.50</td></tr><tr><td>Dépôts d'épargne</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Gourdes</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td><td>1.13</td></tr><tr><td>Devises</td><td>0.55</td><td>0.55</td><td>0.63</td><td>0.63</td><td>0.63</td><td>0.63</td><td>0.63</td><td>0.63</td><td>0.88</td><td>0.88</td><td>0.88</td><td>0.88</td></tr></table>
+
+Source : Direction du Contrôle du Crédit, BRH.
+
+1/Moyenne de fin de période.
+
+Tableau 1.8
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2004</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Bons BRH  $ ^{{1/}} $</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>7 jours</td><td>3.50</td><td>3.50</td><td>9.00</td><td>9.00</td><td>9.00</td><td>11.00</td><td>14.00</td><td>14.00</td><td>14.00</td><td>14.00</td><td>14.00</td><td>14.00</td></tr><tr><td>28 jours</td><td>5.50</td><td>5.50</td><td>11.10</td><td>11.10</td><td>11.10</td><td>13.10</td><td>16.20</td><td>16.20</td><td>16.20</td><td>16.20</td><td>16.20</td><td>16.20</td></tr><tr><td>91 jours</td><td>7.60</td><td>7.60</td><td>13.40</td><td>13.40</td><td>13.40</td><td>15.60</td><td>18.90</td><td>18.90</td><td>18.90</td><td>18.90</td><td>18.90</td><td>18.90</td></tr><tr><td>Refinancement BRH</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Mise en pension de bons BRH</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td><td>27.00</td></tr></table>
+
+Source : Direction du Contrôle du Crédit, BRH.
+
+1/ Taux moyens précomptés de fin de période.
+
+<!-- page 13 -->
+
+Tableau 1.9
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Total des dépôts</td><td>53,913.29</td><td>53,900.06</td><td>55,264.45</td><td>55,710.68</td><td>55,917.97</td><td>57,743.14</td><td>57,296.58</td><td>57,659.21</td><td>58,536.37</td><td>60,775.41</td><td>60,430.35</td><td>61,317.97</td></tr><tr><td>Dépôts des banques commerciales</td><td>52,332.59</td><td>52,351.55</td><td>53,625.20</td><td>54,069.97</td><td>54,130.56</td><td>55,855.04</td><td>55,346.61</td><td>55,726.69</td><td>56,553.22</td><td>58,774.01</td><td>58,398.40</td><td>59,379.04</td></tr><tr><td>Banque de l'Union Haïtienne</td><td>2,416.12</td><td>2,400.05</td><td>2,455.48</td><td>2,468.59</td><td>2,453.54</td><td>2,486.15</td><td>2,639.74</td><td>2,638.73</td><td>2,642.53</td><td>2,766.60</td><td>2,773.93</td><td>2,891.19</td></tr><tr><td>Banque Industrielle et Commerciale d'Haiti</td><td>3.75</td><td>3.31</td><td>4.55</td><td>3.77</td><td>3.04</td><td>3.01</td><td>2.92</td><td>3.76</td><td>4.68</td><td>4.46</td><td>4.97</td><td>4.28</td></tr><tr><td>Banque Nationale de Crédit</td><td>4,371.42</td><td>4,394.01</td><td>4,555.86</td><td>4,469.56</td><td>4,379.75</td><td>4,566.47</td><td>4,511.48</td><td>4,553.66</td><td>4,674.32</td><td>4,960.92</td><td>4,998.34</td><td>5,260.48</td></tr><tr><td>Banque Populaire Haïtienne</td><td>658.70</td><td>694.99</td><td>741.01</td><td>737.55</td><td>704.27</td><td>654.24</td><td>676.19</td><td>743.60</td><td>750.21</td><td>755.34</td><td>797.37</td><td>765.34</td></tr><tr><td>Capital Bank</td><td>2,736.65</td><td>2,644.09</td><td>2,781.48</td><td>2,855.95</td><td>2,868.40</td><td>2,943.36</td><td>2,954.15</td><td>2,967.98</td><td>3,118.05</td><td>3,213.19</td><td>3,250.47</td><td>3,312.52</td></tr><tr><td>Citibank NA</td><td>2,102.35</td><td>2,006.39</td><td>2,162.47</td><td>2,061.33</td><td>2,223.06</td><td>2,486.34</td><td>2,385.22</td><td>2,382.79</td><td>2,419.34</td><td>2,844.91</td><td>2,316.64</td><td>2,333.26</td></tr><tr><td>Promobank</td><td>2,933.33</td><td>2,873.22</td><td>2,811.93</td><td>2,835.82</td><td>2,904.49</td><td>2,919.35</td><td>2,899.35</td><td>2,880.34</td><td>2,957.17</td><td>2,899.79</td><td>2,811.49</td><td>2,730.27</td></tr><tr><td>Scotiabank</td><td>1,752.52</td><td>1,736.16</td><td>1,734.06</td><td>1,726.47</td><td>1,771.09</td><td>1,842.48</td><td>1,916.61</td><td>1,827.92</td><td>1,678.97</td><td>1,801.28</td><td>1,824.64</td><td>1,890.57</td></tr><tr><td>Socabank</td><td>6,296.08</td><td>6,298.66</td><td>6,274.00</td><td>6,236.08</td><td>5,933.21</td><td>5,251.94</td><td>4,915.17</td><td>4,712.53</td><td>4,529.36</td><td>4,521.38</td><td>4,596.95</td><td>4,475.04</td></tr><tr><td>Sogebank</td><td>14,917.47</td><td>14,953.12</td><td>15,342.59</td><td>15,977.70</td><td>15,852.96</td><td>16,712.91</td><td>16,643.36</td><td>16,713.68</td><td>17,191.64</td><td>17,776.46</td><td>17,826.09</td><td>18,104.43</td></tr><tr><td>Unibank</td><td>14,144.19</td><td>14,347.54</td><td>14,761.77</td><td>14,697.14</td><td>15,036.75</td><td>15,988.80</td><td>15,802.43</td><td>16,301.70</td><td>16,586.94</td><td>17,229.69</td><td>17,197.52</td><td>17,611.65</td></tr><tr><td>Dépôts des BEL</td><td>1,580.71</td><td>1,548.50</td><td>1,639.26</td><td>1,640.71</td><td>1,787.42</td><td>1,888.10</td><td>1,949.96</td><td>1,932.51</td><td>1,983.15</td><td>2,001.39</td><td>2,031.95</td><td>1,938.93</td></tr><tr><td>Socabel</td><td>256.49</td><td>254.59</td><td>266.30</td><td>240.96</td><td>215.85</td><td>242.63</td><td>234.52</td><td>232.34</td><td>252.44</td><td>228.65</td><td>230.16</td><td>161.37</td></tr><tr><td>Sogebel</td><td>1,324.22</td><td>1,293.91</td><td>1,372.96</td><td>1,399.75</td><td>1,571.57</td><td>1,645.47</td><td>1,715.44</td><td>1,700.17</td><td>1,730.71</td><td>1,772.74</td><td>1,801.79</td><td>1,777.56</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+<!-- page 14 -->
+
+Tableau 1.10
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Total</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td></tr><tr><td>Part de marché des banques commerciales</td><td>97.07</td><td>97.13</td><td>97.03</td><td>97.05</td><td>96.80</td><td>96.73</td><td>96.60</td><td>96.65</td><td>96.61</td><td>96.71</td><td>96.64</td><td>96.84</td></tr><tr><td>Banque de l'Union Haïtienne</td><td>4.48</td><td>4.45</td><td>4.44</td><td>4.43</td><td>4.39</td><td>4.31</td><td>4.61</td><td>4.58</td><td>4.51</td><td>4.55</td><td>4.59</td><td>4.72</td></tr><tr><td>Banque Industrielle et Commerciale d'Haïti</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td></tr><tr><td>Banque Nationale de Crédit</td><td>8.11</td><td>8.15</td><td>8.24</td><td>8.02</td><td>7.83</td><td>7.91</td><td>7.87</td><td>7.90</td><td>7.99</td><td>8.16</td><td>8.27</td><td>8.58</td></tr><tr><td>Banque Populaire Haïtienne</td><td>1.22</td><td>1.29</td><td>1.34</td><td>1.32</td><td>1.26</td><td>1.13</td><td>1.18</td><td>1.29</td><td>1.28</td><td>1.24</td><td>1.32</td><td>1.25</td></tr><tr><td>Capital Bank</td><td>5.08</td><td>4.91</td><td>5.03</td><td>5.13</td><td>5.13</td><td>5.10</td><td>5.16</td><td>5.15</td><td>5.33</td><td>5.29</td><td>5.38</td><td>5.40</td></tr><tr><td>Citibank NA</td><td>3.90</td><td>3.72</td><td>3.91</td><td>3.70</td><td>3.98</td><td>4.31</td><td>4.16</td><td>4.13</td><td>4.13</td><td>4.68</td><td>3.83</td><td>3.81</td></tr><tr><td>Promobank</td><td>5.44</td><td>5.33</td><td>5.09</td><td>5.09</td><td>5.19</td><td>5.06</td><td>5.06</td><td>5.00</td><td>5.05</td><td>4.77</td><td>4.65</td><td>4.45</td></tr><tr><td>Scotiabank</td><td>3.25</td><td>3.22</td><td>3.14</td><td>3.10</td><td>3.17</td><td>3.19</td><td>3.35</td><td>3.17</td><td>2.87</td><td>2.96</td><td>3.02</td><td>3.08</td></tr><tr><td>Socabank</td><td>11.68</td><td>11.69</td><td>11.35</td><td>11.19</td><td>10.61</td><td>9.10</td><td>8.58</td><td>8.17</td><td>7.74</td><td>7.44</td><td>7.61</td><td>7.30</td></tr><tr><td>Sogebank</td><td>27.67</td><td>27.74</td><td>27.76</td><td>28.68</td><td>28.35</td><td>28.94</td><td>29.05</td><td>28.99</td><td>29.37</td><td>29.25</td><td>29.50</td><td>29.53</td></tr><tr><td>Unibank</td><td>26.24</td><td>26.62</td><td>26.71</td><td>26.38</td><td>26.89</td><td>27.69</td><td>27.58</td><td>28.27</td><td>28.34</td><td>28.35</td><td>28.46</td><td>28.72</td></tr><tr><td>Part de marché des BEL</td><td>2.93</td><td>2.87</td><td>2.97</td><td>2.95</td><td>3.20</td><td>3.27</td><td>3.40</td><td>3.35</td><td>3.39</td><td>3.29</td><td>3.36</td><td>3.16</td></tr><tr><td>Socabel</td><td>0.48</td><td>0.47</td><td>0.48</td><td>0.43</td><td>0.39</td><td>0.42</td><td>0.41</td><td>0.40</td><td>0.43</td><td>0.38</td><td>0.38</td><td>0.26</td></tr><tr><td>Sogebel</td><td>2.46</td><td>2.40</td><td>2.48</td><td>2.51</td><td>2.81</td><td>2.85</td><td>2.99</td><td>2.95</td><td>2.96</td><td>2.92</td><td>2.98</td><td>2.90</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+<!-- page 15 -->
+
+Tableau 1.11
+
+Crédit au secteur privé
+
+(en millions de gourdes)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Total</td><td>21,988.64</td><td>22,134.01</td><td>22,745.25</td><td>23,817.78</td><td>24,111.19</td><td>24,534.33</td><td>24,787.10</td><td>25,127.54</td><td>25,477.17</td><td>25,754.65</td><td>25,377.73</td><td>25,259.31</td></tr><tr><td>Crédit en gourdes</td><td>11,150.91</td><td>11,397.76</td><td>11,701.37</td><td>11,917.62</td><td>11,846.14</td><td>11,925.39</td><td>11,944.54</td><td>12,033.80</td><td>12,174.42</td><td>12,269.19</td><td>12,243.18</td><td>12,258.76</td></tr><tr><td>Crédit en dollars  $ ^{{1/}} $</td><td>10,837.72</td><td>10,736.25</td><td>11,043.89</td><td>11,900.16</td><td>12,265.05</td><td>12,608.94</td><td>12,842.55</td><td>13,093.74</td><td>13,302.75</td><td>13,485.46</td><td>13,134.55</td><td>13,000.55</td></tr><tr><td>Crédit des banques commerciales</td><td>21,062.47</td><td>21,148.77</td><td>21,699.87</td><td>22,685.97</td><td>22,921.56</td><td>23,306.10</td><td>23,556.23</td><td>23,896.50</td><td>24,226.87</td><td>24,468.97</td><td>24,098.66</td><td>24,007.26</td></tr><tr><td>Banque de l'Union Haïtienne</td><td>815.96</td><td>764.51</td><td>797.94</td><td>801.91</td><td>843.23</td><td>860.84</td><td>845.25</td><td>905.97</td><td>942.28</td><td>962.77</td><td>968.36</td><td>928.46</td></tr><tr><td>Banque Industrielle et Commerciale d'Haïti</td><td>2.23</td><td>2.30</td><td>2.14</td><td>2.30</td><td>2.50</td><td>2.27</td><td>2.20</td><td>2.31</td><td>2.32</td><td>2.19</td><td>2.29</td><td>2.17</td></tr><tr><td>Banque Nationale de Crédit</td><td>929.87</td><td>918.28</td><td>1,003.21</td><td>1,082.19</td><td>1,052.23</td><td>1,034.48</td><td>921.58</td><td>968.01</td><td>990.86</td><td>1,187.09</td><td>1,178.01</td><td>1,065.98</td></tr><tr><td>Banque Populaire Haïtienne</td><td>519.00</td><td>516.48</td><td>534.42</td><td>548.75</td><td>541.56</td><td>562.93</td><td>569.97</td><td>562.57</td><td>512.78</td><td>495.89</td><td>512.97</td><td>542.57</td></tr><tr><td>Capital Bank</td><td>1,285.37</td><td>1,277.21</td><td>1,294.41</td><td>1,349.00</td><td>1,348.90</td><td>1,321.96</td><td>1,381.06</td><td>1,419.25</td><td>1,435.46</td><td>1,414.81</td><td>1,375.70</td><td>1,365.27</td></tr><tr><td>Citébank N.A.</td><td>1,422.01</td><td>1,454.81</td><td>1,552.15</td><td>1,623.07</td><td>1,715.47</td><td>1,660.16</td><td>1,723.42</td><td>1,742.21</td><td>1,783.09</td><td>1,855.43</td><td>1,702.37</td><td>1,613.62</td></tr><tr><td>Promobank</td><td>1,451.44</td><td>1,435.31</td><td>1,409.58</td><td>1,456.61</td><td>1,439.46</td><td>1,448.02</td><td>1,523.01</td><td>1,504.49</td><td>1,524.33</td><td>1,558.94</td><td>1,426.78</td><td>1,484.99</td></tr><tr><td>Scotiabank</td><td>813.67</td><td>821.34</td><td>853.87</td><td>861.20</td><td>879.36</td><td>864.95</td><td>930.10</td><td>902.03</td><td>914.70</td><td>920.80</td><td>872.59</td><td>877.45</td></tr><tr><td>Socabank</td><td>3,471.04</td><td>3,527.36</td><td>3,556.11</td><td>3,644.45</td><td>3,668.84</td><td>3,081.60</td><td>3,075.07</td><td>3,014.77</td><td>2,921.58</td><td>2,882.50</td><td>2,845.20</td><td>2,842.77</td></tr><tr><td>Sogebank</td><td>4,727.35</td><td>4,767.20</td><td>5,026.87</td><td>5,593.78</td><td>5,650.29</td><td>5,769.23</td><td>5,881.12</td><td>5,956.46</td><td>6,158.40</td><td>6,134.18</td><td>6,175.84</td><td>6,333.67</td></tr><tr><td>Unibank</td><td>5,624.54</td><td>5,663.98</td><td>5,669.16</td><td>5,722.71</td><td>5,779.72</td><td>6,699.66</td><td>6,703.46</td><td>6,918.44</td><td>7,041.06</td><td>7,054.38</td><td>7,038.55</td><td>6,950.29</td></tr><tr><td>Crédit des BEL</td><td>926.17</td><td>985.24</td><td>1,045.38</td><td>1,131.81</td><td>1,189.64</td><td>1,228.22</td><td>1,230.87</td><td>1,231.04</td><td>1,250.31</td><td>1,285.68</td><td>1,279.07</td><td>1,252.05</td></tr><tr><td>Socabel</td><td>153.31</td><td>170.85</td><td>201.78</td><td>211.70</td><td>209.75</td><td>223.68</td><td>216.06</td><td>220.47</td><td>222.06</td><td>229.96</td><td>225.69</td><td>221.59</td></tr><tr><td>Sogebel</td><td>772.85</td><td>814.39</td><td>843.60</td><td>920.11</td><td>979.88</td><td>1,004.54</td><td>1,014.81</td><td>1,010.57</td><td>1,028.25</td><td>1,055.72</td><td>1,053.38</td><td>1,030.46</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+1/ Convertis au taux de référence de fin de mois de la BRH.
+
+<!-- page 16 -->
+
+Tableau 1.12
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Total</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td><td>100.00</td></tr><tr><td>Part de marché des banques commerciales</td><td>95.79</td><td>95.55</td><td>95.40</td><td>95.25</td><td>95.07</td><td>94.99</td><td>95.03</td><td>95.10</td><td>95.09</td><td>95.01</td><td>94.96</td><td>95.04</td></tr><tr><td>Banque de l'Union Haitienne</td><td>3.71</td><td>3.45</td><td>3.51</td><td>3.37</td><td>3.50</td><td>3.51</td><td>3.41</td><td>3.61</td><td>3.70</td><td>3.74</td><td>3.82</td><td>3.68</td></tr><tr><td>Banque Industrielle et Commerciale d'Haiti</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td><td>0.01</td></tr><tr><td>Banque Nationale de Crédit</td><td>4.23</td><td>4.15</td><td>4.41</td><td>4.54</td><td>4.36</td><td>4.22</td><td>3.72</td><td>3.85</td><td>3.89</td><td>4.61</td><td>4.64</td><td>4.22</td></tr><tr><td>Banque Populaire Haitienne</td><td>2.36</td><td>2.33</td><td>2.35</td><td>2.30</td><td>2.25</td><td>2.29</td><td>2.30</td><td>2.24</td><td>2.01</td><td>1.93</td><td>2.02</td><td>2.15</td></tr><tr><td>Capital Bank</td><td>5.85</td><td>5.77</td><td>5.69</td><td>5.66</td><td>5.59</td><td>5.39</td><td>5.57</td><td>5.65</td><td>5.63</td><td>5.49</td><td>5.42</td><td>5.41</td></tr><tr><td>Citibank N.A.</td><td>6.47</td><td>6.57</td><td>6.82</td><td>6.81</td><td>7.11</td><td>6.77</td><td>6.95</td><td>6.93</td><td>7.00</td><td>7.20</td><td>6.71</td><td>6.39</td></tr><tr><td>Promobank</td><td>6.60</td><td>6.48</td><td>6.20</td><td>6.12</td><td>5.97</td><td>5.90</td><td>6.14</td><td>5.99</td><td>5.98</td><td>6.05</td><td>5.62</td><td>5.88</td></tr><tr><td>Scotiabank</td><td>3.70</td><td>3.71</td><td>3.75</td><td>3.62</td><td>3.65</td><td>3.53</td><td>3.75</td><td>3.59</td><td>3.59</td><td>3.58</td><td>3.44</td><td>3.47</td></tr><tr><td>Socabank</td><td>15.79</td><td>15.94</td><td>15.63</td><td>15.30</td><td>15.22</td><td>12.56</td><td>12.41</td><td>12.00</td><td>11.47</td><td>11.19</td><td>11.21</td><td>11.25</td></tr><tr><td>Sogebank</td><td>21.50</td><td>21.54</td><td>22.10</td><td>23.49</td><td>23.43</td><td>23.51</td><td>23.73</td><td>23.70</td><td>24.17</td><td>23.82</td><td>24.34</td><td>25.07</td></tr><tr><td>Unibank</td><td>25.58</td><td>25.59</td><td>24.92</td><td>24.03</td><td>23.97</td><td>27.31</td><td>27.04</td><td>27.53</td><td>27.64</td><td>27.39</td><td>27.74</td><td>27.52</td></tr><tr><td>Part de marché des BEL</td><td>4.21</td><td>4.45</td><td>4.60</td><td>4.75</td><td>4.93</td><td>5.01</td><td>4.97</td><td>4.90</td><td>4.91</td><td>4.99</td><td>5.04</td><td>4.96</td></tr><tr><td>Socabel</td><td>0.70</td><td>0.77</td><td>0.89</td><td>0.89</td><td>0.87</td><td>0.91</td><td>0.87</td><td>0.88</td><td>0.87</td><td>0.89</td><td>0.89</td><td>0.88</td></tr><tr><td>Sogebel</td><td>3.51</td><td>3.68</td><td>3.71</td><td>3.86</td><td>4.06</td><td>4.09</td><td>4.09</td><td>4.02</td><td>4.04</td><td>4.10</td><td>4.15</td><td>4.08</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+<!-- page 17 -->
+
+Tableau 1.13
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juni 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Avoirs extérieurs nets</td><td>9,183.91</td><td>9,594.04</td><td>9,615.21</td><td>8,830.56</td><td>9,553.14</td><td>10,403.77</td><td>9,562.54</td><td>10,060.09</td><td>10,995.52</td><td>10,708.29</td><td>11,311.34</td><td>11,815.65</td></tr><tr><td>Avoirs extérieurs  $ ^{{1/}} $</td><td>10,808.12</td><td>11,212.82</td><td>11,240.20</td><td>10,630.94</td><td>11,181.65</td><td>11,940.57</td><td>11,236.65</td><td>11,661.50</td><td>12,358.83</td><td>12,090.12</td><td>12,610.92</td><td>12,987.30</td></tr><tr><td>Engagements extérieurs  $ ^{{1/}} $</td><td>-1,624.20</td><td>-1,618.79</td><td>-1,624.99</td><td>-1,800.38</td><td>-1,628.51</td><td>-1,536.80</td><td>-1,674.11</td><td>-1,601.42</td><td>-1,363.30</td><td>-1,381.83</td><td>-1,299.58</td><td>-1,171.65</td></tr><tr><td>Réserves/dépôts & bons BRH</td><td>21,743.71</td><td>21,386.99</td><td>22,146.32</td><td>22,340.13</td><td>21,501.98</td><td>21,887.68</td><td>22,071.15</td><td>22,047.27</td><td>21,616.85</td><td>23,077.84</td><td>22,917.97</td><td>23,686.88</td></tr><tr><td>Réserves/dépôts</td><td>16,905.92</td><td>16,519.05</td><td>16,450.30</td><td>16,998.13</td><td>16,160.98</td><td>16,360.58</td><td>15,959.15</td><td>15,815.27</td><td>15,503.75</td><td>16,816.74</td><td>17,101.87</td><td>17,326.88</td></tr><tr><td>Réserves/dépôts à la BRH</td><td>15,066.39</td><td>14,435.60</td><td>14,747.19</td><td>15,343.49</td><td>14,345.07</td><td>14,484.61</td><td>13,961.95</td><td>13,719.72</td><td>13,516.60</td><td>14,381.66</td><td>15,009.68</td><td>15,240.81</td></tr><tr><td>Encaisses en monnaie nationale</td><td>1,839.53</td><td>2,083.44</td><td>1,703.11</td><td>1,654.65</td><td>1,815.91</td><td>1,875.97</td><td>1,997.20</td><td>2,095.55</td><td>1,987.15</td><td>2,435.08</td><td>2,092.19</td><td>2,086.07</td></tr><tr><td>Bons BRH</td><td>4,837.79</td><td>4,867.94</td><td>5,696.02</td><td>5,342.00</td><td>5,341.00</td><td>5,527.10</td><td>6,112.00</td><td>6,232.00</td><td>6,113.10</td><td>6,261.10</td><td>5,816.10</td><td>6,360.00</td></tr><tr><td>Crédit intérieur</td><td>21,384.73</td><td>21,610.70</td><td>22,194.88</td><td>23,268.22</td><td>23,575.97</td><td>24,019.41</td><td>24,325.83</td><td>24,558.89</td><td>24,627.77</td><td>25,203.28</td><td>24,742.66</td><td>24,646.01</td></tr><tr><td>Créances nettes sur le secteur public  $ ^{{2/}} $</td><td>-603.91</td><td>-523.32</td><td>-550.38</td><td>-549.56</td><td>-535.22</td><td>-514.92</td><td>-461.27</td><td>-568.65</td><td>-849.40</td><td>-551.37</td><td>-635.07</td><td>-623.43</td></tr><tr><td>Créances nettes sur le gouvernement central</td><td>-368.90</td><td>-346.64</td><td>-348.93</td><td>-353.67</td><td>-342.22</td><td>-387.43</td><td>-388.93</td><td>-420.99</td><td>-707.98</td><td>-454.97</td><td>-472.21</td><td>-473.28</td></tr><tr><td>Créances nettes sur les collectivités locales</td><td>-</td><td>-</td><td>-</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>-0.37</td><td>-0.09</td></tr><tr><td>Créances nettes sur les entreprises publique</td><td>-235.01</td><td>-176.67</td><td>-201.45</td><td>-195.89</td><td>-193.00</td><td>-127.49</td><td>-72.34</td><td>-147.66</td><td>-141.42</td><td>-96.41</td><td>-162.49</td><td>-150.05</td></tr><tr><td>Créances sur le secteur privé</td><td>21,988.64</td><td>22,134.01</td><td>22,745.25</td><td>23,817.78</td><td>24,111.19</td><td>24,534.33</td><td>24,787.10</td><td>25,127.54</td><td>25,477.17</td><td>25,754.65</td><td>25,377.73</td><td>25,269.43</td></tr><tr><td>Créances sur les AIB</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Créances sur les IFNB</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>ACTIF = PASSIF</td><td>52,312.35</td><td>52,591.72</td><td>53,956.41</td><td>58,767.63</td><td>58,652.08</td><td>60,601.01</td><td>60,815.26</td><td>61,317.21</td><td>62,125.89</td><td>64,662.56</td><td>64,872.45</td><td>65,186.80</td></tr><tr><td>Engagements envers le secteur privé</td><td>53,913.29</td><td>53,900.06</td><td>55,264.45</td><td>55,710.68</td><td>55,917.97</td><td>57,743.14</td><td>57,296.58</td><td>57,659.21</td><td>58,536.37</td><td>60,775.41</td><td>60,430.35</td><td>61,317.97</td></tr><tr><td>Dépôts en gourdes</td><td>26,779.03</td><td>26,849.88</td><td>27,508.08</td><td>27,411.25</td><td>26,880.27</td><td>27,348.13</td><td>27,578.89</td><td>27,286.44</td><td>27,322.56</td><td>28,767.40</td><td>28,485.14</td><td>28,778.46</td></tr><tr><td>Dépôts à vue</td><td>7,660.17</td><td>7,810.06</td><td>8,355.39</td><td>8,377.22</td><td>8,180.60</td><td>8,452.48</td><td>8,486.98</td><td>8,349.92</td><td>8,270.09</td><td>9,225.61</td><td>8,826.32</td><td>8,713.29</td></tr><tr><td>Dépôts d'épargne</td><td>12,179.28</td><td>12,239.44</td><td>12,378.33</td><td>12,429.43</td><td>12,377.86</td><td>12,510.64</td><td>12,498.79</td><td>12,505.86</td><td>12,650.90</td><td>13,024.05</td><td>13,211.16</td><td>13,431.97</td></tr><tr><td>Dépôts à terme</td><td>6,939.58</td><td>6,800.39</td><td>6,774.35</td><td>6,604.59</td><td>6,321.81</td><td>6,385.01</td><td>6,593.12</td><td>6,430.66</td><td>6,401.57</td><td>6,517.74</td><td>6,447.66</td><td>6,633.20</td></tr><tr><td>Autres engagements envers les particuliers</td><td>807.18</td><td>804.02</td><td>812.73</td><td>833.33</td><td>1,052.31</td><td>943.92</td><td>943.81</td><td>954.08</td><td>948.46</td><td>1,003.80</td><td>1,003.65</td><td>1,003.33</td></tr><tr><td>Dépôts en dollars ÉU  $ ^{{1/}} $</td><td>26,327.08</td><td>26,246.15</td><td>26,943.65</td><td>27,466.10</td><td>27,985.39</td><td>29,451.08</td><td>28,773.88</td><td>29,418.68</td><td>30,265.35</td><td>31,004.20</td><td>30,941.55</td><td>31,536.18</td></tr><tr><td>Dépôts à vue</td><td>8,087.28</td><td>7,676.81</td><td>8,013.13</td><td>7,907.51</td><td>8,252.30</td><td>9,179.76</td><td>8,741.36</td><td>9,327.87</td><td>9,774.48</td><td>9,867.83</td><td>10,229.90</td><td>10,276.15</td></tr><tr><td>Dépôts d'épargne</td><td>9,258.12</td><td>9,339.87</td><td>9,486.07</td><td>9,807.91</td><td>9,779.24</td><td>9,832.82</td><td>9,810.43</td><td>9,809.60</td><td>10,191.95</td><td>10,344.00</td><td>10,363.99</td><td>10,663.84</td></tr><tr><td>Dépôts à terme et autres</td><td>8,981.69</td><td>9,229.46</td><td>9,444.45</td><td>9,750.68</td><td>9,953.85</td><td>10,438.50</td><td>10,222.08</td><td>10,281.21</td><td>10,298.93</td><td>10,792.37</td><td>10,347.66</td><td>10,596.19</td></tr><tr><td>Engagements envers la BRH</td><td>3.00</td><td>3.00</td><td>3.00</td><td>3.00</td><td>3.00</td><td>3.00</td><td>3.00</td><td>3.00</td><td>3.00</td><td>35.07</td><td>17.31</td><td>84.62</td></tr><tr><td>Autres postes nets</td><td>-1,603.95</td><td>-1,311.34</td><td>-1,311.05</td><td>3,053.95</td><td>2,731.11</td><td>2,854.87</td><td>3,515.69</td><td>3,655.01</td><td>3,586.52</td><td>3,852.08</td><td>4,424.78</td><td>3,784.21</td></tr><tr><td>Comptes de capital</td><td>4,512.64</td><td>4,568.59</td><td>4,646.35</td><td>4,759.49</td><td>4,806.50</td><td>5,067.98</td><td>5,262.08</td><td>5,413.81</td><td>5,787.30</td><td>5,952.24</td><td>5,898.10</td><td>5,938.06</td></tr><tr><td>Créances nettes interbancaires</td><td>-1,849.88</td><td>-1,749.57</td><td>-1,880.24</td><td>2,164.36</td><td>2,010.50</td><td>2,145.07</td><td>2,427.87</td><td>2,325.48</td><td>2,442.87</td><td>2,836.58</td><td>2,950.24</td><td>2,519.13</td></tr><tr><td>Autres postes non classés</td><td>-4,266.70</td><td>-4,130.35</td><td>-4,077.16</td><td>-3,869.90</td><td>-4,085.89</td><td>-4,358.18</td><td>-4,174.26</td><td>-4,084.28</td><td>-4,643.66</td><td>-4,936.74</td><td>-4,423.56</td><td>-4,672.98</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+1/ Convertis en gourdes au taux de référence de fin de mois de la BRH.
+
+2/ Ce poste reflète le crédit net de la BNC au secteur public.
+
+<!-- page 18 -->
+
+Tableau 1.14
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Avoirs extérieurs nets</td><td>8,197.07</td><td>7,613.10</td><td>7,580.16</td><td>7,583.19</td><td>8,206.69</td><td>8,226.36</td><td>8,299.39</td><td>8,322.70</td><td>8,762.32</td><td>9,145.42</td><td>8,424.18</td><td>9,846.95</td></tr><tr><td>Avoirs extérieurs</td><td>11,745.03</td><td>11,041.30</td><td>11,108.67</td><td>11,295.88</td><td>12,019.08</td><td>11,997.58</td><td>12,772.96</td><td>12,698.48</td><td>13,148.48</td><td>13,528.46</td><td>12,740.39</td><td>14,127.49</td></tr><tr><td>Engagements extérieurs</td><td>-3,547.96</td><td>-3,428.20</td><td>-3,528.51</td><td>-3,712.69</td><td>-3,812.39</td><td>-3,771.22</td><td>-4,473.57</td><td>-4,375.78</td><td>-4,386.16</td><td>-4,383.03</td><td>-4,316.21</td><td>-4,280.53</td></tr><tr><td>Crédit intérieur</td><td>26,698.99</td><td>26,833.66</td><td>27,776.01</td><td>27,923.26</td><td>26,536.02</td><td>26,807.81</td><td>26,695.72</td><td>26,885.69</td><td>27,528.09</td><td>27,516.05</td><td>27,893.33</td><td>27,627.55</td></tr><tr><td>Créances sur le gouvernement central</td><td>25,152.43</td><td>25,347.76</td><td>26,304.47</td><td>26,398.58</td><td>24,851.53</td><td>25,297.65</td><td>25,055.26</td><td>25,191.44</td><td>25,811.96</td><td>25,906.13</td><td>26,244.64</td><td>25,966.15</td></tr><tr><td>Créances sur les collectivités locales</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Créances sur les entreprises publiques</td><td>307.86</td><td>306.76</td><td>302.34</td><td>298.68</td><td>291.37</td><td>292.52</td><td>308.87</td><td>295.52</td><td>303.60</td><td>296.92</td><td>286.98</td><td>320.32</td></tr><tr><td>Créances sur les banques</td><td>186.10</td><td>118.63</td><td>101.46</td><td>157.19</td><td>319.14</td><td>142.28</td><td>259.68</td><td>301.63</td><td>292.50</td><td>183.47</td><td>228.70</td><td>191.13</td></tr><tr><td>Créances sur les IFNB</td><td>1.66</td><td>1.42</td><td>1.18</td><td>0.94</td><td>0.69</td><td>0.44</td><td>0.19</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr><tr><td>Créances sur les particuliers</td><td>1,050.93</td><td>1,059.08</td><td>1,066.55</td><td>1,067.87</td><td>1,073.29</td><td>1,074.92</td><td>1,071.73</td><td>1,097.10</td><td>1,120.03</td><td>1,129.53</td><td>1,133.00</td><td>1,149.95</td></tr><tr><td>ACTIF = PASSIF</td><td>34,896.06</td><td>34,446.76</td><td>35,356.17</td><td>35,506.45</td><td>34,742.71</td><td>35,034.17</td><td>34,995.12</td><td>35,208.40</td><td>36,290.40</td><td>36,661.47</td><td>36,317.51</td><td>37,474.50</td></tr><tr><td>Base monétaire</td><td>32,803.98</td><td>32,415.59</td><td>33,064.15</td><td>33,601.32</td><td>33,441.02</td><td>33,574.11</td><td>33,639.96</td><td>33,797.58</td><td>35,372.53</td><td>35,893.41</td><td>35,473.74</td><td>36,041.52</td></tr><tr><td>Monnaie en circulation</td><td>10,036.45</td><td>9,878.43</td><td>9,871.85</td><td>10,247.53</td><td>10,576.15</td><td>10,546.58</td><td>10,429.54</td><td>10,370.76</td><td>12,218.31</td><td>11,223.18</td><td>11,359.49</td><td>11,194.70</td></tr><tr><td>Réserves/dépôts & bons BRH</td><td>21,866.73</td><td>21,664.27</td><td>22,276.11</td><td>22,416.48</td><td>22,001.89</td><td>22,093.31</td><td>22,283.79</td><td>22,328.45</td><td>22,106.44</td><td>23,556.68</td><td>22,934.13</td><td>23,734.41</td></tr><tr><td>Réserves/dépôts des banques</td><td>15,167.00</td><td>14,712.89</td><td>14,976.97</td><td>15,419.83</td><td>14,654.97</td><td>14,716.35</td><td>14,174.59</td><td>13,942.90</td><td>14,061.29</td><td>14,908.60</td><td>15,073.94</td><td>15,288.34</td></tr><tr><td>dont : dépôts en dollars ÉU  $ ^{{1/}} $</td><td>5,447.70</td><td>5,230.02</td><td>5,496.44</td><td>5,697.45</td><td>5,537.79</td><td>5,172.89</td><td>5,299.37</td><td>5,180.69</td><td>5,105.72</td><td>5,832.93</td><td>5,304.12</td><td>5,653.13</td></tr><tr><td>Bons BRH</td><td>4,860.19</td><td>4,867.94</td><td>5,596.02</td><td>5,342.00</td><td>5,531.00</td><td>5,501.00</td><td>6,112.00</td><td>6,290.00</td><td>6,055.00</td><td>6,213.00</td><td>5,768.00</td><td>6,360.00</td></tr><tr><td>Autres engments(encaisses des banque</td><td>1,839.54</td><td>2,083.44</td><td>1,703.12</td><td>1,654.65</td><td>1,815.92</td><td>1,875.97</td><td>1,997.20</td><td>2,095.55</td><td>1,990.15</td><td>2,435.08</td><td>2,092.19</td><td>2,086.07</td></tr><tr><td>Dépôts des AIB</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Dépôts des IFNB</td><td>314.27</td><td>351.47</td><td>403.66</td><td>391.40</td><td>411.67</td><td>466.70</td><td>446.36</td><td>527.28</td><td>502.39</td><td>534.25</td><td>533.81</td><td>573.82</td></tr><tr><td>Dépôts des collectivités locales</td><td>100.82</td><td>93.41</td><td>80.32</td><td>75.94</td><td>62.52</td><td>61.19</td><td>70.56</td><td>89.66</td><td>146.35</td><td>151.97</td><td>143.78</td><td>112.69</td></tr><tr><td>Dépôts des entreprises publiques</td><td>340.24</td><td>305.74</td><td>307.25</td><td>306.04</td><td>251.46</td><td>267.18</td><td>263.76</td><td>273.13</td><td>247.83</td><td>287.21</td><td>349.83</td><td>288.19</td></tr><tr><td>Dépôts des particuliers</td><td>145.47</td><td>122.27</td><td>124.95</td><td>163.93</td><td>137.33</td><td>139.16</td><td>145.96</td><td>208.31</td><td>151.22</td><td>140.13</td><td>152.70</td><td>137.72</td></tr><tr><td>Dépôts du gouvernement central</td><td>4,435.56</td><td>3,854.36</td><td>4,078.96</td><td>3,818.15</td><td>3,469.84</td><td>3,717.26</td><td>3,637.80</td><td>3,554.98</td><td>3,289.32</td><td>3,134.15</td><td>3,198.77</td><td>4,102.67</td></tr><tr><td>Autres postes nets</td><td>-2,343.48</td><td>-1,823.19</td><td>-1,786.93</td><td>-1,913.02</td><td>-2,168.14</td><td>-2,257.20</td><td>-2,282.64</td><td>-2,144.16</td><td>-2,371.45</td><td>-2,366.09</td><td>-2,355.00</td><td>-2,669.69</td></tr><tr><td>Comptes de capital</td><td>1,521.36</td><td>2,278.03</td><td>2,266.42</td><td>2,198.67</td><td>2,126.95</td><td>2,061.37</td><td>1,994.61</td><td>1,938.04</td><td>1,825.43</td><td>1,833.19</td><td>1,798.38</td><td>1,683.65</td></tr><tr><td>dont : allocations de DTS</td><td>810.88</td><td>781.88</td><td>796.54</td><td>836.75</td><td>846.64</td><td>854.54</td><td>852.11</td><td>839.97</td><td>841.80</td><td>860.72</td><td>845.08</td><td>842.47</td></tr><tr><td>Autres postes non classés</td><td>-3,864.83</td><td>-4,101.23</td><td>-4,053.35</td><td>-4,111.69</td><td>-4,295.10</td><td>-4,318.58</td><td>-4,277.25</td><td>-4,082.21</td><td>-4,196.88</td><td>-4,199.28</td><td>-4,153.38</td><td>-4,353.34</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+1/ Les dépôts en dollars ÉU des banques doivent être déduits des avoirs extérieurs de la BRH. Ils sont convertis en gourdes au taux de référence de fin de mois de la BRH.
+
+<!-- page 19 -->
+
+Tableau 1.15
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Encours total</td><td>4,860</td><td>4,867</td><td>5,596</td><td>5,342</td><td>5,531</td><td>5,501</td><td>6,112</td><td>6,290</td><td>6,055</td><td>6,213</td><td>5,768</td><td>6,360</td></tr><tr><td>7 jours</td><td>994</td><td>606</td><td>520</td><td>235</td><td>125</td><td>185</td><td>100</td><td>158</td><td>...</td><td>90</td><td>87</td><td>20</td></tr><tr><td>28 jours</td><td>1,650</td><td>1,928</td><td>2,042</td><td>880</td><td>105</td><td>...</td><td>59</td><td>90</td><td>30</td><td>60</td><td>50</td><td>20</td></tr><tr><td>91 jours</td><td>2,216</td><td>2,333</td><td>3,034</td><td>4,227</td><td>5,301</td><td>5,316</td><td>5,953</td><td>6,042</td><td>6,025</td><td>6,063</td><td>5,631</td><td>6,320</td></tr></table>
+
+Source : Direction du Contrôle du Crédit, BRH.
+
+<!-- page 20 -->
+
+Tableau 1.16
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Avoirs extérieurs nets de la BRH</td><td>8,197.07</td><td>7,613.10</td><td>7,580.16</td><td>7,583.19</td><td>8,206.69</td><td>8,226.36</td><td>8,299.39</td><td>8,322.70</td><td>8,762.32</td><td>9,145.42</td><td>8,424.18</td><td>9,846.95</td></tr><tr><td>Avoirs extérieurs  $ ^{{1}} $</td><td>11,745.03</td><td>11,041.30</td><td>11,108.67</td><td>11,295.88</td><td>12,019.08</td><td>11,997.58</td><td>12,772.96</td><td>12,698.48</td><td>13,148.48</td><td>13,528.46</td><td>12,740.39</td><td>14,127.49</td></tr><tr><td>Encaisse or</td><td>22.24</td><td>20.97</td><td>22.82</td><td>23.60</td><td>23.99</td><td>26.63</td><td>26.49</td><td>27.91</td><td>28.84</td><td>32.33</td><td>31.14</td><td>32.49</td></tr><tr><td>Avoirs liquides</td><td>9,760.93</td><td>9,074.69</td><td>9,081.57</td><td>8,820.85</td><td>9,865.08</td><td>9,810.23</td><td>10,311.05</td><td>10,501.05</td><td>10,858.83</td><td>11,312.14</td><td>9,898.58</td><td>11,929.09</td></tr><tr><td>(dont dépôts en dollars ÉU des BCM à la BRH)  $ ^{{2/}} $</td><td>5,447.70</td><td>5,230.02</td><td>5,496.44</td><td>5,697.45</td><td>5,558.96</td><td>5,194.45</td><td>5,320.93</td><td>5,202.27</td><td>5,127.26</td><td>5,854.71</td><td>5,325.66</td><td>5,674.52</td></tr><tr><td>Devises étrangères</td><td>669.38</td><td>622.46</td><td>474.77</td><td>488.72</td><td>568.20</td><td>590.14</td><td>473.21</td><td>930.36</td><td>1,041.61</td><td>2,644.08</td><td>927.44</td><td>554.81</td></tr><tr><td>Citi Institutional Liquid Reserves</td><td>1.61</td><td>1.60</td><td>1.65</td><td>1.74</td><td>1.76</td><td>1.80</td><td>1.80</td><td>1.80</td><td>1.80</td><td>1.82</td><td>1.80</td><td>1.78</td></tr><tr><td>Dépots à vue à l'étranger</td><td>4,096.05</td><td>3,575.32</td><td>3,564.55</td><td>3,029.83</td><td>3,927.72</td><td>3,772.69</td><td>2,042.10</td><td>1,850.03</td><td>2,082.19</td><td>823.83</td><td>1,849.13</td><td>3,627.98</td></tr><tr><td>Disponibilités de DTS</td><td>107.64</td><td>11.71</td><td>11.12</td><td>11.69</td><td>11.47</td><td>11.58</td><td>645.71</td><td>537.12</td><td>537.67</td><td>549.75</td><td>535.26</td><td>533.61</td></tr><tr><td>Position de réserve au FMI</td><td>4.03</td><td>3.97</td><td>4.10</td><td>4.14</td><td>4.17</td><td>4.24</td><td>4.23</td><td>4.24</td><td>4.23</td><td>4.29</td><td>4.19</td><td>4.18</td></tr><tr><td>Placements à l'étranger</td><td>4,882.21</td><td>4,859.62</td><td>5,025.39</td><td>5,284.74</td><td>5,351.74</td><td>5,429.79</td><td>7,143.99</td><td>7,177.50</td><td>7,191.33</td><td>7,288.38</td><td>6,580.76</td><td>7,206.72</td></tr><tr><td>Autres avoirs extérieurs</td><td>1,961.87</td><td>1,945.64</td><td>2,004.28</td><td>2,451.43</td><td>2,130.01</td><td>2,160.71</td><td>2,435.43</td><td>2,169.52</td><td>2,260.81</td><td>2,183.98</td><td>2,810.67</td><td>2,165.91</td></tr><tr><td>Dépôts à terme à l'étranger</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Valeurs en transit à l'étranger</td><td>14.29</td><td>14.46</td><td>12.13</td><td>351.92</td><td>17.26</td><td>12.97</td><td>288.36</td><td>20.85</td><td>115.18</td><td>14.63</td><td>666.18</td><td>35.84</td></tr><tr><td>Autres valeurs en transit à l'étranger</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>intérêts à recevoir sur placements à l'étranger</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Participations au capital des OFI</td><td>1,947.57</td><td>1,931.18</td><td>1,992.15</td><td>2,099.50</td><td>2,112.76</td><td>2,147.74</td><td>2,147.07</td><td>2,148.67</td><td>2,145.63</td><td>2,169.35</td><td>2,144.49</td><td>2,130.07</td></tr><tr><td>Engagements extérieurs (-)  $ ^{{1/}} $</td><td>-3,547.96</td><td>-3,428.20</td><td>-3,528.51</td><td>-3,712.69</td><td>-3,812.39</td><td>-3,771.22</td><td>-4,473.57</td><td>-4,375.78</td><td>-4,386.16</td><td>-4,383.03</td><td>-4,316.21</td><td>-4,280.53</td></tr><tr><td>ESAF</td><td>-359.35</td><td>-259.88</td><td>-264.75</td><td>-278.11</td><td>-281.40</td><td>-284.02</td><td>-283.22</td><td>-186.12</td><td>-186.53</td><td>-190.72</td><td>-187.25</td><td>-186.68</td></tr><tr><td>Encours du crédit FMI</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Engagements envers OFI</td><td>-2,558.94</td><td>-2,543.99</td><td>-2,619.60</td><td>-2,755.51</td><td>-2,770.34</td><td>-2,818.71</td><td>-2,818.32</td><td>-2,835.70</td><td>-2,828.73</td><td>-2,861.54</td><td>-2,835.05</td><td>-2,817.36</td></tr><tr><td>EPCA (Emerg.Post Conflict Ass 12/1/05)</td><td>-608.19</td><td>-603.07</td><td>-622.11</td><td>-655.64</td><td>-659.77</td><td>-573.78</td><td>-1,273.78</td><td>-1,255.63</td><td>-1,272.72</td><td>-1,291.75</td><td>-1,259.33</td><td>-1,249.10</td></tr><tr><td>Lettre de crédit</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-77.27</td><td>-70.65</td><td>-70.63</td><td>-70.68</td><td>-70.58</td><td>-11.12</td><td>-7.00</td><td>-</td></tr><tr><td>Prêt 990 SF HA renforcement institutionnel BRH</td><td>-25.05</td><td>-24.84</td><td>-25.62</td><td>-27.01</td><td>-27.18</td><td>-27.63</td><td>-27.62</td><td>-27.64</td><td>-27.60</td><td>-27.90</td><td>-27.58</td><td>-27.40</td></tr><tr><td>Intérêts à payer sur prêt 990 SF HA</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Dû aux firmes d'impression</td><td>3.58</td><td>3.58</td><td>3.58</td><td>3.58</td><td>3.58</td><td>3.58</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr></table>
+
+Source : Direction Monnaie et Analyse Économique, BRH.
+
+1/ Convertis en gourdes au taux de référence de fin de mois de la BRH.
+
+2/ Les dépôts en dollars ÉU des banques doivent être déduits des avoirs extérieurs de la BRH.
+
+Données préparées à partir de la Table 10R BRH selon les dernières recommandations du FMI.
+
+<!-- page 21 -->
+
+Tableau 1.17
+
+Résultats des activités de la chambre de compensation
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Compensation de chèques en dollars ÉU</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Banque centrale</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Nombre</td><td>318</td><td>304</td><td>401</td><td>377</td><td>400</td><td>296</td><td>378</td><td>393</td><td>433</td><td>331</td><td>262</td><td>460</td></tr><tr><td>Montant</td><td>2,190.55</td><td>2,577.52</td><td>3,795.80</td><td>6,925.73</td><td>7,743.97</td><td>2,350.85</td><td>3,753.31</td><td>3,713.47</td><td>4,425.32</td><td>1,776.27</td><td>1,745.17</td><td>2,596.52</td></tr><tr><td>Banques commerciales</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Nombre</td><td>36,954</td><td>35,525</td><td>36,189</td><td>32,264</td><td>32,081</td><td>28,362</td><td>34,443</td><td>34,484</td><td>39,304</td><td>34,606</td><td>25,380</td><td>41,851</td></tr><tr><td>Montant</td><td>155,276.68</td><td>145,082.22</td><td>152,520.81</td><td>144,386.33</td><td>170,260.59</td><td>154,126.26</td><td>150,042.23</td><td>140,419.37</td><td>166,839.68</td><td>162,920.07</td><td>111,716.63</td><td>197,949.15</td></tr><tr><td>Système bancaire</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Nombre</td><td>37,272</td><td>35,829</td><td>36,590</td><td>32,641</td><td>32,481</td><td>28,658</td><td>34,821</td><td>34,877</td><td>39,737</td><td>34,937</td><td>25,642</td><td>42,311</td></tr><tr><td>Montant</td><td>157,467.23</td><td>147,659.74</td><td>156,316.61</td><td>151,312.06</td><td>178,004.56</td><td>156,477.11</td><td>153,795.54</td><td>144,132.84</td><td>171,265.00</td><td>164,696.34</td><td>113,461.80</td><td>200,545.67</td></tr></table>
+
+Source : Direction de la Caisse, BRH.
+
+N.B Le nombre de chèques compensés correspond au nombre de chèques reçus par les banques.
+
+Les montants en milliers de dollars des chèques compensés correspondent au débit du résultat de la compensation.
+
+<!-- page 22 -->
+
+Tableau 1.17 (suite)
+
+Résultats des activités de la chambre de compensation
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avril 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Compensation de chèques en gourdes Banque centrale</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Nombre</td><td>63,146</td><td>63,261</td><td>64,273</td><td>64,576</td><td>64,921</td><td>109,813</td><td>66,729</td><td>73,926</td><td>98,708</td><td>69,821</td><td>47,438</td><td>85,489</td></tr><tr><td>Montant</td><td>1,042.42</td><td>1,263.15</td><td>1,159.08</td><td>1,288.92</td><td>1,310.27</td><td>1,465.40</td><td>1,143.04</td><td>1,175.68</td><td>1,811.36</td><td>1,126.55</td><td>758.12</td><td>1,468.27</td></tr><tr><td>Banques commerciales</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Nombre</td><td>141,602</td><td>134,011</td><td>139,353</td><td>124,042</td><td>116,646</td><td>132,768</td><td>128,505</td><td>133,338</td><td>147,726</td><td>122,955</td><td>91,935</td><td>147,983</td></tr><tr><td>Montant</td><td>7,271.17</td><td>7,212.51</td><td>6,965.57</td><td>7,505.68</td><td>8,722.31</td><td>7,508.42</td><td>7,759.05</td><td>7,873.86</td><td>8,967.15</td><td>7,906.99</td><td>6,249.87</td><td>9,780.75</td></tr><tr><td>Système bancaire</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Nombre</td><td>204,748</td><td>197,272</td><td>203,626</td><td>188,618</td><td>181,567</td><td>242,581</td><td>195,234</td><td>207,264</td><td>246,434</td><td>192,776</td><td>139,373</td><td>233,472</td></tr><tr><td>Montant</td><td>8,313.59</td><td>8,475.66</td><td>8,124.65</td><td>8,794.60</td><td>10,032.58</td><td>8,973.82</td><td>8,902.09</td><td>9,049.54</td><td>10,778.51</td><td>9,033.54</td><td>7,007.99</td><td>11,249.02</td></tr></table>
+
+Source : Direction de la Caisse, BRH.
+
+N.B Le nombre de chèques compensés correspond au nombre de chèques reçus par les banques.
+
+Les montants en millions de gourdes des chèques compensés correspondent au débit du résultat de la compensation.
+
+<!-- page 23 -->
+
+II- Finances publiques
+
+<!-- page 24 -->
+
+Tableau 2.1
+
+Résumé des opérations financières des administrations publiques $ ^{1} $ (en millions de gourdes)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Recettes totales (incluant les dons)</td><td>1,681.40</td><td>1,275.20</td><td>910.30</td><td>1,197.30</td><td>2,981.20</td><td>1,476.30</td><td>1,585.10</td><td>1,531.83</td><td>1,683.86</td><td>1,480.60</td><td>1,103.80</td><td>2,378.70</td></tr><tr><td>Recettes totales</td><td>1,681.40</td><td>1,275.20</td><td>910.30</td><td>1,197.30</td><td>2,131.20</td><td>1,379.40</td><td>1,585.10</td><td>1,481.23</td><td>1,683.86</td><td>1,480.60</td><td>1,103.80</td><td>1,662.80</td></tr><tr><td>Recettes courantes</td><td>1,681.40</td><td>1,275.20</td><td>910.30</td><td>1,197.30</td><td>2,131.20</td><td>1,379.40</td><td>1,585.10</td><td>1,481.23</td><td>1,683.86</td><td>1,480.60</td><td>1,103.80</td><td>1,662.80</td></tr><tr><td>Recettes internes</td><td>907.20</td><td>876.50</td><td>624.10</td><td>850.30</td><td>1,592.20</td><td>755.70</td><td>1,165.30</td><td>968.10</td><td>1,030.10</td><td>1,014.40</td><td>815.40</td><td>1,019.60</td></tr><tr><td>Recettes douanières</td><td>387.30</td><td>358.40</td><td>246.70</td><td>341.30</td><td>538.50</td><td>496.70</td><td>414.40</td><td>441.70</td><td>584.96</td><td>452.80</td><td>280.40</td><td>620.90</td></tr><tr><td>Recettes non classées  $ ^{1} $</td><td>386.90</td><td>40.30</td><td>39.50</td><td>5.70</td><td>0.50</td><td>127.00</td><td>5.40</td><td>71.43</td><td>68.80</td><td>13.40</td><td>8.00</td><td>22.30</td></tr><tr><td>Transferts des entreprises publiques</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Dons externes au comptant</td><td>-</td><td>-</td><td>-</td><td>-</td><td>850.00</td><td>96.90</td><td>-</td><td>50.60</td><td>-</td><td>-</td><td>-</td><td>715.90</td></tr><tr><td>Dépenses totales</td><td>1,264.70</td><td>1,479.60</td><td>1,877.90</td><td>1,290.50</td><td>1,519.90</td><td>1,944.30</td><td>1,325.10</td><td>1,836.80</td><td>2,177.20</td><td>1,599.80</td><td>1,457.40</td><td>2,235.10</td></tr><tr><td>Dépenses courantes</td><td>1,248.70</td><td>1,438.60</td><td>1,497.90</td><td>1,231.50</td><td>1,444.90</td><td>1,944.30</td><td>1,281.10</td><td>1,789.80</td><td>2,112.20</td><td>1,599.80</td><td>1,457.40</td><td>2,235.10</td></tr><tr><td>Dépenses sur biens et services</td><td>1,057.30</td><td>1,176.40</td><td>1,253.50</td><td>1,032.50</td><td>1,234.90</td><td>1,599.90</td><td>1,133.10</td><td>1,288.50</td><td>1,667.80</td><td>1,321.70</td><td>1,099.50</td><td>1,774.40</td></tr><tr><td>Traitements et salaires</td><td>399.60</td><td>448.80</td><td>409.00</td><td>407.80</td><td>582.90</td><td>739.70</td><td>404.80</td><td>555.30</td><td>757.80</td><td>582.70</td><td>394.50</td><td>592.40</td></tr><tr><td>Dépenses de fonction. / Achats de b & s</td><td>657.70</td><td>727.60</td><td>844.50</td><td>624.70</td><td>652.00</td><td>860.20</td><td>728.30</td><td>733.20</td><td>910.00</td><td>739.00</td><td>705.00</td><td>1,182.00</td></tr><tr><td>Paiements d'intérêts</td><td>58.60</td><td>111.90</td><td>102.20</td><td>66.70</td><td>100.80</td><td>89.90</td><td>77.30</td><td>206.50</td><td>177.50</td><td>82.20</td><td>134.60</td><td>174.10</td></tr><tr><td>Subventions</td><td>97.20</td><td>110.40</td><td>104.70</td><td>97.90</td><td>68.00</td><td>194.90</td><td>19.10</td><td>231.10</td><td>213.30</td><td>165.60</td><td>201.10</td><td>226.20</td></tr><tr><td>Autres dépenses</td><td>35.60</td><td>39.90</td><td>37.50</td><td>34.40</td><td>41.20</td><td>59.60</td><td>51.60</td><td>63.70</td><td>53.60</td><td>30.30</td><td>22.20</td><td>60.40</td></tr><tr><td>Dépenses d'investissement</td><td>16.00</td><td>41.00</td><td>380.00</td><td>59.00</td><td>75.00</td><td>-</td><td>44.00</td><td>47.00</td><td>65.00</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Solde courant</td><td>432.70</td><td>-163.40</td><td>-587.60</td><td>-34.20</td><td>686.30</td><td>-564.90</td><td>304.00</td><td>-308.57</td><td>-428.34</td><td>-119.20</td><td>-353.60</td><td>-572.30</td></tr><tr><td>Ajustement  $ ^{2} $</td><td>331.20</td><td>-269.40</td><td>-359.10</td><td>70.20</td><td>155.80</td><td>-503.90</td><td>-38.00</td><td>-270.37</td><td>60.30</td><td>-48.40</td><td>13.00</td><td>-1,110.90</td></tr><tr><td>Solde global  $ ^{3} $</td><td>85.50</td><td>64.90</td><td>-608.50</td><td>-163.40</td><td>455.50</td><td>-61.10</td><td>298.00</td><td>-85.20</td><td>-553.60</td><td>-70.80</td><td>-366.60</td><td>538.60</td></tr><tr><td>Financement total</td><td>-87.50</td><td>-54.10</td><td>606.20</td><td>160.40</td><td>-1,296.90</td><td>-36.50</td><td>-298.00</td><td>34.60</td><td>553.60</td><td>70.80</td><td>366.60</td><td>-1,254.50</td></tr><tr><td>Financement externe</td><td>-80.20</td><td>-174.40</td><td>-100.00</td><td>-122.60</td><td>-97.90</td><td>-141.00</td><td>-136.80</td><td>-212.60</td><td>-37.70</td><td>-173.60</td><td>-138.00</td><td>-71.20</td></tr><tr><td>Prêts concessionnels Autres Prêts</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Amortissements</td><td>-80.20</td><td>-174.40</td><td>-100.00</td><td>-122.60</td><td>-97.90</td><td>-141.00</td><td>-136.80</td><td>-212.60</td><td>-37.70</td><td>-173.60</td><td>-138.00</td><td>-71.20</td></tr><tr><td>Financement interne</td><td>-7.30</td><td>120.30</td><td>706.20</td><td>283.00</td><td>-1,199.00</td><td>104.50</td><td>-161.20</td><td>247.20</td><td>591.30</td><td>244.40</td><td>504.60</td><td>-1,183.30</td></tr><tr><td>Financement BRH  $ ^{4} $</td><td>8.50</td><td>112.80</td><td>710.20</td><td>289.40</td><td>-1,197.80</td><td>150.40</td><td>-162.70</td><td>215.30</td><td>882.50</td><td>247.10</td><td>273.60</td><td>-1,182.40</td></tr><tr><td>Financement BNC</td><td>-13.80</td><td>9.50</td><td>-2.00</td><td>-4.40</td><td>0.80</td><td>-43.90</td><td>1.20</td><td>31.40</td><td>-294.00</td><td>-</td><td>230.40</td><td>-0.90</td></tr><tr><td>Autres sources  $ ^{5} $</td><td>-2.00</td><td>-2.00</td><td>-2.00</td><td>-2.00</td><td>-2.00</td><td>-2.00</td><td>0.30</td><td>0.50</td><td>2.80</td><td>-2.70</td><td>0.60</td><td>-</td></tr></table>
+
+Sources : Direction du Contrôle du Crédit, BRH; Ministère de l'Économie et des Finances.
+
+1/Base : encaissements-décaissements.
+
+2/ Le poste «ajustement» permet de rétablir l'équilibre comptable entre la balance globale et le financement.
+
+3/ Le solde global est déterminé à partir des opérations considérées comme les moyens de son financement.
+
+4/ Exclut les comptes STABEX, PL-480, Farine Canada et Don Japonais.
+
+5/ Incluant les dépôts du gouvernement dans les banques commerciales publiques et privées.
+
+<!-- page 25 -->
+
+Tableau 2.2
+
+Recettes des administrations publiques (en millions de gourdes et en variation mensuelle en pourcentage)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>En millions de gourdes</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Recettes totales (incluant les dons) $ ^{1} $</td><td>1,681.40</td><td>1,275.10</td><td>910.30</td><td>1,197.30</td><td>2,981.20</td><td>1,476.30</td><td>1,585.10</td><td>1,531.73</td><td>1,683.86</td><td>1,480.60</td><td>1,103.80</td><td>2,378.70</td></tr><tr><td>Dons externes au comptant</td><td>-</td><td>-</td><td>-</td><td>-</td><td>850.00</td><td>96.90</td><td>-</td><td>50.60</td><td>-</td><td>-</td><td>-</td><td>715.90</td></tr><tr><td>Recettes totales (hors dons)</td><td>1,681.40</td><td>1,275.10</td><td>910.30</td><td>1,197.30</td><td>2,131.20</td><td>1,379.40</td><td>1,585.10</td><td>1,481.13</td><td>1,683.86</td><td>1,480.60</td><td>1,103.80</td><td>1,662.80</td></tr><tr><td>Recettes courantes</td><td>1,681.40</td><td>1,275.10</td><td>910.30</td><td>1,197.30</td><td>2,131.20</td><td>1,379.40</td><td>1,585.10</td><td>1,481.13</td><td>1,683.86</td><td>1,480.60</td><td>1,103.80</td><td>1,662.80</td></tr><tr><td>Recettes douanières</td><td>387.30</td><td>358.40</td><td>246.70</td><td>341.30</td><td>538.50</td><td>496.70</td><td>414.40</td><td>441.70</td><td>584.96</td><td>452.80</td><td>280.40</td><td>620.90</td></tr><tr><td>Taxes sur les échanges extérieurs</td><td>794.60</td><td>732.40</td><td>489.50</td><td>750.50</td><td>1,039.90</td><td>886.70</td><td>857.11</td><td>855.96</td><td>1,149.93</td><td>854.30</td><td>576.10</td><td>1,122.70</td></tr><tr><td>Taxes à l'importation</td><td>776.10</td><td>708.50</td><td>489.00</td><td>732.10</td><td>1,022.90</td><td>820.20</td><td>856.72</td><td>820.86</td><td>1,065.68</td><td>824.60</td><td>551.00</td><td>1,063.10</td></tr><tr><td>Taxes à l'exportation</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Autres droits</td><td>18.50</td><td>23.90</td><td>0.50</td><td>18.40</td><td>17.00</td><td>66.50</td><td>0.40</td><td>35.10</td><td>84.26</td><td>29.70</td><td>25.10</td><td>59.60</td></tr><tr><td>Moins taxes perçues pour la DGI</td><td>407.30</td><td>374.00</td><td>242.80</td><td>409.20</td><td>501.40</td><td>390.00</td><td>442.71</td><td>414.26</td><td>564.98</td><td>401.50</td><td>295.70</td><td>501.80</td></tr><tr><td>Recettes internes</td><td>907.20</td><td>876.40</td><td>624.10</td><td>850.30</td><td>1,592.20</td><td>755.70</td><td>1,165.30</td><td>968.00</td><td>1,030.10</td><td>1,014.40</td><td>815.40</td><td>1,019.60</td></tr><tr><td>Droits d'accise</td><td>113.70</td><td>79.90</td><td>57.20</td><td>46.40</td><td>178.90</td><td>111.00</td><td>91.20</td><td>61.30</td><td>70.70</td><td>87.80</td><td>32.20</td><td>89.60</td></tr><tr><td>Impôts sur le revenu</td><td>327.30</td><td>328.40</td><td>174.80</td><td>196.70</td><td>717.80</td><td>138.10</td><td>491.00</td><td>404.70</td><td>236.70</td><td>357.70</td><td>410.80</td><td>230.50</td></tr><tr><td>Taxes sur le chiffre d'affaires</td><td>334.80</td><td>351.00</td><td>269.00</td><td>413.70</td><td>361.00</td><td>351.50</td><td>413.30</td><td>385.80</td><td>564.40</td><td>427.00</td><td>283.90</td><td>515.70</td></tr><tr><td>Autres recettes internes</td><td>131.40</td><td>117.10</td><td>123.10</td><td>193.50</td><td>334.50</td><td>155.10</td><td>169.80</td><td>116.20</td><td>158.30</td><td>141.90</td><td>88.50</td><td>183.80</td></tr><tr><td>Recettes non classées $ ^{2} $</td><td>386.90</td><td>40.30</td><td>39.50</td><td>5.70</td><td>0.50</td><td>127.00</td><td>5.40</td><td>71.43</td><td>68.80</td><td>13.40</td><td>8.00</td><td>22.30</td></tr><tr><td>Transferts des entreprises publiques</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Variation mensuelle en pourcentage</td></tr><tr><td>Recettes totales (incluant les dons)</td><td>22.10</td><td>-24.16</td><td>-28.61</td><td>31.53</td><td>148.99</td><td>-50.48</td><td>7.37</td><td>-3.37</td><td>9.93</td><td>-12.07</td><td>-25.45</td><td>115.50</td></tr><tr><td>Dons externes au comptant</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-88.60</td><td>-100.00</td><td>-</td><td>-100.00</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Recettes totales (hors dons)</td><td>22.17</td><td>-24.16</td><td>-28.61</td><td>31.53</td><td>78.00</td><td>-35.28</td><td>14.91</td><td>-6.56</td><td>13.69</td><td>-12.07</td><td>-25.45</td><td>50.64</td></tr><tr><td>Recettes courantes</td><td>22.17</td><td>-24.16</td><td>-28.61</td><td>31.53</td><td>78.00</td><td>-35.28</td><td>14.91</td><td>-6.56</td><td>13.69</td><td>-12.07</td><td>-25.45</td><td>50.64</td></tr><tr><td>Recettes douanières</td><td>-0.15</td><td>-7.46</td><td>-31.17</td><td>38.35</td><td>57.78</td><td>-7.76</td><td>-16.57</td><td>6.59</td><td>32.43</td><td>-22.59</td><td>-38.07</td><td>121.43</td></tr><tr><td>Taxes sur les échanges extérieurs</td><td>-5.93</td><td>-7.83</td><td>-33.16</td><td>53.32</td><td>38.56</td><td>-14.73</td><td>-3.34</td><td>-0.13</td><td>34.35</td><td>-25.71</td><td>-32.56</td><td>94.88</td></tr><tr><td>dont taxes perçues pour la DGI</td><td>-10.84</td><td>-8.18</td><td>-35.08</td><td>68.53</td><td>22.53</td><td>-22.22</td><td>13.52</td><td>-6.43</td><td>36.38</td><td>-28.94</td><td>-26.35</td><td>69.70</td></tr><tr><td>Taxes à l'importation</td><td>-5.50</td><td>-8.71</td><td>-30.98</td><td>49.71</td><td>39.72</td><td>-19.82</td><td>4.45</td><td>-4.19</td><td>29.83</td><td>-22.62</td><td>-33.18</td><td>92.94</td></tr><tr><td>Taxes à l'exportation</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Autres droits</td><td>-20.94</td><td>29.19</td><td>-97.91</td><td>3,580.00</td><td>-7.61</td><td>291.18</td><td>-99.40</td><td>8,763.64</td><td>140.05</td><td>-64.75</td><td>-15.49</td><td>137.45</td></tr><tr><td>Recettes internes</td><td>-1.73</td><td>-3.40</td><td>-28.79</td><td>36.24</td><td>87.25</td><td>-52.54</td><td>54.20</td><td>-16.93</td><td>6.42</td><td>-1.52</td><td>-19.62</td><td>25.04</td></tr><tr><td>Droits d'accise</td><td>-5.33</td><td>-29.73</td><td>-28.41</td><td>-18.88</td><td>285.56</td><td>-37.95</td><td>-17.84</td><td>-32.79</td><td>15.33</td><td>24.19</td><td>-63.33</td><td>178.26</td></tr><tr><td>Impôts sur le revenu</td><td>23.09</td><td>0.34</td><td>-46.77</td><td>12.53</td><td>264.92</td><td>-80.76</td><td>255.54</td><td>-17.58</td><td>-41.51</td><td>51.12</td><td>14.84</td><td>-43.89</td></tr><tr><td>Taxes sur le chiffre d'affaires</td><td>-14.98</td><td>4.84</td><td>-23.36</td><td>53.79</td><td>-12.74</td><td>-2.63</td><td>17.58</td><td>-6.65</td><td>46.29</td><td>-24.34</td><td>-33.51</td><td>81.65</td></tr><tr><td>Autres recettes internes</td><td>-8.37</td><td>-10.88</td><td>5.12</td><td>57.19</td><td>72.87</td><td>-53.63</td><td>9.48</td><td>-31.57</td><td>36.23</td><td>-10.36</td><td>-37.63</td><td>107.68</td></tr><tr><td>Recettes non classées</td><td>493.40</td><td>-89.58</td><td>-1.99</td><td>-85.57</td><td>-91.23</td><td>25,300.00</td><td>-95.75</td><td>1,222.78</td><td>-3.68</td><td>-80.52</td><td>-40.30</td><td>178.75</td></tr><tr><td>Transferts des entreprises publiques</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr></table>
+
+Sources : Direction du Contrôle du Crédit, BRH; MEF.
+
+1/ Les encaissements au titre des recettes totales incluent les recettes fiscales et non fiscales et les dons, mais excluent les emprunts.
+
+2/ Cette rubrique regroupe les recettes non identifiées au niveau des recettes internes et douanières.
+
+<!-- page 26 -->
+
+Tableau 2.3
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>En millions de gourdes</td><td>Avr. 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Dépenses totales  $ ^{{v}} $</td><td>1,264.70</td><td>1,479.60</td><td>1,877.90</td><td>1,290.50</td><td>1,519.90</td><td>1,944.30</td><td>1,325.10</td><td>1,836.80</td><td>2,177.20</td><td>1,599.80</td><td>1,457.40</td><td>2,235.10</td></tr><tr><td>Dépenses courantes</td><td>1,248.70</td><td>1,438.60</td><td>1,497.90</td><td>1,231.50</td><td>1,444.90</td><td>1,944.30</td><td>1,281.10</td><td>1,789.80</td><td>2,112.20</td><td>1,599.80</td><td>1,457.40</td><td>2,235.10</td></tr><tr><td>Traitements et salaires</td><td>399.60</td><td>448.80</td><td>409.00</td><td>407.80</td><td>582.90</td><td>739.70</td><td>404.80</td><td>555.30</td><td>757.80</td><td>582.70</td><td>394.50</td><td>592.40</td></tr><tr><td>Dépenses de fonction. / Achats de b & s</td><td>657.70</td><td>727.60</td><td>844.50</td><td>624.70</td><td>652.00</td><td>860.20</td><td>728.30</td><td>733.20</td><td>910.00</td><td>739.00</td><td>705.00</td><td>1182.00</td></tr><tr><td>Opérations/comptes courants</td><td>273.10</td><td>312.30</td><td>161.70</td><td>138.80</td><td>170.00</td><td>214.20</td><td>267.80</td><td>247.90</td><td>511.00</td><td>257.30</td><td>290.00</td><td>739.30</td></tr><tr><td>Autres achats de biens et services</td><td>384.60</td><td>415.30</td><td>682.80</td><td>485.90</td><td>482.00</td><td>646.00</td><td>460.50</td><td>485.30</td><td>399.00</td><td>481.70</td><td>415.00</td><td>442.70</td></tr><tr><td>Paiements d'intérêts</td><td>58.60</td><td>111.90</td><td>102.20</td><td>66.70</td><td>100.80</td><td>89.90</td><td>77.30</td><td>206.50</td><td>177.50</td><td>82.20</td><td>134.60</td><td>174.10</td></tr><tr><td>Dette interne</td><td>-</td><td>40.00</td><td>40.00</td><td>-</td><td>40.00</td><td>40.00</td><td>0.00</td><td>140.00</td><td>70.00</td><td>0.00</td><td>70.00</td><td>140.00</td></tr><tr><td>Dette externe</td><td>58.60</td><td>71.90</td><td>62.20</td><td>66.70</td><td>60.80</td><td>49.90</td><td>77.30</td><td>66.50</td><td>107.50</td><td>82.20</td><td>64.60</td><td>34.10</td></tr><tr><td>Subventions</td><td>97.20</td><td>110.40</td><td>104.70</td><td>97.90</td><td>68.00</td><td>194.90</td><td>19.10</td><td>231.10</td><td>213.30</td><td>165.60</td><td>201.10</td><td>226.20</td></tr><tr><td>Arriérés de paiements</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Autres dépenses</td><td>35.60</td><td>39.90</td><td>37.50</td><td>34.40</td><td>41.20</td><td>59.60</td><td>51.60</td><td>63.70</td><td>53.60</td><td>30.30</td><td>22.20</td><td>60.40</td></tr><tr><td>Dépenses d'investissement</td><td>16.00</td><td>41.00</td><td>380.00</td><td>59.00</td><td>75.00</td><td>0.00</td><td>44.00</td><td>47.00</td><td>65.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr><tr><td>Variation mensuelle en pourcentage</td></tr><tr><td>Dépenses totales</td><td>-18.91</td><td>16.99</td><td>26.92</td><td>-31.28</td><td>17.78</td><td>27.92</td><td>-31.85</td><td>38.62</td><td>18.53</td><td>-26.52</td><td>-8.90</td><td>53.36</td></tr><tr><td>Dépenses courantes</td><td>1.88</td><td>15.21</td><td>4.12</td><td>-17.78</td><td>17.33</td><td>34.56</td><td>-34.11</td><td>39.71</td><td>18.01</td><td>-24.26</td><td>-8.90</td><td>53.36</td></tr><tr><td>Traitements et salaires</td><td>-30.13</td><td>12.31</td><td>-8.87</td><td>-0.29</td><td>42.94</td><td>26.90</td><td>-45.28</td><td>37.18</td><td>36.47</td><td>-23.11</td><td>-32.30</td><td>50.16</td></tr><tr><td>Dépenses de fonctionnement</td><td>57.23</td><td>10.63</td><td>16.07</td><td>-26.03</td><td>4.37</td><td>31.93</td><td>-15.33</td><td>0.67</td><td>24.11</td><td>-18.79</td><td>-4.60</td><td>67.66</td></tr><tr><td>Opérations/comptes courants</td><td>43.59</td><td>14.35</td><td>-48.22</td><td>-14.16</td><td>22.48</td><td>26.00</td><td>25.02</td><td>-7.43</td><td>106.13</td><td>-49.65</td><td>12.71</td><td>154.93</td></tr><tr><td>Achats de biens et services</td><td>68.61</td><td>7.98</td><td>64.41</td><td>-28.84</td><td>-0.80</td><td>34.02</td><td>-28.72</td><td>5.39</td><td>-17.78</td><td>20.73</td><td>-13.85</td><td>6.67</td></tr><tr><td>Paiements d'intérêts</td><td>-27.74</td><td>90.96</td><td>-8.67</td><td>-34.74</td><td>51.12</td><td>-10.81</td><td>-14.02</td><td>167.14</td><td>-14.04</td><td>-53.69</td><td>63.75</td><td>29.35</td></tr><tr><td>Dette interne</td><td>-100.00</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-100.00</td><td>-</td><td>-50.00</td><td>-100.00</td><td>-</td><td>100.00</td></tr><tr><td>Dette externe</td><td>42.58</td><td>22.70</td><td>-13.49</td><td>7.23</td><td>-8.85</td><td>-17.93</td><td>54.91</td><td>-13.97</td><td>61.65</td><td>-23.53</td><td>-21.41</td><td>-47.21</td></tr><tr><td>Subventions</td><td>-2.90</td><td>13.58</td><td>-5.16</td><td>-6.49</td><td>-30.54</td><td>186.62</td><td>-90.20</td><td>1109.95</td><td>-7.70</td><td>-22.36</td><td>21.44</td><td>12.48</td></tr><tr><td>Arriérés de paiements</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Autres dépenses</td><td>-34.44</td><td>12.08</td><td>-6.02</td><td>-8.27</td><td>19.77</td><td>44.66</td><td>-13.42</td><td>23.45</td><td>-15.86</td><td>-43.47</td><td>-26.73</td><td>172.07</td></tr><tr><td>Dépenses d'investissement</td><td>-95.21</td><td>156.25</td><td>826.83</td><td>-84.47</td><td>27.12</td><td>-100.00</td><td>-</td><td>6.82</td><td>38.30</td><td>-100.00</td><td>-</td><td>-</td></tr></table>
+
+Sources : Direction du Contrôle du Crédit, BRH; MEF.
+
+1/ Les décaissements au titre des dépenses totales incluent les paiements d'intérêts et excluent les amortissements de la dette publique.
+
+<!-- page 27 -->
+
+Tableau 2.4
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Endetement total  $ ^{{1/}} $</td><td>73,595.97</td><td>72,358.23</td><td>74,459.32</td><td>77,576.54</td><td>77,661.58</td><td>78,534.89</td><td>78,328.35</td><td>78,167.42</td><td>79,834.39</td><td>81,015.59</td><td>80,328.69</td><td>79,213.68</td></tr><tr><td>Dette interne  $ ^{{2/}} $</td><td>21,333.33</td><td>21,401.01</td><td>22,140.29</td><td>22,497.13</td><td>21,359.08</td><td>21,544.55</td><td>21,392.02</td><td>21,569.20</td><td>22,432.05</td><td>22,629.72</td><td>22,839.24</td><td>21,782.92</td></tr><tr><td>Gouvemement central</td><td>21,466.53</td><td>21,493.39</td><td>22,225.52</td><td>22,580.43</td><td>21,381.69</td><td>21,580.39</td><td>21,417.46</td><td>21,636.46</td><td>22,522.64</td><td>22,771.98</td><td>23,045.87</td><td>21,863.48</td></tr><tr><td>Collectivités locales</td><td>-100.82</td><td>-93.41</td><td>-80.32</td><td>-75.94</td><td>-62.52</td><td>-61.19</td><td>-70.56</td><td>-89.66</td><td>-146.35</td><td>-151.97</td><td>-143.78</td><td>-112.69</td></tr><tr><td>Entreprises publiques</td><td>-32.38</td><td>1.02</td><td>-4.91</td><td>-7.36</td><td>39.91</td><td>25.35</td><td>45.11</td><td>22.39</td><td>55.77</td><td>9.71</td><td>-62.85</td><td>32.12</td></tr><tr><td>Dette externe  $ ^{{3/}} $</td><td>52,262.64</td><td>50,957.22</td><td>52,319.03</td><td>55,079.41</td><td>56,302.50</td><td>56,990.34</td><td>56,936.34</td><td>56,598.22</td><td>57,402.34</td><td>58,385.86</td><td>57,489.45</td><td>57,430.76</td></tr><tr><td>Gouvemement central</td><td>46,260.44</td><td>45,156.53</td><td>46,414.00</td><td>48,887.57</td><td>50,043.54</td><td>50,722.05</td><td>50,685.14</td><td>50,451.15</td><td>51,411.58</td><td>52,281.44</td><td>51,517.82</td><td>51,488.56</td></tr><tr><td>Collectivités locales</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Entreprises publiques</td><td>6,002.20</td><td>5,800.69</td><td>5,905.03</td><td>6,191.84</td><td>6,258.96</td><td>6,268.29</td><td>6,251.20</td><td>6,147.07</td><td>5,990.76</td><td>6,104.42</td><td>5,971.64</td><td>5,942.20</td></tr><tr><td>Pour mémoire :</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Taux de change de référence (gourdes/ ÉU (Fin de mois))</td><td>39.0311</td><td>38.7025</td><td>39.9245</td><td>42.0759</td><td>42.3415</td><td>43.0426</td><td>43.0291</td><td>43.0612</td><td>43.0003</td><td>43.4757</td><td>42.9775</td><td>42.6885</td></tr></table>
+
+Sources: Direction des Affaires Internationales, Direction du Contrôle du Crédit, BRH.
+
+1/L'endettement total n'inclut pas les engagements du secteur public envers les banques commerciales.
+
+2/ La dette interne du secteur public indique la position nette du secteur public vis-à-vis de la BRH.
+
+3/ L'encours de la dette externe a été convertì en gourdes au taux de référence de fin de mois de la BRH.
+
+(…): données non disponibles
+
+<!-- page 28 -->
+
+Tableau 2.5
+
+Dette publique externe (en millions de dollars ÉU)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Décaissements nets  $ ^{{1/}} $</td><td>1.91</td><td>-2.67</td><td>3.06</td><td>0.42</td><td>13.97</td><td>8.84</td><td>1.69</td><td>0.49</td><td>6.87</td><td>-2.68</td><td>0.64</td><td>9.33</td></tr><tr><td>Décaissements nets de l'État</td><td>1.91</td><td>-1.83</td><td>3.30</td><td>0.94</td><td>14.33</td><td>9.57</td><td>1.73</td><td>1.36</td><td>6.87</td><td>-2.17</td><td>1.25</td><td>9.80</td></tr><tr><td>Tirages</td><td>3.95</td><td>1.79</td><td>5.58</td><td>3.26</td><td>16.25</td><td>12.02</td><td>4.84</td><td>5.49</td><td>9.35</td><td>1.30</td><td>3.81</td><td>10.98</td></tr><tr><td>Amortissements</td><td>2.04</td><td>3.61</td><td>2.28</td><td>2.32</td><td>1.92</td><td>2.46</td><td>3.11</td><td>4.13</td><td>2.48</td><td>3.48</td><td>2.56</td><td>1.18</td></tr><tr><td>Décaissements nets des entreprises publiques</td><td>0.00</td><td>-0.84</td><td>-0.25</td><td>-0.52</td><td>-0.36</td><td>-0.72</td><td>-0.04</td><td>-0.87</td><td>0.00</td><td>-0.50</td><td>-0.61</td><td>-0.47</td></tr><tr><td>Tirages</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Amortissements</td><td>0.00</td><td>0.84</td><td>0.25</td><td>0.52</td><td>0.36</td><td>0.72</td><td>0.04</td><td>0.87</td><td>-</td><td>0.50</td><td>0.61</td><td>0.47</td></tr><tr><td>Ajustements  $ ^{{2/}} $</td><td>0.79</td><td>19.69</td><td>9.67</td><td>1.77</td><td>6.70</td><td>14.28</td><td>2.34</td><td>9.13</td><td>20.56</td><td>10.70</td><td>5.93</td><td>3.09</td></tr><tr><td>État</td><td>0.75</td><td>16.63</td><td>7.94</td><td>1.59</td><td>5.68</td><td>13.05</td><td>2.04</td><td>7.67</td><td>17.13</td><td>9.11</td><td>5.08</td><td>2.37</td></tr><tr><td>Entreprises publiques</td><td>0.05</td><td>3.06</td><td>1.73</td><td>0.18</td><td>1.02</td><td>1.23</td><td>0.30</td><td>1.45</td><td>3.44</td><td>1.59</td><td>0.85</td><td>0.72</td></tr><tr><td>Intérêts</td><td>1.50</td><td>1.59</td><td>1.57</td><td>1.55</td><td>1.37</td><td>1.13</td><td>1.55</td><td>1.59</td><td>0.87</td><td>1.88</td><td>1.16</td><td>0.79</td></tr><tr><td>État</td><td>1.494</td><td>1.40</td><td>1.47</td><td>1.29</td><td>1.30</td><td>1.00</td><td>1.55</td><td>1.45</td><td>0.87</td><td>1.81</td><td>1.01</td><td>0.69</td></tr><tr><td>Entreprises publiques</td><td>0.00</td><td>0.19</td><td>0.10</td><td>0.26</td><td>0.06</td><td>0.13</td><td>0.01</td><td>0.14</td><td>0.00</td><td>0.07</td><td>0.15</td><td>0.10</td></tr></table>
+
+Source : Direction des Affaires Internationales, BRH.
+
+1/ Décaissements au titre des prêts.
+
+2/ Cette rubrique reflète les variations du taux de change des devises dans lesquelles sont libellés les engagements extérieurs du secteur public.
+
+(…) : données non disponibles
+
+<!-- page 29 -->
+
+## Ill- Balance des paiements
+
+<!-- page 30 -->
+
+Tableau 3.1
+
+|   | Avr. - Juin 05 (P) | Juil. - Sept. 05 (P) | Oct. - Déc. 05 (P) | Janv.-Mars 06 (P) |
+| --- | --- | --- | --- | --- |
+| A. Compte des transactions courantes | 47.69 | 29.62 | 0.47 | -7.69 |
+| Biens et services | -270.98 | -277.05 | -314.69 | -352.00 |
+|   | Crédit | 165.44 | 166.17 | 153.21 |
+|   | Débit | -436.42 | -443.21 | -467.89 |
+| Biens Balance commerciale | -191.63 | -216.51 | -261.56 | -276.93 |
+|   | Crédit | 129.39 | 118.73 | 118.60 |
+|   | Débit | -321.02 | -335.24 | -380.16 |
+| Services | -79.35 | -60.53 | -53.12 | -75.06 |
+|   | Crédit | 36.05 | 47.44 | 34.61 |
+|   | Débit | -115.40 | -107.97 | -87.73 |
+| Revenus nets | -5.26 | -4.94 | -3.70 | -2.68 |
+| Transferts courants nets | 323.93 | 311.61 | 318.86 | 346.99 |
+| B. Compte de capital | - | - | - | - |
+|   | Crédit | - | - | - |
+|   | Débit | - | - | - |
+| C. Comptes d'opérations financières | 2.35 | 22.67 | 0.43 | -5.12 |
+| Investissements directs | 2.38 | 2.38 | 2.91 | 2.91 |
+| Autres investissements | -0.03 | 20.29 | -2.48 | -8.03 |
+|   | Secteur des administrations publiques (net) | 4.77 | 23.86 | 9.88 |
+|   | Secteur bancaire (net) | -1.52 | -0.87 | -16.16 |
+|   | Secteur non bancaire (net) | -4.00 | -4.00 | 3.00 |
+|   | Autres avoirs et engagements (nets) | 0.72 | 1.30 | 0.80 |
+| D. Erreurs et omissions nettes | -54.85 | -51.88 | 11.32 | 34.91 |
+| Balance globale | -4.81 | 0.41 | 12.22 | 22.10 |
+| E. Financement | 4.81 | -0.41 | -12.22 | -22.10 |
+| Avoirs de réserves $ ^{{1/}} $ | 20.52 | -0.49 | -28.48 | -22.77 |
+| Utilisation des crédits et prêts du FMI | -3.60 | -1.04 | 14.31 | -0.54 |
+| Autres engagements $ ^{{2/}} $ | -1.52 | -0.13 | 0.30 | -0.26 |
+| Variations des arriérés de paiement | -10.59 | 1.25 | 1.65 | 1.47 |
+
+Source : Direction des Affaires Internationales, BRH.
+
+1/ Variation des avoirs de réserves bruts. Le signe (-) signifie une variation positive.
+
+2/ Engagements à court terme envers les OFI.
+
+<!-- page 31 -->
+
+Tableau 3.2
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2005</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars. 06</td></tr><tr><td>Principaux Produits Primaires</td><td>4.53</td><td>3.32</td><td>2.85</td><td>3.74</td><td>1.56</td><td>1.10</td><td>0.83</td><td>1.50</td><td>1.07</td><td>0.98</td><td>0.76</td><td>1.48</td></tr><tr><td>Café</td><td>0.51</td><td>0.63</td><td>0.42</td><td>0.23</td><td>0.19</td><td>0.03</td><td>0.30</td><td>0.50</td><td>0.60</td><td>0.20</td><td>0.16</td><td>0.30</td></tr><tr><td>Cacao</td><td>1.30</td><td>0.70</td><td>0.80</td><td>0.78</td><td>1.00</td><td>0.40</td><td>0.30</td><td>0.70</td><td>0.20</td><td>0.60</td><td>0.40</td><td>0.65</td></tr><tr><td>Mangues</td><td>2.30</td><td>1.50</td><td>1.20</td><td>2.45</td><td>0.22</td><td>0.30</td><td>0.02</td><td>0.03</td><td>0.09</td><td>0.01</td><td>0.00</td><td>0.23</td></tr><tr><td>Pite et ficelles</td><td>0.12</td><td>0.14</td><td>0.10</td><td>0.08</td><td>0.00</td><td>0.08</td><td>0.04</td><td>0.07</td><td>0.03</td><td>0.02</td><td>0.10</td><td>0.06</td></tr><tr><td>Autres produits primaires</td><td>0.30</td><td>0.35</td><td>0.33</td><td>0.20</td><td>0.15</td><td>0.29</td><td>0.17</td><td>0.20</td><td>0.15</td><td>0.15</td><td>0.10</td><td>0.24</td></tr><tr><td>Produits industriels</td><td>14.78</td><td>15.28</td><td>16.55</td><td>16.96</td><td>13.85</td><td>14.59</td><td>15.50</td><td>16.01</td><td>13.86</td><td>9.00</td><td>12.37</td><td>17.88</td></tr><tr><td>Petite industrie  $ ^{{1/}} $</td><td>0.53</td><td>0.36</td><td>0.70</td><td>0.52</td><td>0.45</td><td>0.38</td><td>0.42</td><td>0.60</td><td>0.65</td><td>0.30</td><td>0.40</td><td>0.55</td></tr><tr><td>Articles manufacturés  $ ^{{2/}} $</td><td>13.67</td><td>14.12</td><td>15.16</td><td>14.58</td><td>12.49</td><td>12.87</td><td>14.42</td><td>15.00</td><td>12.83</td><td>8.30</td><td>11.77</td><td>16.38</td></tr><tr><td>Huiles essentielles</td><td>0.28</td><td>0.40</td><td>0.34</td><td>1.46</td><td>0.63</td><td>0.84</td><td>0.40</td><td>0.25</td><td>0.19</td><td>0.30</td><td>0.10</td><td>0.70</td></tr><tr><td>Autres produits industriels</td><td>0.30</td><td>0.40</td><td>0.35</td><td>0.40</td><td>0.28</td><td>0.50</td><td>0.26</td><td>0.16</td><td>0.19</td><td>0.10</td><td>0.10</td><td>0.25</td></tr><tr><td>Ajustements pour évaluation</td><td>1.65</td><td>1.59</td><td>1.66</td><td>1.77</td><td>1.32</td><td>1.34</td><td>1.40</td><td>1.50</td><td>1.28</td><td>0.85</td><td>1.12</td><td>1.66</td></tr><tr><td>Exportations nettes (F.O.B.)</td><td>20.96</td><td>20.19</td><td>21.06</td><td>22.48</td><td>16.73</td><td>17.04</td><td>17.72</td><td>19.00</td><td>16.20</td><td>10.84</td><td>14.25</td><td>21.02</td></tr><tr><td>Ajustements pour classification</td><td>21.38</td><td>22.08</td><td>23.72</td><td>22.81</td><td>19.54</td><td>20.14</td><td>22.55</td><td>23.45</td><td>20.06</td><td>12.99</td><td>18.40</td><td>25.63</td></tr><tr><td>Exportations brutes (F.O.B.)</td><td>42.34</td><td>42.27</td><td>44.78</td><td>45.29</td><td>36.26</td><td>37.17</td><td>40.27</td><td>42.46</td><td>36.27</td><td>23.83</td><td>32.65</td><td>46.65</td></tr></table>
+
+Sources : Administration Générale des Douanes; Direction des Affaires Internationales, BRH.
+
+1/ Chiffres obtenus à partir du tableau 3.4.
+
+2/ Valeur ajoutée des industries d'assemblage.
+
+<!-- page 32 -->
+
+Tableau 3.3
+
+Exportations des industries d'assemblage vers les États-Unis d'Amérique à base de matières premières importées (en milliers de dollars ÉU)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars. 06</td></tr><tr><td>Tulles, dentelles et rubans, ouvrages brodés</td><td>24.43</td><td>15.82</td><td>10.36</td><td>23.78</td><td>38.93</td><td>34.66</td><td>36.04</td><td>32.91</td><td>29.44</td><td>8.17</td><td>20.04</td><td>30.88</td></tr><tr><td>Appareils et matériels électriques et électroniques</td><td>734.08</td><td>617.16</td><td>918.18</td><td>673.11</td><td>137.83</td><td>126.47</td><td>75.49</td><td>79.57</td><td>190.20</td><td>62.59</td><td>79.85</td><td>147.62</td></tr><tr><td>Machinerie et accesoires</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Articles de voyage et sacs à main, art. en cuir, bijouterie</td><td>6.39</td><td>7.81</td><td>-</td><td>3.03</td><td>30.10</td><td>6.68</td><td>-</td><td>-</td><td>-</td><td>3.16</td><td>57.12</td><td>5.12</td></tr><tr><td>Vêtements et articles pour vêtements</td><td>34,882.02</td><td>35925.42</td><td>38618.96</td><td>36,906.30</td><td>31,615.60</td><td>32,779.84</td><td>36,558.94</td><td>38,053.96</td><td>33,295.56</td><td>21,211.73</td><td>30,017.31</td><td>41,804.01</td></tr><tr><td>Chaussures</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2.68</td><td>-</td><td>-</td><td>-</td><td>29.07</td><td>14.49</td><td>60.31</td></tr><tr><td>Jouets, ornaments et articles de sport</td><td>89.86</td><td>147.05</td><td>140.99</td><td>131.26</td><td>86.86</td><td>122.20</td><td>50.62</td><td>41.54</td><td>50.23</td><td>29.07</td><td>14.49</td><td>60.31</td></tr><tr><td>Articles manufacturés en caoutchouc et en plastique</td><td>18.30</td><td>24.48</td><td>17.94</td><td>23.65</td><td>19.28</td><td>3.24</td><td>10.81</td><td>11.14</td><td>20.05</td><td>11.44</td><td>0.31</td><td>21.91</td></tr><tr><td>Autres: appareils optiques et d'enregistrement de sons</td><td>6.70</td><td>2.04</td><td>-</td><td>-</td><td>-</td><td>4.80</td><td>-</td><td>7.20</td><td>7.20</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Total  $ ^{{1/}} $</td><td>35,761.78</td><td>36,739.78</td><td>39,706.43</td><td>37,761.13</td><td>31,928.60</td><td>33,080.56</td><td>36,731.90</td><td>38,226.32</td><td>33,592.68</td><td>21,355.22</td><td>30,203.60</td><td>42,130.15</td></tr></table>
+
+Sources : Département du Commerce des États-Unis d'Amérique; Direction des Affaires Internationales, BRH.
+
+1/ Valeur brute permettant de déterminer les exportations nettes des industries d'assemblage figurant au tableau 3.2 sous la rubrique «Articles manufacturés».
+
+<!-- page 33 -->
+
+Tableau 3.4
+
+Exportations vers les États-Unis d'Amérique à base de matières premières locales (en milliers de dollars ÉU)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars. 06</td></tr><tr><td>Articles manufacturés en cuir</td><td>182.02</td><td>0.27</td><td>362.80</td><td>195.00</td><td>9.29</td><td>179.23</td><td>157.36</td><td>206.94</td><td>355.35</td><td>8.17</td><td>20.04</td><td>30.88</td></tr><tr><td>Articles manufacturés en bois, bois pour meubles</td><td>35.34</td><td>5.66</td><td>2.38</td><td>10.32</td><td>0.00</td><td>0.00</td><td>11.44</td><td>8.08</td><td>30.10</td><td>62.59</td><td>79.85</td><td>147.62</td></tr><tr><td>Articles pour vêtements et autres ouvrages, produits textiles</td><td>209.42</td><td>215.68</td><td>231.85</td><td>222.77</td><td>190.84</td><td>196.80</td><td>220.68</td><td>229.70</td><td>199.78</td><td>130.16</td><td>180.11</td><td>250.84</td></tr><tr><td>Tapis, articles pour tapis, couvertures</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Travaux d'art, objets de collection, antiquités</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Balais, brosses, ficelles</td><td>122.31</td><td>141.57</td><td>101.52</td><td>79.51</td><td>2.82</td><td>78.91</td><td>44.00</td><td>161.38</td><td>83.11</td><td>125.45</td><td>40.50</td><td>162.74</td></tr><tr><td>Autres : articles en verre et en céramique</td><td>-</td><td>7.00</td><td>-</td><td>-</td><td>13.00</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Articles déclarés et non déclarés</td><td>-</td><td>4.53</td><td>9.97</td><td>6.99</td><td>11.26</td><td>11.27</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Sous-total</td><td>549.09</td><td>374.71</td><td>708.52</td><td>514.59</td><td>227.20</td><td>466.21</td><td>433.48</td><td>606.10</td><td>668.34</td><td>326.37</td><td>320.50</td><td>592.08</td></tr><tr><td>Marchandises retournées</td><td>-16.47</td><td>-11.24</td><td>-21.26</td><td>-15.44</td><td>-6.82</td><td>-13.99</td><td>-13.00</td><td>-18.18</td><td>-20.05</td><td>-9.79</td><td>-9.62</td><td>-17.76</td></tr><tr><td>Total net  $ ^{{1/}} $</td><td>532.62</td><td>363.47</td><td>687.26</td><td>499.15</td><td>220.38</td><td>452.22</td><td>420.48</td><td>587.92</td><td>648.29</td><td>316.58</td><td>310.89</td><td>574.31</td></tr></table>
+
+Sources: Département du Commerce des États-Unis d'Amérique; Direction des Affaires Internationales, BRH.
+
+1/ Ce total sert de base pour le calcul de la rubrique «Petite Industrie» du tableau 3.2.
+
+<!-- page 34 -->
+
+Tableau 3.5
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars. 06</td></tr><tr><td>Produits alimentaires</td><td>27.76</td><td>28.58</td><td>28.68</td><td>22.94</td><td>42.86</td><td>14.33</td><td>23.41</td><td>50.40</td><td>23.52</td><td>26.76</td><td>43.52</td><td>22.46</td></tr><tr><td>Boissons et tabac</td><td>1.36</td><td>1.60</td><td>1.80</td><td>1.73</td><td>2.46</td><td>1.28</td><td>1.46</td><td>1.40</td><td>1.44</td><td>1.40</td><td>2.44</td><td>1.24</td></tr><tr><td>Matières brutes non comestibles</td><td>0.91</td><td>1.16</td><td>0.81</td><td>0.90</td><td>1.28</td><td>1.46</td><td>1.17</td><td>3.09</td><td>1.18</td><td>1.04</td><td>2.27</td><td>0.36</td></tr><tr><td>Combustibles minéraux</td><td>27.29</td><td>28.27</td><td>22.26</td><td>20.14</td><td>51.15</td><td>28.53</td><td>28.12</td><td>25.09</td><td>25.33</td><td>25.49</td><td>42.65</td><td>25.61</td></tr><tr><td>dont produits pétroliers  $ ^{{1}} $</td><td>23.20</td><td>24.03</td><td>18.92</td><td>17.12</td><td>43.48</td><td>24.25</td><td>23.90</td><td>21.33</td><td>21.53</td><td>21.67</td><td>36.25</td><td>21.77</td></tr><tr><td>Huiles et graisses animales et végétales</td><td>1.15</td><td>0.59</td><td>0.44</td><td>0.60</td><td>1.13</td><td>0.36</td><td>1.25</td><td>2.80</td><td>1.28</td><td>0.84</td><td>3.08</td><td>0.03</td></tr><tr><td>Produits chimiques</td><td>3.78</td><td>3.97</td><td>3.82</td><td>12.17</td><td>4.66</td><td>3.10</td><td>2.09</td><td>12.75</td><td>2.80</td><td>2.05</td><td>7.50</td><td>2.55</td></tr><tr><td>Articles manufacturés</td><td>23.45</td><td>19.88</td><td>17.74</td><td>21.40</td><td>19.19</td><td>21.84</td><td>26.01</td><td>20.21</td><td>21.78</td><td>22.40</td><td>21.66</td><td>18.80</td></tr><tr><td>Machine et matériel de transport</td><td>12.08</td><td>7.54</td><td>11.72</td><td>8.87</td><td>11.32</td><td>7.84</td><td>11.34</td><td>19.94</td><td>26.20</td><td>23.96</td><td>16.88</td><td>17.70</td></tr><tr><td>Articles manufacturés divers</td><td>13.25</td><td>13.80</td><td>10.04</td><td>10.04</td><td>14.26</td><td>10.76</td><td>10.65</td><td>13.29</td><td>8.87</td><td>11.73</td><td>10.99</td><td>10.80</td></tr><tr><td>Articles divers non définis ailleurs</td><td>14.83</td><td>11.57</td><td>5.06</td><td>4.14</td><td>8.65</td><td>11.08</td><td>11.80</td><td>10.67</td><td>19.43</td><td>13.00</td><td>10.70</td><td>16.26</td></tr><tr><td>Total importations (C.I.F.)</td><td>125.86</td><td>116.96</td><td>102.37</td><td>102.93</td><td>156.97</td><td>100.57</td><td>117.29</td><td>159.65</td><td>131.83</td><td>128.67</td><td>161.69</td><td>115.81</td></tr><tr><td>Ajustement</td><td>8.81</td><td>8.19</td><td>7.17</td><td>7.21</td><td>10.99</td><td>7.04</td><td>8.21</td><td>11.18</td><td>9.23</td><td>9.01</td><td>11.32</td><td>8.11</td></tr><tr><td>Importations nettes (F.O.B.)</td><td>117.05</td><td>108.77</td><td>95.20</td><td>95.73</td><td>145.98</td><td>93.53</td><td>109.08</td><td>148.47</td><td>122.60</td><td>119.67</td><td>150.37</td><td>107.70</td></tr></table>
+
+Sources : Administration Générale des Douanes; Direction des Affaires Internationales, BRH.
+
+ $ ^{1} $Voir Tableau 3.5a.
+
+<!-- page 35 -->
+
+Tableau 3.5a
+
+Importations de produits pétroliers
+
+(volume: en milliers de barils) $ ^{1} $
+
+(valeur: en milliers de dollars ÉU)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td></tr><tr><td></td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td></tr><tr><td>Gazoline</td><td>47.91</td><td>3,074.60</td><td>76.97</td><td>5,003.60</td><td>47.84</td><td>3,241.00</td><td>76.05</td><td>5,515.65</td><td>101.48</td><td>7,876.37</td><td>42.17</td><td>3,936.79</td></tr><tr><td>Kérosène</td><td>36.40</td><td>2,492.30</td><td>31.23</td><td>2,078.90</td><td>39.32</td><td>2,857.10</td><td>52.70</td><td>3,840.51</td><td>62.20</td><td>4,816.70</td><td>33.31</td><td>3,092.22</td></tr><tr><td>Gasoil</td><td>265.59</td><td>17,287.10</td><td>198.05</td><td>12,518.90</td><td>173.06</td><td>12,029.50</td><td>106.55</td><td>7,613.11</td><td>393.60</td><td>29,983.56</td><td>197.22</td><td>17,022.12</td></tr><tr><td>Fuel-oil (Mazout)</td><td>-</td><td>-</td><td>67.76</td><td>3,323.63</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Lubrifiants et autres</td><td>2.26</td><td>342.84</td><td>0.85</td><td>125.29</td><td>1.64</td><td>261.95</td><td>0.80</td><td>149.00</td><td>1.70</td><td>344.70</td><td>1.10</td><td>197.90</td></tr><tr><td>Bitume</td><td>-</td><td>-</td><td>16.94</td><td>984.55</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Gaz de pétrole liquéfié</td><td>-</td><td>-</td><td>-</td><td>-</td><td>11.40</td><td>531.30</td><td>-</td><td>-</td><td>8.60</td><td>456.40</td><td>-</td><td>-</td></tr><tr><td>Total</td><td>352.16</td><td>23,196.84</td><td>391.80</td><td>24,034.87</td><td>273.26</td><td>18,920.85</td><td>236.10</td><td>17,118.27</td><td>567.58</td><td>43,477.73</td><td>273.80</td><td>24,249.03</td></tr></table>
+
+Tableau 3.5a (suite)
+
+<table><tr><td></td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars. 06</td></tr><tr><td></td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td><td>Volume</td><td>Valeur</td></tr><tr><td>Gazoline</td><td>49.28</td><td>3,657.82</td><td>31.45</td><td>2,064.61</td><td>69.12</td><td>4,840.49</td><td>58.12</td><td>4,657.90</td><td>129.28</td><td>9,303.40</td><td>47.92</td><td>4,041.10</td></tr><tr><td>Kérosène</td><td>36.42</td><td>3,174.38</td><td>39.68</td><td>2,941.66</td><td>40.20</td><td>3,199.88</td><td>57.66</td><td>4,637.60</td><td>83.42</td><td>6,483.10</td><td>51.03</td><td>4,125.70</td></tr><tr><td>Gasoil</td><td>190.22</td><td>16,737.75</td><td>169.22</td><td>12,508.99</td><td>156.41</td><td>12,152.92</td><td>160.59</td><td>12,376.40</td><td>252.71</td><td>18,525.40</td><td>172.42</td><td>13,143.80</td></tr><tr><td>Fuel-oil (Mazout)</td><td>-</td><td>-</td><td>20.29</td><td>950.15</td><td>-</td><td>-</td><td>-</td><td>-</td><td>24.00</td><td>1,335.20</td><td>8.30</td><td>463.40</td></tr><tr><td>Lubrifiants et autres</td><td>1.9</td><td>331.0</td><td>12.61</td><td>2,182.11</td><td>3.17</td><td>490.72</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Bitume</td><td>-</td><td>-</td><td>-</td><td>-</td><td>14.44</td><td>847.68</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Gaz de pétrole liquéfié</td><td>-</td><td>-</td><td>12.10</td><td>679.70</td><td>-</td><td>-</td><td>-</td><td>-</td><td>11.47</td><td>601.53</td><td>-</td><td>-</td></tr><tr><td>Total</td><td>277.83</td><td>23,900.90</td><td>285.35</td><td>21,327.22</td><td>283.34</td><td>21,531.69</td><td>276.37</td><td>21,671.90</td><td>500.88</td><td>36,248.63</td><td>279.67</td><td>21,774.00</td></tr></table>
+
+Sources : Ministère de l'Économie et des Finances; Compagnies Pétrolières; Direction des Affaires Internationales, BRH. 1/1 baril = 42 Gallons
+
+<!-- page 36 -->
+
+Tableau 3.6
+
+Évolution de l'indice du taux de change réel bilatéral Haïti-États-Unis d'Amérique (2000=100)
+
+<table><tr><td></td><td>2e trimestre 2005</td><td>3e trimestre 2005</td><td>1er trimestre 2006</td></tr><tr><td>Janv. 05</td><td>Fév. 05</td><td>Mars 05</td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juli. 05</td><td>Aouï 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td></tr><tr><td>indice des prix à la consommation d'Haïti</td><td>23C.6</td><td>231.8</td><td>233.9</td><td>239.5</td><td>243.6</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>indice dès prix à la consommation dès États-Unis</td><td>110.7</td><td>111.4</td><td>112.3</td><td>113.0</td><td>112.9</td><td>113.0</td><td>113.5</td><td>114.1</td><td>115.4</td><td>...</td><td>...</td><td>...</td></tr><tr><td>indice de laux de change nominal</td><td>255.3</td><td>258.2</td><td>262.7</td><td>270.6</td><td>275.0</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>indice de taux de change réel bilatéra $ ^{a} $</td><td>122.54</td><td>124.10</td><td>120.11</td><td>127.09</td><td>127.40</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Rapport des prix relatifs (État-Haïti)</td><td>0.48</td><td>0.48</td><td>0.48</td><td>0.47</td><td>0.46</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr></table>
+
+Sources: US Department of Labor; International Monetary Fund; Direction des Affairs Internationales, BR-1
+
+1/ Change ment de base (1991 = 130); effectué à partir de l'IPC mensuel (1982-84-100) du US Dept. of Labor
+
+27 Indice de laux de change nominal $ ^{*} $ (rapport des prix relatifs ÉU/Haiti).
+
+( ) Narrative and dispensable
+
+<!-- page 37 -->
+
+# IV- Prix et autres indicateurs économiques
+
+<!-- page 38 -->
+
+Tableau 4.1
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Indice général (pondération: 100%)</td><td>110.3</td><td>112.3</td><td>113.7</td><td>114.8</td><td>116.0</td><td>117.6</td><td>118.7</td><td>120.1</td><td>121.0</td><td>122.5</td><td>124.6</td><td>125.9</td></tr><tr><td>Alimentation, boissons et tabacs (50,35%)</td><td>111.8</td><td>115.0</td><td>116.8</td><td>118.2</td><td>117.9</td><td>118.2</td><td>118.6</td><td>119.3</td><td>121.5</td><td>123.9</td><td>127.1</td><td>128.8</td></tr><tr><td>Habillement et tissus, chaussures 6,86%)</td><td>107.5</td><td>107.3</td><td>107.4</td><td>107.7</td><td>108.9</td><td>111.1</td><td>111.4</td><td>113.5</td><td>114.4</td><td>115.6</td><td>116.5</td><td>116.7</td></tr><tr><td>Loyer du logement, énergie et eau (11,05%)</td><td>104.4</td><td>104.5</td><td>105.2</td><td>105.6</td><td>110.9</td><td>114.8</td><td>119.9</td><td>127.4</td><td>128.4</td><td>128.9</td><td>129.3</td><td>129.5</td></tr><tr><td>Aménagement et entretien du logement (4,70%)</td><td>107.4</td><td>110.6</td><td>110.5</td><td>113.8</td><td>115.9</td><td>118.8</td><td>119.9</td><td>121.1</td><td>121.7</td><td>123.5</td><td>124.2</td><td>124.9</td></tr><tr><td>Santé (2,90%)</td><td>109.3</td><td>109.0</td><td>109.3</td><td>111.1</td><td>110.6</td><td>114.4</td><td>115.7</td><td>116.9</td><td>117.0</td><td>117.3</td><td>119.2</td><td>120.3</td></tr><tr><td>Transport (13,74%)</td><td>109.9</td><td>111.1</td><td>112.6</td><td>113.9</td><td>118.4</td><td>122.4</td><td>122.9</td><td>122.5</td><td>119.3</td><td>119.8</td><td>120.6</td><td>120.8</td></tr><tr><td>Loisirs, spectacles, enseignement et culture (5,84%)</td><td>119.7</td><td>121.0</td><td>122.8</td><td>121.7</td><td>120.5</td><td>121.0</td><td>121.3</td><td>123.1</td><td>123.2</td><td>123.1</td><td>124.0</td><td>128.5</td></tr><tr><td>Autres biens et services (4,56%)</td><td>105.1</td><td>106.0</td><td>107.2</td><td>107.3</td><td>108.8</td><td>110.8</td><td>113.1</td><td>111.4</td><td>111.7</td><td>112.4</td><td>114.4</td><td>114.7</td></tr></table>
+
+Source : Institut Haïtien de Statistique et d'Informatique (IHSI).
+
+Tableau 4.2
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Indice général\n(variation mensuelle de l'IPC en pourcentage)</td><td>1.0</td><td>1.8</td><td>1.2</td><td>0.9</td><td>1.1</td><td>1.4</td><td>0.9</td><td>1.2</td><td>0.7</td><td>1.2</td><td>1.7</td><td>1.0</td></tr><tr><td>Alimentation, boissons et tabacs</td><td>1.3</td><td>2.8</td><td>1.6</td><td>1.2</td><td>-0.3</td><td>0.3</td><td>0.3</td><td>0.6</td><td>1.8</td><td>2.0</td><td>2.6</td><td>1.3</td></tr><tr><td>Habillement, tissus et chaussures</td><td>0.1</td><td>-0.1</td><td>0.1</td><td>0.3</td><td>1.1</td><td>2.0</td><td>0.3</td><td>1.9</td><td>0.8</td><td>1.0</td><td>0.8</td><td>0.2</td></tr><tr><td>Loyer du logement, énergie et eau</td><td>0.8</td><td>0.1</td><td>0.7</td><td>0.4</td><td>5.1</td><td>3.5</td><td>4.4</td><td>6.3</td><td>0.8</td><td>0.4</td><td>0.3</td><td>0.2</td></tr><tr><td>Aménagement et entretien du logement</td><td>2.2</td><td>3.0</td><td>-0.1</td><td>3.0</td><td>1.9</td><td>2.5</td><td>0.9</td><td>1.0</td><td>0.5</td><td>1.5</td><td>0.6</td><td>0.6</td></tr><tr><td>Santé</td><td>0.1</td><td>-0.3</td><td>0.2</td><td>1.6</td><td>-0.4</td><td>3.4</td><td>1.1</td><td>1.0</td><td>0.1</td><td>0.3</td><td>1.6</td><td>0.9</td></tr><tr><td>Transport</td><td>1.3</td><td>1.1</td><td>1.4</td><td>1.1</td><td>3.9</td><td>3.4</td><td>0.4</td><td>-0.3</td><td>-2.6</td><td>0.4</td><td>0.7</td><td>0.2</td></tr><tr><td>Loisirs, spectacles, enseignement et culture</td><td>-0.1</td><td>1.1</td><td>1.5</td><td>-0.9</td><td>-1.0</td><td>0.4</td><td>0.2</td><td>1.5</td><td>0.1</td><td>-0.1</td><td>0.7</td><td>3.6</td></tr><tr><td>Autres biens et services</td><td>-0.2</td><td>0.8</td><td>1.1</td><td>0.0</td><td>1.4</td><td>1.8</td><td>2.1</td><td>-1.5</td><td>0.3</td><td>0.6</td><td>1.8</td><td>0.3</td></tr><tr><td>Indice général\n(variation de l'IPC en glissement annuel en pourcentage)</td><td>13.2</td><td>13.7</td><td>14.5</td><td>15.3</td><td>16.0</td><td>14.8</td><td>15.3</td><td>16.0</td><td>15.3</td><td>14.5</td><td>15.3</td><td>15.3</td></tr></table>
+
+Source : Direction de la Monnaie et de l'Analyse Économique, BRH.
+
+<!-- page 39 -->
+
+Tableau 4.2a
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Indice général\n(variation en pourcentage)</td><td>3.1</td><td>3.9</td><td>4.1</td><td>4.1</td><td>3.3</td><td>3.4</td><td>3.4</td><td>3.5</td><td>2.9</td><td>3.2</td><td>3.7</td><td>4.0</td></tr><tr><td>Alimentation, boissons et tabacs</td><td>4.4</td><td>5.7</td><td>5.8</td><td>5.7</td><td>2.5</td><td>1.2</td><td>0.3</td><td>1.2</td><td>2.8</td><td>4.5</td><td>6.5</td><td>6.0</td></tr><tr><td>Habillement, tissus et chaussures</td><td>0.4</td><td>-0.1</td><td>0.1</td><td>0.2</td><td>1.4</td><td>3.4</td><td>3.4</td><td>4.2</td><td>3.0</td><td>3.8</td><td>2.6</td><td>2.0</td></tr><tr><td>Loyer du logement, énergie et eau</td><td>1.9</td><td>1.5</td><td>1.5</td><td>1.1</td><td>6.2</td><td>9.2</td><td>13.6</td><td>14.9</td><td>11.8</td><td>7.5</td><td>1.5</td><td>0.9</td></tr><tr><td>Aménagement et entretien du logement</td><td>3.9</td><td>5.9</td><td>5.1</td><td>6.0</td><td>4.8</td><td>7.5</td><td>5.4</td><td>4.5</td><td>2.4</td><td>3.0</td><td>2.6</td><td>2.6</td></tr><tr><td>Santé</td><td>2.9</td><td>0.1</td><td>0.0</td><td>1.6</td><td>1.4</td><td>4.7</td><td>4.2</td><td>5.7</td><td>2.3</td><td>1.4</td><td>2.0</td><td>2.8</td></tr><tr><td>Transport</td><td>2.5</td><td>3.0</td><td>3.8</td><td>3.7</td><td>6.6</td><td>8.7</td><td>7.9</td><td>3.5</td><td>-2.5</td><td>-2.5</td><td>-1.6</td><td>1.3</td></tr><tr><td>Loisirs, spectacles, enseignement et culture</td><td>1.4</td><td>2.1</td><td>2.5</td><td>1.7</td><td>-0.4</td><td>-1.5</td><td>-0.3</td><td>2.2</td><td>1.8</td><td>1.5</td><td>0.7</td><td>4.3</td></tr><tr><td>Autres biens et services</td><td>0.2</td><td>0.7</td><td>1.8</td><td>2.0</td><td>2.6</td><td>3.3</td><td>5.5</td><td>2.4</td><td>0.8</td><td>-0.6</td><td>2.7</td><td>2.7</td></tr></table>
+
+Source : Direction de la Monnaie et de l'Analyse Économique, BRH.
+
+Tableau 4.2b
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Indice général\n(variation en pourcentage)</td><td>7.1</td><td>8.5</td><td>8.4</td><td>7.3</td><td>7.3</td><td>7.7</td><td>7.6</td><td>6.9</td><td>6.4</td><td>6.7</td><td>7.4</td><td>7.1</td></tr><tr><td>Alimentation, boissons et tabacs</td><td>9.2</td><td>12.1</td><td>12.2</td><td>10.3</td><td>8.4</td><td>7.0</td><td>6.0</td><td>3.8</td><td>4.0</td><td>4.8</td><td>7.8</td><td>9.0</td></tr><tr><td>Habillement, tissus et chaussures</td><td>3.8</td><td>3.0</td><td>2.2</td><td>0.6</td><td>1.3</td><td>3.5</td><td>3.6</td><td>5.7</td><td>6.5</td><td>7.3</td><td>7.0</td><td>5.0</td></tr><tr><td>Loyer du logement, énergie et eau</td><td>2.7</td><td>2.9</td><td>2.9</td><td>3.1</td><td>7.8</td><td>10.8</td><td>14.9</td><td>22.0</td><td>22.1</td><td>22.1</td><td>16.6</td><td>12.8</td></tr><tr><td>Aménagement et entretien du logement</td><td>5.9</td><td>8.8</td><td>7.6</td><td>10.1</td><td>11.0</td><td>13.0</td><td>11.7</td><td>9.5</td><td>10.2</td><td>8.6</td><td>7.2</td><td>5.1</td></tr><tr><td>Santé</td><td>6.7</td><td>5.6</td><td>4.5</td><td>4.5</td><td>1.5</td><td>4.7</td><td>5.8</td><td>7.2</td><td>7.1</td><td>5.6</td><td>7.8</td><td>5.2</td></tr><tr><td>Transport</td><td>6.1</td><td>4.6</td><td>5.5</td><td>6.2</td><td>9.8</td><td>12.8</td><td>11.9</td><td>10.3</td><td>5.9</td><td>5.2</td><td>1.9</td><td>-1.3</td></tr><tr><td>Loisirs, spectacles, enseignement et culture</td><td>9.2</td><td>10.0</td><td>7.3</td><td>3.2</td><td>1.7</td><td>1.0</td><td>1.4</td><td>1.8</td><td>0.3</td><td>1.2</td><td>2.9</td><td>6.2</td></tr><tr><td>Autres biens et services</td><td>1.4</td><td>1.7</td><td>2.9</td><td>2.2</td><td>3.3</td><td>5.2</td><td>7.6</td><td>5.1</td><td>4.2</td><td>4.8</td><td>5.1</td><td>3.5</td></tr></table>
+
+Source : Direction de la Monnaie et de l'Analyse Économique, BRH.
+
+<!-- page 40 -->
+
+Tableau 4.3
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Marché informel  $ ^{{1/}} $</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>À l'achat</td><td>38.5118</td><td>38.5189</td><td>39.0849</td><td>41.5124</td><td>42.5528</td><td>42.3174</td><td>43.0111</td><td>42.8986</td><td>42.7500</td><td>43.3139</td><td>42.7444</td><td>42.5181</td></tr><tr><td>À la vente</td><td>39.0139</td><td>39.0181</td><td>39.6682</td><td>42.1814</td><td>43.0788</td><td>42.8801</td><td>43.5000</td><td>43.3944</td><td>43.4083</td><td>44.2639</td><td>43.4778</td><td>43.2528</td></tr><tr><td>Marché bancaire  $ ^{{1/}} $</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>À l'achat</td><td>38.7451</td><td>38.7388</td><td>39.3276</td><td>41.7403</td><td>42.6494</td><td>42.4596</td><td>43.0411</td><td>43.1696</td><td>43.1672</td><td>43.3157</td><td>42.9000</td><td>42.7781</td></tr><tr><td>À la vente</td><td>39.1367</td><td>39.1250</td><td>39.6931</td><td>42.2269</td><td>43.0930</td><td>42.9361</td><td>43.4754</td><td>43.4803</td><td>43.4226</td><td>43.9019</td><td>43.2993</td><td>43.1744</td></tr><tr><td>Taux de référence</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Moyen</td><td>38.6212</td><td>38.6551</td><td>39.1768</td><td>41.5448</td><td>42.5957</td><td>42.3862</td><td>42.9885</td><td>43.0084</td><td>42.9838</td><td>43.3674</td><td>43.0526</td><td>42.6890</td></tr><tr><td>Fin de période</td><td>39.0311</td><td>38.7025</td><td>39.9245</td><td>42.0759</td><td>42.3415</td><td>43.0426</td><td>43.0291</td><td>43.0612</td><td>43.0003</td><td>43.4757</td><td>42.9775</td><td>42.6885</td></tr></table>
+
+Source : Direction des Affaires Internationales, BRH.
+
+1/ moyenne arithmétique de la période.
+
+<!-- page 41 -->
+
+Tableau 4.4
+
+<table><tr><td>(en gourdes)</td></tr><tr><td></td><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td><td></td></tr><tr><td>Produits</td><td>Unité de mesure</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Riz</td><td>livre</td><td>18.76</td><td>18.76</td><td>18.94</td><td>19.15</td><td>19.60</td><td>19.74</td><td>20.22</td><td>20.21</td><td>20.28</td><td>20.72</td><td>21.77</td><td>22.16</td><td></td></tr><tr><td>Maïs moulu</td><td>livre</td><td>12.99</td><td>13.32</td><td>13.15</td><td>13.13</td><td>13.40</td><td>13.30</td><td>13.45</td><td>13.62</td><td>13.74</td><td>14.15</td><td>15.04</td><td>15.70</td><td></td></tr><tr><td>Farine de blé</td><td>livre</td><td>14.69</td><td>14.79</td><td>14.89</td><td>15.63</td><td>15.95</td><td>15.83</td><td>16.68</td><td>16.66</td><td>17.39</td><td>17.30</td><td>17.48</td><td>16.94</td><td></td></tr><tr><td>Pain</td><td>livre</td><td>12.94</td><td>12.71</td><td>12.76</td><td>13.06</td><td>13.51</td><td>13.90</td><td>13.83</td><td>13.83</td><td>14.11</td><td>13.99</td><td>14.33</td><td>14.30</td><td></td></tr><tr><td>Viande de boeuf</td><td>livre</td><td>45.99</td><td>47.60</td><td>47.84</td><td>48.90</td><td>50.37</td><td>51.24</td><td>51.37</td><td>51.45</td><td>52.58</td><td>53.24</td><td>54.63</td><td>55.76</td><td></td></tr><tr><td>Viande de cabri</td><td>livre</td><td>60.68</td><td>61.04</td><td>60.78</td><td>62.14</td><td>62.03</td><td>62.82</td><td>63.72</td><td>63.10</td><td>63.72</td><td>65.30</td><td>65.92</td><td>67.61</td><td></td></tr><tr><td>Poulets</td><td>livre</td><td>63.30</td><td>67.12</td><td>63.85</td><td>68.50</td><td>69.16</td><td>71.29</td><td>74.29</td><td>74.23</td><td>75.27</td><td>75.54</td><td>75.82</td><td>77.51</td><td></td></tr><tr><td>Poissons frais</td><td>livre</td><td>71.12</td><td>71.01</td><td>72.42</td><td>72.19</td><td>74.69</td><td>75.39</td><td>75.33</td><td>75.07</td><td>76.74</td><td>77.89</td><td>79.05</td><td>81.35</td><td></td></tr><tr><td>Lait évaporé non sucré</td><td>boîte de 6 oz</td><td>18.85</td><td>18.94</td><td>18.99</td><td>19.06</td><td>19.93</td><td>20.04</td><td>20.10</td><td>20.30</td><td>20.38</td><td>20.27</td><td>20.36</td><td>20.28</td><td></td></tr><tr><td>Huile</td><td>gallon</td><td>189.09</td><td>188.63</td><td>188.30</td><td>190.63</td><td>197.76</td><td>198.15</td><td>198.73</td><td>201.62</td><td>203.74</td><td>206.05</td><td>213.76</td><td>213.18</td><td></td></tr><tr><td>Banane</td><td>livre</td><td>7.96</td><td>8.35</td><td>8.32</td><td>8.72</td><td>9.09</td><td>9.06</td><td>8.75</td><td>8.56</td><td>8.82</td><td>9.20</td><td>9.33</td><td>9.39</td><td></td></tr><tr><td>Pois sec</td><td>livre</td><td>26.35</td><td>29.78</td><td>34.96</td><td>32.94</td><td>29.30</td><td>27.96</td><td>26.87</td><td>26.60</td><td>27.07</td><td>27.53</td><td>28.32</td><td>28.32</td><td></td></tr><tr><td>Sucre</td><td>livre</td><td>16.53</td><td>17.10</td><td>17.25</td><td>19.02</td><td>21.04</td><td>21.63</td><td>21.82</td><td>21.74</td><td>21.59</td><td>22.67</td><td>25.81</td><td>27.35</td><td></td></tr><tr><td>Cola</td><td>bouteille de 33 cl</td><td>12.29</td><td>12.36</td><td>12.32</td><td>12.43</td><td>12.69</td><td>12.68</td><td>12.79</td><td>12.89</td><td>12.90</td><td>12.94</td><td>12.83</td><td>13.04</td><td></td></tr><tr><td>Savon de toilette</td><td>140 gr</td><td>15.23</td><td>14.66</td><td>14.72</td><td>14.70</td><td>15.08</td><td>15.12</td><td>16.12</td><td>15.10</td><td>15.30</td><td>15.28</td><td>15.28</td><td>15.84</td><td></td></tr><tr><td>Savon de lessive</td><td>barre</td><td>10.72</td><td>10.78</td><td>10.76</td><td>10.89</td><td>11.04</td><td>11.27</td><td>11.31</td><td>11.24</td><td>11.21</td><td>11.30</td><td>11.33</td><td>11.42</td><td></td></tr><tr><td>Charbon de bois</td><td>«gros sac»</td><td>244.70</td><td>244.99</td><td>246.43</td><td>248.26</td><td>260.36</td><td>266.53</td><td>304.44</td><td>355.83</td><td>360.17</td><td>363.60</td><td>364.51</td><td>359.71</td><td></td></tr></table>
+
+Source : Institut Haïtien de Statistique et d'Informatique (IHSI).
+
+N.B. A partir de décembre 2001, les prix moyens sont dérivés de calculs effectués à l'aide des données fournies par l'IHSI sur l'ensemble des variétés des produits.
+
+<!-- page 42 -->
+
+Tableau 4.5
+
+Prix moyen des matériaux de construction (en gourdes)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Ciment (sac)</td><td>210.38</td><td>215.22</td><td>220.06</td><td>233.70</td><td>233.70</td><td>230.50</td><td>225.00</td><td>230.00</td><td>235.00</td><td>240.00</td><td>214.45</td><td>214.45</td></tr><tr><td>Eau (3 000 gallons)</td><td>1,570.83</td><td>1,570.83</td><td>1,570.83</td><td>1,783.33</td><td>1,783.33</td><td>1,725.00</td><td>1,725.00</td><td>1,725.00</td><td>1,725.00</td><td>1,720.00</td><td>1,725.00</td><td>1,725.00</td></tr><tr><td>Sable (camion  $ 5m^{{3}} $)</td><td>2,375.00</td><td>2,375.00</td><td>2,375.00</td><td>2,375.00</td><td>2,375.00</td><td>2,375.00</td><td>2,312.50</td><td>2,312.50</td><td>2,312.50</td><td>2,312.50</td><td>2,312.50</td><td>2,312.50</td></tr><tr><td>Fer (½x30) (barre)</td><td>248.50</td><td>249.87</td><td>251.24</td><td>266.81</td><td>266.81</td><td>270.25</td><td>245.00</td><td>245.00</td><td>245.00</td><td>281.44</td><td>317.87</td><td>317.87</td></tr><tr><td>Blocs 10</td><td>12.90</td><td>12.97</td><td>13.03</td><td>14.22</td><td>14.22</td><td>14.16</td><td>14.15</td><td>15.00</td><td>14.15</td><td>14.15</td><td>13.68</td><td>13.21</td></tr><tr><td>Blocs 15</td><td>14.90</td><td>14.97</td><td>15.04</td><td>16.04</td><td>16.04</td><td>16.45</td><td>16.46</td><td>16.46</td><td>16.46</td><td>16.06</td><td>17.00</td><td>15.19</td></tr></table>
+
+Sources : Entreprises de matériaux de construction; Direction de la Monnaie et de l'Analyse Économique, BRH.
+
+Tableau 4.6
+
+<table><tr><td>Activités du secteur de la construction à Port-au-Prince</td></tr><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td><td></td></tr><tr><td>Constructions</td><td>57</td><td>27</td><td>37</td><td>27</td><td>30</td><td>35</td><td>...</td><td>...</td><td>...</td><td>26</td><td>27</td><td>51</td><td></td></tr><tr><td>Travailleurs</td><td>456</td><td>216</td><td>296</td><td>216</td><td>240</td><td>280</td><td>...</td><td>...</td><td>...</td><td>208</td><td>216</td><td>408</td><td></td></tr></table>
+
+Source : Office Assurance Accidents du Travail, Maladie et Maternité (OFATMA).
+
+<!-- page 43 -->
+
+Tableau 4.7
+
+Nouvelles entreprises déclarées à Port-au-Prince et nombre correspondant d'employés
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2004</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Nouvelles entreprises</td><td>3</td><td>7</td><td>2</td><td>12</td><td>3</td><td>11</td><td>...</td><td>...</td><td>...</td><td>2</td><td>4</td><td>14</td></tr><tr><td>Produits alimentaires, boissons et tabac</td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td><td>1</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>1</td></tr><tr><td>Industries textiles et habillements</td><td>-</td><td>-</td><td>-</td><td>1</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Fabrication de produits chimiques</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Imprimeries, édition et industries annexes</td><td>-</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Autres activités de fabrication</td><td>-</td><td>-</td><td>-</td><td>1</td><td>-</td><td>4</td><td>...</td><td>...</td><td>...</td><td>-</td><td>1</td><td>2</td></tr><tr><td>Gaz et eau</td><td>-</td><td>-</td><td>-</td><td>1</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Commerce, restaurants et hôtels</td><td>-</td><td>1</td><td>-</td><td>1</td><td>-</td><td>3</td><td>...</td><td>...</td><td>...</td><td>1</td><td>-</td><td>1</td></tr><tr><td>Construction</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>1</td></tr><tr><td>Transports, postes et communications</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Intermédiation financière</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Immobilier, location et services aux entreprises</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Autres services</td><td>2</td><td>3</td><td>1</td><td>7</td><td>3</td><td>2</td><td>...</td><td>...</td><td>...</td><td>1</td><td>3</td><td>9</td></tr><tr><td>Nombre de salariés</td><td>136</td><td>175</td><td>514</td><td>1202</td><td>247</td><td>564</td><td>...</td><td>...</td><td>...</td><td>37</td><td>240</td><td>528</td></tr></table>
+
+Source : Office Assurance Accidents du Travail, Maladie et Maternité (OFATMA).
+
+### Tableau 4.8
+
+<table><tr><td>Nouvelles entreprises enregistrées à l'ONA et nombre correspondant d'assurés $ ^{1} $</td></tr><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2004</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juli. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td><td></td></tr><tr><td>Nouvelles entreprises</td><td>16</td><td>8</td><td>7</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>Produits alimentaires, boissons et tabac</td><td>1</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Industries textiles et habillements</td><td>1</td><td>1</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Fabrication de produits chimiques</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Imprimeries, édition et industries annexes</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Autres activités de fabrication</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Gaz et eau</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Commerce, restaurants et hôtels</td><td>1</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Transports, postes et communications</td><td>1</td><td>1</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Intermédiation financière</td><td>-</td><td>-</td><td>-</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Immobilier, location et services aux entreprises</td><td>1</td><td>-</td><td>1</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Autres services</td><td>11</td><td>6</td><td>6</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Nombre d'assurés</td><td>150</td><td>30</td><td>59</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>-</td><td>-</td><td>-</td><td>-</td></tr></table>
+
+Source : Office National d'Assurance Vieillesse (ONA).
+
+1/ Données enregistrées au bureau central de Port-au-Prince et aux annexes de l'institution.
+
+(…) : données non disponibles
+
+<!-- page 44 -->
+
+Tableau 4.9
+
+Production industrielle de certains biens (en volume)
+
+<table><tr><td></td><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td>Produits</td><td>Unité de mesure</td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Huiles comestibles</td><td>tonnes métriques</td><td>2,722.35</td><td>3,274.42</td><td>3,417.28</td><td>3,122.31</td><td>3,045.04</td><td>3,078.80</td><td>3,758.48</td><td>3,333.11</td><td>3,504.09</td><td>3,396.59</td><td>3,133.11</td><td>4,253.44</td></tr><tr><td>Saindoux (mantèque)</td><td>tonnes métriques</td><td>66.31</td><td>68.64</td><td>70.98</td><td>73.31</td><td>75.65</td><td>77.99</td><td>80.32</td><td>82.66</td><td>84.99</td><td>87.33</td><td>89.66</td><td>92.00</td></tr><tr><td>Beurre de cuisine</td><td>tonnes métriques</td><td>21.86</td><td>19.83</td><td>17.98</td><td>16.30</td><td>14.78</td><td>13.40</td><td>12.15</td><td>11.02</td><td>9.99</td><td>9.06</td><td>8.21</td><td>7.45</td></tr><tr><td>Margarine</td><td>tonnes métriques</td><td>1.10</td><td>1.00</td><td>0.91</td><td>0.82</td><td>0.75</td><td>0.68</td><td>0.61</td><td>0.56</td><td>0.50</td><td>0.46</td><td>0.41</td><td>0.38</td></tr><tr><td>Farine de blé</td><td>tonnes métriques $ ^{{1/}} $</td><td>14,481.00</td><td>13,905.00</td><td>15,070.00</td><td>14,093.00</td><td>14,362.00</td><td>16,160.00</td><td>15,887.00</td><td>18,528.00</td><td>15,289.00</td><td>15,283.00</td><td>13,984.00</td><td>19,123.00</td></tr><tr><td>Son de blé</td><td>tonnes métriques $ ^{{1/}} $</td><td>5,762.00</td><td>5,088.00</td><td>6,023.00</td><td>5,421.00</td><td>4,288.00</td><td>6,044.00</td><td>3,654.00</td><td>4,679.00</td><td>5,402.00</td><td>6,420.00</td><td>5,801.00</td><td>7,098.00</td></tr><tr><td>Savon</td><td>tonnes métriques</td><td>43.59</td><td>67.79</td><td>94.96</td><td>101.74</td><td>108.19</td><td>100.14</td><td>73.41</td><td>46.67</td><td>19.94</td><td>56.05</td><td>56.05</td><td>56.05</td></tr><tr><td>Détergent</td><td>tonnes métriques</td><td>63.02</td><td>65.14</td><td>60.68</td><td>56.22</td><td>51.75</td><td>47.29</td><td>42.82</td><td>38.36</td><td>33.90</td><td>29.43</td><td>24.97</td><td>20.50</td></tr><tr><td>Bière (Prestige)</td><td>milliers de caisses $ ^{{2/}} $</td><td>23.67</td><td>27.81</td><td>26.44</td><td>30.59</td><td>28.28</td><td>23.00</td><td>21.39</td><td>27.69</td><td>74.58</td><td>25.83</td><td>25.43</td><td>...</td></tr><tr><td>Malta</td><td>milliers de caisses</td><td>40.52</td><td>36.47</td><td>36.91</td><td>46.39</td><td>35.71</td><td>37.85</td><td>36.91</td><td>37.49</td><td>43.20</td><td>62.71</td><td>37.09</td><td>...</td></tr><tr><td>Guiness</td><td>milliers de caisses</td><td>9.00</td><td>7.73</td><td>9.04</td><td>8.65</td><td>8.36</td><td>8.23</td><td>8.23</td><td>10.53</td><td>14.57</td><td>9.80</td><td>10.09</td><td>...</td></tr><tr><td>Boissons gazeuses</td><td>milliers de caisses</td><td>113.38</td><td>95.14</td><td>102.55</td><td>109.17</td><td>346.69</td><td>318.84</td><td>304.68</td><td>313.34</td><td>347.76</td><td>361.80</td><td>-</td><td>...</td></tr><tr><td>Jus de fruits</td><td>milliers de gallons</td><td>8.37</td><td>8.39</td><td>8.28</td><td>8.40</td><td>8.26</td><td>8.29</td><td>8.22</td><td>8.12</td><td>8.81</td><td>8.85</td><td>8.90</td><td>8.91</td></tr><tr><td>Eau traitée</td><td>milliers de sachets</td><td>10.31</td><td>10.52</td><td>10.73</td><td>10.89</td><td>9.82</td><td>10.35</td><td>10.59</td><td>9.86</td><td>10.00</td><td>10.50</td><td>10.36</td><td>10.91</td></tr><tr><td>Eau traitée</td><td>milliers de bouteilles $ ^{{3/}} $</td><td>86.77</td><td>39.89</td><td>48.86</td><td>38.40</td><td>64.78</td><td>57.21</td><td>33.58</td><td>33.09</td><td>35.95</td><td>37.62</td><td>35.99</td><td>21.60</td></tr><tr><td>Rhum</td><td>milliers de bouteilles</td><td>32.57</td><td>34.20</td><td>33.52</td><td>38.54</td><td>41.63</td><td>39.96</td><td>37.56</td><td>42.07</td><td>43.33</td><td>44.63</td><td>41.76</td><td>55.96</td></tr><tr><td>Électricité</td><td>millions de kw/h</td><td>7.99</td><td>17.76</td><td>29.25</td><td>31.25</td><td>30.86</td><td>36.31</td><td>26.46</td><td>26.09</td><td>26.68</td><td>24.26</td><td>9.73</td><td>9.05</td></tr></table>
+
+Sources : Entreprises industrielles haïtiennes; Direction de la Monnaie et de l'Analyse Économique, BRH.
+
+1/ Données correspondant aux ventes en tonnes métriques de l'entreprise productrice de ces biens.
+
+2/ Caisse de 24 bouteilles.
+
+3/ Bouteilles de 5 gallons
+
+(…) : données non disponibles
+
+<!-- page 45 -->
+
+Tableau 4.10
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05 $ ^{{*}} $</td><td>Jui. 05</td><td>Aout 05</td><td>Sept. 05 $ ^{{*}} $</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Résidences</td><td>...</td><td>...</td><td>25.49</td><td>...</td><td>...</td><td>28.31</td><td>8.09</td><td>8.30</td><td>8.15</td><td>8.36</td><td>6.77</td><td>6.11</td></tr><tr><td>Commerçants et industriels</td><td>...</td><td>...</td><td>25.09</td><td>...</td><td>...</td><td>26.44</td><td>9.38</td><td>7.89</td><td>8.11</td><td>8.05</td><td>6.52</td><td>5.89</td></tr><tr><td>Éclairage de rue</td><td>...</td><td>...</td><td>4.06</td><td>...</td><td>...</td><td>3.81</td><td>1.03</td><td>1.01</td><td>1.12</td><td>1.09</td><td>0.88</td><td>0.79</td></tr><tr><td>Services publics et communaux</td><td>...</td><td>...</td><td>10.16</td><td>...</td><td>...</td><td>11.01</td><td>3.62</td><td>2.93</td><td>4.02</td><td>2.99</td><td>2.42</td><td>2.19</td></tr><tr><td>Total</td><td>...</td><td>...</td><td>64.80</td><td>...</td><td>...</td><td>69.57</td><td>22.12</td><td>20.13</td><td>21.41</td><td>20.48</td><td>16.58</td><td>14.98</td></tr></table>
+
+Source : Électricité d'Haïti ; IHSI et calculs effectués par la BRH.
+
+(…) : données non disponibles
+
+*: données estimées sur une base trimestrielle et présentées à la fin du trimestre.
+
+### Tableau 4.11
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Hydraulique</td><td>4.18</td><td>14.84</td><td>23.93</td><td>29.72</td><td>29.04</td><td>34.77</td><td>25.00</td><td>24.44</td><td>24.72</td><td>20.42</td><td>5.31</td><td>2.57</td></tr><tr><td>Port-au-Prince et environs</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Provinces</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Thermique</td><td>3.81</td><td>2.92</td><td>5.32</td><td>1.53</td><td>1.82</td><td>1.55</td><td>1.46</td><td>1.65</td><td>1.95</td><td>3.84</td><td>4.42</td><td>6.48</td></tr><tr><td>Port-au-Prince et environs</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Provinces</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Total</td><td>7.99</td><td>17.76</td><td>29.25</td><td>31.25</td><td>30.86</td><td>36.31</td><td>26.46</td><td>26.09</td><td>26.68</td><td>24.26</td><td>9.73</td><td>9.05</td></tr></table>
+
+Source : Électricité d'Haïti.
+
+(…) : données non disponibles
+
+<!-- page 46 -->
+
+Tableau 4.12
+
+Prix moyen des principaux produits pétroliers et dérivés sur le marché local (en gourdes)
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Gasoline avec plomb (gallon)</td><td>129.40</td><td>129.84</td><td>128.27</td><td>137.94</td><td>156.00</td><td>167.90</td><td>173.00</td><td>168.50</td><td>146.00</td><td>146.00</td><td>149.71</td><td>164.16</td></tr><tr><td>Gasoline sans plomb (gallon)</td><td>135.00</td><td>138.10</td><td>143.00</td><td>144.74</td><td>161.00</td><td>172.20</td><td>177.00</td><td>175.00</td><td>165.00</td><td>165.00</td><td>165.00</td><td>167.45</td></tr><tr><td>Diesel (gallon)</td><td>87.00</td><td>86.23</td><td>85.30</td><td>94.87</td><td>103.00</td><td>112.10</td><td>116.00</td><td>114.83</td><td>109.00</td><td>109.00</td><td>109.00</td><td>109.00</td></tr><tr><td>Kérosène (litre)</td><td>36.80</td><td>36.76</td><td>39.41</td><td>39.61</td><td>47.69</td><td>50.15</td><td>51.89</td><td>55.17</td><td>53.02</td><td>53.46</td><td>53.98</td><td>54.39</td></tr><tr><td>Propane (25 livres)</td><td>522.60</td><td>524.55</td><td>531.66</td><td>539.12</td><td>547.13</td><td>547.78</td><td>551.29</td><td>551.29</td><td>557.30</td><td>570.82</td><td>571.82</td><td>571.82</td></tr></table>
+
+Sources : Compagnies pétrolières; IHSI.
+
+<!-- page 47 -->
+
+Tableau 4.13
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Jui. 05</td><td>Août 05</td><td>Sept. 05</td></tr><tr><td></td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td></tr><tr><td>Tracteurs, engins agricoles et du BTP  $ ^{{1/}} $</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- à chenilles</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- agricoles</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- routiers</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Camions</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>-</td><td>-</td></tr><tr><td>- Camions-grues</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- Camions-bétonnières</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2</td><td>-</td><td>-</td></tr><tr><td>Bus, autobus et mini-bus</td><td>5</td><td>4</td><td>1</td><td>1</td><td>2</td><td>-</td><td>10</td><td>5</td><td>11</td><td>3</td><td>2</td><td>3</td></tr><tr><td>- de 10 à 24 places</td><td>2</td><td>3</td><td>1</td><td>1</td><td>2</td><td>-</td><td>7</td><td>5</td><td>4</td><td>3</td><td>1</td><td>3</td></tr><tr><td>- essence</td><td>-</td><td>1</td><td>1</td><td>1</td><td>-</td><td>-</td><td>1</td><td>4</td><td>-</td><td>2</td><td>-</td><td>1</td></tr><tr><td>- diesel</td><td>2</td><td>2</td><td>-</td><td>-</td><td>2</td><td>-</td><td>6</td><td>1</td><td>4</td><td>1</td><td>1</td><td>2</td></tr><tr><td>- de 25 places et plus</td><td>3</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>3</td><td>-</td><td>7</td><td>-</td><td>1</td><td>-</td></tr><tr><td>- essence</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- diesel</td><td>3</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>3</td><td>-</td><td>7</td><td>-</td><td>1</td><td>-</td></tr><tr><td>Véhicules</td><td>216</td><td>93</td><td>137</td><td>114</td><td>53</td><td>69</td><td>184</td><td>153</td><td>136</td><td>133</td><td>93</td><td>110</td></tr><tr><td>- utilitaires</td><td>34</td><td>38</td><td>13</td><td>54</td><td>8</td><td>32</td><td>31</td><td>68</td><td>6</td><td>57</td><td>2</td><td>46</td></tr><tr><td>- essence</td><td>11</td><td>3</td><td>5</td><td>5</td><td>5</td><td>-</td><td>18</td><td>14</td><td>3</td><td>6</td><td>1</td><td>5</td></tr><tr><td>- diesel</td><td>23</td><td>35</td><td>8</td><td>49</td><td>3</td><td>32</td><td>13</td><td>54</td><td>3</td><td>51</td><td>1</td><td>41</td></tr><tr><td>- tourisme</td><td>36</td><td>19</td><td>15</td><td>31</td><td>-</td><td>17</td><td>7</td><td>40</td><td>26</td><td>35</td><td>20</td><td>34</td></tr><tr><td>- essence</td><td>27</td><td>17</td><td>9</td><td>27</td><td>-</td><td>13</td><td>5</td><td>37</td><td>5</td><td>24</td><td>19</td><td>28</td></tr><tr><td>- diesel</td><td>9</td><td>2</td><td>6</td><td>4</td><td>-</td><td>4</td><td>2</td><td>3</td><td>21</td><td>11</td><td>1</td><td>6</td></tr><tr><td>- pick up</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- essence</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- diesel</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- tout terrain</td><td>146</td><td>36</td><td>109</td><td>29</td><td>45</td><td>20</td><td>146</td><td>45</td><td>104</td><td>41</td><td>71</td><td>30</td></tr><tr><td>- essence</td><td>39</td><td>33</td><td>67</td><td>25</td><td>-</td><td>17</td><td>23</td><td>38</td><td>31</td><td>38</td><td>19</td><td>25</td></tr><tr><td>- diesel</td><td>107</td><td>3</td><td>42</td><td>4</td><td>45</td><td>3</td><td>123</td><td>7</td><td>73</td><td>3</td><td>52</td><td>5</td></tr><tr><td>Autres véhicules utilisaires</td><td>1</td><td>-</td><td>-</td><td>2</td><td>-</td><td>2</td><td>-</td><td>2</td><td>-</td><td>3</td><td>-</td><td>-</td></tr><tr><td>- ambulances</td><td>1</td><td>-</td><td>-</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>- corbillards</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>1</td><td>-</td><td>-</td><td>-</td><td>1</td><td>-</td><td>-</td></tr><tr><td>- autres</td><td>-</td><td>-</td><td>-</td><td>1</td><td>-</td><td>1</td><td>-</td><td>2</td><td>-</td><td>2</td><td>-</td><td>-</td></tr><tr><td>Motos et motoculteurs</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>Total</td><td>222</td><td>97</td><td>138</td><td>117</td><td>55</td><td>71</td><td>194</td><td>160</td><td>147</td><td>141</td><td>95</td><td>113</td></tr></table>
+
+Source: Administration Générale des Douanes; Direction Monnaie et Analyse Economique, BRH
+
+1/ BTP = bâtiments et travaux publics
+
+(…) : données non disponibles
+
+<!-- page 48 -->
+
+Tableau 4.13 (suite)
+
+<table><tr><td></td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td><td>Usagés</td></tr><tr><td></td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td><td>Usagés</td><td>Neufs</td></tr><tr><td>Tracteurs, engins agricoles et du BTP $ ^{{1/}} $</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- à chenilles</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- agricoles</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- routiers</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Camions</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- Camions-grues</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- Camions-bétonnières</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Bus, autobus et mini-bus</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- de 10 à 24 places</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- essence</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- diesel</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- de 25 places et plus</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- essence</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- diesel</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Véhicules</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- utilitaires</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- essence</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- diesel</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- tourisme</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- essence</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- diesel</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- pick up</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- essence</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- diesel</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- tout terrain</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- essence</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- diesel</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Autres véhicules utilitaires</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- ambulances</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- corbillards</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>- autres</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Motos et motoculteurs</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Total</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr></table>
+
+Source: Administration Générale des Douanes; Direction Monnaie et Analyse Economique, BRH
+
+1/ BTP = bâtiments et travaux publics
+
+(…) : données non disponibles
+
+<!-- page 49 -->
+
+Tableau 4.14
+
+Nombre de touristes arrivés au pays
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Clientèle touristique</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Croisiéristes (site Labadie)</td><td>35,469</td><td>29,030</td><td>21,480</td><td>25,323</td><td>28,701</td><td>22,398</td><td>33,721</td><td>25,124</td><td>39,963</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Touristes internationaux de séjour</td><td>8,753</td><td>8,037</td><td>11,322</td><td>10,345</td><td>12,576</td><td>9,501</td><td>10,843</td><td>8,049</td><td>12,965</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Autres excursionnistes  $ ^{{1/}} $</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td><td>2,167</td></tr><tr><td>Total</td><td>46,389</td><td>39,234</td><td>34,969</td><td>37,835</td><td>43,444</td><td>34,066</td><td>46,731</td><td>35,340</td><td>55,095</td><td>2,167</td><td>2,167</td><td>2,167</td></tr></table>
+
+Source : Office National du Tourisme / Secrétairerie d'État du Tourisme
+
+1/ Données estimées pour les excursionnistes venant de la République Dominicaine
+
+(...) : données non disponibles
+
+<!-- page 50 -->
+
+Tableau 4.15
+
+Mouvements migratoires aériens internationaux
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Départ</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Nombre de vols</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Aéroport de Port-au-Prince (Maïs Gâté)</td><td>356</td><td>439</td><td>465</td><td>448</td><td>394</td><td>377</td><td>382</td><td>418</td><td>462</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Aéroport du Cap-Haïtien</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Passagers embarqués</td><td>33,386</td><td>30,911</td><td>32,016</td><td>33,406</td><td>31,975</td><td>24,925</td><td>23,211</td><td>21,886</td><td>24,097</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Arrivée</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Nombre de vols</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Aéroport de Port-au-Prince (Maïs Gâté)</td><td>356</td><td>439</td><td>465</td><td>448</td><td>394</td><td>377</td><td>382</td><td>418</td><td>462</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Aéroport du Cap-Haïtien</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Passagers débarqués</td><td>28,234</td><td>26,428</td><td>24,081</td><td>27,414</td><td>32,397</td><td>27,831</td><td>22,266</td><td>23,217</td><td>36,141</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Vacanciers (touristes)</td><td>8,753</td><td>8,037</td><td>11,322</td><td>10,345</td><td>12,576</td><td>9,501</td><td>10,843</td><td>8,049</td><td>12,965</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Résidents locaux  $ ^{{1/}} $</td><td>18,416</td><td>17,502</td><td>11,322</td><td>15,878</td><td>18,692</td><td>18,052</td><td>11,072</td><td>14,350</td><td>22,700</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Autres  $ ^{{1/}} $</td><td>1,065</td><td>889</td><td>1,437</td><td>1,191</td><td>1,129</td><td>278</td><td>351</td><td>818</td><td>476</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Diplomates</td><td>841</td><td>889</td><td>945</td><td>1,029</td><td>797</td><td>278</td><td>224</td><td>160</td><td>160</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Rapatriés</td><td>224</td><td>-</td><td>492</td><td>162</td><td>332</td><td>-</td><td>127</td><td>658</td><td>316</td><td>...</td><td>...</td><td>...</td></tr></table>
+
+Source : Autorité Aéroportuaire Nationale, Office National du Tourisme / Secrétairerie d'État du Tourisme
+
+1/ Données provisoires
+
+(...) : données non disponibles
+
+<!-- page 51 -->
+
+Tableau 4.16
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Août 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>A.- En référence au mois précédent</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Valeur en gourdes actuelles</td><td>98.99</td><td>98.20</td><td>98.75</td><td>99.05</td><td>98.95</td><td>98.62</td><td>99.06</td><td>98.82</td><td>99.25</td><td>98.76</td><td>98.29</td><td>98.96</td></tr><tr><td>Valeur en dollars  $ ^{{2)} $</td><td>2.54</td><td>2.54</td><td>2.47</td><td>2.35</td><td>2.34</td><td>2.29</td><td>2.30</td><td>2.29</td><td>2.31</td><td>2.27</td><td>2.29</td><td>2.32</td></tr><tr><td>B.- En glissement annuel</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Valeur en gourdes actuelles</td><td>86.78</td><td>86.34</td><td>85.53</td><td>84.71</td><td>84.00</td><td>85.16</td><td>84.73</td><td>84.02</td><td>84.65</td><td>85.47</td><td>84.74</td><td>84.73</td></tr><tr><td>Valeur en dollars  $ ^{{2)} $</td><td>2.22</td><td>2.23</td><td>2.14</td><td>2.01</td><td>1.98</td><td>1.98</td><td>1.97</td><td>1.95</td><td>1.97</td><td>1.97</td><td>1.97</td><td>1.98</td></tr><tr><td>C.- En référence à septembre dernier</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Valeur en gourdes actuelles</td><td>92.27</td><td>90.32</td><td>88.96</td><td>87.90</td><td>86.72</td><td>85.16</td><td>99.06</td><td>97.87</td><td>97.11</td><td>95.83</td><td>94.05</td><td>92.94</td></tr><tr><td>Valeur en dollars  $ ^{{2)} $</td><td>2.36</td><td>2.33</td><td>2.23</td><td>2.09</td><td>2.05</td><td>1.98</td><td>2.30</td><td>2.27</td><td>2.26</td><td>2.20</td><td>2.19</td><td>2.18</td></tr><tr><td>Pour mémoire:</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Variation mensuelle de l'IPC en pourcentage</td><td>1.01</td><td>1.80</td><td>1.25</td><td>0.95</td><td>1.05</td><td>1.38</td><td>0.94</td><td>1.18</td><td>0.75</td><td>1.24</td><td>1.71</td><td>1.04</td></tr><tr><td>Variation de l'IPC en glissement annuel</td><td>13.22</td><td>13.66</td><td>14.47</td><td>15.29</td><td>16.00</td><td>14.84</td><td>15.27</td><td>15.98</td><td>15.35</td><td>14.53</td><td>15.26</td><td>15.27</td></tr><tr><td>Variation de l'IPC par rapport à septembre dernier</td><td>7.73</td><td>9.68</td><td>11.04</td><td>12.10</td><td>13.28</td><td>14.84</td><td>0.94</td><td>2.13</td><td>2.89</td><td>4.17</td><td>5.95</td><td>7.06</td></tr><tr><td>Taux de référence BRH (fin de période)  $ ^{{3)} $</td><td>39.0311</td><td>38.7025</td><td>39.9245</td><td>42.0759</td><td>42.3415</td><td>43.0426</td><td>43.0291</td><td>43.0612</td><td>43.0003</td><td>43.4757</td><td>42.9775</td><td>42.6885</td></tr></table>
+
+Source : Direction de la Monnaie et de l'Analyse Économique, BRH.
+
+1/ Coefficient de transformation de 100 gourdes d'une période antérieure en gourdes actuelles.
+
+2/ Sur la base du taux de référence de la BRH (fin de période).
+
+3/ Ce taux représente une moyenne pondérée à l'achat du taux de change (du marché informel et du marché bancaire) de la monnaie nationale par rapport au dollar américain.
+
+<!-- page 52 -->
+
+Tableau 4.17
+
+<table><tr><td>Cours croisé des devises étrangères par rapport à la gourde (gourdes/unité de devise)</td></tr><tr><td></td><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td><td></td></tr><tr><td>Pays</td><td>Unité monétaire</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Argentine</td><td>Peso = ARS</td><td>5.0080</td><td>4.9746</td><td>5.1376</td><td>5.4125</td><td>5.4482</td><td>5.5485</td><td>5.5506</td><td>5.5529</td><td>5.5456</td><td>5.6045</td><td>5.5398</td><td>5.5013</td><td></td></tr><tr><td>Brésil</td><td>Real = BRL</td><td>15.4395</td><td>16.0751</td><td>17.1166</td><td>17.6886</td><td>17.9641</td><td>19.3233</td><td>19.1088</td><td>18.6938</td><td>18.4128</td><td>19.6545</td><td>20.2390</td><td>19.7267</td><td></td></tr><tr><td>Canada</td><td>Dollar = CAD</td><td>31.0189</td><td>30.8436</td><td>32.5888</td><td>34.3954</td><td>35.6470</td><td>37.0100</td><td>36.3975</td><td>36.9402</td><td>37.0077</td><td>38.1734</td><td>37.8057</td><td>36.5296</td><td></td></tr><tr><td>Colombie</td><td>Peso = COB</td><td>0.0166</td><td>0.0166</td><td>0.0172</td><td>0.0182</td><td>0.0184</td><td>0.0188</td><td>0.0188</td><td>0.0189</td><td>0.0188</td><td>0.0192</td><td>0.0191</td><td>0.0186</td><td></td></tr><tr><td>Corée du Sud</td><td>Won = KRW</td><td>0.0391</td><td>0.0384</td><td>0.0386</td><td>0.0410</td><td>0.0409</td><td>0.0413</td><td>0.0414</td><td>0.0417</td><td>0.0426</td><td>0.0451</td><td>0.0443</td><td>0.0439</td><td></td></tr><tr><td>Danemark</td><td>Couronne = DKK</td><td>6.7480</td><td>6.3987</td><td>6.4869</td><td>6.8373</td><td>7.0097</td><td>6.9364</td><td>6.9144</td><td>6.8101</td><td>6.8286</td><td>7.0804</td><td>6.8659</td><td>6.9315</td><td></td></tr><tr><td>Euro</td><td>XEU</td><td>50.5687</td><td>47.6970</td><td>48.3406</td><td>51.0339</td><td>52.2748</td><td>51.7630</td><td>51.5962</td><td>50.7605</td><td>50.9543</td><td>52.8491</td><td>51.2335</td><td>51.7299</td><td></td></tr><tr><td>Grande Bretagne</td><td>Livre = GBP</td><td>74.5026</td><td>70.3263</td><td>71.5247</td><td>73.9652</td><td>76.3883</td><td>75.9401</td><td>76.1572</td><td>74.4614</td><td>74.0942</td><td>77.3563</td><td>75.3653</td><td>74.1585</td><td></td></tr><tr><td>Hong Kong</td><td>Dollar = HKD</td><td>5.0080</td><td>4.9746</td><td>5.1376</td><td>5.4125</td><td>5.4482</td><td>5.5485</td><td>5.5506</td><td>5.5529</td><td>5.5456</td><td>5.6045</td><td>5.5398</td><td>5.5013</td><td></td></tr><tr><td>Japon</td><td>Yen = JPY</td><td>0.3726</td><td>0.3565</td><td>0.3599</td><td>0.3740</td><td>0.3828</td><td>0.3792</td><td>0.3697</td><td>0.3594</td><td>0.3652</td><td>0.3710</td><td>0.3712</td><td>0.3624</td><td></td></tr><tr><td>Mexique</td><td>Peso = MXN</td><td>3.5330</td><td>3.5575</td><td>3.7143</td><td>3.9713</td><td>3.9383</td><td>4.0006</td><td>3.9890</td><td>4.0785</td><td>4.0436</td><td>4.1605</td><td>4.0977</td><td>3.9257</td><td></td></tr><tr><td>Norvège</td><td>Couronnée = NOK</td><td>6.1854</td><td>5.9957</td><td>6.1114</td><td>6.4826</td><td>6.6470</td><td>6.5746</td><td>6.6189</td><td>6.3891</td><td>6.3763</td><td>6.5440</td><td>6.3697</td><td>6.5148</td><td></td></tr><tr><td>République Dominicaine</td><td>Peso = DOP</td><td>1.4219</td><td>1.3798</td><td>1.4083</td><td>1.4789</td><td>1.4575</td><td>1.3686</td><td>1.2902</td><td>1.2994</td><td>1.2481</td><td>1.2493</td><td>1.2829</td><td>1.3237</td><td></td></tr><tr><td>Suisse</td><td>Franc = CHF</td><td>32.6593</td><td>31.0042</td><td>31.1496</td><td>32.6322</td><td>33.7948</td><td>33.2658</td><td>33.3947</td><td>32.7412</td><td>32.7417</td><td>34.0212</td><td>32.7647</td><td>32.7316</td><td></td></tr><tr><td>Taiwan</td><td>Nt  = TWD</td><td>1.2482</td><td>1.2342</td><td>1.2624</td><td>1.3215</td><td>1.2929</td><td>1.2969</td><td>1.2825</td><td>1.2849</td><td>1.3101</td><td>1.3593</td><td>1.3244</td><td>1.3152</td><td></td></tr><tr><td>Vénézuela</td><td>Bolivar = VEB</td><td>0.0182</td><td>0.0180</td><td>0.0186</td><td>0.0196</td><td>0.0197</td><td>0.0200</td><td>0.0200</td><td>0.0201</td><td>0.0200</td><td>0.0202</td><td>0.0200</td><td>0.0199</td><td></td></tr><tr><td>Pour mémoire:</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Taux de référence (fin de période)</td><td>39.0311</td><td>38.7025</td><td>39.9245</td><td>42.0759</td><td>42.3415</td><td>43.0426</td><td>43.0291</td><td>43.0612</td><td>43.0030</td><td>43.4757</td><td>42.9775</td><td>42.6885</td><td></td><td></td></tr><tr><td>Droit de tirage spécial $ ^{{1/}} $</td><td>59.2024</td><td>57.0862</td><td>58.1540</td><td>61.0900</td><td>61.8101</td><td>62.3902</td><td>62.2115</td><td>61.3235</td><td>61.4642</td><td>62.8398</td><td>61.6740</td><td>61.6458</td><td></td><td></td></tr></table>
+
+Sources: Bloomberg; Direction des Affaires Internationales, BRH; Journal The New York Times; Fonds Monétaire International.
+
+1/ La valeur du droit de tirage spécial (DTS) exprimée en gourdes, fournie par le Fonds Monétaire International, est calculée à partir du taux de change de la gourde par rapport au dollar ÉU et de la valeur du DTS exprimée en dollar ÉU. (...) : données non disponibles
+
+<!-- page 53 -->
+
+Tableau 4.18
+
+<table><tr><td></td><td>3e trimestre 2005</td><td>4e trimestre 2005</td><td>1er trimestre 2006</td><td>2e trimestre 2006</td></tr><tr><td></td><td>Avr. 05</td><td>Mai 05</td><td>Juin 05</td><td>Juil. 05</td><td>Aout 05</td><td>Sept. 05</td><td>Oct. 05</td><td>Nov. 05</td><td>Déc. 05</td><td>Janv. 06</td><td>Fév. 06</td><td>Mars 06</td></tr><tr><td>Région Nord</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Cap-Haïtien</td><td>222.40</td><td>195.70</td><td>91.80</td><td>94.40</td><td>79.60</td><td>41.20</td><td>310.80</td><td>136.00</td><td>40.00</td><td>107.50</td><td>128.40</td><td>38.50</td></tr><tr><td>Ouanaminthe</td><td>175.80</td><td>293.90</td><td>256.30</td><td>133.50</td><td>197.10</td><td>79.10</td><td>260.20</td><td>45.60</td><td>9.20</td><td>36.10</td><td>61.10</td><td>15.00</td></tr><tr><td>Port-de-Paix</td><td>49.60</td><td>81.20</td><td>101.20</td><td>35.80</td><td>99.90</td><td>37.90</td><td>208.70</td><td>14.30</td><td>-</td><td>...</td><td>...</td><td>32.00</td></tr><tr><td>Jean-Rabel</td><td>84.00</td><td>79.00</td><td>118.00</td><td>68.00</td><td>52.50</td><td>101.00</td><td>212.00</td><td>89.00</td><td>17.00</td><td>...</td><td>...</td><td>9.00</td></tr><tr><td>Bassin-Bleu</td><td>15.40</td><td>74.30</td><td>133.60</td><td>102.80</td><td>93.20</td><td>50.10</td><td>247.70</td><td>30.70</td><td>7.50</td><td>...</td><td>...</td><td>10.00</td></tr><tr><td>Bombardopolis</td><td>41.70</td><td>53.00</td><td>50.20</td><td>47.10</td><td>114.70</td><td>93.40</td><td>323.30</td><td>50.00</td><td>36.10</td><td>...</td><td>...</td><td>23.20</td></tr><tr><td>Région Artibonite</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Gonaïves</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Saint-Marc</td><td>8.40</td><td>150.70</td><td>244.50</td><td>93.00</td><td>123.50</td><td>38.10</td><td>172.10</td><td>20.50</td><td>0.00</td><td>1.60</td><td>4.00</td><td>0.00</td></tr><tr><td>La Vallée de l'Artibonite</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Région métropolitaine de Port-au-Prince</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Aéroport</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Centre-Ville</td><td>69.50</td><td>152.40</td><td>93.70</td><td>89.30</td><td>138.50</td><td>109.70</td><td>174.90</td><td>83.90</td><td>3.50</td><td>14.70</td><td>23.30</td><td>61.40</td></tr><tr><td>Damien</td><td>136.00</td><td>172.60</td><td>101.50</td><td>37.10</td><td>144.10</td><td>167.70</td><td>192.80</td><td>75.40</td><td>2.90</td><td>1.60</td><td>8.10</td><td>127.30</td></tr><tr><td>Delmas</td><td>104.90</td><td>232.00</td><td>155.10</td><td>56.70</td><td>160.70</td><td>106.60</td><td>188.00</td><td>65.30</td><td>2.80</td><td>9.80</td><td>17.00</td><td>97.50</td></tr><tr><td>Juvénat</td><td>93.00</td><td>253.10</td><td>228.70</td><td>68.60</td><td>220.70</td><td>137.10</td><td>197.90</td><td>53.80</td><td>20.10</td><td>45.20</td><td>16.60</td><td>123.00</td></tr><tr><td>Grenier/Laboule 12</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Région Sud</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>Cayes</td><td>101.40</td><td>274.30</td><td>245.40</td><td>135.00</td><td>142.40</td><td>75.10</td><td>688.30</td><td>41.70</td><td>93.70</td><td>14.50</td><td>10.50</td><td>21.70</td></tr><tr><td>Jérémie</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr><tr><td>Jacmel</td><td>164.40</td><td>176.80</td><td>126.70</td><td>61.60</td><td>127.00</td><td>116.50</td><td>349.60</td><td>37.50</td><td>7.00</td><td>1.60</td><td>30.20</td><td>171.60</td></tr><tr><td>La Vallée de Jacmel</td><td>81.00</td><td>264.80</td><td>310.00</td><td>142.10</td><td>189.40</td><td>168.00</td><td>666.80</td><td>24.50</td><td>20.50</td><td>15.00</td><td>32.00</td><td>44.50</td></tr><tr><td>Thiotte (Marie Madeleine)</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr></table>
+
+Sources : Ministère de l'Agriculture, des Ressources Naturelles et du Développement Rural; CARE-Haïti; BRH.
+
+1/ Données de chutes de pluie enregistrées par station
+
+(…) : données non disponibles
+
+<!-- page 54 -->
+
+Annexe graphique
+
+<!-- page 55 -->
+
+Graphique 1 Agrégats M1, M2, M3 (en milliards de gourdes)
+
+| Month | M1 | M2 | M3 |
+| --- | --- | --- | --- |
+| Avril 05 | 17.8 | 37.8 | 64.0 |
+| Mai 05 | 17.8 | 37.7 | 64.0 |
+| Juin 05 | 18.2 | 38.2 | 65.5 |
+| Jul. 05 | 18.8 | 38.5 | 66.5 |
+| Aout 05 | 18.8 | 38.5 | 66.8 |
+| Sept. 05 | 19.0 | 38.8 | 68.8 |
+| Oct. 05 | 19.0 | 39.0 | 68.0 |
+| Nov. 05 | 18.8 | 38.5 | 68.2 |
+| Déc. 05 | 20.5 | 40.5 | 71.0 |
+| Janv. 06 | 20.5 | 41.0 | 72.0 |
+| Fév. 06 | 20.2 | 41.0 | 72.0 |
+| Mars 06 | 20.0 | 41.0 | 72.5 |
+
+<!-- page 56 -->
+
+Graphique 2 Contreparties de M3 (en milliards de gourdes)
+
+| Month | Dark Blue | Light Blue | Total |
+| --- | --- | --- | --- |
+| Avril 05 | 4287 | 1738 | 4395 |
+| Mai 05 | 4528 | 1721 | 4667 |
+| Juin 05 | 4528 | 1720 | 4667 |
+| Juil. 05 | 4587 | 1641 | 4667 |
+| Août 05 | 4650 | 1776 | 4650 |
+| Sept. 05 | 4664 | 1863 | 4664 |
+| Oct. 05 | 4702 | 1786 | 4702 |
+| Nov. 05 | 4803 | 1838 | 4803 |
+| Déc. 05 | 4882 | 1976 | 4882 |
+| Janv. 06 | 4856 | 1985 | 4856 |
+| Fév. 06 | 4743 | 1974 | 4743 |
+| Mars 06 | 4766 | 2166 | 4766 |
+
+Crédit intérieur
+
+Avoirs extérieurs nets
+
+<!-- page 57 -->
+
+Graphique 3 Encours des bons BRH (en millions de gourdes)
+
+| Date | Value |
+| --- | --- |
+| Avril 05 | 4860 |
+| Mai 05 | 4868 |
+| Juin 05 | 5596 |
+| Juli. 05 | 5342 |
+| Août 05 | 5531 |
+| Sept. 05 | 5501 |
+| Oct. 05 | 6112 |
+| Nov. 05 | 6290 |
+| Déc. 05 | 6055 |
+| Janv. 06 | 6213 |
+| Fév. 06 | 5768 |
+| Mars 06 | 6360 |
+
+<!-- page 58 -->
+
+Graphique 4 Dépôts du secteur privé (en milliards de gourdes)
+
+| Month | Total dépôts en gourdes | Total dépôts en dollars ÉU |
+| --- | --- | --- |
+| Avril 05 | 27590 | 26330 |
+| Mai 05 | 27650 | 26250 |
+| Juin 05 | 28320 | 26940 |
+| Juli. 05 | 28240 | 27470 |
+| Aout 05 | 27930 | 27990 |
+| Sept. 05 | 28290 | 29450 |
+| Oct. 05 | 28520 | 28770 |
+| Nov. 05 | 28240 | 29420 |
+| Déc. 05 | 28270 | 30270 |
+| Janv. 06 | 29770 | 31000 |
+| Fév. 06 | 29490 | 30940 |
+| Mars 06 | 29780 | 31540 |
+
+<!-- page 59 -->
+
+| Month | Dark Blue | Light Blue | Total |
+| --- | --- | --- | --- |
+| Avril 05 | 11.15 | 10.84 | 16.00 |
+| Mai 05 | 11.40 | 10.74 | 16.14 |
+| Juni 05 | 11.70 | 11.04 | 17.64 |
+| Jul. 05 | 11.92 | 11.90 | 17.82 |
+| Aout 05 | 11.85 | 12.27 | 17.13 |
+| Sept. 05 | 11.93 | 12.61 | 17.54 |
+| Oct. 05 | 11.94 | 12.84 | 17.78 |
+| Nov. 05 | 12.03 | 13.09 | 17.12 |
+| Déc. 05 | 12.17 | 13.30 | 17.48 |
+| Janv. 06 | 12.27 | 13.49 | 17.76 |
+| Fév. 06 | 12.24 | 13.13 | 17.37 |
+| Mars 06 | 12.26 | 13.00 | 16.00 |
+
+<!-- page 60 -->
+
+| Date | Blue | Red | Green |
+| --- | --- | --- | --- |
+| Avr. 05 | 1681.40 | 1264.70 | 1275.20 |
+| Mai 05 | 1479.60 | 1479.60 | 910.30 |
+| Juln 05 | 1877.90 | 1877.90 | 1197.30 |
+| Juil. 05 | 1290.50 | 1290.50 | 1290.50 |
+| Aout 05 | 2981.20 | 1519.90 | 1476.30 |
+| Sept. 05 | 1944.30 | 1585.10 | 1325.10 |
+| Oct. 05 | 1531.83 | 1531.83 | 1531.83 |
+| Nov. 05 | 1836.80 | 1836.80 | 1836.80 |
+| Déc. 05 | 2177.20 | 1683.86 | 1683.86 |
+| Janv. 06 | 1480.60 | 1599.80 | 1480.60 |
+| Fév. 06 | 1103.80 | 1457.40 | 1457.40 |
+| Mars 06 | 2378.70 | 2235.10 | 2235.10 |
+
+<!-- page 61 -->
+
+Graphique 7 Endettlement total du secteur public (en milliards de gourdes)
+
+| Deutsche Interne | Date | Valor |
+| --- | --- | --- |
+| Avr. 05 |   | 5860 |
+| Mai. 05 |   | 7190 |
+| Juni. 05 |   | 6220 |
+| Jul. 05 |   | 6670 |
+| Aout. 05 |   | 6080 |
+| Sept. 05 |   | 4990 |
+| Oct. 05 |   | 7730 |
+| Nov. 05 |   | 14000 |
+| Dec. 05 |   | 10750 |
+| Jan. 06 |   | 7000 |
+| Fév. 06 |   | 8220 |
+| Mars. 06 |   | 6460 |
+
+<!-- page 62 -->
+
+![](assets/p062/img_in_image_box_219_302_1409_986.jpg)
+
+<!-- page 63 -->
+
+Graphique 9 Indice du taux de change réel bilatéral Haïti-États-Unis d'Amérique
+
+| Date | Value |
+| --- | --- |
+| Janv. 05 | 122.54 |
+| Fév. 05 | 124.1 |
+| Mars 05 | 126.11 |
+| Avr. 05 | 127.69 |
+| Mai 05 | 127.46 |
+
+<!-- page 64 -->
+
+| Date | Value |
+| --- | --- |
+| Apr. 05 | 101 |
+| May 05 | 180 |
+| Jun 05 | 125 |
+| Jul. 05 | 095 |
+| Aug 05 | 105 |
+| Sep 05 | 138 |
+| Oct. 05 | 094 |
+| Nov. 05 | 118 |
+| Dec. 05 | 075 |
+| Jan. 06 | 124 |
+| Feb. 06 | 171 |
+| Mar. 06 | 104 |
+
+<!-- page 65 -->
+
+Graphique 11 Taux d'inflation (variation de l'IPC en glissement annuel)
+
+| Date | Value |
+| --- | --- |
+| Apr. 05 | 1322 |
+| May 05 | 1366 |
+| Jun 05 | 1447 |
+| Jul 05 | 1529 |
+| Aug 05 | 1600 |
+| Sep 05 | 1484 |
+| Oct 05 | 1527 |
+| Nov 05 | 1598 |
+| Dec 05 | 1535 |
+| Jan 06 | 1453 |
+| Feb 06 | 1526 |
+| Mar 06 | 1527 |
+
+<!-- page 66 -->
+
+Graphique 12
+
+Taux de change
+
+(marché informel; moyenne de période)
+
+(gourdes/dollar ÉU)
+
+| Date | Å la vente | Å l'achat |
+| --- | --- | --- |
+| Avr. 05 | 389000 | 385000 |
+| Mai 05 | 389000 | 384000 |
+| Juin 05 | 397000 | 391000 |
+| Jul. 05 | 422000 | 415000 |
+| Aout 05 | 430000 | 425000 |
+| Sept. 05 | 428000 | 423000 |
+| Oct. 05 | 435000 | 430000 |
+| Nov. 05 | 434000 | 430000 |
+| Déc. 05 | 434000 | 428000 |
+| Janv. 06 | 442000 | 433000 |
+| Fév. 06 | 435000 | 428000 |
+| Mars 06 | 433000 | 425000 |
+
+<!-- page 67 -->
+
+ISSN: 1683-2876
+
+Dépôt légal : 3ème trimestre 2006
+
+No. : 06-06-339
+
+Bibliothèque Nationale d'Haïti
+
+Coordination et mise en page :
+
+Direction Monnaie et Analyse Économique - BRH
+
+Pour toutes informations, s'adresser à:
+
+Banque de la République d'Haïti
+
+Direction Monnaie et Analyse Économique
+
+Port-au-Prince, Haiti
+
+Boîte Postale: BP 1570
+
+Téléphone: 299-1164
+
+Télécopieur: (Fax) 299-1192
+
+Internet: http://www.brh.net
+
+E-mail: brh_mae@brh.net
