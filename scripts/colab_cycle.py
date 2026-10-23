@@ -27,7 +27,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SESSION = os.environ.get("SESSION", "ocr-loop")
 CHUNK = os.environ.get("CHUNK", "12")
-CYCLES = int(os.environ.get("CYCLES", "12"))
+CYCLES = int(os.environ.get("CYCLES", "1000"))
 PULL_EVERY = int(os.environ.get("PULL_EVERY", "150"))
 PAYLOAD = Path("/tmp/opencode/colab_payload.tgz")
 
