@@ -77,18 +77,41 @@ class Page(_Frozen):
     text: str
 
 
+class ChunkType(StrEnum):
+    """Why a passage exists — drives retrieval expansion and the inspection report."""
+
+    prose = "prose"
+    table = "table"
+    series = "series"
+    provision = "provision"
+
+
 class Chunk(_Frozen):
-    """A retrievable passage, bound to exactly one page."""
+    """A retrievable passage, bound to one page.
+
+    ``page_number`` is where the passage starts; ``page_end`` differs only for a
+    table or section that ran across a page boundary, and citations still open
+    ``page_number`` (ADR-0005).
+    """
 
     chunk_id: str
     document_id: str
     page_number: int
     ordinal: int
     text: str
+    page_end: int | None = None
+    chunk_type: ChunkType = ChunkType.prose
+    section_path: tuple[str, ...] = ()
+    token_count: int | None = None
+    metadata: dict[str, object] = Field(default_factory=dict)
 
     @property
     def char_count(self) -> int:
         return len(self.text)
+
+    @property
+    def spans_pages(self) -> bool:
+        return self.page_end is not None and self.page_end != self.page_number
 
 
 class VectorRecord(_Frozen):

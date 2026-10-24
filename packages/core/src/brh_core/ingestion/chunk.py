@@ -1,31 +1,31 @@
-"""Chunking — split page text into retrievable passages (ADR-0005).
+"""Chunking entry point — kept stable while the strategy lives in a package.
 
-Chunks never span pages, so every chunk has an unambiguous ``page_number`` and
-a citation can open the exact page. Chunk ids must be deterministic
-(``{document_id}:p{page}:c{ordinal}``) so re-ingestion is idempotent.
+The implementation is :mod:`brh_core.ingestion.chunking`, split by concern:
+parsing, envelope, table policy, prose policy, token measurement, traversal.
+This module exists so callers and docs keep one obvious import path while the
+v2 hybrid strategy evolves behind it.
 
-TODO: implement with ``langchain_text_splitters.RecursiveCharacterTextSplitter``.
-French separators are longer-winded than English; keep ``"."``/``";"``
-splitting and stay under the embedder's token ceiling.
+    >>> from brh_core.ingestion.chunk import chunk_pages, chunker_id
 """
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from brh_core.ingestion.chunking import (
+    CHUNKING_VERSION,
+    DEFAULT_MAX_TOKENS,
+    StructureChunker,
+    chunk_pages,
+    chunker_id,
+    estimate_tokens,
+    huggingface_counter,
+)
 
-from brh_core.ingestion.extract import ExtractedPage
-from brh_core.models import Chunk
-
-
-def chunk_pages(
-    document_id: str,
-    pages: Sequence[ExtractedPage],
-    *,
-    chunk_size: int,
-    chunk_overlap: int,
-) -> list[Chunk]:
-    """Split each page's text into chunks, preserving page provenance.
-
-    Skip blank pages. Split **within** a page — never across pages.
-    """
-    raise NotImplementedError("TODO: per-page chunking")
+__all__ = [
+    "CHUNKING_VERSION",
+    "DEFAULT_MAX_TOKENS",
+    "StructureChunker",
+    "chunk_pages",
+    "chunker_id",
+    "estimate_tokens",
+    "huggingface_counter",
+]

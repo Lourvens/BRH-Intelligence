@@ -39,3 +39,6 @@ extend-exclude = ["experiments"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+# French text legitimately uses the typographic apostrophe and en dash; RUF001
+# is about homoglyph risk in identifiers, not in a French corpus's fixtures.
+allowed-confusables = ["’", "–"]

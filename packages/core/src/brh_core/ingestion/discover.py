@@ -1,10 +1,4 @@
-"""Discovery — which files should be ingested.
-
-Today: local PDFs under ``BRH_RAW_DIR``. Tomorrow: the same function grows a
-web-crawler source behind the same return type.
-
-TODO: implement.
-"""
+"""Discovery of locally persisted PDF artefacts."""
 
 from __future__ import annotations
 
@@ -17,4 +11,8 @@ def discover_pdfs(raw_dir: Path) -> list[Path]:
     Missing directory -> ``[]`` (not an error); sort so ingestion order is
     deterministic.
     """
-    raise NotImplementedError("TODO: walk raw_dir for *.pdf")
+    if not raw_dir.is_dir():
+        return []
+    return sorted(
+        path for path in raw_dir.rglob("*") if path.is_file() and path.suffix.lower() == ".pdf"
+    )

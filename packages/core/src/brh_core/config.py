@@ -90,6 +90,10 @@ class Settings(BaseSettings):
         default_factory=lambda: Path(Settings.DEFAULT_PROCESSED_DIR),
         validation_alias="BRH_PROCESSED_DIR",
     )
+    ocr_dir: Path = Field(
+        default_factory=lambda: Path("./data/ocr"),
+        validation_alias="BRH_OCR_DIR",
+    )
 
     # --- LLM (ADR-0010) ------------------------------------------------
     llm_provider: LLMProvider = Field(
@@ -123,6 +127,18 @@ class Settings(BaseSettings):
         default="brh-intelligence", validation_alias="BRH_PINECONE_INDEX_NAME"
     )
     pinecone_namespace: str = Field(default="default", validation_alias="BRH_PINECONE_NAMESPACE")
+    pinecone_text_field: str = Field(
+        default="chunk_text", validation_alias="BRH_PINECONE_TEXT_FIELD"
+    )
+    index_batch_size: int = Field(default=96, ge=1, le=96, validation_alias="BRH_INDEX_BATCH_SIZE")
+    index_timeout: float = Field(default=30, gt=0, validation_alias="BRH_INDEX_TIMEOUT")
+    index_max_retries: int = Field(default=3, ge=0, validation_alias="BRH_INDEX_MAX_RETRIES")
+    embedding_tokenizer: str = Field(
+        default="intfloat/multilingual-e5-large", validation_alias="BRH_EMBEDDING_TOKENIZER"
+    )
+    embedding_tokenizer_revision: str = Field(
+        default="main", validation_alias="BRH_EMBEDDING_TOKENIZER_REVISION"
+    )
     vector_backend: VectorBackend = Field(
         default=VectorBackend.pinecone_integrated,
         validation_alias="BRH_VECTOR_BACKEND",
@@ -146,6 +162,15 @@ class Settings(BaseSettings):
     retrieval_min_score: float = Field(default=0.35, validation_alias="BRH_RETRIEVAL_MIN_SCORE")
     chunk_size: int = Field(default=1000, gt=0, validation_alias="BRH_CHUNK_SIZE")
     chunk_overlap: int = Field(default=150, ge=0, validation_alias="BRH_CHUNK_OVERLAP")
+    chunk_token_limit: int = Field(
+        default=448, gt=0, validation_alias="BRH_CHUNK_TOKEN_LIMIT"
+    )
+    chunk_token_reserve: int = Field(
+        default=64, ge=0, validation_alias="BRH_CHUNK_TOKEN_RESERVE"
+    )
+    chunk_tokenizer_id: str = Field(
+        default="safe-estimate-v2", validation_alias="BRH_CHUNK_TOKENIZER_ID"
+    )
 
     # --- Web inventory (discovery of brh.ht) ---------------------------
     web_base_url: str = Field(default="https://www.brh.ht", validation_alias="BRH_WEB_BASE_URL")
@@ -183,6 +208,7 @@ class Settings(BaseSettings):
     def _resolve_paths(self) -> Settings:
         object.__setattr__(self, "raw_dir", Path(self.raw_dir).resolve())
         object.__setattr__(self, "processed_dir", Path(self.processed_dir).resolve())
+        object.__setattr__(self, "ocr_dir", Path(self.ocr_dir).resolve())
         return self
 
     @property
@@ -202,6 +228,10 @@ class Settings(BaseSettings):
     @property
     def resolved_processed_dir(self) -> Path:
         return Path(self.processed_dir)
+
+    @property
+    def resolved_ocr_dir(self) -> Path:
+        return Path(self.ocr_dir)
 
     @property
     def web_store_dir(self) -> Path:
