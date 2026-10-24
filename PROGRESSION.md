@@ -23,16 +23,17 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
     the report.
 
 - **OCR extraction is in progress across three runners (2026-10-20).** The
-  catalogue is 1 169 PDFs; **752 are extracted** (64,3 %), 417 remain
-  (11 448 pages, 29,0 M characters, 862 figures). The checkout is the whole
+  catalogue is 1 169 PDFs; **778 are extracted** (66,6 %), 391 remain
+  (11 761 pages, 29,7 M characters, 889 figures). The checkout is the whole
   corpus: the Modal volume was pulled with `modal volume get brh-ocr /ocr` and
   merged, so 173 documents that existed only on the volume are now committed.
   Kaggle v10 delivered 80 new documents, v11 79, v12 79, v13 76 and v14 74.
   Versions take 3-5 h on two T4s. Each is pulled and committed by the watcher
   the moment it ends, because Kaggle wipes a version's output when the next is
   pushed. Kaggle's **weekly GPU quota is 30 h** and resets Saturday 00:00 UTC.
-  Shards 2/4 and 3/4 are spent; the remaining documents are concentrated in
-  0/4 (Modal's) and 1/4 (Colab's), so later Kaggle versions take those.
+  Shards 2/4 and 3/4 are spent (v15 took their last 25); from v16 Kaggle takes
+  all four, two per GPU, up to 160 documents per version. **Modal is retired**:
+  the skip list is now `scripts/export_skip_list.py`, which reads `data/ocr`.
   - Modal is **stopped by budget**: $25.45 of the $30 credit is spent and the
     spend guard refuses to dispatch below $5. The last run was left to finish;
     no further Modal work is planned without new credit. A volume is not a
