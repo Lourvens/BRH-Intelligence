@@ -28,25 +28,30 @@ from skiplist import published
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--manifest", required=True, type=Path)
+    parser.add_argument("--manifest", required=True, nargs="+", type=Path,
+                        help="One or more manifests; each is processed in order.")
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--runner", default="kaggle")
     parser.add_argument("--timeout", type=int, default=2400, help="seconds per document")
     parser.add_argument("--skip-shas", default=Path("data/ocr/done_shas.txt"), type=Path)
     args = parser.parse_args(argv)
 
-    rows = [
-        json.loads(line)
-        for line in args.manifest.read_text(encoding="utf-8").splitlines()
-        if line.strip()
-    ]
+    rows = []
+    for manifest in args.manifest:
+        rows.extend(
+            json.loads(line)
+            for line in manifest.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        )
+    seen: set[str] = set()
+    rows = [row for row in rows if not (row["sha256"] in seen or seen.add(row["sha256"]))]
     claims = Claims(runner=args.runner)
     print(
         f"{len(rows)} document(s), claims {'on' if claims.enabled else 'off'}",
         flush=True,
     )
 
-    one = args.manifest.with_suffix(".one.jsonl")
+    one = args.manifest[0].with_suffix(".one.jsonl")
     for number, row in enumerate(rows, 1):
         sha = row["sha256"]
         # The manifest was cut when the kernel started; this list is minutes old.
