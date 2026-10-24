@@ -9,7 +9,12 @@ TODO: implement.
 
 from __future__ import annotations
 
+import math
+import re
 from collections.abc import Sequence
+from hashlib import sha256
+
+_TOKEN_RE = re.compile(r"\w+(?:['’]\w+)?", re.UNICODE)
 
 
 class HashingEmbedder:
@@ -26,12 +31,18 @@ class HashingEmbedder:
 
     def embed_documents(self, texts: Sequence[str]) -> list[list[float]]:
         """Embed a batch of passages."""
-        raise NotImplementedError("TODO: hash tokens into fixed-width vectors")
+        return [self._embed(text) for text in texts]
 
     def embed_query(self, text: str) -> list[float]:
         """Embed a single query."""
-        raise NotImplementedError("TODO: same as embed_documents for one text")
+        return self._embed(text)
 
     def _embed(self, text: str) -> list[float]:
         """Hash each token to an index, count, then L2-normalize."""
-        raise NotImplementedError("TODO: implement the token-hash kernel")
+        vector = [0.0] * self._dimension
+        for token in _TOKEN_RE.findall(text.casefold()):
+            digest = sha256(token.encode("utf-8")).digest()
+            index = int.from_bytes(digest[:8], "big") % self._dimension
+            vector[index] += 1.0 if digest[8] & 1 else -1.0
+        norm = math.sqrt(sum(value * value for value in vector))
+        return [value / norm for value in vector] if norm else vector

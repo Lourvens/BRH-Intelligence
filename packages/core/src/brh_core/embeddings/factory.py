@@ -9,8 +9,9 @@ TODO: implement the ``EmbeddingProvider`` switch.
 
 from __future__ import annotations
 
-from brh_core.config import Settings
+from brh_core.config import EmbeddingProvider, Settings
 from brh_core.embeddings.base import Embedder
+from brh_core.embeddings.hashing import HashingEmbedder
 
 
 def build_embedder(settings: Settings) -> Embedder | None:
@@ -20,4 +21,15 @@ def build_embedder(settings: Settings) -> Embedder | None:
     * ``openai``   -> :class:`~brh_core.embeddings.openai.OpenAIEmbedder`
     * ``hashing``  -> :class:`~brh_core.embeddings.hashing.HashingEmbedder`
     """
-    raise NotImplementedError("TODO: switch on settings.embedding_provider")
+    if settings.embedding_provider is EmbeddingProvider.hashing:
+        return HashingEmbedder(settings.embedding_dim)
+    if settings.embedding_provider is EmbeddingProvider.openai:
+        from brh_core.embeddings.openai import OpenAIEmbedder
+
+        return OpenAIEmbedder(
+            model=settings.embedding_model,
+            api_key=settings.openai_api_key.get_secret_value(),
+            base_url=settings.openai_base_url,
+            dimension=settings.embedding_dim,
+        )
+    return None

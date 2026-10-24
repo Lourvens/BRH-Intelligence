@@ -1,26 +1,93 @@
 # Progression
 
-Last updated: 2026-10-23 (chunking experiment in progress; experiments-are-not-code)
+Last updated: 2026-10-24 (LangChain offline ingestion path and vector cleanup)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
-- **Chunking experiment is running; no decision recorded (2026-10-23).** Nine
-  LangChain splitters measured over the OCR corpus — 750 documents, 10 714
-  pages, 3 seeds of ~627 pages / ~406 needles each, BM25 retrieval, fully
-  offline. The leading candidate is lexical-shift chunking: recall@5 0.798
-  vs 0.697 for the best recursive arm, page recall 0.912 vs 0.843, boundary
-  loss 0.128 vs 0.261. **It is a candidate, not a decision.** No ADR, and
-  `brh_core.ingestion.{chunk,extract,metadata,discover}` are still scaffolds on
-  purpose. Evidence: `experiments/chunking/REPORT.md` + `results.json`; design
-  in `docs/plans/2026-10-23-chunking-evaluation-design.md`; the run is
-  `experiments/notebooks/0004-chunking-strategies.ipynb`.
-  - Open before sign-off: the winner was only tested at `chunk_size=1000`
-    (every recursive arm got a size sweep), there is no significance test, and
-    retrieval is BM25 rather than `multilingual-e5-large`. See the gap list in
-    the report.
+- **LangSmith chunking evaluation completed (2026-10-24).** Dataset
+  `brh-chunking-eval-v2` contains 324 deterministic page-level needle examples
+  across three seeds, three length strata and the prose/table/provision content
+  families. The `structure-v2, safe-estimate-v2` experiment scored **61.73 %**
+  strict needle recall, **79.94 %** windowed recall across chunk boundaries,
+  **100 %** page provenance and **100 %** token-cap compliance. The family
+  breakdown exposes the next bottleneck: prose 84.26 % strict / 100 % windowed,
+  provision 66.67 % / 99.07 %, and tables 34.26 % / 40.74 %. The table score is
+  a real preservation problem, not merely a seam penalty; table parsing and
+  oversized-row/header fragmentation need the next evaluation pass.
+
+- **Table-aware chunking improvement completed (2026-10-24).** The table path
+  now recognises OCR period headers encoded as `<td>`, emits compact semantic
+  cell-labelled rows for HTML tables, repeats row labels across oversized
+  fragments, carries bounded neighbouring context and following `Source:`
+  provenance in the envelope, and evaluates table rows rather than impossible
+  whole-table prefixes. The new v3 dataset has 324 examples. The LangSmith
+  experiment scored **75.93 %** strict row recall, **89.81 %** windowed recall,
+  **100 %** provenance and **100 %** cap compliance. Focused tests: 30 passed.
+  LangSmith hit the workspace monthly unique-trace limit while uploading
+  evaluator traces, but the aggregate experiment was created successfully.
+
+- **LangChain ingestion completion plan created (2026-10-24).** The architect
+  review froze the next dependency order: canonical `Chunk` → LangChain
+  `Document`, exact tokenizer, offline hashing embeddings, memory vector store,
+  production embeddings, Pinecone adapter, index manifest/reconciliation,
+  `RetrievalService`, then LangSmith retrieval evaluation. OCR is explicitly an
+  external Kaggle input and is not on this implementation critical path. See
+  `docs/plans/2026-10-24-langchain-ingestion-pipeline-design.md`.
+
+- **Offline LangChain indexing path implemented (2026-10-24).** `brh_core` now
+  has deterministic hashing embeddings, a filterable/idempotent in-memory
+  vector store, backend/embedder factories, and a canonical frozen BRH
+  `Chunk` → LangChain `Document` projection. The ingestion boundary captures
+  prior chunk IDs, upserts the desired set, deletes stale IDs, and records the
+  cleanup count. Tests cover deterministic vectors, stable ranking, metadata
+  projection, and fallback→PaddleOCR reindex cleanup. Pinecone adapters and
+  the durable remote index manifest remain the next production gate; current
+  cleanup is retriable but not crash-proof without reconciliation.
+
+- **Incremental extraction resume fixed (2026-10-24).** `run_ingestion()` now
+  fingerprints the active extraction source in its content and index keys.
+  A document can be processed with the PyMuPDF fallback while its OCR artifact
+  is absent; when the PaddleOCR `document.md` arrives or changes, the next run
+  re-extracts, re-chunks and atomically replaces the stored pages/chunks instead
+  of treating the fallback result as complete. The transition is covered by a
+  regression test, and stale vector IDs are now deleted during the same
+  reindex. Crash-safe remote reconciliation still belongs to the planned
+  index-manifest phase.
+
+
+- **Backend/RAG architecture audit completed (2026-10-24).** The intended
+  boundaries are good (shared `brh_core`, Postgres metadata, vector-store
+  protocol, and one `RetrievalService`). The discovery-to-chunk front-half is
+  now executable and covered offline: recursive PDF discovery, SHA-256 and
+  UUID5 identity, PaddleOCR-first page-aware extraction with strict page
+  validation, PyMuPDF fallback, transactional page/chunk replacement,
+  idempotent processing jobs, collision-safe slugs, and atomic catalog export.
+  Embeddings, vector stores, retrieval, agent nodes/LLM, and MCP tools remain
+  the next implementation gate. The main future risks are two-datastore
+  consistency, stale vectors after content replacement, under-fetching before
+  page de-duplication, missing hybrid/reranked retrieval, unbounded agent
+  history, and lack of operational metrics/reconciliation.
+
+- **Deterministic hybrid chunking v2 is selected and implemented
+  (2026-10-24).** `brh_core.ingestion.chunking` (:mod:`chunk.py` is the facade)
+  turns page-marked markdown into four chunk types — `prose`, `table`, `series`,
+  `provision` — under a strict 448-token default budget, with a table envelope,
+  header repetition, explicit row/header fragments, no row overlap and
+  `prev`/`next` links. ADR-0011 records the rules;
+  migration `0003_chunk_structure.sql` adds the columns. Full-corpus smoke:
+  778 documents → 68 596 chunks in 20.4 s, 0 chunks over the cap, p50 345,
+  p95 433 and max 448; 302 pathological rows and 22 oversized headers were
+  fragmented; 4 299 chunks span pages and 876 navigation chunks are marked.
+  - The historical nine-arm experiment remains unchanged as evidence, but its
+    lexical-shift/`semantic-shift-1000` leader is explicitly rejected for
+    production because it is not the shipped hybrid algorithm and shares a
+    lexical bias with its BM25 evaluation.
+  - **Unmeasured**: whether the shipped hybrid retrieves better than the
+    alternatives. The next experiment is by content family against
+    `multilingual-e5-large`, not BM25.
 
 - **OCR extraction is in progress across three runners (2026-10-20).** The
   catalogue is 1 169 PDFs; **778 are extracted** (66,6 %), 391 remain
@@ -128,9 +195,10 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 Continue the build order:
 
-0. **Finish the chunking experiment and sign it off** — size sweep for the
-   leading strategy, a significance test, then (only on sign-off) the ADR, a
-   test that encodes the choice, and only then the ingestion implementation.
+0. **Evaluate chunking v2** — per family (prose/table/series/provision),
+   against the production embedder; include a size sweep (350/448 tokens) and a
+   paired test across needles. The chunker exists; whether it is the best one
+   is still an open question, and ADR-0011 says so.
 1. `embeddings/hashing.py` + `vectorstore/memory.py` — offline embedder and
    vector store, so tests can run with no cloud.
 2. `db/repository.py` — corpus documents/pages/chunks read/write (pool and
@@ -147,7 +215,8 @@ Continue the build order:
   recommendations; nothing in `experiments/` is importable by shipped code. The
   rule came out of this session: a chunking benchmark was first written as three
   `.py` modules plus an "Accepted" ADR *before any decision existed*. Both were
-  withdrawn — the ADR is deleted, and the run now lives in
+  withdrawn at the time — the ADR stayed deleted until a strategy was actually
+  chosen and built, and the run now lives in
   `experiments/notebooks/0004-chunking-strategies.ipynb`, which re-derives
   `chunking/results.json` offline in ~5 minutes.
   - `experiments/pyproject.toml` gains `langchain-text-splitters` for the
@@ -576,9 +645,11 @@ Continue the build order:
 - Pinecone's **records API** (`upsert_records` / `search_records`) is what
   integrated-inference indexes use; the plain `upsert`/`query` API needs
   client-computed vectors.
-- `multilingual-e5-large` has a ~512-token (~2K char) ceiling; chunks above it
-  are silently truncated at embed time. Keep `chunk_size` well under it
-  (default 1000 chars).
+- `multilingual-e5-large` has a **512-token** ceiling and truncates silently.
+  Chunking defaults to `DEFAULT_MAX_TOKENS = 448`, with a 64-token reserve;
+  counts are conservative estimates (`estimate_tokens`: 2.75 chars/token prose,
+  1.9 for tables) until the
+  production tokenizer replaces it — every cap is in estimated tokens.
 - `brh.ht` is WordPress: enumerate documents through
   `wp-json/wp/v2/media?mime_type=application/pdf`, **not** `media_type=...`
   (that rejects `pdf` with HTTP 400 — the sibling project's doc is wrong).
