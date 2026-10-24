@@ -1,11 +1,26 @@
 # Progression
 
-Last updated: 2026-10-20 (corpus analytics family)
+Last updated: 2026-10-23 (chunking experiment in progress; experiments-are-not-code)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Chunking experiment is running; no decision recorded (2026-10-23).** Nine
+  LangChain splitters measured over the OCR corpus — 750 documents, 10 714
+  pages, 3 seeds of ~627 pages / ~406 needles each, BM25 retrieval, fully
+  offline. The leading candidate is lexical-shift chunking: recall@5 0.798
+  vs 0.697 for the best recursive arm, page recall 0.912 vs 0.843, boundary
+  loss 0.128 vs 0.261. **It is a candidate, not a decision.** No ADR, and
+  `brh_core.ingestion.{chunk,extract,metadata,discover}` are still scaffolds on
+  purpose. Evidence: `experiments/chunking/REPORT.md` + `results.json`; design
+  in `docs/plans/2026-10-23-chunking-evaluation-design.md`; the run is
+  `experiments/notebooks/0004-chunking-strategies.ipynb`.
+  - Open before sign-off: the winner was only tested at `chunk_size=1000`
+    (every recursive arm got a size sweep), there is no significance test, and
+    retrieval is BM25 rather than `multilingual-e5-large`. See the gap list in
+    the report.
 
 - **OCR extraction is in progress across three runners (2026-10-20).** The
   catalogue is 1 169 PDFs; **752 are extracted** (64,3 %), 417 remain
@@ -15,8 +30,9 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   Kaggle v10 delivered 80 new documents, v11 79, v12 79, v13 76 and v14 74.
   Versions take 3-5 h on two T4s. Each is pulled and committed by the watcher
   the moment it ends, because Kaggle wipes a version's output when the next is
-  pushed. Kaggle's **weekly GPU quota is 30 h**; v15 was refused at exactly
-  that ceiling, so no further version runs until the weekly reset.
+  pushed. Kaggle's **weekly GPU quota is 30 h** and resets Saturday 00:00 UTC.
+  Shards 2/4 and 3/4 are spent; the remaining documents are concentrated in
+  0/4 (Modal's) and 1/4 (Colab's), so later Kaggle versions take those.
   - Modal is **stopped by budget**: $25.45 of the $30 credit is spent and the
     spend guard refuses to dispatch below $5. The last run was left to finish;
     no further Modal work is planned without new credit. A volume is not a
@@ -111,6 +127,9 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 Continue the build order:
 
+0. **Finish the chunking experiment and sign it off** — size sweep for the
+   leading strategy, a significance test, then (only on sign-off) the ADR, a
+   test that encodes the choice, and only then the ingestion implementation.
 1. `embeddings/hashing.py` + `vectorstore/memory.py` — offline embedder and
    vector store, so tests can run with no cloud.
 2. `db/repository.py` — corpus documents/pages/chunks read/write (pool and
@@ -119,6 +138,22 @@ Continue the build order:
    the files the inventory has already downloaded. Verify with `make ingest`.
 
 ## Recently done
+
+- **2026-10-23 — The "experiments are not code" rule, and notebook 0004.**
+  `AGENTS.md` now has an *Experiments are not code* section and
+  `experiments/README.md` says the same in one paragraph: the loop is
+  notebook → sign-off → ADR → eval/test → implementation; results are
+  recommendations; nothing in `experiments/` is importable by shipped code. The
+  rule came out of this session: a chunking benchmark was first written as three
+  `.py` modules plus an "Accepted" ADR *before any decision existed*. Both were
+  withdrawn — the ADR is deleted, and the run now lives in
+  `experiments/notebooks/0004-chunking-strategies.ipynb`, which re-derives
+  `chunking/results.json` offline in ~5 minutes.
+  - `experiments/pyproject.toml` gains `langchain-text-splitters` for the
+    notebook; the workspace runtime is untouched.
+  - `.env` now carries a live `BRH_PINECONE_API_KEY` (gitignored; verified
+    absent from tracked files). Index `brh-intelligence`, namespace `default`,
+    backend `pinecone_integrated`.
 
 - **2026-10-20 — Corpus analytics family (`brh_analytics.corpus`).** The first
   stats over what OCR actually produced, not what the site lists. Sources:
