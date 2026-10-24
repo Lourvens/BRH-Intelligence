@@ -13,16 +13,25 @@ app, all sharing one Python core.
 **Much of it is a scaffold.** A module existing in the tree does not mean it
 works. These still `raise NotImplementedError`:
 
-- `brh_core`: `catalog.py`, `db/repository.py`,
-  `embeddings/{factory,hashing,openai}.py`, `ingestion/{discover,metadata,extract,chunk,pipeline}.py`,
-  `retrieval/service.py`, `vectorstore/{factory,memory,pinecone_store}.py`
+- `brh_core`: the optional `embeddings/openai.py` adapter remains a scaffold;
+  production uses Pinecone integrated embeddings, so it is outside that path.
 - `brh_agent`: `llm.py`, `nodes.py`, `prompts.py`
 
 Implemented today: `brh_core.{config,models}`, `brh_core.db.{pool,migrate}`,
 `brh_core.inventory.*`, `brh_core.ingestion.{ocr,engines,markdown}` (the batch
 OCR stage: manifest → ledger → page-marked markdown),
-`brh_agent.{graph,state}`, and the `brh_analytics`
-design layer plus its `inventory` family.
+`brh_core.ingestion.{discover,metadata,extract,pipeline}`, the transactional
+`brh_core.db.repository`, and `brh_core.catalog` (discovery → PaddleOCR artifact
+validation → page/chunk persistence; vector indexing remains opt-in),
+`brh_core.ingestion.chunking` (structure-aware hybrid chunking v2, ADR-0011) with
+`chunk.py` as its stable facade, `brh_agent.{graph,state}`, and the
+`brh_analytics` design layer plus its `inventory` family.
+
+Ingestion/indexing is now runnable end to end: LangChain discovery/ingestion
+cycles, exact E5 token counts, Pinecone hosted Records API, durable Postgres
+index manifests, restart-safe reconciliation and canonical `RetrievalService`.
+See ADR-0012 and `docs/architecture/ingestion-operations.md`. Agent generation
+and MCP tool registration remain separate surface work.
 
 ## Layout and boundaries
 
@@ -37,14 +46,52 @@ design layer plus its `inventory` family.
   (`.opencode/agents/analytics.md`) owns changes there — delegate to it rather
   than re-deriving the house style.
 - `experiments/` — a **standalone uv project** (own `.venv` + lockfile), *not* a
-  workspace member. Notebooks answer design questions before implementation.
+  workspace member. **Experiments are notebooks, not code** — see
+  [Experiments](#experiments-are-not-code) below. Nothing in `experiments/` is
+  imported, packaged or shipped.
 - `docs/` — `adr/` (why), `architecture/` (as-is), `plans/` (pre-work).
-- `data/` — gitignored. `data/raw/web/<sha256>.pdf` is the content-addressed
-  store the inventory writes.
+- `data/` — gitignored, except `data/ocr/` which is committed so an experiment
+  can be re-derived from a clone. `data/raw/web/<sha256>.pdf` is the
+  content-addressed store the inventory writes.
 
 Two separate workspaces: the root `pyproject.toml` is a uv virtual workspace
 (`packages/*`, `services/*`); the root `package.json` is a bun workspace
 (`apps/*`).
+
+## Experiments are not code
+
+`experiments/` answers one question per notebook and then stops. It is **not a
+prototype tree**, and nothing in it ships.
+
+The loop is: **notebook → sign-off → ADR → eval/test → implementation.**
+
+1. A notebook in `experiments/notebooks/` (`NNNN-topic.ipynb`) states one
+   question, fixes its decision rule *before* the run, and ends with the answer
+   and its trade-off.
+2. Artifacts live beside it (`experiments/<topic>/results.json`, `REPORT.md`)
+   and are committed, so the numbers re-derive without re-running.
+3. Results are a **recommendation**. No `brh_core` module, no `Settings`
+   default and no ADR changes until a human signs off. A notebook must not
+   leave the scaffold half-edited behind it.
+4. Only after sign-off: the ADR, then a test that encodes the choice, then the
+   implementation written against that test.
+
+The boundary that makes this real:
+
+- **Nothing in `experiments/` is importable by shipped code.** No
+  `brh_core`/`brh_agent`/`brh_mcp`/`brh_analytics` module may import from it,
+  and `experiments/` is not a workspace member. If a notebook function is worth
+  keeping, it is re-written in `packages/` behind a test — not copied over.
+- **A `.py` under `experiments/` is the experiment, never the product.** It is
+  allowed only as the notebook's driver or as the scoring/glue for a run that
+  happened elsewhere (`experiments/mineru/score.py`). It does not grow a public
+  API, and `packages/` never depends on it.
+- **Seeded and offline by default.** `random.Random(seed)`, no key, no network.
+  A run that needs a model or a GPU says so and records what it skipped.
+- **Several seeds, spread reported.** One seed can crown a fragile winner.
+- **Report the metrics that punish your own candidate.** Recall alone once
+  picked a chunker that cut 76 % of its seams mid-word.
+- **Never edit a result to match a doc.** Regenerate, or mark the doc stale.
 
 ## Commands
 

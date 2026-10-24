@@ -1,11 +1,35 @@
 # Progression
 
-Last updated: 2026-10-24 (LangChain offline ingestion path and vector cleanup)
+Last updated: 2026-10-24 (ingestion/indexing/retrieval implemented and live-tested)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **End-to-end ingestion implemented and live-tested (2026-10-24).** A LangChain
+  runnable composes discovery and ingestion. Exact E5 token counts, canonical
+  Document projection, hosted Pinecone Records embedding, durable Postgres
+  manifests, per-document writer locks, batch reuse/recovery, remote verification,
+  database-only reconciliation and shared retrieval/citations are implemented.
+  The initially missing `brh-intelligence` index was provisioned with hosted
+  `multilingual-e5-large`, `truncate=NONE` and deletion protection; migration
+  `0004_index_manifest` was applied locally. An isolated live test passed PDF
+  indexing → later OCR replacement → stale-vector deletion → LangChain retrieval
+  → page citation, then removed its temporary database and vector IDs. A real
+  Postgres restart test also passed. The default namespace has not been bulk
+  indexed. See ADR-0012 and `docs/architecture/ingestion-operations.md`.
+  Validation: **111 tests passed** with Postgres and Pinecone integration
+  suites enabled; the normal offline suite skips those opt-in live tests.
+
+- **Production bugs found by live verification (2026-10-24).** Fixed the
+  inventory join (`url AS source_url`, not a nonexistent column), converted
+  extraction pages into domain `Page` objects before transactional writes,
+  removed Records/Documents API mixing, matched Pinecone SDK 10 keyword
+  signatures and `id_`/`score_` serialization, preserved original errors when
+  recording failed jobs, and rejected duplicate OCR page markers. These
+  were hidden by the earlier permissive fakes; strict SDK contracts and real
+  service acceptance tests now cover them.
 
 - **LangSmith chunking evaluation completed (2026-10-24).** Dataset
   `brh-chunking-eval-v2` contains 324 deterministic page-level needle examples
@@ -43,9 +67,9 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   `Chunk` → LangChain `Document` projection. The ingestion boundary captures
   prior chunk IDs, upserts the desired set, deletes stale IDs, and records the
   cleanup count. Tests cover deterministic vectors, stable ranking, metadata
-  projection, and fallback→PaddleOCR reindex cleanup. Pinecone adapters and
-  the durable remote index manifest remain the next production gate; current
-  cleanup is retriable but not crash-proof without reconciliation.
+  projection, and fallback→PaddleOCR reindex cleanup. This initial slice has
+  since been extended with the durable manifest and verified remote recovery
+  described in ADR-0012.
 
 - **Pinecone integrated embedding boundary implemented (2026-10-24).** The
   production adapter follows Pinecone's documented text-record flow: it sends
@@ -53,7 +77,8 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   embedding at search time, and exposes results through a LangChain
   `BaseRetriever`. No client-side production embedding is used. Offline
   contract tests cover payloads, metadata filtering, score parsing and the
-  LangChain document boundary; a live-index smoke test is still required.
+  LangChain document boundary. The later live acceptance test passed against
+  the provisioned hosted-model index.
 
 - **Incremental extraction resume fixed (2026-10-24).** `run_ingestion()` now
   fingerprints the active extraction source in its content and index keys.
@@ -62,8 +87,7 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   re-extracts, re-chunks and atomically replaces the stored pages/chunks instead
   of treating the fallback result as complete. The transition is covered by a
   regression test, and stale vector IDs are now deleted during the same
-  reindex. Crash-safe remote reconciliation still belongs to the planned
-  index-manifest phase.
+  reindex. The index-manifest/reconciliation phase is now implemented.
 
 
 - **Backend/RAG architecture audit completed (2026-10-24).** The intended
@@ -73,11 +97,9 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   UUID5 identity, PaddleOCR-first page-aware extraction with strict page
   validation, PyMuPDF fallback, transactional page/chunk replacement,
   idempotent processing jobs, collision-safe slugs, and atomic catalog export.
-  Embeddings, vector stores, retrieval, agent nodes/LLM, and MCP tools remain
-  the next implementation gate. The main future risks are two-datastore
-  consistency, stale vectors after content replacement, under-fetching before
-  page de-duplication, missing hybrid/reranked retrieval, unbounded agent
-  history, and lack of operational metrics/reconciliation.
+  The later implementation closes the vector consistency and retrieval
+  scaffolds. Agent nodes/LLM and MCP tools remain separate surface work;
+  relevance evaluation and hybrid/reranked retrieval remain quality work.
 
 - **Deterministic hybrid chunking v2 is selected and implemented
   (2026-10-24).** `brh_core.ingestion.chunking` (:mod:`chunk.py` is the facade)
@@ -201,20 +223,21 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Next up
 
-Continue the build order:
-
-0. **Evaluate chunking v2** — per family (prose/table/series/provision),
-   against the production embedder; include a size sweep (350/448 tokens) and a
-   paired test across needles. The chunker exists; whether it is the best one
-   is still an open question, and ADR-0011 says so.
-1. `embeddings/hashing.py` + `vectorstore/memory.py` — offline embedder and
-   vector store, so tests can run with no cloud.
-2. `db/repository.py` — corpus documents/pages/chunks read/write (pool and
-   migrate are done; run `make postgres-up && make migrate`).
-3. Ingestion: `metadata.py` → `extract.py` → `chunk.py` → `pipeline.py`, fed by
-   the files the inventory has already downloaded. Verify with `make ingest`.
+1. Run the corpus backfill incrementally with `make ingest ARGS="--index --limit 20"`;
+   add `--watch 60` to consume later OCR artifacts. Discovery is opt-in with
+   `--discover --download-limit 20`. Reconcile with `--index --reconcile`.
+2. Measure hosted-model retrieval by family using a reviewed LangSmith dataset.
+   Connectivity and recovery acceptance tests are not relevance scores. Compare
+   350/448-token budgets and table-row/continuation recall.
+3. Wire agent generation and MCP tools through the now-implemented
+   `RetrievalService`; then connect the frontend to those surfaces.
 
 ## Recently done
+
+- **2026-10-24 — Pipeline commits grouped by dependency.** Extraction/chunk
+  persistence and resumable hosted indexing/retrieval are committed separately;
+  ADRs and the operations guide accompany the implementation. Unrelated
+  experiment deletions and local tool configuration remain outside these groups.
 
 - **2026-10-23 — The "experiments are not code" rule, and notebook 0004.**
   `AGENTS.md` now has an *Experiments are not code* section and

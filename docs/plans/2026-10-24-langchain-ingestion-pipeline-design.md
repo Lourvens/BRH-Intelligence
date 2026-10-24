@@ -1,7 +1,7 @@
 # LangChain ingestion pipeline completion plan
 
 **Date:** 2026-10-24
-**Status:** In progress — offline LangChain path and resumable ingestion implemented
+**Status:** Ingestion/indexing/retrieval implemented and live-tested; corpus relevance evaluation remains
 **Scope:** Complete ingestion, indexing and retrieval after OCR and chunking.
 OCR execution on Kaggle is an external input and is deliberately out of scope.
 
@@ -13,10 +13,9 @@ owned by `brh_core`:
 ```text
 BRH Chunk
   → langchain_core.documents.Document
-  → langchain_core.embeddings.Embeddings
-  → LangChain-compatible vector store
-  → LangChain retriever adapter
+  → Pinecone hosted Records embedding and vector storage
   → BRH RetrievalService
+  → LangChain retriever adapter
   → LangSmith evaluation
 ```
 
@@ -24,7 +23,7 @@ The deterministic hybrid chunker, frozen BRH models, Postgres repository,
 processing ledger and citation builder remain the source of truth. LangChain
 must not replace them with untyped dictionaries or a second persistence path.
 
-## Current gap analysis
+## Original gap analysis (implementation gaps below are now resolved)
 
 Already implemented:
 
@@ -35,7 +34,7 @@ Already implemented:
 - processing job keys;
 - LangSmith chunk-preservation evaluation.
 
-Still missing or unsafe:
+Missing at the time of planning:
 
 - embedding implementations;
 - memory and Pinecone vector stores;
@@ -46,10 +45,10 @@ Still missing or unsafe:
 - shared `RetrievalService`;
 - retrieval-quality evaluation.
 
-The most important risk is the two-database boundary: Postgres can contain a
+The main design risk was the two-database boundary: Postgres can contain a
 new chunk set while Pinecone contains an old or partial vector set. The index
-manifest/reconciliation layer must therefore be designed before production
-Pinecone indexing is enabled.
+manifest/reconciliation layer is now implemented and live-tested (ADR-0012).
+Corpus relevance evaluation remains outstanding.
 
 ## Dependency graph
 
@@ -60,9 +59,9 @@ exact tokenizer + cap validation
           ↓
 Chunk → LangChain Document
           ↓
-hashing Embeddings ───── production Embeddings
+hashing Embeddings ───── Pinecone hosted Records embedding
           ↓                         ↓
-      memory VectorStore ───── Pinecone VectorStore
+      memory VectorStore ───── Pinecone integrated Records store
                          ↓
               index manifest/reconciliation
                          ↓
@@ -292,7 +291,7 @@ deterministic retrieval metrics.
 2. Hashing Embeddings
 3. Memory vector store
 4. Offline end-to-end tests
-5. Production embedding adapter
+5. Pinecone hosted embedding contract
 6. Pinecone adapter
 7. Index manifest + reconciliation
 8. RetrievalService
@@ -305,7 +304,7 @@ deterministic retrieval metrics.
 
 - exact tokenizer proves every production chunk is under the real limit;
 - offline LangChain path passes without external services;
-- embedding batches are retryable and dimension-checked;
+- hosted embedding batches are bounded/retryable and index configuration is checked;
 - vector IDs and metadata are version-safe;
 - stale vectors are deleted after re-chunking;
 - reconciliation repairs partial indexing;
@@ -314,7 +313,7 @@ deterministic retrieval metrics.
 - LangSmith reports deterministic metrics by content family;
 - agent and MCP never bypass `RetrievalService`.
 
-## First implementation slice
+## First implementation slice (completed)
 
 Implement Phases 0–2 together:
 
@@ -324,5 +323,7 @@ Implement Phases 0–2 together:
 4. LangChain-compatible memory vector store;
 5. offline ingestion/index/search integration test.
 
-Only after this slice passes should production embeddings and Pinecone be
-enabled.
+This slice and production indexing/retrieval are complete. See ADR-0012 and
+the ingestion operations runbook for the implemented commands, recovery
+guarantees and real-service tests. Phase 7's statistical relevance evaluation
+and agent/MCP surface wiring remain follow-up work.

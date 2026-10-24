@@ -50,3 +50,12 @@ Harder:
 - **Hard-code OpenAI `text-embedding-3-large`.** Rejected: weaker on French
   than multilingual-e5 and locks us to one vendor.
 - **Multilingual model for Creole now.** Deferred: no Creole corpus in v1.
+
+## Implementation status
+
+The supported production path is Pinecone integrated `multilingual-e5-large`;
+hashing/memory is implemented for offline development. The optional OpenAI
+adapter remains a scaffold, and selecting client-supplied Pinecone vectors
+fails explicitly. The provider table records the original extension contract,
+not a claim that every provider ships today. ADR-0012 selects hosted Records
+inference, exact local token counting and `truncate=NONE`.

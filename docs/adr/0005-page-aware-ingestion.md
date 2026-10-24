@@ -1,4 +1,4 @@
-# ADR-0005: Page-aware ingestion with PyMuPDF
+# ADR-0005: Page-aware extraction and canonical Markdown
 
 - **Status**: Accepted
 - **Date**: 2026-10-14
@@ -14,41 +14,64 @@ the Markdown carries no page markers, so citations could only reference
 printed page numbers scraped from tables of contents. That is not good enough
 to deep-link a viewer.
 
+The current corpus is mixed: some PDFs are born-digital and some are scanned
+or hybrid. The extraction contract must preserve PDF page identity while
+allowing a layout/OCR engine to emit tables, figures, and text. The database
+bridge and incremental OCR replacement are implemented (ADR-0012).
+
 ## Decision
 
-Extract text **per page** with **PyMuPDF** (`fitz`) during ingestion:
+Produce a canonical, page-marked representation during extraction/OCR:
 
-- `extract.py` returns a list of `(page_number, text)` for each PDF.
-- `chunk.py` chunks **within page boundaries**, so every chunk carries its
-  source `page_number` (1-based, matching the PDF viewer's `#page=N`).
-- Pages and chunks are persisted in Postgres (ADR-0003); the vector payload
-  carries `document_id`, `page_number`, and `chunk_id`.
+- the implemented batch runner is `PaddleOCR-VL` through its Transformers
+  backend, behind the narrow `Engine` protocol;
+- each engine returns ordered `OcrPage` values numbered from 1;
+- the runner writes one content-addressed document directory containing
+  `document.md`, page markers (`<!-- page N -->`), local figure assets, and
+  `meta.json`, with an append-only JSONL ledger for resume/retry;
+- `markdown.py` removes engine presentation details, converts regular HTML
+  tables to pipe Markdown, preserves irregular tables safely, and fixes asset
+  paths when pages are assembled;
+- downstream chunking consumes these page markers. A chunk records its starting
+  page and may record `page_end` when a section or table crosses a page;
+- the relational ingestion bridge persists pages/chunks in Postgres atomically
+  per document and uses their page provenance for later citations.
 
-PyMuPDF is offline, deterministic, fast, and licence-permissive (AGPL; fine
-for this project — revisit if the licence terms ever conflict).
+PyMuPDF is a deterministic fallback for PDFs without a verified OCR artifact;
+it is not the canonical extractor when PaddleOCR output is available.
 
 ## Consequences
 
 Easier:
 
 - A citation maps to a real PDF page and opens it directly.
-- Ingestion has no external parse dependency and no per-page cost.
-- Re-ingestion is trivial.
+- OCR is resumable at document granularity and does not expose half-written
+  Markdown: the final file is installed by an atomic rename.
+- Extraction and normalization are deterministic after the selected engine
+  version is fixed, and engine/version/counts are recorded in `meta.json`.
 
 Harder:
 
-- PyMuPDF does not reconstruct complex table structure the way a VLM parser
-  can. Financial tables may lose their grid. Mitigated for v1 by keeping the
-  page text alongside chunks so the model can read the surrounding rows; a
-  table-aware parser is a backlog item.
-- Scanned/image-only PDFs would need OCR. Out of scope for v1 (the RDDCF
-  corpus is digital text).
+- OCR quality and runtime depend on the engine and hardware. The selected
+  PaddleOCR-VL path is measured and versioned, but still needs regression
+  evaluation and production operational limits.
+- Table structure can be irregular or include merged cells. Regular grids are
+  normalized to pipe Markdown; irregular HTML is retained rather than padded
+  in a way that could move values under the wrong header.
+- Page markers describe PDF page order, not printed page labels. The latter
+  may be present in text but is not citation identity.
+- The OCR ledger is a local extraction ledger, not a replacement for the
+  Postgres processing ledger in ADR-0003; the bridge imports the content-hash
+  artifact without creating a second document identity.
 
 ## Alternatives considered
 
-- **Keep LlamaCloud/LlamaParse.** Rejected as the *primary* path because of
-  the page-loss problem; may return as an optional enrichment step.
-- **PDF text via `pypdf`.** Viable, but PyMuPDF is faster and gives better
-  layout/ordering heuristics.
-- **VLM table extraction per page.** Deferred on cost; strong candidate once
-  table queries matter.
+- **Keep LlamaCloud/LlamaParse.** Rejected as the primary path because of the
+  page-loss problem; may return as optional enrichment if it preserves page
+  markers.
+- **PyMuPDF-only extraction.** Kept as a future/fallback adapter, but not
+  sufficient as the current corpus path because scanned and mixed PDFs need
+  OCR/layout handling.
+- **VLM/OCR per page.** Accepted for the current extraction batch because it
+  preserves page order and handles tables/figures; its quality and cost remain
+  evaluation and operations work.

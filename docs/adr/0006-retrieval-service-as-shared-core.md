@@ -23,7 +23,9 @@ and owns:
 
 - calling the vector store (interface in `brh_core.vectorstore`),
 - assembling citations from Postgres (document title/slug/page/pdf link),
-- deduplicating chunks from the same page,
+- deduplicating repeated chunk IDs while retaining independent table rows on
+  the same page, over-fetching and expanding bounded table context,
+- rejecting unresolved or stale hits against canonical chunks/index manifests,
 - applying the minimum-score threshold that drives the agent's refusal branch.
 
 The LangGraph agent and the MCP server both call this. Neither talks to
@@ -50,3 +52,11 @@ Harder:
 - **Each surface queries Pinecone directly.** Rejected: guaranteed drift.
 - **A separate retrieval microservice.** Rejected for v1: an HTTP hop for a
   local function call, at this scale, buys nothing.
+
+## Implementation status
+
+`RetrievalService`, its LangChain retriever and the retrieval CLI are implemented
+and exercised against real Postgres/Pinecone in an isolated acceptance test.
+The agent generation nodes and MCP tool registration remain separate surface
+implementation; both must call this service. ADR-0012 records version checks
+and the decision to preserve distinct table rows instead of page de-duplication.
