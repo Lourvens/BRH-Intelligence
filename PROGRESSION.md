@@ -47,6 +47,14 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   the durable remote index manifest remain the next production gate; current
   cleanup is retriable but not crash-proof without reconciliation.
 
+- **Pinecone integrated embedding boundary implemented (2026-10-24).** The
+  production adapter follows Pinecone's documented text-record flow: it sends
+  `chunk_text` records to the configured namespace, requests hosted semantic
+  embedding at search time, and exposes results through a LangChain
+  `BaseRetriever`. No client-side production embedding is used. Offline
+  contract tests cover payloads, metadata filtering, score parsing and the
+  LangChain document boundary; a live-index smoke test is still required.
+
 - **Incremental extraction resume fixed (2026-10-24).** `run_ingestion()` now
   fingerprints the active extraction source in its content and index keys.
   A document can be processed with the PyMuPDF fallback while its OCR artifact

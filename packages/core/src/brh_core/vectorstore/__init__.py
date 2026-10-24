@@ -13,12 +13,14 @@ from brh_core.vectorstore.factory import build_vector_store
 from brh_core.vectorstore.memory import InMemoryVectorStore
 from brh_core.vectorstore.pinecone_store import (
     PineconeClientVectorStore,
+    PineconeIntegratedRetriever,
     PineconeIntegratedVectorStore,
 )
 
 __all__ = [
     "InMemoryVectorStore",
     "PineconeClientVectorStore",
+    "PineconeIntegratedRetriever",
     "PineconeIntegratedVectorStore",
     "VectorStore",
     "build_vector_store",

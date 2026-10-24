@@ -154,35 +154,36 @@ BRH_EMBEDDING_PROVIDER=hashing
 
 must support offline ingestion, indexing and retrieval tests.
 
-## Phase 3 — Production embedding adapter
+## Phase 3 — Pinecone integrated embedding contract
 
-Implement a provider-neutral LangChain `Embeddings` adapter. Provider logic
-must stay outside `run_ingestion()` and retrieval code.
+Use Pinecone's hosted embedding model for production. This is intentionally
+not represented as a LangChain `Embeddings` object: Pinecone embeds text
+records at upsert and query time. LangChain remains the application boundary
+through `Document` and `BaseRetriever`.
 
 Required behavior:
 
-- bounded batches;
-- input-order preservation;
-- timeout and bounded exponential retry;
-- rate-limit handling;
-- partial-batch failure reporting;
-- dimension validation;
-- empty-input handling;
-- provider/model identity;
-- LangSmith trace metadata.
+- explicit text field matching the Pinecone index field map;
+- bounded record batches;
+- retry and rate-limit handling;
+- scalar/filterable metadata projection;
+- query-time hosted embedding using the same field/model;
+- provider/model/index identity in the processing key;
+- LangSmith trace metadata around indexing and retrieval.
 
-Embedding identity should include:
+The production embedding identity is index-owned and should include:
 
 ```text
-provider:model:dimension:normalization:tokenizer_id
+pinecone:model:index:namespace:tokenizer_id
 ```
 
 An index cannot be marked successful if any batch is incomplete or unknown.
 
-## Phase 4 — LangChain vector stores
+## Phase 4 — LangChain/Pinecone integration
 
-Implement the memory adapter first, then the client-side Pinecone adapter
-behind the same boundary:
+The offline memory adapter is implemented. The production adapter uses
+Pinecone's integrated text-record API and exposes a LangChain
+`BaseRetriever` wrapper:
 
 - add/upsert documents with explicit IDs;
 - similarity search with scores;
@@ -192,12 +193,10 @@ behind the same boundary:
 - statistics and health checks;
 - deterministic response parsing.
 
-Use client-side LangChain embeddings plus Pinecone vectors as the first
-production path because embedding identity and reproducibility remain explicit.
-Pinecone integrated inference can be a separate later adapter.
-
 Test fake-index upsert payloads, metadata flattening, query parsing, deletes,
-namespace isolation, score ordering and missing metadata.
+namespace isolation, score ordering and missing metadata. The current
+contract tests cover this adapter offline; a live-index smoke test remains
+required before enabling the production backfill.
 
 ## Phase 5 — Index manifest and reconciliation
 
