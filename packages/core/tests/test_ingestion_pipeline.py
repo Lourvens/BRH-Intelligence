@@ -5,10 +5,12 @@ from __future__ import annotations
 from pathlib import Path
 
 import pymupdf
+import pytest
 from brh_core.catalog import catalog_path, read_catalog, write_catalog
 from brh_core.config import Settings
+from brh_core.db.index_manifest import MemoryIndexLedger
 from brh_core.ingestion.discover import discover_pdfs
-from brh_core.ingestion.extract import extract_pages
+from brh_core.ingestion.extract import InvalidOcrArtifact, extract_pages
 from brh_core.ingestion.metadata import document_id_for_sha256, sha256_of_file
 from brh_core.ingestion.pipeline import run_ingestion
 from brh_core.models import Document, JobStatus, VectorRecord
@@ -21,6 +23,25 @@ class FakeRepository:
         self.chunks: dict[str, list] = {}
         self.jobs: set[tuple[str, str, str]] = set()
         self.failed: list[tuple[str, str, str]] = []
+        self.ledger = MemoryIndexLedger()
+
+    def index_ledger(self):
+        return self.ledger
+
+    def upsert_document(self, document):
+        self.documents[document.document_id] = document
+
+    def get_documents(self, ids):
+        return {key: self.documents[key] for key in ids if key in self.documents}
+
+    def get_chunks(self, ids):
+        wanted = set(ids)
+        return {
+            chunk.chunk_id: chunk
+            for chunks in self.chunks.values()
+            for chunk in chunks
+            if chunk.chunk_id in wanted
+        }
 
     def get_document_by_sha256(self, sha256: str) -> Document | None:
         return next((doc for doc in self.documents.values() if doc.sha256 == sha256), None)
@@ -40,7 +61,7 @@ class FakeRepository:
         self.chunks[document.document_id] = list(chunks)
 
     def get_chunks_for_document(self, document_id: str) -> list:
-        return self.chunks[document_id]
+        return self.chunks.get(document_id, [])
 
     def record_job(
         self, document_id: str, stage, key: str, *, status=JobStatus.succeeded, **kwargs
@@ -65,6 +86,16 @@ class FakeVectorStore:
         for record_id in ids:
             self.records.pop(record_id, None)
         return len(ids)
+
+    def list_ids(self, prefix):
+        return [record_id for record_id in self.records if record_id.startswith(prefix)]
+
+    def matching_ids(self, records):
+        return {record.id for record in records if self.records.get(record.id) == record}
+
+    def verify(self, records, *, absent_ids=()):
+        assert all(self.records.get(record.id) == record for record in records)
+        assert not any(record_id in self.records for record_id in absent_ids)
 
 
 def make_pdf(path: Path, pages: tuple[str, ...]) -> None:
@@ -130,7 +161,7 @@ def test_rerunning_ingestion_does_not_duplicate_documents_or_chunks(tmp_path: Pa
     raw = tmp_path / "raw"
     raw.mkdir()
     pdf = raw / "report.pdf"
-    make_pdf(pdf, ("# Rapport\n\nUn texte indexable." ,))
+    make_pdf(pdf, ("# Rapport\n\nUn texte indexable.",))
     settings = Settings(
         _env_file=None,
         raw_dir=raw,
@@ -177,8 +208,7 @@ def test_fallback_content_is_reprocessed_when_ocr_artifact_arrives(tmp_path: Pat
 
     assert resumed.documents_processed == 1
     assert (
-        repository.pages[next(iter(repository.pages))][0].text.strip()
-        == "PaddleOCR canonical text"
+        repository.pages[next(iter(repository.pages))][0].text.strip() == "PaddleOCR canonical text"
     )
 
 
@@ -233,3 +263,12 @@ def test_catalog_is_atomic_and_round_trips(tmp_path: Path) -> None:
 
     assert target == catalog_path(settings)
     assert read_catalog(settings)[0]["sha256"] == next(iter(repository.documents.values())).sha256
+
+
+def test_duplicate_ocr_page_markers_are_rejected_instead_of_losing_text(tmp_path):
+    pdf = tmp_path / "report.pdf"
+    make_pdf(pdf, ("Page une", "Page deux"))
+    ocr = tmp_path / "document.md"
+    ocr.write_text("<!-- page 1 -->\nfirst\n<!-- page 1 -->\noverwrite\n<!-- page 2 -->\nend")
+    with pytest.raises(InvalidOcrArtifact, match="unique and in order"):
+        extract_pages(pdf, ocr_markdown=ocr)

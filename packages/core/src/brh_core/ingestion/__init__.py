@@ -1,12 +1,11 @@
-"""Ingestion: turn source PDFs into pages, chunks, and vectors.
+"""Ingestion: turn canonical OCR/PDF sources into pages and chunks.
 
-Auto-discovery of ``brh.ht`` is a roadmap item; today the discovery step reads
-local files from ``data/raw`` (ADR-0005).
+The CLI can discover and download ``brh.ht`` publications before processing
+local files from ``data/raw``. ``--index`` enables verified hosted embedding.
 
-The OCR stage is implemented — :mod:`brh_core.ingestion.ocr` (batch runner and
-ledger), :mod:`brh_core.ingestion.engines` (PaddleOCR-VL behind one interface)
-and :mod:`brh_core.ingestion.markdown` (markup cleanup). The rest of the pipeline
-is still a stub.
+The extraction stage is PaddleOCR-VL-first: the batch runner produces the
+canonical page-marked Markdown consumed by the relational ingestion bridge.
+PyMuPDF is a fallback for documents that do not yet have an OCR artifact.
 
 The exports below are resolved lazily so that importing a submodule — say the OCR
 runner on a laptop or in Colab — does not drag in Postgres and Pinecone.

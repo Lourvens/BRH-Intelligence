@@ -5,7 +5,7 @@ The :class:`VectorStore` interface takes **text** in and returns
 client or inside Pinecone is an implementation detail of the adapter, so
 swapping backends is an env change.
 
-TODO: implement the two Pinecone adapters and the in-memory one.
+Production uses Pinecone integrated inference; the memory store supports offline tests.
 """
 
 from brh_core.vectorstore.base import VectorStore

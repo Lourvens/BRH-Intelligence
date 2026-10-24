@@ -16,6 +16,8 @@ def chunk_to_langchain_document(
     embedding_id: str,
 ) -> LangChainDocument:
     """Project one frozen BRH chunk into the LangChain integration boundary."""
+    if chunk.document_id != source.document_id:
+        raise ValueError("Chunk and source document identities differ")
     metadata = {
         "document_id": source.document_id,
         "sha256": source.sha256,

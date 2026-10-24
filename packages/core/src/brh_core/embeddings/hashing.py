@@ -4,7 +4,7 @@ Not semantic — hash whitespace tokens into a fixed-width vector. Its only jobs
 are (a) letting tests and the ``memory`` vector backend run with no network and
 no keys, and (b) being reproducible. Never use it in production retrieval.
 
-TODO: implement.
+Vectors are reproducible across processes and require no model downloads.
 """
 
 from __future__ import annotations

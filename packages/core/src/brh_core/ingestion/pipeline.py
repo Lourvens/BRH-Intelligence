@@ -1,20 +1,13 @@
-"""Reliable local ingestion from PDF discovery through chunk persistence.
-
-Idempotency (ADR-0003): the ``index`` stage is keyed by
-``{sha256}:{chunker_id}:{embed_id}``. Re-running without ``force`` skips a
-document whose index job already succeeded for the same key, so a chunker or
-embedding-model change is the *only* thing that triggers re-indexing.
-
-The vector store is optional until the embedding phase is enabled. Postgres is
-updated atomically per document: a rerun cannot leave a new page set paired
-with an old chunk set.
-"""
+"""Incremental discovery, extraction, chunk persistence and recoverable indexing."""
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from langsmith import traceable
 
 from brh_core.config import Settings
 from brh_core.db.repository import CorpusRepository
@@ -22,6 +15,8 @@ from brh_core.ingestion.chunk import chunk_pages
 from brh_core.ingestion.chunk import chunker_id as structure_chunker_id
 from brh_core.ingestion.discover import discover_pdfs
 from brh_core.ingestion.extract import extract_pages
+from brh_core.ingestion.indexing import IndexCoordinator
+from brh_core.ingestion.langchain import chunk_to_langchain_document
 from brh_core.ingestion.metadata import (
     document_id_for_sha256,
     infer_title,
@@ -32,31 +27,128 @@ from brh_core.ingestion.metadata import (
 from brh_core.models import Chunk, Document, JobStage, JobStatus, Language, SourceKind, VectorRecord
 from brh_core.vectorstore.base import VectorStore
 
+logger = logging.getLogger(__name__)
+
 
 @dataclass(frozen=True, slots=True)
 class IngestionReport:
-    """Outcome of one ingestion run."""
-
     documents_found: int
     documents_processed: int
     documents_skipped: int
     pages_written: int
     chunks_written: int
     failures: tuple[tuple[str, str], ...] = field(default_factory=tuple)
+    documents_deferred: int = 0
+
+
+class AwaitingOcr(RuntimeError):
+    """A scan with no text remains eligible when its OCR artifact arrives."""
+
+
+def reconcile_corpus(
+    settings: Settings,
+    *,
+    repository,
+    vector_store,
+    count_tokens,
+    tokenizer_id,
+    limit: int | None = None,
+) -> IngestionReport:
+    """Repair remote records from Postgres even when source PDFs are offline."""
+    if getattr(vector_store, "requires_exact_tokens", False) and (
+        count_tokens is None or not tokenizer_id or "estimate" in tokenizer_id
+    ):
+        raise ValueError("Pinecone reconciliation requires the exact production tokenizer")
+    if count_tokens is None:
+        from brh_core.ingestion.chunking.tokens import estimate_tokens
+
+        count_tokens = estimate_tokens
+        tokenizer_id = tokenizer_id or settings.chunk_tokenizer_id
+    ledger = repository.index_ledger()
+    coordinator = IndexCoordinator(
+        vector_store,
+        ledger,
+        target_id(settings, vector_store),
+        batch_size=settings.index_batch_size,
+    )
+    documents = repository.list_documents()
+    processed = skipped = chunks_written = 0
+    failures = []
+    for document in documents[:limit]:
+        document_id = document.document_id
+        try:
+            with ledger.lock(document_id):
+                # Re-read after acquiring the same lock used by ingestion.
+                document = repository.get_document_by_sha256(document.sha256)
+                if document is None:
+                    skipped += 1
+                    continue
+                chunks = repository.get_chunks_for_document(document.document_id)
+                if not chunks:
+                    skipped += 1
+                    continue
+                content_key = document.metadata.get("content_key")
+                if not content_key or document.metadata.get("tokenizer_id") != tokenizer_id:
+                    raise ValueError("Stored chunks require ingestion with the current tokenizer")
+                if document.metadata.get("chunker_id") != chunker_id(
+                    settings, tokenizer_id=tokenizer_id
+                ):
+                    raise ValueError("Stored chunks require ingestion with the current chunker")
+                if any(count_tokens(chunk.text) > _chunk_cap(settings) for chunk in chunks):
+                    raise ValueError("Stored chunk exceeds current token budget; re-ingest source")
+                version = (
+                    f"{content_key}:{embed_id(settings)}:{settings.vector_backend.value}:"
+                    f"{settings.pinecone_index_name}:{settings.pinecone_namespace}:"
+                    f"{settings.pinecone_text_field}"
+                )
+                records = []
+                for chunk in chunks:
+                    projected = chunk_to_langchain_document(
+                        chunk,
+                        document,
+                        chunker_id=document.metadata["chunker_id"],
+                        tokenizer_id=tokenizer_id,
+                        embedding_id=embed_id(settings),
+                    )
+                    records.append(
+                        VectorRecord(
+                            id=projected.id,
+                            text=projected.page_content,
+                            metadata=projected.metadata,
+                        )
+                    )
+                metrics = coordinator.reconcile(document.document_id, version, records)
+                repository.record_job(
+                    document.document_id, JobStage.index, version, metrics=metrics
+                )
+                processed += 1
+                chunks_written += len(chunks)
+        except Exception as exc:
+            logger.exception("Reconciliation failed for %s", document_id)
+            failures.append((document_id, str(exc)))
+    return IngestionReport(len(documents), processed, skipped, 0, chunks_written, tuple(failures))
 
 
 def chunker_id(settings: Settings, *, tokenizer_id: str | None = None) -> str:
-    """Stable id for the active structure-aware strategy."""
     return structure_chunker_id(
-        max_tokens=_chunk_cap(settings),
-        tokenizer_id=tokenizer_id or settings.chunk_tokenizer_id,
+        max_tokens=_chunk_cap(settings), tokenizer_id=tokenizer_id or settings.chunk_tokenizer_id
     )
 
 
 def embed_id(settings: Settings) -> str:
-    """Stable id for the embedding strategy, e.g. ``pinecone:multilingual-e5-large``."""
     return (
         f"{settings.embedding_provider.value}:{settings.embedding_model}:{settings.embedding_dim}"
+    )
+
+
+def target_id(settings: Settings, vector_store) -> str:
+    return getattr(
+        vector_store,
+        "target_id",
+        (
+            f"{settings.vector_backend.value}:{settings.pinecone_index_name}:"
+            f"{settings.pinecone_namespace}:{embed_id(settings)}"
+        ),
     )
 
 
@@ -67,10 +159,11 @@ def index_key(
     tokenizer_id: str | None = None,
     extraction_key: str = "unknown-extraction",
 ) -> str:
-    """Idempotency key for content, extraction and embedding versions."""
     return (
-        f"{sha256}:{extraction_key}:{chunker_id(settings, tokenizer_id=tokenizer_id)}"
-        f":{embed_id(settings)}"
+        f"{sha256}:{extraction_key}:{chunker_id(settings, tokenizer_id=tokenizer_id)}:"
+        f"{embed_id(settings)}:{settings.vector_backend.value}:"
+        f"{settings.pinecone_index_name}:{settings.pinecone_namespace}:"
+        f"{settings.pinecone_text_field}"
     )
 
 
@@ -84,26 +177,57 @@ def run_ingestion(
     limit: int | None = None,
     count_tokens: Callable[[str], int] | None = None,
     tokenizer_id: str | None = None,
+    index_ledger=None,
+    reconcile: bool = False,
 ) -> IngestionReport:
-    """Ingest every discovered PDF; contain per-file errors."""
+    """Resume changed documents; a bounded pass advances beyond completed files."""
+    if limit is not None and limit < 0:
+        raise ValueError("limit must be non-negative")
+    if getattr(vector_store, "requires_exact_tokens", False) and (
+        count_tokens is None or not tokenizer_id or "estimate" in tokenizer_id
+    ):
+        raise ValueError("Pinecone indexing requires the exact production tokenizer")
+    ledger = index_ledger or repository.index_ledger()
+    coordinator = (
+        IndexCoordinator(
+            vector_store,
+            ledger,
+            target_id(settings, vector_store),
+            batch_size=settings.index_batch_size,
+        )
+        if vector_store is not None
+        else None
+    )
     paths = discover_pdfs(raw_dir or settings.resolved_raw_dir)
-    if limit is not None:
-        paths = paths[:limit]
-
-    processed = skipped = pages_written = chunks_written = 0
-    failures: list[tuple[str, str]] = []
+    processed = skipped = pages_written = chunks_written = deferred = 0
+    failures = []
+    seen = set()
     for pdf_path in paths:
+        if limit is not None and processed >= limit:
+            break
         try:
-            result = _ingest_document(
-                settings,
-                repository=repository,
-                vector_store=vector_store,
-                pdf_path=pdf_path,
-                force=force,
-                count_tokens=count_tokens,
-                tokenizer_id=tokenizer_id,
-            )
-        except Exception as exc:  # one bad document must not stop a backfill
+            sha = sha256_of_file(pdf_path)
+            if sha in seen:
+                skipped += 1
+                continue
+            seen.add(sha)
+            with ledger.lock(document_id_for_sha256(sha)):
+                result = _ingest_document(
+                    settings,
+                    repository=repository,
+                    coordinator=coordinator,
+                    pdf_path=pdf_path,
+                    sha256=sha,
+                    force=force,
+                    reconcile=reconcile,
+                    count_tokens=count_tokens,
+                    tokenizer_id=tokenizer_id,
+                )
+        except AwaitingOcr:
+            deferred += 1
+            continue
+        except Exception as exc:
+            logger.exception("Ingestion failed for %s", pdf_path)
             failures.append((str(pdf_path), str(exc)))
             continue
         if result is None:
@@ -112,64 +236,95 @@ def run_ingestion(
         processed += 1
         pages_written += result[0]
         chunks_written += result[1]
-
     return IngestionReport(
-        documents_found=len(paths),
-        documents_processed=processed,
-        documents_skipped=skipped,
-        pages_written=pages_written,
-        chunks_written=chunks_written,
-        failures=tuple(failures),
+        len(paths), processed, skipped, pages_written, chunks_written, tuple(failures), deferred
     )
 
 
+@traceable(
+    name="brh.ingestion.document",
+    process_inputs=lambda values: {
+        "sha256": values.get("sha256"),
+        "path": str(values.get("pdf_path")),
+        "tokenizer_id": values.get("tokenizer_id"),
+        "force": values.get("force"),
+        "reconcile": values.get("reconcile"),
+    },
+)
 def _ingest_document(
     settings: Settings,
     *,
-    repository: CorpusRepository,
-    vector_store: VectorStore | None,
-    pdf_path: Path,
-    force: bool,
-    count_tokens: Callable[[str], int] | None,
-    tokenizer_id: str | None,
-) -> tuple[int, int] | None:
-    sha256 = sha256_of_file(pdf_path)
+    repository,
+    coordinator,
+    pdf_path,
+    sha256,
+    force,
+    reconcile,
+    count_tokens,
+    tokenizer_id,
+):
     existing = repository.get_document_by_sha256(sha256)
     document_id = existing.document_id if existing else document_id_for_sha256(sha256)
     ocr_path = settings.resolved_ocr_dir / sha256 / "document.md"
     extraction_key, extraction_source = _extraction_identity(pdf_path, ocr_path)
-    index_key_value = index_key(
-        sha256,
-        settings,
-        tokenizer_id=tokenizer_id,
-        extraction_key=extraction_key,
+    content_key = f"{sha256}:{extraction_key}:{chunker_id(settings, tokenizer_id=tokenizer_id)}"
+    version = index_key(sha256, settings, tokenizer_id=tokenizer_id, extraction_key=extraction_key)
+    has_content = bool(
+        existing
+        and existing.metadata.get("content_key") == content_key
+        and repository.job_succeeded(document_id, JobStage.chunk, content_key)
     )
-    content_key = (
-        f"{sha256}:{extraction_key}:{chunker_id(settings, tokenizer_id=tokenizer_id)}"
+    needs_index = coordinator is not None and (
+        not coordinator.succeeded(document_id, version)
+        or not repository.job_succeeded(document_id, JobStage.index, version)
     )
-    has_content = repository.job_succeeded(document_id, JobStage.chunk, content_key)
-    needs_index = vector_store is not None and not repository.job_succeeded(
-        document_id, JobStage.index, index_key_value
-    )
-    if not force and has_content and not needs_index:
+    if not force and has_content and not needs_index and not reconcile:
         return None
-
-    pages: list = []
-    chunks: list[Chunk] = []
-    previous_chunk_ids: set[str] = set()
-    if force or not has_content:
-        if vector_store is not None and existing is not None:
-            previous_chunk_ids = {
-                chunk.chunk_id for chunk in repository.get_chunks_for_document(document_id)
-            }
-        try:
+    pages = []
+    chunks = []
+    document = existing
+    stage = JobStage.extract
+    try:
+        if force or not has_content:
+            if coordinator and existing:
+                coordinator.remember(
+                    document_id,
+                    [chunk.chunk_id for chunk in repository.get_chunks_for_document(document_id)],
+                )
+            if existing is None:
+                document = _build_document(
+                    settings,
+                    repository,
+                    pdf_path,
+                    sha256,
+                    document_id,
+                    None,
+                    0,
+                    extraction_source=extraction_source,
+                )
+                repository.upsert_document(document)
             pages = extract_pages(pdf_path, ocr_markdown=ocr_path)
+            if not any(page.text.strip() for page in pages):
+                repository.record_job(
+                    document_id,
+                    stage,
+                    extraction_key,
+                    status=JobStatus.pending,
+                    error="Awaiting readable OCR",
+                )
+                raise AwaitingOcr(document_id)
+            if _extraction_identity(pdf_path, ocr_path)[0] != extraction_key:
+                raise RuntimeError("Extraction artifact changed while being read; retry")
+            stage = JobStage.chunk
             chunks = chunk_pages(
-                document_id,
-                pages,
-                max_tokens=_chunk_cap(settings),
-                count_tokens=count_tokens,
+                document_id, pages, max_tokens=_chunk_cap(settings), count_tokens=count_tokens
             )
+            if not chunks:
+                raise ValueError("Extraction produced text but no retrievable chunks")
+            if count_tokens and any(
+                count_tokens(chunk.text) > _chunk_cap(settings) for chunk in chunks
+            ):
+                raise ValueError("Chunk exceeds exact token budget")
             document = _build_document(
                 settings,
                 repository,
@@ -180,69 +335,67 @@ def _ingest_document(
                 len(pages),
                 extraction_source=extraction_source,
             )
+            document = document.model_copy(
+                update={
+                    "metadata": {
+                        **document.metadata,
+                        "content_key": content_key,
+                        "chunker_id": chunker_id(settings, tokenizer_id=tokenizer_id),
+                        "tokenizer_id": tokenizer_id or settings.chunk_tokenizer_id,
+                    }
+                }
+            )
             _replace_content(repository, document, pages, chunks)
             repository.record_job(
                 document_id,
                 JobStage.extract,
                 extraction_key,
-                metrics={
-                    "pages": len(pages),
-                    "path": str(pdf_path),
-                    "source": extraction_source,
-                },
+                metrics={"pages": len(pages), "source": extraction_source},
             )
             repository.record_job(
-                document_id,
-                JobStage.chunk,
-                content_key,
-                metrics={
-                    "chunks": len(chunks),
-                    "chunker": chunker_id(settings, tokenizer_id=tokenizer_id),
-                },
+                document_id, JobStage.chunk, content_key, metrics={"chunks": len(chunks)}
             )
-        except Exception as exc:
-            repository.record_job(
-                document_id, JobStage.extract, sha256, status=JobStatus.failed, error=str(exc)
-            )
-            raise
-    elif vector_store is not None:
-        stored = repository.get_chunks_for_document(document_id)
-        chunks = list(stored)
-
-    if vector_store is not None and (force or needs_index):
-        records = [_vector_record(chunk) for chunk in chunks]
-        desired_chunk_ids = {record.id for record in records}
-        stale_chunk_ids = sorted(previous_chunk_ids - desired_chunk_ids)
+        elif coordinator:
+            chunks = repository.get_chunks_for_document(document_id)
+        if coordinator:
+            stage = JobStage.index
+            records = []
+            for chunk in chunks:
+                projected = chunk_to_langchain_document(
+                    chunk,
+                    document,
+                    chunker_id=chunker_id(settings, tokenizer_id=tokenizer_id),
+                    tokenizer_id=tokenizer_id or settings.chunk_tokenizer_id,
+                    embedding_id=embed_id(settings),
+                )
+                records.append(
+                    VectorRecord(
+                        id=projected.id, text=projected.page_content, metadata=projected.metadata
+                    )
+                )
+            metrics = coordinator.reconcile(document_id, version, records)
+            repository.record_job(document_id, stage, version, metrics=metrics)
+    except AwaitingOcr:
+        raise
+    except Exception as exc:
         try:
-            vector_store.upsert(records)
-            if stale_chunk_ids:
-                vector_store.delete(stale_chunk_ids)
-            repository.record_job(
-                document_id,
-                JobStage.index,
-                index_key_value,
-                metrics={
-                    "chunks": len(records),
-                    "embedding": embed_id(settings),
-                    "stale_vectors_deleted": len(stale_chunk_ids),
-                },
-            )
-        except Exception as exc:
-            repository.record_job(
-                document_id,
-                JobStage.index,
-                index_key_value,
-                status=JobStatus.failed,
-                error=str(exc),
-            )
-            raise
-
+            if document is not None:
+                repository.record_job(
+                    document_id,
+                    stage,
+                    version if stage is JobStage.index else content_key,
+                    status=JobStatus.failed,
+                    error=str(exc),
+                )
+        except Exception:
+            logger.exception("Could not record failed %s job for %s", stage, document_id)
+        raise
     return len(pages), len(chunks)
 
 
 def _chunk_cap(settings: Settings) -> int:
     """Keep content below the model limit, including a configurable reserve."""
-    safe_limit = max(1, 512 - settings.chunk_token_reserve)
+    safe_limit = min(507, max(1, 512 - settings.chunk_token_reserve))
     return min(settings.chunk_token_limit, safe_limit)
 
 
@@ -262,9 +415,7 @@ def _build_document(
     source_slug = slugify(str(source.get("slug"))) if source.get("slug") else base_slug
     owner = repository.get_document_by_slug(source_slug)
     slug = (
-        source_slug
-        if owner is None or owner.sha256 == sha256
-        else f"{source_slug}-{sha256[:12]}"
+        source_slug if owner is None or owner.sha256 == sha256 else f"{source_slug}-{sha256[:12]}"
     )
     source_kind = (
         SourceKind.pdf_web
@@ -287,7 +438,10 @@ def _build_document(
         publication_date=_publication_date(source),
         volume=infer_volume(pdf_path.stem),
         page_count=page_count,
-        metadata={"extraction_source": extraction_source},
+        metadata={
+            **(existing.metadata if existing else {}),
+            "extraction_source": extraction_source,
+        },
     )
 
 
@@ -316,7 +470,7 @@ def _replace_content(
 ) -> None:
     replace = getattr(repository, "replace_document_content", None)
     if replace is not None:
-        replace(document, pages, chunks)
+        replace(document, [_page(document.document_id, page) for page in pages], chunks)
         return
     repository.upsert_document(document)
     repository.upsert_pages([_page(document.document_id, page) for page in pages])
@@ -327,18 +481,3 @@ def _page(document_id: str, page: object):
     from brh_core.models import Page
 
     return Page(document_id=document_id, page_number=page.page_number, text=page.text)
-
-
-def _vector_record(chunk: Chunk) -> VectorRecord:
-    return VectorRecord(
-        id=chunk.chunk_id,
-        text=chunk.text,
-        metadata={
-            "document_id": chunk.document_id,
-            "page_number": chunk.page_number,
-            "page_end": chunk.page_end,
-            "chunk_type": chunk.chunk_type.value,
-            "section_path": list(chunk.section_path),
-            **chunk.metadata,
-        },
-    )

@@ -33,3 +33,15 @@ class VectorStore(Protocol):
     def count(self) -> int:
         """Number of vectors currently indexed (best effort)."""
         ...
+
+    def list_ids(self, prefix: str) -> list[str]:
+        """Enumerate IDs owned by a document prefix for reconciliation."""
+        ...
+
+    def matching_ids(self, records: Sequence[VectorRecord]) -> set[str]:
+        """Return IDs whose stored text and version metadata match the intent."""
+        ...
+
+    def verify(self, records: Sequence[VectorRecord], *, absent_ids: Sequence[str] = ()) -> None:
+        """Raise unless desired versions are visible and stale IDs are absent."""
+        ...

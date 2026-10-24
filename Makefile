@@ -26,7 +26,7 @@ seed: ## Copy the sibling project's PDFs + parsed Markdown into data/
 	./scripts/seed-data.sh
 
 ingest: ## Discover PDFs in data/raw and run the ingestion pipeline
-	uv run python -m brh_core.ingestion
+	uv run python -m brh_core.ingestion $(ARGS)
 
 inventory: ## Catalogue brh.ht and download the missing documents (ARGS="--limit 20")
 	uv run python -m brh_core.inventory $(ARGS)
