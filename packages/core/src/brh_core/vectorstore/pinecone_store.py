@@ -51,6 +51,13 @@ class PineconeIntegratedVectorStore:
         """
         raise NotImplementedError("TODO: upsert_records")
 
+    def delete(self, ids: Sequence[str]) -> int:
+        """Delete stale IDs from the integrated-inference namespace."""
+        if not ids:
+            return 0
+        self._index.delete(ids=list(ids), namespace=self._namespace)
+        return len(ids)
+
     def search(
         self,
         query: str,
@@ -86,6 +93,13 @@ class PineconeClientVectorStore:
     def upsert(self, records: Sequence[VectorRecord]) -> int:
         """Embed locally; store ``text`` in metadata for display."""
         raise NotImplementedError("TODO: index.upsert(vectors=[...])")
+
+    def delete(self, ids: Sequence[str]) -> int:
+        """Delete stale IDs from the client-side namespace."""
+        if not ids:
+            return 0
+        self._index.delete(ids=list(ids), namespace=self._namespace)
+        return len(ids)
 
     def search(
         self,

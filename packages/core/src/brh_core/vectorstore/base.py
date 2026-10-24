@@ -16,6 +16,10 @@ class VectorStore(Protocol):
         """Index records. Returns the number written."""
         ...
 
+    def delete(self, ids: Sequence[str]) -> int:
+        """Delete vector IDs and return the number requested for deletion."""
+        ...
+
     def search(
         self,
         query: str,
