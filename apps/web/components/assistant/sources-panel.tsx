@@ -34,15 +34,15 @@ export function SourcesPanel({
 
   return (
     <div className="flex h-full w-full min-w-0 shrink-0 flex-col overflow-hidden bg-surface">
-      <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
+      <div className="flex h-16 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
         <div>
           <h2 className="font-display text-caption font-bold text-navy-ink">
-            Sources documentaires
+            Sources
           </h2>
           <p
             role="status"
             aria-live="polite"
-            className="text-[10px] text-ink-muted"
+            className="text-caption text-ink-muted"
           >
             <motion.span
               key={unique.length}
@@ -67,7 +67,7 @@ export function SourcesPanel({
                   size="icon-sm"
                   onClick={onCollapse}
                   aria-label="Replier les sources"
-                  className="text-ink-muted transition-[background-color,color,transform] duration-150 hover:bg-surface-alt hover:text-navy-ink active:scale-95 motion-reduce:transition-none"
+                  className="text-ink-muted transition-colors duration-150 hover:bg-surface-alt hover:text-navy-ink motion-reduce:transition-none"
                 >
                   <PanelRightClose className="size-4" aria-hidden />
                 </Button>
@@ -82,7 +82,7 @@ export function SourcesPanel({
               size="icon-sm"
               onClick={onClose}
               aria-label="Fermer les sources"
-              className="text-ink-muted transition-[background-color,color,transform] duration-150 hover:bg-surface-alt hover:text-navy-ink active:scale-95 motion-reduce:transition-none xl:hidden"
+              className="text-ink-muted transition-colors duration-150 hover:bg-surface-alt hover:text-navy-ink motion-reduce:transition-none xl:hidden"
             >
               <X className="size-4" />
             </Button>
@@ -104,13 +104,13 @@ export function SourcesPanel({
             transition={{ duration: reduceMotion ? 0.01 : 0.16 }}
             className="flex w-full flex-1 flex-col items-center justify-center px-6 text-center"
           >
-            <div className="mb-3 grid size-12 place-items-center rounded-2xl bg-surface-alt text-teal">
+            <div className="mb-3 grid size-12 place-items-center rounded-sm bg-surface-alt text-teal">
               <FileSearch className="size-6" aria-hidden />
             </div>
             <p className="font-display text-small font-bold text-navy-ink">
               Les sources apparaîtront ici
             </p>
-            <p className="mt-1.5 max-w-[220px] text-[11px] leading-relaxed text-ink-muted">
+            <p className="mt-1.5 max-w-[220px] text-small leading-relaxed text-ink-muted">
               Chaque réponse renvoie à un document et à une page du corpus.
             </p>
           </motion.div>
@@ -131,13 +131,13 @@ export function SourcesPanel({
               type="always"
               className="h-full w-full overscroll-contain [&_[data-slot=scroll-area-viewport]]:overflow-x-hidden"
             >
-              <div className="w-full min-w-0 max-w-full overflow-hidden pb-6 pl-4 pr-6 pt-4">
+              <div className="w-full min-w-0 max-w-full overflow-hidden p-4">
                 <SourceDetail key={selected.id} citation={selected} />
 
                 {unique.length > 1 ? (
                   <div className="mt-5 w-full min-w-0">
-                    <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
-                      Toutes les sources
+                    <div className="mb-2 px-1 text-caption font-bold uppercase tracking-wider text-ink-muted">
+                      Références de la conversation
                     </div>
                     <SourceList
                       citations={unique}
@@ -152,7 +152,7 @@ export function SourcesPanel({
         )}
       </AnimatePresence>
 
-      <div className="shrink-0 border-t border-border px-4 py-3 text-[10px] leading-relaxed text-ink-muted">
+      <div className="shrink-0 border-t border-border px-4 py-3 text-caption leading-relaxed text-ink-muted">
         Vérifiez toujours la page originale du document cité.
       </div>
     </div>

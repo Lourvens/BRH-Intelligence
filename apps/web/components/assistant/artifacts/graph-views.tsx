@@ -17,7 +17,7 @@ import { MermaidGraph } from "./mermaid-graph";
 
 function GraphLegend({ kinds }: { kinds: string[] }) {
   return (
-    <div className="flex flex-wrap gap-x-3 gap-y-1 border-b border-border px-3.5 py-1.5 text-[9px] text-ink-muted">
+    <div className="flex flex-wrap gap-x-3 gap-y-1 border-b border-border px-3.5 py-1.5 text-[11px] text-ink-muted">
       {kinds.map((kind, index) => (
         <span key={kind} className="inline-flex items-center gap-1">
           <span
@@ -54,18 +54,18 @@ export function GraphViews({
 
   return (
     <Tabs value={view} onValueChange={setView} className="gap-0">
-      <div className="flex items-center justify-between gap-2 border-b border-border px-3.5 py-2">
-        <TabsList className="h-7 rounded-lg bg-surface-alt p-0.5">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-3.5 py-2">
+        <TabsList variant="line" className="h-10 gap-3 p-0">
           <TabsTrigger
             value="network"
-            className="gap-1 px-2 text-[10px] data-[state=active]:bg-surface"
+            className="h-10 gap-1 rounded-none px-0 text-caption shadow-none after:bottom-0"
           >
             <Network className="size-3" aria-hidden />
             Réseau
           </TabsTrigger>
           <TabsTrigger
             value="diagram"
-            className="gap-1 px-2 text-[10px] data-[state=active]:bg-surface"
+            className="h-10 gap-1 rounded-none px-0 text-caption shadow-none after:bottom-0"
           >
             <Workflow className="size-3" aria-hidden />
             Diagramme
@@ -81,26 +81,26 @@ export function GraphViews({
             }}
             variant="outline"
             size="sm"
-            className="h-7"
+            className="h-9 rounded-sm"
             aria-label="Orientation du diagramme"
           >
             <ToggleGroupItem
               value="TD"
               aria-label="Orientation verticale"
-              className="h-7 min-w-7 px-1.5"
+              className="h-9 min-w-9 rounded-sm px-1.5 shadow-none"
             >
               <ArrowDown className="size-3" aria-hidden />
             </ToggleGroupItem>
             <ToggleGroupItem
               value="LR"
               aria-label="Orientation horizontale"
-              className="h-7 min-w-7 px-1.5"
+              className="h-9 min-w-9 rounded-sm px-1.5 shadow-none"
             >
               <ArrowRight className="size-3" aria-hidden />
             </ToggleGroupItem>
           </ToggleGroup>
         ) : (
-          <span className="hidden text-[9px] text-ink-muted sm:block">
+          <span className="hidden text-[11px] text-ink-muted sm:block">
             {nodes.length} nœuds · {edges.length} relations
           </span>
         )}

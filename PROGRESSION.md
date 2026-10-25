@@ -7,6 +7,20 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
+- **Assistant flat UI redesign completed (2026-10-25).** Separate analysis and
+  implementation agents redesigned conversation navigation, the chat header /
+  composer, source inspector and generated artifacts with solid surfaces,
+  dividers and readable typography. Sources now shares the answer toolbar with
+  Copy and Share; sharing includes the answer and citations with clipboard
+  fallback. Framer Motion handles disclosure, selection and action feedback,
+  respecting reduced motion. Workspace / scroll / feedback hooks and pure chart
+  option builders preserve separation of concerns. Charts have data tabs,
+  larger plots and adaptive labels. Web TypeScript and whitespace checks pass;
+  non-browser smoke checks cover 10 charts, 4 graphs and both diagram
+  orientations. The user requested no further browser checks, so the final UI
+  has not been visually verified. See
+  `docs/plans/2026-10-25-assistant-flat-design.md`.
+
 - **Qwen rebuild implemented; backfill running (2026-10-25).** Implemented the
   approved OpenRouter embedding adapter, 768-token target / 1536-token hybrid
   ceiling, bounded document/request parallelism and resumable derived-data reset.

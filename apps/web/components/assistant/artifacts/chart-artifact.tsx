@@ -1,5 +1,11 @@
-import type { TableArtifact } from "@/lib/chat/types";
+"use client";
 
+import { Table2 } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { chartUnit } from "@/lib/chat/decision";
+import type { TableArtifact } from "@/lib/chat/types";
+import { ArtifactHeader, ArtifactProvenance } from "./artifact-frame";
+import { ArtifactTable } from "./artifact-table";
 import { iconFor, labelFor } from "./chart-utils";
 import { EChartsChart } from "./echarts-chart";
 import { ExpandableVisualization } from "./expandable-visualization";
@@ -7,35 +13,23 @@ import { ExpandableVisualization } from "./expandable-visualization";
 export function ChartArtifactCard({ artifact }: { artifact: TableArtifact }) {
   const chartType = artifact.decision.chartType ?? "line";
   const Icon = iconFor(chartType);
+  const unit = chartUnit(artifact);
 
   return (
-    <figure className="overflow-hidden rounded-xl border border-border bg-surface">
-      <div className="flex items-start justify-between gap-3 border-b border-border px-3.5 py-3">
-        <div>
-          <figcaption className="font-display text-caption font-bold text-navy-ink">
-            {artifact.title}
-          </figcaption>
-          <p className="text-[10px] text-ink-muted">{artifact.subtitle}</p>
+    <figure className="min-w-0 overflow-hidden rounded-sm border border-border bg-surface">
+      <ArtifactHeader artifact={artifact} icon={Icon} label={labelFor(chartType)} actions={<ExpandableVisualization title={artifact.title} subtitle={artifact.subtitle} source={artifact.source} expanded={<EChartsChart artifact={artifact} expanded />} />} />
+      <Tabs defaultValue="chart" className="gap-0">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-4">
+          <TabsList variant="line" aria-label={`Présentation de ${artifact.title}`} className="h-11 gap-3 p-0">
+            <TabsTrigger value="chart" className="h-11 rounded-none px-0 text-caption shadow-none after:bottom-0 after:bg-navy-ink"><Icon className="size-3.5" aria-hidden /> Graphique</TabsTrigger>
+            <TabsTrigger value="data" className="h-11 rounded-none px-0 text-caption shadow-none after:bottom-0 after:bg-navy-ink"><Table2 className="size-3.5" aria-hidden /> Données</TabsTrigger>
+          </TabsList>
+          {unit ? <span className="py-2 text-caption text-ink-muted">Unité : {unit}</span> : null}
         </div>
-        <div className="flex shrink-0 items-center gap-0.5">
-          <span className="inline-flex items-center gap-1 rounded border border-azure/20 bg-azure/5 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-teal">
-            <Icon className="size-3" aria-hidden />
-            {labelFor(chartType)}
-          </span>
-          <ExpandableVisualization
-            title={artifact.title}
-            subtitle={artifact.subtitle}
-            source={artifact.source}
-            expanded={<EChartsChart artifact={artifact} expanded />}
-          />
-        </div>
-      </div>
-
-      <EChartsChart artifact={artifact} />
-
-      <div className="border-t border-border px-3.5 py-2 text-[10px] text-ink-muted">
-        Source : {artifact.source}
-      </div>
+        <TabsContent value="chart" className="min-w-0"><EChartsChart artifact={artifact} /></TabsContent>
+        <TabsContent value="data" className="min-w-0"><ArtifactTable artifact={artifact} /></TabsContent>
+      </Tabs>
+      <ArtifactProvenance source={artifact.source} />
     </figure>
   );
 }

@@ -18,7 +18,7 @@ function CitationMarks({
           type="button"
           onClick={() => onSelectCitation(citation.id)}
           aria-label={`Voir la source ${index + 1}`}
-          className="font-mono text-[9px] font-bold text-teal hover:underline"
+          className="font-mono text-caption font-bold rounded-sm bg-gold px-1 py-0.5 text-navy-deep hover:underline"
         >
           [{index + 1}]
         </button>
@@ -71,7 +71,7 @@ export function MessageContent({
       );
     },
     strong: ({ children }) => (
-      <strong className="box-decoration-clone rounded-sm bg-gold/30 px-1 py-0.5 font-semibold text-navy-ink dark:bg-gold/25">
+      <strong className="font-semibold text-navy-ink">
         {children}
       </strong>
     ),
@@ -79,7 +79,7 @@ export function MessageContent({
       <em className="italic text-teal">{children}</em>
     ),
     blockquote: ({ children }) => (
-      <blockquote className="rounded-r-lg border-l-2 border-gold bg-gold/10 px-3.5 py-2.5 text-[14px] italic leading-7 text-ink [&>p]:text-[14px] [&>p]:leading-7 [&>p]:text-ink">
+      <blockquote className="rounded-r-sm border-l-2 border-gold bg-gold/10 px-3.5 py-2.5 text-[14px] italic leading-7 text-ink [&>p]:text-[14px] [&>p]:leading-7 [&>p]:text-ink">
         {children}
       </blockquote>
     ),
@@ -110,14 +110,14 @@ export function MessageContent({
       </code>
     ),
     pre: ({ children }) => (
-      <pre className="overflow-x-auto rounded-lg border border-border bg-surface-alt p-3 text-[11px] leading-relaxed">
+      <pre className="overflow-x-auto rounded-sm border border-border bg-surface-alt p-3 text-caption leading-relaxed">
         {children}
       </pre>
     ),
     hr: () => <hr className="border-border" />,
     table: ({ children }) => (
-      <div className="overflow-x-auto rounded-lg border border-border">
-        <table className="w-full border-collapse text-left text-[11px]">
+      <div className="overflow-x-auto rounded-sm border border-border">
+        <table className="w-full border-collapse text-left text-caption">
           {children}
         </table>
       </div>

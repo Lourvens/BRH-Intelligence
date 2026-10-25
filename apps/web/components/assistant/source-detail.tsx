@@ -9,7 +9,7 @@ import {
   FileText,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useActionFeedback } from "@/lib/hooks/use-action-feedback";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,30 +23,15 @@ import type { ChatCitation } from "@/lib/chat/types";
 import { cn } from "@/lib/utils";
 
 export function SourceDetail({ citation }: { citation: ChatCitation }) {
-  const [copyState, setCopyState] = useState<"idle" | "done" | "error">(
-    "idle",
-  );
-  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const feedback = useActionFeedback();
+  const copyState = feedback.state === "success" ? "done" : feedback.state;
   const reduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    return () => {
-      if (copyTimer.current) clearTimeout(copyTimer.current);
-    };
-  }, []);
-
-  async function copyCitation() {
-    try {
-      const pdf = citation.pdfUrl ? `\n${citation.pdfUrl}` : "";
-      await navigator.clipboard.writeText(
-        `« ${citation.snippet} » — ${citation.title}, p. ${citation.page}${pdf}`,
-      );
-      setCopyState("done");
-      if (copyTimer.current) clearTimeout(copyTimer.current);
-      copyTimer.current = setTimeout(() => setCopyState("idle"), 2200);
-    } catch {
-      setCopyState("error");
-    }
+  function copyCitation() {
+    const pdf = citation.pdfUrl ? `\n${citation.pdfUrl}` : "";
+    return feedback.run(() => navigator.clipboard.writeText(
+      `« ${citation.snippet} » — ${citation.title}, p. ${citation.page}${pdf}`,
+    ));
   }
 
   return (
@@ -58,38 +43,38 @@ export function SourceDetail({ citation }: { citation: ChatCitation }) {
         ease: [0.2, 0, 0, 1],
       }}
     >
-      <div className="mb-2 px-1 text-[10px] font-bold uppercase tracking-wider text-ink-muted">
-        Source principale citée
+      <div className="mb-2 px-1 text-caption font-bold uppercase tracking-wider text-ink-muted">
+        Source sélectionnée
       </div>
-      <Card className="w-full min-w-0 max-w-full gap-0 overflow-hidden rounded-xl border-border bg-gradient-to-b from-surface to-bg py-0 shadow-none">
-        <CardContent className="min-w-0 p-4">
+      <Card className="w-full min-w-0 max-w-full gap-0 overflow-hidden rounded-none border-0 bg-surface py-0 shadow-none">
+        <CardContent className="min-w-0 p-0">
           <div className="mb-3 flex items-start gap-2.5">
-            <div className="grid size-8 shrink-0 place-items-center rounded-lg bg-navy text-gold">
+            <div className="grid size-8 shrink-0 place-items-center rounded-sm bg-surface-alt text-navy-ink">
               <FileText className="size-4" aria-hidden />
             </div>
             <div className="min-w-0">
               <Badge
                 variant="outline"
-                className="mb-1 rounded border-azure/25 bg-azure/5 px-1.5 py-0 text-[9px] font-bold uppercase tracking-wider text-teal"
+                className="mb-1 rounded border-azure/25 bg-azure/5 px-1.5 py-0 text-[11px] font-bold uppercase tracking-wider text-teal"
               >
                 {citation.kind}
               </Badge>
-              <h3 className="font-reading text-[13px] font-semibold leading-snug text-navy-ink">
+              <h3 className="font-reading text-base font-semibold leading-snug text-navy-ink">
                 {citation.title}
               </h3>
-              <p className="mt-0.5 text-[10px] text-ink-muted">
+              <p className="mt-0.5 text-caption text-ink-muted">
                 {citation.source} · page {citation.page}
               </p>
             </div>
           </div>
 
-          <div className="rounded-lg border border-gold/20 border-l-2 border-l-gold bg-gold/10 p-3 font-reading text-[12px] italic leading-6 text-ink">
+          <div className="border-l-2 border-gold bg-surface-alt px-4 py-3 font-reading text-[15px] italic leading-6 text-ink">
             « {citation.snippet} »
           </div>
 
           {citation.pdfUrl ? (
-            <div className="mt-3 rounded-lg border border-azure/25 bg-azure/5 p-2.5">
-              <div className="mb-1 flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-teal">
+            <div className="mt-4 border-t border-border pt-3">
+              <div className="mb-1 flex items-center gap-1 text-[11px] font-bold uppercase tracking-wider text-teal">
                 <FileText className="size-3" aria-hidden />
                 PDF source
               </div>
@@ -98,9 +83,10 @@ export function SourceDetail({ citation }: { citation: ChatCitation }) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`Ouvrir le PDF source de ${citation.title}`}
-                className="block break-all rounded-sm font-mono text-[10px] leading-snug text-teal underline decoration-azure/40 underline-offset-2 transition-colors duration-150 hover:text-navy-ink active:opacity-70"
+                className="inline-flex items-center gap-1 text-small font-medium text-teal underline decoration-azure/40 underline-offset-4 transition-colors duration-150 hover:text-navy-ink"
               >
-                {citation.pdfUrl}
+                Ouvrir le document · page {citation.page}
+                <ArrowUpRight className="size-4" aria-hidden />
               </a>
             </div>
           ) : null}
@@ -111,8 +97,10 @@ export function SourceDetail({ citation }: { citation: ChatCitation }) {
               variant="outline"
               size="sm"
               onClick={copyCitation}
+              disabled={copyState === "pending"}
+              aria-busy={copyState === "pending"}
               className={cn(
-                "flex-1 gap-1.5 rounded-lg border-border bg-surface text-[11px] font-medium text-navy-ink transition-[background-color,border-color,color,transform] duration-150 hover:bg-surface-alt active:scale-[0.98] motion-reduce:transition-none",
+                "flex-1 gap-1.5 rounded-sm border-border bg-surface text-caption shadow-none font-medium text-navy-ink transition-colors duration-150 hover:bg-surface-alt motion-reduce:transition-none",
                 copyState === "done" &&
                   "border-emerald/30 text-emerald hover:text-emerald",
                 copyState === "error" &&
@@ -130,7 +118,9 @@ export function SourceDetail({ citation }: { citation: ChatCitation }) {
                 ? "Citation copiée"
                 : copyState === "error"
                   ? "Copie impossible"
-                  : "Copier la citation"}
+                  : copyState === "pending"
+                    ? "Copie en cours…"
+                    : "Copier la citation"}
             </Button>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -138,7 +128,7 @@ export function SourceDetail({ citation }: { citation: ChatCitation }) {
                   asChild
                   variant="secondary"
                   size="icon-sm"
-                  className="rounded-lg bg-surface-alt text-navy-ink transition-[background-color,color,transform] duration-150 hover:bg-border/60 active:scale-95 motion-reduce:transition-none"
+                  className="rounded-sm bg-surface-alt text-navy-ink transition-colors duration-150 hover:bg-border/60 motion-reduce:transition-none"
                 >
                   <Link href="/#corpus" aria-label="Explorer le corpus">
                     <ArrowUpRight className="size-3.5" aria-hidden />

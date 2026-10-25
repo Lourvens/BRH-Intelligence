@@ -45,13 +45,12 @@ export function ConversationSidebar({
   const filtered = threads.filter((thread) =>
     thread.title.toLowerCase().includes(query.toLowerCase()),
   );
-  const groups = ["Aujourd’hui", "Cette semaine"] as const;
 
   return (
     <div className="flex h-full flex-col">
       <SidebarHeader
         className={cn(
-          "flex h-14 min-h-14 flex-row items-center justify-between gap-2 border-b border-sidebar-border p-3",
+          "flex h-16 min-h-16 flex-row items-center justify-between gap-2 border-b border-sidebar-border p-3",
           collapsed && "justify-center p-1",
         )}
       >
@@ -75,7 +74,7 @@ export function ConversationSidebar({
               <span className="block font-display text-caption font-bold leading-none text-navy-ink">
                 Intelligence
               </span>
-              <span className="mt-0.5 block truncate text-[9px] text-ink-muted">
+              <span className="mt-0.5 block truncate text-caption text-ink-muted">
                 Assistant documentaire
               </span>
             </span>
@@ -84,7 +83,7 @@ export function ConversationSidebar({
         {!isMobile ? (
           <SidebarTrigger
             aria-label="Replier ou déplier la navigation"
-            className="size-8 shrink-0 text-ink-muted hover:bg-gold/10 hover:text-navy-ink"
+            className="size-8 shrink-0 text-ink-muted hover:bg-surface-alt hover:text-navy-ink"
           />
         ) : null}
         {isMobile ? (
@@ -108,9 +107,9 @@ export function ConversationSidebar({
               <Button
                 type="button"
                 size="icon"
-                onClick={onNewThread}
+                onClick={() => { onNewThread(); if (isMobile) setOpenMobile(false); }}
                 aria-label="Nouvelle conversation"
-                className="mx-auto size-9 rounded-lg bg-navy text-white shadow-sm hover:bg-navy-deep"
+                className="mx-auto size-9 rounded-sm bg-navy text-white shadow-none hover:bg-navy-deep"
               >
                 <Plus className="size-4" aria-hidden />
               </Button>
@@ -120,8 +119,8 @@ export function ConversationSidebar({
         ) : (
           <Button
             type="button"
-            onClick={onNewThread}
-            className="w-full rounded-xl bg-navy text-caption text-white shadow-sm transition-[background-color,transform] duration-150 hover:bg-navy-deep active:scale-[0.98] motion-reduce:transition-none"
+            onClick={() => { onNewThread(); if (isMobile) setOpenMobile(false); }}
+            className="w-full rounded-sm bg-navy text-caption text-white shadow-none transition-colors duration-150 hover:bg-navy-deep motion-reduce:transition-none"
           >
             <Plus className="size-4" aria-hidden />
             Nouvelle conversation
@@ -155,7 +154,7 @@ export function ConversationSidebar({
               onChange={(event: ChangeEvent<HTMLInputElement>) => setQuery(event.target.value)}
               placeholder="Rechercher dans l’historique…"
               aria-label="Rechercher une conversation"
-              className="h-9 border-border bg-bg pl-8 text-[11px] focus-visible:border-navy-ink/30"
+              className="h-9 border-border bg-bg pl-8 text-caption focus-visible:border-navy-ink/30"
             />
           </div>
         )}
@@ -167,7 +166,7 @@ export function ConversationSidebar({
         <ThreadList
           threads={filtered}
           activeThreadId={activeThreadId}
-          onSelectThread={onSelectThread}
+          onSelectThread={(id) => { onSelectThread(id); if (isMobile) setOpenMobile(false); }}
           collapsed={collapsed}
         />
       </SidebarContent>
@@ -181,21 +180,21 @@ export function ConversationSidebar({
         {!collapsed ? (
           <Badge
             variant="outline"
-            className="w-full justify-start gap-2 rounded-lg border-transparent bg-gold/10 px-2.5 py-2 text-[10px] font-normal text-gold-ink"
+            className="w-full justify-start gap-2 rounded-sm border-transparent bg-surface-alt px-2.5 py-2 text-caption font-normal text-ink-muted"
           >
-            <span className="size-1.5 rounded-full bg-gold-ink" />
+            <span className="size-1.5 rounded-full bg-ink-muted" />
             Mode démonstration · réponses préenregistrées
           </Badge>
         ) : null}
         <ThemeToggle
           withLabel={!collapsed}
-          className={cn(collapsed && "mx-auto")}
+          className={cn("rounded-sm text-caption shadow-none active:scale-100", collapsed && "mx-auto")}
         />
         <SidebarMenuButton
           asChild
           tooltip="Retour au portail officiel"
           className={cn(
-            "text-[11px] text-ink-muted hover:text-navy-ink",
+            "text-caption text-ink-muted hover:text-navy-ink",
             collapsed && "justify-center",
           )}
         >

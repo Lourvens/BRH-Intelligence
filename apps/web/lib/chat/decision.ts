@@ -27,10 +27,10 @@ export const SERIES_COLORS = [
   // the first series stays visible on a dark plot without a second palette.
   "var(--color-navy-ink)",
   "var(--color-azure)",
-  "var(--color-gold-ink)",
   "var(--color-purple)",
   "var(--color-teal)",
   "var(--color-steel)",
+  "var(--color-slate)",
 ];
 
 function keysOf(artifact: TableArtifact) {

@@ -1,136 +1,64 @@
 "use client";
 
-import { Check, Copy, Link2, Share2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-
+import { motion, useReducedMotion } from "framer-motion";
+import { ChevronDown, Copy, FileText, Share2 } from "lucide-react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useAnswerActions } from "@/lib/hooks/use-answer-actions";
 import type { ChatCitation } from "@/lib/chat/types";
+import { disclosureVariants, feedbackTransition } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import { FeedbackAction } from "./feedback-action";
+import { SourceList } from "./source-list";
 
-type ActionState = "idle" | "done" | "fallback";
-
-export function MessageActions({
-  content,
-  citations = [],
-}: {
+export function MessageActions({ content, citations = [], selectedCitationId, onSelectCitation }: {
   content: string;
   citations?: readonly ChatCitation[];
+  selectedCitationId: string | null;
+  onSelectCitation: (citationId: string) => void;
 }) {
-  const [copied, setCopied] = useState<ActionState>("idle");
-  const [shared, setShared] = useState<ActionState>("idle");
-  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const shareTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [sourcesOpen, setSourcesOpen] = useState(false);
+  const sourceTrigger = useRef<HTMLButtonElement>(null);
+  const sourceContent = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { copyState, shareState, copy, share } = useAnswerActions(content, citations);
 
-  useEffect(() => {
-    return () => {
-      if (copyTimer.current) clearTimeout(copyTimer.current);
-      if (shareTimer.current) clearTimeout(shareTimer.current);
-    };
-  }, []);
-
-  function schedule(setter: (value: ActionState) => void, timer: typeof copyTimer) {
-    if (timer.current) clearTimeout(timer.current);
-    timer.current = setTimeout(() => setter("idle"), 2200);
+  function setSourcesExpanded(open: boolean) {
+    if (!open && sourceContent.current?.contains(document.activeElement)) sourceTrigger.current?.focus();
+    setSourcesOpen(open);
   }
 
-  async function copyAnswer() {
-    const sources = citations
-      .map(
-        (citation) =>
-          `— ${citation.title}, p. ${citation.page}${
-            citation.pdfUrl ? `\n${citation.pdfUrl}` : ""
-          }`,
-      )
-      .join("\n");
-
-    try {
-      await navigator.clipboard.writeText(
-        sources ? `${content}\n\nSources\n${sources}` : content,
-      );
-      setCopied("done");
-      schedule(setCopied, copyTimer);
-    } catch {
-      setCopied("idle");
-    }
-  }
-
-  async function shareAnswer() {
-    const url = window.location.href;
-    const data = {
-      title: "BRH Intelligence",
-      text: content.slice(0, 280),
-      url,
-    };
-
-    try {
-      if (navigator.share) {
-        await navigator.share(data);
-        setShared("done");
-      } else {
-        await navigator.clipboard.writeText(url);
-        setShared("fallback");
-      }
-      schedule(setShared, shareTimer);
-    } catch (error) {
-      if (error instanceof DOMException && error.name === "AbortError") return;
-      setShared("idle");
-    }
-  }
+  const announcement = copyState === "error" ? "La copie a échoué. Réessayez ou sélectionnez le texte manuellement." : shareState === "error" ? "Le partage a échoué. Réessayez ou copiez le texte manuellement." : copyState === "success" ? "Réponse et sources copiées." : shareState === "fallback" ? "Réponse et sources copiées. Vous pouvez les coller dans l’application de votre choix." : shareState === "success" ? "Réponse partagée." : "";
 
   return (
-    <div className="flex items-center gap-1">
-      <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        onClick={copyAnswer}
-        aria-label="Copier la réponse et ses sources"
-        className={cn(
-          "group h-7 gap-1.5 rounded-md px-2 text-[10px] font-medium text-ink-muted transition-all duration-200 hover:bg-surface-alt hover:text-navy-ink active:scale-95",
-          copied === "done" && "bg-emerald/5 text-emerald hover:text-emerald",
-        )}
-      >
-        {copied === "done" ? (
-          <Check className="size-3.5 transition-transform duration-200 scale-110" aria-hidden />
-        ) : (
-          <Copy className="size-3.5 transition-transform duration-200 group-hover:-translate-y-0.5" aria-hidden />
-        )}
-        {copied === "done" ? "Copié" : "Copier"}
-      </Button>
-
-      <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        onClick={shareAnswer}
-        aria-label="Partager la réponse"
-        className={cn(
-          "group h-7 gap-1.5 rounded-md px-2 text-[10px] font-medium text-ink-muted transition-all duration-200 hover:bg-surface-alt hover:text-navy-ink active:scale-95",
-          shared !== "idle" && "bg-azure/5 text-teal hover:text-teal",
-        )}
-      >
-        {shared === "fallback" ? (
-          <Link2 className="size-3.5 transition-transform duration-200 scale-110" aria-hidden />
-        ) : shared === "done" ? (
-          <Check className="size-3.5 transition-transform duration-200 scale-110" aria-hidden />
-        ) : (
-          <Share2 className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden />
-        )}
-        {shared === "fallback"
-          ? "Lien copié"
-          : shared === "done"
-            ? "Partagé"
-            : "Partager"}
-      </Button>
-
-      <span className="sr-only" aria-live="polite">
-        {copied === "done" ? "Réponse copiée." : null}
-        {shared === "done"
-          ? "Réponse partagée."
-          : shared === "fallback"
-            ? "Lien copié."
-            : null}
-      </span>
-    </div>
+    <Collapsible open={sourcesOpen} onOpenChange={setSourcesExpanded} className="mt-4 border-t border-border pt-2">
+      <div className="flex flex-wrap items-center gap-1" role="group" aria-label="Actions de la réponse">
+        {citations.length ? (
+          <CollapsibleTrigger asChild>
+            <Button ref={sourceTrigger} type="button" variant="ghost" size="sm" className={cn("h-10 gap-1.5 rounded-sm px-2 text-caption text-ink-muted transition-colors hover:bg-surface-alt hover:text-navy-ink", sourcesOpen && "bg-surface-alt text-navy-ink")}>
+              <FileText className="size-3.5 text-gold-ink" aria-hidden />
+              Sources ({citations.length})
+              <motion.span aria-hidden animate={{ rotate: sourcesOpen ? 180 : 0 }} transition={reduceMotion ? { duration: 0 } : feedbackTransition} className="inline-flex"><ChevronDown className="size-3" /></motion.span>
+            </Button>
+          </CollapsibleTrigger>
+        ) : null}
+        <FeedbackAction state={copyState} label="Copier" successLabel="Copié" icon={Copy} onClick={copy} />
+        <FeedbackAction state={shareState} label="Partager" successLabel="Partagé" icon={Share2} onClick={share} />
+        <span className="ml-auto hidden text-[11px] text-ink-muted sm:inline">Réponse de démonstration</span>
+      </div>
+      <p role="status" aria-live="polite" className={cn("text-caption leading-5", copyState === "error" || shareState === "error" ? "mt-2 text-scarlet" : "sr-only")}>{announcement}</p>
+      {citations.length ? (
+        <CollapsibleContent forceMount asChild>
+          <motion.div ref={sourceContent} inert={!sourcesOpen} aria-hidden={!sourcesOpen} initial={false} variants={disclosureVariants} animate={sourcesOpen ? "open" : "closed"} transition={reduceMotion ? { duration: 0 } : feedbackTransition} className="grid">
+            <div className="min-h-0 overflow-hidden">
+              <div className="max-h-72 overflow-y-auto overscroll-contain pt-3">
+                <SourceList citations={citations} selectedId={selectedCitationId} onSelect={onSelectCitation} />
+              </div>
+            </div>
+          </motion.div>
+        </CollapsibleContent>
+      ) : null}
+    </Collapsible>
   );
 }

@@ -30,10 +30,10 @@ export function SourcesRail({
             size="icon-sm"
             onClick={onOpen}
             aria-label="Déplier les sources"
-            className="group/rail-open text-ink-muted transition-[background-color,color,transform] duration-150 hover:bg-surface-alt hover:text-navy-ink active:scale-95 motion-reduce:transition-none"
+            className="group/rail-open text-ink-muted transition-colors duration-150 hover:bg-surface-alt hover:text-navy-ink motion-reduce:transition-none"
           >
             <PanelRightOpen
-              className="size-4 transition-transform duration-150 group-hover/rail-open:-translate-x-0.5 motion-reduce:transition-none"
+              className="size-4 transition-transform duration-150 motion-reduce:transition-none"
               aria-hidden
             />
           </Button>
@@ -45,18 +45,18 @@ export function SourcesRail({
         type="button"
         onClick={onOpen}
         aria-label={`Ouvrir les sources documentaires (${count})`}
-        className="group/rail flex min-h-0 flex-1 flex-col items-center gap-2 rounded-lg px-1 py-2 text-ink-muted transition-[background-color,color,transform] duration-150 hover:bg-surface-alt hover:text-navy-ink active:scale-[0.99] motion-reduce:transition-none"
+        className="group/rail flex min-h-0 flex-1 flex-col items-center gap-2 rounded-sm px-1 py-2 text-ink-muted transition-colors duration-150 hover:bg-surface-alt hover:text-navy-ink motion-reduce:transition-none"
       >
         <BookOpen
-          className="size-4 transition-transform duration-150 group-hover/rail:scale-105 motion-reduce:transition-none"
+          className="size-4 transition-transform duration-150 motion-reduce:transition-none"
           aria-hidden
         />
-        <span className="[writing-mode:vertical-rl] rotate-180 text-[9px] font-bold uppercase tracking-wider">
+        <span className="[writing-mode:vertical-rl] rotate-180 text-[11px] font-bold uppercase tracking-wider">
           Sources
         </span>
         <Badge
           variant="secondary"
-          className="mt-auto h-5 min-w-5 rounded-full border-azure/20 bg-azure/5 px-1 text-[9px] text-teal"
+          className="mt-auto h-5 min-w-5 rounded-sm border-azure/20 bg-azure/5 px-1 text-[11px] text-teal"
         >
           <motion.span
             key={count}

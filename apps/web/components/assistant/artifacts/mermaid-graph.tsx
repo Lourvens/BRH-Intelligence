@@ -4,51 +4,10 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import { graphData } from "@/lib/chat/decision";
+import { graphData, SERIES_COLORS } from "@/lib/chat/decision";
+import { buildDiagram } from "@/lib/charts/diagram";
 import type { TableArtifact } from "@/lib/chat/types";
 import { cssColor } from "@/lib/echarts";
-
-function labelText(value: string) {
-  return value.replace(/["<>\n]/g, " ").replace(/\s+/g, " ").trim();
-}
-
-function buildDiagram(
-  artifact: TableArtifact,
-  colors: string[],
-  surface: string,
-  ink: string,
-  orientation: "TD" | "LR",
-) {
-  const { nodes, edges } = graphData(artifact);
-  const ids = new Map(nodes.map((node, index) => [node.id, `n${index}`]));
-  const kinds = [...new Set(nodes.map((node) => node.kind))];
-  const lines = [`flowchart ${orientation}`];
-
-  nodes.forEach((node, index) => {
-    const meta = [node.kind, node.page ? `p. ${node.page}` : null]
-      .filter(Boolean)
-      .join(" · ");
-    lines.push(`  n${index}["${labelText(node.label)}<br/>${labelText(meta)}"]`);
-    lines.push(`  class n${index} kind${kinds.indexOf(node.kind)}`);
-  });
-
-  edges.forEach((edge) => {
-    const from = ids.get(edge.from);
-    const to = ids.get(edge.to);
-    if (!from || !to) return;
-    const label = edge.label ? `|${labelText(edge.label)}|` : "";
-    lines.push(`  ${from} -->${label} ${to}`);
-  });
-
-  kinds.forEach((kind, index) => {
-    const color = colors[index % colors.length];
-    lines.push(
-      `  classDef kind${index} fill:${surface},stroke:${color},stroke-width:2px,color:${ink}`,
-    );
-  });
-
-  return lines.join("\n");
-}
 
 export function MermaidGraph({
   artifact,
@@ -72,14 +31,7 @@ export function MermaidGraph({
     setSvg("");
     setFailed(false);
 
-    const colors = [
-      cssColor("var(--color-navy-ink)"),
-      cssColor("var(--color-azure)"),
-      cssColor("var(--color-gold-ink)"),
-      cssColor("var(--color-purple)"),
-      cssColor("var(--color-teal)"),
-      cssColor("var(--color-steel)"),
-    ];
+    const colors = SERIES_COLORS.map(cssColor);
 
     async function render() {
       // Let next-themes apply the theme class before reading CSS variables.
@@ -160,8 +112,8 @@ export function MermaidGraph({
       aria-label={`${artifact.title}. Diagramme de ${graphData(artifact).nodes.length} nœuds. Source : ${artifact.source}.`}
       className={
         expanded
-          ? "mermaid-diagram flex min-h-[min(64vh,680px)] items-center justify-center overflow-auto bg-bg/40 p-4 [&_svg]:h-auto [&_svg]:max-w-full"
-          : "mermaid-diagram flex min-h-[300px] items-center justify-center overflow-auto bg-bg/40 p-4 [&_svg]:h-auto [&_svg]:max-w-full"
+          ? "mermaid-diagram flex min-h-[min(64vh,680px)] items-center justify-center overflow-auto bg-surface p-4 [&_svg]:h-auto [&_svg]:max-w-full"
+          : "mermaid-diagram flex min-h-[300px] items-center justify-center overflow-auto bg-surface p-4 [&_svg]:h-auto [&_svg]:max-w-full"
       }
       dangerouslySetInnerHTML={{ __html: svg }}
     />
