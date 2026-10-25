@@ -6,11 +6,19 @@ import logging
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
+from threading import Event, Lock
 
 from langsmith import traceable
 
-from brh_core.config import Settings
+from brh_core.config import EmbeddingProvider, Settings
+from brh_core.db.index_manifest import DocumentBusyError
 from brh_core.db.repository import CorpusRepository
+from brh_core.embeddings.errors import EmbeddingBlockedError
+from brh_core.ingestion.artifacts import (
+    IncompleteOcrArtifact,
+    OcrArtifact,
+    discover_ocr_markdown,
+)
 from brh_core.ingestion.chunk import chunk_pages
 from brh_core.ingestion.chunk import chunker_id as structure_chunker_id
 from brh_core.ingestion.discover import discover_pdfs
@@ -131,14 +139,21 @@ def reconcile_corpus(
 
 def chunker_id(settings: Settings, *, tokenizer_id: str | None = None) -> str:
     return structure_chunker_id(
-        max_tokens=_chunk_cap(settings), tokenizer_id=tokenizer_id or settings.chunk_tokenizer_id
+        max_tokens=_chunk_cap(settings),
+        tokenizer_id=tokenizer_id or settings.chunk_tokenizer_id,
+        **({"target_tokens": settings.chunk_target_tokens} if settings.chunk_target_tokens else {}),
     )
 
 
 def embed_id(settings: Settings) -> str:
-    return (
+    identity = (
         f"{settings.embedding_provider.value}:{settings.embedding_model}:{settings.embedding_dim}"
     )
+    if settings.embedding_provider is EmbeddingProvider.openrouter:
+        from brh_core.embeddings.openrouter import QWEN_CONTRACT
+
+        identity += ":" + QWEN_CONTRACT
+    return identity
 
 
 def target_id(settings: Settings, vector_store) -> str:
@@ -179,10 +194,16 @@ def run_ingestion(
     tokenizer_id: str | None = None,
     index_ledger=None,
     reconcile: bool = False,
+    from_ocr: bool = False,
+    workers: int | None = None,
+    stop: Event | None = None,
 ) -> IngestionReport:
     """Resume changed documents; a bounded pass advances beyond completed files."""
     if limit is not None and limit < 0:
         raise ValueError("limit must be non-negative")
+    worker_count = settings.ingestion_workers if workers is None else workers
+    if not 1 <= worker_count <= 16:
+        raise ValueError("workers must be between 1 and 16")
     if getattr(vector_store, "requires_exact_tokens", False) and (
         count_tokens is None or not tokenizer_id or "estimate" in tokenizer_id
     ):
@@ -198,19 +219,26 @@ def run_ingestion(
         if vector_store is not None
         else None
     )
-    paths = discover_pdfs(raw_dir or settings.resolved_raw_dir)
+    paths = (
+        discover_ocr_markdown(settings.resolved_ocr_dir)
+        if from_ocr
+        else discover_pdfs(raw_dir or settings.resolved_raw_dir)
+    )
+    from brh_core.ingestion.scheduling import bounded_results
+
     processed = skipped = pages_written = chunks_written = deferred = 0
     failures = []
     seen = set()
-    for pdf_path in paths:
-        if limit is not None and processed >= limit:
-            break
+    seen_lock = Lock()
+
+    def process(pdf_path):
         try:
-            sha = sha256_of_file(pdf_path)
-            if sha in seen:
-                skipped += 1
-                continue
-            seen.add(sha)
+            artifact = OcrArtifact.load(pdf_path) if from_ocr else None
+            sha = artifact.sha256 if artifact else sha256_of_file(pdf_path)
+            with seen_lock:
+                if sha in seen:
+                    return "skipped", None
+                seen.add(sha)
             with ledger.lock(document_id_for_sha256(sha)):
                 result = _ingest_document(
                     settings,
@@ -222,20 +250,39 @@ def run_ingestion(
                     reconcile=reconcile,
                     count_tokens=count_tokens,
                     tokenizer_id=tokenizer_id,
+                    artifact=artifact,
                 )
-        except AwaitingOcr:
-            deferred += 1
-            continue
+        except (AwaitingOcr, IncompleteOcrArtifact, DocumentBusyError):
+            return "deferred", None
+        except EmbeddingBlockedError:
+            if stop is not None:
+                stop.set()
+            raise
         except Exception as exc:
             logger.exception("Ingestion failed for %s", pdf_path)
-            failures.append((str(pdf_path), str(exc)))
-            continue
-        if result is None:
+            return "failed", (str(pdf_path), str(exc))
+        if result is not None:
+            logger.info("Document verified sha256=%s pages=%d chunks=%d", sha, result[0], result[1])
+        return ("skipped", None) if result is None else ("processed", result)
+
+    for status, result in bounded_results(
+        paths,
+        process,
+        workers=worker_count,
+        limit=limit,
+        stop=stop,
+        successful=lambda outcome: outcome[0] == "processed",
+    ):
+        if status == "skipped":
             skipped += 1
-            continue
-        processed += 1
-        pages_written += result[0]
-        chunks_written += result[1]
+        elif status == "deferred":
+            deferred += 1
+        elif status == "failed":
+            failures.append(result)
+        else:
+            processed += 1
+            pages_written += result[0]
+            chunks_written += result[1]
     return IngestionReport(
         len(paths), processed, skipped, pages_written, chunks_written, tuple(failures), deferred
     )
@@ -262,10 +309,13 @@ def _ingest_document(
     reconcile,
     count_tokens,
     tokenizer_id,
+    artifact: OcrArtifact | None = None,
 ):
     existing = repository.get_document_by_sha256(sha256)
     document_id = existing.document_id if existing else document_id_for_sha256(sha256)
-    ocr_path = settings.resolved_ocr_dir / sha256 / "document.md"
+    if artifact is not None:
+        pdf_path = settings.web_store_dir / f"{sha256}.pdf"
+    ocr_path = artifact.markdown if artifact else settings.resolved_ocr_dir / sha256 / "document.md"
     extraction_key, extraction_source = _extraction_identity(pdf_path, ocr_path)
     content_key = f"{sha256}:{extraction_key}:{chunker_id(settings, tokenizer_id=tokenizer_id)}"
     version = index_key(sha256, settings, tokenizer_id=tokenizer_id, extraction_key=extraction_key)
@@ -303,7 +353,11 @@ def _ingest_document(
                     extraction_source=extraction_source,
                 )
                 repository.upsert_document(document)
-            pages = extract_pages(pdf_path, ocr_markdown=ocr_path)
+            pages = (
+                artifact.read_pages()
+                if artifact
+                else extract_pages(pdf_path, ocr_markdown=ocr_path)
+            )
             if not any(page.text.strip() for page in pages):
                 repository.record_job(
                     document_id,
@@ -317,7 +371,15 @@ def _ingest_document(
                 raise RuntimeError("Extraction artifact changed while being read; retry")
             stage = JobStage.chunk
             chunks = chunk_pages(
-                document_id, pages, max_tokens=_chunk_cap(settings), count_tokens=count_tokens
+                document_id,
+                pages,
+                max_tokens=_chunk_cap(settings),
+                count_tokens=count_tokens,
+                **(
+                    {"target_tokens": settings.chunk_target_tokens}
+                    if settings.chunk_target_tokens
+                    else {}
+                ),
             )
             if not chunks:
                 raise ValueError("Extraction produced text but no retrievable chunks")
@@ -345,6 +407,34 @@ def _ingest_document(
                     }
                 }
             )
+            if artifact is not None:
+                local_path = (
+                    str(pdf_path)
+                    if pdf_path.is_file()
+                    else (existing.source_path if existing else None)
+                )
+                if not local_path:
+                    title = next(
+                        (
+                            page.text.splitlines()[0].lstrip("# ").strip()
+                            for page in pages
+                            if page.text.strip()
+                        ),
+                        document.title,
+                    )
+                    if document.title == infer_title(sha256):
+                        document = document.model_copy(update={"title": title[:240]})
+                document = document.model_copy(
+                    update={
+                        "source_path": local_path,
+                        "metadata": {
+                            **document.metadata,
+                            "ocr_artifact": str(ocr_path),
+                            "ocr_engine": artifact.metadata["engine"],
+                            "ocr_engine_version": artifact.metadata.get("engine_version"),
+                        },
+                    }
+                )
             _replace_content(repository, document, pages, chunks)
             repository.record_job(
                 document_id,
@@ -375,6 +465,14 @@ def _ingest_document(
                 )
             metrics = coordinator.reconcile(document_id, version, records)
             repository.record_job(document_id, stage, version, metrics=metrics)
+            logger.info(
+                "Indexed document=%s chunks=%s written=%s reused=%s deleted=%s",
+                document_id,
+                len(records),
+                metrics.get("vectors_written"),
+                metrics.get("vectors_reused"),
+                metrics.get("stale_vectors_deleted"),
+            )
     except AwaitingOcr:
         raise
     except Exception as exc:
@@ -395,7 +493,10 @@ def _ingest_document(
 
 def _chunk_cap(settings: Settings) -> int:
     """Keep content below the model limit, including a configurable reserve."""
-    safe_limit = min(507, max(1, 512 - settings.chunk_token_reserve))
+    if settings.chunk_max_tokens is not None:
+        settings.validate_chunk_limits()
+        return settings.chunk_max_tokens
+    safe_limit = max(1, settings.model_token_limit - settings.chunk_token_reserve)
     return min(settings.chunk_token_limit, safe_limit)
 
 

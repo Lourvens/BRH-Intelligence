@@ -9,6 +9,10 @@ import psycopg
 from psycopg.types.json import Jsonb
 
 
+class DocumentBusyError(RuntimeError):
+    """Another worker owns the document; defer rather than record failure."""
+
+
 @dataclass
 class IndexManifest:
     version: str = ""
@@ -70,7 +74,9 @@ class PostgresIndexLedger:
                 "SELECT pg_try_advisory_lock(hashtextextended(%s, 0))", (document_id,)
             ).fetchone()[0]
             if not locked:
-                raise RuntimeError(f"Document {document_id} is being ingested by another worker")
+                raise DocumentBusyError(
+                    f"Document {document_id} is being ingested by another worker"
+                )
             try:
                 yield
             finally:

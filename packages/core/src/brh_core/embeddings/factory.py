@@ -4,7 +4,6 @@ Returns ``None`` for the ``pinecone`` provider: with Pinecone integrated
 inference there is no client-side embedder, and returning ``None`` makes that
 explicit rather than hiding a no-op object.
 
-TODO: implement the ``EmbeddingProvider`` switch.
 """
 
 from __future__ import annotations
@@ -18,11 +17,16 @@ def build_embedder(settings: Settings) -> Embedder | None:
     """Build the embedder selected by ``BRH_EMBEDDING_PROVIDER``.
 
     * ``pinecone`` -> ``None`` (server-side embedding)
+    * ``openrouter`` -> validated LangChain Qwen embeddings
     * ``openai``   -> :class:`~brh_core.embeddings.openai.OpenAIEmbedder`
     * ``hashing``  -> :class:`~brh_core.embeddings.hashing.HashingEmbedder`
     """
     if settings.embedding_provider is EmbeddingProvider.hashing:
         return HashingEmbedder(settings.embedding_dim)
+    if settings.embedding_provider is EmbeddingProvider.openrouter:
+        from brh_core.embeddings.openrouter import OpenRouterEmbedder
+
+        return OpenRouterEmbedder(settings)
     if settings.embedding_provider is EmbeddingProvider.openai:
         from brh_core.embeddings.openai import OpenAIEmbedder
 

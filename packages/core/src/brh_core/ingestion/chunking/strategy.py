@@ -33,10 +33,15 @@ _TOC_LINE = re.compile(r"\.{3,}\s*\d+\s*$")
 
 
 def chunker_id(
-    *, max_tokens: int = DEFAULT_MAX_TOKENS, tokenizer_id: str = "safe-estimate-v2"
+    *,
+    max_tokens: int = DEFAULT_MAX_TOKENS,
+    target_tokens: int | None = None,
+    tokenizer_id: str = "safe-estimate-v2",
 ) -> str:
     """Stable id for the index key, including the token-counting contract."""
-    return f"structure-{CHUNKING_VERSION}:{max_tokens}:{tokenizer_id}"
+    _validate_target(target_tokens, max_tokens)
+    identity = f"structure-{CHUNKING_VERSION}:{max_tokens}:{tokenizer_id}"
+    return identity if target_tokens is None else f"{identity}:target={target_tokens}"
 
 
 class StructureChunker:
@@ -46,10 +51,13 @@ class StructureChunker:
         self,
         *,
         max_tokens: int = DEFAULT_MAX_TOKENS,
+        target_tokens: int | None = None,
         count_tokens: Callable[[str], int] | None = None,
     ) -> None:
         if max_tokens <= 0:
             raise ValueError("max_tokens must be positive")
+        _validate_target(target_tokens, max_tokens)
+        self._target = target_tokens
         self._max = max_tokens
         self._count = count_tokens or estimate_tokens
         self._min_provision = max(80, max_tokens // 6)
@@ -125,7 +133,10 @@ class StructureChunker:
                 },
             )
             for part in prose_policy.pack(
-                buffer, max_tokens=self._max, count_tokens=self._count
+                buffer,
+                max_tokens=self._max,
+                target_tokens=None if self._regulatory else self._target,
+                count_tokens=self._count,
             )
         ]
 
@@ -265,10 +276,16 @@ def chunk_pages(
     pages: Sequence[ExtractedPage],
     *,
     max_tokens: int = DEFAULT_MAX_TOKENS,
+    target_tokens: int | None = None,
     count_tokens: Callable[[str], int] | None = None,
 ) -> list[Chunk]:
-    """Structure-aware chunking of one document, page numbers preserved."""
+    """Chunk pages with an optional prose target and a hard structural cap."""
     blocks = blocks_from_pages(pages)
-    return StructureChunker(max_tokens=max_tokens, count_tokens=count_tokens).split(
-        document_id, blocks
-    )
+    return StructureChunker(
+        max_tokens=max_tokens, target_tokens=target_tokens, count_tokens=count_tokens
+    ).split(document_id, blocks)
+
+
+def _validate_target(target_tokens: int | None, max_tokens: int) -> None:
+    if target_tokens is not None and not 0 < target_tokens <= max_tokens:
+        raise ValueError("target_tokens must be positive and no greater than max_tokens")

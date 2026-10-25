@@ -27,6 +27,50 @@ class CorpusRepository:
 
         return PostgresIndexLedger(self._pool)
 
+    def reset_derived_document(self, document_id: str) -> None:
+        """Remove retrievable derivatives while preserving sources and extraction."""
+        with self._pool.connection() as conn, conn.transaction():
+            conn.execute("DELETE FROM corpus.chunks WHERE document_id=%s", (document_id,))
+            conn.execute(
+                """DELETE FROM corpus.processing_jobs
+                WHERE document_id=%s AND stage IN ('chunk','embed','index')""",
+                (document_id,),
+            )
+
+            conn.execute("DELETE FROM corpus.index_manifests WHERE document_id=%s", (document_id,))
+            conn.execute(
+                """UPDATE corpus.documents
+                SET metadata=metadata - 'content_key' - 'chunker_id' - 'tokenizer_id'
+                WHERE document_id=%s""",
+                (document_id,),
+            )
+
+    def index_progress(self, target: str, embedding_id: str) -> dict:
+        """Count only verified manifests matching current canonical content."""
+        with self._pool.connection() as conn:
+            row = conn.execute(
+                """WITH manifests AS (
+                    SELECT m.state,
+                        (m.state->>'status'='succeeded'
+                         AND starts_with(m.state->>'version',
+                             (d.metadata->>'content_key') || ':' || %s || ':')
+                         AND jsonb_array_length(m.state->'desired_ids') =
+                             (SELECT count(*) FROM corpus.chunks c
+                              WHERE c.document_id=d.document_id)) AS verified
+                    FROM corpus.index_manifests m
+                    JOIN corpus.documents d ON d.document_id=m.document_id
+                    WHERE m.target=%s
+                )
+                SELECT count(*) FILTER (WHERE verified) AS documents_verified,
+                    coalesce(sum(jsonb_array_length(state->'desired_ids'))
+                        FILTER (WHERE verified), 0) AS vectors_verified,
+                    count(*) FILTER (WHERE state->>'status'='running') AS documents_running,
+                    count(*) FILTER (WHERE state->>'status'='failed') AS documents_failed
+                FROM manifests""",
+                (embedding_id, target),
+            ).fetchone()
+        return {key: int(value) for key, value in row.items()}
+
     # --- documents -----------------------------------------------------
 
     def upsert_document(self, document: Document) -> None:

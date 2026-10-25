@@ -8,6 +8,7 @@ from langchain_core.documents import Document
 from langchain_core.retrievers import BaseRetriever
 from pydantic import ConfigDict, Field
 
+from brh_core.vectorstore.pinecone_client import PineconeClientVectorStore
 from brh_core.vectorstore.pinecone_integrated import PineconeIntegratedVectorStore
 
 
@@ -29,15 +30,6 @@ class PineconeIntegratedRetriever(BaseRetriever):
             )
             for hit in hits
         ]
-
-
-class PineconeClientVectorStore:
-    """Reject a backend outside the selected hosted-embedding architecture."""
-
-    def __init__(self, **kwargs):
-        raise ValueError(
-            "Use BRH_VECTOR_BACKEND=pinecone_integrated with the Pinecone hosted model"
-        )
 
 
 __all__ = [

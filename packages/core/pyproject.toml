@@ -17,6 +17,7 @@ dependencies = [
     "langsmith>=0.2",
     "tokenizers>=0.21",
     "huggingface-hub>=0.30",
+    "langchain-openai>=1.0,<2",
 ]
 
 [project.optional-dependencies]

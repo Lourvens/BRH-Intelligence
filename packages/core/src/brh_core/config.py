@@ -37,6 +37,7 @@ class EmbeddingProvider(StrEnum):
 
     pinecone = "pinecone"  # server-side, Pinecone integrated inference
     openai = "openai"  # client-side, OpenAI-compatible API
+    openrouter = "openrouter"  # embedding-only OpenRouter credential
     hashing = "hashing"  # deterministic, offline — tests/dev only
 
 
@@ -118,6 +119,25 @@ class Settings(BaseSettings):
         default="multilingual-e5-large", validation_alias="BRH_EMBEDDING_MODEL"
     )
     embedding_dim: int = Field(default=1024, gt=0, validation_alias="BRH_EMBEDDING_DIM")
+    openrouter_embedding_api_key: SecretStr = Field(
+        default=SecretStr(""), validation_alias="OPENROUTER_EMBEDDING_API_KEY"
+    )
+    embedding_context_limit: int | None = Field(
+        default=None, gt=0, validation_alias="BRH_EMBEDDING_CONTEXT_LIMIT"
+    )
+    embedding_batch_size: int = Field(
+        default=32, ge=1, le=32, validation_alias="BRH_EMBEDDING_BATCH_SIZE"
+    )
+    embedding_batch_tokens: int = Field(
+        default=16384, gt=0, validation_alias="BRH_EMBEDDING_BATCH_TOKENS"
+    )
+    embedding_concurrency: int = Field(
+        default=2, ge=1, le=8, validation_alias="BRH_EMBEDDING_CONCURRENCY"
+    )
+    embedding_requests_per_second: float = Field(
+        default=1, gt=0, validation_alias="BRH_EMBEDDING_REQUESTS_PER_SECOND"
+    )
+    ingestion_workers: int = Field(default=1, ge=1, le=16, validation_alias="BRH_INGESTION_WORKERS")
 
     # --- Vector store (ADR-0003) ---------------------------------------
     pinecone_api_key: SecretStr = Field(
@@ -162,12 +182,14 @@ class Settings(BaseSettings):
     retrieval_min_score: float = Field(default=0.35, validation_alias="BRH_RETRIEVAL_MIN_SCORE")
     chunk_size: int = Field(default=1000, gt=0, validation_alias="BRH_CHUNK_SIZE")
     chunk_overlap: int = Field(default=150, ge=0, validation_alias="BRH_CHUNK_OVERLAP")
-    chunk_token_limit: int = Field(
-        default=448, gt=0, validation_alias="BRH_CHUNK_TOKEN_LIMIT"
+    chunk_token_limit: int = Field(default=448, gt=0, validation_alias="BRH_CHUNK_TOKEN_LIMIT")
+    chunk_target_tokens: int | None = Field(
+        default=None, gt=0, validation_alias="BRH_CHUNK_TARGET_TOKENS"
     )
-    chunk_token_reserve: int = Field(
-        default=64, ge=0, validation_alias="BRH_CHUNK_TOKEN_RESERVE"
+    chunk_max_tokens: int | None = Field(
+        default=None, gt=0, validation_alias="BRH_CHUNK_MAX_TOKENS"
     )
+    chunk_token_reserve: int = Field(default=64, ge=0, validation_alias="BRH_CHUNK_TOKEN_RESERVE")
     chunk_tokenizer_id: str = Field(
         default="safe-estimate-v2", validation_alias="BRH_CHUNK_TOKENIZER_ID"
     )
@@ -178,9 +200,7 @@ class Settings(BaseSettings):
         default="brh-intelligence-inventory/0.1 (+public-sector document inventory)",
         validation_alias="BRH_WEB_USER_AGENT",
     )
-    web_request_delay: float = Field(
-        default=0.3, ge=0, validation_alias="BRH_WEB_REQUEST_DELAY"
-    )
+    web_request_delay: float = Field(default=0.3, ge=0, validation_alias="BRH_WEB_REQUEST_DELAY")
     web_timeout: float = Field(default=30.0, gt=0, validation_alias="BRH_WEB_TIMEOUT")
     web_max_retries: int = Field(default=3, ge=0, validation_alias="BRH_WEB_MAX_RETRIES")
 
@@ -210,6 +230,26 @@ class Settings(BaseSettings):
         object.__setattr__(self, "processed_dir", Path(self.processed_dir).resolve())
         object.__setattr__(self, "ocr_dir", Path(self.ocr_dir).resolve())
         return self
+
+    @property
+    def model_token_limit(self) -> int:
+        known = {"multilingual-e5-large": 512, "qwen/qwen3-embedding-8b": 32768}
+        native = known.get(self.embedding_model)
+        if self.embedding_context_limit is not None:
+            return (
+                min(native, self.embedding_context_limit)
+                if native
+                else self.embedding_context_limit
+            )
+        if native is None:
+            raise ValueError("Unknown embedding model: configure BRH_EMBEDDING_CONTEXT_LIMIT")
+        return native
+
+    def validate_chunk_limits(self) -> None:
+        ceiling = self.chunk_max_tokens or self.chunk_token_limit
+        target = self.chunk_target_tokens or ceiling
+        if target > ceiling or ceiling > self.model_token_limit:
+            raise ValueError("Require chunk target <= chunk maximum <= embedding context limit")
 
     @property
     def postgres_dsn(self) -> str:

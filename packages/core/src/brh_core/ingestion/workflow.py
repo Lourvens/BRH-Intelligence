@@ -18,6 +18,7 @@ def build_ingestion_workflow(
     tokenizer_id=None,
     inventory_runner=None,
     inventory_ledger=None,
+    stop=None,
 ):
     """Capture infrastructure once; runnable inputs contain only cycle options."""
 
@@ -54,6 +55,9 @@ def build_ingestion_workflow(
             force=options.get("force", False),
             limit=options.get("limit"),
             reconcile=options.get("reconcile", False),
+            from_ocr=options.get("from_ocr", False),
+            workers=options.get("workers"),
+            stop=stop,
         )
         return {
             "inventory": payload["inventory"],

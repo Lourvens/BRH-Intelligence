@@ -1,7 +1,7 @@
 """Provider-agnostic embedders (ADR-0004).
 
-TODO: keep the :class:`~brh_core.embeddings.base.Embedder` contract; implement
-the concrete embedders below.
+OpenRouter Qwen and offline hashing implement the shared Embedder contract.
+Pinecone integrated inference embeds remotely; generic OpenAI remains a scaffold.
 """
 
 from brh_core.embeddings.base import Embedder
