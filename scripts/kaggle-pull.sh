@@ -16,10 +16,18 @@ DEST="${2:-data/ocr}"
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 
-if ! kaggle kernels output "$REF" -p "$STAGE" >/dev/null 2>"$STAGE/err"; then
-    echo "no output to pull ($(tail -1 "$STAGE/err"))"
+# The CLI's `kernels output` resets the connection on this kernel (the server
+# closes mid-stream), and when it does answer it can fall back to downloading
+# the manifests only. The REST endpoint it should be using is
+# /output/download/{owner}/{slug}; curl retries cleanly there.
+if ! curl -sS -L --retry 5 --retry-all-errors --retry-delay 3 \
+    -o "$STAGE/out.zip" \
+    -H "Authorization: Bearer ${KAGGLE_API_TOKEN:?set KAGGLE_API_TOKEN}" \
+    "https://www.kaggle.com/api/v1/kernels/output/download/${REF}"; then
+    echo "no output to pull (download failed)"
     exit 0
 fi
+unzip -q -o "$STAGE/out.zip" -d "$STAGE"
 
 if ! find "$STAGE" -name document.md -print -quit | grep -q .; then
     echo "nothing finished yet"
