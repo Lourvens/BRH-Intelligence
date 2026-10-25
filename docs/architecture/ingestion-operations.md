@@ -1,3 +1,56 @@
+# Qwen rebuild (2026-10-25)
+
+ADR-0013 supersedes the hosted-E5 production commands below. Set the embedding
+provider to `openrouter`, vector backend to `pinecone`, model to
+`qwen/qwen3-embedding-8b`, index to `brh-intelligence-qwen-1024`, and namespace to
+`default`. The ignored `.env` holds `OPENROUTER_EMBEDDING_API_KEY`; it is not a
+chat credential. `.env.example` records the complete nonsecret configuration.
+
+Chunk target/max are 768/1536 exact Qwen tokens; the separate hard model cap is
+32768. Request batches are bounded to 32 texts / 16384 tokens. Four document
+tasks share two in-flight requests and a one-request/sec rate. Set
+`BRH_INGESTION_WORKERS=1` for serial troubleshooting.
+
+After offline tests and isolated live acceptance, stop the old tmux worker and
+wait for its process and file lock to exit. Provision the new index, then run:
+
+```bash
+uv run python -m brh_core.ingestion --reset-derived --reset-from-index brh-intelligence --reset-from-namespace default
+tmux new-session -d -s brh-ocr-embedding 'bash scripts/index-ocr.sh'
+```
+
+`data/processed/qwen-reset.json` is the durable one-time reset checkpoint. It
+records document identities and obsolete vector IDs. Repeating the command
+resumes unfinished reset work and becomes a no-op after completion; do not
+delete the manifest during an active rebuild. The command preserves OCR/PDFs,
+inventory, document rows, extracted pages and extraction-stage jobs.
+
+The supervisor drains full batches immediately, polls every 30 seconds when
+the backlog is drained, and checkpoints every successful batch.
+`data/processed/ocr-index.log` contains batch timing, local/reported tokens,
+cycle counts and failures. Permanent provider failures exit with status 2;
+replenish credentials/quota before restarting. SIGTERM/SIGINT stop scheduling
+and drain bounded in-flight work. Restarting reuses verified vectors and picks
+up new/changed OCR; never add recurring `--force`.
+
+Canonical retrieval switches to Qwen and returns only successful, current
+manifests. Coverage grows during backfill. Reconcile the initial completed-OCR
+snapshot after the backfill; the watcher stays active for subsequent arrivals.
+
+Check progress without submitting embedding requests:
+
+```bash
+uv run python -m brh_core.ingestion.status
+```
+
+Each completed cycle also refreshes `data/processed/ocr-index-status.json`.
+Verified document/vector counts require matching canonical content, embedding
+contract and manifest counts; Pinecone's namespace count is reported separately
+because it can lag or include in-progress writes. The initial artifact snapshot
+records expected chunks and deferred blank OCR independently of later arrivals.
+
+## Historical hosted-E5 operations
+
 # Ingestion operations
 
 The supported production path uses Pinecone integrated `multilingual-e5-large`
@@ -57,6 +110,29 @@ Watch for new PDFs and newly copied OCR artifacts:
 ```bash
 make ingest ARGS="--index --limit 20 --watch 60"
 ```
+
+Start directly from completed extraction artifacts, without requiring local
+PDFs or invoking text-layer extraction:
+
+```bash
+make ingest ARGS="--from-ocr --index --limit 20 --watch 30"
+```
+
+This mode discovers `data/ocr/<sha256>/document.md`, requires completion
+metadata (`meta.json`, matching SHA-256, PaddleOCR engine, finished timestamp,
+positive page count), and validates the full page-marker sequence. Artifacts
+whose metadata has not arrived yet are deferred. It uses the same exact
+tokenizer, chunker, document identity, indexing manifest and reconciliation.
+When a source PDF is unavailable, `source_path` stays empty instead of pointing
+to an imaginary local file; available inventory aliases supply source URLs.
+
+The background launcher `bash scripts/index-ocr.sh` holds a single-worker file
+lock, appends progress to `data/processed/ocr-index.log`, and watches every 30
+seconds. Its tracing default is off because the workspace trace quota was
+exhausted; Postgres checkpoints and local metrics remain enabled. Set
+`BRH_INDEX_TRACING=true` to explicitly enable trace uploads when quota permits.
+The active detached session can be inspected with
+`tmux attach -t brh-ocr-embedding` (detach with Ctrl+B, D).
 
 Add `--discover --download-limit 20` to refresh/download WordPress media each
 cycle. Discovery and ingestion have separate limits. Completed documents do

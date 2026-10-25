@@ -1,6 +1,6 @@
 # ADR-0004: Configurable embeddings, French-first corpus
 
-- **Status**: Accepted
+- **Status**: Accepted; production embedding choice superseded by ADR-0013
 - **Date**: 2026-10-14
 
 ## Context
@@ -18,6 +18,7 @@ Put embeddings behind `EMBEDDING_PROVIDER` and keep the corpus French-first:
 |---|---|---|
 | `pinecone` (default) | Pinecone integrated inference embeds server-side | Pinecone only |
 | `openai` | Client-side embeddings via OpenAI-compatible API | OpenAI |
+| `openrouter` (production configuration) | Qwen client embeddings via LangChain | Embedding-only OpenRouter |
 | `hashing` | Deterministic offline vectors — tests/dev only | none |
 
 `BRH_EMBEDDING_MODEL` / `BRH_EMBEDDING_DIM` are read in every mode. The
@@ -47,15 +48,14 @@ Harder:
 
 ## Alternatives considered
 
-- **Hard-code OpenAI `text-embedding-3-large`.** Rejected: weaker on French
-  than multilingual-e5 and locks us to one vendor.
+- **Hard-code OpenAI `text-embedding-3-large`.** Rejected: it would remove
+  provider configurability; no French-quality comparison is claimed here.
 - **Multilingual model for Creole now.** Deferred: no Creole corpus in v1.
 
 ## Implementation status
 
-The supported production path is Pinecone integrated `multilingual-e5-large`;
-hashing/memory is implemented for offline development. The optional OpenAI
-adapter remains a scaffold, and selecting client-supplied Pinecone vectors
-fails explicitly. The provider table records the original extension contract,
-not a claim that every provider ships today. ADR-0012 selects hosted Records
-inference, exact local token counting and `truncate=NONE`.
+ADR-0013 selects OpenRouter Qwen3-Embedding-8B and client-supplied Pinecone
+vectors for the production configuration. The hosted E5 adapter remains
+available for the previous configuration, and hashing/memory supports offline
+development. The separate generic OpenAI adapter remains a scaffold. Production
+chunking uses exact model-specific token counts; no input is silently truncated.

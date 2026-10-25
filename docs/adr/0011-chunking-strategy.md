@@ -1,5 +1,12 @@
 # ADR-0011: Structure-aware hybrid chunking (v2)
 
+## Current production limits
+
+ADR-0013 updates the production configuration to a 768-token prose target and
+1536-token structural maximum measured with the pinned Qwen tokenizer. The
+model context limit is a separate safety boundary. Both chunk thresholds enter
+the chunker identity; omitted targets retain the historical behavior below.
+
 - **Status**: Accepted — deterministic hybrid v2 selected; table-aware evaluation completed; embedding/retrieval evaluation pending
 - **Date**: 2026-10-24
 - **Evidence**: corpus profile (778 documents, 11 761 pages),
@@ -145,9 +152,9 @@ Harder:
   above did not justify it.
 - **No parent-document retrieval.** The metadata (`table_id`, `part`,
   `row_start/end`) is shaped so it can be added without re-chunking.
-- **No embedding or vector indexing yet.** The 448-token default is an
-  embedding-facing contract, but the production tokenizer, embedder, vector
-  store, and retrieval evaluation are next-phase work.
+- **Embedding and vector indexing now implemented.** ADR-0012 implements
+  durable ingestion/retrieval and ADR-0013 selects Qwen client embeddings with
+  model-aware limits. Comparative retrieval-quality evaluation remains separate.
 
 ## Alternatives considered
 

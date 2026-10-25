@@ -21,9 +21,9 @@ record: no meaningful uniqueness constraints, no joins, no audit log.
 ## Decision
 
 - **Pinecone** holds vectors + minimal filter metadata, keyed by chunk id.
-  The index uses **integrated inference** (`multilingual-e5-large`, cosine),
-  so text goes in and no client-side embedding key is required in the default
-  configuration (ADR-0004).
+  ADR-0013 selects client-computed Qwen vectors in a dense cosine index.
+  OpenRouter uses a separate embedding-only credential; Pinecone stores vectors
+  and serves similarity queries. Hosted E5 remains a legacy configuration.
 - **Postgres** (schema `corpus`) is the system of record for parsed corpus
   data: `documents`, `pages`, `chunks`, and `processing_jobs`. The inventory
   tables `crawl_runs` and `crawl_urls` are the discovery/download ledger and
@@ -71,7 +71,7 @@ Harder:
 ## Implementation boundary
 
 The inventory, transactional corpus repository, exact-token chunking bridge,
-hosted Pinecone indexing and shared retrieval are implemented. Migration
+hosted and client-vector Pinecone indexing and shared retrieval are implemented. Migration
 0004 adds durable index state. ADR-0012 records recovery behavior and the live
 Postgres/Pinecone acceptance test. Corpus-wide indexing is an operator run,
 not something implied by an adapter or smoke test existing.

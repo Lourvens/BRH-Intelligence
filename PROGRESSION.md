@@ -1,11 +1,58 @@
 # Progression
 
-Last updated: 2026-10-24 (ingestion/indexing/retrieval implemented and live-tested)
+Last updated: 2026-10-25 (Qwen rebuild implementation and corpus validation)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Qwen rebuild implemented; backfill running (2026-10-25).** Implemented the
+  approved OpenRouter embedding adapter, 768-token target / 1536-token hybrid
+  ceiling, bounded document/request parallelism and resumable derived-data reset.
+  OCR artifacts remain the durable input. The old E5 worker is stopped and its
+  advisory locks released. Live Qwen → raw Pinecone → canonical citation and
+  reset-preserves-extraction acceptance passed in an isolated database/namespace.
+  Full exact-token preflight: 931 artifacts / 13,646 pages; 930 readable,
+  one blank awaiting text; 47,730 chunks / 32,837,980 Qwen input tokens;
+  maximum 1,536 tokens and no cap failures. Snapshot:
+  `data/processed/qwen-backfill-snapshot.json`. Derived reset is resumable via
+  `data/processed/qwen-reset.json`; sources/pages/inventory are preserved.
+  Reset completed for all 899 existing documents: old E5 vectors and canonical
+  chunks reached zero, while 899 documents, 13,310 pages and 902 extraction jobs
+  remained. The detached `brh-ocr-embedding` supervisor now runs Qwen; its first
+  completed cycle verified 20 documents / 731 vectors with no failures. Full
+  batches drain without a polling delay; later OCR arrivals are polled every
+  30 idle seconds. Blank artifact `790e27b795a384fde070d07c1382a8831afcbe493ac529ad4c5ea0f091f00324`
+  awaits readable text. Verification: **252 offline tests passed**, 4 live
+  tests deselected; isolated live Qwen/Pinecone/Postgres acceptance passed;
+  Ruff and `git diff --check` passed. Each provider microbatch is persisted
+  immediately so a later failure reuses earlier remote writes on resume.
+  Read-only progress: `uv run python -m brh_core.ingestion.status`; per-cycle
+  snapshot: `data/processed/ocr-index-status.json`. Backfill is ongoing, not
+  corpus-complete; initial target is 930 readable documents / 47,730 vectors.
+  Implementation and tests committed as `6407b3f`; architecture decisions and
+  operational documentation are recorded in the companion documentation commit.
+
+- **OpenRouter embedding credential saved (2026-10-25).** Added
+  `OPENROUTER_EMBEDDING_API_KEY` to the ignored root `.env` for embedding-only use.
+  The production `.env` now selects OpenRouter Qwen, raw Pinecone index
+  `brh-intelligence-qwen-1024`, namespace `default`, the pinned official tokenizer,
+  768/1536-token target/max, four document tasks and two in-flight embedding
+  requests with a one-request/sec initial rate. ADR-0013 records the decision.
+
+- **Historical E5 artifact backfill (stopped 2026-10-25).** `--from-ocr`
+  starts directly at completed extraction artifacts, with no local PDF or
+  fallback extraction required. All 856 current PaddleOCR artifacts / 12,716
+  pages passed completion/page-marker validation. The detached tmux session
+  `brh-ocr-embedding` runs `bash scripts/index-ocr.sh`: 20 successful documents
+  per cycle, polling every 30 seconds for remaining and newly arrived OCR.
+  Logs: `data/processed/ocr-index.log`; single-worker lock:
+  `data/processed/ocr-index.lock`. First progress check: 3 successful documents,
+  57 verified vectors, one document in progress and no failed manifests.
+  LangSmith rejected trace uploads due to its monthly trace quota, so this
+  worker disables trace uploads only; Postgres checkpoints/local metrics stay
+  enabled. Offline regression: 113 passed, 3 live tests deselected.
 
 - **End-to-end ingestion implemented and live-tested (2026-10-24).** A LangChain
   runnable composes discovery and ingestion. Exact E5 token counts, canonical

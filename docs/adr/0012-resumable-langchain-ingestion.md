@@ -4,6 +4,10 @@
 - **Date**: 2026-10-24
 - **Extends**: ADR-0003, ADR-0004, ADR-0005, ADR-0006, ADR-0011
 
+ADR-0013 supersedes this ADR's hosted-E5 production choice and fixed chunk
+budget. Its LangChain orchestration, canonical projection, durable manifests,
+locking and reconciliation decisions remain in force for Qwen client vectors.
+
 ## Context
 
 OCR arrives incrementally from external GPU runners. A PDF may first have a
@@ -57,6 +61,13 @@ which kind of index is configured.
 10. A repeatable CLI cycle picks up new PDFs and OCR. Explicit reconciliation
     can also read persisted chunks when original PDFs are offline. Changing
     the tokenizer/chunker requires re-ingestion before those chunks are indexed.
+
+The `--from-ocr` entry point starts at published extraction artifacts rather
+than at PDF discovery. It trusts the existing content-addressed extraction
+metadata for source identity, validates completion and page markers, and never
+requires a source PDF or invokes fallback extraction. No second persistence or
+indexing path is introduced. Missing local PDFs remain absent in metadata;
+this entry point does not invent source file locations or document URLs.
 
 ## Consequences
 

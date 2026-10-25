@@ -5,12 +5,11 @@ ask questions in natural language, get answers grounded in official BRH
 documents, open the exact source page, and let other people's agents use the
 same knowledge through **MCP**.
 
-> **This repository is a scaffold.** The structure, contracts, configuration,
-> and wiring are in place; most of the implementation is not. Every module
-> carries `TODO:` markers and signature-level stubs so you can build it step by
-> step. Two slices *are* implemented: the BRH document inventory
-> (`make inventory`) and its analytics track, `services/analytics`
-> (`make analytics`). See [Build order](#build-order) below.
+> **The ingestion/retrieval core is implemented.** Inventory, PaddleOCR artifact
+> consumption, hybrid chunking, Qwen embeddings, Pinecone indexing, recovery,
+> canonical retrieval and citations are covered by offline and isolated live
+> tests. Agent generation and MCP registration remain scaffolds. The separate
+> analytics track is implemented. See [Build order](#build-order) below.
 
 ## The one workflow we build first
 
@@ -42,16 +41,16 @@ brh-intelligence/
 │       ├── db/migrations/*.sql  ✅ real  (schema)
 │       ├── db/pool.py           ✅ real  (connection pool)
 │       ├── db/migrate.py        ✅ real  (migration runner)
-│       ├── db/repository.py     ⬜ stub  (corpus documents/pages/chunks)
+│       ├── db/repository.py     ✅ real  (transactional corpus + manifests)
 │       ├── vectorstore/base.py  ✅ real  (VectorStore protocol)
-│       ├── vectorstore/         ⬜ stub  (pinecone, memory, factory)
+│       ├── vectorstore/         ✅ real  (Pinecone vectors/records, memory)
 │       ├── embeddings/base.py   ✅ real  (Embedder protocol)
-│       ├── embeddings/          ⬜ stub  (openai, hashing, factory)
+│       ├── embeddings/          ✅ real  (Qwen/OpenRouter, hashing; generic OpenAI stub)
 │       ├── inventory/           ✅ real  (brh.ht: discover → download → ledger)
-│       ├── ingestion/           ⬜ stub  (discover, extract, chunk, pipeline)
-│       ├── retrieval/service.py ⬜ stub  (THE shared core)
-│       ├── citations.py         ⬜ stub  (PDF page deep links)
-│       └── catalog.py           ⬜ stub  (export for the web PDF route)
+│       ├── ingestion/           ✅ real  (LangChain, OCR artifacts, hybrid chunks, resume)
+│       ├── retrieval/service.py ✅ real  (canonical evidence + stale-hit rejection)
+│       ├── citations.py         ✅ real  (PDF page deep links)
+│       └── catalog.py           ✅ real  (export for the web PDF route)
 ├── services/agent/      # brh_agent — LangGraph graph
 │   ├── graph.py                 ✅ real  (retrieve → generate|refuse)
 │   ├── state.py                 ✅ real  (graph state)
@@ -77,7 +76,12 @@ Legend: ✅ real = ready to use; ⬜ stub = signatures + `TODO`, you write the b
 
 ## Build order
 
-A suggested path. Each step is independently verifiable.
+The core ingestion and retrieval stages below are implemented. The production
+configuration uses Qwen3-Embedding-8B through LangChain/OpenRouter and a raw
+Pinecone index (ADR-0013). Follow the
+[ingestion runbook](docs/architecture/ingestion-operations.md) for the resumable
+OCR-artifact backfill and read-only progress command. Agent and MCP surface
+integration remain separate work.
 
 0. **Inventory (front half)** — already implemented. `make inventory` catalogues
    every PDF on `brh.ht` (so the ledger lists the whole corpus), then downloads
@@ -91,13 +95,14 @@ A suggested path. Each step is independently verifiable.
    [`services/analytics/README.md`](services/analytics/README.md).
 1. **Config & schema** — already done. `make postgres-up && make migrate` creates
    the corpus tables (migrations `0001`–`0002`).
-2. **Vector store + embedder** — implement `embeddings/hashing.py` and
-   `vectorstore/memory.py` first; they run fully offline and unlock tests.
-3. **Ingestion** — `metadata.py` → `extract.py` (PyMuPDF, page-aware) →
-   `chunk.py` → `pipeline.py`. Verify with `make seed && make ingest`
+2. **Vector store + embedder** — implemented: Qwen/OpenRouter, client-vector
+   Pinecone, legacy hosted E5, and offline hashing/memory.
+3. **Ingestion** — implemented: discovery, artifact-first extraction, hybrid
+   chunking, exact token limits, bounded parallelism and durable reconciliation.
+   Verify with `make seed && make ingest`
    (`BRH_VECTOR_BACKEND=memory BRH_EMBEDDING_PROVIDER=hashing` needs no cloud).
-4. **Retrieval** — `retrieval/service.py` (+ `citations.py`). This is the shared
-   core; get it right and everything above it is thin.
+4. **Retrieval** — implemented in `retrieval/service.py` and `citations.py`,
+   shared by the eventual agent/MCP surfaces.
 5. **Agent** — `prompts.py` → `nodes.py` → run `make agent-dev`.
 6. **MCP** — register the tools in `services/mcp/src/brh_mcp/server.py`.
 7. **Web** — `lib/agent.ts` (`useStream`) → chat UI → citation chips → PDF route
