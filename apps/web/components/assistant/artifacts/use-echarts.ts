@@ -7,6 +7,7 @@ import { echarts } from "@/lib/echarts";
 export function useECharts(
   buildOption: () => object | null,
   deps: DependencyList,
+  onClick?: (event: unknown) => void,
 ) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -31,6 +32,7 @@ export function useECharts(
       if (option) {
         chart.setOption(option as Parameters<typeof chart.setOption>[0]);
       }
+      if (onClick) chart.on("click", onClick);
       observer.observe(node);
     });
 

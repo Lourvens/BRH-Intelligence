@@ -50,7 +50,7 @@ export function Hero() {
 
           <div className="mt-9 flex w-full max-w-2xl flex-col items-center justify-center gap-3.5 sm:flex-row">
             <a
-              href="#corpus"
+              href="/brh-corpus"
               className="group inline-flex w-full items-center justify-center gap-2.5 whitespace-nowrap rounded-xl bg-navy px-7 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-navy/20 transition-all duration-200 hover:bg-navy-deep hover:shadow-xl sm:w-auto"
             >
               {heroCopy.primaryCta}

@@ -1,0 +1,11 @@
+{
+  "entities": 1015,
+  "mentions": 1392,
+  "pending_relationships": 116,
+  "documents_with_entities": 16,
+  "sample_documents": 52,
+  "sample_pages": 901,
+  "attempted_pages": 216,
+  "failed_attempts": 1,
+  "observed_cost": 0.097369467
+}

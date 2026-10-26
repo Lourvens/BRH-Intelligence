@@ -6,11 +6,11 @@ const columns = [
   {
     title: "Corpus",
     links: [
-      { label: "Circulaires et avis", href: "#corpus" },
-      { label: "Notes de conjoncture", href: "#corpus" },
-      { label: "Rapports et bilans", href: "#corpus" },
-      { label: "Données IHSI", href: "#corpus" },
-      { label: "Avis et communiqués", href: "#corpus" },
+      { label: "Circulaires et avis", href: "/brh-corpus?family=circular" },
+      { label: "Notes de conjoncture", href: "/brh-corpus?family=bulletin" },
+      { label: "Rapports et bilans", href: "/brh-corpus?family=annual-report" },
+      { label: "Notes d’inflation", href: "/brh-corpus?family=inflation" },
+      { label: "Entités et relations", href: "/brh-corpus?mode=entities" },
     ],
   },
   {
@@ -27,7 +27,7 @@ const columns = [
     title: "Institution",
     links: [
       { label: "Portail brh.ht", href: "https://www.brh.ht" },
-      { label: "Sources publiques", href: "#corpus" },
+      { label: "Sources publiques", href: "/brh-corpus" },
       { label: "Questions fréquentes", href: "#faq" },
       { label: "Démonstration", href: "#demo" },
       { label: "Retour en haut", href: "#apercu" },
@@ -99,7 +99,7 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-col items-center justify-between gap-4 pt-8 text-[11px] text-white/50 md:flex-row">
-          <div>© 2026 BRH Intelligence · Inventaire du 15 octobre 2026.</div>
+          <div>© 2026 BRH Intelligence · Couverture mesurée dans le catalogue.</div>
           <div className="max-w-xl text-center leading-relaxed md:text-right">
             Les réponses peuvent contenir des erreurs. Vérifiez toujours la page
             originale du document officiel cité.

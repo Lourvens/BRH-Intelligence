@@ -1,0 +1,19 @@
+{
+  "synthetic": true,
+  "purpose": "Jev transport and support-judgment parsing; not corpus quality",
+  "status": "succeeded",
+  "probabilities": [
+    0.93
+  ],
+  "validation": {
+    "id": "gen-dec-1793043200-5OOpUc68ifsbzn7Rd8MT",
+    "model": "typesafe/jev-1.14-20261014",
+    "provider": "TypeSafe",
+    "usage": {
+      "input_tokens": 365,
+      "output_tokens": 21,
+      "cost": 1.533e-05
+    },
+    "prompt_version": "research-graph-v1"
+  }
+}

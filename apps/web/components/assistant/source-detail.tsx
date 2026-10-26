@@ -130,7 +130,7 @@ export function SourceDetail({ citation }: { citation: ChatCitation }) {
                   size="icon-sm"
                   className="rounded-sm bg-surface-alt text-navy-ink transition-colors duration-150 hover:bg-border/60 motion-reduce:transition-none"
                 >
-                  <Link href="/#corpus" aria-label="Explorer le corpus">
+                  <Link href="/brh-corpus" aria-label="Explorer le corpus">
                     <ArrowUpRight className="size-3.5" aria-hidden />
                   </Link>
                 </Button>

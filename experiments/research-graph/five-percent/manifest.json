@@ -1,0 +1,495 @@
+{
+  "question": "Can grounded entities from 5% of documents be saved and resumed?",
+  "decision_rule": "Attempt all pages of the fixed sample; save only exact source evidence. Record rejected candidates, failures, cost and coverage. No factual precision/recall claim without reviewed labels; no production model selection.",
+  "corpus_documents": 1026,
+  "percentage": 5,
+  "seed": 17,
+  "model": "mistralai/ministral-8b-2512",
+  "prompt_version": "research-graph-v2",
+  "documents": [
+    {
+      "document_id": "cf4b056f-bb9b-571c-9ee5-00e6d149c0a9",
+      "sha256": "0bef67e648359475270ba54e2ddfa251914c9b66c066f92637f7fc809c20aaad",
+      "artifact_hash": "847f2c69e20e934ecd09b5c7186995fe3e5317c0962f6c9d13d99846a7b2f3da",
+      "slug": "circulaire-126-pdf",
+      "title": "Circulaire 126-pdf",
+      "family": "circular",
+      "page_count": 5
+    },
+    {
+      "document_id": "997ba20d-85e4-58cb-b2f2-248afe3c675f",
+      "sha256": "ad52e5e6232d72a99e8c6de871a5ed1d25a818521c338214d8ddb374da616bde",
+      "artifact_hash": "4aa1032e66152b243878ee21166281f187b6a58232bdbefceb618c50bdd4f4c2",
+      "slug": "ad52e5e6232d72a99e8c6de871a5ed1d25a818521c338214d8ddb374da616bde",
+      "title": "note_inflat0118",
+      "family": "unknown",
+      "page_count": 9
+    },
+    {
+      "document_id": "b7f22eca-cfe7-5f24-8afd-0bc421c85924",
+      "sha256": "6fc6c3d8e451ca60638d547c10f12bd8664c2074bfcf85240be6e110ffaec8b4",
+      "artifact_hash": "c01f44c3de3b099875752904145ef238405ac56504845e4cdf717c20ec6a14b8",
+      "slug": "6fc6c3d8e451ca60638d547c10f12bd8664c2074bfcf85240be6e110ffaec8b4",
+      "title": "bul47",
+      "family": "unknown",
+      "page_count": 67
+    },
+    {
+      "document_id": "93055e42-a6fd-5487-a8ad-b93594129968",
+      "sha256": "9d1d93fc8ed8023b5fead072e9696fb1f0a3e6094733321958707e3044f09ae1",
+      "artifact_hash": "6fd124e1afaf8bdad78a0907d6938f8f49a647da1a69adc0c26ce44e40e1cab1",
+      "slug": "circulaire-123-pdf",
+      "title": "Circulaire 123-pdf",
+      "family": "circular",
+      "page_count": 4
+    },
+    {
+      "document_id": "575204a0-08e3-5d7d-b9bf-e1e11c7f03d3",
+      "sha256": "0b524231fbbb32df30bc54b9fb90a26f075d9f5c4c99a01cd52c70734ac03439",
+      "artifact_hash": "2abfa3ef38209bda0414891849c53aa34c890ccd9e58d001cd96751d0caca587",
+      "slug": "0b524231fbbb32df30bc54b9fb90a26f075d9f5c4c99a01cd52c70734ac03439",
+      "title": "Bulletin 97 (Octobre – Décembre 2015)",
+      "family": "bulletin",
+      "page_count": 21
+    },
+    {
+      "document_id": "8b1984a4-1343-5f58-a33d-e8d3723eb3bb",
+      "sha256": "feded6471f06068dd540a815eb31741ad48e8cdc19aeca0e9db2bdf21e60de0e",
+      "artifact_hash": "2ab2f8ffaf360f76677fdbef42427c79f27c2ba5f5d04acd3746e04bd520f7b5",
+      "slug": "feded6471f06068dd540a815eb31741ad48e8cdc19aeca0e9db2bdf21e60de0e",
+      "title": "bul82",
+      "family": "unknown",
+      "page_count": 67
+    },
+    {
+      "document_id": "34376d41-83db-5f5f-8c3e-52f356b5e02f",
+      "sha256": "5d65e460367fcb4f2af623983b1c610a3347a89699ea4318b4feefff08fdb998",
+      "artifact_hash": "39b7196d871bd475ad051f50b69c3cc72f702b73f3472929826635a270ae233b",
+      "slug": "banque-de-la-republique-d-haiti-brh-5d65e460367f",
+      "title": "Rapport-des-auditeurs-inde?pendants-2011",
+      "family": "unknown",
+      "page_count": 70
+    },
+    {
+      "document_id": "0d38667e-05d2-5d75-845c-063544873b8a",
+      "sha256": "f30a0943837a659b873995aa5bb420981ff5b7fc6b1b83c1668a246311e0e698",
+      "artifact_hash": "9eb19bf5a906bfc480b702667bb566c1909a88b04a3d7d43004cf1de3a9e0008",
+      "slug": "table-des-matieres-f30a0943837a",
+      "title": "Table des Matières",
+      "family": "unknown",
+      "page_count": 16
+    },
+    {
+      "document_id": "7c38d403-b8f1-510e-af42-893f422fd0c7",
+      "sha256": "926524bfa73f7cc17ada8fa0885ea913d6f28201929938f1b767d5cc67f26f8b",
+      "artifact_hash": "4e5ef7709d4d08054057787199d29c673eba35cb16f63fbcadcd95fe7654ed6a",
+      "slug": "926524bfa73f7cc17ada8fa0885ea913d6f28201929938f1b767d5cc67f26f8b",
+      "title": "AVIS AU PUBLIC-DSBIF-29-07-2025",
+      "family": "notice",
+      "page_count": 1
+    },
+    {
+      "document_id": "c3d142e7-f649-52d0-8690-d50a4949cbbf",
+      "sha256": "19e9c21caf74fa57eb27ab7d2dc2db405d539a5b17b3fc40280e8d9e9ee0e048",
+      "artifact_hash": "ff19d797f2341997f7e09d59590f62b027c88f6b13b27ab59c86c007d671b7a2",
+      "slug": "19e9c21caf74fa57eb27ab7d2dc2db405d539a5b17b3fc40280e8d9e9ee0e048",
+      "title": "Avis-de-la-BRH-relatif-au-projet-emission-de-sa-monnaie-digitale",
+      "family": "notice",
+      "page_count": 3
+    },
+    {
+      "document_id": "d242d425-ef34-593a-8671-abba708408e9",
+      "sha256": "80bbd500f0f571411ca9d16422a194ecf1c6e7f5a6f3b12165f23f85c3863692",
+      "artifact_hash": "0f0d16917e02c1f35447ec11ef0f0a10b05e633e87a84f841b44026532f1a428",
+      "slug": "80bbd500f0f571411ca9d16422a194ecf1c6e7f5a6f3b12165f23f85c3863692",
+      "title": "Banque de la République d'Haiti",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "7dac41b3-63cb-5fc1-9186-f0989fba05e6",
+      "sha256": "63b4ca02772a885f4fcf3a68ed6264af1b8bf2fdac25a56a0d1b08ac05d84451",
+      "artifact_hash": "a36c2a181edbc798009a89780dc1072682b49523d1217997d05772e73f79e72d",
+      "slug": "note-mensuelle-dinflation-septembre-2022-f",
+      "title": "Note mensuelle d’inflation-septembre 2022_f",
+      "family": "inflation",
+      "page_count": 9
+    },
+    {
+      "document_id": "9f6602c2-729d-50a1-8cd5-ca42a6b2ebe0",
+      "sha256": "30d6c2bd1048307ff9c095fdf11bb8bd0a00a0152c552d74772c0fe74c1ad001",
+      "artifact_hash": "eb01c4e771c59ddc28ce60841fecd9408707cc253a0e3c2714568c5d4f615f7e",
+      "slug": "30d6c2bd1048307ff9c095fdf11bb8bd0a00a0152c552d74772c0fe74c1ad001",
+      "title": "E. ANNEXE STATISTIQUE",
+      "family": "unknown",
+      "page_count": 35
+    },
+    {
+      "document_id": "ca15a7fa-011b-56da-8c25-9cd2f239b053",
+      "sha256": "ac32a1ef318344bbda5b7681b193d90691826b571691c849fd7ebf9f7cce812e",
+      "artifact_hash": "cbdd2c6faada1c971231f382990d9518946bad1b59f571d8aa9775c0718c7190",
+      "slug": "ac32a1ef318344bbda5b7681b193d90691826b571691c849fd7ebf9f7cce812e",
+      "title": "NOTE SUR",
+      "family": "unknown",
+      "page_count": 20
+    },
+    {
+      "document_id": "44e4eb96-8886-57b5-a1ad-811eafa8cea5",
+      "sha256": "08e627702ddce96098a835cfb7cd734fce8667759cee48805a399c4d5011095c",
+      "artifact_hash": "94246682b1dbe24a0b17d33e7f795a7bd721b4510352f54992ca1a9f58dbf74f",
+      "slug": "08e627702ddce96098a835cfb7cd734fce8667759cee48805a399c4d5011095c",
+      "title": "Interventions sur le marché des changes (en Euros)",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "20d8670f-69e8-56b3-a812-a09bff77043e",
+      "sha256": "aa3e3d139b5aefed51525a48aff88296610b2c933177eec87c6b9aad8a2fd645",
+      "artifact_hash": "bb60e87b272b84f93fcd0c235372665027eccdcd0a9624991e4ccac24fdef625",
+      "slug": "aa3e3d139b5aefed51525a48aff88296610b2c933177eec87c6b9aad8a2fd645",
+      "title": "Exercice 08-09",
+      "family": "unknown",
+      "page_count": 2
+    },
+    {
+      "document_id": "4604b652-a367-5403-aa6a-ba69ab61a945",
+      "sha256": "3a7821994b73a5cdf4f3d53133d758e546232929950e126d4858ed6092488ede",
+      "artifact_hash": "5f2d7ca5f7f36ec5b9bfc238a6dbe01be921cb56ff88048a267ff2a4a49aa4a1",
+      "slug": "3a7821994b73a5cdf4f3d53133d758e546232929950e126d4858ed6092488ede",
+      "title": "loibels",
+      "family": "unknown",
+      "page_count": 7
+    },
+    {
+      "document_id": "650452d3-aeac-5a16-9361-3a1a1e2373a8",
+      "sha256": "5e8fcbd999c0bb7c4284e1964e4b329fad04d79ca798d76fb1ffe6020c157cd7",
+      "artifact_hash": "af3f2fdeeb1f0c2c79dd035963efa55353ee99d9862ca3dd595a34c015ca5c4b",
+      "slug": "5e8fcbd999c0bb7c4284e1964e4b329fad04d79ca798d76fb1ffe6020c157cd7",
+      "title": "Table des Matières",
+      "family": "unknown",
+      "page_count": 16
+    },
+    {
+      "document_id": "4bc07a96-987a-5390-9f0d-44010f5f9af7",
+      "sha256": "c6cf8142a4b084434e8e731932a02595e47af82b4bced4dbb229200407859c63",
+      "artifact_hash": "07353f10f2d6a16ee6d6afcd0902eb447decdfc4200394d6ffab243a2bc183c6",
+      "slug": "c6cf8142a4b084434e8e731932a02595e47af82b4bced4dbb229200407859c63",
+      "title": "Document BRH c6cf8142",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "6ab05ddc-c52e-5314-8b0f-81fa40ce1caa",
+      "sha256": "c2c3523538d826aa8f90427f069396c1af926f2a2cd14fbd9b04712146b95bae",
+      "artifact_hash": "45666948bb669705523f8cd1285f865214cfaae3b5185e6ce6058ecfdfd9cb6d",
+      "slug": "circulaire-100-3-c2c3523538d8",
+      "title": "circulaire 100-3",
+      "family": "circular",
+      "page_count": 5
+    },
+    {
+      "document_id": "a5887c44-442a-5669-83d4-ce9eb229225a",
+      "sha256": "d3ba5b4a159161f3dec4a9341658782e49929eed2fe67e28edd2850454e74e23",
+      "artifact_hash": "927bc83aead479c0c16fa795bf473d634b30d03571d25744c9e1246f87136d78",
+      "slug": "d3ba5b4a159161f3dec4a9341658782e49929eed2fe67e28edd2850454e74e23",
+      "title": "En pourcentage du total",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "3a533d53-708e-5121-931b-f7c298bc50cc",
+      "sha256": "b6665367712e394639923146511b55bfbc561c2a31e3fbb28d98f20fdda28ab0",
+      "artifact_hash": "989fb66596655576bf7849f21677a632f9ea94f03b21f3b4f5064ae12e2bb8ef",
+      "slug": "b6665367712e394639923146511b55bfbc561c2a31e3fbb28d98f20fdda28ab0",
+      "title": "Aux Banques Commerciales Et aux Banques d'Epargne et de Logement",
+      "family": "unknown",
+      "page_count": 44
+    },
+    {
+      "document_id": "246b8c6a-3921-52cf-a634-4f68efe09b52",
+      "sha256": "ad101b9b620e750cb12e09da351a0ae8a046407181d129a7d18a08200b26bbc4",
+      "artifact_hash": "466470164587f0a80a7a04dc48b1c4e65fd19d84035dc093b1bfe48a9454be59",
+      "slug": "ad101b9b620e750cb12e09da351a0ae8a046407181d129a7d18a08200b26bbc4",
+      "title": "COMMUNIQUE-SPIH-BRH.pdf alias",
+      "family": "notice",
+      "page_count": 1
+    },
+    {
+      "document_id": "9b335825-58de-50af-9e8a-f51cf1101c00",
+      "sha256": "b98f2c2d4d5cba653933f4e6fa0314751a8bbe8e5d0a23b15a070cfb553d2227",
+      "artifact_hash": "13d13d5a662706213c98b450e278128ea9213db57c6231940b7ae86f8eb529e8",
+      "slug": "b98f2c2d4d5cba653933f4e6fa0314751a8bbe8e5d0a23b15a070cfb553d2227",
+      "title": "BANQUE DE LA REPUBLIQUE D'HAITI (BRH)",
+      "family": "unknown",
+      "page_count": 12
+    },
+    {
+      "document_id": "cdba0dc3-8fd2-53a1-9953-294f510c333b",
+      "sha256": "77cb6c70e048d9ee60c16947bce532b66a5c5a256c7f4fe16c98bc61bcc93b45",
+      "artifact_hash": "8e81b435a1f60bfb3af48e1b8a0754bffcf93032a73c07b5398986eb87e6303f",
+      "slug": "77cb6c70e048d9ee60c16947bce532b66a5c5a256c7f4fe16c98bc61bcc93b45",
+      "title": "note_inflat0617",
+      "family": "unknown",
+      "page_count": 9
+    },
+    {
+      "document_id": "294492af-bfd3-5abb-9102-8000550ed4ec",
+      "sha256": "ab8eb639c81be8bb1393e2ee122e7c1c1a6294e338ddda97278e9d590c7b1c1b",
+      "artifact_hash": "15f6256a9bbaee6c1004def04d5c4b97c26da5c1efc1204987e5929f932dfc76",
+      "slug": "ab8eb639c81be8bb1393e2ee122e7c1c1a6294e338ddda97278e9d590c7b1c1b",
+      "title": "Banque de la République d'Haïti",
+      "family": "unknown",
+      "page_count": 9
+    },
+    {
+      "document_id": "f03bc1bf-12e2-5649-a5b1-27c5aedbb1d4",
+      "sha256": "bf917ecaf9d57559d2cf25b969a34f946e0e2663f4cfa75b40b33d4c98a24ec9",
+      "artifact_hash": "1833939baff2828eb537862201ae281dde032ffa7675ee3c273d9636aa1155ca",
+      "slug": "bf917ecaf9d57559d2cf25b969a34f946e0e2663f4cfa75b40b33d4c98a24ec9",
+      "title": "Exercice 14-15",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "46afb14b-5c31-55d6-ae94-d767b94a6b88",
+      "sha256": "dd71dd5a71c8b6c5319b0893ae574633414a23b4e50ac08e2bbf91b7e94eced3",
+      "artifact_hash": "bf402f0a93afc1dbaca958eab7d48011a82fe1d09e185d76be6dd1829e49abe5",
+      "slug": "2021-2",
+      "title": "Document BRH dd71dd5a",
+      "family": "unknown",
+      "page_count": 2
+    },
+    {
+      "document_id": "cd0fa444-2550-5775-a884-5520352a779f",
+      "sha256": "b1b7a2e8ac28a0c11445560ffb40c35bb969c5ea48dcfa6dc5d22e17312d68dd",
+      "artifact_hash": "0ef128f73bbe218beebfe5e00e50d9a1b8b7cfca7d7b88839354112030b76e21",
+      "slug": "note-polmon1t22",
+      "title": "note_polmon1t22",
+      "family": "unknown",
+      "page_count": 14
+    },
+    {
+      "document_id": "a8712bab-238f-5d89-ab60-b9dcda71b641",
+      "sha256": "65181755c675f46b2eeea763a5502afc903422176d0a9350b34381fb231f7ccf",
+      "artifact_hash": "8a7f312d62f5898dfa7191371c4cc712c9808b6e497c365884021d63eaad5f1d",
+      "slug": "65181755c675f46b2eeea763a5502afc903422176d0a9350b34381fb231f7ccf",
+      "title": "graphiques_polmon",
+      "family": "unknown",
+      "page_count": 5
+    },
+    {
+      "document_id": "07cbc420-96ce-5cf4-9607-ceba06b6d1d4",
+      "sha256": "b7b786cbd071bf81386f8c93ab5bbe9cb397083127ff344258e6bf1684460755",
+      "artifact_hash": "eafbd32852d941a4860834dec6a6ad3b065933882fa22776784290eeba278b2c",
+      "slug": "b7b786cbd071bf81386f8c93ab5bbe9cb397083127ff344258e6bf1684460755",
+      "title": "LIGNES DIRECTRICES AUX INSTITUTIONS FINANCIERES",
+      "family": "circular",
+      "page_count": 4
+    },
+    {
+      "document_id": "da461e23-f616-5c20-ab02-8fffe16b6ce1",
+      "sha256": "3281e868337e2cade95925eac21c550e1ec75237f57eca85cd0cc5669a2afa1c",
+      "artifact_hash": "ea2855375838f31f9a1c1d2342d0714b1d9a45f4ffce7fe07abad0ee987fc31c",
+      "slug": "3281e868337e2cade95925eac21c550e1ec75237f57eca85cd0cc5669a2afa1c",
+      "title": "INDIA STORY OF AS SINCE 1900INDIA STORY OF AS SINCE 1900Nov 19Dec 19Jan 20Feb 20Mar 20Apr 20May 20Jun 20Jul 20Aug 20<",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "bb7869ba-3d67-565c-8c14-9bc70c3f6cd3",
+      "sha256": "8dfe4cd42872ce617e55d0d775e943c22d1f840e6e8eef0c3f7c305a57bb2d94",
+      "artifact_hash": "91c2bafce8828da70c261c836d1ff1b0e08ecc9223a0057b9e645a757eadec1f",
+      "slug": "8dfe4cd42872ce617e55d0d775e943c22d1f840e6e8eef0c3f7c305a57bb2d94",
+      "title": "Note-additionnelle-No2-Circulaire-88-1",
+      "family": "circular",
+      "page_count": 1
+    },
+    {
+      "document_id": "192f42b4-4c42-51c8-8396-9e845dbdc9fb",
+      "sha256": "01884737c9a63a4e46779b39a718b67533aaa628b9f9aa58f146fb57ea0174be",
+      "artifact_hash": "69e62b02278dd774c39624851dbfc936e8007e69fc0c0198a0e5199f058848d3",
+      "slug": "01884737c9a63a4e46779b39a718b67533aaa628b9f9aa58f146fb57ea0174be",
+      "title": "Circulaire # 10 relative a? la bonne gouvernance des CEC",
+      "family": "circular",
+      "page_count": 13
+    },
+    {
+      "document_id": "b3877977-3507-5c86-b171-2d9628ef3f17",
+      "sha256": "66611f9c674fe7e950c10c9bfaf9ab956e6647787c7803690ac17c842f8b0fd8",
+      "artifact_hash": "49ac5b8b17d1a8dc43420277969b577d7d2b3dd3a1f2f7c5a5d103dfeb6c792b",
+      "slug": "66611f9c674fe7e950c10c9bfaf9ab956e6647787c7803690ac17c842f8b0fd8",
+      "title": "A. L'ACTIVITÉ ÉCONOMIQUE EN 2001",
+      "family": "unknown",
+      "page_count": 35
+    },
+    {
+      "document_id": "18b1d1ae-9dbb-5185-91b7-7038fb60c0af",
+      "sha256": "2e8791e146f89cb09ddfb6e6895fcdf3eb97cdc2cab3f1c5b15d4afb59ae9b43",
+      "artifact_hash": "d26639eb1e7f4c642ad59a2257bfac831d8d9fa7b31e75010226ad741664e995",
+      "slug": "2e8791e146f89cb09ddfb6e6895fcdf3eb97cdc2cab3f1c5b15d4afb59ae9b43",
+      "title": "Note-mensuelle-d’inflation-Janvier-2024",
+      "family": "inflation",
+      "page_count": 9
+    },
+    {
+      "document_id": "f1cbe5a0-a6e2-52fe-a56c-b08b64ced432",
+      "sha256": "19a0d15c348228281fe9fbc1c6bdeb3315a595957c512fa2f07b2b97a92f0a00",
+      "artifact_hash": "c04235c471152524262fd2ca075bd960ee1ed1affc6f75233c412b951608e4a4",
+      "slug": "19a0d15c348228281fe9fbc1c6bdeb3315a595957c512fa2f07b2b97a92f0a00",
+      "title": "CONSEIL D'ADMINISTRATION",
+      "family": "unknown",
+      "page_count": 33
+    },
+    {
+      "document_id": "bd2a3f33-4b24-5c99-badd-22ad31007362",
+      "sha256": "f92a368377012ea1fd95a9993007d3161cf2dd2f333e2d04af4292e34443d7f0",
+      "artifact_hash": "e7e2659fd356d751d9f14e72a0c85d22f751ae470dd58215a772abb7f9ec2f6c",
+      "slug": "document-brh-f92a3683-f92a36837701",
+      "title": "interventions21",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "02d4a5d2-27ee-5178-a886-ff248236c4bb",
+      "sha256": "4c06ff5a73cd7efda1a6f781c2a5ccfdc4dc761d6027cb777a6f4d148ee1ba8a",
+      "artifact_hash": "24d8607d520f6b2eb1d6f90dddfe0103194183782f1093bd1574ca3ed73baa6c",
+      "slug": "4c06ff5a73cd7efda1a6f781c2a5ccfdc4dc761d6027cb777a6f4d148ee1ba8a",
+      "title": "Note mensuelle d’inflation_juillet 2023-version finale1",
+      "family": "inflation",
+      "page_count": 8
+    },
+    {
+      "document_id": "cb65382a-5985-5c53-9f4e-a6689d4b2b57",
+      "sha256": "7ce2059d60f5970619a339724cea7a4871b71eeaf7750fa671e69933b7af13ef",
+      "artifact_hash": "2beca4b76b5cc76434ad34960b8fb40d466ac27d21b28f33a052bfcc23b31b38",
+      "slug": "7ce2059d60f5970619a339724cea7a4871b71eeaf7750fa671e69933b7af13ef",
+      "title": "Banque de la République d'Haïti Le Gouverneur",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "76bbd977-da09-5577-955f-d60e422020ee",
+      "sha256": "6231c73e6644116956e05a3ed8a39347fa52eae1723cfafc33a2767a859a38ec",
+      "artifact_hash": "12f9694878ef71d3155a46d8bd447a04e8ee4f4d716daa86d7aa5374fcadf491",
+      "slug": "6231c73e6644116956e05a3ed8a39347fa52eae1723cfafc33a2767a859a38ec",
+      "title": "October-17TM = 62,8461TAUX DE CHANGE (Gdes pour US$ 1)02-oct-17......Gdes62,709020-oct-17......Gdes03-oct-17",
+      "family": "unknown",
+      "page_count": 3
+    },
+    {
+      "document_id": "37937000-dfbf-59f5-b227-e416da9200eb",
+      "sha256": "a6ba96cbbb6745dff7ce12b52e27d6cfee12d6e090b7a733f03dc0144b0796aa",
+      "artifact_hash": "3c0089679fa745788cc0239b32bff9cca33120b711de1df001b96cdec2b69149",
+      "slug": "bilanconsolidemensuel",
+      "title": "Base mensuelle",
+      "family": "unknown",
+      "page_count": 1
+    },
+    {
+      "document_id": "6bf731c5-e46d-5181-a9fc-1b78ab78bb02",
+      "sha256": "8bde507130dd7b2baf54da3b6ac3d446a4d90e12f777533bf4683980f9a633de",
+      "artifact_hash": "b9f64275dd336eb899419a7f02de965dfcf4317b90fad729e1a1b9cd11299a0a",
+      "slug": "8bde507130dd7b2baf54da3b6ac3d446a4d90e12f777533bf4683980f9a633de",
+      "title": "Bilan consolide des banques commerciales (Table 20R)",
+      "family": "annual-report",
+      "page_count": 1
+    },
+    {
+      "document_id": "b57d27fd-2158-5307-9aeb-a887dd4c37bf",
+      "sha256": "e240ab15a6445f28a6300f62ccb73420c755d1962919aae340bb369d6fc540ea",
+      "artifact_hash": "b2a727a5815b4d8bb151a252e7b087580d91ade7fe4e4959b4e8e901bde3730f",
+      "slug": "e240ab15a6445f28a6300f62ccb73420c755d1962919aae340bb369d6fc540ea",
+      "title": "L'ÉCONOMIE HAITIENNE EN GRAPHES",
+      "family": "unknown",
+      "page_count": 16
+    },
+    {
+      "document_id": "1d79ebd8-e80c-515f-8ac6-ed281a069dcc",
+      "sha256": "62e492968be1c7dbac5fbfe0f32e6d37ee9086257f6590a00476b5114af36e7e",
+      "artifact_hash": "0553d40f516196ca1b44d00a0c6ef7ff31b7c652e13e9969e7b77281143ad318",
+      "slug": "62e492968be1c7dbac5fbfe0f32e6d37ee9086257f6590a00476b5114af36e7e",
+      "title": "bul44",
+      "family": "unknown",
+      "page_count": 67
+    },
+    {
+      "document_id": "8447b26a-1759-5e82-9a95-9565705916bd",
+      "sha256": "e1582b0157941c6df40cf9df60c6d2c95567d2fe48ed439ab4bb368dd63b5899",
+      "artifact_hash": "5e385c88d400647c17d3287f645b992dc950653d06f6e565ad5d57c256617339",
+      "slug": "e1582b0157941c6df40cf9df60c6d2c95567d2fe48ed439ab4bb368dd63b5899",
+      "title": "bul51",
+      "family": "unknown",
+      "page_count": 67
+    },
+    {
+      "document_id": "21ff2e61-5102-5fca-9bd8-b1cdeba67981",
+      "sha256": "5e43971427063856648b4c99d8a9d52d10965d85b4e092d77a58140e41fab857",
+      "artifact_hash": "f1cd35f88955a6e681834e676aaaca0a927dc8b41008f38de5d86bf912f7cbce",
+      "slug": "5e43971427063856648b4c99d8a9d52d10965d85b4e092d77a58140e41fab857",
+      "title": "BRH-1017-DAOON-T-010-006- Raccordement centrale electrique",
+      "family": "unknown",
+      "page_count": 2
+    },
+    {
+      "document_id": "899f4764-2e44-59f4-8c1d-5c437965e58d",
+      "sha256": "443619f2c6a499d3e8a90b09c77b0b0b738aa26028ea1a99bb1b9de38aac0efb",
+      "artifact_hash": "73a96e15abb17bef4405a13a0b7416d1736d472f12b47f44b7f0649c8c4b4948",
+      "slug": "443619f2c6a499d3e8a90b09c77b0b0b738aa26028ea1a99bb1b9de38aac0efb",
+      "title": "bul85",
+      "family": "unknown",
+      "page_count": 67
+    },
+    {
+      "document_id": "63c61b52-9a73-5292-84d2-8e44d6ae328b",
+      "sha256": "f8de57a93d13ba5f10d98704d4ef3ab928b2e51a9ebf330c818ee4611319f97b",
+      "artifact_hash": "c945ada3b08c034cc7f3bc3527fb0e2f08ba539f4bef9073a24e32214312fe72",
+      "slug": "f8de57a93d13ba5f10d98704d4ef3ab928b2e51a9ebf330c818ee4611319f97b",
+      "title": "AUX INSTITUTIONS FINANCIERES",
+      "family": "unknown",
+      "page_count": 12
+    },
+    {
+      "document_id": "3d4d7665-5663-5214-9bf3-27d758391b1a",
+      "sha256": "e0b4482daf2ecb6f8d388a9c5a0834202495f83b8b7256de3a83ca8d033311e2",
+      "artifact_hash": "bc72f887c3cd9128013b8408fd9906d65eadc5495dc2bea7c80de0eb46248d97",
+      "slug": "e0b4482daf2ecb6f8d388a9c5a0834202495f83b8b7256de3a83ca8d033311e2",
+      "title": "AUX INSTITUTIONS FINANCIERES",
+      "family": "unknown",
+      "page_count": 33
+    },
+    {
+      "document_id": "7d00e315-5489-5735-a348-5f5095fba8ba",
+      "sha256": "0ba5e090475f8f64ab50fa816f95a1d78dbfe11e870b48fbedb40755d864abfe",
+      "artifact_hash": "dfe5e00a96dab260fc50e45bbb88cd53694c95943a42c1fc6a3bd6cef92241ce",
+      "slug": "0ba5e090475f8f64ab50fa816f95a1d78dbfe11e870b48fbedb40755d864abfe",
+      "title": "bul69",
+      "family": "unknown",
+      "page_count": 67
+    },
+    {
+      "document_id": "9ab3f272-913f-51d8-a63e-96948e4dcc26",
+      "sha256": "07e61574cd63c6764e487c8f973cd36ecded8f91bf874bac3a321cb00920b013",
+      "artifact_hash": "59720c4134050220e59da81ffd0ef7ac66f2cf8eb209f9068daf5768e33d02b2",
+      "slug": "07e61574cd63c6764e487c8f973cd36ecded8f91bf874bac3a321cb00920b013",
+      "title": "Auditeur junior au Service Audit des Syste?mes d’Information (SASI)",
+      "family": "unknown",
+      "page_count": 1
+    }
+  ],
+  "pages": 901,
+  "families": {
+    "circular": 6,
+    "unknown": 38,
+    "bulletin": 1,
+    "notice": 3,
+    "inflation": 3,
+    "annual-report": 1
+  },
+  "amendments": [
+    {
+      "prompt_version": "research-graph-v3",
+      "reason": "User identified dates incorrectly typed as places; deterministic temporal validation and quarantine added.",
+      "resume": "Keep successful pages; quarantined proposals remain auditable. Apply v3 to remaining or failed pages."
+    }
+  ]
+}

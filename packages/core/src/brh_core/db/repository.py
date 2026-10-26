@@ -71,6 +71,11 @@ class CorpusRepository:
             ).fetchone()
         return {key: int(value) for key, value in row.items()}
 
+    def index_targets(self) -> list[str]:
+        with self._pool.connection() as conn:
+            rows = conn.execute("SELECT DISTINCT target FROM corpus.index_manifests").fetchall()
+        return [row["target"] for row in rows]
+
     # --- documents -----------------------------------------------------
 
     def upsert_document(self, document: Document) -> None:

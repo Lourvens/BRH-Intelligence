@@ -66,7 +66,7 @@ export function WorkspaceDocument() {
 
       <div className="flex items-center gap-2">
         <a
-          href="#corpus"
+          href={demo.documentHref}
           className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-border bg-surface px-3 py-2 text-caption font-semibold text-navy-ink shadow-sm transition-colors hover:border-navy-ink"
         >
           <FileText className="size-4 text-scarlet" aria-hidden />

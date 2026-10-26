@@ -65,6 +65,7 @@ class ManifestItem:
     path: Path
     pages: int | None = None
     title: str = ""
+    source_url: str = ""
 
     def to_json(self) -> dict:
         row: dict = {"sha256": self.sha256, "path": str(self.path)}
@@ -72,6 +73,8 @@ class ManifestItem:
             row["pages"] = self.pages
         if self.title:
             row["title"] = self.title
+        if self.source_url:
+            row["source_url"] = self.source_url
         return row
 
 
@@ -123,6 +126,7 @@ def read_manifest(path: Path) -> list[ManifestItem]:
                 path=Path(row["path"]),
                 pages=row.get("pages"),
                 title=row.get("title", ""),
+                source_url=row.get("source_url", ""),
             )
         )
     return items
@@ -312,6 +316,8 @@ def run_batch(
                         "engine": parsed.engine,
                         "engine_version": parsed.engine_version,
                         "source": str(item.path),
+                        **({"source_url": item.source_url} if item.source_url else {}),
+                        **({"title": item.title} if item.title else {}),
                         "pages": len(parsed.pages),
                         "chars": len(markdown),
                         "figures": figures,

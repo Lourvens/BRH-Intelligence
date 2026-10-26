@@ -15,10 +15,117 @@ from brh_core.vectorstore.base import VectorStore
 class RetrievalService:
     """Resolve vector candidates against current Postgres evidence."""
 
-    def __init__(self, settings: Settings, *, vector_store: VectorStore, repository: object):
+    def __init__(
+        self,
+        settings: Settings,
+        *,
+        vector_store: VectorStore | None,
+        repository: object,
+        research=None,
+    ):
         self._settings = settings
         self._vector_store = vector_store
         self._repository = repository
+        self._research = research
+
+    def _vectors(self):
+        if self._vector_store is None:
+            from brh_core.vectorstore.factory import build_vector_store
+
+            self._vector_store = build_vector_store(self._settings)
+        return self._vector_store
+
+    @property
+    def research(self):
+        if self._research is None:
+            raise RuntimeError("Research corpus is not configured")
+        return self._research
+
+    def browse_corpus(self, query):
+        return self.research.queries.documents(query)
+
+    def corpus_facets(self, query):
+        return self.research.queries.facets(query)
+
+    def corpus_stats(self):
+        from brh_core.corpus.status import configured_index_target
+        from brh_core.ingestion.pipeline import embed_id
+
+        stats = self.research.queries.stats()
+        target = configured_index_target(self._settings, self._repository.index_targets())
+        progress = (
+            self._repository.index_progress(target, embed_id(self._settings))
+            if target
+            else {"documents_verified": None, "vectors_verified": None}
+        )
+        return {
+            **stats,
+            "indexed_documents": progress["documents_verified"],
+            "indexed_vectors": progress["vectors_verified"],
+        }
+
+    def corpus_document(self, identifier):
+        return self.research.current_document(identifier)[0]
+
+    def corpus_page(self, identifier, number):
+        return self.research.page(identifier, number)
+
+    def corpus_reader(self, identifier, number):
+        return self.research.reader(identifier, number)
+
+    def corpus_asset(self, identifier, name, publication_id=None):
+        return self.research.asset(identifier, name, publication_id)
+
+    def corpus_markdown(self, identifier, publication_id=None):
+        return self.research.published_file(identifier, "document.md", publication_id)
+
+    def corpus_readiness(self):
+        return self.research.readiness()
+
+    def corpus_entities(self, query="", **kwargs):
+        return self.research.graph.entities(query, **kwargs)
+
+    def corpus_graph(self, entity_id, **kwargs):
+        return self.research.neighborhood(entity_id, **kwargs)
+
+    def corpus_passages(self, entity_id, **kwargs):
+        return self.research.graph_passages(entity_id, **kwargs)
+
+    def semantic_corpus(self, query):
+        from brh_core.corpus.service import StaleArtifactError
+
+        if not query.q.strip():
+            return {"items": [], "total": 0, "page": 1, "page_size": 20, "bounded": True}
+        filtered = bool(query.family or query.year or query.entity_id or query.document_id)
+        eligible = self.research.queries.eligible_document_ids(query) if filtered else None
+        scope = {"document_id": {"$in": eligible}} if eligible is not None else None
+        hits = self.retrieve(query.q, top_k=20, filter=scope) if eligible != [] else []
+        canonical = self._repository.get_documents(hit.document_id for hit in hits)
+        documents = {}
+        for hit in hits:
+            if hit.document_id in documents:
+                continue
+            try:
+                document, _ = self.research.current_document(hit.document_id)
+            except (FileNotFoundError, StaleArtifactError, ValueError):
+                continue
+            # A readable artifact may arrive before its canonical reindex completes.
+            content_key = canonical[hit.document_id].metadata.get("content_key", "")
+            if f":ocr:{document.artifact_hash}:" not in content_key:
+                continue
+            documents[hit.document_id] = document.model_copy(
+                update={
+                    "match_page": hit.page_number,
+                    "snippet": hit.text[:400],
+                }
+            )
+        return {
+            "items": list(documents.values()),
+            "total": len(documents),
+            "page": 1,
+            "page_size": 20,
+            "bounded": True,
+        }
 
     def retrieve(
         self,
@@ -32,7 +139,7 @@ class RetrievalService:
         threshold = self._settings.retrieval_min_score if min_score is None else min_score
         if not question.strip() or k <= 0:
             return []
-        candidates = self._vector_store.search(question, top_k=min(k * 4, 1000), filter=filter)
+        candidates = self._vectors().search(question, top_k=min(k * 4, 1000), filter=filter)
         stored = self._repository.get_chunks(hit.chunk_id for hit in candidates)
         documents = self._repository.get_documents(hit.document_id for hit in candidates)
         accepted = {}
@@ -180,16 +287,23 @@ class RetrievalService:
 
 
 def build_retrieval_service(settings: Settings | None = None):
+    from brh_core.corpus.service import ResearchCorpus
     from brh_core.db.pool import open_pool
     from brh_core.db.repository import CorpusRepository
-    from brh_core.vectorstore.factory import build_vector_store
+    from brh_core.db.research_graph import ResearchGraphRepository
+    from brh_core.db.research_query import ResearchQueryRepository
 
     settings = settings or get_settings()
     pool = open_pool(settings)
     try:
         pool.open(wait=True)
         service = RetrievalService(
-            settings, vector_store=build_vector_store(settings), repository=CorpusRepository(pool)
+            settings,
+            vector_store=None,
+            repository=CorpusRepository(pool),
+            research=ResearchCorpus(
+                settings, ResearchQueryRepository(pool), ResearchGraphRepository(pool)
+            ),
         )
         return service, pool
     except Exception:

@@ -110,6 +110,15 @@ integration remain separate work.
 
 ## Run
 
+The research catalogue is available at **`/brh-corpus`**. It reads completed OCR
+Markdown first, links to official PDFs, and supports title/page-text/semantic
+search plus a Postgres entity/evidence graph. Start it independently of agent
+generation with `make migrate`, `make corpus-sync`, `make corpus-dev`, and
+`make web-dev` in another terminal. `make corpus-sync ARGS="--watch 30"` consumes
+new artifacts. See [research corpus operations](docs/architecture/research-corpus.md)
+for source-link coverage, explicit paid extraction and the reviewed-policy gate.
+Extraction and Jev reuse the existing OpenRouter embedding token as requested.
+
 ```bash
 cp .env.example .env          # fill in what each step needs
 make install                  # uv sync --all-packages + bun install

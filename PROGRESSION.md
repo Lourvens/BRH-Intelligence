@@ -1,11 +1,76 @@
 # Progression
 
-Last updated: 2026-10-25 (Qwen rebuild implementation and corpus validation)
+Last updated: 2026-10-26 (document availability diagnosis and publication plan)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Published document snapshots implemented (2026-10-26).** ADR-0015 replaces
+  live-file reads with published Postgres snapshots. Shared data-root resolution,
+  immutable local/S3-compatible bundles, atomic promotion, versioned figures,
+  Markdown downloads with provenance and readiness are implemented. Migrations
+  0006/0007 applied locally; all 1,026 documents published, one blank deferred.
+  The previously failing document and web reader respond 200 without the
+  unavailable message. Latest isolated SQL acceptance: 7 passed, including
+  concurrent snapshot reads, failed promotion rollback, no OCR mount and missing
+  asset storage. Validation: 289 offline tests, 7 isolated Postgres acceptance tests and 3 web
+  tests pass; TypeScript, Ruff and whitespace checks pass. No browser automation was used.
+
+- **5% graph persistence trial running (2026-10-26).** User authorized paid
+  extraction and saving entities using the shared OpenRouter key. Fixed seed 17
+  selects 52/1,026 documents (901 pages); manifest, results and resumable driver
+  live in `experiments/research-graph/five-percent/` and `trial.py` (notebook 0007).
+  Entities/mentions are persisted in Postgres; unreviewed relations stay pending.
+  Initial snapshot: 216 pages attempted, 1,015 proposed entities, one failed page;
+  the run is ongoing, not a quality benchmark. User spotted dates typed as places:
+  temporal validation/prompt v3 now reject them, and 12 existing proposals were
+  quarantined with evidence retained by migration 0007. Successful earlier pages
+  are retained; resume processes remaining/failed pages. No production model or
+  probability thresholds have been approved. Commit/push explicitly requested.
+
+- **Document publication plan completed (2026-10-26), proposed.** See
+  `docs/plans/2026-10-26-document-publication-design.md`. Confirmed reader 503s:
+  Agent Server launches in `services/agent`; relative OCR paths resolve to the
+  nonexistent `services/agent/data/ocr`, yielding `IncompleteOcrArtifact`.
+  Catalogue/stats work because they read Postgres. The existing database already
+  contains page Markdown, but the reader reopens local artifacts per request.
+  Proposed sequence: repair common data-root resolution, serve published pages
+  from Postgres, publish versioned figures/bundles to local/durable storage,
+  promote snapshots atomically and retain exact evidence provenance. User
+  requested planning before further implementation: no runtime repair or
+  storage provisioning performed. All checks used HTTP/logs, no browser
+  automation; user explicitly prohibited `agent-browser`.
+
+- **Markdown corpus / research graph implementation started (2026-10-25).**
+  Implementing the approved researcher-first catalogue, OCR Markdown reader,
+  official PDF links, Postgres entity/evidence graph, bounded graph retrieval,
+  and separate cheap-LLM + Jev extraction/evaluation workflow. Existing embedding
+  backfill and unrelated assistant/experiment changes must remain intact.
+
+- **BRH corpus page plan completed (2026-10-25), pending review.**
+  `docs/plans/2026-10-25-brh-corpus-page-design.md` proposes `/brh-corpus`,
+  document/page reading, prioritized research features, shared corpus read
+  contracts and a phased implementation. Browsing uses Postgres through
+  `RetrievalService`; semantic search retains the existing canonical/vector
+  boundary. Thin custom HTTP routes in the existing agent deployment are
+  proposed, not implemented. Important findings: no catalogue/PDF routes exist;
+  landing stats remain hardcoded at 360 documents / 5,592 pages; ingestion
+  currently copies WordPress upload dates into `publication_date`; family and
+  covered-period metadata need review. The existing offline artifact checker
+  passed **991 documents / 14,134 pages / 1,184 figures**. This validates artifact
+  structure/assets, not OCR accuracy or live index coverage. Planning only;
+  runtime, migrations, workers and experiment results were unchanged.
+
+- **Visualization prominence refined (2026-10-25).** Chart and graph titles /
+  descriptions remain visible in a shorter horizontal header; the presentation
+  decision is a small collapsed technical-details row, and provenance takes less
+  height. Chart canvases grew to 360/420px and graph canvases to 360/380px. A
+  follow-up removed redundant separators inside the artifact, leaving its outer
+  outline and selected-tab indicators. Graph and chart type/count badges were
+  removed from headers to keep attention on their titles and descriptions. Web
+  TypeScript check passes.
 
 - **Assistant flat UI redesign completed (2026-10-25).** Separate analysis and
   implementation agents redesigned conversation navigation, the chat header /

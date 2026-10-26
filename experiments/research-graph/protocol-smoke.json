@@ -1,0 +1,478 @@
+{
+  "runs": [
+    {
+      "key": "f9bcaeb92a2646f9e735f3a17dd7e999562306b29e13c5265847d7781f0b94d6",
+      "model": "qwen/qwen3.5-flash-02-23",
+      "seed": 17,
+      "sha256": "8afd50d4fff9ce115eea93cf8e1ff3de3fdc43ad28eb86ff8dccb900d51a31ca",
+      "artifact_hash": "220fd110eeaa012764fa841192f71088da619a1207d54115c77c89b86bf551c9",
+      "page": 4,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": [],
+      "status": "failed",
+      "error": "ValidationError",
+      "structural_evidence_valid": false
+    },
+    {
+      "key": "f9bcaeb92a2646f9e735f3a17dd7e999562306b29e13c5265847d7781f0b94d6",
+      "model": "qwen/qwen3.5-flash-02-23",
+      "seed": 17,
+      "sha256": "8afd50d4fff9ce115eea93cf8e1ff3de3fdc43ad28eb86ff8dccb900d51a31ca",
+      "artifact_hash": "220fd110eeaa012764fa841192f71088da619a1207d54115c77c89b86bf551c9",
+      "page": 4,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": [],
+      "status": "failed",
+      "error": "ValidationError",
+      "structural_evidence_valid": false,
+      "extraction": {
+        "id": "gen-1792980241-UJ4voQsIp3jGAL5yJPod",
+        "model": "qwen/qwen3.5-flash-02-23",
+        "provider": "Alibaba",
+        "usage": {
+          "prompt_tokens": 640,
+          "completion_tokens": 23,
+          "total_tokens": 663,
+          "cost": 4.758e-05,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 4.758e-05,
+            "upstream_inference_prompt_cost": 4.16e-05,
+            "upstream_inference_completions_cost": 5.98e-06
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "prompt_version": "research-graph-v1"
+      },
+      "schema_errors": [
+        {
+          "type": "model_type",
+          "loc": [],
+          "msg": "Input should be an object",
+          "ctx": {
+            "class_name": "ExtractionProposal"
+          }
+        }
+      ],
+      "raw_output": "1.0000000000000002e+300"
+    },
+    {
+      "key": "ad7f801f42c1783551557ed6e3bb378505807fbd1f29541d45e19904eee8f36a",
+      "model": "google/gemini-2.5-flash-lite",
+      "seed": 17,
+      "sha256": "8afd50d4fff9ce115eea93cf8e1ff3de3fdc43ad28eb86ff8dccb900d51a31ca",
+      "artifact_hash": "220fd110eeaa012764fa841192f71088da619a1207d54115c77c89b86bf551c9",
+      "page": 4,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": [],
+      "status": "failed",
+      "error": "HTTPStatusError",
+      "structural_evidence_valid": false,
+      "extraction": {}
+    },
+    {
+      "key": "1c19bec6881415a91cef12ef88008c9994939465e05ccca6857f45296be0e000",
+      "model": "mistralai/ministral-8b-2512",
+      "seed": 17,
+      "sha256": "8afd50d4fff9ce115eea93cf8e1ff3de3fdc43ad28eb86ff8dccb900d51a31ca",
+      "artifact_hash": "220fd110eeaa012764fa841192f71088da619a1207d54115c77c89b86bf551c9",
+      "page": 4,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": [],
+      "proposal": {
+        "entities": [
+          {
+            "ref": "ent_001",
+            "label": "BRH",
+            "kind": "institution",
+            "surface": "BRH",
+            "aliases": [],
+            "quote": "les autorités monétaires ont durci les conditions monétaires en augmentant les taux sur les bons BRH et les coefficients des réserves obligatoires"
+          },
+          {
+            "ref": "ent_002",
+            "label": "gourde",
+            "kind": "instrument",
+            "surface": "gourde",
+            "aliases": [],
+            "quote": "une dépréciation de la gourde et une augmentation des prix"
+          },
+          {
+            "ref": "ent_003",
+            "label": "dollar",
+            "kind": "instrument",
+            "surface": "dollar",
+            "aliases": [
+              "dollar ÉU"
+            ],
+            "quote": "une dépréciation de la gourde par rapport au dollar"
+          },
+          {
+            "ref": "ent_004",
+            "label": "États-Unis",
+            "kind": "place",
+            "surface": "États-Unis",
+            "aliases": [],
+            "quote": "aux États-Unis, notre premier partenaire commercial"
+          },
+          {
+            "ref": "ent_005",
+            "label": "PIB",
+            "kind": "indicator",
+            "surface": "Produit Intérieur Brut",
+            "aliases": [],
+            "quote": "une contraction de 1% du Produit Intérieur Brut"
+          },
+          {
+            "ref": "ent_006",
+            "label": "indice FAO",
+            "kind": "indicator",
+            "surface": "indice FAO des prix des produits alimentaires",
+            "aliases": [],
+            "quote": "l'indice FAO des prix des produits alimentaires est en baisse de 2,53 points de pourcentage"
+          },
+          {
+            "ref": "ent_007",
+            "label": "Brent",
+            "kind": "instrument",
+            "surface": "baril du Brent",
+            "aliases": [],
+            "quote": "le prix du baril du Brent"
+          },
+          {
+            "ref": "ent_008",
+            "label": "WTI",
+            "kind": "instrument",
+            "surface": "West Texas Intermediate (WTI)",
+            "aliases": [],
+            "quote": "le prix du baril du West Texas Intermediate (WTI)"
+          },
+          {
+            "ref": "ent_009",
+            "label": "3e trimestre 2014",
+            "kind": "program",
+            "surface": "troisième trimestre 2014",
+            "aliases": [],
+            "quote": "Les données préliminaires du troisième trimestre 2014"
+          }
+        ],
+        "relationships": [
+          {
+            "subject": "ent_001",
+            "object": "ent_002",
+            "predicate": "regulates",
+            "quote": "les autorités monétaires ont durci les conditions monétaires en augmentant les taux sur les bons BRH et les coefficients des réserves obligatoires",
+            "temporal_context": "3e trimestre 2014"
+          },
+          {
+            "subject": "ent_001",
+            "object": "ent_002",
+            "predicate": "measures",
+            "quote": "la base monétaire s'est repliée de 3.5% sous l'effet de la baisse de la monnaie en circulation ainsi que celle des dépôts en dollars des banques commerciales à la BRH et de l'encours des Bons BRH",
+            "temporal_context": "3e trimestre 2014"
+          },
+          {
+            "subject": "ent_009",
+            "object": "ent_002",
+            "predicate": "reports_on",
+            "quote": "Les données préliminaires du troisième trimestre 2014 indiquent une faible performance de l'activité économique nationale caractérisée par ... une dépréciation de la gourde",
+            "temporal_context": null
+          },
+          {
+            "subject": "ent_009",
+            "object": "ent_003",
+            "predicate": "reports_on",
+            "quote": "la gourde a continué à se déprécier au cours du troisième trimestre en s'établissant à 45,3336 gourdes pour un dollar ÉU",
+            "temporal_context": null
+          },
+          {
+            "subject": "ent_004",
+            "object": "ent_005",
+            "predicate": "measures",
+            "quote": "après une contraction de 1% du Produit Intérieur Brut au premier trimestre 2014",
+            "temporal_context": "premier trimestre 2014"
+          },
+          {
+            "subject": "ent_004",
+            "object": "ent_006",
+            "predicate": "measures",
+            "quote": "l'indice FAO des prix des produits alimentaires est en baisse de 2,53 points de pourcentage",
+            "temporal_context": null
+          },
+          {
+            "subject": "ent_004",
+            "object": "ent_007",
+            "predicate": "measures",
+            "quote": "le prix du baril du Brent oscille à 110 dollars américains",
+            "temporal_context": null
+          },
+          {
+            "subject": "ent_004",
+            "object": "ent_008",
+            "predicate": "measures",
+            "quote": "le prix du baril du West Texas Intermediate (WTI) oscille à 102 dollars américains",
+            "temporal_context": null
+          }
+        ]
+      },
+      "extraction": {
+        "id": "gen-1792980548-HbHiD4wTuMUKsc8eNat6",
+        "model": "mistralai/ministral-8b-2512",
+        "provider": "Mistral",
+        "usage": {
+          "prompt_tokens": 610,
+          "completion_tokens": 1291,
+          "total_tokens": 1901,
+          "cost": 0.00028515,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.00028515,
+            "upstream_inference_prompt_cost": 9.15e-05,
+            "upstream_inference_completions_cost": 0.00019365
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "prompt_version": "research-graph-v1"
+      },
+      "status": "failed",
+      "error": "ValueError",
+      "structural_evidence_valid": false
+    },
+    {
+      "key": "89f8424aed34479bd734e138daa8bd93cd8c0bb021093e22ac532aad99beb5e3",
+      "model": "mistralai/ministral-8b-2512",
+      "seed": 17,
+      "prompt_version": "research-graph-v2",
+      "sha256": "8afd50d4fff9ce115eea93cf8e1ff3de3fdc43ad28eb86ff8dccb900d51a31ca",
+      "artifact_hash": "220fd110eeaa012764fa841192f71088da619a1207d54115c77c89b86bf551c9",
+      "page": 4,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": [],
+      "proposal": {
+        "entities": [
+          {
+            "ref": "e1",
+            "label": "Banque de la République d'Haïti (BRH)",
+            "kind": "institution",
+            "surface": "BRH",
+            "aliases": [
+              "bons BRH",
+              "réserves obligatoires"
+            ],
+            "quote": "les autorités monétaires ont durci les conditions monétaires en augmentant les taux sur les bons BRH et les coefficients des réserves obligatoires"
+          },
+          {
+            "ref": "e2",
+            "label": "gourde",
+            "kind": "instrument",
+            "surface": "gourde",
+            "aliases": [],
+            "quote": "une dépréciation de la gourde et une augmentation des prix"
+          },
+          {
+            "ref": "e3",
+            "label": "dollar",
+            "kind": "instrument",
+            "surface": "dollar",
+            "aliases": [
+              "dollar ÉU"
+            ],
+            "quote": "une dépréciation de la gourde par rapport au dollar"
+          },
+          {
+            "ref": "e4",
+            "label": "États-Unis",
+            "kind": "place",
+            "surface": "États-Unis",
+            "aliases": [],
+            "quote": "aux États-Unis, notre premier partenaire commercial"
+          },
+          {
+            "ref": "e5",
+            "label": "Produit Intérieur Brut (PIB)",
+            "kind": "indicator",
+            "surface": "Produit Intérieur Brut",
+            "aliases": [],
+            "quote": "une contraction de 1% du Produit Intérieur Brut"
+          },
+          {
+            "ref": "e6",
+            "label": "indice FAO des prix des produits alimentaires",
+            "kind": "indicator",
+            "surface": "indice FAO des prix des produits alimentaires",
+            "aliases": [],
+            "quote": "l'indice FAO des prix des produits alimentaires est en baisse de 2,53 points de pourcentage"
+          },
+          {
+            "ref": "e7",
+            "label": "baril du Brent",
+            "kind": "instrument",
+            "surface": "baril du Brent",
+            "aliases": [],
+            "quote": "le prix du baril du Brent"
+          },
+          {
+            "ref": "e8",
+            "label": "baril du West Texas Intermediate (WTI)",
+            "kind": "instrument",
+            "surface": "baril du West Texas Intermediate (WTI)",
+            "aliases": [],
+            "quote": "le prix du baril du West Texas Intermediate (WTI)"
+          },
+          {
+            "ref": "e9",
+            "label": "activité économique nationale",
+            "kind": "program",
+            "surface": "activité économique nationale",
+            "aliases": [],
+            "quote": "une faible performance de l'activité économique nationale"
+          },
+          {
+            "ref": "e10",
+            "label": "balance commerciale",
+            "kind": "indicator",
+            "surface": "balance commerciale",
+            "aliases": [],
+            "quote": "une détérioration de la balance commerciale"
+          },
+          {
+            "ref": "e11",
+            "label": "finances publiques",
+            "kind": "regulation",
+            "surface": "finances publiques",
+            "aliases": [],
+            "quote": "une détérioration ... des finances publiques"
+          }
+        ],
+        "relationships": [
+          {
+            "subject": "e1",
+            "object": "e2",
+            "predicate": "regulates",
+            "quote": "les autorités monétaires ont durci les conditions monétaires en augmentant les taux sur les bons BRH et les coefficients des réserves obligatoires. Conséquemment, la base monétaire s'est repliée...",
+            "temporal_context": "troisième trimestre 2014"
+          },
+          {
+            "subject": "e1",
+            "object": "e2",
+            "predicate": "measures",
+            "quote": "En vue de contenir cette dépréciation de la gourde par rapport au dollar",
+            "temporal_context": "troisième trimestre 2014"
+          },
+          {
+            "subject": "e9",
+            "object": "e10",
+            "predicate": "reports_on",
+            "quote": "une détérioration de la balance commerciale",
+            "temporal_context": "troisième trimestre 2014"
+          },
+          {
+            "subject": "e9",
+            "object": "e11",
+            "predicate": "reports_on",
+            "quote": "une détérioration ... des finances publiques",
+            "temporal_context": "troisième trimestre 2014"
+          },
+          {
+            "subject": "e2",
+            "object": "e3",
+            "predicate": "references",
+            "quote": "une dépréciation de la gourde par rapport au dollar",
+            "temporal_context": "troisième trimestre 2014"
+          },
+          {
+            "subject": "e4",
+            "object": "e5",
+            "predicate": "measures",
+            "quote": "le Produit Intérieur Brut au premier trimestre 2014",
+            "temporal_context": "premier trimestre 2014"
+          },
+          {
+            "subject": "e4",
+            "object": "e9",
+            "predicate": "participates_in",
+            "quote": "notre premier partenaire commercial",
+            "temporal_context": null
+          },
+          {
+            "subject": "e6",
+            "object": "e7",
+            "predicate": "measures",
+            "quote": "l'indice FAO des prix des produits alimentaires est en baisse de 2,53 points de pourcentage à 207,8 tandis que le prix du baril du Brent",
+            "temporal_context": null
+          },
+          {
+            "subject": "e6",
+            "object": "e8",
+            "predicate": "measures",
+            "quote": "le prix du baril du Brent et du West Texas Intermediate (WTI) oscille à 110 et 102 dollars américains respectivement",
+            "temporal_context": null
+          }
+        ]
+      },
+      "extraction": {
+        "id": "gen-1793046156-Y9ucV6tIVcIPLKbzztBA",
+        "model": "mistralai/ministral-8b-2512",
+        "provider": "Mistral",
+        "usage": {
+          "prompt_tokens": 637,
+          "completion_tokens": 1377,
+          "total_tokens": 2014,
+          "cost": 0.0003021,
+          "is_byok": false,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "cache_write_tokens": 0,
+            "audio_tokens": 0,
+            "video_tokens": 0
+          },
+          "cost_details": {
+            "upstream_inference_cost": 0.0003021,
+            "upstream_inference_prompt_cost": 9.555e-05,
+            "upstream_inference_completions_cost": 0.00020655
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "image_tokens": 0,
+            "audio_tokens": 0
+          }
+        },
+        "prompt_version": "research-graph-v2"
+      },
+      "status": "failed",
+      "error": "ValueError",
+      "structural_evidence_valid": false
+    }
+  ],
+  "status": "protocol_only"
+}

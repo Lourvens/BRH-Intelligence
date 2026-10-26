@@ -36,7 +36,7 @@ export function AccessCta() {
                 <ArrowRight className="size-4" aria-hidden />
               </a>
               <a
-                href="#corpus"
+                href="/brh-corpus"
                 className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-white/30 bg-white/10 px-7 py-4 text-[15px] font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/20"
               >
                 <BookOpen className="size-4" aria-hidden />

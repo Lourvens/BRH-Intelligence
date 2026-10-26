@@ -1,5 +1,3 @@
-import { corpusStats } from "@/lib/corpus-stats";
-
 export const heroCopy = {
   eyebrow:
     "Le moteur d’intelligence documentaire de la Banque de la République d’Haïti",
@@ -29,6 +27,7 @@ export const demo = {
   page: 3,
   totalPages: 10,
   documentCode: "Note mensuelle · nov. 2025",
+  documentHref: "/documents/note-mensuelle-dinflation-du-mois-de-novembre-2025?page=3",
 } as const;
 
 export const heroTags = [
@@ -43,17 +42,17 @@ export const heroTags = [
 
 export const heroMetrics = [
   {
-    value: corpusStats.catalogued,
-    label: "PDF recensés",
+    metric: "discovered_urls",
+    label: "URL PDF recensées",
     detail: "Inventaire brh.ht",
   },
   {
-    value: corpusStats.documents,
+    metric: "readable_documents",
     label: "Documents transcrits",
     detail: "Transcription OCR",
   },
   {
-    value: corpusStats.pages,
+    metric: "readable_pages",
     label: "Pages transcrites",
     detail: "Citation page par page",
   },

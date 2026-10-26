@@ -177,6 +177,7 @@ export function ConversationSidebar({
           collapsed && "items-center p-1",
         )}
       >
+        <SidebarMenuButton asChild tooltip="Explorer le corpus"><Link href="/brh-corpus"><Search className="size-4" aria-hidden />{!collapsed ? <span>Explorer le corpus</span> : null}</Link></SidebarMenuButton>
         {!collapsed ? (
           <Badge
             variant="outline"

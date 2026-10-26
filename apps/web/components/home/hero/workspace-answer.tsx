@@ -70,7 +70,7 @@ export function WorkspaceAnswer() {
           {demo.documentCode}
         </span>
         <a
-          href="#corpus"
+          href={demo.documentHref}
           className="inline-flex items-center gap-1 font-semibold text-teal hover:underline"
         >
           Voir la source

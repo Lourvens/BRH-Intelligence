@@ -86,7 +86,8 @@ def main(argv: list[str] | None = None) -> int:
                 skipped += 1
                 print(f"  [{number}/{len(shard)}] {digest[:8]} already extracted", flush=True)
                 continue
-            items.append(ManifestItem(sha256=digest, path=path))
+            items.append(ManifestItem(sha256=digest, path=path,
+                                      title=row.get('title', ''), source_url=row['url']))
             print(f"  [{number}/{len(shard)}] {digest[:8]} {path.stat().st_size // 1024} kB",
                   flush=True)
         except NotAPdf as error:

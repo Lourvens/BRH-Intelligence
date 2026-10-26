@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 
 import { heroMetrics, heroTags } from "./data";
+import { CorpusCount } from "@/components/corpus/stats-provider";
 
 const tagIcons: LucideIcon[] = [Landmark, BarChart3, Globe2, Users];
 const metricIcons: LucideIcon[] = [FileText, ScanLine, BookOpen];
@@ -54,7 +55,7 @@ export function HeroTrust() {
               </div>
               <div>
                 <div className="font-display text-3xl font-extrabold text-navy-ink">
-                  {metric.value}
+                  <CorpusCount metric={metric.metric} />
                 </div>
                 <div className="mt-0.5 font-display text-caption font-semibold text-ink">
                   {metric.label}

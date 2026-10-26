@@ -17,6 +17,7 @@ Design notes:
 
 from __future__ import annotations
 
+import tomllib
 from enum import StrEnum
 from pathlib import Path
 from typing import Any, ClassVar
@@ -37,7 +38,7 @@ class EmbeddingProvider(StrEnum):
 
     pinecone = "pinecone"  # server-side, Pinecone integrated inference
     openai = "openai"  # client-side, OpenAI-compatible API
-    openrouter = "openrouter"  # embedding-only OpenRouter credential
+    openrouter = "openrouter"  # also reused by research extraction at the user's request
     hashing = "hashing"  # deterministic, offline — tests/dev only
 
 
@@ -47,6 +48,11 @@ class VectorBackend(StrEnum):
     pinecone_integrated = "pinecone_integrated"
     pinecone = "pinecone"
     memory = "memory"
+
+
+class ArtifactBackend(StrEnum):
+    local = "local"
+    s3 = "s3"
 
 
 def _discover_env_file() -> str | None:
@@ -60,6 +66,19 @@ def _discover_env_file() -> str | None:
         if candidate.is_file():
             return str(candidate)
     return None
+
+
+def _data_base() -> Path:
+    env_file = _discover_env_file()
+    if env_file:
+        return Path(env_file).parent
+    for directory in (Path.cwd(), *Path.cwd().parents):
+        project = directory / "pyproject.toml"
+        if project.is_file():
+            config = tomllib.loads(project.read_text(encoding="utf-8"))
+            if "workspace" in config.get("tool", {}).get("uv", {}):
+                return directory
+    return Path.cwd()
 
 
 class Settings(BaseSettings):
@@ -81,6 +100,7 @@ class Settings(BaseSettings):
     log_format: str = Field(default="plain", validation_alias="BRH_LOG_FORMAT")
 
     # --- Paths ---------------------------------------------------------
+    data_root: Path | None = Field(default=None, validation_alias="BRH_DATA_ROOT")
     # Strings, not Path: pydantic-settings mangles Path-ish defaults. We
     # resolve them to absolute Paths in ``_resolve_paths`` below.
     raw_dir: Path = Field(
@@ -95,6 +115,16 @@ class Settings(BaseSettings):
         default_factory=lambda: Path("./data/ocr"),
         validation_alias="BRH_OCR_DIR",
     )
+    publication_dir: Path = Field(
+        default_factory=lambda: Path("./data/published"),
+        validation_alias="BRH_PUBLICATION_DIR",
+    )
+    artifact_backend: ArtifactBackend = Field(
+        default=ArtifactBackend.local, validation_alias="BRH_ARTIFACT_BACKEND"
+    )
+    artifact_s3_bucket: str = Field(default="", validation_alias="BRH_ARTIFACT_S3_BUCKET")
+    artifact_s3_endpoint: str = Field(default="", validation_alias="BRH_ARTIFACT_S3_ENDPOINT")
+    artifact_s3_region: str = Field(default="us-east-1", validation_alias="BRH_ARTIFACT_S3_REGION")
 
     # --- LLM (ADR-0010) ------------------------------------------------
     llm_provider: LLMProvider = Field(
@@ -226,9 +256,11 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def _resolve_paths(self) -> Settings:
-        object.__setattr__(self, "raw_dir", Path(self.raw_dir).resolve())
-        object.__setattr__(self, "processed_dir", Path(self.processed_dir).resolve())
-        object.__setattr__(self, "ocr_dir", Path(self.ocr_dir).resolve())
+        base = self.data_root.expanduser().resolve() if self.data_root else _data_base()
+        object.__setattr__(self, "data_root", base)
+        for name in ("raw_dir", "processed_dir", "ocr_dir", "publication_dir"):
+            path = Path(getattr(self, name)).expanduser()
+            object.__setattr__(self, name, (base / path).resolve())
         return self
 
     @property

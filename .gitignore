@@ -30,6 +30,7 @@ data/raw/*
 data/processed/*
 !data/processed/.gitkeep
 data/web/
+data/published/
 
 # --- LangGraph / LangSmith local state ---
 .langgraph_api/

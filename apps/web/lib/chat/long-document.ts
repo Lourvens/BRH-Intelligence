@@ -81,7 +81,7 @@ Cette note est une démonstration de mise en forme. Elle ne construit pas de pr�
 
 > « Chaque réponse renvoie à un document et à une page. » — Principe de l’assistant documentaire.
 
-Pour prolonger la lecture, on peut consulter [la présentation du corpus](/#corpus), puis ouvrir les documents cités.
+Pour prolonger la lecture, on peut consulter [le corpus documentaire](/brh-corpus), puis ouvrir les documents cités.
 
 ### En une phrase
 

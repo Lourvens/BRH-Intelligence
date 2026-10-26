@@ -1,17 +1,19 @@
 import { FileText, Landmark, Library, ScrollText, TrendingUp } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
-import { corpusStats } from "@/lib/corpus-stats";
+import { CorpusCount } from "@/components/corpus/stats-provider";
 
 const metrics = [
-  { value: corpusStats.catalogued, label: "PDF recensés" },
-  { value: corpusStats.documents, label: "Documents transcrits" },
-  { value: corpusStats.pages, label: "Pages transcrites" },
-];
+  { metric: "discovered_urls", label: "URL PDF recensées" },
+  { metric: "readable_documents", label: "Documents lisibles" },
+  { metric: "readable_pages", label: "Pages lisibles" },
+] as const;
 
 const families = [
   {
     icon: ScrollText,
+    family: "circular",
     title: "Circulaires et avis",
     type: "Textes",
     body: "Textes réglementaires, avis et communiqués publiés par la Banque de la République d’Haïti.",
@@ -19,6 +21,7 @@ const families = [
   },
   {
     icon: TrendingUp,
+    family: "inflation",
     title: "Notes de conjoncture & inflation",
     type: "Séries",
     body: "Notes mensuelles, indices des prix et séries statistiques publiées par l’IHSI.",
@@ -26,6 +29,7 @@ const families = [
   },
   {
     icon: FileText,
+    family: "annual-report",
     title: "Rapports & bilans",
     type: "Rapports",
     body: "Rapports annuels, bulletins et documents d’information de la Banque.",
@@ -51,8 +55,8 @@ export function CorpusSection() {
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
               Les publications monétaires, légales et économiques recensées sur
-              brh.ht, avec leur document et leur page. L’archive couvre
-              2018—2026 ; la transcription OCR progresse document par document.
+              brh.ht, avec leur document et leur page. Consultez le texte extrait
+              en Markdown et ouvrez la page originale du PDF officiel.
             </p>
 
             <div className="my-8 grid grid-cols-3 gap-4 rounded-2xl border border-border bg-bg p-4">
@@ -66,7 +70,7 @@ export function CorpusSection() {
                   }
                 >
                   <span className="font-display text-2xl font-extrabold text-navy-ink sm:text-3xl">
-                    {metric.value}
+                    <CorpusCount metric={metric.metric} />
                   </span>
                   <span className="mt-0.5 block text-[11px] font-semibold uppercase tracking-wider text-ink-muted">
                     {metric.label}
@@ -80,7 +84,7 @@ export function CorpusSection() {
                 const Icon = family.icon;
 
                 return (
-                  <div
+                  <Link href={`/brh-corpus?family=${family.family}`}
                     key={family.title}
                     className="flex items-start gap-3.5 rounded-xl border border-border bg-bg/60 p-4 transition-colors hover:border-teal"
                   >
@@ -102,10 +106,11 @@ export function CorpusSection() {
                         {family.body}
                       </p>
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>
+            <Link href="/brh-corpus" className="mt-6 inline-flex text-small font-semibold text-teal underline underline-offset-4">Ouvrir le catalogue documentaire →</Link>
           </div>
 
           <div className="relative lg:col-span-5">

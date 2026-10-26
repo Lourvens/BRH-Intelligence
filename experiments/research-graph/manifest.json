@@ -1,0 +1,282 @@
+{
+  "question": "Which inexpensive LLM + Jev meets page-grounded French extraction gates?",
+  "selection_seed": 17,
+  "repetition_seeds": [
+    17,
+    41,
+    97
+  ],
+  "decision_rule": "At least 30 reviewed pages; entity recall >= .80; accepted relationship precision >= .95 in every family; structural evidence validity 100%; choose lowest observed cost among eligible model/threshold pairs. No winner without human sign-off.",
+  "pages": [
+    {
+      "sha256": "8afd50d4fff9ce115eea93cf8e1ff3de3fdc43ad28eb86ff8dccb900d51a31ca",
+      "artifact_hash": "220fd110eeaa012764fa841192f71088da619a1207d54115c77c89b86bf551c9",
+      "page": 4,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "6de139fe1b265530ef4f368d105f623317367036d90aa8a81dbbf6ff3570eda1",
+      "artifact_hash": "80d5ce477dac3fd5c704e952d7a4f09848582ccce13fdd15e0960d1e3e26f37a",
+      "page": 3,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "f7cb522e35a67582326b4a53c484771bcf27285219de991f98c0cea3e6591381",
+      "artifact_hash": "70c9ea12556fb19ac4dc13d3f9948dd8716b4553f28c94d71f1284b7aac7e6eb",
+      "page": 25,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "514c2959c4fbbca6224e980c14e9d57bf39cb01eaf9db6f222026f63336e5b81",
+      "artifact_hash": "0b6fd1b6d368a4eb6ced530e85e6e9e4f1dbd24e0d5c348ca78fa8c59d9a464a",
+      "page": 4,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "63c11b668b89dd2afd7c50385aa6024a51b8126c7b5c7abb5bd626945e139d3a",
+      "artifact_hash": "6fc8c2d70a2495130399b9ef16dfcef64b0e280f0a0b884942dbed1fff625f83",
+      "page": 53,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "494b44dcd830d8faae6f7ae8b66a4a2406987f85ada19a081dba60c5776195b7",
+      "artifact_hash": "63e9603439c71e5e61813da7c62f2558e5098dc9a42b7962b609c87c46cfe2c6",
+      "page": 20,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "2b9233515ac662492ec4070599eed16346e2adeecf42c551708c5e63260bfcf4",
+      "artifact_hash": "fdf21e750d17ebd54806273caf43d3e846445ce7480f00fd5ad62717d44adf59",
+      "page": 15,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "e46111941c999735ccc5dc6d1edbd7152c3efb852f3e76744ca3bd44332ddd72",
+      "artifact_hash": "a8c1d4941093923bd8efd38443c1467160b419b7f576ac9793c7ccd6b54071bc",
+      "page": 3,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "d240be15d22e44639e42b92cc6986b2ba46c3b05f3d4221efa581f392356b78f",
+      "artifact_hash": "a19cc299e53a5f457e8bda32c6cda43c38a9ff5b276cbf05d1d7f1fd14f8850f",
+      "page": 47,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "d240be15d22e44639e42b92cc6986b2ba46c3b05f3d4221efa581f392356b78f",
+      "artifact_hash": "a19cc299e53a5f457e8bda32c6cda43c38a9ff5b276cbf05d1d7f1fd14f8850f",
+      "page": 36,
+      "family": "prose",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "7a8d445d8eaab15b48e24743e0ec0bc6020dae05b32480b670f10cb63ba01fdc",
+      "artifact_hash": "4a0a52b04ffb206989fe0cf3c99856fda2c4ec3cec8c93fe706c97f2fe6b5814",
+      "page": 52,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "35a3da0d31ac63412ef969c4ee4253d41d788bf953d79f875999790e6d661955",
+      "artifact_hash": "a90ca270fd0174119c61ddcd2d020dcdd5588510510fff934cd707ae30f174ee",
+      "page": 28,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "0ba5e090475f8f64ab50fa816f95a1d78dbfe11e870b48fbedb40755d864abfe",
+      "artifact_hash": "dfe5e00a96dab260fc50e45bbb88cd53694c95943a42c1fc6a3bd6cef92241ce",
+      "page": 43,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "708abdc1c1de1df665d09f3b7dedc17758de702af4c0bfa4f6c2790879da2249",
+      "artifact_hash": "eb8908d84fa6d6a1864d7da25d8787631229f18fbee4eb808f3426ca63f3c291",
+      "page": 8,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "b3c66e772db0ab7964c0ce3e76ae10652c76f60ac877be86897b65a19e448d6f",
+      "artifact_hash": "ead4dde80382449663378eff5e5c14f422e218ef229b1d5cbc9a0140fd5656ce",
+      "page": 25,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "c5b14853c04b2d21b2139c09055b8b536f1b78c46db5f26db13fd6ab63afc182",
+      "artifact_hash": "9713e452364577f034fcc96a054b678ef0296997e129159fa9c609ba75d87239",
+      "page": 59,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "7220ff18ae47e73bc6c832153a003316b5ba9282e6cb23794c1e18e05a6e79ff",
+      "artifact_hash": "d7fb10e42b2d67ba64b842ef824d47988beeda4dadc13758491f3d61d8632ea7",
+      "page": 54,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "ecc3ff70243eae95c88ad8118f400de37f2bfd881decf40894b6bcdb8239ceaa",
+      "artifact_hash": "3af5749d353b4634601b9d2e4d04513b4c3b28aaa7865c6e516f756c3d55273f",
+      "page": 7,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "8fc8752aed75ebd3cfdc7bfe3856c1f11a189cea0a51b5f4cae8ec6d56bca562",
+      "artifact_hash": "6e8a9e176a7bab60516da16c5b2a54a4866859d41d2dddfc91e31ffe4e089a7e",
+      "page": 7,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "bed6514669c6fb744fbaf1ee873a893056dd1284bf58790fac4d1f68d9755135",
+      "artifact_hash": "fe30a291dd11e335659f4b3563dc50cc74e36e7e118e73204a3cdee49c682771",
+      "page": 41,
+      "family": "table",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "2f7d3d79f389c5d585d3605a4ae2027e96b7389701e2d25cd38c24153c9046cf",
+      "artifact_hash": "d2477803156419927aaa91f66500b8c927ebd92a02b6b2d0521228962fa47bee",
+      "page": 10,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "f41c11e0410e52e406f94d4797fdc35a2ea33e89e897eb98d2d5034af0b356d0",
+      "artifact_hash": "49a99467afffe7dbfec1b3033704de672c53a71803159e5b510c6d8e55ef21e5",
+      "page": 21,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "1b488502361d248d06af20b723729b173be0f1e84d9215bcd51c736be3c875cf",
+      "artifact_hash": "b8ce58bf20b080317351aa4bcc815d69ff18dfa8b28c7d342ea7b04dbab450db",
+      "page": 1,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "2f7d3d79f389c5d585d3605a4ae2027e96b7389701e2d25cd38c24153c9046cf",
+      "artifact_hash": "d2477803156419927aaa91f66500b8c927ebd92a02b6b2d0521228962fa47bee",
+      "page": 16,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "50f3799043297008623a92ff351f01c887bf25f21ba045d4d3b92d82ccf47188",
+      "artifact_hash": "1b311f974892958fa8f2f227fd0a08c910e859fcdfd8ec5a97411d6557f3da78",
+      "page": 1,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "2f7d3d79f389c5d585d3605a4ae2027e96b7389701e2d25cd38c24153c9046cf",
+      "artifact_hash": "d2477803156419927aaa91f66500b8c927ebd92a02b6b2d0521228962fa47bee",
+      "page": 52,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "e6925f248cde2bd345f0eb64acf26673dc3fb3d70d427b9dd2c6fa0bcfa777ea",
+      "artifact_hash": "97c3aec5529278cfbe95d9cef4c539303a3109962ccf805016c0d6f4c4740e2a",
+      "page": 4,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "f8de57a93d13ba5f10d98704d4ef3ab928b2e51a9ebf330c818ee4611319f97b",
+      "artifact_hash": "c945ada3b08c034cc7f3bc3527fb0e2f08ba539f4bef9073a24e32214312fe72",
+      "page": 2,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "54af340d0997487f1b5f805b530747a66c2af2d4aacf750af2522dcb91c5604e",
+      "artifact_hash": "5845ad9692515705eb9b125afffb42c7c2505897e58dc68a01826165a68ecd25",
+      "page": 18,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    },
+    {
+      "sha256": "89d9f80e4ee3fbb32f22dbcced9eef636a59136a0eeb6a7ba1f9faa1f177b3c3",
+      "artifact_hash": "c23abd82f63beffe0b892a65535c033672fcc2fff00359c1d77f4f7e54d6e88d",
+      "page": 1,
+      "family": "regulation",
+      "reviewed_by": "",
+      "expected_entities": [],
+      "expected_relationships": []
+    }
+  ]
+}

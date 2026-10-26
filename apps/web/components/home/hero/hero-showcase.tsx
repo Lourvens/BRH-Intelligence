@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { corpusStats } from "@/lib/corpus-stats";
+import { CorpusCount } from "@/components/corpus/stats-provider";
 
 import { ArchiveStrip } from "./archive-strip";
 import { demo } from "./data";
@@ -47,7 +47,7 @@ export function HeroShowcase() {
           <div className="flex shrink-0 items-center gap-3 text-[11px] font-medium text-ink-muted">
             <span className="hidden items-center gap-1 rounded border border-border bg-surface px-2 py-0.5 md:inline-flex">
               <span className="size-1.5 rounded-full bg-emerald" />
-              {corpusStats.catalogued} PDF recensés
+              <CorpusCount metric="discovered_urls" /> URL PDF recensées
             </span>
             <span className="font-mono text-ink-muted/70">DÉMONSTRATION</span>
           </div>
@@ -68,11 +68,11 @@ export function HeroShowcase() {
             <div className="flex flex-wrap items-center gap-2 font-mono text-[11px]">
               <span className="inline-flex items-center gap-1 rounded border border-white/10 bg-black/20 px-2 py-0.5">
                 <FileText className="size-3 text-azure" aria-hidden />
-                {corpusStats.documents} documents transcrits
+                <CorpusCount metric="readable_documents" /> documents lisibles
               </span>
               <span className="hidden items-center gap-1 rounded border border-white/10 bg-black/20 px-2 py-0.5 sm:inline-flex">
                 <BookOpen className="size-3 text-azure" aria-hidden />
-                {corpusStats.pages} pages transcrites
+                <CorpusCount metric="readable_pages" /> pages lisibles
               </span>
               <span className="rounded border border-emerald/30 bg-emerald/20 px-2 py-0.5 font-semibold text-white">
                 Source citée
@@ -110,7 +110,7 @@ export function HeroShowcase() {
                   Rejouer
                 </button>
                 <a
-                  href="#corpus"
+                  href={demo.documentHref}
                   className="inline-flex items-center gap-1.5 rounded-lg bg-navy px-4 py-2 text-caption font-medium text-white shadow-sm transition-colors hover:bg-navy-deep"
                 >
                   <FileText className="size-3.5 text-gold" aria-hidden />

@@ -1,4 +1,4 @@
-.PHONY: help install sync postgres-up postgres-down migrate ingest inventory ocr-pull analytics analytics-dev agent-dev mcp-dev web-dev test lint fmt check seed lab
+.PHONY: help install sync postgres-up postgres-down migrate ingest inventory ocr-pull analytics analytics-dev agent-dev mcp-dev web-dev test lint fmt check seed lab corpus-sync corpus-dev corpus-extract
 
 # Modal is a runner dependency, not a workspace one; point this at whatever
 # environment has the CLI (e.g. MODAL="/path/to/venv/bin/python -m modal").
@@ -30,6 +30,15 @@ ingest: ## Discover PDFs in data/raw and run the ingestion pipeline
 
 inventory: ## Catalogue brh.ht and download the missing documents (ARGS="--limit 20")
 	uv run python -m brh_core.inventory $(ARGS)
+
+corpus-sync: ## Publish completed OCR Markdown without embedding or LLM calls
+	uv run python -m brh_core.corpus sync $(ARGS)
+
+corpus-dev: ## Run only the research HTTP routes (no agent generation required)
+	uv run uvicorn brh_agent.http:app --host 127.0.0.1 --port 2024
+
+corpus-extract: ## Explicit paid graph extraction; requires reviewed policy and --allow-paid
+	uv run python -m brh_core.corpus extract $(ARGS)
 
 ocr-pull: ## Pull Modal's OCR output into data/ocr — a volume is not a backup
 	rm -rf /tmp/brh-ocr-pull
