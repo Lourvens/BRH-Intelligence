@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -143,6 +144,7 @@ export default function RootLayout({
           </a>
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
