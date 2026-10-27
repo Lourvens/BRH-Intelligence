@@ -1,0 +1,14 @@
+{
+ "sha256": "e8cdd75572ca3cbe654ba9849877d3a1fa8026a103e7845bc540ed8d5f6f1acf",
+ "batch": "20261026T225505Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/e8cdd75572ca3cbe654ba9849877d3a1fa8026a103e7845bc540ed8d5f6f1acf.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/NOTE-MENSUELLE-DINFLATION-DU-MOIS-DAOUT-2025.pdf",
+ "title": "NOTE MENSUELLE D&#8217;INFLATION DU MOIS D&#8217;AOU?T 2025",
+ "pages": 10,
+ "chars": 14135,
+ "figures": 3,
+ "seconds": 168.0,
+ "finished_at": "2026-10-26T22:57:53+00:00"
+}

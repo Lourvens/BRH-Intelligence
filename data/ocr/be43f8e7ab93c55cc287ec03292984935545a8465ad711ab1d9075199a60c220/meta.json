@@ -1,0 +1,14 @@
+{
+ "sha256": "be43f8e7ab93c55cc287ec03292984935545a8465ad711ab1d9075199a60c220",
+ "batch": "20261026T231315Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/be43f8e7ab93c55cc287ec03292984935545a8465ad711ab1d9075199a60c220.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Position-moyenne-de-reserves-des-banques-commerciales-24-25-usd.pdf",
+ "title": "Position moyenne de re?serves des banques commerciales-24-25-usd",
+ "pages": 4,
+ "chars": 24832,
+ "figures": 0,
+ "seconds": 327.4,
+ "finished_at": "2026-10-26T23:18:43+00:00"
+}

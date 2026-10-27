@@ -1,0 +1,14 @@
+{
+ "sha256": "304bfa10ca0ffb798dadaee8c6904c93369524ec38d45bce59e7b0491c3f96bf",
+ "batch": "20261026T232631Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/304bfa10ca0ffb798dadaee8c6904c93369524ec38d45bce59e7b0491c3f96bf.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Circulaire-portant-sur-la-gestion-du-risque-de-credit-des-Institutions-de-Microfinance.pdf",
+ "title": "Circulaire portant sur la gestion du risque de cre?dit des Institutions de Microfinance",
+ "pages": 34,
+ "chars": 83044,
+ "figures": 1,
+ "seconds": 909.6,
+ "finished_at": "2026-10-26T23:41:41+00:00"
+}

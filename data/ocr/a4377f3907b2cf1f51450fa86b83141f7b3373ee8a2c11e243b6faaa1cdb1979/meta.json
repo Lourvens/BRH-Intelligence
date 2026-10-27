@@ -1,0 +1,14 @@
+{
+ "sha256": "a4377f3907b2cf1f51450fa86b83141f7b3373ee8a2c11e243b6faaa1cdb1979",
+ "batch": "20261026T222051Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/a4377f3907b2cf1f51450fa86b83141f7b3373ee8a2c11e243b6faaa1cdb1979.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/REVUE-DEVELOPPEMENT-DE-CONNAISSANCES-ET-COMPETENCES-FINANCIERES-V0L-3-MARS-2025.pdf",
+ "title": "RE?VUE DE?VELOPPEMENT DE CONNAISSANCES ET COMPE?TENCES FINANCIE?RES &#8211; V0L 3 [MARS 2025]",
+ "pages": 40,
+ "chars": 53119,
+ "figures": 35,
+ "seconds": 468.1,
+ "finished_at": "2026-10-26T22:28:39+00:00"
+}

@@ -1,0 +1,14 @@
+{
+ "sha256": "2ca481999bc05f4a9991775be8531760734489c1886474058bedc8d583aa07a0",
+ "batch": "20261026T230003Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/2ca481999bc05f4a9991775be8531760734489c1886474058bedc8d583aa07a0.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Circulaire-115-7.pdf",
+ "title": "Circulaire 115-7",
+ "pages": 3,
+ "chars": 5799,
+ "figures": 1,
+ "seconds": 63.2,
+ "finished_at": "2026-10-26T23:01:07+00:00"
+}

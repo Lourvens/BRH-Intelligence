@@ -1,0 +1,14 @@
+{
+ "sha256": "9cc3de9c6c34db708902bb2e284c926d06c71ba03f0a17632cb165ce0dcb93f7",
+ "batch": "20261026T230109Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/9cc3de9c6c34db708902bb2e284c926d06c71ba03f0a17632cb165ce0dcb93f7.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Avis-dattribution-definitive.pdf",
+ "title": "Avis d&#8217;attribution de?finitive",
+ "pages": 1,
+ "chars": 1718,
+ "figures": 0,
+ "seconds": 36.6,
+ "finished_at": "2026-10-26T23:01:45+00:00"
+}

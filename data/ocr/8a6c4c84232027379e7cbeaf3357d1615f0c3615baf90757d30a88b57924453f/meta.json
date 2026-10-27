@@ -1,0 +1,14 @@
+{
+ "sha256": "8a6c4c84232027379e7cbeaf3357d1615f0c3615baf90757d30a88b57924453f",
+ "batch": "20261026T222010Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/8a6c4c84232027379e7cbeaf3357d1615f0c3615baf90757d30a88b57924453f.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Inspecteur-Junior-dInstitutions-Financieres-non-bancaires.pdf",
+ "title": "Inspecteur Junior d’Institutions Financie?res non bancaires",
+ "pages": 1,
+ "chars": 2368,
+ "figures": 0,
+ "seconds": 39.1,
+ "finished_at": "2026-10-26T22:20:49+00:00"
+}

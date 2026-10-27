@@ -1,0 +1,14 @@
+{
+ "sha256": "ec6ce3b84045b804411eabfaf0fa7b94f7a8eabd3a5cd7a4177e54bdf1f0cd17",
+ "batch": "20261026T223654Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/ec6ce3b84045b804411eabfaf0fa7b94f7a8eabd3a5cd7a4177e54bdf1f0cd17.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Avis-aux-IF-vigilance-renforcee-8-mai-2025.pdf",
+ "title": "Avis aux IF-vigilance renforce?e 8 mai 2025",
+ "pages": 1,
+ "chars": 1573,
+ "figures": 1,
+ "seconds": 29.1,
+ "finished_at": "2026-10-26T22:37:23+00:00"
+}

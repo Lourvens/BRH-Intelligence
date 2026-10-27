@@ -1,0 +1,14 @@
+{
+ "sha256": "dbdfc88557083b9af4c7fd7d29928547c6cfb5188a5bb271838f6f4477f5d7f9",
+ "batch": "20261026T224618Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/dbdfc88557083b9af4c7fd7d29928547c6cfb5188a5bb271838f6f4477f5d7f9.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/NOTE-MENSUELLE-DINFLATION-DU-MOIS-DE-JUIN-2025.pdf",
+ "title": "NOTE MENSUELLE D&#8217;INFLATION DU MOIS DE JUIN 2025",
+ "pages": 10,
+ "chars": 14694,
+ "figures": 3,
+ "seconds": 170.1,
+ "finished_at": "2026-10-26T22:49:08+00:00"
+}

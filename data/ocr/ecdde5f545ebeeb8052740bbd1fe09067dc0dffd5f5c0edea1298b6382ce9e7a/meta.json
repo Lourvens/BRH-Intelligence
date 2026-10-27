@@ -1,0 +1,14 @@
+{
+ "sha256": "ecdde5f545ebeeb8052740bbd1fe09067dc0dffd5f5c0edea1298b6382ce9e7a",
+ "batch": "20261026T222841Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/ecdde5f545ebeeb8052740bbd1fe09067dc0dffd5f5c0edea1298b6382ce9e7a.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/FinScope_MSME_Haiti_2021_Pocketguide_FR-2025-04-07.pdf",
+ "title": "FinScope_MSME_Haiti_2021_Pocketguide_FR-2025-04-07",
+ "pages": 48,
+ "chars": 43451,
+ "figures": 84,
+ "seconds": 427.8,
+ "finished_at": "2026-10-26T22:35:49+00:00"
+}

@@ -1,0 +1,14 @@
+{
+ "sha256": "f62fe53249166afb2c3b3798658cc79ecd41a7242087a9730d020d28f95d5591",
+ "batch": "20261026T232541Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/f62fe53249166afb2c3b3798658cc79ecd41a7242087a9730d020d28f95d5591.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/2018/08/offreetdemandeglobales.pdf",
+ "title": "offreetdemandeglobales",
+ "pages": 1,
+ "chars": 2402,
+ "figures": 0,
+ "seconds": 48.2,
+ "finished_at": "2026-10-26T23:26:29+00:00"
+}

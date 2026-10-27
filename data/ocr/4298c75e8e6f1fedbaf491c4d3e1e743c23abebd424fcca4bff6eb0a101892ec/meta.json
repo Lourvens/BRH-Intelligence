@@ -1,0 +1,14 @@
+{
+ "sha256": "4298c75e8e6f1fedbaf491c4d3e1e743c23abebd424fcca4bff6eb0a101892ec",
+ "batch": "20261027T002645Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/4298c75e8e6f1fedbaf491c4d3e1e743c23abebd424fcca4bff6eb0a101892ec.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Stabilite-financiere-et-stress-tests_Approches-VAR-bayesienne-et-quantile_17-juillet-2026.pdf",
+ "title": "Stabilite financiere et stress tests_Approches VAR bayésienne et quantile_17 juillet 2026",
+ "pages": 34,
+ "chars": 94517,
+ "figures": 0,
+ "seconds": 891.8,
+ "finished_at": "2026-10-27T00:41:37+00:00"
+}

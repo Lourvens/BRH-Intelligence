@@ -1,0 +1,14 @@
+{
+ "sha256": "39d4677d91b9d50135b1668484a3f469610fec2c1e5a3bc20115ac72ac5d9007",
+ "batch": "20261026T231845Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/39d4677d91b9d50135b1668484a3f469610fec2c1e5a3bc20115ac72ac5d9007.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/2018/08/recettesetdepensestotales.pdf",
+ "title": "Recettes et dépenses",
+ "pages": 1,
+ "chars": 2702,
+ "figures": 0,
+ "seconds": 58.0,
+ "finished_at": "2026-10-26T23:19:43+00:00"
+}

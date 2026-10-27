@@ -1,0 +1,14 @@
+{
+ "sha256": "8f610cac14262b323720eed7e7101881eddad73ed9d0791a884ac3f0483cde48",
+ "batch": "20261027T000025Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/8f610cac14262b323720eed7e7101881eddad73ed9d0791a884ac3f0483cde48.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Circulaire-06.pdf",
+ "title": "Circulaire 06",
+ "pages": 7,
+ "chars": 21064,
+ "figures": 0,
+ "seconds": 194.2,
+ "finished_at": "2026-10-27T00:03:39+00:00"
+}

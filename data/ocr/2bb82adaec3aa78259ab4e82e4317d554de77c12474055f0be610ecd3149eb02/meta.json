@@ -1,0 +1,14 @@
+{
+ "sha256": "2bb82adaec3aa78259ab4e82e4317d554de77c12474055f0be610ecd3149eb02",
+ "batch": "20261026T210009Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs0/2bb82adaec3aa78259ab4e82e4317d554de77c12474055f0be610ecd3149eb02.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/resultatsbons.pdf",
+ "title": "resultatsbons",
+ "pages": 3,
+ "chars": 2185,
+ "figures": 0,
+ "seconds": 47.0,
+ "finished_at": "2026-10-26T21:00:56+00:00"
+}

@@ -1,0 +1,14 @@
+{
+ "sha256": "2c52df6f1be8907f48ffc66003f433afd52fcf01ca8b312dc1fc80d3b741d87b",
+ "batch": "20261026T234143Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/2c52df6f1be8907f48ffc66003f433afd52fcf01ca8b312dc1fc80d3b741d87b.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/CIRCULAIRE-87-1.pdf",
+ "title": "CIRCULAIRE-87-1",
+ "pages": 41,
+ "chars": 93165,
+ "figures": 1,
+ "seconds": 948.1,
+ "finished_at": "2026-10-26T23:57:31+00:00"
+}

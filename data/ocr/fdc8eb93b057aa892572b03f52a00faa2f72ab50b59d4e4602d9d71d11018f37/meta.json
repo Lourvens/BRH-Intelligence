@@ -1,0 +1,14 @@
+{
+ "sha256": "fdc8eb93b057aa892572b03f52a00faa2f72ab50b59d4e4602d9d71d11018f37",
+ "batch": "20261026T235733Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/fdc8eb93b057aa892572b03f52a00faa2f72ab50b59d4e4602d9d71d11018f37.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Appel-a-candidatures-Bourse-a-mobilite-doctorale-2026.pdf",
+ "title": "Appel a? candidatures Bourse a? mobilite? doctorale 2026",
+ "pages": 5,
+ "chars": 7619,
+ "figures": 1,
+ "seconds": 86.9,
+ "finished_at": "2026-10-26T23:59:00+00:00"
+}

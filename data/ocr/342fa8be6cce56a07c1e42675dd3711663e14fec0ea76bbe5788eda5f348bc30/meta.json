@@ -1,0 +1,14 @@
+{
+ "sha256": "342fa8be6cce56a07c1e42675dd3711663e14fec0ea76bbe5788eda5f348bc30",
+ "batch": "20261027T000821Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/342fa8be6cce56a07c1e42675dd3711663e14fec0ea76bbe5788eda5f348bc30.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/DREF-BRH_Impacts-macroeconomiques-du-choc-petrolier_Mercredi-BID_6-mai-2026.pdf",
+ "title": "DREF-BRH_Impacts macroeconomiques du choc petrolier_Mercredi BID_6 mai 2026",
+ "pages": 34,
+ "chars": 17558,
+ "figures": 0,
+ "seconds": 301.6,
+ "finished_at": "2026-10-27T00:13:23+00:00"
+}

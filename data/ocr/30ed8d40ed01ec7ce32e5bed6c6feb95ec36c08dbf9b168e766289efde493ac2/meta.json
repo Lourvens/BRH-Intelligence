@@ -1,0 +1,14 @@
+{
+ "sha256": "30ed8d40ed01ec7ce32e5bed6c6feb95ec36c08dbf9b168e766289efde493ac2",
+ "batch": "20261026T223551Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/30ed8d40ed01ec7ce32e5bed6c6feb95ec36c08dbf9b168e766289efde493ac2.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Circulaire-No.-95-5.pdf",
+ "title": "Circulaire No. 95-5",
+ "pages": 3,
+ "chars": 5136,
+ "figures": 1,
+ "seconds": 61.4,
+ "finished_at": "2026-10-26T22:36:52+00:00"
+}

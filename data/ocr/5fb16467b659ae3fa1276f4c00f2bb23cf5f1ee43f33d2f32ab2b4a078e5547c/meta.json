@@ -1,0 +1,14 @@
+{
+ "sha256": "5fb16467b659ae3fa1276f4c00f2bb23cf5f1ee43f33d2f32ab2b4a078e5547c",
+ "batch": "20261026T231945Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/5fb16467b659ae3fa1276f4c00f2bb23cf5f1ee43f33d2f32ab2b4a078e5547c.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Note-sur-la-politique-monetaire-4e-trimestre-2024-2025.pdf",
+ "title": "Note sur la politique mone?taire 4e trimestre 2024-2025",
+ "pages": 18,
+ "chars": 33410,
+ "figures": 4,
+ "seconds": 354.0,
+ "finished_at": "2026-10-26T23:25:39+00:00"
+}

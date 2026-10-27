@@ -1,0 +1,14 @@
+{
+ "sha256": "08ef642a16a855285719ab871caeb9e87a7aef2d960869d86b0954fb57e9796b",
+ "batch": "20261027T001325Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/08ef642a16a855285719ab871caeb9e87a7aef2d960869d86b0954fb57e9796b.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Note-sur-la-politique-monetaire-deuxieme-trimestre-de-lexercice-fiscal-2025-2026-janvier-mars-2026.pdf",
+ "title": "Note sur la politique mone?taire deuxie?me trimestre de l&#8217;exercice fiscal 2025 &#8211; 2026 [janvier &#8211; mars 2026]",
+ "pages": 19,
+ "chars": 37703,
+ "figures": 3,
+ "seconds": 406.6,
+ "finished_at": "2026-10-27T00:20:11+00:00"
+}

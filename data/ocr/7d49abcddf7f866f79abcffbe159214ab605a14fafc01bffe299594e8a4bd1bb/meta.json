@@ -1,0 +1,14 @@
+{
+ "sha256": "7d49abcddf7f866f79abcffbe159214ab605a14fafc01bffe299594e8a4bd1bb",
+ "batch": "20261026T224326Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/7d49abcddf7f866f79abcffbe159214ab605a14fafc01bffe299594e8a4bd1bb.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/NOTE-MENSUELLE-DINFLATION-DU-MOIS-DAVRIL-2025.pdf",
+ "title": "NOTE MENSUELLE D&#8217;INFLATION DU MOIS D&#8217;AVRIL 2025",
+ "pages": 10,
+ "chars": 14669,
+ "figures": 3,
+ "seconds": 169.8,
+ "finished_at": "2026-10-26T22:46:16+00:00"
+}

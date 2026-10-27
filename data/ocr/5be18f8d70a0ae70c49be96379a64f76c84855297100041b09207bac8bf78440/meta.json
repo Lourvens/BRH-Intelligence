@@ -1,0 +1,14 @@
+{
+ "sha256": "5be18f8d70a0ae70c49be96379a64f76c84855297100041b09207bac8bf78440",
+ "batch": "20261026T223725Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/5be18f8d70a0ae70c49be96379a64f76c84855297100041b09207bac8bf78440.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/NOTE-POLITIQUE-MONETAIRE-DEUXIEME-TRIMESTRE-EXERCICE-FISCAl-2024-2025.pdf",
+ "title": "NOTE-POLITIQUE MONE?TAIRE-DEUXIE?ME TRIMESTRE -EXERCICE-FISCAl-2024-2025",
+ "pages": 19,
+ "chars": 32852,
+ "figures": 3,
+ "seconds": 358.7,
+ "finished_at": "2026-10-26T22:43:24+00:00"
+}

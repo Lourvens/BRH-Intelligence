@@ -1,0 +1,14 @@
+{
+ "sha256": "ac00202643c373cb2e879456c4910edf0b304938d7988b7bfb188a020f8cb945",
+ "batch": "20261026T230613Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/ac00202643c373cb2e879456c4910edf0b304938d7988b7bfb188a020f8cb945.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Rapport-CAMEL-Fevrier-2024.pdf",
+ "title": "Rapport-CAMEL-Fevrier-2024",
+ "pages": 1,
+ "chars": 6725,
+ "figures": 0,
+ "seconds": 83.3,
+ "finished_at": "2026-10-26T23:07:36+00:00"
+}

@@ -1,0 +1,14 @@
+{
+ "sha256": "d8ad74f15d42984315a68e9aa2d1b8bad20b985b1dfcafa12dfb1088c162557a",
+ "batch": "20261026T225755Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/d8ad74f15d42984315a68e9aa2d1b8bad20b985b1dfcafa12dfb1088c162557a.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Circulaire-No-7-1-relative-a-la-transmission-des-CEC-et-des-FCEC.pdf",
+ "title": "Circulaire No 7-1 relative a? la transmission des CEC et des FCEC",
+ "pages": 6,
+ "chars": 13222,
+ "figures": 1,
+ "seconds": 126.6,
+ "finished_at": "2026-10-26T23:00:02+00:00"
+}

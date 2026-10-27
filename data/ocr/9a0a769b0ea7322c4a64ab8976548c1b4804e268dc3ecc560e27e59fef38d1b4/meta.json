@@ -1,0 +1,14 @@
+{
+ "sha256": "9a0a769b0ea7322c4a64ab8976548c1b4804e268dc3ecc560e27e59fef38d1b4",
+ "batch": "20261026T224910Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/9a0a769b0ea7322c4a64ab8976548c1b4804e268dc3ecc560e27e59fef38d1b4.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Note-sur-la-Politique-Monetaire-troisieme-trimestre-de-lexercice-fiscal-2024-2025-avril-juin-2025-version-web.pdf",
+ "title": "Note sur la Politique Mone?taire troisie?me trimestre de l&#8217;exercice fiscal 2024 &#8211; 2025 [avril &#8211; juin 2025]-version web",
+ "pages": 19,
+ "chars": 32187,
+ "figures": 3,
+ "seconds": 352.7,
+ "finished_at": "2026-10-26T22:55:03+00:00"
+}

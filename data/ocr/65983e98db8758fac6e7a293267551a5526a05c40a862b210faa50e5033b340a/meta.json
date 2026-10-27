@@ -1,0 +1,14 @@
+{
+ "sha256": "65983e98db8758fac6e7a293267551a5526a05c40a862b210faa50e5033b340a",
+ "batch": "20261027T000341Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/65983e98db8758fac6e7a293267551a5526a05c40a862b210faa50e5033b340a.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Circulaire10gouvernance.pdf",
+ "title": "Circulaire#10gouvernance",
+ "pages": 15,
+ "chars": 31868,
+ "figures": 1,
+ "seconds": 278.2,
+ "finished_at": "2026-10-27T00:08:19+00:00"
+}
