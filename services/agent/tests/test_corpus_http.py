@@ -15,7 +15,7 @@ class FakeResearch:
         return {"nodes": [], "edges": [], **kwargs}
 
     def semantic_corpus(self, query):
-        return {'items': [], 'total': 0, 'page': 1, 'page_size': 20, 'bounded': True}
+        return {"items": [], "total": 0, "page": 1, "page_size": 20, "bounded": True}
 
 
 def test_http_bounds_missing_document_and_no_private_path_leak():
@@ -38,7 +38,34 @@ def test_http_bounds_missing_document_and_no_private_path_leak():
 def test_semantic_requests_have_a_bounded_shared_budget():
     with TestClient(create_app(FakeResearch())) as client:
         for _ in range(10):
-            assert client.get('/corpus/v1/search?q=inflation&mode=semantic').status_code == 200
-        response = client.get('/corpus/v1/search?q=inflation&mode=semantic')
+            assert client.get("/corpus/v1/search?q=inflation&mode=semantic").status_code == 200
+        response = client.get("/corpus/v1/search?q=inflation&mode=semantic")
         assert response.status_code == 429
-        assert response.headers['retry-after'] == '60'
+        assert response.headers["retry-after"] == "60"
+
+
+def test_atlas_routes_validate_limits_and_clean_up_shared_pool(monkeypatch):
+    from brh_agent import http
+
+    class Atlas:
+        def corpus_atlas(self, params):
+            return {"nodes": [], "edges": [], "view": params.view, "truncated": False}
+
+        def corpus_entity_page(self, params):
+            return {"items": [], "total": 0, "page": params.page, "page_size": params.page_size}
+
+    class Pool:
+        closed = False
+
+        def close(self):
+            self.closed = True
+
+    pool = Pool()
+    monkeypatch.setattr(http, "build_retrieval_service", lambda: (Atlas(), pool))
+    with TestClient(http.create_app()) as client:
+        assert client.get("/corpus/v1/graph").json()["view"] == "mentions"
+        for query in ["node_limit=501", "edge_limit=1001", "hops=3", "focus=document:bad"]:
+            assert client.get("/corpus/v1/graph?" + query).status_code == 400
+        assert client.get("/corpus/v1/entities?page=2").json()["page"] == 2
+        assert not pool.closed
+    assert pool.closed

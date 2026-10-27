@@ -1,33 +1,108 @@
 import Link from "next/link";
+import { ArrowLeft, ArrowUpRight, Network, Quote, Files } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { entityLabels } from "@/lib/corpus/labels";
 import type { Entity, Evidence, GraphResult } from "@/lib/corpus/types";
 import { EvidenceCard } from "./evidence-card";
 import { GraphExplorer } from "./graph-explorer";
-import { GraphFilters } from "./graph-filters";
-
-export function EntityProfile({ entity, graph, passages, query }: {
-  entity: Entity; graph: GraphResult; passages: { items: Evidence[]; truncated: boolean }; query: Record<string, string>;
+import { Reveal } from "./reveal";
+export function EntityProfile({
+  entity,
+  graph,
+  passages,
+}: {
+  entity: Entity;
+  graph: GraphResult;
+  passages: { items: Evidence[]; truncated: boolean };
+  query: Record<string, string>;
 }) {
-  const depthLink = (hops: number) => `?${new URLSearchParams({ ...query, hops: String(hops) })}`;
-  return <div className="mx-auto max-w-6xl px-5 py-10 sm:px-8">
-    <Link href="/brh-corpus?mode=entities" className="text-caption text-teal hover:underline">← Répertoire des entités</Link>
-    <p className="mb-2 mt-7 text-caption uppercase tracking-wider text-teal">{entityLabels[entity.kind]}</p>
-    <h1 className="font-display text-3xl font-semibold text-navy-ink">{entity.label}</h1>
-    <p className="mt-3 text-small text-ink-muted">{entity.document_count} documents · {entity.mention_count} mentions</p>
-    {entity.aliases.length ? <p className="mt-2 text-caption text-ink-muted">Formes rencontrées : {entity.aliases.join(" · ")}</p> : null}
-    <div className="my-6 flex flex-wrap items-center justify-between gap-4 border-y border-border py-4">
-      <Button asChild variant="outline" size="sm"><Link href={`/brh-corpus?entity_id=${entity.entity_id}`}>Documents mentionnant cette entité</Link></Button>
-      <nav aria-label="Profondeur du graphe" className="flex items-center gap-2 text-caption"><span className="mr-2 text-ink-muted">Profondeur</span>
-        {[1, 2].map((depth) => <Button key={depth} asChild size="sm" variant={graph.hops === depth ? "default" : "outline"}><Link href={depthLink(depth)} aria-current={graph.hops === depth ? "page" : undefined}>{depth} lien{depth > 1 ? "s" : ""}</Link></Button>)}
-      </nav>
+  return (
+    <div className="atlas-page">
+      <Link
+        href="/brh-corpus/entities"
+        className="mb-6 flex min-h-11 items-center gap-2 text-small text-teal"
+      >
+        <ArrowLeft size={16} />
+        Toutes les entités
+      </Link>
+      <Reveal>
+        <header className="atlas-entity-hero">
+          <div>
+            <p className="atlas-kicker">
+              {entityLabels[entity.kind] ?? entity.kind}
+            </p>
+            <h1>{entity.label}</h1>
+            <div className="mt-5 flex flex-wrap gap-4 text-small text-ink-muted">
+              <span className="flex items-center gap-2">
+                <Files size={16} />
+                {entity.document_count} documents
+              </span>
+              <span className="flex items-center gap-2">
+                <Quote size={16} />
+                {entity.mention_count} mentions
+              </span>
+            </div>
+            {entity.aliases.length > 0 && (
+              <p className="mt-4 text-caption text-ink-muted">
+                Aussi rencontré sous : {entity.aliases.join(" · ")}
+              </p>
+            )}
+          </div>
+          <Button asChild className="h-12 rounded-xl">
+            <Link href={`/brh-corpus/graph?focus=entity:${entity.entity_id}`}>
+              <Network size={17} />
+              Explorer le graphe
+              <ArrowUpRight size={16} />
+            </Link>
+          </Button>
+        </header>
+      </Reveal>
+      <div className="atlas-profile-grid">
+        <section className="atlas-discovery">
+          <div className="atlas-section-heading">
+            <div>
+              <p className="atlas-kicker">DANS LES TEXTES</p>
+              <h2>Les passages sources</h2>
+            </div>
+          </div>
+          {passages.items.length ? (
+            <div className="space-y-5">
+              {passages.items.map((e, i) => (
+                <EvidenceCard
+                  key={`${e.document_id}:${e.page_number}:${i}`}
+                  evidence={e}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="atlas-empty">
+              <Quote size={30} />
+              <h3>Aucun passage disponible</h3>
+              <p>Essayez un autre document ou une autre entité.</p>
+            </div>
+          )}
+          {passages.truncated && (
+            <p className="mt-5 text-caption text-ink-muted">
+              Les 100 premiers passages sont affichés.
+            </p>
+          )}
+          <Button asChild variant="outline" className="mt-6 h-11 rounded-xl">
+            <Link href={`/brh-corpus?entity_id=${entity.entity_id}`}>
+              Voir les publications liées
+              <ArrowUpRight size={16} />
+            </Link>
+          </Button>
+        </section>
+        <section className="min-w-0">
+          <div className="atlas-discovery">
+            <p className="atlas-kicker mb-3">LES CONNEXIONS</p>
+            <h2 className="mb-5 font-display text-xl font-semibold">
+              Autour de cette entité
+            </h2>
+            <GraphExplorer graph={graph} />
+          </div>
+        </section>
+      </div>
     </div>
-    <GraphFilters key={JSON.stringify(query)} query={query} />
-    <GraphExplorer graph={graph} key={JSON.stringify([entity.entity_id, query])} />
-    <section className="mt-10" aria-label="Passages documentaires">
-      <h2 className="mb-4 font-display text-xl font-semibold text-navy-ink">Passages et contexte documentaire</h2>
-      <div className="space-y-4">{passages.items.map((evidence, index) => <EvidenceCard key={`${evidence.document_id}:${evidence.page_number}:${index}`} evidence={evidence} />)}</div>
-      {passages.truncated ? <p className="mt-4 text-caption text-ink-muted">Les 100 premiers passages sont affichés.</p> : null}
-    </section>
-  </div>;
+  );
 }

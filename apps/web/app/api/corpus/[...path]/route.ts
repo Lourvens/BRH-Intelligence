@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 export async function GET(request: Request, context: { params: Promise<{ path: string[] }> }) {
   const { path } = await context.params;
   const joined = path.join("/");
-  const allowed = /^(stats|facets|search|documents|entities|documents\/[^/]+(?:\/(?:pages|reader)\/\d+|\/markdown|\/assets\/.+|\/versions\/[a-f0-9]{64}\/(?:assets\/.+|markdown))?|entities\/[^/]+(?:\/graph|\/passages)?)$/;
+  const allowed = /^(stats|facets|search|documents|entities|graph|graph\/edges\/[^/]+\/evidence|documents\/[^/]+(?:\/(?:pages|reader)\/\d+|\/markdown|\/assets\/.+|\/versions\/[a-f0-9]{64}\/(?:assets\/.+|markdown))?|entities\/[^/]+(?:\/graph|\/passages)?)$/;
   if (!allowed.test(joined) || path.some((part) => part === ".." || part === ".")) {
     return Response.json({ error: { message: "Ressource introuvable." } }, { status: 404 });
   }

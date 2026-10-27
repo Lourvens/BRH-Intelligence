@@ -11,7 +11,7 @@ from uuid import UUID
 import httpx
 import psycopg
 from brh_core.corpus.download import markdown_export
-from brh_core.corpus.models import CorpusQuery
+from brh_core.corpus.models import CorpusQuery, GlobalGraphQuery
 from brh_core.corpus.service import StaleArtifactError
 from brh_core.corpus.storage import digest
 from brh_core.retrieval import build_retrieval_service
@@ -144,18 +144,20 @@ def readiness(request: Request):
 
 
 def entities(request: Request):
+    return json_response(service(request).corpus_entity_page(query(request)))
+
+
+def atlas(request: Request):
+    params = GlobalGraphQuery.model_validate(dict(request.query_params))
+    return json_response(service(request).corpus_atlas(params))
+
+
+def edge_evidence(request: Request):
     params = query(request)
     return json_response(
-        {
-            "items": service(request).corpus_entities(
-                params.q,
-                kind=params.kind,
-                limit=params.page_size,
-                document_id=params.document_id,
-                family=params.family,
-                year=params.year,
-            )
-        }
+        service(request).corpus_edge_evidence(
+            request.path_params["edge_id"], page=params.page, page_size=params.page_size
+        )
     )
 
 
@@ -231,6 +233,8 @@ def create_app(retrieval=None):
         Route(prefix + "/stats", stats),
         Route(prefix + "/ready", readiness),
         Route(prefix + "/entities", entities),
+        Route(prefix + "/graph", atlas),
+        Route(prefix + "/graph/edges/{edge_id}/evidence", edge_evidence),
         Route(prefix + "/documents/{slug}", document),
         Route(prefix + "/documents/{slug}/pages/{number}", page),
         Route(prefix + "/documents/{slug}/reader/{number}", reader),

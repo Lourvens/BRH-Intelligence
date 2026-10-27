@@ -118,3 +118,27 @@ class GraphResult(FrozenModel):
     edges: tuple[GraphEdge, ...] = ()
     truncated: bool = False
     hops: int = 1
+
+
+class GlobalGraphQuery(FrozenModel):
+    view: str = Field(default="mentions", pattern="^(mentions|relations)$")
+    q: str = Field(default="", max_length=300)
+    family: str = Field(default="", max_length=60)
+    year: int | None = Field(default=None, ge=1800, le=2200)
+    kind: str = Field(default="", max_length=40)
+    relationship: str = Field(default="", max_length=60)
+    focus: str = ""
+    hops: int = Field(default=1, ge=1, le=2)
+    node_limit: int = Field(default=300, ge=1, le=500)
+    edge_limit: int = Field(default=600, ge=1, le=1000)
+    orphans: bool = False
+
+    @field_validator("focus")
+    @classmethod
+    def valid_focus(cls, value):
+        if value:
+            kind, identifier = value.split(":", 1)
+            if kind not in ("document", "entity"):
+                raise ValueError("Invalid focus type")
+            return f"{kind}:{UUID(identifier)}"
+        return value

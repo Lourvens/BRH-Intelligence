@@ -331,3 +331,120 @@ def test_graph_caps_and_cycles_are_bounded(research_db):
         and edge.object_id in {node.entity_id for node in result.nodes}
         for edge in result.edges
     )
+
+
+@pytest.mark.integration
+def test_global_atlas_bounds_focus_evidence_and_publication_visibility(research_db):
+    from brh_core.corpus.models import GlobalGraphQuery
+    from brh_core.db.research_atlas import ResearchAtlasRepository
+
+    settings, pool = research_db
+    artifact_fixture(settings.ocr_dir)
+    queries = ResearchQueryRepository(pool)
+    sync_artifacts(settings.ocr_dir, ResearchImportRepository(pool), publication_storage(settings))
+    document = queries.documents(CorpusQuery())["items"][0]
+    extract_document(
+        document,
+        queries.pages(document.document_id),
+        client=FakeClient(),
+        repository=ResearchExtractionRepository(pool),
+        policy=ExtractionPolicy(
+            model="fixture",
+            accept_probability=0.95,
+            reject_probability=0.2,
+            approved_by="test",
+            evaluation_reference="fixture",
+        ),
+    )
+    atlas = ResearchAtlasRepository(pool)
+    mentions = atlas.overview(GlobalGraphQuery())
+    assert mentions["matching_nodes"] == 3
+    assert len(mentions["edges"]) == 2
+    assert {n["kind"] for n in mentions["nodes"]} == {"document", "institution", "indicator"}
+    assert atlas.overview(GlobalGraphQuery()) == mentions
+    bounded = atlas.overview(GlobalGraphQuery(node_limit=1))
+    assert bounded["truncated"] and len(bounded["nodes"]) == 1
+    assert bounded["edges"] == []
+    assert atlas.overview(GlobalGraphQuery(q="BRH"))["matching_nodes"] == 1
+    focused = atlas.overview(GlobalGraphQuery(focus="document:" + document.document_id))
+    assert len(focused["edges"]) == 2
+    relations = atlas.overview(GlobalGraphQuery(view="relations"))
+    assert len(relations["edges"]) == 1
+    for edge in mentions["edges"] + relations["edges"]:
+        evidence = atlas.evidence(edge["id"])
+        assert evidence["total"] == 1
+        assert evidence["items"][0]["quote"] == "BRH mesure les prix."
+    entities, total = ResearchGraphRepository(pool).entities(limit=1, offset=1, with_total=True)
+    assert total == 2 and len(entities) == 1
+    assert ResearchGraphRepository(pool).entities(offset=50, with_total=True)[1] == 2
+    with pool.connection() as conn:
+        conn.execute("UPDATE corpus.research_assertions SET status='pending'")
+    assert atlas.overview(GlobalGraphQuery(view="relations"))["edges"] == []
+    assert atlas.evidence(relations["edges"][0]["id"])["items"] == []
+    with pool.connection() as conn:
+        conn.execute("UPDATE corpus.research_documents SET artifact_hash=%s", ("b" * 64,))
+    assert atlas.overview(GlobalGraphQuery())["nodes"] == []
+    assert atlas.evidence(mentions["edges"][0]["id"])["items"] == []
+    orphans = atlas.overview(GlobalGraphQuery(orphans=True))
+    assert len(orphans["nodes"]) == 1 and orphans["nodes"][0]["kind"] == "document"
+
+
+@pytest.mark.integration
+def test_global_atlas_maximum_topology_and_rejected_entities(research_db):
+    from brh_core.corpus.models import GlobalGraphQuery
+    from brh_core.db.research_atlas import ResearchAtlasRepository
+
+    settings, pool = research_db
+    artifact_fixture(settings.ocr_dir)
+    sync_artifacts(settings.ocr_dir, ResearchImportRepository(pool), publication_storage(settings))
+    document = ResearchQueryRepository(pool).documents(CorpusQuery())["items"][0]
+    identifiers = [str(uuid4()) for _ in range(501)]
+    with pool.connection() as conn, conn.cursor() as cursor:
+        cursor.executemany(
+            """INSERT INTO corpus.research_entities(entity_id,label,kind,normalized_label)
+            VALUES (%s,%s,'institution',%s)""",
+            [(identifier, "BRH", "brh") for identifier in identifiers],
+        )
+        cursor.executemany(
+            """INSERT INTO corpus.research_mentions
+            (mention_id,entity_id,document_id,page_number,artifact_hash,surface,quote)
+            VALUES (%s,%s,%s,1,%s,'BRH','BRH mesure les prix.')""",
+            [
+                (str(uuid4()), identifier, document.document_id, document.artifact_hash)
+                for identifier in identifiers
+            ],
+        )
+        cursor.executemany(
+            """INSERT INTO corpus.research_assertions
+            (assertion_id,subject_id,object_id,predicate,document_id,page_number,
+             artifact_hash,quote,status,probability)
+            VALUES (%s,%s,%s,'mesure',%s,1,%s,'BRH mesure les prix.','accepted',0.99)""",
+            [
+                (
+                    str(uuid4()),
+                    identifiers[i % 501],
+                    identifiers[(i + 1) % 501],
+                    document.document_id,
+                    document.artifact_hash,
+                )
+                for i in range(1002)
+            ],
+        )
+    atlas = ResearchAtlasRepository(pool)
+    result = atlas.overview(GlobalGraphQuery(node_limit=500, edge_limit=1000))
+    assert result["matching_nodes"] == 502
+    assert result["displayed_nodes"] == 500
+    assert result["truncated"]
+    # Identical labels never collapse independent identities.
+    assert len({node["id"] for node in result["nodes"]}) == 500
+    relations = atlas.overview(GlobalGraphQuery(view="relations", node_limit=500, edge_limit=1000))
+    assert relations["matching_edges"] == 1002
+    assert relations["displayed_edges"] <= 1000
+    assert relations["truncated"]
+    with pool.connection() as conn:
+        conn.execute(
+            "INSERT INTO corpus.research_entity_rejections(entity_id,reason) VALUES (%s,'test')",
+            (identifiers[0],),
+        )
+    hidden = atlas.overview(GlobalGraphQuery(q="BRH", node_limit=500))
+    assert all(node["id"] != "entity:" + identifiers[0] for node in hidden["nodes"])
