@@ -1,11 +1,30 @@
 # Progression
 
-Last updated: 2026-10-26 (document availability diagnosis and publication plan)
+Last updated: 2026-10-26 (responsive research atlas and global graph)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Research atlas UI completed (2026-10-26).** Rebuilt Documents, a paginated
+  Entities directory, entity profiles, the focused document reader and a dedicated
+  whole-corpus Graph workspace. Added responsive navigation, collection filters,
+  publication list/grid, citations/figure zoom, exact research return context,
+  stable graph type colours, evidence inspectors and reduced-motion behaviour.
+  Postgres supplies bounded mention/accepted-assertion projections and paginated
+  evidence through the existing Agent Server; migration 0008 adds supporting
+  indexes. No separate backend, paid extraction or indexing was introduced.
+  Validation: 298 offline Python tests, 10 isolated Postgres acceptance tests,
+  3 web unit tests, Ruff, TypeScript and the production build passed. The full
+  browser suite passed 12 scenarios with 2 intentional device-specific skips;
+  final graph control/sheet viewport bounds were rechecked on desktop and mobile.
+  Browser checks cover 320–2560px, dark/reduced-motion preferences, keyboard/focus,
+  filter drafts, reader page jumps/return context and a 500-node/1000-edge fixture.
+  The cloud instance has 1,026 readable documents but no extracted graph data;
+  populated graphs were validated with browser fixtures and disposable databases.
+  Web scripts explicitly use the verified Webpack path after Turbopack dev stalled.
+  See ADR-0016 and the research-corpus runbook. Screenshots: `/tmp/brh-ui/`.
 
 - **Published document snapshots implemented (2026-10-26).** ADR-0015 replaces
   live-file reads with published Postgres snapshots. Shared data-root resolution,

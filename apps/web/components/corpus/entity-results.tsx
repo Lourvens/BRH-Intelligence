@@ -1,19 +1,93 @@
-import { ArrowUpRight, Network } from "lucide-react";
+import { ArrowUpRight, Shapes, ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { entityLabels } from "@/lib/corpus/labels";
 import type { Entity } from "@/lib/corpus/types";
-
-export function EntityResults({ entities }: { entities: Entity[] }) {
-  return <div>
-    <h2 className="mb-3 text-small font-semibold text-navy-ink">Entités repérées <span className="font-normal text-ink-muted">· jusqu’à 25 propositions</span></h2>
-    {entities.length ? <ul className="divide-y divide-border border-y border-border">{entities.map((entity) => <li key={entity.entity_id} className="py-5">
-      <p className="mb-1 text-caption text-ink-muted">{entityLabels[entity.kind]}</p>
-      <Link href={`/brh-corpus/entities/${entity.entity_id}`} className="flex items-center gap-2 font-semibold text-navy-ink hover:underline underline-offset-4"><Network className="size-4" aria-hidden />{entity.label}<ArrowUpRight className="size-3.5" aria-hidden /></Link>
-      <p className="mt-2 text-caption text-ink-muted">{entity.document_count} documents · {entity.mention_count} mentions · Identités et alias extraits à vérifier dans les sources.</p>
-    </li>)}</ul> : <div className="border border-dashed border-border px-6 py-16 text-center">
-      <Network className="mx-auto mb-4 size-7 text-ink-muted" aria-hidden />
-      <h3 className="font-display text-lg font-semibold text-navy-ink">Aucune entité disponible pour cette recherche</h3>
-      <p className="mx-auto mt-2 max-w-md text-small leading-6 text-ink-muted">L’extraction du graphe est distincte de la transcription. Les documents restent accessibles dans les onglets de recherche textuelle.</p>
-    </div>}
-  </div>;
+export function EntityResults({
+  entities,
+  pagination,
+  query = {},
+}: {
+  entities: Entity[];
+  pagination?: { total: number; page: number; page_size: number };
+  query?: Record<string, string>;
+}) {
+  const link = (page: number) =>
+    `/brh-corpus/entities?${new URLSearchParams({ ...query, page: String(page) })}`;
+  return (
+    <div className="mt-8">
+      <p role="status" className="mb-5 text-small text-ink-muted">
+        {pagination ? `${pagination.total} entités` : "Entités repérées"}
+      </p>
+      {entities.length ? (
+        <ul className="atlas-entity-grid">
+          {entities.map((e) => (
+            <li key={e.entity_id}>
+              <Link
+                href={`/brh-corpus/entities/${e.entity_id}`}
+                className="atlas-entity-card"
+              >
+                <span className="atlas-entity-icon">
+                  <Shapes size={23} />
+                </span>
+                <span className="atlas-kicker">
+                  {entityLabels[e.kind] ?? e.kind}
+                </span>
+                <h3>
+                  {e.label}
+                  <ArrowUpRight size={18} />
+                </h3>
+                <p>
+                  {e.document_count} documents · {e.mention_count} mentions
+                </p>
+                <span className="text-caption text-ink-muted">
+                  Consulter les passages sources
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="atlas-empty">
+          <Shapes size={36} />
+          <h3>Les entités restent à explorer</h3>
+          <p>
+            Aucune entité pour ces critères. L’extraction du graphe est
+            distincte de la transcription des documents.
+          </p>
+          <Button asChild variant="outline">
+            <Link href="/brh-corpus">Explorer les documents</Link>
+          </Button>
+        </div>
+      )}
+      {pagination && pagination.total > pagination.page_size && (
+        <nav aria-label="Pagination des entités" className="atlas-pagination">
+          {pagination.page > 1 ? (
+            <Button asChild variant="outline">
+              <Link href={link(pagination.page - 1)}>
+                <ArrowLeft size={16} />
+                Précédente
+              </Link>
+            </Button>
+          ) : (
+            <span />
+          )}
+          <span>
+            Page {pagination.page} sur{" "}
+            {Math.ceil(pagination.total / pagination.page_size)}
+          </span>
+          {pagination.page * pagination.page_size < pagination.total ? (
+            <Button asChild variant="outline">
+              <Link href={link(pagination.page + 1)}>
+                Suivante
+                <ArrowRight size={16} />
+              </Link>
+            </Button>
+          ) : (
+            <span />
+          )}
+        </nav>
+      )}
+    </div>
+  );
 }

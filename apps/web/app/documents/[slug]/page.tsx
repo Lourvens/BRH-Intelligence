@@ -29,7 +29,7 @@ export default async function ReaderPage({ params, searchParams }: {
     catch (error) { status = error instanceof CorpusRequestError ? error.status : 503; }
   }
   if (status === 404) notFound();
-  return <div className="min-h-dvh bg-surface text-ink"><ResearchHeader /><main id="contenu">
+  return <div className="min-h-dvh bg-bg text-ink"><ResearchHeader /><main id="contenu">
     {data ? <DocumentReader {...data} /> : <div className="px-5 py-16"><CorpusUnavailable document status={status} invalid={status === 400} /></div>}
   </main></div>;
 }

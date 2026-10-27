@@ -54,3 +54,7 @@ data/ocr/_ledger/
 # --- OS / editor ---
 .DS_Store
 *.swp
+
+# Browser regression artifacts
+apps/web/test-results/
+apps/web/playwright-report/

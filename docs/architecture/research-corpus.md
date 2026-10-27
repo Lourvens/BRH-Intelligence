@@ -179,3 +179,40 @@ The Postgres suite creates/drops isolated databases, reruns migrations and check
 French search, extraction resume, graph evidence and stale-content invalidation.
 Provider contracts run against HTTP fakes offline. Broader community summaries,
 global GraphRAG answers and quality claims require the later reviewed evaluation.
+
+## Research atlas UI
+
+The research shell now separates Documents, Entities and Graph. The original
+`/brh-corpus?mode=entities` URL redirects to `/brh-corpus/entities`, preserving its
+filters. Readers remain at `/documents/{slug}?page=N` and entity profiles at
+`/brh-corpus/entities/{uuid}`. The whole-corpus graph is `/brh-corpus/graph`; it has
+separate mention and accepted-relationship views, bounded counts, on-demand
+passage evidence, local focus and an accessible list alternative. See ADR-0016
+for the API fields and data eligibility rules.
+
+Apply migration 0008 before using the graph. Run **one** backend for both agent
+and research endpoints:
+
+```bash
+cd services/agent
+uv run --frozen langgraph dev --no-browser
+```
+
+The existing `http.app` mounts `/corpus/v1` alongside LangGraph's built-in APIs.
+The Next.js server-only `BRH_CORPUS_API_URL` and public LangGraph URL both default
+to port 2024. The standalone `make corpus-dev` remains useful for research-only
+work; do not run it and Agent Server on the same port.
+
+Browser regression tests use a running web app and research backend:
+
+```bash
+cd apps/web
+bun run test:e2e
+# Use an existing system Chromium when downloads are unavailable:
+PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium bun run test:e2e
+```
+
+Otherwise install the browser first with `bunx playwright install chromium`.
+Graph browser fixtures are intercepted in tests only; they are never inserted
+into the real corpus. SQL acceptance tests populate and drop isolated databases,
+including a maximum-size graph, repeated labels, stale evidence and rejection.

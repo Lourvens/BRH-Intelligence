@@ -35,8 +35,10 @@ class ResearchGraphRepository:
         document_id=None,
         family="",
         year=None,
+        offset=0,
+        with_total=False,
     ) -> list[Entity]:
-        clauses, params = ["m.artifact_hash=d.artifact_hash"], []
+        clauses, params = ["m.artifact_hash=d.artifact_hash", "d.publication_id IS NOT NULL"], []
         if entity_ids is not None:
             clauses.append("e.entity_id=ANY(%s::uuid[])")
             params.append(list(entity_ids))
@@ -57,17 +59,34 @@ class ResearchGraphRepository:
         if year:
             clauses.append("%s=ANY(d.period_years)")
             params.append(year)
-        with self.pool.connection() as conn:
+        with self.pool.connection() as conn, conn.transaction():
+            conn.execute("SET LOCAL statement_timeout='5s'")
             rows = conn.execute(
-                f"""SELECT {ENTITY_SELECT}
+                f"""SELECT {ENTITY_SELECT},count(*) OVER() total
                 FROM corpus.research_visible_entities e
                 JOIN corpus.research_mentions m USING(entity_id)
                 JOIN corpus.research_documents d USING(document_id)
                 WHERE {" AND ".join(clauses)} GROUP BY e.entity_id,e.label,e.kind
-                ORDER BY count(DISTINCT m.document_id) DESC,e.label,e.entity_id LIMIT %s""",
-                [*params, min(limit, 100)],
+                ORDER BY count(DISTINCT m.document_id) DESC,e.label,e.entity_id
+                LIMIT %s OFFSET %s""",
+                [*params, min(limit, 100), offset],
             ).fetchall()
-        return [Entity.model_validate(row) for row in rows]
+            total = (
+                conn.execute(
+                    f"""SELECT count(DISTINCT e.entity_id) total
+                FROM corpus.research_visible_entities e
+                JOIN corpus.research_mentions m USING(entity_id)
+                JOIN corpus.research_documents d USING(document_id)
+                WHERE {" AND ".join(clauses)}""",
+                    params,
+                ).fetchone()["total"]
+                if with_total
+                else 0
+            )
+        items = [
+            Entity.model_validate({k: v for k, v in row.items() if k != "total"}) for row in rows
+        ]
+        return (items, total) if with_total else items
 
     def mentions(self, entity_id: str, *, limit=100) -> list[Evidence]:
         with self.pool.connection() as conn:

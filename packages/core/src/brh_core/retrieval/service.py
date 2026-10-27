@@ -85,6 +85,29 @@ class RetrievalService:
     def corpus_entities(self, query="", **kwargs):
         return self.research.graph.entities(query, **kwargs)
 
+    def corpus_entity_page(self, query):
+        items, total = self.research.graph.entities(
+            query.q,
+            kind=query.kind,
+            limit=query.page_size,
+            offset=(query.page - 1) * query.page_size,
+            with_total=True,
+            document_id=query.document_id,
+            family=query.family,
+            year=query.year,
+        )
+        return {"items": items, "total": total, "page": query.page, "page_size": query.page_size}
+
+    def corpus_atlas(self, query):
+        from brh_core.db.research_atlas import ResearchAtlasRepository
+
+        return ResearchAtlasRepository(self.research.graph.pool).overview(query)
+
+    def corpus_edge_evidence(self, edge_id, **kwargs):
+        from brh_core.db.research_atlas import ResearchAtlasRepository
+
+        return ResearchAtlasRepository(self.research.graph.pool).evidence(edge_id, **kwargs)
+
     def corpus_graph(self, entity_id, **kwargs):
         return self.research.neighborhood(entity_id, **kwargs)
 
