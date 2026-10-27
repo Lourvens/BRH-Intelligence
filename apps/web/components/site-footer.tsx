@@ -10,17 +10,16 @@ const columns = [
       { label: "Notes de conjoncture", href: "/brh-corpus?family=bulletin" },
       { label: "Rapports et bilans", href: "/brh-corpus?family=annual-report" },
       { label: "Notes d’inflation", href: "/brh-corpus?family=inflation" },
-      { label: "Entités et relations", href: "/brh-corpus?mode=entities" },
+      { label: "Entités", href: "/brh-corpus/entities" },
+      { label: "Graphe documentaire", href: "/brh-corpus/graph" },
     ],
   },
   {
-    title: "Méthode",
+    title: "Explorer",
     links: [
-      { label: "Pipeline documentaire", href: "#pipeline" },
-      { label: "Recherche sémantique", href: "#pipeline" },
-      { label: "Ancrage page par page", href: "#pipeline" },
-      { label: "Refus explicite", href: "#faq" },
-      { label: "Comparatif", href: "#comparatif" },
+      { label: "Assistant IA", href: "/#assistant" },
+      { label: "Sujets de recherche", href: "/#rechercher" },
+      { label: "Lire et vérifier", href: "/#sources" },
     ],
   },
   {
@@ -28,9 +27,8 @@ const columns = [
     links: [
       { label: "Portail brh.ht", href: "https://www.brh.ht" },
       { label: "Sources publiques", href: "/brh-corpus" },
-      { label: "Questions fréquentes", href: "#faq" },
-      { label: "Démonstration", href: "#demo" },
-      { label: "Retour en haut", href: "#apercu" },
+      { label: "Périmètre du corpus", href: "/#reperes" },
+      { label: "Retour en haut", href: "/#apercu" },
     ],
   },
 ];
@@ -59,8 +57,8 @@ export function SiteFooter() {
             </Link>
             <p className="mb-4 max-w-sm text-caption leading-relaxed text-white/70">
               Interface de recherche sur les publications officielles de la
-              Banque de la République d’Haïti. Chaque réponse renvoie au
-              document et à la page qui la soutiennent.
+              Banque de la République d’Haïti. Explorez les documents, leurs
+              connexions et les passages utiles à votre recherche.
             </p>
             <div className="flex items-center gap-2 font-mono text-[11px] text-white/60">
               <span className="size-2 rounded-full bg-emerald" />

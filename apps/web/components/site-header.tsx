@@ -9,11 +9,11 @@ import { ThemeToggle } from "./theme-toggle";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/95 shadow-[0_1px_3px_rgba(11,23,41,0.03)] backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-5 sm:gap-4 sm:px-6">
         <Link
           href="/"
           aria-label="BRH Intelligence — accueil"
-          className="flex shrink-0 items-center gap-3 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-ink"
+          className="flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-ink sm:gap-3"
         >
           {/* The mark is navy only; on dark surfaces it sits on a white chip so
               it keeps its official colour and stays visible. */}
@@ -24,12 +24,12 @@ export function SiteHeader() {
               width={251}
               height={123}
               priority
-              className="h-7 w-auto"
+              className="h-5 w-auto sm:h-7"
             />
           </span>
           <span className="hidden h-6 w-px bg-border sm:block" />
           <span className="flex flex-col">
-            <span className="font-display text-body font-bold leading-none tracking-tight text-navy-ink">
+            <span className="font-display text-caption font-bold leading-none tracking-tight text-navy-ink sm:text-body">
               Intelligence
             </span>
             <span className="mt-1 hidden text-[10px] font-medium leading-none text-ink-muted sm:block">
@@ -53,17 +53,17 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-3">
           <div className="hidden items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption font-medium text-ink-muted sm:flex">
             <span className="size-2 rounded-full bg-emerald" />
-            <span>Archive 2018—2026</span>
+            <span>Publications en français</span>
           </div>
 
           <ThemeToggle className="size-8 sm:size-9" />
 
           <a
             href="/assistant"
-            className="inline-flex items-center gap-1.5 rounded-full bg-navy px-4 py-2 text-caption font-semibold text-white shadow-sm transition-colors hover:bg-navy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3 py-2 text-caption font-semibold text-white shadow-sm transition-colors hover:bg-navy-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure focus-visible:ring-offset-2 sm:px-4"
           >
             <span className="sm:hidden">Assistant</span>
             <span className="hidden sm:inline">Ouvrir l’assistant</span>
