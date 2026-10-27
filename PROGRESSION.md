@@ -1,11 +1,48 @@
 # Progression
 
-Last updated: 2026-10-26 (responsive research atlas and global graph)
+Last updated: 2026-10-27 (landing page, agent preview and research illustrations)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Landing interaction refinement (2026-10-27).** Checked available skills (no
+  UI/motion skill installed) and researched public Aceternity-author examples
+  plus Motion API source. The supplied `ui.aceternity.com/interactions` and
+  Motion docs are denied by the environment proxy (403), explicitly unverified.
+  Added spring-followed pointer light/hero tilt, a pause control, offscreen
+  ambient-motion suspension, collection feedback and a shared tab indicator.
+  Fixed the agent preview presence boundary so exit transitions actually play.
+  Touch/reduced-motion behaviour stays static; no third-party component copied.
+  Research links and behaviour: `docs/architecture/landing-motion.md`.
+  Production build/TypeScript and both desktop/mobile browser checks passed,
+  including pointer response, pause, reduced motion, tab/keyboard activation,
+  320–2560px layouts and absence of browser errors. Fixed a hydration mismatch
+  by rendering the preference-dependent pause button only after hydration.
+  Registered `@aceternity` in the web components.json, installed shadcn 4.22.1
+  as a dev dependency and added project-local Codex MCP configuration. Real
+  stdio MCP initialization/tool discovery/registry recognition succeeded;
+  Aceternity registry search failed with a cancelled network request. The
+  configured MCP does not remove the environment's registry access restriction.
+  Direct MCP component retrieval was also attempted (`@aceternity/spotlight`,
+  `@aceternity/3d-card`), failing at `registry/spotlight.json` with a cancelled
+  request. Frozen-lockfile dependency installation verified successfully.
+
+- **Landing page refined (2026-10-27).** Replaced the technical pipeline/comparison
+  narrative with topic entry points, an interactive agent preview, connected
+  exploration, source verification and publication collections. Original SVG/PNG
+  artwork, Framer Motion entrances/hover/ambient movement and reduced-motion
+  support; shadcn/Radix tabs connect examples to real catalogue searches. Agent
+  integration is explicitly labelled as planned. Updated navigation/footer/SEO,
+  removed fixed coverage dates and unsupported agent guarantees. Aceternity's
+  registry was inaccessible; lighting/depth are original, no third-party code
+  or new dependency claimed. Production build and TypeScript passed; browser
+  checks caught a shared-header overflow at 320px, now compacted for small phones.
+  Final production build passed, along with both desktop/mobile browser tests:
+  agent tab switching and keyboard activation, real search links, anchor targets,
+  no horizontal overflow from 320–2560px, dark mode and reduced motion. Updated
+  production preview runs on port 3000. Screenshots: `/tmp/brh-ui/landing-*.png`.
 
 - **Research atlas UI completed (2026-10-26).** Rebuilt Documents, a paginated
   Entities directory, entity profiles, the focused document reader and a dedicated

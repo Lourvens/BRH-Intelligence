@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 
-import { AccessCta } from "@/components/home/access-cta";
-import { ComparisonSection } from "@/components/home/comparison-section";
-import { CorpusSection } from "@/components/home/corpus-section";
-import { FaqSection } from "@/components/home/faq-section";
-import { Hero } from "@/components/home/hero";
-import { PipelineSection } from "@/components/home/pipeline-section";
-import { UsagesSection } from "@/components/home/usages-section";
+import { ResearchLanding } from "@/components/home/research-landing";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import {
@@ -18,7 +12,7 @@ import {
 
 export const metadata: Metadata = {
   title: {
-    absolute: "BRH Intelligence — Les publications de la BRH, sourcées",
+    absolute: "BRH Corpus — L’économie haïtienne, à la source",
   },
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
@@ -30,7 +24,7 @@ export const metadata: Metadata = {
     locale: "fr_HT",
     url: "/",
     siteName: SITE_NAME,
-    title: "BRH Intelligence — Les publications de la BRH, sourcées",
+    title: "BRH Corpus — L’économie haïtienne, à la source",
     description: SITE_DESCRIPTION,
     images: [OG_IMAGE],
   },
@@ -47,13 +41,7 @@ export default function Home() {
     <div className="min-h-screen bg-bg text-ink">
       <SiteHeader />
       <main id="contenu">
-        <Hero />
-        <PipelineSection />
-        <CorpusSection />
-        <UsagesSection />
-        <ComparisonSection />
-        <FaqSection />
-        <AccessCta />
+        <ResearchLanding />
       </main>
       <SiteFooter />
     </div>

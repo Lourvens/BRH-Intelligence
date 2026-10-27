@@ -5,7 +5,7 @@ export const SITE_URL = (
 export const SITE_NAME = "BRH Intelligence";
 
 export const SITE_DESCRIPTION =
-  "Posez vos questions sur les publications officielles de la Banque de la République d’Haïti. Réponses en français, avec le document et la page exacte.";
+  "Explorez les publications de la Banque de la République d’Haïti, retrouvez leurs sources et découvrez un assistant IA conçu pour accompagner votre recherche.";
 
 export const SITE_KEYWORDS = [
   "BRH",

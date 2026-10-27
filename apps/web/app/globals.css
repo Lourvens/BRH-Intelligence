@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./research.css";
+@import "./landing.css";
 @custom-variant dark (&:is(.dark *));
 
 /*
