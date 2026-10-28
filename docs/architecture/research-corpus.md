@@ -190,6 +190,16 @@ separate mention and accepted-relationship views, bounded counts, on-demand
 passage evidence, local focus and an accessible list alternative. See ADR-0016
 for the API fields and data eligibility rules.
 
+The graph fills the research viewport. Search, active filter chips, view switching,
+legend, counts and camera controls float inside the canvas boundary. Desktop
+filters use a contained shadcn Popover; selected nodes and links open a contextual
+card. Mobile filters and details use mutually exclusive bottom Sheets. All
+scrollable graph panels use the shared shadcn ScrollArea. The accessible list
+leaves ECharts mounted, preserving its camera when switching back to the map.
+Focus mode covers navigation and exits with Escape; filters and selection remain
+shareable in the URL. Component boundaries are recorded in
+`docs/plans/2026-10-27-graph-workspace-design.md`.
+
 Apply migration 0008 before using the graph. Run **one** backend for both agent
 and research endpoints:
 

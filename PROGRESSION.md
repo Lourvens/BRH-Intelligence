@@ -1,11 +1,51 @@
 # Progression
 
-Last updated: 2026-10-27 (landing page, agent preview and research illustrations)
+Last updated: 2026-10-28 (centered assistant and unified composer)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **UI delivery (2026-10-28).** Collected the completed graph workspace and
+  centered assistant changes for commit and push to main. Existing artifact,
+  extraction-trial, experiment and unrelated architecture edits remain separate.
+
+- **Assistant empty state implemented (2026-10-28).** Centered the welcome title
+  and existing composer, with compact example links beneath the textarea.
+  One composer instance and identical textarea styling serve empty and active
+  conversations; only its position changes. Sources appear with messages.
+  TypeScript and whitespace checks passed. The assistant route returned HTTP 200;
+  rendered markup contains exactly one textarea, followed by the example links.
+  No browser automation was used.
+
+- **Full-view graph workspace implemented (2026-10-27).** The graph fills the
+  research viewport with integrated search/results, removable filters, view and
+  neighborhood controls, legend, counts and camera/fullscreen tools. Replaced
+  the permanent split panel with a contextual desktop inspector; mobile filters
+  and evidence use mutually exclusive bottom Sheets. All graph panel scrolling
+  uses the existing shadcn ScrollArea. Filters use a CLI-generated shadcn Popover
+  contained within the graph. URL-backed selection and filters remain shareable;
+  ECharts stays mounted when switching to the accessible list. Added focus
+  restoration, Escape handling and reduced-motion panel transitions. No new
+  package dependencies were needed. Context7 was unavailable; official shadcn
+  and Radix documentation were used for the overlay primitives.
+  Validation: production build, final TypeScript, three existing Bun corpus tests
+  and diff whitespace checks passed. Local graph page/API returned HTTP 200;
+  search returned 90 nodes, a neighborhood returned two nodes/one edge, and its
+  evidence endpoint returned a published passage. No browser automation or
+  visual inspection was performed, per the user's restriction.
+  Design: `docs/plans/2026-10-27-graph-workspace-design.md`; architecture updated.
+
+- **Dependency sync (2026-10-27).** Fixed the missing React Query import after
+  pulling main by running `bun install --frozen-lockfile` (578 packages). The
+  dependency was already declared; no manifest or lockfile change was needed.
+  Web TypeScript passed and local `/brh-corpus` returned HTTP 200.
+
+- **Main pulled locally (2026-10-27).** Fast-forwarded `46b6e03` to `bba74c4`
+  from `origin/main` (four commits). Local changes were preserved; the local
+  progression update was temporarily stashed and restored without conflicts.
+  No dependency installation, migration or runtime restart was performed.
 
 - **Landing interaction refinement (2026-10-27).** Checked available skills (no
   UI/motion skill installed) and researched public Aceternity-author examples
@@ -85,6 +125,11 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   quarantined with evidence retained by migration 0007. Successful earlier pages
   are retained; resume processes remaining/failed pages. No production model or
   probability thresholds have been approved. Commit/push explicitly requested.
+  Follow-up status check: worker alive and advancing; 384/901 pages attempted,
+  382 succeeded, two failed (ValueError and ReadTimeout). Published entity view
+  contains 1,717 entities / 2,195 mentions across 31 sampled documents; 12 temporal
+  proposals remain quarantined. There are 170 pending and 102 rejected relations.
+  Counts are a running snapshot, not a completed-run result.
 
 - **Document publication plan completed (2026-10-26), proposed.** See
   `docs/plans/2026-10-26-document-publication-design.md`. Confirmed reader 503s:

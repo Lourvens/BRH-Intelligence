@@ -23,9 +23,21 @@ import { SourcesRail } from "./sources-rail";
 
 export function AssistantShell() {
   const {
-    threads, activeThread, activeThreadId, citations, selectedCitation, isThinking,
-    sourcesOpen, setSourcesOpen, sourcesCollapsed, setSourcesCollapsed,
-    selectThread, newThread, submitQuestion, stopThinking, selectCitation,
+    threads,
+    activeThread,
+    activeThreadId,
+    citations,
+    selectedCitation,
+    isThinking,
+    sourcesOpen,
+    setSourcesOpen,
+    sourcesCollapsed,
+    setSourcesCollapsed,
+    selectThread,
+    newThread,
+    submitQuestion,
+    stopThinking,
+    selectCitation,
   } = useAssistantWorkspace();
 
   return (
@@ -53,26 +65,28 @@ export function AssistantShell() {
             onSubmit={submitQuestion}
             onStop={stopThinking}
           />
-          <aside
-            className={cn(
-              "hidden shrink-0 overflow-hidden border-l border-border xl:flex",
-              sourcesCollapsed ? "w-12" : "w-[320px] 2xl:w-[352px]",
-            )}
-          >
-            {sourcesCollapsed ? (
-              <SourcesRail
-                count={citations.length}
-                onOpen={() => setSourcesCollapsed(false)}
-              />
-            ) : (
-              <SourcesPanel
-                citations={citations}
-                selected={selectedCitation}
-                onSelect={selectCitation}
-                onCollapse={() => setSourcesCollapsed(true)}
-              />
-            )}
-          </aside>
+          {(activeThread || isThinking) && (
+            <aside
+              className={cn(
+                "hidden shrink-0 overflow-hidden border-l border-border xl:flex",
+                sourcesCollapsed ? "w-12" : "w-[320px] 2xl:w-[352px]",
+              )}
+            >
+              {sourcesCollapsed ? (
+                <SourcesRail
+                  count={citations.length}
+                  onOpen={() => setSourcesCollapsed(false)}
+                />
+              ) : (
+                <SourcesPanel
+                  citations={citations}
+                  selected={selectedCitation}
+                  onSelect={selectCitation}
+                  onCollapse={() => setSourcesCollapsed(true)}
+                />
+              )}
+            </aside>
+          )}
         </div>
       </SidebarInset>
 
