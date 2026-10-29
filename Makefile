@@ -1,4 +1,4 @@
-.PHONY: help install sync postgres-up postgres-down migrate ingest inventory ocr-pull analytics analytics-dev agent-dev mcp-dev web-dev test lint fmt check seed lab corpus-sync corpus-dev corpus-extract
+.PHONY: help install sync postgres-up postgres-down migrate ingest inventory ocr-pull analytics analytics-dev agent-dev agent-eval mcp-dev web-dev test lint fmt check seed lab corpus-sync corpus-dev corpus-extract
 
 # Modal is a runner dependency, not a workspace one; point this at whatever
 # environment has the CLI (e.g. MODAL="/path/to/venv/bin/python -m modal").
@@ -54,6 +54,9 @@ analytics-dev: ## Open the analytics dashboard
 
 agent-dev: ## Run the LangGraph agent server locally
 	cd services/agent && uv run langgraph dev
+
+agent-eval: ## Validate, sync or run agent behavior evals (ARGS="validate")
+	cd services/agent && uv run python -m evals.cli $(ARGS)
 
 mcp-dev: ## Run the MCP server (streamable HTTP)
 	uv run python -m brh_mcp

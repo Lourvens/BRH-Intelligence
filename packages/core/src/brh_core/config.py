@@ -31,6 +31,7 @@ class LLMProvider(StrEnum):
 
     anthropic = "anthropic"
     openai = "openai"
+    openrouter = "openrouter"
 
 
 class EmbeddingProvider(StrEnum):
@@ -140,6 +141,45 @@ class Settings(BaseSettings):
     openai_api_key: SecretStr = Field(default=SecretStr(""), validation_alias="OPENAI_API_KEY")
     openai_base_url: str = Field(default="", validation_alias="OPENAI_BASE_URL")
 
+    # --- Agent model roles (OpenRouter) --------------------------------
+    openrouter_api_key: SecretStr = Field(
+        default=SecretStr(""), validation_alias="OPENROUTER_API_KEY"
+    )
+    chat_provider: LLMProvider = Field(
+        default=LLMProvider.openrouter, validation_alias="BRH_CHAT_PROVIDER"
+    )
+    chat_base_url: str = Field(
+        default="https://openrouter.ai/api/v1",
+        min_length=1,
+        validation_alias="BRH_CHAT_BASE_URL",
+    )
+    chat_model: str = Field(
+        default="mistralai/ministral-8b-2512",
+        min_length=1,
+        validation_alias="BRH_CHAT_MODEL",
+    )
+    chat_temperature: float = Field(default=0, ge=0, validation_alias="BRH_CHAT_TEMPERATURE")
+    chat_max_tokens: int = Field(default=2048, gt=0, validation_alias="BRH_CHAT_MAX_TOKENS")
+    chat_timeout: float = Field(default=60, gt=0, validation_alias="BRH_CHAT_TIMEOUT")
+    chat_max_retries: int = Field(default=2, ge=0, validation_alias="BRH_CHAT_MAX_RETRIES")
+
+    decision_provider: LLMProvider = Field(
+        default=LLMProvider.openrouter, validation_alias="BRH_DECISION_PROVIDER"
+    )
+    decision_base_url: str = Field(
+        default="https://openrouter.ai/api",
+        min_length=1,
+        validation_alias="BRH_DECISION_BASE_URL",
+    )
+    decision_api_path: str = Field(
+        default="/alpha/decisions", min_length=1, validation_alias="BRH_DECISION_API_PATH"
+    )
+    decision_model: str = Field(
+        default="typesafe/jev-1.14", min_length=1, validation_alias="BRH_DECISION_MODEL"
+    )
+    decision_timeout: float = Field(default=60, gt=0, validation_alias="BRH_DECISION_TIMEOUT")
+    decision_max_retries: int = Field(default=2, ge=0, validation_alias="BRH_DECISION_MAX_RETRIES")
+
     # --- Embeddings (ADR-0004) -----------------------------------------
     embedding_provider: EmbeddingProvider = Field(
         default=EmbeddingProvider.pinecone,
@@ -240,7 +280,7 @@ class Settings(BaseSettings):
         validation_alias="BRH_PUBLIC_PDF_BASE_URL",
     )
 
-    # --- LangGraph / LangSmith (ADR-0009) ------------------------------
+    # --- LangGraph Agent Server ----------------------------------------
     langgraph_url: str = Field(
         default="http://localhost:2024", validation_alias="BRH_LANGGRAPH_URL"
     )
@@ -318,14 +358,16 @@ class Settings(BaseSettings):
         """The API key for the configured chat provider."""
         if self.llm_provider == LLMProvider.anthropic:
             return self.anthropic_api_key.get_secret_value()
+        if self.llm_provider == LLMProvider.openrouter:
+            return self.openrouter_api_key.get_secret_value()
         return self.openai_api_key.get_secret_value()
 
     def to_safe_dict(self) -> dict[str, Any]:
         """Settings as a dict with secrets redacted — safe to log."""
         data = self.model_dump()
-        for key in ("anthropic_api_key", "openai_api_key", "pinecone_api_key", "postgres_password"):
-            if key in data:
-                data[key] = "***" if data[key] else ""
+        for key, value in data.items():
+            if isinstance(value, SecretStr):
+                data[key] = "***" if value.get_secret_value() else ""
         return data
 
 

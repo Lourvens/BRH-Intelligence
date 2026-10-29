@@ -13,7 +13,6 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useAssistantWorkspace } from "@/lib/hooks/use-assistant-workspace";
-import { suggestedQuestions } from "@/lib/chat/suggestions";
 import { cn } from "@/lib/utils";
 
 import { ChatPanel } from "./chat-panel";
@@ -29,6 +28,12 @@ export function AssistantShell() {
     citations,
     selectedCitation,
     isThinking,
+    activities,
+    runStatus,
+    isRestoring,
+    isStopping,
+    error,
+    retry,
     sourcesOpen,
     setSourcesOpen,
     sourcesCollapsed,
@@ -57,10 +62,14 @@ export function AssistantShell() {
             sourceCount={citations.length}
             onOpenSources={() => setSourcesOpen(true)}
             thread={activeThread}
-            suggestions={suggestedQuestions}
             isThinking={isThinking}
+            activities={activities}
+            runStatus={runStatus}
+            isRestoring={isRestoring}
+            isStopping={isStopping}
+            error={error}
+            onRetry={retry}
             selectedCitationId={selectedCitation?.id ?? null}
-            onSelectSuggestion={selectThread}
             onSelectCitation={selectCitation}
             onSubmit={submitQuestion}
             onStop={stopThinking}

@@ -15,7 +15,6 @@ works. These still `raise NotImplementedError`:
 
 - `brh_core`: the optional `embeddings/openai.py` adapter remains a scaffold;
   production uses Pinecone integrated embeddings, so it is outside that path.
-- `brh_agent`: `llm.py`, `nodes.py`, `prompts.py`
 
 Implemented today: `brh_core.{config,models}`, `brh_core.db.{pool,migrate}`,
 `brh_core.inventory.*`, `brh_core.ingestion.{ocr,engines,markdown}` (the batch
@@ -24,14 +23,17 @@ OCR stage: manifest → ledger → page-marked markdown),
 `brh_core.db.repository`, and `brh_core.catalog` (discovery → PaddleOCR artifact
 validation → page/chunk persistence; vector indexing remains opt-in),
 `brh_core.ingestion.chunking` (structure-aware hybrid chunking v2, ADR-0011) with
-`chunk.py` as its stable facade, `brh_agent.{graph,state}`, and the
+`chunk.py` as its stable facade, `brh_agent` (bounded adaptive research,
+chat/decision clients, validated answer publication and configurable Arize
+tracing; ADR-0017/0018/0022), and the
 `brh_analytics` design layer plus its `inventory` family.
 
 Ingestion/indexing is now runnable end to end: LangChain discovery/ingestion
 cycles, exact E5 token counts, Pinecone hosted Records API, durable Postgres
 index manifests, restart-safe reconciliation and canonical `RetrievalService`.
-See ADR-0012 and `docs/architecture/ingestion-operations.md`. Agent generation
-and MCP tool registration remain separate surface work.
+See ADR-0012 and `docs/architecture/ingestion-operations.md`. Agent generation is
+implemented; live model verification needs `OPENROUTER_API_KEY`. MCP tool
+registration remains separate surface work.
 
 ## Layout and boundaries
 

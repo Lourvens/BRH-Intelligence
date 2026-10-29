@@ -16,7 +16,6 @@ export function WorkspaceHeader({ title, sourceCount, onOpenSources }: {
         <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">Espace de recherche</p>
         <h1 className="truncate font-display text-small font-semibold text-navy-ink">{title ?? "Assistant documentaire"}</h1>
       </div>
-      <span className="hidden border-l border-border pl-4 text-caption text-ink-muted sm:block">Démo locale</span>
       <Button type="button" variant="outline" onClick={onOpenSources} className="h-10 gap-2 rounded-sm border-border bg-surface px-3 text-caption text-navy-ink shadow-none xl:hidden">
         <BookOpen className="size-4" aria-hidden /> Sources ({sourceCount})
       </Button>

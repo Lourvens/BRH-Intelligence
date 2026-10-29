@@ -50,3 +50,8 @@ Multiple URLs pointing to one PDF are aliases, not duplicate corpus documents.
 | [0010](0010-provider-agnostic-llm.md) | Provider-agnostic LLM configuration | Accepted |
 | [0011](0011-chunking-strategy.md) | Structure-aware hybrid chunking (v2) | Accepted (retrieval eval pending) |
 | [0012](0012-resumable-langchain-ingestion.md) | Resumable LangChain ingestion with Pinecone hosted embeddings | Accepted |
+| [0018](0018-arize-agent-observability.md) | Arize AX for agent observability | Accepted |
+| [0019](0019-single-agent-system-prompt.md) | One system prompt for the agent identity | Accepted |
+| [0020](0020-bounded-model-directed-graph.md) | Smaller graph with model-directed research and responses | Accepted |
+| [0021](0021-streamed-agent-activity.md) | Temporary activity UI over the LangGraph SDK stream | Accepted |
+| [0022](0022-opt-in-trace-content.md) | Opt-in Arize trace content for agent debugging | Accepted |

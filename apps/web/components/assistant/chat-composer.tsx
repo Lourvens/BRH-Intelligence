@@ -7,10 +7,14 @@ import { Textarea } from "@/components/ui/textarea";
 
 export function ChatComposer({
   isThinking,
+  isRestoring,
+  isStopping,
   onSubmit,
   onStop,
 }: {
   isThinking: boolean;
+  isRestoring: boolean;
+  isStopping: boolean;
   onSubmit: (question: string) => void;
   onStop: () => void;
 }) {
@@ -20,7 +24,7 @@ export function ChatComposer({
 
   function submit() {
     const question = draft.trim();
-    if (!question || isThinking) return;
+    if (!question || isThinking || isRestoring) return;
     onSubmit(question);
     setDraft("");
     if (textareaRef.current) textareaRef.current.style.height = "96px";
@@ -52,6 +56,7 @@ export function ChatComposer({
             ref={textareaRef}
             value={draft}
             rows={1}
+            maxLength={4000}
             onChange={(event) => updateDraft(event.target.value)}
             onKeyDown={(event) => {
               if (
@@ -73,25 +78,21 @@ export function ChatComposer({
               </span>
               <span className="sm:hidden">Questions en français</span>
             </span>
-            {isThinking ? (
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onStop}
-                className="h-10 rounded-sm border-border text-caption shadow-none"
-              >
-                <Square className="size-3 fill-current" aria-hidden /> Arrêter
-              </Button>
-            ) : (
-              <Button
-                type="submit"
-                disabled={!draft.trim()}
-                aria-label="Envoyer la question"
-                className="size-10 rounded-xl bg-navy text-white shadow-none hover:bg-navy-deep disabled:opacity-40"
-              >
-                <ArrowUp className="size-4" aria-hidden />
-              </Button>
-            )}
+            <Button
+              type={isThinking ? "button" : "submit"}
+              aria-disabled={isStopping || isRestoring || (!isThinking && !draft.trim())}
+              aria-label={isThinking ? "Arrêter le traitement" : "Envoyer la question"}
+              onClick={(event) => {
+                if (isStopping || isRestoring || (!isThinking && !draft.trim())) {
+                  event.preventDefault();
+                  return;
+                }
+                if (isThinking) onStop();
+              }}
+              className="h-11 min-w-11 rounded-xl bg-navy px-3 text-white shadow-none transition-colors hover:bg-navy-deep aria-disabled:opacity-40 motion-reduce:transition-none"
+            >
+              {isThinking ? <><Square className="size-3 fill-current" aria-hidden /><span className="text-caption">{isStopping ? "Arrêt…" : "Arrêter"}</span></> : <ArrowUp className="size-4" aria-hidden />}
+            </Button>
           </div>
         </div>
         <p className="mt-2 text-center text-[11px] leading-relaxed text-ink-muted">

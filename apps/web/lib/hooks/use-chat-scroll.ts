@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-export function useChatScroll(threadId: string | undefined, messageCount: number, isThinking: boolean, reduceMotion: boolean | null) {
+export function useChatScroll(threadId: string | undefined, messageCount: number, isThinking: boolean, reduceMotion: boolean | null, progressVersion = 0) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const followRef = useRef(true);
 
@@ -10,7 +10,7 @@ export function useChatScroll(threadId: string | undefined, messageCount: number
   useEffect(() => {
     const node = scrollRef.current;
     if (node && followRef.current) node.scrollTo({ top: node.scrollHeight, behavior: reduceMotion ? "instant" : "smooth" });
-  }, [threadId, messageCount, isThinking, reduceMotion]);
+  }, [threadId, messageCount, isThinking, reduceMotion, progressVersion]);
 
   function handleScroll() {
     const node = scrollRef.current;

@@ -14,13 +14,15 @@ from brh_core.corpus.download import markdown_export
 from brh_core.corpus.models import CorpusQuery, GlobalGraphQuery
 from brh_core.corpus.service import StaleArtifactError
 from brh_core.corpus.storage import digest
-from brh_core.retrieval import build_retrieval_service
 from pydantic import TypeAdapter, ValidationError
 from starlette.applications import Starlette
 from starlette.concurrency import run_in_threadpool
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 from starlette.routing import Route
+
+from brh_agent.observability import shutdown_observability
+from brh_agent.resources import get_resources
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +34,7 @@ def json_response(value):
 
 
 def service(request: Request):
-    return request.app.state.retrieval
+    return request.app.state.retrieval or request.app.state.resources.retrieval
 
 
 def query(request: Request):
@@ -211,19 +213,18 @@ async def failure(request, exc):
 def create_app(retrieval=None):
     @asynccontextmanager
     async def lifespan(app):
-        pool = None
         app.state.semantic_requests = deque()
         app.state.semantic_lock = threading.Lock()
+        app.state.retrieval = retrieval
+        app.state.resources = None
         if retrieval is None:
-            instance, pool = await run_in_threadpool(build_retrieval_service)
-            app.state.retrieval = instance
-        else:
-            app.state.retrieval = retrieval
+            app.state.resources = get_resources()
         try:
             yield
         finally:
-            if pool:
-                await run_in_threadpool(pool.close)
+            if app.state.resources:
+                await run_in_threadpool(app.state.resources.close)
+            await run_in_threadpool(shutdown_observability)
 
     prefix = "/corpus/v1"
     routes = [

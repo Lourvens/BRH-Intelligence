@@ -12,8 +12,8 @@ container**, **Postgres managed**, **Pinecone serverless** (ADR-0009).
      `BRH_EMBEDDING_PROVIDER=openai`)
 2. **Postgres** — any managed Postgres 15+. Run the migration once
    (`python -m brh_core.db.migrate`).
-3. **LangSmith** — a project + API key for tracing
-   (`LANGCHAIN_API_KEY`, `LANGCHAIN_PROJECT`).
+3. **Arize AX** — a space + API key for privacy-redacted agent tracing
+   (`ARIZE_API_KEY`, `ARIZE_SPACE_ID`, `ARIZE_PROJECT_NAME`).
 
 ## 1. Ingest
 
@@ -36,8 +36,14 @@ cd services/agent
 langgraph deploy        # or push via LangSmith Deployment
 ```
 
-Required env: `BRH_*` (as in `.env.example`), `ANTHROPIC_API_KEY`,
-`LANGCHAIN_API_KEY`. The `langgraph.json` graph id is `agent`.
+Required env: `BRH_*` (as in `.env.example`), the configured model-provider
+credential, `ARIZE_API_KEY`, `ARIZE_SPACE_ID` and `ARIZE_PROJECT_NAME`. The
+`langgraph.json` graph id is `agent`. OpenInference content-redaction flags are
+enforced by the runtime and repeated in `.env.example` for operational clarity.
+`BRH_TRACE_CONTENT=false` is the metadata-only default. Set it to `true` and
+restart Agent Server to inspect messages, model outputs and corpus context in
+Arize (ADR-0022). New traces then send that content to the configured project;
+previously redacted traces cannot recover it. Credentials remain outside spans.
 
 ## 3. Web (Vercel)
 

@@ -1,11 +1,279 @@
 # Progression
 
-Last updated: 2026-10-28 (centered assistant and unified composer)
+Last updated: 2026-10-29 (Arize content capture verified; agent/UI commit prepared)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Arize content capture fixed and verified (2026-10-29).** The prior
+  `REDACTED` values were the intentional ADR-0018 policy, not failed delivery.
+  User-authorized ADR-0022 adds `BRH_TRACE_CONTENT` with a false template default
+  and true only in ignored local `.env`. Explicit OpenInference configuration
+  now exposes messages, inputs, outputs and source context when enabled while
+  hiding invocation parameters, tools, images and embeddings. Jev spans now
+  use the active LangChain parent and include decision input/output under the
+  same policy. Restarted Agent Server on local port 2024. Arize read-back
+  of trace `874e933fe59b1e8e840326e82bd9022b` confirmed ten spans, visible
+  chat inputs/outputs and message fields, two linked Jev spans with visible
+  decision inputs/outputs, and no configured secret values. Historical traces
+  remain redacted. Validation: 369 offline tests pass, 13 integration tests
+  deselected. Preparing only agent/UI/config/eval/docs changes for the requested
+  commit; unrelated artifacts, experiments and local tooling remain unstaged.
+
+- **Streaming assistant activity UI implemented (2026-10-29).** Exa and
+  Context7 research informed a shadcn Task/Trace-style temporary activity panel
+  (ADR-0021), composed from existing Button/Collapsible primitives without new
+  dependencies or a second chat runtime. LangGraph `get_stream_writer()` emits
+  turn-scoped start/end events for model stages and parallel retrieval. Public
+  events contain actual goals, queries, passage counts, bounded source previews
+  and coverage summaries; no model drafts or private reasoning. The installed
+  LangGraph SDK consumes `values` plus `custom` through `onCustomEvent`. The
+  client merges operation IDs, rejects stale turns/replayed starts and ignores
+  late events after cancellation. Thread restoration has separate feedback.
+  The old generic search/spinner row is removed; activity disappears on final
+  publication, with interrupted/error state retained until another action.
+  The composer preserves its send/stop button identity and exposes stopping;
+  scroll-follow respects user scrolling and motion preferences. Validation:
+  61 agent tests, eight frontend tests, TypeScript, Ruff, whitespace and the
+  production Next build pass. Live research SSE delivered 17 activity events,
+  two parallel searches with six passages each and source previews, then a
+  validated answer. A direct installed JavaScript SDK smoke test consumed the
+  same event contract and verified greeting -> respond -> publish, without
+  fabricated search activity. Browser visual/interaction QA was not run.
+
+- **Agent simplification and memory verified (2026-10-29).** Context7 plus
+  primary LangGraph/Anthropic documentation informed ADR-0019/0020. Execution
+  nodes decrease from 19 to 12: plan/draft nodes loop for their single repair;
+  one response node generates conversation, clarification and limitations.
+  Jev selects refine/draft/respond after retrieval and reviews generated replies.
+  Hardcoded scope/insufficient/safety refusals were removed; technical error
+  fallbacks, deadlines, budgets and canonical citation validation remain.
+  All runtime prompt instructions are French; one `AGENT_PROMPT` owns identity,
+  goal and rules. LangChain receives one system message, bounded typed history
+  and an ephemeral task envelope. `memory.py` uses `trim_messages` with an
+  approximate 4,000-token budget over at most six previous messages; full
+  thread checkpoints remain owned by Agent Server. No global memory store or
+  legacy buffer was added. SDK thread selection/reload already matches the
+  documented server contract. Validation: 60 agent tests, Ruff, whitespace and
+  12 local evaluation cases pass. Live server tests confirmed same-thread name
+  recall, isolation of another thread and a generated scope response. A live
+  research run had a valid four-goal plan and zero plan repairs, then generated
+  `safe_limitation` after answer-support review rejected both drafts; factual
+  answer quality remains unresolved. Local evaluation contract is v4 (three
+  calls for greeting plus response review); remote sync/full repeated eval was
+  not run. The existing dev server hot-reloaded and remains on port 2024.
+
+- **Planner cardinality prompt fixed and live-verified (2026-10-29).** The
+  planning prompt now states the `TaskPlan` invariant explicitly: `direct`
+  requires exactly one goal, while `decomposed` requires two to four, and it
+  forbids the two invalid combinations. Added a regression assertion for all
+  three statements. Validation: all 53 agent tests and targeted Ruff pass;
+  `git diff --check` passes. Restarted Agent Server on local port 2024. A live
+  multi-topic request produced `mode=decomposed`, four goals,
+  `plan_status=valid` and zero plan repairs. Its later `safe_limitation` came
+  from downstream answer-support validation, not planning.
+
+- **Live planner failure diagnosed (2026-10-29).** Arize trace
+  `3273405d550efdfd57a10bbaa0c40895` proves the chat provider returned
+  syntactically valid structured JSON, but the payload selected `mode=direct`
+  while containing multiple goals. `TaskPlan` correctly rejected it because
+  direct research requires exactly one goal. The initial plan and its single
+  repair repeated the same violation, then the bounded graph published
+  `safe_limitation` without retrieving. The visible issue text is misleadingly
+  generic: `nodes.guarded()` collapses every Pydantic/schema error to
+  `Malformed structured model output`, so the repair model is not told the
+  actionable invariant it violated. No product code was changed during this
+  diagnosis. Recommended fix: give the repair attempt a sanitized structured
+  validation reason and state the direct/decomposed cardinality invariants
+  explicitly in the planner prompt; retain the strict schema and bounded exit.
+
+- **Arize UI visibility mismatch diagnosed (2026-10-29).** The running Agent
+  Server and tunnel remain healthy. A direct authenticated `POST /v2/traces`
+  read proves telemetry is stored in private space `lourvens.luxamar Space`
+  (`U3BhY2U6NTAyNzY6cjhTNA==`) under the `APPLICATION` project
+  `brh-intelligence` (`TW9kZWw6MTA3NzU3MTc1MDI6cFlQTA==`). It returns the
+  clean greeting trace `f94082b7b674f7ce2d386c620d85af25` with eight `OK`
+  graph spans at 15:37:08–15:37:11 UTC, plus the user's newer research trace
+  `3273405d550efdfd57a10bbaa0c40895`. The exporter therefore worked; an empty
+  Arize screen means the UI is scoped to another space/project, has a time or
+  status filter, or the logged-in user cannot access this private space.
+
+- **Agent Server clean-restarted for live testing (2026-10-29).** Stopped the
+  previous `langgraph dev` process and launched a fresh
+  `uv run langgraph dev --tunnel --no-browser` instance from `services/agent`.
+  Local `/info` is healthy on port 2024 and corpus readiness reports 1,026/1,026
+  published documents. A fresh `Hello` request routed through Jev to
+  `conversation`, skipped planning/retrieval, used two model calls and returned
+  the BRH assistant introduction with zero citations. Arize read-back confirms
+  the completed eight-span `agent` trace (`f94082b7b674f7ce2d386c620d85af25`)
+  plus its content-redacted `brh.decisions` span; every graph span is `OK`. The
+  server and Cloudflare tunnel were intentionally left running for user tests.
+
+- **Jev-first intent routing implemented (2026-10-29).** Removed the hardcoded
+  social allowlist and the temporary deterministic `social.py` reply path. Every
+  valid message now reaches a typed Jev decision selecting `conversation`,
+  `plan` or `out_of_scope`. Conversation skips research planning/retrieval and
+  calls the chat model with one general BRH assistant identity instruction;
+  substantive and ambiguous requests continue to the structured planner and
+  its existing Jev validation. A live English `Hello` run returned
+  `route=conversation`, no plan, zero citations and two model calls, with the
+  English BRH assistant introduction requested by the user. The first
+  chat-planner-first attempt was rejected after it produced invalid structured
+  plans for a greeting, which is why routing now uses Jev before planning.
+  Validation: targeted Ruff, all 52 agent tests and a live Agent Server greeting
+  pass. Arize dataset `brh-agent-behavior-v3` records the new two-call/no-plan
+  conversation contract (ID `RGF0YXNldDozNzIyMTM6U043Sg==`).
+
+- **Arize-backed agent behavior evaluation implemented (2026-10-29).** Added
+  `services/agent/evals/` with a reviewed 12-case French behavior set covering
+  conversation, greeting-plus-research routing, direct research, explicit-date
+  preservation, decomposition, clarification, scope and prompt injection. Each
+  Arize experiment row runs repeated Agent Server trials; deterministic code
+  evaluators independently score the behavior contract, repeated-run stability
+  and transport availability, so Jev never judges itself. Context7 supplied the
+  current `ArizeClient.datasets.create()` / `client.experiments.run()` and
+  `Evaluator` contracts; `arize==8.61.0` is a workspace dev dependency. The
+  current immutable `brh-agent-behavior-v3` dataset was created in the configured
+  Arize space (ID `RGF0YXNldDozNzIyMTM6U043Sg==`); earlier versions retain the
+  superseded routing contracts. `make agent-eval ARGS="validate|sync|run"` is the
+  operator entry point; the full repeated live experiment remains opt-in and was
+  not launched. Validation: six eval regression tests and all 52 agent tests pass;
+  targeted Ruff and whitespace checks pass. The initial set measures graph
+  contracts, not factual accuracy; reviewed factual gold answers remain next.
+
+- **Live agent behavior acceptance stopped at the first broken boundary
+  (2026-10-29).** The UI-facing Agent Server, web route and corpus were healthy
+  (`/info` 200, `/assistant` 200, corpus ready with 1,026/1,026 documents).
+  `Salut !` passed the social fast path in 1.99 s with one chat call, no plan,
+  retrieval or citations. The first direct BRH research run retrieved two ready
+  result sets and assessed support as `supported`, but two decision-model answer
+  validations rejected publication and returned `safe_limitation` with no
+  citation. An identical focused repeat succeeded end to end, establishing an
+  intermittent decision-gate failure rather than a corpus or provider outage.
+  The first multi-goal research run also failed after plan validation plus one
+  repair, before retrieval. Acceptance was halted before the remaining scenarios
+  per the full-story verification rule. Existing mocked workflow/model tests do
+  not expose this live-model variance: 38/38 pass. No browser automation and no
+  product-code changes were made. Next: add a recorded French live-eval set with
+  repeated trials and inspect/calibrate Jev plan/grounding judgments before
+  treating the agent as behaviorally ready.
+
+- **Arize orphan-span warning audited (2026-10-28).** Read back every span since
+  the Arize project was created using metadata-only API columns. All seven spans
+  resolve to an existing parent or are a valid root; pagination is complete and
+  there are zero orphan candidates. The live agent trace has a valid `agent`
+  root and complete prepare/routing/conversation/publish relationships. The UI
+  warning was therefore transient: batched child spans can arrive before the
+  still-running root span ends and uploads. No runtime change was needed.
+
+- **Arize agent observability implemented (2026-10-28).** Replaced agent
+  runtime LangSmith export with `arize-otel` plus OpenInference LangChain
+  instrumentation (ADR-0018), while retaining the LangSmith MCP only as an
+  optional historical inspection tool. Resolved the configured account's Arize
+  space, stored its ID/token only in ignored `.env`, and created/verified the
+  `brh-intelligence` application project. Runtime code enforces redaction of
+  inputs, outputs, messages, invocation parameters, tools, prompts, choices,
+  embeddings and retrieved documents; Jev spans contain only model name and
+  question count. A content-free exporter smoke span flushed successfully, then
+  a real greeting produced a six-span LangGraph trace in Arize. Read-back found
+  the expected graph/model metadata and redaction markers, with no submitted
+  human/assistant text. The Agent Server restarted on port 2024 and logs Arize
+  tracing enabled. Validation: 353 offline tests passed (13 integration tests
+  deselected), targeted Ruff and whitespace checks passed.
+
+- **LangSmith tracing setup repaired (2026-10-28).** Normalized the root `.env`
+  to one modern `LANGSMITH_*` tracing destination and removed the conflicting
+  `LANGSMITH_AGENT_ID` / `LANGSMITH_AGENT_ENVIRONMENT` pair that caused the SDK
+  to discard implicitly targeted traces. `.env.example`, the deployment runbook
+  and agent-runtime guide now use the same contract. The existing LangSmith MCP
+  is installed at `https://api.smith.langchain.com/mcp`, enabled and
+  OAuth-authenticated; it successfully resolved the `brh-intelligence` project.
+  Restarted `langgraph dev --tunnel --no-browser`; the local API returns 200 and
+  startup metadata reaches LangSmith with HTTP 204. Added a regression test that
+  forbids mixed trace destinations and legacy `LANGCHAIN_*` aliases in the env
+  template. Validation: 14 targeted tests, Ruff and whitespace checks passed.
+
+- **Adaptive agent implemented (2026-10-28).** LangGraph now runs the social fast
+  route, structured plans, Jev plan checks, bounded `Send` retrieval workers,
+  dependency waves, fair canonical evidence merging, coverage, one missing-goal
+  refinement and one answer repair before validated publication. Separate Mistral
+  chat/Jev typed-decision clients honor configured endpoints, timeouts/retries and
+  credentials. Context7 verified graph and stream APIs. The graph and corpus HTTP
+  app share lazy resources. The frontend uses real SDK messages, cancellation,
+  idempotent retry, session thread metadata, checkpoint reload and claim-local
+  citations scoped to the selected answer. ADR-0017 and
+  `docs/architecture/agent-runtime.md` document the contracts and limits.
+  Validation: 349 offline Python tests (including 43 agent tests; 13 integration
+  tests deselected), three web citation/message tests, targeted Ruff, TypeScript
+  and production build passed. Local
+  Agent Server `/info` and a stateless greeting run returned 200; the run correctly
+  published unavailable because `OPENROUTER_API_KEY` is blank. Paid/live model
+  quality is unverified. Next: fill the key and restart Agent Server, run reviewed
+  French acceptance/evaluation; add server thread ownership/rate limits before
+  public multi-user deployment. No browser automation was used.
+
+- **Agent model environment setup (2026-10-28).** Added independent `BRH_CHAT_*`
+  and `BRH_DECISION_*` settings, local `.env` entries and `.env.example` defaults:
+  OpenRouter Ministral `mistralai/ministral-8b-2512` for chat and Jev
+  `typesafe/jev-1.14` for decisions. Chat uses `/api/v1`; Jev uses
+  `/api/alpha/decisions` through a separate base URL/path. `OPENROUTER_API_KEY`
+  is a blank shared agent credential, separate from the existing embedding key.
+  Legacy `BRH_LLM_*` values remain intact. Secret redaction now covers every
+  `SecretStr`. Provider clients and agent generation remain unimplemented.
+  Jev supports typed judgments, not free-form plans/query rewriting; corrected
+  the detailed design to assign text generation to chat and typed gates to Jev.
+  Validation: 19 offline config/smoke/path tests and targeted Ruff checks passed;
+  no paid provider calls were made.
+
+- **Two agent model roles selected (2026-10-28).** User chose a chat model and
+  a decision model. Updated the agent plans: chat handles conversational replies,
+  clarification wording, answer drafting and repair; decision handles intent,
+  rewriting, planning, refinement, coverage and semantic review. Greeting fast
+  routes now call the chat model directly while skipping decision/retrieval.
+  Model clients/configuration are separate; code retains budgets, tool execution
+  and citation integrity. Provider/model IDs remain open. Planning only.
+
+- **Adaptive agent graph designed (2026-10-28).** Added
+  `docs/plans/2026-10-28-agent-graph-design.md`. The proposed LangGraph has one
+  coordinator, a high-confidence conversational fast route, structured
+  intent/query planning, deterministic plan validation, dynamic bounded
+  goal-worker fan-out, idempotent result reduction, semantic coverage assessment,
+  missing-goal-only refinement, validated drafting and explicit terminal
+  outcomes. `Hi`, `What's up?`, thanks and farewells bypass planning and retrieval;
+  greeting-prefixed research does not. Direct questions and decomposed research
+  share the same worker path; loops and repairs have hard limits. Clarification
+  ends the current turn normally, and only progress plus the final validated
+  answer is user-visible. Planning only; ADR-0002 still requires amendment before
+  runtime implementation.
+
+- **Agent Phase 1 analyzed (2026-10-28).** Detailed the first live vertical
+  slice in `docs/plans/2026-10-28-agent-phase-1-design.md`: structured intent
+  detection, semantic-preserving query rewriting, direct or decomposed execution
+  based on query complexity, bounded goal workers/refinement, evidence assessment,
+  validated drafting, real LangGraph SDK integration and explicit failure
+  outcomes. Found material gaps in claim-level citation rendering, per-message
+  citation persistence, retrieval-threshold calibration, resource ownership,
+  anonymous thread isolation and graph-run rate limiting. Recommends progress
+  streaming followed by atomic validated answers; this and thread scope remain
+  product decisions. Planning only; no runtime behavior changed.
+
+- **Initial agent design proposed (2026-10-28).** Draft:
+  `docs/plans/2026-10-28-agent-design.md`. Proposes one conversational assistant,
+  bounded research, conditional numerical analysis, explicit evidence review and
+  validated native artifacts. Distinguishes retrieval presence (`grounded` today)
+  from semantic support, and separates the execution graph from corpus evidence
+  relationships. Product priority (research vs analysis) remains open. Reviewed
+  existing code/ADRs and current official LangChain docs. Planning only; no agent
+  runtime or approved architecture decisions changed.
+
+- **Assistant cleanup completed (2026-10-28).** Removed seeded example
+  conversations, example prompt links and local-demo notices from the header,
+  sidebar and loading state. The assistant starts with an empty history and the
+  centered composer. Submission still uses the existing canned-response handler;
+  live agent integration remains pending the role/design work. TypeScript,
+  React review and diff whitespace checks passed. No browser automation used.
 
 - **UI delivery (2026-10-28).** Collected the completed graph workspace and
   centered assistant changes for commit and push to main. Existing artifact,

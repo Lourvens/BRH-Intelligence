@@ -3,30 +3,6 @@ import remarkGfm from "remark-gfm";
 
 import type { ChatCitation } from "@/lib/chat/types";
 
-function CitationMarks({
-  citations,
-  onSelectCitation,
-}: {
-  citations: ChatCitation[];
-  onSelectCitation: (citationId: string) => void;
-}) {
-  return (
-    <span className="ml-1 inline-flex gap-0.5 align-super">
-      {citations.map((citation, index) => (
-        <button
-          key={citation.id}
-          type="button"
-          onClick={() => onSelectCitation(citation.id)}
-          aria-label={`Voir la source ${index + 1}`}
-          className="font-mono text-caption font-bold rounded-sm bg-gold px-1 py-0.5 text-navy-deep hover:underline"
-        >
-          [{index + 1}]
-        </button>
-      ))}
-    </span>
-  );
-}
-
 export function MessageContent({
   content,
   citations,
@@ -36,8 +12,6 @@ export function MessageContent({
   citations?: ChatCitation[];
   onSelectCitation: (citationId: string) => void;
 }) {
-  let citationInserted = false;
-
   const components: Components = {
     h1: ({ children }) => (
       <h2 className="mt-6 font-reading text-title font-bold leading-tight text-navy-ink first:mt-0">
@@ -54,22 +28,11 @@ export function MessageContent({
         {children}
       </h4>
     ),
-    p: ({ children }) => {
-      const showCitations = !citationInserted && citations?.length;
-      if (showCitations) citationInserted = true;
-
-      return (
-        <p className="text-[15px] leading-[1.72] text-ink sm:text-body sm:leading-[1.72]">
-          {children}
-          {showCitations ? (
-            <CitationMarks
-              citations={citations ?? []}
-              onSelectCitation={onSelectCitation}
-            />
-          ) : null}
-        </p>
-      );
-    },
+    p: ({ children }) => (
+      <p className="text-[15px] leading-[1.72] text-ink sm:text-body sm:leading-[1.72]">
+        {children}
+      </p>
+    ),
     strong: ({ children }) => (
       <strong className="font-semibold text-navy-ink">
         {children}
@@ -94,16 +57,33 @@ export function MessageContent({
       </ol>
     ),
     li: ({ children }) => <li className="pl-0.5">{children}</li>,
-    a: ({ children, href }) => (
-      <a
-        href={href}
-        target={href?.startsWith("http") ? "_blank" : undefined}
-        rel={href?.startsWith("http") ? "noreferrer" : undefined}
-        className="font-medium text-teal underline decoration-azure/40 underline-offset-2 hover:decoration-azure"
-      >
-        {children}
-      </a>
-    ),
+    a: ({ children, href }) => {
+      const marker = href?.match(/^#brh-source-(\d+)$/);
+      if (marker) {
+        const citation = citations?.[Number(marker[1]) - 1];
+        if (!citation) return <span>{children}</span>;
+        return (
+          <button
+            type="button"
+            onClick={() => onSelectCitation(citation.id)}
+            aria-label={`Voir la source ${marker[1]} : ${citation.title}, page ${citation.page}`}
+            className="mx-0.5 rounded-sm bg-gold px-1 py-0.5 align-super font-mono text-caption font-bold text-navy-deep hover:underline focus-visible:outline-2 focus-visible:outline-azure"
+          >
+            [{marker[1]}]
+          </button>
+        );
+      }
+      return (
+        <a
+          href={href}
+          target={href?.startsWith("http") ? "_blank" : undefined}
+          rel={href?.startsWith("http") ? "noreferrer" : undefined}
+          className="font-medium text-teal underline decoration-azure/40 underline-offset-2 hover:decoration-azure"
+        >
+          {children}
+        </a>
+      );
+    },
     code: ({ children }) => (
       <code className="rounded bg-surface-alt px-1 py-0.5 font-mono text-[0.85em] text-navy-ink">
         {children}

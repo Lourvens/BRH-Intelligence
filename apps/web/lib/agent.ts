@@ -9,6 +9,7 @@
  */
 
 import { useStream } from "@langchain/langgraph-sdk/react";
+import type { Message } from "@langchain/langgraph-sdk";
 
 import type { ChatCitation } from "@/lib/chat/types";
 
@@ -26,7 +27,9 @@ export type Citation = {
 
 /** The graph state, mirroring `brh_agent.state.AgentState`. */
 export type AgentState = {
-  messages: unknown[];
+  messages: Message[];
+  phase?: string;
+  kind?: string;
   question?: string;
   grounded?: boolean;
   citations?: Citation[];
@@ -39,19 +42,23 @@ export const ASSISTANT_ID =
   process.env.NEXT_PUBLIC_LANGGRAPH_ASSISTANT_ID ?? "agent";
 
 /**
- * The real LangGraph stream. It is intentionally not used by the demo landing
- * page yet: the graph nodes are still scaffolds. This hook is the boundary the
- * chat shell will use once the server returns answers.
+ * Single stream boundary used by the assistant workspace.
  */
 export function useAgent(options: {
   threadId?: string | null;
   onThreadId?: (threadId: string) => void;
+  onCustomEvent?: (data: unknown) => void;
+  onFinish?: () => void;
+  onError?: () => void;
 } = {}) {
-  return useStream({
+  return useStream<AgentState>({
     assistantId: ASSISTANT_ID,
     apiUrl: API_URL,
     threadId: options.threadId,
     onThreadId: options.onThreadId,
+    onCustomEvent: options.onCustomEvent,
+    onFinish: options.onFinish,
+    onError: options.onError,
     fetchStateHistory: { limit: 20 },
   });
 }

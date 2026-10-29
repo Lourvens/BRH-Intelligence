@@ -1,46 +1,61 @@
 "use client";
 
-import { Loader2, Search } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ACTIVITY_LABELS, type AgentActivity as Activity } from "@/lib/chat/agent-activity";
+import { feedbackTransition } from "@/lib/motion";
 import { useChatScroll } from "@/lib/hooks/use-chat-scroll";
-import type { ChatThread, SuggestedQuestion } from "@/lib/chat/types";
+import type { ChatThread } from "@/lib/chat/types";
 import { cn } from "@/lib/utils";
 import { ChatComposer } from "./chat-composer";
 import { EmptyState } from "./empty-state";
-import { ExampleLinks } from "./example-links";
 import { Message } from "./message";
 import { WorkspaceHeader } from "./workspace-header";
+import { AgentActivity } from "./agent-activity";
 
 export function ChatPanel({
   thread,
-  suggestions,
   isThinking,
   selectedCitationId,
-  onSelectSuggestion,
   onSelectCitation,
   onSubmit,
   onStop,
   sourceCount,
   onOpenSources,
+  activities,
+  runStatus,
+  isRestoring,
+  isStopping,
+  error,
+  onRetry,
 }: {
   thread: ChatThread | null;
-  suggestions: readonly SuggestedQuestion[];
   isThinking: boolean;
   selectedCitationId: string | null;
-  onSelectSuggestion: (threadId: string) => void;
-  onSelectCitation: (citationId: string) => void;
+  onSelectCitation: (citationId: string, messageId?: string) => void;
   onSubmit: (question: string) => void;
   onStop: () => void;
   sourceCount: number;
   onOpenSources: () => void;
+  activities: Activity[];
+  runStatus: "idle" | "running" | "stopped" | "error";
+  isRestoring: boolean;
+  isStopping: boolean;
+  error: boolean;
+  onRetry: () => void;
 }) {
   const reduceMotion = useReducedMotion();
-  const isEmpty = !thread && !isThinking;
+  const isEmpty = !thread && !isThinking && !isRestoring;
+  const currentActivity = activities.findLast((item) => item.status === "running") ?? activities.at(-1);
+  const announcement = isRestoring ? "Chargement de la conversation…" :
+    isStopping ? "Arrêt du traitement…" : runStatus === "stopped" ? "Traitement interrompu." :
+    isThinking ? currentActivity ? ACTIVITY_LABELS[currentActivity.stage] : "Demande envoyée à l’assistant." : "";
   const { scrollRef, handleScroll, followMessages } = useChatScroll(
     thread?.id,
     thread?.messages.length ?? 0,
     isThinking,
     reduceMotion,
+    activities.length + activities.filter((item) => item.status !== "running").length,
   );
 
   return (
@@ -53,6 +68,7 @@ export function ChatPanel({
         sourceCount={sourceCount}
         onOpenSources={onOpenSources}
       />
+      <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">{announcement}</p>
       <div
         className={cn(
           "flex min-h-0 flex-1 flex-col",
@@ -85,31 +101,24 @@ export function ChatPanel({
                       key={message.id}
                       message={message}
                       selectedCitationId={selectedCitationId}
-                      onSelectCitation={onSelectCitation}
+                      onSelectCitation={(id) => onSelectCitation(id, message.id)}
                     />
                   ))}
-                  {isThinking ? (
-                    <div
-                      role="status"
-                      aria-live="polite"
-                      className="flex items-start gap-3 border-t border-border py-5"
-                    >
-                      <Search
-                        className="mt-0.5 size-5 shrink-0 text-navy-ink"
-                        aria-hidden
-                      />
-                      <div>
-                        <p className="flex items-center gap-2 text-small font-medium text-navy-ink">
-                          <Loader2
-                            className="size-4 motion-safe:animate-spin"
-                            aria-hidden
-                          />{" "}
-                          Préparation de la réponse…
-                        </p>
-                        <p className="mt-1 text-caption text-ink-muted">
-                          Mode démonstration · réponse préenregistrée.
-                        </p>
-                      </div>
+                  {isRestoring && <p className="py-4 text-small text-ink-muted">Chargement de la conversation…</p>}
+                  <AnimatePresence initial={false}>
+                    {(isThinking || runStatus === "stopped" || runStatus === "error") && (
+                      <motion.div key="activity" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={feedbackTransition}>
+                        <AgentActivity activities={activities} stopped={runStatus === "stopped" || runStatus === "error"} isStopping={isStopping} failed={runStatus === "error"} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  {error && !isThinking ? (
+                    <div role="alert" className="border-t border-border py-4 text-small text-ink">
+                      Impossible de joindre l’assistant. Vérifiez la connexion et réessayez.
+                      <Button type="button" variant="link" onClick={onRetry}
+                        className="ml-2 min-h-11 text-azure">
+                        Réessayer
+                      </Button>
                     </div>
                   ) : null}
                 </motion.div>
@@ -119,18 +128,14 @@ export function ChatPanel({
         </div>
         <ChatComposer
           isThinking={isThinking}
+          isRestoring={isRestoring}
+          isStopping={isStopping}
           onSubmit={(question) => {
             followMessages();
             onSubmit(question);
           }}
           onStop={onStop}
         />
-        {isEmpty && (
-          <ExampleLinks
-            suggestions={suggestions}
-            onSelect={onSelectSuggestion}
-          />
-        )}
         {isEmpty && <div aria-hidden className="flex-1" />}
       </div>
     </section>

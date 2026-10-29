@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useState, type ChangeEvent } from "react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   SidebarContent,
@@ -178,15 +177,6 @@ export function ConversationSidebar({
         )}
       >
         <SidebarMenuButton asChild tooltip="Explorer le corpus"><Link href="/brh-corpus"><Search className="size-4" aria-hidden />{!collapsed ? <span>Explorer le corpus</span> : null}</Link></SidebarMenuButton>
-        {!collapsed ? (
-          <Badge
-            variant="outline"
-            className="w-full justify-start gap-2 rounded-sm border-transparent bg-surface-alt px-2.5 py-2 text-caption font-normal text-ink-muted"
-          >
-            <span className="size-1.5 rounded-full bg-ink-muted" />
-            Mode démonstration · réponses préenregistrées
-          </Badge>
-        ) : null}
         <ThemeToggle
           withLabel={!collapsed}
           className={cn("rounded-sm text-caption shadow-none active:scale-100", collapsed && "mx-auto")}
