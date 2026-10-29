@@ -1,11 +1,24 @@
 # Progression
 
-Last updated: 2026-10-29 (Arize content capture verified; agent/UI commit prepared)
+Last updated: 2026-10-29 (agent implementation removed for restart)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Agent reset started (2026-10-29).** Removed the LangGraph agent implementation,
+  its local behavior evaluations and agent-specific tests. The corpus HTTP app
+  remains available independently through `make corpus-dev`. The assistant UI
+  has no agent backend until a replacement is built. The running agent was stopped.
+  Arize traces and remote evaluation datasets have not yet been deleted; prior
+  agent-design entries below are historical and no longer describe the runtime.
+
+- **Delegated trace audit in progress (2026-10-29).** A senior AI-engineering
+  reviewer is reading recent Arize traces and matching observed behavior to
+  implementation and evaluation contracts. Deliverable: an evidence-backed
+  analysis and prioritized measurable improvement requirements. The audit is
+  read-only against runtime/Arize; no new model runs or product changes.
 
 - **Arize content capture fixed and verified (2026-10-29).** The prior
   `REDACTED` values were the intentional ADR-0018 policy, not failed delivery.
@@ -614,9 +627,12 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
     alternatives. The next experiment is by content family against
     `multilingual-e5-large`, not BM25.
 
-- **OCR extraction is in progress across three runners (2026-10-20).** The
-  catalogue is 1 169 PDFs; **778 are extracted** (66,6 %), 391 remain
-  (11 761 pages, 29,7 M characters, 889 figures). The checkout is the whole
+- **OCR extraction is in progress (2026-10-29).** The catalogue is **1 171
+  URLs** (744 downloaded, 81 pending, 337 failed, 1 gone; newest entry
+  2026-10-29); **1 065 are extracted** (91,0 %), 106 remain
+  (15 135 pages, 37,0 M characters, 1 464 figures). 77 of the 81 pending URLs
+  are 2026 publications — the corpus grew while it was being extracted, which is
+  why the denominator is the catalogue and not the day-one count. The checkout is the whole
   corpus: the Modal volume was pulled with `modal volume get brh-ocr /ocr` and
   merged, so 173 documents that existed only on the volume are now committed.
   Kaggle v10 delivered 80 new documents, v11 79, v12 79, v13 76 and v14 74.
