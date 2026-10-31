@@ -1,0 +1,14 @@
+{
+ "sha256": "5e6fb32e5d8ecd06d0229a9848c7d4239942cfcf02d9a9992aaecbb0b0e37a27",
+ "batch": "20261031T082814Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/5e6fb32e5d8ecd06d0229a9848c7d4239942cfcf02d9a9992aaecbb0b0e37a27.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/TMA-25-26.pdf",
+ "title": "TMA-25-26",
+ "pages": 4,
+ "chars": 19800,
+ "figures": 0,
+ "seconds": 200.6,
+ "finished_at": "2026-10-31T08:31:35+00:00"
+}

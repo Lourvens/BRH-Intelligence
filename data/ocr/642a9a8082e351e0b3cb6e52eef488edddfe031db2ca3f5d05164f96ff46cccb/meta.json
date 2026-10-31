@@ -1,0 +1,14 @@
+{
+ "sha256": "642a9a8082e351e0b3cb6e52eef488edddfe031db2ca3f5d05164f96ff46cccb",
+ "batch": "20261031T083247Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs2/642a9a8082e351e0b3cb6e52eef488edddfe031db2ca3f5d05164f96ff46cccb.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Presentation-DREF-BRH_Transferts_et_TPS_Mercredi-de-la-BID_23-09-2026.pdf",
+ "title": "Presentation DREF-BRH_Transferts_et_TPS_Mercredi de la BID_23 09 2026",
+ "pages": 38,
+ "chars": 32631,
+ "figures": 3,
+ "seconds": 478.8,
+ "finished_at": "2026-10-31T08:40:46+00:00"
+}

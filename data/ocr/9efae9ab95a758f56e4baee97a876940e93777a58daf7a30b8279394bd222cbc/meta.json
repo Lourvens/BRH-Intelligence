@@ -1,0 +1,14 @@
+{
+ "sha256": "9efae9ab95a758f56e4baee97a876940e93777a58daf7a30b8279394bd222cbc",
+ "batch": "20261031T083030Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs2/9efae9ab95a758f56e4baee97a876940e93777a58daf7a30b8279394bd222cbc.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Organigramme-BRH-Version-Aout-2026-2.pdf",
+ "title": "Organigramme-BRH-Version-Août 2026-2",
+ "pages": 1,
+ "chars": 3872,
+ "figures": 0,
+ "seconds": 71.6,
+ "finished_at": "2026-10-31T08:31:42+00:00"
+}

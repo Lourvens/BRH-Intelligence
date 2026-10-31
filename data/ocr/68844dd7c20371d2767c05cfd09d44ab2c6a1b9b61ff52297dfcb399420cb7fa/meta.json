@@ -1,0 +1,14 @@
+{
+ "sha256": "68844dd7c20371d2767c05cfd09d44ab2c6a1b9b61ff52297dfcb399420cb7fa",
+ "batch": "20261031T083439Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/68844dd7c20371d2767c05cfd09d44ab2c6a1b9b61ff52297dfcb399420cb7fa.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/resultatssoumissions.pdf",
+ "title": "resultatssoumissions",
+ "pages": 3,
+ "chars": 2668,
+ "figures": 2,
+ "seconds": 49.5,
+ "finished_at": "2026-10-31T08:35:29+00:00"
+}

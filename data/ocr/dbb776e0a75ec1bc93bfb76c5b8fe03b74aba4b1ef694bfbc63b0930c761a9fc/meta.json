@@ -1,0 +1,14 @@
+{
+ "sha256": "dbb776e0a75ec1bc93bfb76c5b8fe03b74aba4b1ef694bfbc63b0930c761a9fc",
+ "batch": "20261031T083144Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs2/dbb776e0a75ec1bc93bfb76c5b8fe03b74aba4b1ef694bfbc63b0930c761a9fc.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/CAMEL_SFD_FDI_SOFIHDES_2023-2024_corrige2.xlsx-Read-Only.pdf",
+ "title": "CAMEL_SFD_FDI_SOFIHDES_2023-2024_corrigé2.xlsx [Read-Only]",
+ "pages": 1,
+ "chars": 3863,
+ "figures": 0,
+ "seconds": 61.9,
+ "finished_at": "2026-10-31T08:32:45+00:00"
+}

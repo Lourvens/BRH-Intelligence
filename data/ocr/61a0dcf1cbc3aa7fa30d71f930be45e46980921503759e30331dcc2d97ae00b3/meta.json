@@ -1,0 +1,14 @@
+{
+ "sha256": "61a0dcf1cbc3aa7fa30d71f930be45e46980921503759e30331dcc2d97ae00b3",
+ "batch": "20261031T082945Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs2/61a0dcf1cbc3aa7fa30d71f930be45e46980921503759e30331dcc2d97ae00b3.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/PROCEDURE-DE-DEMANDE-ET-DE-DELIVRANCE-DE-CERTIFICAT.pdf",
+ "title": "PROCEDURE DE DEMANDE ET DE DELIVRANCE DE CERTIFICAT",
+ "pages": 2,
+ "chars": 2112,
+ "figures": 0,
+ "seconds": 42.7,
+ "finished_at": "2026-10-31T08:30:28+00:00"
+}

@@ -1,0 +1,14 @@
+{
+ "sha256": "64aa01c71cd6576ea32c865e4170116decdfe2981cd00af898514e10b242c3d6",
+ "batch": "20261031T095532Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs3/64aa01c71cd6576ea32c865e4170116decdfe2981cd00af898514e10b242c3d6.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/avis-au-public-19-octobre-2026.pdf",
+ "title": "avis au public &#8211; 19 octobre 2026",
+ "pages": 1,
+ "chars": 1935,
+ "figures": 0,
+ "seconds": 33.4,
+ "finished_at": "2026-10-31T09:56:05+00:00"
+}

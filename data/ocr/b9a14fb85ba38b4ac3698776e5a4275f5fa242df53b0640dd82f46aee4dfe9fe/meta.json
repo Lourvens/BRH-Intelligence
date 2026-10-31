@@ -1,0 +1,14 @@
+{
+ "sha256": "b9a14fb85ba38b4ac3698776e5a4275f5fa242df53b0640dd82f46aee4dfe9fe",
+ "batch": "20261031T083137Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs1/b9a14fb85ba38b4ac3698776e5a4275f5fa242df53b0640dd82f46aee4dfe9fe.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/NOTE-MENSUELLE-DINFLATION-DU-MOIS-DAOUT-2026.pdf",
+ "title": "NOTE MENSUELLE D&#8217;INFLATION DU MOIS D&#8217;AOU?T 2026",
+ "pages": 10,
+ "chars": 15584,
+ "figures": 2,
+ "seconds": 180.4,
+ "finished_at": "2026-10-31T08:34:37+00:00"
+}
