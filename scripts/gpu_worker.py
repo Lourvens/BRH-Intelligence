@@ -34,6 +34,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--runner", default="kaggle")
     parser.add_argument("--timeout", type=int, default=2400, help="seconds per document")
     parser.add_argument("--skip-shas", default=Path("data/ocr/done_shas.txt"), type=Path)
+    parser.add_argument("--slice", default="0/1",
+                        help="I/N: this worker takes rows I, I+N, I+2N... of the manifest.")
     args = parser.parse_args(argv)
 
     rows = []
@@ -45,6 +47,12 @@ def main(argv: list[str] | None = None) -> int:
         )
     seen: set[str] = set()
     rows = [row for row in rows if not (row["sha256"] in seen or seen.add(row["sha256"]))]
+
+    # Splitting at processing time, not in the URL file: with a short queue the
+    # filesystem shards are tiny, and each GPU ends up with a handful of
+    # documents while the other idles.
+    index, total = (int(part) for part in args.slice.split("/", 1))
+    rows = rows[index::total]
     claims = Claims(runner=args.runner)
     print(
         f"{len(rows)} document(s), claims {'on' if claims.enabled else 'off'}",
