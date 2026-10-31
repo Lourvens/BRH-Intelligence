@@ -32,7 +32,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="One or more manifests; each is processed in order.")
     parser.add_argument("--out", required=True, type=Path)
     parser.add_argument("--runner", default="kaggle")
-    parser.add_argument("--timeout", type=int, default=2400, help="seconds per document")
+    parser.add_argument("--timeout", type=int, default=5400, help="seconds per document")
     parser.add_argument("--skip-shas", default=Path("data/ocr/done_shas.txt"), type=Path)
     parser.add_argument("--slice", default="0/1",
                         help="I/N: this worker takes rows I, I+N, I+2N... of the manifest.")
