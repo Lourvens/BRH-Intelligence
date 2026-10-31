@@ -1,0 +1,14 @@
+{
+ "sha256": "32fa479be46f7bc3c30f553a85b645d2a3989c36035db2d63db3fff44817ee91",
+ "batch": "20261031T223404Z",
+ "engine": "paddleocr-vl",
+ "engine_version": "3.7.0",
+ "source": "/kaggle/working/pdfs0/32fa479be46f7bc3c30f553a85b645d2a3989c36035db2d63db3fff44817ee91.pdf",
+ "source_url": "https://www.brh.ht/wp-content/uploads/Rapport_ENR.pdf",
+ "title": "Rapport_ENR",
+ "pages": 141,
+ "chars": 390321,
+ "figures": 3,
+ "seconds": 3402.3,
+ "finished_at": "2026-10-31T23:30:46+00:00"
+}
