@@ -29,19 +29,14 @@ export default async function EntitiesPage({
     <>
       <div className="atlas-page">
         <header className="atlas-page-intro">
-          <p className="atlas-kicker">LES ACTEURS ET LES IDÉES</p>
-          <h1>
-            Donner un visage
-            <br />
-            <span>aux connaissances.</span>
-          </h1>
+          <h1>Répertoire des entités</h1>
           <p>
             Institutions, personnes, lieux et indicateurs : retrouvez ce qui
             traverse les publications.
           </p>
         </header>
         <section className="atlas-discovery">
-          <h2 className="mb-6 font-display text-xl font-semibold">
+          <h2 className="sr-only">
             Répertoire des entités
           </h2>
           <CorpusSearchForm

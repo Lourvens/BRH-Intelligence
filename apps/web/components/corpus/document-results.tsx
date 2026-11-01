@@ -67,7 +67,7 @@ export function DocumentResults({
               ? "Sélection sémantique limitée"
               : query.q
                 ? `Résultats pour « ${query.q} »`
-                : "Le corpus, à votre rythme"}
+                : "Ouvrez une publication pour commencer la lecture"}
           </span>
         </p>
         <div
@@ -187,7 +187,7 @@ export function DocumentResults({
       )}
       {pages > 1 && (
         <nav aria-label="Pagination du corpus" className="atlas-pagination">
-          <Button asChild variant="outline" disabled={documents.page <= 1}>
+          {documents.page > 1 ? <Button asChild variant="outline">
             <Link
               aria-disabled={documents.page <= 1}
               tabIndex={documents.page <= 1 ? -1 : undefined}
@@ -198,11 +198,11 @@ export function DocumentResults({
               <ArrowLeft size={16} />
               <span className="hidden sm:inline">Précédente</span>
             </Link>
-          </Button>
+          </Button> : <Button variant="outline" disabled aria-label="Page précédente"><ArrowLeft size={16} aria-hidden /></Button>}
           <span>
             Page <strong>{documents.page}</strong> sur {pages}
           </span>
-          <Button asChild variant="outline" disabled={documents.page >= pages}>
+          {documents.page < pages ? <Button asChild variant="outline">
             <Link
               aria-disabled={documents.page >= pages}
               tabIndex={documents.page >= pages ? -1 : undefined}
@@ -213,7 +213,7 @@ export function DocumentResults({
               <span className="hidden sm:inline">Suivante</span>
               <ArrowRight size={16} />
             </Link>
-          </Button>
+          </Button> : <Button variant="outline" disabled aria-label="Page suivante"><ArrowRight size={16} aria-hidden /></Button>}
         </nav>
       )}
     </div>

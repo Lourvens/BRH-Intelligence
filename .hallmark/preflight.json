@@ -1,0 +1,14 @@
+{
+  "scope": "app",
+  "target": "corpus workspace, including document reader",
+  "date": "2026-11-01",
+  "direction": "modern-minimal research workspace",
+  "brand": "kept",
+  "sources": ["apps/web/app/globals.css:1", "apps/web/app/research.css:1", "apps/web/app/graph-workspace.css:1", "apps/web/package.json:1"],
+  "preserved": ["existing brand tokens and fonts", "light and dark themes", "corpus data and routes", "assistant access", "search return context"],
+  "introduced": ["compact responsive header", "search-first catalogue", "continuous five-page reader", "page-specific citations and loading recovery"],
+  "inferredAudience": "Researchers reading and checking BRH publications",
+  "primaryAction": "Find a publication and read its evidence",
+  "renderCheck": "Not performed: prior user instruction disallows browser tools",
+  "review": "In-thread source review; no claim of visual verification"
+}

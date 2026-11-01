@@ -3,6 +3,7 @@
 @import "./research.css";
 @import "./graph-workspace.css";
 @import "./landing.css";
+@import "./corpus-workspace.css";
 @custom-variant dark (&:is(.dark *));
 
 /*

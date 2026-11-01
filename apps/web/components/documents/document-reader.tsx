@@ -24,16 +24,17 @@ import {
 import { dateLabel, familyLabels } from "@/lib/corpus/labels";
 import type { DocumentPage, ResearchDocument } from "@/lib/corpus/types";
 import { CopyReference } from "./copy-reference";
-import { MarkdownPage } from "./markdown-page";
+import { ContinuousPages } from "./continuous-pages";
 import { Reveal } from "@/components/corpus/reveal";
 export function DocumentReader({
   document,
-  content,
+  content: initialContent,
 }: {
   document: ResearchDocument;
   content: DocumentPage;
 }) {
   const router = useRouter();
+  const [content, setContent] = useState(initialContent);
   const [notes, setNotes] = useState(true);
   const [returnLabel, setReturnLabel] = useState("Retour aux documents");
   useEffect(() => {
@@ -139,7 +140,8 @@ export function DocumentReader({
               sessionStorage.setItem("brh-research-restore", saved);
               // A full graph navigation retains native-history selection parameters
               // that Next's cached static graph route can otherwise discard.
-              if (saved.startsWith("/brh-corpus/graph")) window.location.assign(saved);
+              if (saved.startsWith("/brh-corpus/graph"))
+                window.location.assign(saved);
               else router.push(saved, { scroll: false });
               return;
             }
@@ -154,7 +156,7 @@ export function DocumentReader({
       </button>
       <Reveal>
         <p className="atlas-kicker mb-3">
-          {familyLabels[document.family] ?? document.family} · LECTURE
+          {familyLabels[document.family] ?? document.family}
         </p>
         <h1 className="atlas-reading-title">{document.title}</h1>
       </Reveal>
@@ -166,8 +168,8 @@ export function DocumentReader({
         </span>
         <div className="flex items-center gap-2">
           <form method="get" className="flex items-center gap-2">
-            <label htmlFor="reader-page" className="sr-only">
-              Aller à la page
+            <label htmlFor="reader-page" className="corpus-jump-label">
+              Page
             </label>
             <input
               id="reader-page"
@@ -175,6 +177,7 @@ export function DocumentReader({
               type="number"
               min={1}
               max={content.page_count}
+              key={page}
               defaultValue={page}
               className="h-11 w-16 rounded-xl border border-border bg-bg px-2 text-small"
             />
@@ -184,7 +187,7 @@ export function DocumentReader({
           </form>
           <button
             type="button"
-            className="hidden min-h-11 items-center gap-2 rounded-xl px-3 text-small xl:flex"
+            className="hidden min-h-11 items-center gap-2 rounded-xl px-3 text-small lg:flex"
             aria-expanded={notes}
             onClick={() => setNotes(!notes)}
           >
@@ -196,7 +199,7 @@ export function DocumentReader({
             <SheetTrigger asChild>
               <Button
                 variant="outline"
-                className="h-11 rounded-xl xl:hidden"
+                className="h-11 rounded-xl lg:hidden"
                 aria-label="Informations et actions du document"
               >
                 <Info size={17} />
@@ -219,52 +222,39 @@ export function DocumentReader({
         style={!notes ? { gridTemplateColumns: "minmax(0,1fr)" } : undefined}
       >
         <div className="min-w-0">
-          <Reveal key={`${document.document_id}:${page}`}>
-            <section
-              className="atlas-reading-paper"
-              aria-label={`Transcription, page ${page}`}
-            >
-              <div className="mb-9 flex items-center gap-3 border-b border-border pb-5 text-caption text-ink-muted">
-                <span className="rounded-full bg-surface-alt px-3 py-1 text-teal">
-                  Transcription OCR
-                </span>
-                <span>Vérifiez les valeurs dans l’original.</span>
-              </div>
-              <MarkdownPage
-                markdown={content.markdown}
-                slug={document.slug}
-                publicationId={content.publication_id}
-              />
-              <p className="mt-12 border-t border-border pt-6 text-center text-caption text-ink-muted">
-                Fin de la page {page}
-              </p>
-            </section>
-          </Reveal>
-          <nav aria-label="Pages du document" className="atlas-reader-bottom">
-            {page > 1 ? (
-              <Button asChild variant="outline">
-                <Link href={`?page=${page - 1}`}>
-                  <ArrowLeft size={16} />
-                  Précédente
-                </Link>
-              </Button>
-            ) : (
-              <span />
-            )}
-            <span className="text-caption text-ink-muted">
-              {page} / {content.page_count}
-            </span>
-            {page < content.page_count ? (
-              <Button asChild>
-                <Link href={`?page=${page + 1}`}>
-                  Suivante
-                  <ArrowRight size={16} />
-                </Link>
-              </Button>
-            ) : (
-              <span />
-            )}
-          </nav>
+          <ContinuousPages
+            initial={initialContent}
+            slug={document.slug}
+            onActive={setContent}
+          />
+          <details className="corpus-single-page-fallback">
+            <summary>Navigation page par page</summary>
+            <nav aria-label="Pages du document" className="atlas-reader-bottom">
+              {page > 1 ? (
+                <Button asChild variant="outline">
+                  <Link href={`?page=${page - 1}`}>
+                    <ArrowLeft size={16} />
+                    Précédente
+                  </Link>
+                </Button>
+              ) : (
+                <span />
+              )}
+              <span className="text-caption text-ink-muted">
+                {page} / {content.page_count}
+              </span>
+              {page < content.page_count ? (
+                <Button asChild>
+                  <Link href={`?page=${page + 1}`}>
+                    Suivante
+                    <ArrowRight size={16} />
+                  </Link>
+                </Button>
+              ) : (
+                <span />
+              )}
+            </nav>
+          </details>
         </div>
         {notes && (
           <aside

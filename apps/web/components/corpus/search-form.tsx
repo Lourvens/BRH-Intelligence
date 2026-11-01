@@ -192,7 +192,7 @@ export function CorpusSearchForm({
                 Filtres
                 {[filters.family, filters.year, filters.kind].filter(
                   (v) => v && v !== "all",
-                ).length > 0 && <span className="atlas-filter-dot" />}
+                ).length > 0 && <span aria-label="Filtres actifs">{[filters.family, filters.year, filters.kind].filter(v => v && v !== "all").length}</span>}
               </Button>
             </SheetTrigger>
             <SheetContent
@@ -247,7 +247,7 @@ export function CorpusSearchForm({
             >
               <SelectTrigger
                 aria-label="Trier les publications"
-                className="hidden h-11 w-44 rounded-xl sm:flex"
+                className="flex h-11 w-40 rounded-lg"
               >
                 <SelectValue>
                   {

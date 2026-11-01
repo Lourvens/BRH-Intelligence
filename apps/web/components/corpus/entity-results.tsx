@@ -27,9 +27,6 @@ export function EntityResults({
                 href={`/brh-corpus/entities/${e.entity_id}`}
                 className="atlas-entity-card"
               >
-                <span className="atlas-entity-icon">
-                  <Shapes size={23} />
-                </span>
                 <span className="atlas-kicker">
                   {entityLabels[e.kind] ?? e.kind}
                 </span>
@@ -38,7 +35,7 @@ export function EntityResults({
                   <ArrowUpRight size={18} />
                 </h3>
                 <p>
-                  {e.document_count} documents · {e.mention_count} mentions
+                  {e.document_count} documents, {e.mention_count} mentions
                 </p>
                 <span className="text-caption text-ink-muted">
                   Consulter les passages sources

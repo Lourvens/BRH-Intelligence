@@ -1,5 +1,4 @@
 "use client";
-import { motion } from "framer-motion";
 export function Reveal({
   children,
   className = "",
@@ -8,13 +7,8 @@ export function Reveal({
   className?: string;
 }) {
   return (
-    <motion.div
-      initial={false}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.24 }}
-      className={`atlas-reveal ${className}`}
-    >
+    <div className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }

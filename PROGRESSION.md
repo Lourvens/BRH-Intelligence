@@ -1,11 +1,13 @@
 # Progression
 
-Last updated: 2026-10-31 (landing hero theme refinement)
+Last updated: 2026-11-01 (responsive corpus workspace)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Responsive corpus rebuild (2026-11-01).** Installed Nutlope/Hallmark for Codex. Rebuilt the shared header, search-first catalogue, entity layout, graph viewport and document reader with scoped brand-preserving styles. Phones use menu/filter sheets and full-width reading. Reader loads an initial five-page window, then batches of five with automatic/manual loading, per-page citations, version checks, cancellation and prepend anchoring. See ADR 0025. Typecheck, production build and five focused batch tests pass. Hallmark static lint reports no findings for the new stylesheet and continuous reader; browser checks are intentionally not run under the prior no-browser-tools preference.
 
 - **Landing hero theme refinement (2026-10-31).** Analysed the theme from
   `globals.css`, `landing.css` and git history (no browser). The dark hero was

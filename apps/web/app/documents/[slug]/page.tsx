@@ -30,6 +30,6 @@ export default async function ReaderPage({ params, searchParams }: {
   }
   if (status === 404) notFound();
   return <div className="min-h-dvh bg-bg text-ink"><ResearchHeader /><main id="contenu">
-    {data ? <DocumentReader {...data} /> : <div className="px-5 py-16"><CorpusUnavailable document status={status} invalid={status === 400} /></div>}
+    {data ? <DocumentReader key={`${slug}:${page}`} {...data} /> : <div className="px-5 py-16"><CorpusUnavailable document status={status} invalid={status === 400} /></div>}
   </main></div>;
 }

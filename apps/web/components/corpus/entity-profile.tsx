@@ -44,7 +44,7 @@ export function EntityProfile({
             </div>
             {entity.aliases.length > 0 && (
               <p className="mt-4 text-caption text-ink-muted">
-                Aussi rencontré sous : {entity.aliases.join(" · ")}
+                Aussi rencontré sous : {entity.aliases.join(", ")}
               </p>
             )}
           </div>
@@ -61,7 +61,6 @@ export function EntityProfile({
         <section className="atlas-discovery">
           <div className="atlas-section-heading">
             <div>
-              <p className="atlas-kicker">DANS LES TEXTES</p>
               <h2>Les passages sources</h2>
             </div>
           </div>
@@ -95,7 +94,6 @@ export function EntityProfile({
         </section>
         <section className="min-w-0">
           <div className="atlas-discovery">
-            <p className="atlas-kicker mb-3">LES CONNEXIONS</p>
             <h2 className="mb-5 font-display text-xl font-semibold">
               Autour de cette entité
             </h2>
