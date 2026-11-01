@@ -1,5 +1,6 @@
 "use client";
 import { useState, useTransition } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
   Search,
@@ -7,6 +8,8 @@ import {
   X,
   ArrowRight,
   LoaderCircle,
+  PanelLeftClose,
+  PanelLeftOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -187,12 +190,23 @@ export function CorpusSearchForm({
             }}
           >
             <SheetTrigger asChild>
-              <Button variant="outline" className="h-11 rounded-xl">
+              <Button
+                variant="outline"
+                className="corpus-filter-sheet-trigger h-11 rounded-xl"
+              >
                 <SlidersHorizontal size={16} />
                 Filtres
                 {[filters.family, filters.year, filters.kind].filter(
                   (v) => v && v !== "all",
-                ).length > 0 && <span aria-label="Filtres actifs">{[filters.family, filters.year, filters.kind].filter(v => v && v !== "all").length}</span>}
+                ).length > 0 && (
+                  <span aria-label="Filtres actifs">
+                    {
+                      [filters.family, filters.year, filters.kind].filter(
+                        (v) => v && v !== "all",
+                      ).length
+                    }
+                  </span>
+                )}
               </Button>
             </SheetTrigger>
             <SheetContent
@@ -252,7 +266,7 @@ export function CorpusSearchForm({
                 <SelectValue>
                   {
                     {
-                      title: "Titre A–Z",
+                      title: "Titre A à Z",
                       period: "Période récente",
                       recent: "Ajouts récents",
                     }[filters.sort || "title"]
@@ -260,7 +274,7 @@ export function CorpusSearchForm({
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="title">Titre A–Z</SelectItem>
+                <SelectItem value="title">Titre A à Z</SelectItem>
                 <SelectItem value="period">Période récente</SelectItem>
                 <SelectItem value="recent">Ajouts récents</SelectItem>
               </SelectContent>
@@ -309,112 +323,175 @@ export function CorpusFilterSidebar({
   query: Record<string, string>;
   facets: Facets;
 }) {
+  const reducedMotion = useReducedMotion();
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
   const [open, setOpen] = useState(true);
   const [values, setValues] = useState(query);
+  const activeCount = ["family", "year"].filter(
+    (key) => values[key] && values[key] !== "all",
+  ).length;
+  const resetParams = new URLSearchParams(query);
+  resetParams.delete("family");
+  resetParams.delete("year");
+  resetParams.delete("page");
+  const resetHref = `/brh-corpus${resetParams.size ? `?${resetParams}` : ""}`;
+  function applyFilter(key: "family" | "year", value: string) {
+    const next = new URLSearchParams(query);
+    next.delete("page");
+    if (!value || value === "all") next.delete(key);
+    else next.set(key, value);
+    startTransition(() =>
+      router.push(`/brh-corpus${next.size ? `?${next}` : ""}`, {
+        scroll: false,
+      }),
+    );
+  }
   return (
     <aside
       className={`atlas-filter-sidebar ${open ? "" : "is-closed"}`}
       aria-label="Filtres des publications"
+      aria-busy={pending}
     >
       <button
         type="button"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-label={open ? "Réduire les filtres" : "Afficher les filtres"}
-        className="flex min-h-11 w-full items-center justify-between gap-2 text-small font-semibold"
+        className="corpus-filter-sidebar-toggle"
       >
-        <SlidersHorizontal size={17} />
-        {open && (
+        {open ? (
           <>
-            Affiner
-            <X size={15} />
+            <span className="corpus-filter-sidebar-title">
+              <SlidersHorizontal size={18} aria-hidden />
+              <span>Filtres</span>
+              {activeCount > 0 && (
+                <span
+                  className="corpus-filter-count"
+                  aria-label={`${activeCount} filtres actifs`}
+                >
+                  {activeCount}
+                </span>
+              )}
+            </span>
+            {pending ? (
+              <LoaderCircle className="animate-spin" size={18} aria-hidden />
+            ) : (
+              <PanelLeftClose size={18} aria-hidden />
+            )}
           </>
+        ) : (
+          <PanelLeftOpen size={19} aria-hidden />
         )}
       </button>
-      {open && (
-        <form action="/brh-corpus" method="get" className="mt-6 space-y-5">
-          {["q", "mode", "entity_id", "document_id", "sort"].map((k) =>
-            query[k] ? (
-              <input key={k} type="hidden" name={k} value={query[k]} />
-            ) : null,
-          )}
-          {[
-            [
-              "family",
-              "Collection",
-              facets.families.map((f) => [
-                f.family,
-                `${familyLabels[f.family] ?? f.family} (${f.count})`,
-              ]),
-            ],
-            [
-              "year",
-              "Période couverte",
-              facets.years.map((y) => [String(y), String(y)]),
-            ],
-          ].map(([key, label, options]) => (
-            <div key={String(key)}>
-              <label
-                htmlFor={`sidebar-${key}`}
-                className="mb-2 block text-caption text-ink-muted"
-              >
-                {String(label)}
+      <AnimatePresence initial={false} mode="popLayout">
+        {open && (
+          <motion.form
+            key="filter-fields"
+            action="/brh-corpus"
+            method="get"
+            className="corpus-filter-form"
+            initial={{ opacity: 0, x: reducedMotion ? 0 : -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: reducedMotion ? 0 : -8 }}
+            transition={{
+              duration: reducedMotion ? 0 : 0.16,
+              ease: [0.2, 0, 0, 1],
+            }}
+          >
+            <p className="corpus-filter-intro">
+              Les résultats s’actualisent dès qu’un filtre est choisi.
+            </p>
+            {["q", "mode", "entity_id", "document_id", "sort"].map((k) =>
+              query[k] ? (
+                <input key={k} type="hidden" name={k} value={query[k]} />
+              ) : null,
+            )}
+            <fieldset className="corpus-filter-field">
+              <legend className="corpus-filter-label">Collection</legend>
+              <div className="corpus-filter-options">
+                <label className="corpus-filter-option">
+                  <input
+                    type="radio"
+                    name="family"
+                    value=""
+                    checked={!values.family || values.family === "all"}
+                    onChange={() => {
+                      setValues({ ...values, family: "" });
+                      applyFilter("family", "");
+                    }}
+                  />
+                  <span>Toutes les collections</span>
+                </label>
+                {facets.families.map((family) => (
+                  <label className="corpus-filter-option" key={family.family}>
+                    <input
+                      type="radio"
+                      name="family"
+                      value={family.family}
+                      checked={values.family === family.family}
+                      onChange={() => {
+                        setValues({ ...values, family: family.family });
+                        applyFilter("family", family.family);
+                      }}
+                    />
+                    <span>{familyLabels[family.family] ?? family.family}</span>
+                    <span className="corpus-filter-option-count">
+                      {family.count}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div className="corpus-filter-field">
+              <label htmlFor="sidebar-year" className="corpus-filter-label">
+                Période couverte
               </label>
               <input
                 type="hidden"
-                name={String(key)}
-                value={
-                  values[String(key)] === "all"
-                    ? ""
-                    : (values[String(key)] ?? "")
-                }
+                name="year"
+                value={values.year === "all" ? "" : (values.year ?? "")}
               />
               <Select
-                value={values[String(key)] || "all"}
-                onValueChange={(v) =>
-                  v && setValues({ ...values, [String(key)]: v })
-                }
+                value={values.year || "all"}
+                onValueChange={(year) => {
+                  if (!year) return;
+                  setValues({ ...values, year });
+                  applyFilter("year", year);
+                }}
               >
                 <SelectTrigger
-                  id={`sidebar-${key}`}
-                  className="h-11 w-full min-w-0 rounded-xl"
+                  id="sidebar-year"
+                  className="corpus-filter-select h-11 w-full min-w-0 rounded-lg"
                 >
                   <SelectValue>
-                    {(options as string[][]).find(
-                      ([value]) => value === values[String(key)],
-                    )?.[1] ?? "Tout afficher"}
+                    {values.year && values.year !== "all"
+                      ? values.year
+                      : "Toutes les périodes"}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Tout afficher</SelectItem>
-                  {(options as string[][]).map(([v, l]) => (
-                    <SelectItem key={v} value={v}>
-                      {l}
+                  <SelectItem value="all">Toutes les périodes</SelectItem>
+                  {facets.years.map((year) => (
+                    <SelectItem key={year} value={String(year)}>
+                      {year}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-          ))}
-          <Button
-            type="submit"
-            variant="outline"
-            className="h-11 w-full rounded-xl"
-          >
-            Appliquer
-          </Button>
-          <a
-            href="/brh-corpus"
-            className="block py-3 text-center text-caption text-teal"
-          >
-            Tout réinitialiser
-          </a>
-          <p className="border-t border-border pt-5 text-caption leading-6 text-ink-muted">
-            Un document, son contexte, sa source. Les périodes inconnues restent
-            visibles sans filtre.
-          </p>
-        </form>
-      )}
+            {activeCount > 0 && (
+              <a href={resetHref} className="corpus-filter-reset">
+                Réinitialiser les filtres
+              </a>
+            )}
+            <p className="corpus-filter-note">
+              La période décrit le contenu du document. Les dates inconnues
+              restent visibles tant qu’aucune période n’est choisie.
+            </p>
+          </motion.form>
+        )}
+      </AnimatePresence>
     </aside>
   );
 }

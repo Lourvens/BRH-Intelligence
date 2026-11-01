@@ -2,6 +2,7 @@
 
 import { ArrowUp, Square } from "lucide-react";
 import { useId, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -18,6 +19,7 @@ export function ChatComposer({
   onSubmit: (question: string) => void;
   onStop: () => void;
 }) {
+  const reducedMotion = useReducedMotion();
   const [draft, setDraft] = useState("");
   const inputId = useId();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -80,10 +82,18 @@ export function ChatComposer({
             </span>
             <Button
               type={isThinking ? "button" : "submit"}
-              aria-disabled={isStopping || isRestoring || (!isThinking && !draft.trim())}
-              aria-label={isThinking ? "Arrêter le traitement" : "Envoyer la question"}
+              aria-disabled={
+                isStopping || isRestoring || (!isThinking && !draft.trim())
+              }
+              aria-label={
+                isThinking ? "Arrêter le traitement" : "Envoyer la question"
+              }
               onClick={(event) => {
-                if (isStopping || isRestoring || (!isThinking && !draft.trim())) {
+                if (
+                  isStopping ||
+                  isRestoring ||
+                  (!isThinking && !draft.trim())
+                ) {
                   event.preventDefault();
                   return;
                 }
@@ -91,7 +101,27 @@ export function ChatComposer({
               }}
               className="h-11 min-w-11 rounded-xl bg-primary px-3 text-primary-foreground shadow-none transition-colors hover:bg-primary/90 aria-disabled:opacity-40 motion-reduce:transition-none"
             >
-              {isThinking ? <><Square className="size-3 fill-current" aria-hidden /><span className="text-caption">{isStopping ? "Arrêt…" : "Arrêter"}</span></> : <ArrowUp className="size-4" aria-hidden />}
+              <AnimatePresence initial={false} mode="wait">
+                <motion.span
+                  key={isThinking ? "stop" : "send"}
+                  className="inline-flex items-center gap-2"
+                  initial={{ opacity: 0, scale: reducedMotion ? 1 : 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: reducedMotion ? 1 : 0.9 }}
+                  transition={{ duration: reducedMotion ? 0 : 0.12 }}
+                >
+                  {isThinking ? (
+                    <>
+                      <Square className="size-3 fill-current" aria-hidden />
+                      <span className="text-caption">
+                        {isStopping ? "Arrêt…" : "Arrêter"}
+                      </span>
+                    </>
+                  ) : (
+                    <ArrowUp className="size-4" aria-hidden />
+                  )}
+                </motion.span>
+              </AnimatePresence>
             </Button>
           </div>
         </div>

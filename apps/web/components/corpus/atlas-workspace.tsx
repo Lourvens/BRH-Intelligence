@@ -257,7 +257,7 @@ function Workspace() {
             initial={reduced ? false : { opacity: 0, x: 12 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: reduced ? 0 : 12 }}
-            transition={{ duration: 0.18 }}
+            transition={{ duration: reduced ? 0 : 0.18 }}
           >
             {inspector}
           </motion.aside>

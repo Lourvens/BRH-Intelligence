@@ -4,6 +4,7 @@
 @import "./graph-workspace.css";
 @import "./landing.css";
 @import "./corpus-workspace.css";
+@import "./interaction-motion.css";
 @custom-variant dark (&:is(.dark *));
 
 /*

@@ -172,6 +172,21 @@ Do not fall back to raw Chrome headless flags unless the CLI cannot do the job.
 
 ## UI libraries (binding)
 
+### Interaction and motion (persistent user preference)
+
+For every UI build or refinement, deliberately include useful microinteractions.
+Read `.agents/skills/fixing-motion-performance/SKILL.md` before animation work.
+Use the installed Framer Motion for React state entry/exit and CSS for simple
+hover, press, focus and selection feedback. Cover sidebar expansion/collapse,
+dialog/sheet opening and closing, loading, copy success, and scroll feedback
+where relevant. Keep effects short (roughly 120–220ms), interruptible, and
+consistent. Prefer transform/opacity; never animate large widths/heights or
+drive effects by polling scroll events. Use native scroll/view timelines or
+IntersectionObserver. Respect `prefers-reduced-motion` in CSS and JS, including
+portaled dialogs. Keep content available without motion and preserve keyboard
+focus, touch target sizes and reading position. Do not add decorative movement
+to every paragraph or delay the appearance of research content.
+
 Use maintained libraries for UI and charts. Do **not** hand-roll dialogs,
 dropdowns, sheets, tooltips, or chart geometry.
 

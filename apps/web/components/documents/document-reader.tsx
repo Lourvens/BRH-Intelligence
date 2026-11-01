@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
@@ -33,6 +34,7 @@ export function DocumentReader({
   document: ResearchDocument;
   content: DocumentPage;
 }) {
+  const reducedMotion = useReducedMotion();
   const router = useRouter();
   const [content, setContent] = useState(initialContent);
   const [notes, setNotes] = useState(true);
@@ -256,14 +258,21 @@ export function DocumentReader({
             </nav>
           </details>
         </div>
-        {notes && (
-          <aside
-            className="atlas-reader-notes"
-            aria-label="Informations du document"
-          >
-            {info}
-          </aside>
-        )}
+        <AnimatePresence initial={false} mode="popLayout">
+          {notes && (
+            <motion.aside
+              key="reader-information"
+              initial={{ opacity: 0, x: reducedMotion ? 0 : 8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: reducedMotion ? 0 : 8 }}
+              transition={{ duration: reducedMotion ? 0 : 0.16 }}
+              className="atlas-reader-notes"
+              aria-label="Informations du document"
+            >
+              {info}
+            </motion.aside>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

@@ -7,6 +7,26 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
+- **Interaction motion (2026-11-01).** Installed `ibelick/ui-skills`'s
+  `fixing-motion-performance` skill. Recorded the user's persistent preference
+  for useful microinteractions in AGENTS.md. Shared CSS coordinates press,
+  selection, focus and portaled sheet/dialog timing. Corpus scroll progress
+  uses a native CSS scroll timeline; filter disclosure and copy feedback use
+  Framer Motion with reduced-motion handling. Existing filter redesign remains
+  part of the local working changes. TypeScript and whitespace checks pass.
+  Extended the audit to corpus and assistant: explicit Radix enter/exit
+  keyframes, reader information disclosure, graph reduced-motion corrections,
+  send/stop state feedback, activity and return-to-answer transitions, native
+  details/select/tooltip feedback. See docs/architecture/interaction-motion.md.
+  Browser checks confirm corpus sidebar toggling and phone filter opening,
+  Escape closing and reduced-motion animation suppression. Eight focused reader
+  and assistant tests pass. Production build passes. Production browser checks
+  confirm assistant sources and mobile conversations open/close, Escape
+  dismissal, reduced-motion suppression, and corpus sidebar collapse/expand,
+  with no page exceptions. Live agent streaming and graph-data transitions
+  remain unverified because their local services are unavailable. Preview now
+  runs the production build on port 3000.
+
 - **Responsive corpus rebuild (2026-11-01).** Installed Nutlope/Hallmark for Codex. Rebuilt the shared header, search-first catalogue, entity layout, graph viewport and document reader with scoped brand-preserving styles. Phones use menu/filter sheets and full-width reading. Reader loads an initial five-page window, then batches of five with automatic/manual loading, per-page citations, version checks, cancellation and prepend anchoring. See ADR 0025. Typecheck, production build and five focused batch tests pass. Hallmark static lint reports no findings for the new stylesheet and continuous reader; browser checks are intentionally not run under the prior no-browser-tools preference.
 
 - **Landing hero theme refinement (2026-10-31).** Analysed the theme from

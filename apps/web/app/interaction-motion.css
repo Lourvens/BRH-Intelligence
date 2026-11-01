@@ -1,0 +1,243 @@
+/* Shared interaction timing. Portaled surfaces intentionally use global slots. */
+:root {
+  --motion-feedback: 140ms;
+  --motion-enter: 200ms;
+  --motion-exit: 140ms;
+  --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+:is(
+  [data-slot="select-content"],
+  [data-slot="tooltip-content"]
+)[data-state="open"],
+[data-slot="tooltip-content"][data-state="delayed-open"],
+[data-slot="tooltip-content"][data-state="instant-open"] {
+  animation: interaction-fade var(--motion-feedback) var(--motion-ease);
+}
+:is(
+  [data-slot="select-content"],
+  [data-slot="tooltip-content"]
+)[data-state="closed"] {
+  animation: interaction-fade var(--motion-exit) var(--motion-ease) reverse;
+}
+/* Explicit keyframes also work without a Tailwind animation plugin.
+   Radix retains closing surfaces until their exit animation finishes. */
+:is(
+  [data-slot="dialog-overlay"],
+  [data-slot="sheet-overlay"]
+)[data-state="open"] {
+  animation-name: interaction-fade;
+}
+:is(
+  [data-slot="dialog-overlay"],
+  [data-slot="sheet-overlay"]
+)[data-state="closed"] {
+  animation-name: interaction-fade;
+  animation-direction: reverse;
+}
+[data-slot="dialog-content"][data-state="open"] {
+  animation-name: interaction-dialog;
+}
+[data-slot="dialog-content"][data-state="closed"] {
+  animation-name: interaction-dialog;
+  animation-direction: reverse;
+}
+[data-slot="sheet-content"] {
+  --sheet-offset-x: 24px;
+  --sheet-offset-y: 0px;
+}
+[data-slot="sheet-content"][data-side="left"] {
+  --sheet-offset-x: -24px;
+}
+[data-slot="sheet-content"][data-side="top"] {
+  --sheet-offset-x: 0px;
+  --sheet-offset-y: -24px;
+}
+[data-slot="sheet-content"][data-side="bottom"] {
+  --sheet-offset-x: 0px;
+  --sheet-offset-y: 24px;
+}
+[data-slot="sheet-content"][data-state="open"] {
+  animation-name: interaction-sheet;
+}
+[data-slot="sheet-content"][data-state="closed"] {
+  animation-name: interaction-sheet;
+  animation-direction: reverse;
+}
+@keyframes interaction-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes interaction-dialog {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes interaction-sheet {
+  from {
+    opacity: 0;
+    transform: translate(var(--sheet-offset-x), var(--sheet-offset-y));
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+/* Stateful controls: feedback without moving surrounding text or charts. */
+:is(.atlas-page, .atlas-map)
+  :is(button, a, summary):active:not(:disabled):not([aria-disabled="true"]) {
+  opacity: 0.8;
+}
+:is(.atlas-page, .atlas-map) :is(button, a, summary):focus-visible {
+  transition: none;
+}
+.atlas-page details > summary {
+  cursor: pointer;
+}
+.atlas-page details[open] > :not(summary),
+.atlas-map .atlas-graph-legend[open] > :not(summary) {
+  animation: interaction-fade var(--motion-enter) var(--motion-ease);
+}
+.atlas-map .atlas-graph-list {
+  animation: interaction-fade var(--motion-enter) var(--motion-ease);
+}
+.atlas-page .atlas-document,
+.atlas-page .atlas-entity-card,
+.atlas-map .atlas-graph-list a,
+[data-slot="sidebar-menu-button"],
+[data-slot="select-trigger"],
+[data-slot="select-item"] {
+  transition:
+    background-color var(--motion-feedback) var(--motion-ease),
+    border-color var(--motion-feedback) var(--motion-ease),
+    color var(--motion-feedback) var(--motion-ease);
+}
+/* Keep desktop rails from continuously relaying out the chat while toggling.
+   Only their contents fade; the new column width is applied once. */
+[data-slot="sidebar-gap"],
+[data-slot="sidebar-container"] {
+  transition: none;
+}
+[data-slot="sidebar"][data-state="expanded"] [data-slot="sidebar-inner"] {
+  animation: interaction-fade var(--motion-enter) var(--motion-ease);
+}
+[data-slot="sidebar"][data-state="collapsed"] [data-slot="sidebar-inner"] {
+  animation: interaction-fade var(--motion-exit) var(--motion-ease);
+}
+[data-slot="button"] {
+  transition-property:
+    transform, background-color, border-color, color, opacity;
+  transition-duration: var(--motion-feedback);
+  transition-timing-function: var(--motion-ease);
+}
+[data-slot="button"]:active:not(:disabled):not([aria-disabled="true"]) {
+  transform: translateY(1px);
+}
+[data-slot="button"]:focus-visible {
+  transition-duration: 0s;
+}
+:is(
+  [data-slot="sheet-content"],
+  [data-slot="dialog-content"],
+  [data-slot="sheet-overlay"],
+  [data-slot="dialog-overlay"]
+)[data-state="open"] {
+  animation-duration: var(--motion-enter);
+  animation-timing-function: var(--motion-ease);
+}
+:is(
+  [data-slot="sheet-content"],
+  [data-slot="dialog-content"],
+  [data-slot="sheet-overlay"],
+  [data-slot="dialog-overlay"]
+)[data-state="closed"] {
+  animation-duration: var(--motion-exit);
+  animation-timing-function: var(--motion-ease);
+}
+.corpus-filter-sidebar-toggle svg,
+.corpus-filter-option,
+.atlas-segment button,
+.atlas-chip,
+.corpus-desktop-nav a,
+.corpus-mobile-nav a {
+  transition:
+    background-color var(--motion-feedback) var(--motion-ease),
+    color var(--motion-feedback) var(--motion-ease),
+    transform var(--motion-feedback) var(--motion-ease);
+}
+.atlas-page .atlas-filter-sidebar {
+  position: sticky;
+}
+.corpus-filter-sidebar-toggle:active svg {
+  transform: scale(0.9);
+}
+.atlas-chip:active {
+  transform: scale(0.97);
+}
+.atlas-search-box:focus-within {
+  outline: 2px solid var(--color-azure);
+  outline-offset: 3px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .corpus-desktop-nav a:hover,
+  .corpus-mobile-nav a:hover {
+    background: var(--color-surface-alt);
+  }
+  .atlas-page .atlas-document-actions a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+/* Native scroll feedback, no JS scroll polling or hidden reading content. */
+@supports (animation-timeline: scroll()) {
+  .corpus-header::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 -1px;
+    height: 2px;
+    background: var(--color-azure);
+    transform-origin: left;
+    animation: corpus-scroll-progress linear both;
+    animation-timeline: scroll(root block);
+    pointer-events: none;
+  }
+  @keyframes corpus-scroll-progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.atlas-page, .atlas-map) *,
+  [data-slot="sidebar"] *,
+  [data-slot="select-content"],
+  [data-slot="tooltip-content"],
+  [data-slot="button"],
+  :is(
+    [data-slot="sheet-content"],
+    [data-slot="dialog-content"],
+    [data-slot="sheet-overlay"],
+    [data-slot="dialog-overlay"]
+  ),
+  .corpus-header::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  [data-slot="button"]:active {
+    transform: none !important;
+  }
+  .corpus-header::after {
+    display: none;
+  }
+}

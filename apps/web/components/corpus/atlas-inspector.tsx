@@ -73,7 +73,7 @@ export function AtlasInspector({
             initial={reduced ? false : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
+            transition={{ duration: reduced ? 0 : 0.18 }}
           >
             {selectedLabel ? (
               <h2>{selectedLabel}</h2>
