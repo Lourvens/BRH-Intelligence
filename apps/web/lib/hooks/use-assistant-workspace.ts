@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAgent } from "@/lib/agent";
 import { agentMessagesToChatMessages } from "@/lib/chat/agent-messages";
+import { appendAnswerDelta, parseAnswerDelta } from "@/lib/chat/answer-stream";
 import { mergeActivity, parseActivity, type AgentActivity } from "@/lib/chat/agent-activity";
 import type { ChatThread } from "@/lib/chat/types";
 
@@ -15,12 +16,24 @@ export function useAssistantWorkspace() {
   const [selectedMessageId, setSelectedMessageId] = useState<string | null>(null);
   const [selectedCitationId, setSelectedCitationId] = useState<string | null>(null);
   const [sourcesOpen, setSourcesOpen] = useState(false);
-  const [sourcesCollapsed, setSourcesCollapsed] = useState(false);
+  const [sourcesCollapsed, setSourcesCollapsed] = useState(true);
   const [requestError, setRequestError] = useState(false);
   const [activities, setActivities] = useState<AgentActivity[]>([]);
+  const [draft, setDraft] = useState<{ turnId: string; text: string; sequence?: number } | null>(null);
   const [runStatus, setRunStatus] = useState<"idle" | "running" | "stopped" | "error">("idle");
   const [isStopping, setIsStopping] = useState(false);
   const acceptActivity = useRef(false);
+  const currentTurn = useRef<string | null>(null);
+  const queuedDraft = useRef<{ turnId: string; text: string; sequence?: number } | null>(null);
+  const frame = useRef<number | null>(null);
+
+  const clearQueuedDraft = useCallback(() => {
+    if (frame.current !== null) cancelAnimationFrame(frame.current);
+    frame.current = null;
+    queuedDraft.current = null;
+  }, []);
+
+  useEffect(() => () => clearQueuedDraft(), [clearQueuedDraft]);
   const stoppedByUser = useRef(false);
   const pending = useRef<{ id: string; text: string } | null>(null);
   const submitting = useRef(false);
@@ -34,19 +47,42 @@ export function useAssistantWorkspace() {
   }, []);
   const onCustomEvent = useCallback((data: unknown) => {
     if (!acceptActivity.current) return;
+    const delta = parseAnswerDelta(data);
+    if (delta) {
+      if (currentTurn.current !== delta.turnId) return;
+      queuedDraft.current = appendAnswerDelta(queuedDraft.current, delta);
+      if (frame.current === null) {
+        frame.current = requestAnimationFrame(() => {
+          frame.current = null;
+          const queued = queuedDraft.current;
+          queuedDraft.current = null;
+          if (queued && acceptActivity.current && currentTurn.current === queued.turnId) {
+            setDraft((previous) => appendAnswerDelta(previous, queued));
+          }
+        });
+      }
+      return;
+    }
     const event = parseActivity(data);
-    if (event) setActivities((previous) => mergeActivity(previous, event));
+    if (event) {
+      if (!currentTurn.current && event.stage === "route_intent") currentTurn.current = event.turn_id;
+      if (event.turn_id !== currentTurn.current) return;
+      setActivities((previous) => mergeActivity(previous, event));
+    }
   }, []);
   const onFinish = useCallback(() => {
     acceptActivity.current = false;
+    clearQueuedDraft();
     setRunStatus((current) => current === "running" ? "idle" : current);
-  }, []);
+  }, [clearQueuedDraft]);
   const onError = useCallback(() => {
     if (stoppedByUser.current) return;
     acceptActivity.current = false;
     setRunStatus("error");
     setRequestError(true);
-  }, []);
+    clearQueuedDraft();
+    setDraft(null);
+  }, [clearQueuedDraft]);
   const stream = useAgent({ threadId: activeThreadId, onThreadId, onCustomEvent, onFinish, onError });
 
   useEffect(() => {
@@ -84,7 +120,11 @@ export function useAssistantWorkspace() {
     return () => window.removeEventListener("keydown", handleShortcut);
   }, []);
 
-  const messages = agentMessagesToChatMessages(stream.messages);
+  const publishedMessages = agentMessagesToChatMessages(stream.messages);
+  const messages = draft && publishedMessages.at(-1)?.role === "user"
+    ? [...publishedMessages, { id: `answer-${draft.turnId}`, role: "assistant" as const,
+        content: draft.text, streaming: true, activities }]
+    : publishedMessages;
   const activeInfo = threadInfo.find((thread) => thread.id === activeThreadId);
   const activeThread: ChatThread | null = activeThreadId || messages.length ? {
     id: activeThreadId || "pending",
@@ -106,6 +146,7 @@ export function useAssistantWorkspace() {
   function selectThread(id: string) {
     if (isBusy) return;
     setActivities([]);
+    setDraft(null);
     setRunStatus("idle");
     setActiveThreadId(id);
     pending.current = null;
@@ -118,6 +159,7 @@ export function useAssistantWorkspace() {
   function newThread() {
     if (isBusy) return;
     setActivities([]);
+    setDraft(null);
     setRunStatus("idle");
     setActiveThreadId(null);
     pending.current = null;
@@ -133,9 +175,12 @@ export function useAssistantWorkspace() {
     pending.current = message;
     setRequestError(false);
     setActivities([]);
+    clearQueuedDraft();
+    setDraft(null);
     setRunStatus("running");
     stoppedByUser.current = false;
     acceptActivity.current = true;
+    currentTurn.current = null;
     setSelectedMessageId(null);
     setSelectedCitationId(null);
     try {
@@ -176,6 +221,8 @@ export function useAssistantWorkspace() {
     setIsStopping(true);
     stoppedByUser.current = true;
     acceptActivity.current = false;
+    clearQueuedDraft();
+    setDraft(null);
     setRunStatus("stopped");
     try { await stream.stop(); }
     catch { setRequestError(true); setRunStatus("error"); }

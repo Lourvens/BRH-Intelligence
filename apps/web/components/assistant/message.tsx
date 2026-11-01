@@ -1,11 +1,14 @@
 import { ShieldAlert } from "lucide-react";
 
+import { useReducedMotion } from "framer-motion";
+import { useSmoothText } from "smooth-stream-text/react";
 import { uniqueCitations } from "@/lib/chat/citations";
 import { cn } from "@/lib/utils";
 import type { ChatMessage } from "@/lib/chat/types";
 
 import { Artifact } from "./artifacts/artifact";
 import { DecisionCard } from "./artifacts/decision-card";
+import { AgentActivity } from "./agent-activity";
 import { MessageActions } from "./message-actions";
 import { MessageContent } from "./message-content";
 
@@ -18,6 +21,10 @@ export function Message({
   selectedCitationId: string | null;
   onSelectCitation: (citationId: string) => void;
 }) {
+  const reducedMotion = useReducedMotion();
+  const { text: pacedContent } = useSmoothText(message.content, { done: !message.streaming });
+  const visibleContent = reducedMotion || !message.content.startsWith(pacedContent)
+    ? message.content : pacedContent;
   const citations = message.citations
     ? uniqueCitations(message.citations)
     : undefined;
@@ -25,7 +32,7 @@ export function Message({
   if (message.role === "user") {
     return (
       <div className="flex justify-end">
-        <div className="max-w-full border-l-2 border-navy-ink bg-surface-alt px-4 py-3 text-small leading-7 text-ink sm:max-w-[85%]">
+        <div className="max-w-full rounded-2xl rounded-br-md bg-surface-alt px-5 py-3 text-small leading-7 text-ink sm:max-w-[85%]">
           {message.content}
         </div>
       </div>
@@ -34,10 +41,11 @@ export function Message({
 
   return (
     <div className="min-w-0">
+        {message.activities?.length ? <AgentActivity activities={message.activities} stopped={false} failed={false} isStopping={false} /> : null}
         <div
           className={cn(
             "min-w-0 py-2",
-            message.refused ? "border-l-2 border-border bg-surface-alt p-4" : "bg-surface",
+            message.refused ? "border-l-2 border-border bg-surface-alt p-4" : "bg-transparent",
           )}
         >
           {message.refused ? (
@@ -54,7 +62,8 @@ export function Message({
             </div>
           ) : (
             <MessageContent
-              content={message.content}
+              content={visibleContent}
+              streaming={message.streaming || visibleContent !== message.content}
               citations={citations}
               onSelectCitation={onSelectCitation}
             />
@@ -69,12 +78,14 @@ export function Message({
             </div>
           ) : null}
 
-          <MessageActions
-            content={message.content}
-            citations={citations}
-            selectedCitationId={selectedCitationId}
-            onSelectCitation={onSelectCitation}
-          />
+          {!message.streaming && (
+            <MessageActions
+              content={message.content}
+              citations={citations}
+              selectedCitationId={selectedCitationId}
+              onSelectCitation={onSelectCitation}
+            />
+          )}
       </div>
     </div>
   );

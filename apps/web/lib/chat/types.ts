@@ -67,6 +67,8 @@ export type ChatMessage = {
   citations?: ChatCitation[];
   artifacts?: ChatArtifact[];
   refused?: boolean;
+  streaming?: boolean;
+  activities?: import("./agent-activity").AgentActivity[];
 };
 
 export type ChatThread = {

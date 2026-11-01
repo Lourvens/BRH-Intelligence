@@ -52,12 +52,6 @@ analytics: ## Render the posts into services/analytics/out (ARGS="--size portrai
 analytics-dev: ## Open the analytics dashboard
 	uv run streamlit run services/analytics/src/brh_analytics/app.py
 
-agent-dev: ## Run the LangGraph agent server locally
-	cd services/agent && uv run langgraph dev
-
-agent-eval: ## Validate, sync or run agent behavior evals (ARGS="validate")
-	cd services/agent && uv run python -m evals.cli $(ARGS)
-
 mcp-dev: ## Run the MCP server (streamable HTTP)
 	uv run python -m brh_mcp
 

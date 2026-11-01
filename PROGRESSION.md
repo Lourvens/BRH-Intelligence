@@ -7,6 +7,36 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
+- **Answer replacement audit (2026-10-31).** Preserved non-empty answers with unrecognized citation markers as ungrounded rather than replacing the whole response; partial conversation and research output is retained and explicitly marked interrupted on stream failure. Empty output and pre-output provider failures retain technical fallbacks. UI continues to hide unpublished model drafts.
+
+- **Answer replacement fix (2026-10-31).** Preserve the model’s final response when it contains no citation markers, including limitations, instead of replacing it with a canned refusal. Uncited text carries no citations and is not marked grounded; invalid citation markers remain rejected.
+
+- **Streaming pacing library (2026-10-31).** Replaced the custom reveal loop with smooth-stream-text’s React hook, used with the existing LangGraph stream and Streamdown Markdown renderer. Reduced motion shows incoming text immediately; invalidated answer replacements snap to the published text. Live provider and visual timing remain unverified.
+
+- **First-token reveal fix (2026-10-31).** Kept the reveal animation loop and fractional progress alive across incoming chunks; the previous effect reset both on each token and could starve the display. Exa and Context7 confirm LangGraph custom events and Streamdown support the existing stack. Live network timing remains unverified; no browser tools.
+
+- **Typing indicator (2026-10-31).** Enabled Streamdown’s inline animated caret during streamed answer reveal; the prior status label remains removed.
+
+- **Streaming UI cleanup (2026-10-31).** Removed the visible “Réponse en cours” label from streamed messages at the user’s request; message actions remain hidden until publication.
+
+- **Streaming display fix (2026-10-31).** Bounded client-side reveal smooths bursty arrivals and drains after completion; live activity occupies the answer’s activity slot. Reduced motion shows text immediately. User will visually verify; no browser tools.
+
+- **Streaming fluidity (2026-10-31).** Batched live answer chunks per animation frame to reduce repeated Markdown renders; cancel queued updates on finish, cancellation, failure and unmount. Streamdown 2.7.1 handles incomplete Markdown while retaining the citation renderer. TypeScript and focused tests pass. Provider-side chunk timing remains unverified; frame batching does not smooth bursty arrivals.
+
+- **Chat redesign implemented (2026-10-31).** Charcoal dark palette, centered reading column, rounded composer, on-demand source drawer, compact expandable activity timeline and jump-to-response scrolling. A separate research writer streams provisional text through LangGraph custom events; final citation-marker validation replaces it using a stable message ID (ADR-0024). Completed activity is checkpointed with published answers. Tool events now show per-call passage counts, filters, duration and failures. Offline tests cover token-before-publication and private-draft exclusion. Visual verification is left to the user; no further browser tools are permitted. Live-provider behavior remains unverified.
+
+- **Chat redesign implementation (2026-10-31).** Rebuilding theme, activity presentation and final-answer streaming under ADR-0024. No agent-browser.
+
+- **Chat redesign analysis (2026-10-31).** Inspected actual graph emissions and UI reconstruction; Exa/Context7 research informs `docs/plans/2026-10-31-chat-redesign.md`. Proposed a compact tool timeline, genuine final-writer streaming, stable message identities and a less saturated charcoal dark theme. Design only; user explicitly prohibits agent-browser.
+
+- **Assistant response streaming (2026-10-31).** Conversational replies stream actual chat-model chunks through LangGraph custom events into a temporary UI message; the final published message replaces it, and stop/error clears it. Research drafts remain private until citation-marker checks complete, so research answers still appear all at once. Agent tests (9), focused web tests (4), TypeScript and Ruff pass. Browser smoke test could not complete: agent-browser open hung against the already running development server. Live provider streaming was not verified.
+
+- **Fresh routed agent foundation (2026-10-30).** Added Jev intent routing, a French conversational path, a bounded research loop with a LangChain tool using `RetrievalService`, exact document/page filters, citation-marker checks, UI activity events, optional Arize instrumentation and Agent Server registration (ADR-0023). Offline agent tests pass; live model, retrieval, Arize and hosted session verification remain outstanding. Year/family passage filters, claim-level citation support verification and answer-token streaming are not yet implemented. Previous remote Arize data remains pending deletion.
+
+- **Agent rebuild started (2026-10-30).** Implementing the new routed LangGraph and a LangChain retrieval tool against the existing shared retrieval service. Prior remote Arize traces and datasets are still pending deletion.
+
+- **Agent redesign planning (2026-10-30).** Planning a fresh BRH-specific LangGraph architecture with an LLM intent router, per-agent folders, corpus-backed research and streamed activity. This is a proposal; no replacement agent has been implemented. The previous Arize traces and remote evaluation datasets remain pending deletion.
+
 - **Agent reset started (2026-10-29).** Removed the LangGraph agent implementation,
   its local behavior evaluations and agent-specific tests. The corpus HTTP app
   remains available independently through `make corpus-dev`. The assistant UI

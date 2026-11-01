@@ -49,13 +49,15 @@ export function ChatPanel({
   const currentActivity = activities.findLast((item) => item.status === "running") ?? activities.at(-1);
   const announcement = isRestoring ? "Chargement de la conversation…" :
     isStopping ? "Arrêt du traitement…" : runStatus === "stopped" ? "Traitement interrompu." :
-    isThinking ? currentActivity ? ACTIVITY_LABELS[currentActivity.stage] : "Demande envoyée à l’assistant." : "";
-  const { scrollRef, handleScroll, followMessages } = useChatScroll(
+    isThinking ? thread?.messages.at(-1)?.streaming ? "L’assistant rédige sa réponse." :
+      currentActivity ? ACTIVITY_LABELS[currentActivity.stage] : "Demande envoyée à l’assistant." : "";
+  const { scrollRef, handleScroll, followMessages, isAtBottom } = useChatScroll(
     thread?.id,
     thread?.messages.length ?? 0,
     isThinking,
     reduceMotion,
-    activities.length + activities.filter((item) => item.status !== "running").length,
+    activities.length + activities.filter((item) => item.status !== "running").length +
+      (thread?.messages.at(-1)?.streaming ? thread.messages.at(-1)?.content.length ?? 0 : 0),
   );
 
   return (
@@ -94,7 +96,7 @@ export function ChatPanel({
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: reduceMotion ? 0.01 : 0.16 }}
-                  className="mx-auto flex max-w-[880px] flex-col gap-8"
+                  className="mx-auto flex max-w-[780px] flex-col gap-8"
                 >
                   {thread?.messages.map((message) => (
                     <Message
@@ -106,7 +108,7 @@ export function ChatPanel({
                   ))}
                   {isRestoring && <p className="py-4 text-small text-ink-muted">Chargement de la conversation…</p>}
                   <AnimatePresence initial={false}>
-                    {(isThinking || runStatus === "stopped" || runStatus === "error") && (
+                    {((isThinking && !thread?.messages.at(-1)?.streaming) || runStatus === "stopped" || runStatus === "error") && (
                       <motion.div key="activity" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={feedbackTransition}>
                         <AgentActivity activities={activities} stopped={runStatus === "stopped" || runStatus === "error"} isStopping={isStopping} failed={runStatus === "error"} />
                       </motion.div>
@@ -126,6 +128,7 @@ export function ChatPanel({
             </div>
           )}
         </div>
+        {!isAtBottom && !isEmpty && <div className="flex justify-center pt-2"><Button variant="secondary" size="sm" onClick={followMessages} className="rounded-full">Revenir à la réponse ↓</Button></div>}
         <ChatComposer
           isThinking={isThinking}
           isRestoring={isRestoring}

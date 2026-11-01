@@ -45,9 +45,9 @@ export function ChatComposer({
           event.preventDefault();
           submit();
         }}
-        className="mx-auto max-w-[712px]"
+        className="mx-auto max-w-[780px]"
       >
-        <div className="rounded-2xl border border-border bg-surface shadow-card transition-colors focus-within:border-azure focus-within:ring-1 focus-within:ring-azure">
+        <div className="rounded-2xl border border-border bg-surface-alt/60 shadow-sm transition-colors focus-within:border-azure focus-within:ring-1 focus-within:ring-azure">
           <label htmlFor={inputId} className="sr-only">
             Votre question
           </label>
@@ -89,7 +89,7 @@ export function ChatComposer({
                 }
                 if (isThinking) onStop();
               }}
-              className="h-11 min-w-11 rounded-xl bg-navy px-3 text-white shadow-none transition-colors hover:bg-navy-deep aria-disabled:opacity-40 motion-reduce:transition-none"
+              className="h-11 min-w-11 rounded-xl bg-primary px-3 text-primary-foreground shadow-none transition-colors hover:bg-primary/90 aria-disabled:opacity-40 motion-reduce:transition-none"
             >
               {isThinking ? <><Square className="size-3 fill-current" aria-hidden /><span className="text-caption">{isStopping ? "Arrêt…" : "Arrêter"}</span></> : <ArrowUp className="size-4" aria-hidden />}
             </Button>

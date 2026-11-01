@@ -1,8 +1,9 @@
 import type { Message } from "@langchain/langgraph-sdk";
 import type { Citation } from "@/lib/agent";
+import { parseActivity } from "./agent-activity";
 import type { ChatMessage } from "./types";
 
-type Envelope = { version: number; validated: boolean; kind: string; citations: Citation[] };
+type Envelope = { version: number; validated: boolean; kind: string; citations: Citation[]; activities?: unknown[] };
 
 /** Only published AI messages belong to the conversation; drafts stay private. */
 export function agentMessagesToChatMessages(messages: Message[]): ChatMessage[] {
@@ -15,7 +16,9 @@ export function agentMessagesToChatMessages(messages: Message[]): ChatMessage[] 
     const content = typeof message.content === "string" ? message.content : message.content
       .filter((block) => block.type === "text").map((block) => "text" in block ? block.text : "").join("");
     return [{ id: message.id || `message-${index}`, role: message.type === "human" ? "user" : "assistant",
-      content, citations: envelope?.citations?.map((citation) => ({
+      content, activities: envelope?.activities?.flatMap((item) => {
+        const event = parseActivity(item); return event ? [event] : [];
+      }), citations: envelope?.citations?.map((citation) => ({
         id: `${citation.document_id}:${citation.page_number}`, title: citation.title,
         page: citation.page_number, snippet: citation.snippet, source: citation.slug,
         kind: "Document", pdfUrl: citation.pdf_url,

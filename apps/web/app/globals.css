@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../../node_modules/streamdown/dist/*.js";
 @import "./research.css";
 @import "./graph-workspace.css";
 @import "./landing.css";
@@ -145,18 +146,18 @@
  */
 .dark {
   color-scheme: dark;
-  --color-bg: #070e1c;
-  --color-surface: #0d1730;
-  --color-surface-alt: #15213c;
-  --color-border: #263352;
-  --color-ink: #e9eef8;
-  --color-ink-muted: #a3b1c9;
+  --color-bg: #101216;
+  --color-surface: #171a20;
+  --color-surface-alt: #20242b;
+  --color-border: #323842;
+  --color-ink: #e7e9ed;
+  --color-ink-muted: #a1a8b3;
 
-  --color-navy-ink: #c2d4ff;
-  --color-navy-700: #9fbbff;
+  --color-navy-ink: #b8c8e5;
+  --color-navy-700: #a8bedf;
 
   --color-gold-ink: #f1d675;
-  --color-teal: #6fd3f2;
+  --color-teal: #86bacd;
   /* azure keeps its brand value: 5.7:1 on the dark surface, so it still works
      for focus rings and the second chart series without a lighter variant. */
   --color-emerald: #5fd6b3;

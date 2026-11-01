@@ -13,12 +13,10 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useAssistantWorkspace } from "@/lib/hooks/use-assistant-workspace";
-import { cn } from "@/lib/utils";
 
 import { ChatPanel } from "./chat-panel";
 import { ConversationSidebar } from "./sidebar";
 import { SourcesPanel } from "./sources-panel";
-import { SourcesRail } from "./sources-rail";
 
 export function AssistantShell() {
   const {
@@ -36,8 +34,6 @@ export function AssistantShell() {
     retry,
     sourcesOpen,
     setSourcesOpen,
-    sourcesCollapsed,
-    setSourcesCollapsed,
     selectThread,
     newThread,
     submitQuestion,
@@ -74,28 +70,7 @@ export function AssistantShell() {
             onSubmit={submitQuestion}
             onStop={stopThinking}
           />
-          {(activeThread || isThinking) && (
-            <aside
-              className={cn(
-                "hidden shrink-0 overflow-hidden border-l border-border xl:flex",
-                sourcesCollapsed ? "w-12" : "w-[320px] 2xl:w-[352px]",
-              )}
-            >
-              {sourcesCollapsed ? (
-                <SourcesRail
-                  count={citations.length}
-                  onOpen={() => setSourcesCollapsed(false)}
-                />
-              ) : (
-                <SourcesPanel
-                  citations={citations}
-                  selected={selectedCitation}
-                  onSelect={selectCitation}
-                  onCollapse={() => setSourcesCollapsed(true)}
-                />
-              )}
-            </aside>
-          )}
+
         </div>
       </SidebarInset>
 

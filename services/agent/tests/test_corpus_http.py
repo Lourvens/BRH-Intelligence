@@ -45,7 +45,7 @@ def test_semantic_requests_have_a_bounded_shared_budget():
 
 
 def test_atlas_routes_validate_limits_and_clean_up_shared_pool(monkeypatch):
-    from brh_agent import http, resources
+    from brh_agent import http
 
     class Atlas:
         def corpus_atlas(self, params):
@@ -61,9 +61,7 @@ def test_atlas_routes_validate_limits_and_clean_up_shared_pool(monkeypatch):
             self.closed = True
 
     pool = Pool()
-    owner = resources.Resources()
-    monkeypatch.setattr(resources, "build_retrieval_service", lambda settings: (Atlas(), pool))
-    monkeypatch.setattr(http, "get_resources", lambda: owner)
+    monkeypatch.setattr(http, "build_retrieval_service", lambda: (Atlas(), pool))
     with TestClient(http.create_app()) as client:
         assert client.get("/corpus/v1/graph").json()["view"] == "mentions"
         for query in ["node_limit=501", "edge_limit=1001", "hops=3", "focus=document:bad"]:

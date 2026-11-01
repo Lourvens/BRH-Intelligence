@@ -10,13 +10,13 @@ export function WorkspaceHeader({ title, sourceCount, onOpenSources }: {
   onOpenSources: () => void;
 }) {
   return (
-    <header className="flex h-16 shrink-0 items-center gap-3 border-b border-border bg-surface px-4 sm:px-6">
-      <SidebarTrigger aria-label="Ouvrir les conversations" className="size-10 rounded-sm text-ink-muted md:hidden" />
+    <header className="flex h-16 shrink-0 items-center gap-3 bg-surface px-4 sm:px-6">
+      <SidebarTrigger aria-label="Ouvrir les conversations" className="size-10 rounded-lg text-ink-muted md:hidden" />
       <div className="min-w-0 flex-1">
         <p className="text-[11px] font-semibold uppercase tracking-wider text-ink-muted">Espace de recherche</p>
-        <h1 className="truncate font-display text-small font-semibold text-navy-ink">{title ?? "Assistant documentaire"}</h1>
+        <h1 className="truncate font-display text-small font-semibold text-ink">{title ?? "Assistant documentaire"}</h1>
       </div>
-      <Button type="button" variant="outline" onClick={onOpenSources} className="h-10 gap-2 rounded-sm border-border bg-surface px-3 text-caption text-navy-ink shadow-none xl:hidden">
+      <Button type="button" variant="outline" onClick={onOpenSources} className="h-10 gap-2 rounded-lg border-border bg-surface px-3 text-caption text-ink shadow-none">
         <BookOpen className="size-4" aria-hidden /> Sources ({sourceCount})
       </Button>
     </header>

@@ -31,6 +31,8 @@
     "rehype-raw": "^7.0.0",
     "rehype-sanitize": "^6.0.0",
     "remark-gfm": "^4.0.1",
+    "smooth-stream-text": "^0.2.2",
+    "streamdown": "^2.7.1",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {

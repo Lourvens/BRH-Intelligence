@@ -1,4 +1,5 @@
-import Markdown, { type Components } from "react-markdown";
+import { type Components } from "react-markdown";
+import { Streamdown } from "streamdown";
 import remarkGfm from "remark-gfm";
 
 import type { ChatCitation } from "@/lib/chat/types";
@@ -7,8 +8,10 @@ export function MessageContent({
   content,
   citations,
   onSelectCitation,
+  streaming = false,
 }: {
   content: string;
+  streaming?: boolean;
   citations?: ChatCitation[];
   onSelectCitation: (citationId: string) => void;
 }) {
@@ -119,9 +122,9 @@ export function MessageContent({
 
   return (
     <div className="space-y-3 font-reading">
-      <Markdown remarkPlugins={[remarkGfm]} components={components}>
+      <Streamdown remarkPlugins={[remarkGfm]} components={components} isAnimating={streaming} caret={streaming ? "circle" : undefined} mode={streaming ? "streaming" : "static"}>
         {content}
-      </Markdown>
+      </Streamdown>
     </div>
   );
 }
