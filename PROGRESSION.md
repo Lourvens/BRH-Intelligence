@@ -1,11 +1,24 @@
 # Progression
 
-Last updated: 2026-10-29 (agent implementation removed for restart)
+Last updated: 2026-10-31 (landing hero theme refinement)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Landing hero theme refinement (2026-10-31).** Analysed the theme from
+  `globals.css`, `landing.css` and git history (no browser). The dark hero was
+  collapsing its teal accent to body-text navy and had no separation from the
+  page (`surface` vs `bg` = 1.08:1); the documented hero dot grid was unused.
+  Restored the accent with the already-dark-safe `teal` token (8.23:1) and
+  azure italic (5.63:1), re-added a masked institutional dot field sized from
+  `navy-ink` so it survives both themes, added a gold provenance rule to the
+  hero note, gave the dark primary CTA an edge, and raised the 8px caption /
+  9px motion pill / 11px bottom strip to the repo's micro scale with 44px
+  targets. The dark footer now uses the charcoal page floor (`dark:bg-bg`)
+  instead of a fixed navy slab. `tsc --noEmit` passes; no browser run per the
+  no-agent-browser request.
 
 - **Answer replacement audit (2026-10-31).** Preserved non-empty answers with unrecognized citation markers as ungrounded rather than replacing the whole response; partial conversation and research output is retained and explicitly marked interrupted on stream failure. Empty output and pre-output provider failures retain technical fallbacks. UI continues to hide unpublished model drafts.
 

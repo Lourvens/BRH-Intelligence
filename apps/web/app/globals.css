@@ -266,7 +266,8 @@
   text-transform: uppercase;
 }
 
-/* Institutional dot grid used by the hero; the light variant sits on navy. */
+/* Institutional dot grid for plain surfaces. The landing hero draws a masked,
+   dark-aware copy in `landing.css`; `dot-grid-light` sits on navy. */
 @utility dot-grid {
   background-image: radial-gradient(
     color-mix(in srgb, var(--color-navy) 22%, transparent) 1px,

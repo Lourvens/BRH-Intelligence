@@ -35,9 +35,9 @@ const columns = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-navy-deep bg-navy pt-16 pb-12 text-white">
+    <footer className="border-t border-navy-deep bg-navy pt-16 pb-12 text-white dark:border-border dark:bg-bg dark:text-ink">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 dark:border-border md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <Link
               href="/"
@@ -55,12 +55,12 @@ export function SiteFooter() {
                 Intelligence
               </span>
             </Link>
-            <p className="mb-4 max-w-sm text-caption leading-relaxed text-white/70">
+            <p className="mb-4 max-w-sm text-caption leading-relaxed text-white/70 dark:text-ink-muted">
               Interface de recherche sur les publications officielles de la
               Banque de la République d’Haïti. Explorez les documents, leurs
               connexions et les passages utiles à votre recherche.
             </p>
-            <div className="flex items-center gap-2 font-mono text-[11px] text-white/60">
+            <div className="flex items-center gap-2 font-mono text-[11px] text-white/60 dark:text-ink-muted">
               <span className="size-2 rounded-full bg-emerald" />
               Prototype documentaire · v0.1
             </div>
@@ -71,7 +71,7 @@ export function SiteFooter() {
               <h3 className="mb-4 text-[11px] font-bold uppercase tracking-wider text-gold">
                 {column.title}
               </h3>
-              <ul className="space-y-2.5 text-caption text-white/75">
+              <ul className="space-y-2.5 text-caption text-white/75 dark:text-ink-muted">
                 {column.links.map((link) => (
                   <li key={link.label}>
                     <a
@@ -82,7 +82,7 @@ export function SiteFooter() {
                           ? "noopener noreferrer"
                           : undefined
                       }
-                      className="inline-flex items-center gap-1 transition-colors hover:text-white"
+                      className="inline-flex items-center gap-1 transition-colors hover:text-white dark:hover:text-ink"
                     >
                       {link.label}
                       {link.href.startsWith("http") ? (
@@ -96,7 +96,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-4 pt-8 text-[11px] text-white/50 md:flex-row">
+        <div className="flex flex-col items-center justify-between gap-4 pt-8 text-[11px] text-white/50 dark:text-ink-muted md:flex-row">
           <div>© 2026 BRH Intelligence · Couverture mesurée dans le catalogue.</div>
           <div className="max-w-xl text-center leading-relaxed md:text-right">
             Les réponses peuvent contenir des erreurs. Vérifiez toujours la page
