@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+
+import { Brand } from "./brand";
 
 const columns = [
   {
@@ -39,22 +39,11 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="grid grid-cols-1 gap-10 border-b border-white/10 pb-12 dark:border-border md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <Link
-              href="/"
-              aria-label="BRH Intelligence — accueil"
-              className="mb-4 inline-flex items-center gap-2 rounded-xl bg-white px-3 py-2"
-            >
-              <Image
-                src="/brh-logo.png"
-                alt="BRH"
-                width={251}
-                height={123}
-                className="h-5 w-auto"
-              />
-              <span className="font-display text-caption font-bold text-navy-deep">
-                Intelligence
-              </span>
-            </Link>
+            <Brand
+              tone="inverse"
+              subtitle="Recherche documentaire"
+              className="mb-4 w-fit"
+            />
             <p className="mb-4 max-w-sm text-caption leading-relaxed text-white/70 dark:text-ink-muted">
               Interface de recherche sur les publications officielles de la
               Banque de la République d’Haïti. Explorez les documents, leurs

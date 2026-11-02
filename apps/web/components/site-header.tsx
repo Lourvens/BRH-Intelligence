@@ -1,42 +1,15 @@
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 
 import { navigation } from "@/lib/content/navigation";
 
+import { Brand } from "./brand";
 import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/95 shadow-[0_1px_3px_rgba(11,23,41,0.03)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-5 sm:gap-4 sm:px-6">
-        <Link
-          href="/"
-          aria-label="BRH Intelligence — accueil"
-          className="flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-ink sm:gap-3"
-        >
-          {/* The mark is navy only; on dark surfaces it sits on a white chip so
-              it keeps its official colour and stays visible. */}
-          <span className="inline-flex items-center justify-center dark:rounded-sm dark:bg-white dark:p-0.5">
-            <Image
-              src="/brh-logo.png"
-              alt="BRH"
-              width={251}
-              height={123}
-              priority
-              className="h-5 w-auto sm:h-7"
-            />
-          </span>
-          <span className="hidden h-6 w-px bg-border sm:block" />
-          <span className="flex flex-col">
-            <span className="font-display text-caption font-bold leading-none tracking-tight text-navy-ink sm:text-body">
-              Intelligence
-            </span>
-            <span className="mt-1 hidden text-[10px] font-medium leading-none text-ink-muted sm:block">
-              Banque de la République d’Haïti
-            </span>
-          </span>
-        </Link>
+        <Brand priority className="shrink-0" />
 
         <nav
           aria-label="Navigation principale"

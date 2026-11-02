@@ -1,10 +1,10 @@
 "use client";
 
 import { ArrowLeft, Plus, Search, X } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useState, type ChangeEvent } from "react";
 
+import { Brand } from "@/components/brand";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -54,30 +54,11 @@ export function ConversationSidebar({
         )}
       >
         {!collapsed ? (
-          <Link
-            href="/"
-            aria-label="BRH Intelligence — accueil"
-            className="flex min-w-0 flex-1 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring"
-          >
-            <span className="inline-flex shrink-0 items-center justify-center dark:rounded-sm dark:bg-white dark:p-0.5">
-              <Image
-                src="/brh-logo.png"
-                alt="BRH"
-                width={251}
-                height={123}
-                className="h-6 w-auto"
-              />
-            </span>
-            <span className="hidden h-5 w-px bg-sidebar-border sm:block" />
-            <span className="min-w-0">
-              <span className="block font-display text-caption font-bold leading-none text-navy-ink">
-                Intelligence
-              </span>
-              <span className="mt-0.5 block truncate text-caption text-ink-muted">
-                Assistant documentaire
-              </span>
-            </span>
-          </Link>
+          <Brand
+            size="sm"
+            subtitle="Assistant documentaire"
+            className="min-w-0 flex-1"
+          />
         ) : null}
         {!isMobile ? (
           <SidebarTrigger
