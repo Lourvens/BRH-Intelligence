@@ -8,7 +8,9 @@ import { ThemeToggle } from "./theme-toggle";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-bg/95 shadow-[0_1px_3px_rgba(11,23,41,0.03)] backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-5 sm:gap-4 sm:px-6">
+      {/* Same wrapper as the landing sections, so the logo, hero copy and
+          footer share one left edge. */}
+      <div className="landing-wrap flex h-16 items-center justify-between gap-2 sm:gap-4">
         <Brand priority className="shrink-0" />
 
         <nav

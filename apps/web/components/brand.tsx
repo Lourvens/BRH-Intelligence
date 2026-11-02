@@ -4,6 +4,8 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 type BrandProps = {
+  /** Lockup label: “Intelligence” for the app, “Corpus” for the corpus. */
+  wordmark?: string;
   /** Descriptor under the wordmark. Pass `null` to omit it. */
   subtitle?: string | null;
   size?: "sm" | "md";
@@ -13,11 +15,12 @@ type BrandProps = {
 };
 
 /**
- * The product lockup: the official BRH monogram, a rule, and the “Intelligence”
- * wordmark. The mark is never recoloured — on dark or inverse surfaces it sits
- * on a white tile so it keeps its official navy.
+ * The product lockup: the official BRH monogram, a rule, and the product or
+ * section wordmark. The mark is never recoloured — on dark or inverse surfaces
+ * it sits on a white tile so it keeps its official navy.
  */
 export function Brand({
+  wordmark = "Intelligence",
   subtitle = "Banque de la République d’Haïti",
   size = "md",
   tone = "default",
@@ -30,7 +33,7 @@ export function Brand({
   return (
     <Link
       href="/"
-      aria-label="BRH Intelligence — accueil"
+      aria-label={`BRH ${wordmark} — accueil`}
       className={cn(
         "flex min-w-0 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 sm:gap-3",
         inverse ? "focus-visible:ring-white/70" : "focus-visible:ring-navy-ink",
@@ -68,7 +71,7 @@ export function Brand({
             inverse ? "text-white" : "text-navy-ink",
           )}
         >
-          Intelligence
+          {wordmark}
         </span>
         {subtitle ? (
           <span

@@ -25,18 +25,6 @@ body:has(.corpus-header) {
   box-shadow: none;
   z-index: 35;
 }
-.corpus-wordmark {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 18px;
-  white-space: nowrap;
-  color: var(--color-navy-ink);
-}
-.corpus-wordmark strong {
-  font-weight: 600;
-  color: var(--color-ink);
-}
 .corpus-desktop-nav {
   display: flex;
   gap: 8px;
@@ -618,10 +606,6 @@ body:has(.corpus-header) .atlas-page {
 @media (max-width: 767px) {
   .corpus-header.research-header {
     padding: 0 16px;
-    gap: 8px;
-  }
-  .corpus-wordmark {
-    font-size: 16px;
     gap: 8px;
   }
   .corpus-desktop-nav {

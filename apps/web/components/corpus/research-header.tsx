@@ -1,14 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  BookOpen,
-  Library,
-  MessageSquare,
-  Network,
-  Shapes,
-  Menu,
-} from "lucide-react";
+import { Library, MessageSquare, Network, Shapes, Menu } from "lucide-react";
+import { Brand } from "@/components/brand";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,16 +28,11 @@ export function ResearchHeader() {
       : "/brh-corpus";
   return (
     <header className="research-header corpus-header">
-      <Link
-        href="/"
-        className="corpus-wordmark"
-        aria-label="BRH Intelligence, accueil"
-      >
-        <BookOpen size={22} aria-hidden />
-        <span>
-          BRH <strong>Corpus</strong>
-        </span>
-      </Link>
+      <Brand
+        wordmark="Corpus"
+        subtitle="Espace de recherche"
+        className="shrink-0"
+      />
       <nav className="corpus-desktop-nav" aria-label="Navigation de recherche">
         {destinations.map(({ href, label, icon: Icon }) => (
           <Link

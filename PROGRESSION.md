@@ -7,6 +7,12 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
+- **Home container alignment (2026-11-02).** The sticky header and footer now
+  use the landing `landing-wrap` (1240px, 80px gutters, 48/40px on tablet and
+  mobile) instead of their own `max-w-6xl` and `max-w-7xl` wrappers. The logo,
+  hero copy, sections and footer now share one left and right edge.
+  `tsc --noEmit` passes; no browser run.
+
 - **Small model and thread titles (2026-11-01).** Added independently configurable OpenRouter SLM settings and first-turn conversation title generation stored in graph state (ADR-0026). The UI restores titles on thread reload and falls back to the question if the SLM fails. Offline agent tests pass; future ontology work and live model verification remain outstanding.
 
 - **New-chat thread lifecycle (2026-10-31).** Moved the assistant shell into a shared Next.js layout so the SDK stream remains mounted as `/assistant` receives its thread URL. History navigation to a different thread stops an active run and clears its transient state. Next route type generation, TypeScript and three focused tests pass. End-to-end browser verification is reserved for the user.
@@ -18,7 +24,8 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
   The official BRH monogram is unchanged and keeps its white tile on dark and
   inverse surfaces; the wordmark is larger, the footer drops the white pill for
   a mark tile plus wordmark, and the subtitle is hidden on narrow headers.
-  `tsc --noEmit` passes; no browser run.
+  The corpus workspace header shares the same lockup with a `Corpus` wordmark,
+  replacing its one-off book icon. `tsc --noEmit` passes; no browser run.
 
 - **Interaction motion (2026-11-01).** Installed `ibelick/ui-skills`'s
   `fixing-motion-performance` skill. Recorded the user's persistent preference
