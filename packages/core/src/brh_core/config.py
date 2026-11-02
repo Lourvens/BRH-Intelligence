@@ -163,6 +163,16 @@ class Settings(BaseSettings):
     chat_timeout: float = Field(default=60, gt=0, validation_alias="BRH_CHAT_TIMEOUT")
     chat_max_retries: int = Field(default=2, ge=0, validation_alias="BRH_CHAT_MAX_RETRIES")
 
+    # Small model for lightweight assistant tasks (titles, future ontology work).
+    slm_base_url: str = Field(
+        default="https://openrouter.ai/api/v1", min_length=1, validation_alias="BRH_SLM_BASE_URL"
+    )
+    slm_model: str = Field(
+        default="mistralai/ministral-8b-2512", min_length=1, validation_alias="BRH_SLM_MODEL"
+    )
+    slm_timeout: float = Field(default=20, gt=0, validation_alias="BRH_SLM_TIMEOUT")
+    slm_max_tokens: int = Field(default=128, gt=0, validation_alias="BRH_SLM_MAX_TOKENS")
+
     decision_provider: LLMProvider = Field(
         default=LLMProvider.openrouter, validation_alias="BRH_DECISION_PROVIDER"
     )

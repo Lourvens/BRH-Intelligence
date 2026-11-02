@@ -23,6 +23,22 @@ def chat_model():
     )
 
 
+def small_model():
+    settings = get_settings()
+    key = settings.openrouter_api_key.get_secret_value()
+    if not key:
+        raise RuntimeError("La clé du petit modèle est absente.")
+    return ChatOpenAI(
+        model=settings.slm_model,
+        base_url=settings.slm_base_url,
+        api_key=key,
+        temperature=0,
+        max_tokens=settings.slm_max_tokens,
+        timeout=settings.slm_timeout,
+        max_retries=0,
+    )
+
+
 def decide_intent(messages):
     settings = get_settings()
     if settings.decision_provider != LLMProvider.openrouter:

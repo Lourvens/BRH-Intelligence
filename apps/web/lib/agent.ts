@@ -28,6 +28,7 @@ export type Citation = {
 /** The graph state, mirroring `brh_agent.state.AgentState`. */
 export type AgentState = {
   messages: Message[];
+  title?: string;
   phase?: string;
   kind?: string;
   question?: string;

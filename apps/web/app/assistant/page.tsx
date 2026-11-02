@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { AssistantShell } from "@/components/assistant/assistant-shell";
 import { OG_IMAGE, SITE_NAME } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -30,5 +29,5 @@ export const metadata: Metadata = {
 };
 
 export default function AssistantPage() {
-  return <AssistantShell />;
+  return null;
 }

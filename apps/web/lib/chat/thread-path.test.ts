@@ -1,0 +1,10 @@
+import { expect, test } from "bun:test";
+import { threadIdFromPath, threadPath } from "./thread-path";
+
+test("thread URLs round-trip and the assistant root starts a new conversation", () => {
+  const id = "12345678-1234-1234-1234-123456789abc";
+  expect(threadPath(id)).toBe(`/assistant/${id}`);
+  expect(threadIdFromPath(threadPath(id))).toBe(id);
+  expect(threadIdFromPath("/assistant")).toBeNull();
+  expect(threadIdFromPath("/assistant/not-an-id")).toBeNull();
+});

@@ -2,11 +2,21 @@
 
 import json
 
-from brh_agent.graph import build_graph
+from brh_agent.graph import build_graph as create_graph
 from brh_agent.research.tools import make_search_tool
 from brh_core.models import Citation, RetrievedChunk, SearchResult
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.checkpoint.memory import InMemorySaver
+
+
+class TitleModel:
+    def invoke(self, messages):
+        return AIMessage(content="Politique monétaire")
+
+
+def build_graph(**kwargs):
+    kwargs.setdefault("title_model_factory", TitleModel)
+    return create_graph(**kwargs)
 
 
 class Service:
@@ -305,3 +315,40 @@ def test_partial_conversation_is_preserved_after_stream_error():
     assert result["answer"].startswith("Bonjour, je peux vous aider")
     assert "interrompue" in result["answer"]
     assert result["kind"] == "error"
+
+
+def test_title_generated_once_and_restored_with_thread():
+    calls = []
+
+    class Counter:
+        def invoke(self, messages):
+            calls.append(messages)
+            return AIMessage(content="  « Taux directeur »  ")
+
+    model = Model([AIMessage(content="Bonjour"), AIMessage(content="Autre réponse")])
+    graph = build_graph(
+        decision=lambda _: "greeting",
+        model_factory=lambda: model,
+        title_model_factory=Counter,
+        checkpointer=InMemorySaver(),
+    )
+    config = {"configurable": {"thread_id": "title-thread"}}
+    first = graph.invoke({"messages": [HumanMessage(content="Quel taux ?")]}, config)
+    second = graph.invoke({"messages": [HumanMessage(content="Merci")]}, config)
+    assert first["title"] == second["title"] == "Taux directeur"
+    assert len(calls) == 1
+
+
+def test_title_failure_does_not_replace_response():
+    class Broken:
+        def invoke(self, messages):
+            raise RuntimeError("unavailable")
+
+    graph = build_graph(
+        decision=lambda _: "greeting",
+        model_factory=lambda: Model([AIMessage(content="Bonjour !")]),
+        title_model_factory=Broken,
+    )
+    result = graph.invoke({"messages": [HumanMessage(content="Salut")]})
+    assert result["answer"] == "Bonjour !"
+    assert not result.get("title")

@@ -9,6 +9,7 @@ from langgraph.graph.message import add_messages
 class AgentState(TypedDict, total=False):
     messages: Annotated[list[BaseMessage], add_messages]
     activities: list[dict[str, Any]]
+    title: str
     intent: str
     turn_id: str
     research_messages: list[BaseMessage]

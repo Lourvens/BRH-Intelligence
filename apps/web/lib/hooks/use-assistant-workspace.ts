@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { threadIdFromPath, threadPath } from "@/lib/chat/thread-path";
 import { useAgent } from "@/lib/agent";
 import { agentMessagesToChatMessages } from "@/lib/chat/agent-messages";
 import { appendAnswerDelta, parseAnswerDelta } from "@/lib/chat/answer-stream";
@@ -11,8 +13,10 @@ type ThreadInfo = Omit<ChatThread, "messages">;
 const STORAGE_KEY = "brh:assistant:threads:v1";
 
 export function useAssistantWorkspace() {
+  const pathname = usePathname();
+  const urlThreadId = threadIdFromPath(pathname);
   const [threadInfo, setThreadInfo] = useState<ThreadInfo[]>([]);
-  const [activeThreadId, setActiveThreadId] = useState<string | null>(null);
+  const [activeThreadId, setActiveThreadId] = useState<string | null>(urlThreadId);
   const [selectedMessageId, setSelectedMessageId] = useState<string | null>(null);
   const [selectedCitationId, setSelectedCitationId] = useState<string | null>(null);
   const [sourcesOpen, setSourcesOpen] = useState(false);
@@ -40,6 +44,7 @@ export function useAssistantWorkspace() {
 
   const onThreadId = useCallback((id: string) => {
     setActiveThreadId(id);
+    if (window.location.pathname !== threadPath(id)) window.history.replaceState(null, "", threadPath(id));
     setThreadInfo((current) => current.some((thread) => thread.id === id) ? current : [{
       id, title: pending.current?.text.slice(0, 48) || "Conversation",
       updatedAt: "À l’instant", group: "Aujourd’hui",
@@ -93,11 +98,28 @@ export function useAssistantWorkspace() {
         if (Array.isArray(data.threads) && data.threads.every((thread) =>
           typeof thread.id === "string" && typeof thread.title === "string")) {
           setThreadInfo(data.threads);
-          setActiveThreadId(typeof data.activeId === "string" ? data.activeId : null);
         }
       }
     } catch { /* Storage is optional; server thread state remains authoritative. */ }
   }, []);
+
+  useEffect(() => {
+    if (urlThreadId === activeThreadId) return;
+    if (submitting.current) {
+      stoppedByUser.current = true;
+      acceptActivity.current = false;
+      clearQueuedDraft();
+      void stream.stop().catch(() => setRequestError(true));
+    }
+    setActiveThreadId(urlThreadId);
+    setDraft(null);
+    setActivities([]);
+    setSelectedMessageId(null);
+    setSelectedCitationId(null);
+    setSourcesOpen(false);
+    setRunStatus("idle");
+    pending.current = null;
+  }, [urlThreadId]);
 
   useEffect(() => {
     if (!threadInfo.length) return;
@@ -120,6 +142,18 @@ export function useAssistantWorkspace() {
     return () => window.removeEventListener("keydown", handleShortcut);
   }, []);
 
+  useEffect(() => {
+    const title = stream.values?.title;
+    if (!activeThreadId || !title) return;
+    setThreadInfo((current) => {
+      if (!current.some((thread) => thread.id === activeThreadId)) {
+        return [{ id: activeThreadId, title, updatedAt: "À l’instant", group: "Aujourd’hui" }, ...current];
+      }
+      return current.map((thread) =>
+        thread.id === activeThreadId && thread.title !== title ? { ...thread, title } : thread);
+    });
+  }, [activeThreadId, stream.values?.title]);
+
   const publishedMessages = agentMessagesToChatMessages(stream.messages);
   const messages = draft && publishedMessages.at(-1)?.role === "user"
     ? [...publishedMessages, { id: `answer-${draft.turnId}`, role: "assistant" as const,
@@ -128,7 +162,7 @@ export function useAssistantWorkspace() {
   const activeInfo = threadInfo.find((thread) => thread.id === activeThreadId);
   const activeThread: ChatThread | null = activeThreadId || messages.length ? {
     id: activeThreadId || "pending",
-    title: activeInfo?.title || pending.current?.text.slice(0, 48) || "Conversation",
+    title: stream.values?.title || activeInfo?.title || pending.current?.text.slice(0, 48) || "Conversation",
     updatedAt: "À l’instant", group: "Aujourd’hui", messages,
   } : null;
   const threads = threadInfo.map((thread) => ({
@@ -149,6 +183,7 @@ export function useAssistantWorkspace() {
     setDraft(null);
     setRunStatus("idle");
     setActiveThreadId(id);
+    if (window.location.pathname !== threadPath(id)) window.history.pushState(null, "", threadPath(id));
     pending.current = null;
     setSelectedMessageId(null);
     setSelectedCitationId(null);
@@ -162,6 +197,7 @@ export function useAssistantWorkspace() {
     setDraft(null);
     setRunStatus("idle");
     setActiveThreadId(null);
+    if (window.location.pathname !== threadPath(null)) window.history.pushState(null, "", threadPath(null));
     pending.current = null;
     setSelectedMessageId(null);
     setSelectedCitationId(null);
