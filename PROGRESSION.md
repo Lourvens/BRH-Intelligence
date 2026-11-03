@@ -1,11 +1,16 @@
 # Progression
 
-Last updated: 2026-11-03 (corpus default order + skeleton)
+Last updated: 2026-11-03 (header agent CTA)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Header CTA routes to the agent (2026-11-03).** The desktop header and the
+  mobile sheet now link “Poser une question” to `/assistant` instead of
+  scrolling to the landing form (`#question`), so the primary action opens the
+  agent from any page. TypeScript passes.
 
 - **Corpus recent-first order + faithful skeleton (2026-11-03).** Browsing now
   defaults to the most recently synced publications (`sort=recent`) in the
