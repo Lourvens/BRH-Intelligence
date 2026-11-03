@@ -14,7 +14,6 @@ from brh_agent.research import agent as research
 from brh_agent.research.tools import make_search_tool
 from brh_agent.router.agent import route_turn
 from brh_agent.state import AgentState
-from brh_agent.telemetry import configure_tracing
 
 logger = logging.getLogger(__name__)
 ERROR = "Le service est temporairement indisponible. Veuillez réessayer."
@@ -250,5 +249,4 @@ def publish(text, citations, kind, turn_id):
     }
 
 
-configure_tracing()
 graph = build_graph()

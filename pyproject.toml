@@ -23,7 +23,6 @@ dev = [
     "langgraph-cli[inmem]>=0.4.40",
     # The CLI's inmem extra ships the Agent Server; 0.17+ leaves critical support.
     "langgraph-api>=0.17.0",
-    "arize>=8.61.0",
     "httpx>=0.28.1",
 ]
 

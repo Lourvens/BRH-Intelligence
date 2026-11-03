@@ -2,6 +2,7 @@
 
 - **Status**: Accepted
 - **Date**: 2026-10-29
+- **Amended**: ADR-0027 replaces the Arize tracing detail with LangSmith.
 
 ## Context
 

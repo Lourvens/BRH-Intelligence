@@ -1,9 +1,9 @@
 # ADR-0018: Arize AX for agent observability
 
-- **Status**: Accepted
+- **Status**: Superseded by ADR-0027 (2026-11-03)
 - **Date**: 2026-10-28
-- **Amended**: ADR-0022 adds explicitly opted-in trace content; the policy below
-  remains the default when `BRH_TRACE_CONTENT=false`.
+- **Superseded by**: ADR-0027, which removes the Arize/OpenInference stack and
+  returns agent tracing to LangSmith.
 
 ## Context
 

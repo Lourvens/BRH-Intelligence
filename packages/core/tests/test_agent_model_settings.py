@@ -28,7 +28,7 @@ def test_agent_role_defaults_match_template():
     )
 
 
-def test_env_template_uses_arize_agent_tracing():
+def test_env_template_uses_langsmith_tracing():
     template_path = Path(__file__).resolve().parents[3] / ".env.example"
     assignments = {
         line.partition("=")[0]: line.partition("=")[2]
@@ -36,18 +36,13 @@ def test_env_template_uses_arize_agent_tracing():
         if line and not line.startswith("#") and "=" in line
     }
 
-    assert assignments["ARIZE_PROJECT_NAME"] == "brh-intelligence"
-    assert "ARIZE_API_KEY" in assignments
-    assert "ARIZE_SPACE_ID" in assignments
-    privacy_flags = {
-        name: value
-        for name, value in assignments.items()
-        if name.startswith("OPENINFERENCE_HIDE_")
-    }
-    assert len(privacy_flags) == 9
-    assert set(privacy_flags.values()) == {"true"}
-    assert not any(name.startswith("LANGSMITH_") for name in assignments)
-    assert not any(name.startswith("LANGCHAIN_") for name in assignments)
+    assert assignments["LANGSMITH_TRACING"] == "true"
+    assert assignments["LANGSMITH_PROJECT"] == "brh-intelligence"
+    assert "LANGSMITH_API_KEY" in assignments
+    assert "LANGSMITH_HIDE_INPUTS" not in assignments
+    assert "LANGSMITH_HIDE_OUTPUTS" not in assignments
+    assert not any(name.startswith("ARIZE_") for name in assignments)
+    assert not any(name.startswith("OPENINFERENCE_") for name in assignments)
 
 
 def test_model_roles_can_be_overridden_independently(monkeypatch):

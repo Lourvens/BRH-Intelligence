@@ -1,11 +1,21 @@
 # Progression
 
-Last updated: 2026-11-03 (corpus default order + skeleton)
+Last updated: 2026-11-03 (LangSmith tracing)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Observability moved to LangSmith (2026-11-03).** Removed Arize AX and
+  OpenInference from the agent: dropped `arize-otel`,
+  `openinference-instrumentation-langchain` and `opentelemetry-api`, deleted
+  `brh_agent.telemetry`, and removed `ARIZE_*`, `BRH_TRACE_CONTENT` and the
+  `OPENINFERENCE_HIDE_*` flags. Tracing is now the native LangChain/LangGraph
+  LangSmith integration (`LANGSMITH_TRACING`, `LANGSMITH_API_KEY`,
+  `LANGSMITH_PROJECT=brh-intelligence`). Traces keep full content by default;
+  set `LANGSMITH_HIDE_INPUTS`/`LANGSMITH_HIDE_OUTPUTS` to true only for
+  metadata-only traces. See ADR-0027.
 
 - **Corpus recent-first order + faithful skeleton (2026-11-03).** Browsing now
   defaults to the most recently synced publications (`sort=recent`) in the

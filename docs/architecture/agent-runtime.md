@@ -106,37 +106,27 @@ through `services/agent/langgraph.json`. Web uses
 `NEXT_PUBLIC_LANGGRAPH_ASSISTANT_ID` (default `agent`). These belong in the web
 environment when overriding the defaults. No provider key goes into web env.
 
-Agent tracing exports to Arize AX through OpenTelemetry and OpenInference:
+Agent tracing exports to LangSmith through the native LangChain/LangGraph
+callback integration:
 
 ```dotenv
-ARIZE_API_KEY=...
-ARIZE_SPACE_ID=...
-ARIZE_PROJECT_NAME=brh-intelligence
+LANGSMITH_TRACING=true
+LANGSMITH_API_KEY=...
+LANGSMITH_PROJECT=brh-intelligence
 ```
 
-`brh_agent.observability` installs the LangChain instrumentor once before graph
-execution, batches exports and flushes them during application shutdown. It
-enforces content redaction even if a deployment omits the template flags:
-questions, prompts, answers, tool definitions, embeddings and retrieved
-documents are not exported. Arize retains the execution hierarchy, timing,
-errors, token usage and model metadata. With `BRH_TRACE_CONTENT=true` (ADR-0022),
-new traces instead include graph inputs/outputs, chat messages and corpus
-context, plus Jev decision inputs/outputs. Jev spans use the active LangChain
-parent so these operations appear inside the same graph trace. Invocation
-parameters, tool definitions, images and embeddings remain hidden; provider
-authorization headers and settings are not span attributes.
+`langgraph dev` loads the root `.env` through `services/agent/langgraph.json`;
+no custom instrumentation module is required. LangSmith retains the graph
+hierarchy, latency, errors, token usage and model metadata. Content is captured
+by default, so traces include prompts, model outputs and retrieved corpus
+context. Set `LANGSMITH_HIDE_INPUTS=true` and `LANGSMITH_HIDE_OUTPUTS=true` only
+when a deployment must keep traces metadata-only (ADR-0027).
 
 Restart `langgraph dev` after changing the root `.env` because
 `services/agent/langgraph.json` loads that file when the server starts.
 
-The optional LangSmith Codex MCP remains independent of runtime trace export. It
-can inspect historical LangSmith projects, but the application no longer emits
-agent traces through LangSmith.
-
-```bash
-codex mcp get langsmith
-codex mcp login langsmith  # only when Auth is not already OAuth-authenticated
-```
+The LangSmith MCP can inspect the same projects; it is a developer tool, not a
+second exporter.
 
 The SDK owns messages and cancellation. The browser stores only thread metadata
 in session storage; messages and citation envelopes reload from Agent Server.

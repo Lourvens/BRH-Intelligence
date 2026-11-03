@@ -24,8 +24,8 @@ OCR stage: manifest → ledger → page-marked markdown),
 validation → page/chunk persistence; vector indexing remains opt-in),
 `brh_core.ingestion.chunking` (structure-aware hybrid chunking v2, ADR-0011) with
 `chunk.py` as its stable facade, `brh_agent` (bounded adaptive research,
-chat/decision clients, validated answer publication and configurable Arize
-tracing; ADR-0017/0018/0022), and the
+chat/decision clients, validated answer publication and configurable LangSmith
+tracing; ADR-0017/0027), and the
 `brh_analytics` design layer plus its `inventory` family.
 
 Ingestion/indexing is now runnable end to end: LangChain discovery/ingestion

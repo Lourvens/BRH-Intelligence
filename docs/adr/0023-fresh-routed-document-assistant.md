@@ -2,6 +2,7 @@
 
 - Status: implemented foundation, pending live verification
 - Date: 2026-10-30
+- Amended: ADR-0027 replaces the Arize tracing detail with LangSmith.
 
 ## Context
 

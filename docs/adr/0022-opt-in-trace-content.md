@@ -1,8 +1,10 @@
 # ADR-0022: Opt-in Arize trace content for agent debugging
 
-- **Status**: Accepted
+- **Status**: Superseded by ADR-0027 (2026-11-03)
 - **Date**: 2026-10-29
 - **Amends**: ADR-0018
+- **Superseded by**: ADR-0027, which replaces `BRH_TRACE_CONTENT` with the
+  LangSmith `LANGSMITH_HIDE_INPUTS` / `LANGSMITH_HIDE_OUTPUTS` controls.
 
 ## Context
 
