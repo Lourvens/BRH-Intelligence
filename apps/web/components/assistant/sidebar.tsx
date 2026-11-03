@@ -140,7 +140,7 @@ export function ConversationSidebar({
         )}
       </div>
 
-      <SidebarSeparator className={cn("mx-3 w-auto", collapsed && "mx-2")} />
+      <SidebarSeparator className={cn("mx-3", collapsed && "mx-2")} />
 
       <SidebarContent className={cn("px-1.5 pb-4", collapsed && "px-1")}>
         <ThreadList

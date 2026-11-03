@@ -73,6 +73,12 @@
       "skillPath": "skills/improve-animations/SKILL.md",
       "computedHash": "f6652a3bb94950baa33c684cc0966c838eb65cf22ebb5769a4f51ea205c254fe"
     },
+    "langsmith-dataset": {
+      "source": "langchain-ai/langsmith-skills",
+      "sourceType": "github",
+      "skillPath": "config/skills/langsmith-dataset/SKILL.md",
+      "computedHash": "38c4ed7c09f14948243ace1b2e55c9baa356954ce1e17deace33745f443fa79b"
+    },
     "mobile-native": {
       "source": "emilkowalski/skill",
       "sourceType": "github",

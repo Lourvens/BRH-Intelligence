@@ -3,6 +3,11 @@ export function threadPath(threadId: string | null): string {
   return threadId ? `/assistant/${encodeURIComponent(threadId)}` : "/assistant";
 }
 
+/** Absolute, shareable URL for a conversation thread. */
+export function threadShareUrl(threadId: string, origin: string): string {
+  return new URL(threadPath(threadId), origin).toString();
+}
+
 export function threadIdFromPath(pathname: string): string | null {
   const match = pathname.match(/^\/assistant\/([^/]+)\/?$/);
   if (!match) return null;

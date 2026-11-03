@@ -9,7 +9,15 @@ import {
   DialogDescription,
   DialogTrigger,
 } from "@/components/ui/dialog";
-export function DocumentFigure({ src, alt }: { src: string; alt: string }) {
+export function DocumentFigure({
+  src,
+  alt,
+  priority = false,
+}: {
+  src: string;
+  alt: string;
+  priority?: boolean;
+}) {
   const [failed, setFailed] = useState(false);
   return failed ? (
     <span
@@ -28,7 +36,8 @@ export function DocumentFigure({ src, alt }: { src: string; alt: string }) {
           <img
             src={src}
             alt={alt}
-            loading="lazy"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : undefined}
             onError={() => setFailed(true)}
             className="h-auto max-w-full"
           />

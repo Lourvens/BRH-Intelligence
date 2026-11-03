@@ -4,23 +4,18 @@ import type { ChatArtifact } from "@/lib/chat/types";
 
 export function DecisionCard({ artifact }: { artifact: ChatArtifact }) {
   return (
-    <details className="group rounded-sm border border-border bg-surface">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-3.5 py-3">
-        <span className="flex items-center gap-2 text-caption font-bold uppercase tracking-wider text-navy-ink">
-          <Braces className="size-3.5 text-teal" aria-hidden />
-          Décision de présentation
-        </span>
-        <span className="rounded bg-surface-alt px-1.5 py-0.5 font-mono text-[11px] text-ink-muted">
+    <details className="group mt-1">
+      <summary className="flex min-h-8 cursor-pointer list-none items-center gap-1.5 py-1.5 text-[11px] text-ink-muted hover:text-navy-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure">
+        <Braces className="size-3 text-ink-muted" aria-hidden />
+        <span>Détails techniques de la visualisation</span>
+        <span className="ml-auto font-mono text-[10px] uppercase tracking-wide">
           JSON
         </span>
       </summary>
-      <div className="border-t border-border px-3.5 py-3">
-        <pre className="overflow-x-auto rounded-sm bg-bg p-3 font-mono text-caption leading-relaxed text-ink">
+      <div className="border-t border-border py-2">
+        <pre className="max-h-48 overflow-auto bg-surface-alt p-2.5 font-mono text-[11px] leading-relaxed text-ink">
 {JSON.stringify(artifact.decision, null, 2)}
         </pre>
-        <p className="mt-2 text-caption text-ink-muted">
-          Type de visualisation et correspondance des colonnes utilisées.
-        </p>
       </div>
     </details>
   );

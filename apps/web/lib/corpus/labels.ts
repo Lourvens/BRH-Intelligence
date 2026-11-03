@@ -15,5 +15,11 @@ export const relationshipLabels: Record<string, string> = {
   supervises: "supervise", measures: "mesure", reports_on: "documente",
   participates_in: "participe à", finances: "finance", part_of: "fait partie de",
 };
+export const familyLabel = (family: string): string =>
+  familyLabels[family] ?? family;
+export const entityLabel = (kind: string, fallback?: string): string =>
+  entityLabels[kind] ?? fallback ?? kind;
+export const relationshipLabel = (predicate: string): string =>
+  relationshipLabels[predicate] ?? predicate;
 export const numberLabel = (value: number) => new Intl.NumberFormat("fr-FR").format(value);
 export const dateLabel = (value: string) => format(parseISO(value), "d MMM yyyy", { locale: fr });

@@ -17,7 +17,7 @@ import { MermaidGraph } from "./mermaid-graph";
 
 function GraphLegend({ kinds }: { kinds: string[] }) {
   return (
-    <div className="flex flex-wrap gap-x-3 gap-y-1 border-b border-border px-3.5 py-1.5 text-[11px] text-ink-muted">
+    <div className="flex flex-wrap gap-x-3 gap-y-1 px-3.5 py-1 text-[11px] text-ink-muted">
       {kinds.map((kind, index) => (
         <span key={kind} className="inline-flex items-center gap-1">
           <span
@@ -54,7 +54,7 @@ export function GraphViews({
 
   return (
     <Tabs value={view} onValueChange={setView} className="gap-0">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-3.5 py-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 px-3.5 py-2">
         <TabsList variant="line" className="h-10 gap-3 p-0">
           <TabsTrigger
             value="network"

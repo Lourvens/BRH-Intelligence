@@ -1,0 +1,20 @@
+# Backend image build context. Keep it to the Python workspace only.
+.git
+.venv
+.github
+.agents
+.codex
+.hallmark
+.pytest_cache
+.ruff_cache
+**/__pycache__
+**/*.pyc
+apps
+data
+docs
+experiments
+node_modules
+services/analytics/out
+services/agent/.langgraph_api
+*.md
+!README.md

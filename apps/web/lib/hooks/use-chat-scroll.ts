@@ -31,10 +31,13 @@ export function useChatScroll(threadId: string | undefined, messageCount: number
       setIsAtBottom(followRef.current);
     }
   }
-  function followMessages() {
+  function followMessages({ smooth = false }: { smooth?: boolean } = {}) {
     followRef.current = true;
     setIsAtBottom(true);
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "instant" });
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: smooth && !reduceMotion ? "smooth" : "instant",
+    });
   }
   return { scrollRef, handleScroll, followMessages, isAtBottom };
 }

@@ -1,0 +1,94 @@
+{
+  "source": {
+    "path": "data/ocr",
+    "documents": 778,
+    "pages": 11628
+  },
+  "assumptions": {
+    "chars_per_token": 4.0,
+    "token_cap": 500,
+    "token_figures_are_estimates": true,
+    "validate_with": "multilingual-e5-large tokenizer before enforcing a cap"
+  },
+  "headings": {
+    "total": 13445,
+    "by_level": {
+      "1": 1494,
+      "2": 8049,
+      "3": 3028,
+      "4": 700,
+      "5": 168,
+      "6": 6
+    }
+  },
+  "sections": {
+    "count": 13445,
+    "chars": {
+      "p50": 620,
+      "p75": 1494,
+      "p90": 3151,
+      "p95": 6187,
+      "p99": 36133
+    },
+    "tokens_est": {
+      "p50": 155.0,
+      "p75": 373.5,
+      "p90": 787.8,
+      "p95": 1546.8,
+      "p99": 9033.2
+    },
+    "crossing_page_pct": 40.8,
+    "token_band_pct": {
+      "under_350": 73.0,
+      "350_to_cap": 9.8,
+      "over_cap": 17.2
+    }
+  },
+  "paragraphs": {
+    "count": 73756,
+    "chars": {
+      "p50": 62,
+      "p75": 170,
+      "p90": 410,
+      "p95": 591,
+      "p99": 1001
+    },
+    "over_cap_pct": 0.0
+  },
+  "tables": {
+    "count": 10588,
+    "formats": {
+      "html": 5079,
+      "gfm": 5509
+    },
+    "chars": {
+      "p50": 1048,
+      "p75": 2259,
+      "p90": 4186,
+      "p95": 6352,
+      "p99": 8249
+    },
+    "tokens_est": {
+      "p50": 262.0,
+      "p75": 564.8,
+      "p90": 1046.5,
+      "p95": 1588.0,
+      "p99": 2062.2
+    },
+    "over_cap_pct": 29.7,
+    "caption_before_pct": 47.8,
+    "unit_inside_pct": 30.1,
+    "period_inside_pct": 55.6,
+    "source_inside_pct": 0.4,
+    "series_shape_pct": 34.7,
+    "pages_leading_with_table_pct": 9.6
+  },
+  "regulations": {
+    "circular_documents": 69,
+    "chars_p50": 8683,
+    "tokens_p50_est": 2170.8,
+    "fits_one_chunk_pct": 27.5,
+    "uses_article_pct": 59.4,
+    "uses_lettered_items_pct": 42.0
+  }
+}

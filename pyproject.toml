@@ -21,7 +21,8 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.6",
     "langgraph-cli[inmem]>=0.4.40",
-    "arize>=8.61.0",
+    # The CLI's inmem extra ships the Agent Server; 0.17+ leaves critical support.
+    "langgraph-api>=0.17.0",
     "httpx>=0.28.1",
 ]
 

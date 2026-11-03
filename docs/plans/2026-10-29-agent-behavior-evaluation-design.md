@@ -1,6 +1,8 @@
 # Agent behavior evaluation — design
 
-**Status:** Implemented initial contract set; factual gold-answer review remains open.
+**Status:** Historical. The Arize execution backend was removed in ADR-0027; the
+dataset and deterministic scorers remain the useful part. Factual gold-answer
+review remains open.
 
 ## Purpose
 

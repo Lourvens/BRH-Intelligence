@@ -25,7 +25,6 @@ export function ContinuousPages({
   const [pages, setPages] = useState<DocumentPage[]>([initial]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const [automatic, setAutomatic] = useState(true);
   const root = useRef<HTMLDivElement>(null);
   const sentinel = useRef<HTMLDivElement>(null);
   const controller = useRef<AbortController | null>(null);
@@ -75,7 +74,6 @@ export function ContinuousPages({
               ? failure.message
               : "Chargement impossible. Réessayez.",
           );
-          setAutomatic(false);
         }
       } finally {
         if (controller.current === request) {
@@ -106,14 +104,7 @@ export function ContinuousPages({
     anchor.current = null;
   }, [pages]);
   useEffect(() => {
-    if (
-      !automatic ||
-      busy ||
-      error ||
-      last >= initial.page_count ||
-      !sentinel.current
-    )
-      return;
+    if (busy || error || last >= initial.page_count || !sentinel.current) return;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) void load("next");
@@ -122,7 +113,7 @@ export function ContinuousPages({
     );
     observer.observe(sentinel.current);
     return () => observer.disconnect();
-  }, [automatic, busy, error, last, initial.page_count, load]);
+  }, [busy, error, last, initial.page_count, load]);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -154,17 +145,6 @@ export function ContinuousPages({
   }, [pages, onActive]);
   return (
     <div ref={root} className="corpus-continuous">
-      <div className="corpus-reading-options">
-        <span>Lecture continue</span>
-        <label>
-          <input
-            type="checkbox"
-            checked={automatic}
-            onChange={(event) => setAutomatic(event.target.checked)}
-          />{" "}
-          Charger la suite automatiquement
-        </label>
-      </div>
       {first > 1 && (
         <Button
           variant="outline"
@@ -195,14 +175,6 @@ export function ContinuousPages({
             slug={slug}
             publicationId={page.publication_id}
           />
-          <footer className="corpus-page-footer">
-            Fin de la page {page.page_number}
-            {page.pdf_url && (
-              <a href={page.pdf_url} target="_blank" rel="noreferrer">
-                Vérifier dans le PDF officiel
-              </a>
-            )}
-          </footer>
         </section>
       ))}
       <div ref={sentinel} className="corpus-load-more" aria-busy={busy}>

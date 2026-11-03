@@ -58,7 +58,7 @@ export function ThemeToggle({
       aria-pressed={mounted ? isDark : undefined}
       title={label}
       className={cn(
-        "rounded-lg text-ink-muted transition-[background-color,color,transform] duration-200 hover:text-navy-ink active:scale-95 motion-reduce:transition-none motion-reduce:active:scale-100",
+        "rounded-lg text-ink-muted transition-[background-color,color,transform] duration-[140ms] hover:text-navy-ink active:scale-95 motion-reduce:transition-none motion-reduce:active:scale-100",
         withLabel
           ? "w-full justify-start gap-2 px-2 text-[11px] font-medium"
           : "size-9 border border-border bg-surface shadow-sm hover:bg-surface-alt",

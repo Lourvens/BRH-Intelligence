@@ -144,22 +144,20 @@ implementing it.
 | `app/page.tsx` | ✅ landing page | `b961…` hero + `027b…` sections |
 | `app/assistant/page.tsx` | ✅ assistant | Three-panel Stitch workspace, demo transcripts |
 | `components/assistant/*` | ✅ | Sidebar, chat, message content, sources, decision card, chart/graph artifacts |
-| `lib/chat/*` | ✅ demo | Table schema, decision validation, threads, citations, artifacts |
-| `lib/chat/decision.ts` | ✅ | Validates `UIDecision` and derives chart/graph data from table rows |
-| `lib/chat/open-intelligent-ui.ts` | ✅ contract | Table→A2UI / chart-graph→Open Generative UI routing |
+| `components/corpus/*` | ✅ | Catalogue search, filters, entity directory and knowledge atlas |
+| `components/documents/*` | ✅ | Page-marked Markdown reader, continuous pages and copy-reference |
+| `components/landing/landing-page.tsx` | ✅ | Landing orchestrator; one concern per section file |
+| `components/landing/*` | ✅ | Hero, demo, proof strip, agent jobs, corpus workspace, method, provenance, FAQ, closing, footer |
+| `components/landing/graph-section.tsx` | ✅ | Preview graph orchestrator; heading, toolbar, canvas, node, inspector and list are siblings |
 | `components/site-header.tsx` | ✅ | Sticky institutional navbar |
-| `components/home/hero.tsx` | ✅ | Hero copy, CTAs and section shell |
-| `components/home/hero/*` | ✅ | Showcase, answer/document panes, archive strip, trust band, data |
-| `components/home/pipeline-section.tsx` | ✅ | Four-step document pipeline |
-| `components/home/corpus-section.tsx` | ✅ | Corpus narrative, metrics, families and archive image |
-| `components/home/usages-section.tsx` | ✅ | Four professional use cases |
-| `components/home/comparison-section.tsx` | ✅ | Sourced search vs general assistant |
-| `components/home/faq-section.tsx` | ✅ | Data, perimeter and freshness FAQ |
-| `components/home/access-cta.tsx` | ✅ | Closing demo/corpus CTA |
-| `components/site-footer.tsx` | ✅ | Institutional footer |
 | `public/brh-corpus-archive.jpg` | ✅ | Stitch archive image, locally hosted |
 | `components/ui/button.tsx` | ✅ | Button primitive |
-| `components/ui/citation-chip.tsx` | ✅ | Citation primitive |
+| `lib/chat/*` | ✅ | Message/citation types, activity and answer-stream parsing, thread storage |
+| `lib/chat/decision.ts` | ✅ | Validates `UIDecision` and derives chart/graph data from table rows |
+| `lib/chat/open-intelligent-ui.ts` | ✅ contract | Table→A2UI / chart-graph→Open Generative UI routing |
+| `lib/corpus/*` | ✅ | Server client, canonical links, labels, filter model, query mutation, Markdown safety |
+| `lib/hooks/*` | ✅ | Shared React hooks: assistant workspace/stream, atlas, landing motion, ECharts, mobile |
+| `lib/landing/*` | ✅ | Landing fixtures, graph data/path/layout and motion runtime |
 | `lib/content/navigation.ts` | ✅ | Shared navbar/footer links |
 | `lib/agent.ts` | ✅ SDK boundary | `AgentState`/`Citation` types + `useAgent()` wrapping `useStream` |
 | `lib/utils.ts` | ✅ | `cn()` + tailwind-merge config |

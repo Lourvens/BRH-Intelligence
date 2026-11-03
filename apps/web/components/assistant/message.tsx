@@ -16,10 +16,12 @@ export function Message({
   message,
   selectedCitationId,
   onSelectCitation,
+  threadId,
 }: {
   message: ChatMessage;
   selectedCitationId: string | null;
   onSelectCitation: (citationId: string) => void;
+  threadId: string | null;
 }) {
   const reducedMotion = useReducedMotion();
   const { text: pacedContent } = useSmoothText(message.content, { done: !message.streaming });
@@ -41,7 +43,7 @@ export function Message({
 
   return (
     <div className="min-w-0">
-        {message.activities?.length ? <AgentActivity activities={message.activities} stopped={false} failed={false} isStopping={false} /> : null}
+        {message.activities?.length ? <AgentActivity activities={message.activities} stopped={false} failed={false} isStopping={false} live={Boolean(message.streaming)} streaming={Boolean(message.streaming)} /> : null}
         <div
           className={cn(
             "min-w-0 py-2",
@@ -84,6 +86,7 @@ export function Message({
               citations={citations}
               selectedCitationId={selectedCitationId}
               onSelectCitation={onSelectCitation}
+              threadId={threadId}
             />
           )}
       </div>

@@ -32,7 +32,7 @@ export function SiteHeader() {
           <ThemeToggle className="size-10 min-[601px]:size-11" />
 
           <Link
-            href="#question"
+            href="/assistant"
             className="group hidden h-[42px] items-center gap-2 rounded-[11px] border border-white/15 bg-navy px-4 text-[13px] font-semibold text-white transition-[background-color,transform] duration-150 hover:bg-navy-deep active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-azure focus-visible:ring-offset-2 motion-reduce:active:scale-100 min-[1051px]:inline-flex"
           >
             Poser une question

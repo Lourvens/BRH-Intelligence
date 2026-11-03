@@ -7,18 +7,11 @@ import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
 import { useAssistantWorkspace } from "@/lib/hooks/use-assistant-workspace";
 
 import { ChatPanel } from "./chat-panel";
 import { ConversationSidebar } from "./sidebar";
-import { SourcesPanel } from "./sources-panel";
+import { SourcesSheet } from "./sources-sheet";
 
 export function AssistantShell() {
   const {
@@ -91,26 +84,13 @@ export function AssistantShell() {
         </div>
       </SidebarInset>
 
-      <Sheet open={sourcesOpen} onOpenChange={setSourcesOpen}>
-        <SheetContent
-          side="right"
-          showCloseButton={false}
-          className="w-[min(380px,94vw)] gap-0 rounded-none bg-surface p-0 shadow-none sm:max-w-[400px]"
-        >
-          <SheetHeader className="sr-only">
-            <SheetTitle>Sources documentaires</SheetTitle>
-            <SheetDescription>
-              Les documents et pages qui soutiennent la réponse.
-            </SheetDescription>
-          </SheetHeader>
-          <SourcesPanel
-            citations={citations}
-            selected={selectedCitation}
-            onSelect={selectCitation}
-            onClose={() => setSourcesOpen(false)}
-          />
-        </SheetContent>
-      </Sheet>
+      <SourcesSheet
+        open={sourcesOpen}
+        onOpenChange={setSourcesOpen}
+        citations={citations}
+        selected={selectedCitation}
+        onSelect={selectCitation}
+      />
     </SidebarProvider>
   );
 }

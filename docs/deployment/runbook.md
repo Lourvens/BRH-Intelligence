@@ -12,8 +12,9 @@ container**, **Postgres managed**, **Pinecone serverless** (ADR-0009).
      `BRH_EMBEDDING_PROVIDER=openai`)
 2. **Postgres** — any managed Postgres 15+. Run the migration once
    (`python -m brh_core.db.migrate`).
-3. **Arize AX** — a space + API key for privacy-redacted agent tracing
-   (`ARIZE_API_KEY`, `ARIZE_SPACE_ID`, `ARIZE_PROJECT_NAME`).
+3. **LangSmith** — an agent-based workspace with the `brh-intelligence` agent
+   and its environments, plus an API key (`LANGSMITH_API_KEY`,
+   `LANGSMITH_AGENT_ID`, `LANGSMITH_AGENT_ENVIRONMENT`).
 
 ## 1. Ingest
 
@@ -37,13 +38,14 @@ langgraph deploy        # or push via LangSmith Deployment
 ```
 
 Required env: `BRH_*` (as in `.env.example`), the configured model-provider
-credential, `ARIZE_API_KEY`, `ARIZE_SPACE_ID` and `ARIZE_PROJECT_NAME`. The
-`langgraph.json` graph id is `agent`. OpenInference content-redaction flags are
-enforced by the runtime and repeated in `.env.example` for operational clarity.
-`BRH_TRACE_CONTENT=false` is the metadata-only default. Set it to `true` and
-restart Agent Server to inspect messages, model outputs and corpus context in
-Arize (ADR-0022). New traces then send that content to the configured project;
-previously redacted traces cannot recover it. Credentials remain outside spans.
+credential, `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`,
+`LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT` (the agent environment
+per deployment, e.g. `production`). The `langgraph.json`
+graph id is `agent`. Tracing is emitted by the native LangChain/LangGraph
+integration; traces include prompts, model outputs and corpus context by
+default. Set `LANGSMITH_HIDE_INPUTS=true` and `LANGSMITH_HIDE_OUTPUTS=true`
+when a deployment must keep traces metadata-only (ADR-0027). Credentials remain
+outside spans.
 
 ## 3. Web (Vercel)
 
@@ -52,7 +54,7 @@ previously redacted traces cannot recover it. Credentials remain outside spans.
   Vercel deployment these must be reachable: either bundle a read-only copy, or
   point `BRH_DATA_DIR` at a mounted/object-storage path. Simplest production
   option: serve PDFs from object storage and set each citation's URL instead of
-  proxying through the app (a follow-up — see `PROGRESSION.md`).
+  proxying through the app (a follow-up).
 
 ## 4. MCP
 

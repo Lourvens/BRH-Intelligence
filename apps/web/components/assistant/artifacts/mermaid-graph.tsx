@@ -89,7 +89,7 @@ export function MermaidGraph({
     return (
       <div
         role="alert"
-        className="grid min-h-[300px] place-items-center px-6 text-center text-[11px] text-ink-muted"
+        className="grid min-h-[360px] place-items-center px-6 text-center text-[11px] text-ink-muted"
       >
         Le diagramme n’a pas pu être rendu. Le graphe interactif reste
         disponible.
@@ -113,7 +113,7 @@ export function MermaidGraph({
       className={
         expanded
           ? "mermaid-diagram flex min-h-[min(64vh,680px)] items-center justify-center overflow-auto bg-surface p-4 [&_svg]:h-auto [&_svg]:max-w-full"
-          : "mermaid-diagram flex min-h-[300px] items-center justify-center overflow-auto bg-surface p-4 [&_svg]:h-auto [&_svg]:max-w-full"
+          : "mermaid-diagram flex min-h-[360px] items-center justify-center overflow-auto bg-surface p-4 [&_svg]:h-auto [&_svg]:max-w-full"
       }
       dangerouslySetInnerHTML={{ __html: svg }}
     />

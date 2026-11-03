@@ -6,7 +6,7 @@ import { SERIES_COLORS } from "@/lib/chat/decision";
 import type { TableArtifact } from "@/lib/chat/types";
 import { buildChartOption } from "@/lib/charts/options";
 import { cssColor } from "@/lib/echarts";
-import { useECharts } from "./use-echarts";
+import { useECharts } from "@/lib/hooks/use-echarts";
 
 export function EChartsChart({ artifact, expanded = false }: {
   artifact: TableArtifact;
@@ -22,5 +22,5 @@ export function EChartsChart({ artifact, expanded = false }: {
     palette: SERIES_COLORS.map(cssColor),
   }, Boolean(reduceMotion)), [artifact, resolvedTheme, reduceMotion]);
 
-  return <div ref={ref} role="img" aria-label={`${artifact.title}. ${artifact.subtitle}. Source : ${artifact.source}.`} className={expanded ? "h-[min(62dvh,680px)] min-h-64 w-full bg-surface" : "h-[300px] w-full bg-surface sm:h-[340px]"} />;
+  return <div ref={ref} role="img" aria-label={`${artifact.title}. ${artifact.subtitle}. Source : ${artifact.source}.`} className={expanded ? "h-[min(68dvh,760px)] min-h-64 w-full bg-surface" : "h-[360px] w-full bg-surface sm:h-[420px]"} />;
 }

@@ -45,3 +45,10 @@ Harder:
 - **Fold MCP tools into the LangGraph deployment.** Rejected: MCP is a
   distinct protocol and audience; a separate process keeps it independently
   deployable and testable.
+
+## Implementation status
+
+The service layout and FastMCP dependency are present, but the MCP tool
+handlers remain scaffolded pending the shared retrieval service and repository
+implementation. The table above is the intended public contract, not a claim
+that these tools are currently available.

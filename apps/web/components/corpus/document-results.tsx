@@ -4,7 +4,6 @@ import {
   ArrowUpRight,
   ArrowLeft,
   ArrowRight,
-  FileText,
   LayoutGrid,
   List,
   SearchX,
@@ -13,10 +12,10 @@ import {
 import Link from "next/link";
 import { ResearchLink } from "./research-link";
 import { Button } from "@/components/ui/button";
-import { familyLabels, numberLabel } from "@/lib/corpus/labels";
+import { familyLabel, numberLabel } from "@/lib/corpus/labels";
+import { documentPageHref, graphFocusHref } from "@/lib/corpus/links";
 import { corpusLink } from "@/lib/corpus/query";
 import type { DocumentList } from "@/lib/corpus/types";
-import { Reveal } from "./reveal";
 export function DocumentResults({
   documents,
   query,
@@ -72,6 +71,7 @@ export function DocumentResults({
         </p>
         <div
           className="hidden gap-1 rounded-xl border border-border p-1 md:flex"
+          role="group"
           aria-label="Présentation des résultats"
         >
           {[
@@ -101,69 +101,60 @@ export function DocumentResults({
       </div>
       {documents.items.length ? (
         <ul className={`atlas-results ${grid ? "is-grid" : ""}`}>
-          {documents.items.map((doc, index) => (
+          {documents.items.map((doc) => (
             <li key={doc.document_id}>
-              <Reveal>
-                <article className="atlas-document">
-                  <div
-                    className={`atlas-document-spine spine-${index % 4}`}
-                    aria-hidden
-                  >
-                    <FileText size={23} />
+              <article className="atlas-document">
+                <div className="atlas-document-body">
+                  <h3>
+                    <ResearchLink
+                      href={documentPageHref(doc.slug, doc.match_page ?? 1)}
+                    >
+                      {doc.title}
+                      <ArrowUpRight size={18} />
+                    </ResearchLink>
+                  </h3>
+                  <div className="atlas-document-meta">
+                    {doc.family !== "unknown" && (
+                      <span>{familyLabel(doc.family)}</span>
+                    )}
+                    {doc.period_label && <span>{doc.period_label}</span>}
                     <span>
-                      {String(
-                        (documents.page - 1) * documents.page_size + index + 1,
-                      ).padStart(2, "0")}
+                      {doc.page_count} page{doc.page_count > 1 ? "s" : ""}
                     </span>
                   </div>
-                  <div className="atlas-document-body">
-                    <div className="atlas-document-meta">
-                      <span>{familyLabels[doc.family] ?? doc.family}</span>
-                      {doc.period_label && <span>{doc.period_label}</span>}
-                      <span>{doc.page_count} pages</span>
-                    </div>
-                    <h3>
-                      <ResearchLink
-                        href={`/documents/${doc.slug}?page=${doc.match_page ?? 1}`}
+                  {doc.snippet && (
+                    <p className="atlas-document-snippet">{doc.snippet}</p>
+                  )}
+                  <div className="atlas-document-actions">
+                    <ResearchLink
+                      href={documentPageHref(doc.slug, doc.match_page ?? 1)}
+                    >
+                      Lire
+                      {doc.match_page
+                        ? ` la page ${doc.match_page}`
+                        : " le document"}
+                      <ArrowRight size={14} />
+                    </ResearchLink>
+                    {doc.source_urls[0] && (
+                      <a
+                        href={`${doc.source_urls[0]}#page=${doc.match_page ?? 1}`}
+                        target="_blank"
+                        rel="noreferrer"
                       >
-                        {doc.title}
-                        <ArrowUpRight size={18} />
-                      </ResearchLink>
-                    </h3>
-                    {doc.snippet && (
-                      <p className="atlas-document-snippet">{doc.snippet}</p>
+                        PDF officiel
+                        <ExternalLink size={13} />
+                      </a>
                     )}
-                    <div className="atlas-document-actions">
-                      <ResearchLink
-                        href={`/documents/${doc.slug}?page=${doc.match_page ?? 1}`}
+                    {doc.entity_count > 0 && (
+                      <Link
+                        href={graphFocusHref("document", doc.document_id)}
                       >
-                        Lire
-                        {doc.match_page
-                          ? ` la page ${doc.match_page}`
-                          : " le document"}
-                        <ArrowRight size={14} />
-                      </ResearchLink>
-                      {doc.source_urls[0] && (
-                        <a
-                          href={`${doc.source_urls[0]}#page=${doc.match_page ?? 1}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          PDF officiel
-                          <ExternalLink size={13} />
-                        </a>
-                      )}
-                      {doc.entity_count > 0 && (
-                        <Link
-                          href={`/brh-corpus/graph?focus=document:${doc.document_id}`}
-                        >
-                          {doc.entity_count} entités
-                        </Link>
-                      )}
-                    </div>
+                        {doc.entity_count} entités
+                      </Link>
+                    )}
                   </div>
-                </article>
-              </Reveal>
+                </div>
+              </article>
             </li>
           ))}
         </ul>

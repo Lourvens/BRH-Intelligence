@@ -59,16 +59,16 @@ export function SourceDetail({ citation }: { citation: ChatCitation }) {
               >
                 {citation.kind}
               </Badge>
-              <h3 className="font-reading text-base font-semibold leading-snug text-navy-ink">
+              <h3 className="break-words font-reading text-base font-semibold leading-snug text-navy-ink">
                 {citation.title}
               </h3>
-              <p className="mt-0.5 text-caption text-ink-muted">
+              <p className="mt-0.5 break-words text-caption text-ink-muted">
                 {citation.source} · page {citation.page}
               </p>
             </div>
           </div>
 
-          <div className="border-l-2 border-gold bg-surface-alt px-4 py-3 font-reading text-[15px] italic leading-6 text-ink">
+          <div className="break-words border-l-2 border-gold bg-surface-alt px-4 py-3 font-reading text-[15px] italic leading-6 text-ink">
             « {citation.snippet} »
           </div>
 

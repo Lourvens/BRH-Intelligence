@@ -7,7 +7,8 @@ import { useCallback, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { graphArtifact, researchTree } from "@/lib/corpus/graph";
-import { relationshipLabels } from "@/lib/corpus/labels";
+import { relationshipLabel } from "@/lib/corpus/labels";
+import { entityHref } from "@/lib/corpus/links";
 import type { GraphResult } from "@/lib/corpus/types";
 import { EvidenceCard } from "./evidence-card";
 
@@ -22,7 +23,7 @@ export function GraphExplorer({ graph }: { graph: GraphResult }) {
   const selected = graph.edges.find((edge) => edge.assertion_id === selectedId);
   const byId = new Map(graph.nodes.map((node) => [node.entity_id, node]));
   const onSelect = useCallback((kind: string, identifier: string) => {
-    if (kind === "node") router.push(`/brh-corpus/entities/${identifier}`);
+    if (kind === "node") router.push(entityHref(identifier));
     else if (kind === "edge") setSelectedId(identifier);
   }, [router]);
   if (!graph.edges.length) return <div className="border border-dashed border-border px-6 py-10 text-center text-small leading-6 text-ink-muted">Aucune relation validée pour ces critères. Les mentions documentaires restent disponibles ci-dessous.</div>;
@@ -44,9 +45,9 @@ export function GraphExplorer({ graph }: { graph: GraphResult }) {
       <caption className="mb-3 text-left font-semibold text-navy-ink">Relations et preuves</caption>
       <thead className="border-y border-border bg-surface-alt text-caption text-ink-muted"><tr><th className="p-3">Source</th><th className="p-3">Relation</th><th className="p-3">Cible</th><th className="p-3">Preuve</th></tr></thead>
       <tbody>{graph.edges.map((edge) => <tr key={edge.assertion_id} className="border-b border-border">
-        <td className="p-3"><Link href={`/brh-corpus/entities/${edge.subject_id}`} className="text-teal hover:underline">{byId.get(edge.subject_id)?.label}</Link></td>
-        <td className="p-3">{relationshipLabels[edge.predicate] ?? edge.predicate}{edge.temporal_context ? <span className="mt-1 block text-caption text-ink-muted">{edge.temporal_context}</span> : null}</td>
-        <td className="p-3"><Link href={`/brh-corpus/entities/${edge.object_id}`} className="text-teal hover:underline">{byId.get(edge.object_id)?.label}</Link></td>
+        <td className="p-3"><Link href={entityHref(edge.subject_id)} className="text-teal hover:underline">{byId.get(edge.subject_id)?.label}</Link></td>
+        <td className="p-3">{relationshipLabel(edge.predicate)}{edge.temporal_context ? <span className="mt-1 block text-caption text-ink-muted">{edge.temporal_context}</span> : null}</td>
+        <td className="p-3"><Link href={entityHref(edge.object_id)} className="text-teal hover:underline">{byId.get(edge.object_id)?.label}</Link></td>
         <td className="p-3"><button type="button" onClick={() => setSelectedId(edge.assertion_id)} aria-pressed={edge.assertion_id === selectedId} className="rounded-sm text-teal underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-azure">Page {edge.evidence.page_number}</button></td>
       </tr>)}</tbody>
     </table></div>

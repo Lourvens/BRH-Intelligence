@@ -1,7 +1,8 @@
 import { ArrowUpRight, Shapes, ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { entityLabels } from "@/lib/corpus/labels";
+import { entityLabel } from "@/lib/corpus/labels";
+import { entityHref } from "@/lib/corpus/links";
 import type { Entity } from "@/lib/corpus/types";
 export function EntityResults({
   entities,
@@ -24,11 +25,11 @@ export function EntityResults({
           {entities.map((e) => (
             <li key={e.entity_id}>
               <Link
-                href={`/brh-corpus/entities/${e.entity_id}`}
+                href={entityHref(e.entity_id)}
                 className="atlas-entity-card"
               >
                 <span className="atlas-kicker">
-                  {entityLabels[e.kind] ?? e.kind}
+                  {entityLabel(e.kind)}
                 </span>
                 <h3>
                   {e.label}

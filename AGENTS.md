@@ -1,8 +1,6 @@
 # AGENTS.md
 
-Repo-specific guidance for agents. Read [`PROGRESSION.md`](PROGRESSION.md) first —
-it holds current state, next steps, and gotchas; update it when you start or
-finish a task.
+Repo-specific guidance for agents.
 
 ## What this is
 
@@ -24,8 +22,8 @@ OCR stage: manifest → ledger → page-marked markdown),
 validation → page/chunk persistence; vector indexing remains opt-in),
 `brh_core.ingestion.chunking` (structure-aware hybrid chunking v2, ADR-0011) with
 `chunk.py` as its stable facade, `brh_agent` (bounded adaptive research,
-chat/decision clients, validated answer publication and configurable Arize
-tracing; ADR-0017/0018/0022), and the
+chat/decision clients, validated answer publication and configurable LangSmith
+tracing; ADR-0017/0027), and the
 `brh_analytics` design layer plus its `inventory` family.
 
 Ingestion/indexing is now runnable end to end: LangChain discovery/ingestion
@@ -45,8 +43,8 @@ registration remains separate surface work.
   assets, grouped into *families* (one package per kind of analytics; the
   `inventory` family is live). Take colours from `palette.py` and rules from its
   `DESIGN.md`; never hardcode a hex. The `analytics` agent
-  (`.opencode/agents/analytics.md`) owns changes there — delegate to it rather
-  than re-deriving the house style.
+  (`.claude/agents/analytics.md`, mirrored in `.codex/agents/analytics.toml`)
+  owns changes there — delegate to it rather than re-deriving the house style.
 - `experiments/` — a **standalone uv project** (own `.venv` + lockfile), *not* a
   workspace member. **Experiments are notebooks, not code** — see
   [Experiments](#experiments-are-not-code) below. Nothing in `experiments/` is
@@ -59,6 +57,25 @@ registration remains separate surface work.
 Two separate workspaces: the root `pyproject.toml` is a uv virtual workspace
 (`packages/*`, `services/*`); the root `package.json` is a bun workspace
 (`apps/*`).
+
+## Code organization (binding)
+
+- **250-line cap per code file.** The Claude Code hook
+  `.claude/hooks/precommit-line-limit.sh` blocks `git commit` while a staged
+  `.py`, `.ts`, `.tsx`, `.js`, `.jsx`, `.mjs` or `.cjs` file exceeds 250 lines.
+  Split by concern, not by line count. The playbook is
+  [`.agents/skills/code-organization/SKILL.md`](.agents/skills/code-organization/SKILL.md).
+- **DRY without premature abstraction.** Apply the rule of three; extract
+  duplicated knowledge (constants, validation, formatting, types, error
+  messages), not coincidentally similar lines. Delete dead code before adding a
+  shared module.
+- **Python.** One concept per file; pure business logic separate from I/O;
+  injected dependencies; absolute imports; public facades declare `__all__`;
+  settings, timeouts and retries have one home.
+- **React/Next.** Route files compose; Server Components by default;
+  `"use client"` only at interactive leaves; hook logic in
+  `lib/hooks/use-*.ts`; pure helpers and presentational siblings beside the
+  orchestrator; one component per file.
 
 ## Experiments are not code
 
@@ -119,24 +136,6 @@ make lab                           # JupyterLab for experiments/
   `tsc --noEmit`. `apps/web/package.json` is the source of truth.
 - Ruff excludes `experiments/` (notebook cells trip it).
 
-## Browser verification
-
-Use the `agent-browser` CLI for preview checks, screenshots and interaction —
-it is the preferred browser harness in this repo. Start the app (`bun dev` from
-`apps/web`), then:
-
-```bash
-agent-browser --args "--no-sandbox" open http://localhost:3000
-agent-browser set viewport 1440 1200
-agent-browser screenshot --full /tmp/opencode/<name>.png
-agent-browser errors
-agent-browser close
-```
-
-`--no-sandbox` is required in this container. For a static HTML mock, open
-`file:///...` with `--args "--no-sandbox,--allow-file-access-from-files"`.
-Do not fall back to raw Chrome headless flags unless the CLI cannot do the job.
-
 ## Gotchas that cost time
 
 - **`langgraph dev` overrides shell env.** `services/agent/langgraph.json` sets
@@ -189,6 +188,12 @@ to every paragraph or delay the appearance of research content.
 
 Use maintained libraries for UI and charts. Do **not** hand-roll dialogs,
 dropdowns, sheets, tooltips, or chart geometry.
+
+**Both directions animate.** Every dismissible surface (sheet, dialog, sidebar,
+popover, disclosure) must animate its exit as well as its entry; closing must
+never unmount instantly. For Radix, keep a `data-state="closed"` CSS animation
+(Radix waits for it before unmounting) or a Framer `AnimatePresence` exit. Verify
+the close path and the reduced-motion fallback, not just the open state.
 
 ### Charts
 

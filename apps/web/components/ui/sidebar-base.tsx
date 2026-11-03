@@ -1,7 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { PanelLeftIcon } from "lucide-react"
+import {
+  PanelLeftCloseIcon,
+  PanelLeftIcon,
+  PanelLeftOpenIcon,
+} from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -128,7 +132,7 @@ export function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar, state } = useSidebar()
 
   return (
     <Button
@@ -143,7 +147,24 @@ export function SidebarTrigger({
       }}
       {...props}
     >
-      <PanelLeftIcon />
+      <PanelLeftIcon className="md:hidden" />
+      <span
+        className="relative hidden size-4 items-center justify-center md:inline-flex"
+        aria-hidden
+      >
+        <PanelLeftCloseIcon
+          className={cn(
+            "absolute size-4 transition-opacity duration-150 motion-reduce:transition-none",
+            state === "collapsed" && "opacity-0"
+          )}
+        />
+        <PanelLeftOpenIcon
+          className={cn(
+            "absolute size-4 transition-opacity duration-150 motion-reduce:transition-none",
+            state === "expanded" && "opacity-0"
+          )}
+        />
+      </span>
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   )

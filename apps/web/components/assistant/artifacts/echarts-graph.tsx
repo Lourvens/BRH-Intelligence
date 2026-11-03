@@ -8,7 +8,7 @@ import { graphData, SERIES_COLORS } from "@/lib/chat/decision";
 import type { TableArtifact } from "@/lib/chat/types";
 import { cssColor } from "@/lib/echarts";
 
-import { useECharts } from "./use-echarts";
+import { useECharts } from "@/lib/hooks/use-echarts";
 
 export function EChartsGraph({
   artifact,
@@ -41,8 +41,8 @@ export function EChartsGraph({
       aria-label={`${artifact.title}. Graphe de ${nodes.length} nœuds. Source : ${artifact.source}.`}
       className={
         expanded
-          ? "h-[min(64vh,680px)] w-full bg-surface"
-          : "h-[340px] w-full bg-surface"
+          ? "h-[min(68dvh,760px)] w-full bg-surface"
+          : "h-[380px] w-full bg-surface"
       }
     />
   );

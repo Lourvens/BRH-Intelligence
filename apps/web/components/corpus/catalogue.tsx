@@ -4,7 +4,8 @@ import type { CatalogueData } from "@/lib/corpus/types";
 import { numberLabel } from "@/lib/corpus/labels";
 import { CorpusCoverage } from "./coverage";
 import { DocumentResults } from "./document-results";
-import { CorpusSearchForm, CorpusFilterSidebar } from "./search-form";
+import { CorpusSearchForm } from "./search-form";
+import { CorpusFilterSidebar } from "./corpus-filter-sidebar";
 import { SearchFailure } from "./search-failure";
 export function CorpusCatalogue({ data }: { data: CatalogueData }) {
   return (

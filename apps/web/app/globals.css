@@ -2,7 +2,6 @@
 @source "../../../node_modules/streamdown/dist/*.js";
 @import "./research.css";
 @import "./graph-workspace.css";
-@import "./landing.css";
 @import "./landing-v2.css";
 @import "./landing-interactions.css";
 @import "./landing-graph.css";
@@ -41,6 +40,7 @@
   /* Neutrals */
   --color-bg: #f7f9fc;
   --color-surface: #ffffff;
+  --color-on-accent: #ffffff;
   --color-surface-alt: #eef3fa;
   --color-border: #e3e9f2;
   --color-ink: #0b1729;
@@ -153,6 +153,7 @@
   color-scheme: dark;
   --color-bg: #101216;
   --color-surface: #171a20;
+  --color-on-accent: #ffffff;
   --color-surface-alt: #20242b;
   --color-border: #323842;
   --color-ink: #e7e9ed;
@@ -272,7 +273,7 @@
 }
 
 /* Institutional dot grid for plain surfaces. The landing hero draws a masked,
-   dark-aware copy in `landing.css`; `dot-grid-light` sits on navy. */
+   dark-aware copy in `landing-v2.css`; `dot-grid-light` sits on navy. */
 @utility dot-grid {
   background-image: radial-gradient(
     color-mix(in srgb, var(--color-navy) 22%, transparent) 1px,

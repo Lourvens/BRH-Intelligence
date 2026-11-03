@@ -10,11 +10,6 @@ export type ChatCitation = {
   pdfUrl?: string | null;
 };
 
-export type ChartPoint = {
-  label: string;
-  value: number;
-};
-
 export type TableColumnType = "string" | "number" | "date" | "category";
 
 export type TableColumn = {
@@ -77,11 +72,4 @@ export type ChatThread = {
   updatedAt: string;
   group: "Aujourd’hui" | "Cette semaine";
   messages: ChatMessage[];
-};
-
-export type SuggestedQuestion = {
-  id: string;
-  category: string;
-  question: string;
-  threadId: string;
 };

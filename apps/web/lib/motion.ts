@@ -1,6 +1,6 @@
 import type { Variants } from "framer-motion";
 
-export const feedbackTransition = { duration: 0.16, ease: [0.2, 0, 0, 1] as const };
+export const feedbackTransition = { duration: 0.14, ease: [0.2, 0, 0, 1] as const };
 
 export const feedbackVariants: Variants = {
   hidden: { opacity: 0 },
