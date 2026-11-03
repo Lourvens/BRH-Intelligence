@@ -43,7 +43,7 @@ export function Message({
 
   return (
     <div className="min-w-0">
-        {message.activities?.length ? <AgentActivity activities={message.activities} stopped={false} failed={false} isStopping={false} /> : null}
+        {message.activities?.length ? <AgentActivity activities={message.activities} stopped={false} failed={false} isStopping={false} live={Boolean(message.streaming)} streaming={Boolean(message.streaming)} /> : null}
         <div
           className={cn(
             "min-w-0 py-2",

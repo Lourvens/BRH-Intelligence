@@ -166,9 +166,9 @@ export function ChatPanel({
                         runStatus === "error") && (
                         <motion.div
                           key="activity"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
+                          initial={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: reduceMotion ? 0 : 2 }}
                           transition={
                             reduceMotion ? { duration: 0 } : feedbackTransition
                           }
@@ -180,6 +180,7 @@ export function ChatPanel({
                             }
                             isStopping={isStopping}
                             failed={runStatus === "error"}
+                            live={isThinking}
                           />
                         </motion.div>
                       )}
