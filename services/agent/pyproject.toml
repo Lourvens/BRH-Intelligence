@@ -20,6 +20,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "langgraph-cli[inmem]>=0.4.40",
+    # The CLI's inmem extra ships the Agent Server; 0.17+ leaves critical support.
+    "langgraph-api>=0.17.0",
     "pytest>=8.0",
     "pytest-asyncio>=0.23",
 ]

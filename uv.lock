@@ -230,6 +230,7 @@ dependencies = [
 
 [package.optional-dependencies]
 dev = [
+    { name = "langgraph-api" },
     { name = "langgraph-cli", extra = ["inmem"] },
     { name = "pytest" },
     { name = "pytest-asyncio" },
@@ -244,6 +245,7 @@ requires-dist = [
     { name = "langchain-core", specifier = ">=1.0" },
     { name = "langchain-openai", specifier = ">=1.0" },
     { name = "langgraph", specifier = ">=1.2.17" },
+    { name = "langgraph-api", marker = "extra == 'dev'", specifier = ">=0.17.0" },
     { name = "langgraph-cli", extras = ["inmem"], marker = "extra == 'dev'", specifier = ">=0.4.40" },
     { name = "openinference-instrumentation-langchain", specifier = ">=0.1.80,<0.2" },
     { name = "opentelemetry-api", specifier = ">=1.28,<2" },
@@ -341,6 +343,7 @@ source = { virtual = "." }
 dev = [
     { name = "arize" },
     { name = "httpx" },
+    { name = "langgraph-api" },
     { name = "langgraph-cli", extra = ["inmem"] },
     { name = "pytest" },
     { name = "pytest-asyncio" },
@@ -354,6 +357,7 @@ dev = [
 dev = [
     { name = "arize", specifier = ">=8.61.0" },
     { name = "httpx", specifier = ">=0.28.1" },
+    { name = "langgraph-api", specifier = ">=0.17.0" },
     { name = "langgraph-cli", extras = ["inmem"], specifier = ">=0.4.40" },
     { name = "pytest", specifier = ">=8.0" },
     { name = "pytest-asyncio", specifier = ">=0.23" },
@@ -2027,7 +2031,7 @@ wheels = [
 
 [[package]]
 name = "langgraph-api"
-version = "0.16.7"
+version = "0.17.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -2066,9 +2070,9 @@ dependencies = [
     { name = "websockets" },
     { name = "zstandard" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ff/71/64e28971de074f75e33f5a0a5cfef82bbd9005e00684ff11059dfa35fc8d/langgraph_api-0.16.7.tar.gz", hash = "sha256:0be71352116aa8bde30d2c9d0d4811ae37d458a8e187014fa1723de3c1086765", size = 872477, upload-time = "2026-10-26T16:50:50.74Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/63/49/b1b310879f695d7a93a7c59188a0729e271d573db0abf58fe72eb6f91a86/langgraph_api-0.17.0.tar.gz", hash = "sha256:1073ca6e61fe125763e11a8511192c4f9882d589474efa663a7443d802d079ae", size = 886051, upload-time = "2026-10-30T13:28:40.112Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/dc/df/5d8b73b849901255ec559f6f3be816e66b360fc236b600018529dad0ef44/langgraph_api-0.16.7-py3-none-any.whl", hash = "sha256:3c1dcddd1b0e4f345386d7075beaa88e3fb0fe7fc898e9816085dbf44012827e", size = 650513, upload-time = "2026-10-26T16:50:48.919Z" },
+    { url = "https://files.pythonhosted.org/packages/05/7d/9abef10e0db10d8152d154ef2564912fae6beb001a9df0a44497e2d3ad8f/langgraph_api-0.17.0-py3-none-any.whl", hash = "sha256:8de191fd516d7b148cca14198c400bd4ea2abcd18ab6adcd9750f5cf95ac0a7c", size = 663034, upload-time = "2026-10-30T13:28:38.267Z" },
 ]
 
 [[package]]
@@ -2121,7 +2125,7 @@ wheels = [
 
 [[package]]
 name = "langgraph-runtime-inmem"
-version = "0.36.7"
+version = "0.37.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "blockbuster" },
@@ -2132,9 +2136,9 @@ dependencies = [
     { name = "starlette" },
     { name = "structlog" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/cb/b2/3b39c3bce09358f4a5dcb391cd925bea586eeacaea48798c84c4e4aa53f5/langgraph_runtime_inmem-0.36.7.tar.gz", hash = "sha256:a2489909c7fb6800047b4b9adfccf841f25fbce09902b4a7f528ae7c92676598", size = 135062, upload-time = "2026-10-26T16:48:35.769Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6b/36/1f65ee5292731d0eee3e06bdcf896b5ed8ad4e99ddffc764f1edf8e015d2/langgraph_runtime_inmem-0.37.0.tar.gz", hash = "sha256:036bef0cdc90b0e7ef7548f93e9a5c6cb67b528c30aaff6ac2a2e17dcb519069", size = 142121, upload-time = "2026-10-30T13:24:52.082Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/87/0a/48a3297a3c054bc395f079b7c78862589c709ac7da7afce1b5df8bf28086/langgraph_runtime_inmem-0.36.7-py3-none-any.whl", hash = "sha256:ee6676486040b8f6e968883734ef63def6f704d30ea66a4650a2e084849f3501", size = 54345, upload-time = "2026-10-26T16:48:34.67Z" },
+    { url = "https://files.pythonhosted.org/packages/6f/ba/285cff2265449ccadbcfa56d8898fa8615ebb56b5a7875f625034d2f8885/langgraph_runtime_inmem-0.37.0-py3-none-any.whl", hash = "sha256:f3061f560ef109ad40182ee15c2cb11cb58d5c763cc922d319ca19be1c9301d7", size = 62098, upload-time = "2026-10-30T13:24:50.827Z" },
 ]
 
 [[package]]
