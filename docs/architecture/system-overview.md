@@ -88,4 +88,4 @@ The MCP server answers the same question shape by calling step 2 directly.
 
 Crawler/autodiscovery of `brh.ht`, Haitian Creole and English, indicator
 comparison, multi-agent research, auth + rate limiting on MCP, reranking,
-session memory. Each is a backlog item in `PROGRESSION.md`.
+session memory.

@@ -1,8 +1,6 @@
 # AGENTS.md
 
-Repo-specific guidance for agents. Read [`PROGRESSION.md`](PROGRESSION.md) first —
-it holds current state, next steps, and gotchas; update it when you start or
-finish a task.
+Repo-specific guidance for agents.
 
 ## What this is
 
@@ -121,9 +119,15 @@ make lab                           # JupyterLab for experiments/
 
 ## Browser verification
 
-Use the `agent-browser` CLI for preview checks, screenshots and interaction —
-it is the preferred browser harness in this repo. Start the app (`bun dev` from
-`apps/web`), then:
+Run `agent-browser` **only when the user asks for a browser check or the task
+is complex UI work that genuinely needs rendered/interactive verification**
+(layout, motion, responsive behavior, gestures, multi-step flows). Skip it for
+routine or static changes — copy, config, one-line attributes, type-only edits —
+and verify those with typecheck/tests and the running dev server's HTML. When
+in doubt, do not open a browser.
+
+When a browser check is warranted, `agent-browser` is the preferred harness in
+this repo. Start the app (`bun dev` from `apps/web`), then:
 
 ```bash
 agent-browser --args "--no-sandbox" open http://localhost:3000

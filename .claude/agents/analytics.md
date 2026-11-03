@@ -22,7 +22,6 @@ when a change genuinely requires it, and say so when you do.
    decorative.
 2. `services/analytics/README.md` — the structure and the live families.
 3. `services/analytics/src/brh_analytics/palette.py` — the tokens.
-4. `PROGRESSION.md`.
 
 ## The shape you are extending
 

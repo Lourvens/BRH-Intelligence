@@ -25,7 +25,7 @@ BRH PDF  ──►  page-aware extraction  ──►  Postgres (metadata, pages,
 ```
 
 Everything else (indicator comparison, French/Creole/English, multi-agent) is
-deliberately out of scope for now — see `PROGRESSION.md`. The **analytics
+deliberately out of scope for now. The **analytics
 track** (`services/analytics`) runs beside this one: it turns the inventory's
 crawl ledger into stats, charts and postable images, and nothing above depends
 on it.
@@ -145,5 +145,3 @@ make web-dev                  # Next.js                  :3000
   hardcode a hex.
 - Tests run offline; live calls are `@pytest.mark.integration`.
 - Frozen pydantic models; small focused files; type hints everywhere.
-
-Read [`PROGRESSION.md`](PROGRESSION.md) at the start of a session.
