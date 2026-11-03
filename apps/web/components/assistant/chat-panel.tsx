@@ -49,6 +49,7 @@ export function ChatPanel({
 }) {
   const reduceMotion = useReducedMotion();
   const isEmpty = !thread && !isThinking && !isRestoring;
+  const threadId = thread?.id && thread.id !== "pending" ? thread.id : null;
   const currentActivity =
     activities.findLast((item) => item.status === "running") ??
     activities.at(-1);
@@ -151,6 +152,7 @@ export function ChatPanel({
                         onSelectCitation={(id) =>
                           onSelectCitation(id, message.id)
                         }
+                        threadId={threadId}
                       />
                     ))}
                     {isRestoring && (

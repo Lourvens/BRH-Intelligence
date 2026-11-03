@@ -12,24 +12,25 @@ import { cn } from "@/lib/utils";
 import { FeedbackAction } from "./feedback-action";
 import { SourceList } from "./source-list";
 
-export function MessageActions({ content, citations = [], selectedCitationId, onSelectCitation }: {
+export function MessageActions({ content, citations = [], selectedCitationId, onSelectCitation, threadId }: {
   content: string;
   citations?: readonly ChatCitation[];
   selectedCitationId: string | null;
   onSelectCitation: (citationId: string) => void;
+  threadId: string | null;
 }) {
   const [sourcesOpen, setSourcesOpen] = useState(false);
   const sourceTrigger = useRef<HTMLButtonElement>(null);
   const sourceContent = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const { copyState, shareState, copy, share } = useAnswerActions(content, citations);
+  const { copyState, shareState, copy, share } = useAnswerActions(content, citations, threadId);
 
   function setSourcesExpanded(open: boolean) {
     if (!open && sourceContent.current?.contains(document.activeElement)) sourceTrigger.current?.focus();
     setSourcesOpen(open);
   }
 
-  const announcement = copyState === "error" ? "La copie a échoué. Réessayez ou sélectionnez le texte manuellement." : shareState === "error" ? "Le partage a échoué. Réessayez ou copiez le texte manuellement." : copyState === "success" ? "Réponse et sources copiées." : shareState === "fallback" ? "Réponse et sources copiées. Vous pouvez les coller dans l’application de votre choix." : shareState === "success" ? "Réponse partagée." : "";
+  const announcement = copyState === "error" ? "La copie a échoué. Réessayez ou sélectionnez le texte manuellement." : shareState === "error" ? "Le partage a échoué. Réessayez ou copiez le lien manuellement." : copyState === "success" ? "Réponse et sources copiées." : shareState === "fallback" ? "Lien de la conversation copié. Collez-le pour partager cette réponse." : shareState === "success" ? "Conversation partagée." : "";
 
   return (
     <Collapsible open={sourcesOpen} onOpenChange={setSourcesExpanded} className="mt-4 border-t border-border pt-2">
@@ -44,7 +45,7 @@ export function MessageActions({ content, citations = [], selectedCitationId, on
           </CollapsibleTrigger>
         ) : null}
         <FeedbackAction state={copyState} label="Copier" successLabel="Copié" icon={Copy} onClick={copy} />
-        <FeedbackAction state={shareState} label="Partager" successLabel="Partagé" icon={Share2} onClick={share} />
+        <FeedbackAction state={shareState} label="Partager" successLabel="Partagé" fallbackLabel="Lien copié" icon={Share2} onClick={share} />
         <span className="ml-auto hidden text-[11px] text-ink-muted sm:inline">Réponse de démonstration</span>
       </div>
       <p role="status" aria-live="polite" className={cn("text-caption leading-5", copyState === "error" || shareState === "error" ? "mt-2 text-scarlet" : "sr-only")}>{announcement}</p>

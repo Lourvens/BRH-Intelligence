@@ -16,10 +16,12 @@ export function Message({
   message,
   selectedCitationId,
   onSelectCitation,
+  threadId,
 }: {
   message: ChatMessage;
   selectedCitationId: string | null;
   onSelectCitation: (citationId: string) => void;
+  threadId: string | null;
 }) {
   const reducedMotion = useReducedMotion();
   const { text: pacedContent } = useSmoothText(message.content, { done: !message.streaming });
@@ -84,6 +86,7 @@ export function Message({
               citations={citations}
               selectedCitationId={selectedCitationId}
               onSelectCitation={onSelectCitation}
+              threadId={threadId}
             />
           )}
       </div>
