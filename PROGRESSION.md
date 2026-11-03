@@ -1,11 +1,40 @@
 # Progression
 
-Last updated: 2026-11-01 (responsive corpus workspace)
+Last updated: 2026-11-02 (landing v2 + graph section)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Landing redesign plan (2026-11-02).** Wrote
+  `docs/plans/2026-11-02-landing-page.md` after a grill and copywriting
+  research. The page becomes an assistant-first analysis companion for
+  economists, researchers and students: proof-first funnel, live question input
+  with a verified demo panel, BRH modern SaaS. The agent stays the primary path,
+  but the corpus is a first-class workspace section (search, grouped families,
+  page reader, entities and graph), not a footnote. The plan includes the
+  `/assistant?q=` handoff, demo verification, phases and acceptance criteria.
+  Implemented in the landing v2 port below.
+
+- **Landing v2 + graph section implemented (2026-11-02).** Ported the approved
+  Figma Make landing into the Next app with scoped `landing-v2.css` and
+  `landing-graph.css`, componentized sections, live corpus counts, the official
+  Brand/theme/header, `/assistant?q=` auto-send, and a graph section backed by
+  `lib/landing/graph-mock.ts` (12 real nodes / 13 edges; 9/10 in the preview)
+  from corpus mentions and pending assertions. Every CTA was audited: Agent →
+  `/assistant`, Corpus → `/brh-corpus`, graph → `/brh-corpus/graph`, document
+  citations → the real page. The graph inspector uses shadcn `ScrollArea`.
+  TypeScript passes; production build verification pending.
+
+- **Root header modernization (2026-11-02).** Removed the redundant
+  “Publications en français” pill (the corpus is French-only), moved the
+  desktop nav to `next/link` with a transform-only underline, sized the
+  assistant CTA to 36px with a 12px radius, and added a shadcn `Sheet` mobile
+  navigation so Agent, Corpus, Méthode and Sources stay reachable below the
+  desktop breakpoint. The CTA hides below 1051px so the narrow header stays
+  uncluttered.
+  `tsc --noEmit` passes; no browser run.
 
 - **Home container alignment (2026-11-02).** The sticky header and footer now
   use the landing `landing-wrap` (1240px, 80px gutters, 48/40px on tablet and

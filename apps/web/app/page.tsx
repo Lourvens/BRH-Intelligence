@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
-import { ResearchLanding } from "@/components/home/research-landing";
-import { SiteFooter } from "@/components/site-footer";
+import { ResearchLandingV2 } from "@/components/home/landing-v2";
 import { SiteHeader } from "@/components/site-header";
 import {
   OG_IMAGE,
@@ -12,9 +11,10 @@ import {
 
 export const metadata: Metadata = {
   title: {
-    absolute: "BRH Corpus — L’économie haïtienne, à la source",
+    absolute: "BRH Intelligence — L’agent d’analyse de l’économie haïtienne",
   },
-  description: SITE_DESCRIPTION,
+  description:
+    "Posez une question sur les publications de la BRH, ou explorez tout le corpus. L’agent compare les documents, construit les graphiques et cite chaque page.",
   keywords: SITE_KEYWORDS,
   alternates: {
     canonical: "/",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     locale: "fr_HT",
     url: "/",
     siteName: SITE_NAME,
-    title: "BRH Corpus — L’économie haïtienne, à la source",
+    title: "BRH Intelligence — L’agent d’analyse de l’économie haïtienne",
     description: SITE_DESCRIPTION,
     images: [OG_IMAGE],
   },
@@ -40,10 +40,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-bg text-ink">
       <SiteHeader />
-      <main id="contenu">
-        <ResearchLanding />
-      </main>
-      <SiteFooter />
+      <ResearchLandingV2 />
     </div>
   );
 }

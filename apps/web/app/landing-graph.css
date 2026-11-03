@@ -1,0 +1,875 @@
+/* Graph explorer section — scoped to the landing wrapper. */
+.brh-home {
+  .graph-section {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .graph-section-inner {
+    max-width: 1380px;
+  }
+  .graph-section-heading {
+    margin-bottom: 45px;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .graph-section-heading h2 {
+    max-width: 720px;
+  }
+  .graph-section-heading > div:last-child {
+    padding-bottom: 4px;
+  }
+  .graph-section-heading > div:last-child p {
+    max-width: 480px;
+    margin: 0 0 18px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .graph-section-heading > div:last-child a {
+    color: var(--navy-ink);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .graph-explorer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    background: var(--page);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: 0 20px 55px rgba(5, 21, 91, 0.07);
+    overflow: hidden;
+  }
+  .graph-workspace {
+    min-width: 0;
+    border-right: 1px solid var(--border);
+  }
+  .graph-toolbar {
+    min-height: 78px;
+    padding: 13px 15px;
+    display: flex;
+    align-items: end;
+    gap: 12px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  .graph-toolbar form {
+    width: min(250px, 29%);
+    flex: none;
+  }
+  .graph-toolbar form label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--muted);
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .graph-toolbar form > div {
+    height: 39px;
+    padding: 0 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--page);
+  }
+  .graph-toolbar form > div:focus-within {
+    border-color: var(--azure);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--azure) 13%, transparent);
+  }
+  .graph-toolbar input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--ink);
+    font-size: 10px;
+  }
+  .graph-toolbar svg {
+    color: var(--muted);
+    flex: none;
+  }
+  .graph-status-filters {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .graph-status-filters button {
+    height: 39px;
+    padding: 0 9px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .graph-status-filters button[aria-pressed="true"] {
+    color: var(--ink);
+    background: var(--alt);
+  }
+  .graph-status-filters button:disabled {
+    opacity: 0.52;
+    cursor: not-allowed;
+  }
+  .graph-status-filters i {
+    width: 12px;
+    height: 2px;
+    background: var(--azure);
+  }
+  .graph-status-filters .proposed i {
+    height: 0;
+    border-top: 2px dashed var(--gold-ink);
+    background: transparent;
+  }
+  .graph-status-filters .validated i {
+    height: 3px;
+    background: var(--navy);
+  }
+  .graph-view-toggle {
+    margin-left: auto;
+    padding: 3px;
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--alt);
+  }
+  .graph-view-toggle button {
+    height: 31px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .graph-view-toggle button[aria-pressed="true"] {
+    background: var(--surface);
+    color: var(--navy-ink);
+    box-shadow: 0 2px 7px rgba(11, 23, 41, 0.07);
+  }
+  .graph-canvas {
+    height: 520px;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--page);
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--border) 47%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--border) 47%, transparent) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .graph-canvas:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    box-shadow: inset 0 0 80px color-mix(in srgb, var(--page) 82%, transparent);
+  }
+  .graph-canvas > svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .graph-zoom-layer {
+    transition: transform 0.18s ease;
+  }
+  .preview-badge {
+    position: absolute;
+    left: 14px;
+    top: 14px;
+    z-index: 3;
+    min-height: 28px;
+    padding: 0 9px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: color-mix(in srgb, var(--surface) 93%, transparent);
+    color: var(--muted);
+    font-size: 7px;
+    backdrop-filter: blur(8px);
+  }
+  .preview-badge > span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--azure);
+  }
+  .preview-badge b {
+    padding-left: 7px;
+    border-left: 1px solid var(--border);
+    color: var(--gold-ink);
+    font-weight: 600;
+  }
+  .research-edge {
+    cursor: pointer;
+    outline: none;
+  }
+  .research-edge > path:not(.edge-hit) {
+    fill: none;
+    stroke: var(--azure);
+    stroke-width: 2;
+    transition: stroke 0.16s, stroke-width 0.16s;
+  }
+  .research-edge.proposed > path:not(.edge-hit) {
+    stroke: var(--gold-ink);
+    stroke-width: 1.7;
+    stroke-dasharray: 7 6;
+  }
+  .research-edge.selected > path:not(.edge-hit),
+  .research-edge:focus > path:not(.edge-hit) {
+    stroke: var(--gold);
+    stroke-width: 4;
+    stroke-dasharray: none;
+  }
+  .edge-hit {
+    fill: none;
+    stroke: transparent;
+    stroke-width: 15;
+  }
+  .research-node {
+    cursor: pointer;
+    outline: none;
+  }
+  .research-node > rect,
+  .research-node > circle,
+  .research-node > polygon {
+    stroke-width: 2;
+    transition: stroke 0.16s, stroke-width 0.16s, filter 0.16s;
+  }
+  .research-node.document > rect {
+    fill: var(--navy);
+    stroke: color-mix(in srgb, var(--azure) 45%, var(--navy));
+  }
+  .research-node.institution > circle {
+    fill: color-mix(in srgb, var(--azure) 14%, var(--surface));
+    stroke: var(--azure);
+  }
+  .research-node.regulation > polygon {
+    fill: color-mix(in srgb, var(--ink-muted) 22%, var(--surface));
+    stroke: var(--ink-muted);
+  }
+  .research-node > text {
+    pointer-events: none;
+    fill: var(--navy-deep);
+    font: 600 10px var(--type-sans);
+    dominant-baseline: central;
+  }
+  .research-node.document > text {
+    fill: white;
+  }
+  .research-node.selected > rect,
+  .research-node.selected > circle,
+  .research-node.selected > polygon,
+  .research-node:focus > rect,
+  .research-node:focus > circle,
+  .research-node:focus > polygon {
+    stroke: var(--gold);
+    stroke-width: 5;
+    filter: drop-shadow(0 7px 9px rgba(3, 26, 113, 0.13));
+  }
+  .research-node.on-path > rect,
+  .research-node.on-path > circle {
+    stroke: var(--gold);
+    stroke-width: 5;
+  }
+  .graph-controls {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    overflow: hidden;
+    box-shadow: 0 5px 18px rgba(11, 23, 41, 0.08);
+  }
+  .graph-controls button {
+    min-width: 39px;
+    height: 39px;
+    padding: 0 10px;
+    border: 0;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .graph-controls button:last-child {
+    border: 0;
+    color: var(--muted);
+    font-size: 8px;
+    font-weight: 600;
+  }
+  .research-legend {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+    z-index: 3;
+    min-height: 35px;
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: color-mix(in srgb, var(--surface) 93%, transparent);
+    color: var(--muted);
+    font-size: 7px;
+    backdrop-filter: blur(8px);
+  }
+  .research-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  .research-legend i {
+    display: inline-block;
+  }
+  .research-legend .institution {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--azure) 14%, var(--surface));
+    border: 1px solid var(--azure);
+  }
+  .research-legend .document {
+    width: 13px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--navy);
+  }
+  .research-legend .regulation {
+    width: 10px;
+    height: 9px;
+    background: color-mix(in srgb, var(--ink-muted) 22%, var(--surface));
+    clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+  }
+  .research-legend .mention-line {
+    width: 15px;
+    border-top: 2px solid var(--azure);
+  }
+  .research-legend .proposed-line {
+    width: 15px;
+    border-top: 2px dashed var(--gold-ink);
+  }
+  .graph-list-view {
+    height: 520px;
+    padding: 20px;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    background: var(--page);
+  }
+  .graph-list-view > div {
+    align-self: start;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .graph-list-view h3 {
+    margin: 0;
+    padding: 13px;
+    background: var(--alt);
+    border-bottom: 1px solid var(--border);
+    font-size: 10px;
+  }
+  .graph-list-view button {
+    width: 100%;
+    min-height: 55px;
+    padding: 9px 12px;
+    border: 0;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    color: var(--ink);
+    display: grid;
+    grid-template-columns: 16px 1fr auto;
+    align-items: center;
+    gap: 7px;
+    text-align: left;
+    cursor: pointer;
+  }
+  .graph-list-view button:hover {
+    background: var(--alt);
+  }
+  .graph-list-view button > span:first-child {
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--azure);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--azure) 14%, var(--surface));
+  }
+  .graph-list-view button > span.document {
+    width: 13px;
+    border-radius: 2px;
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+  .graph-list-view button > span.regulation {
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--ink-muted) 22%, var(--surface));
+    border-color: var(--ink-muted);
+    transform: rotate(45deg);
+  }
+  .graph-list-view button b {
+    font-size: 8px;
+  }
+  .graph-list-view button small {
+    color: var(--muted);
+    font-size: 7px;
+  }
+  .graph-list-view .edge-list-mark {
+    height: 0;
+    width: 13px;
+    border: 0;
+    border-top: 2px solid var(--azure);
+    border-radius: 0;
+    background: transparent;
+  }
+  .graph-list-view .edge-list-mark.proposed {
+    border-top-style: dashed;
+    border-color: var(--gold-ink);
+  }
+  .graph-action-row {
+    min-height: 58px;
+    padding: 9px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .graph-action-row > button {
+    min-height: 37px;
+    padding: 0 12px;
+    border: 1px solid var(--navy);
+    border-radius: 9px;
+    background: transparent;
+    color: var(--navy-ink);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .graph-action-row > span {
+    color: var(--muted);
+    font-size: 8px;
+  }
+  .graph-action-row > p {
+    margin-left: auto;
+    color: var(--gold-ink);
+    font-size: 7px;
+  }
+  .graph-inspector {
+    min-width: 0;
+    height: 657px;
+    background: var(--surface);
+  }
+  .graph-inspector-content {
+    padding: 23px 20px;
+  }
+  .inspector-kicker {
+    margin: 0 0 11px;
+    color: var(--muted);
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+  }
+  .graph-inspector-content > h3 {
+    margin: 9px 0 12px;
+    overflow-wrap: anywhere;
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.3;
+    letter-spacing: -0.025em;
+    outline: 0;
+  }
+  .node-type-badge,
+  .status-badge {
+    width: fit-content;
+    min-height: 22px;
+    padding: 0 8px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 7px;
+    font-weight: 600;
+  }
+  .node-type-badge.institution {
+    background: color-mix(in srgb, var(--azure) 12%, var(--surface));
+    color: var(--teal);
+    border: 1px solid color-mix(in srgb, var(--azure) 25%, var(--border));
+  }
+  .node-type-badge.document {
+    background: var(--navy);
+    color: white;
+  }
+  .node-type-badge.regulation {
+    background: var(--alt);
+    color: var(--ink-muted);
+    border: 1px solid var(--border);
+  }
+  .node-meta,
+  .probability {
+    margin: -4px 0 18px;
+    color: var(--muted);
+    font-size: 8px;
+  }
+  .relation-heading {
+    margin-top: 18px;
+    padding: 11px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .relation-heading b {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--alt);
+    color: var(--ink);
+    font-size: 7px;
+  }
+  .inspector-relations {
+    display: grid;
+    gap: 7px;
+  }
+  .inspector-relations > button {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--page);
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+  }
+  .inspector-relations > button:hover {
+    border-color: color-mix(in srgb, var(--azure) 40%, var(--border));
+  }
+  .inspector-relations button > span {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 7px;
+  }
+  .inspector-relations button > span b {
+    color: var(--teal);
+    font-size: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .inspector-relations button > strong {
+    display: block;
+    margin: 7px 0;
+    font-size: 9px;
+    overflow-wrap: anywhere;
+  }
+  .inspector-relations button > em {
+    width: fit-content;
+    padding: 3px 5px;
+    border-radius: 4px;
+    display: block;
+    font-size: 6px;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .inspector-relations button > em.documented {
+    background: color-mix(in srgb, var(--azure) 12%, var(--surface));
+    color: var(--teal);
+  }
+  .inspector-relations button > em.proposed {
+    background: color-mix(in srgb, var(--gold) 18%, var(--surface));
+    color: var(--gold-ink);
+  }
+  .inspector-relations button > p {
+    max-width: 100%;
+    margin: 7px 0 0;
+    color: var(--muted);
+    font: 500 8px/1.45 var(--type-reading);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .edge-parties {
+    margin-bottom: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 8px;
+  }
+  .edge-parties span {
+    max-width: 45%;
+    overflow-wrap: anywhere;
+  }
+  .status-badge.documented {
+    background: color-mix(in srgb, var(--azure) 12%, var(--surface));
+    color: var(--teal);
+  }
+  .status-badge.proposed {
+    background: color-mix(in srgb, var(--gold) 18%, var(--surface));
+    color: var(--gold-ink);
+    border: 1px dashed var(--gold-ink);
+  }
+  .probability {
+    margin: 12px 0;
+  }
+  .inspector-evidence {
+    margin: 17px 0 12px;
+    padding: 14px;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    background: color-mix(in srgb, var(--gold) 9%, var(--page));
+  }
+  .inspector-evidence > span {
+    color: var(--gold-ink);
+    font-size: 6px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  .inspector-evidence blockquote {
+    margin: 9px 0;
+    font: 500 11px/1.55 var(--type-reading);
+  }
+  .inspector-evidence small {
+    color: var(--muted);
+    font-size: 7px;
+  }
+  .inspector-primary {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--teal);
+    border-bottom: 1px solid var(--border);
+    font-size: 8px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .inspector-actions {
+    margin-top: 18px;
+    display: grid;
+    gap: 7px;
+  }
+  .inspector-actions .button {
+    width: 100%;
+    min-height: 39px;
+    font-size: 8px;
+  }
+  .inspector-actions > :is(button, a) {
+    min-height: 38px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: transparent;
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .path-result {
+    margin: -5px 0 20px;
+    padding: 12px;
+    border: 1px solid color-mix(in srgb, var(--gold) 55%, var(--border));
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--gold) 9%, var(--surface));
+    display: grid;
+    gap: 5px;
+  }
+  .path-result span {
+    color: var(--gold-ink);
+    font-size: 6px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+  .path-result strong {
+    font-size: 9px;
+  }
+  .path-result p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 7px;
+    line-height: 1.4;
+  }
+  .graph-disclaimer {
+    max-width: 930px;
+    margin: 18px 0 0;
+    color: var(--muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 9px;
+    line-height: 1.6;
+  }
+  .graph-disclaimer svg {
+    color: var(--gold-ink);
+    flex: none;
+    margin-top: 1px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .brh-home .graph-explorer {
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+  .brh-home .graph-toolbar {
+    flex-wrap: wrap;
+  }
+  .brh-home .graph-toolbar form {
+    width: 220px;
+  }
+  .brh-home .graph-view-toggle {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 820px) {
+  .brh-home .graph-section-heading {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .brh-home .graph-section-heading > div:last-child p {
+    max-width: 620px;
+  }
+  .brh-home .graph-explorer {
+    grid-template-columns: 1fr;
+  }
+  .brh-home .graph-workspace {
+    border-right: 0;
+  }
+  .brh-home .graph-inspector {
+    height: 560px;
+    max-height: 560px;
+    border-top: 1px solid var(--border);
+    border-radius: 22px 22px 0 0;
+    box-shadow: 0 -12px 30px rgba(11, 23, 41, 0.06);
+  }
+  .brh-home .inspector-relations {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .brh-home .graph-section-heading {
+    margin-bottom: 30px;
+  }
+  .brh-home .graph-toolbar {
+    align-items: center;
+    padding: 12px;
+  }
+  .brh-home .graph-toolbar form {
+    width: 100%;
+  }
+  .brh-home .graph-status-filters {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+  .brh-home .graph-status-filters button {
+    flex: none;
+  }
+  .brh-home .graph-view-toggle {
+    width: 100%;
+  }
+  .brh-home .graph-view-toggle button {
+    flex: 1;
+  }
+  .brh-home .graph-canvas {
+    height: 430px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .brh-home .graph-canvas > svg {
+    width: 760px;
+    max-width: none;
+  }
+  .brh-home .preview-badge {
+    left: 10px;
+  }
+  .brh-home .graph-controls {
+    position: sticky;
+    float: right;
+    margin: 14px 10px 0 0;
+  }
+  .brh-home .research-legend {
+    width: 730px;
+    right: auto;
+  }
+  .brh-home .graph-list-view {
+    height: 500px;
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+  .brh-home .graph-action-row {
+    flex-wrap: wrap;
+  }
+  .brh-home .graph-action-row > p {
+    width: 100%;
+    margin: 0;
+  }
+  .brh-home .graph-inspector-content {
+    padding: 24px 18px;
+  }
+  .brh-home .inspector-relations {
+    grid-template-columns: 1fr;
+  }
+  .brh-home .graph-disclaimer {
+    font-size: 8px;
+  }
+}
+
+/* Dark mode: node labels and outlines must stay visible on charcoal. */
+.dark .brh-home .research-node.document > rect {
+  fill: var(--color-surface);
+  stroke: var(--color-navy-ink);
+}
+.dark .brh-home .research-node.document > text,
+.dark .brh-home .research-node.institution > text,
+.dark .brh-home .research-node.regulation > text {
+  fill: var(--color-ink);
+}
+.dark .brh-home .research-node.institution > circle {
+  fill: var(--color-navy);
+}
+.dark .brh-home .research-node.regulation > polygon {
+  fill: color-mix(in srgb, var(--color-ink-muted) 45%, var(--color-surface));
+}
+.dark .brh-home .graph-section-heading > div:last-child a,
+.dark .brh-home .graph-action-row > button {
+  color: var(--color-navy-ink);
+  border-color: var(--color-navy-ink);
+}

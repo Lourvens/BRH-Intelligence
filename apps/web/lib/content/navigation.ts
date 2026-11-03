@@ -1,6 +1,6 @@
 export const navigation = [
+  { label: "Agent", href: "/assistant" },
   { label: "Corpus", href: "/brh-corpus" },
-  { label: "Assistant IA", href: "/#assistant" },
-  { label: "Graphe", href: "/#connexions" },
-  { label: "Les sources", href: "/#sources" },
+  { label: "Méthode", href: "/#methode" },
+  { label: "Sources", href: "/#sources" },
 ] as const;

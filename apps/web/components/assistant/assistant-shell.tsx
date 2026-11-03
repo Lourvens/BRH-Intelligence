@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+
 import {
   Sidebar,
   SidebarInset,
@@ -40,6 +42,21 @@ export function AssistantShell() {
     stopThinking,
     selectCitation,
   } = useAssistantWorkspace();
+
+  const initialQuestionSent = useRef(false);
+
+  // The landing form sends `/assistant?q=…`; start it once, then let the
+  // workspace replace the URL with the real thread path.
+  useEffect(() => {
+    if (initialQuestionSent.current || isRestoring) return;
+    const question = new URLSearchParams(window.location.search)
+      .get("q")
+      ?.trim();
+    if (!question) return;
+    initialQuestionSent.current = true;
+    window.history.replaceState(null, "", "/assistant");
+    submitQuestion(question);
+  }, [isRestoring, submitQuestion]);
 
   return (
     <SidebarProvider className="h-dvh overflow-hidden">
