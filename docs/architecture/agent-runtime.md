@@ -112,9 +112,13 @@ callback integration:
 ```dotenv
 LANGSMITH_TRACING=true
 LANGSMITH_API_KEY=...
-LANGSMITH_PROJECT=brh-intelligence
+LANGSMITH_AGENT_ID=brh-intelligence
+LANGSMITH_AGENT_ENVIRONMENT=local
 ```
 
+The workspace is agent-based: traces are addressed to the `brh-intelligence`
+agent's `local` environment (`brh-intelligence-local` project). `LANGSMITH_PROJECT`
+is a legacy destination and must not be set alongside agent addressing.
 `langgraph dev` loads the root `.env` through `services/agent/langgraph.json`;
 no custom instrumentation module is required. LangSmith retains the graph
 hierarchy, latency, errors, token usage and model metadata. Content is captured

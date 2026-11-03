@@ -12,8 +12,9 @@ container**, **Postgres managed**, **Pinecone serverless** (ADR-0009).
      `BRH_EMBEDDING_PROVIDER=openai`)
 2. **Postgres** — any managed Postgres 15+. Run the migration once
    (`python -m brh_core.db.migrate`).
-3. **LangSmith** — a project + API key for agent tracing
-   (`LANGSMITH_API_KEY`, `LANGSMITH_PROJECT`).
+3. **LangSmith** — an agent-based workspace with the `brh-intelligence` agent
+   and its environments, plus an API key (`LANGSMITH_API_KEY`,
+   `LANGSMITH_AGENT_ID`, `LANGSMITH_AGENT_ENVIRONMENT`).
 
 ## 1. Ingest
 
@@ -37,8 +38,9 @@ langgraph deploy        # or push via LangSmith Deployment
 ```
 
 Required env: `BRH_*` (as in `.env.example`), the configured model-provider
-credential, `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY` and
-`LANGSMITH_PROJECT`. The `langgraph.json`
+credential, `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`,
+`LANGSMITH_AGENT_ID` and `LANGSMITH_AGENT_ENVIRONMENT` (the agent environment
+per deployment, e.g. `production`). The `langgraph.json`
 graph id is `agent`. Tracing is emitted by the native LangChain/LangGraph
 integration; traces include prompts, model outputs and corpus context by
 default. Set `LANGSMITH_HIDE_INPUTS=true` and `LANGSMITH_HIDE_OUTPUTS=true`
@@ -52,7 +54,7 @@ outside spans.
   Vercel deployment these must be reachable: either bundle a read-only copy, or
   point `BRH_DATA_DIR` at a mounted/object-storage path. Simplest production
   option: serve PDFs from object storage and set each citation's URL instead of
-  proxying through the app (a follow-up — see `PROGRESSION.md`).
+  proxying through the app (a follow-up).
 
 ## 4. MCP
 

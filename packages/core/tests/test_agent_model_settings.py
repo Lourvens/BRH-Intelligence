@@ -37,7 +37,9 @@ def test_env_template_uses_langsmith_tracing():
     }
 
     assert assignments["LANGSMITH_TRACING"] == "true"
-    assert assignments["LANGSMITH_PROJECT"] == "brh-intelligence"
+    assert assignments["LANGSMITH_AGENT_ID"] == "brh-intelligence"
+    assert assignments["LANGSMITH_AGENT_ENVIRONMENT"] == "local"
+    assert "LANGSMITH_PROJECT" not in assignments
     assert "LANGSMITH_API_KEY" in assignments
     assert "LANGSMITH_HIDE_INPUTS" not in assignments
     assert "LANGSMITH_HIDE_OUTPUTS" not in assignments
