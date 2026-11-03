@@ -1,0 +1,1694 @@
+{
+  "seeds": [
+    20261023,
+    7,
+    42
+  ],
+  "corpus": {
+    "documents": 750,
+    "pages": 10714,
+    "chars": 28783927,
+    "sampled_pages_mean": 627,
+    "needles_mean": 406
+  },
+  "arms": [
+    {
+      "name": "fixed-1000",
+      "note": "control: no boundary respect, no overlap",
+      "shape": {
+        "chunk_count": 2466.6667,
+        "chars_p50": 1000.0,
+        "chars_p95": 1000.0,
+        "chars_max": 1000.0,
+        "chars_mean": 863.1333,
+        "chunks_per_page": 3.9333,
+        "abbrev_cut": 0.008,
+        "mid_sentence_start": 0.2957,
+        "midword_cut": 0.7594,
+        "letter_seam": 0.3399,
+        "table_split": 0.4344,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.0
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.7695,
+          "recall@5": 0.8817,
+          "page_recall@5": 0.9851,
+          "mrr@5": 0.8144,
+          "needle_tightness": 0.28,
+          "boundary_loss": 0.1157,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.5921,
+          "recall@5": 0.7907,
+          "page_recall@5": 0.8966,
+          "mrr@5": 0.6644,
+          "needle_tightness": 0.2825,
+          "boundary_loss": 0.1157,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.5659,
+          "recall@5": 0.7659,
+          "page_recall@5": 0.8702,
+          "mrr@5": 0.6387,
+          "needle_tightness": 0.286,
+          "boundary_loss": 0.1157,
+          "queries": 405.6667
+        }
+      }
+    },
+    {
+      "name": "recursive-600-100",
+      "note": "small passages for fact lookup",
+      "shape": {
+        "chunk_count": 5476.3333,
+        "chars_p50": 469.6667,
+        "chars_p95": 598.0,
+        "chars_max": 600.0,
+        "chars_mean": 409.2333,
+        "chunks_per_page": 8.7333,
+        "abbrev_cut": 0.0008,
+        "mid_sentence_start": 0.2332,
+        "midword_cut": 0.0005,
+        "letter_seam": 0.2552,
+        "table_split": 0.5477,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.009
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.6028,
+          "recall@5": 0.6158,
+          "page_recall@5": 0.9303,
+          "mrr@5": 0.6083,
+          "needle_tightness": 0.4721,
+          "boundary_loss": 0.3834,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.5025,
+          "recall@5": 0.5666,
+          "page_recall@5": 0.8713,
+          "mrr@5": 0.526,
+          "needle_tightness": 0.4798,
+          "boundary_loss": 0.3834,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.5018,
+          "recall@5": 0.5632,
+          "page_recall@5": 0.8563,
+          "mrr@5": 0.5248,
+          "needle_tightness": 0.4805,
+          "boundary_loss": 0.3834,
+          "queries": 405.6667
+        }
+      }
+    },
+    {
+      "name": "recursive-1000-0",
+      "note": "no-overlap recursive, the Chroma result",
+      "shape": {
+        "chunk_count": 3156.3333,
+        "chars_p50": 805.6667,
+        "chars_p95": 995.6667,
+        "chars_max": 1000.0,
+        "chars_mean": 673.4,
+        "chunks_per_page": 5.0333,
+        "abbrev_cut": 0.001,
+        "mid_sentence_start": 0.1806,
+        "midword_cut": 0.0208,
+        "letter_seam": 0.2715,
+        "table_split": 0.0037,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.0071
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.6607,
+          "recall@5": 0.6769,
+          "page_recall@5": 0.9378,
+          "mrr@5": 0.6668,
+          "needle_tightness": 0.3493,
+          "boundary_loss": 0.3215,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.566,
+          "recall@5": 0.6309,
+          "page_recall@5": 0.8623,
+          "mrr@5": 0.5912,
+          "needle_tightness": 0.3499,
+          "boundary_loss": 0.3215,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.5596,
+          "recall@5": 0.6276,
+          "page_recall@5": 0.8319,
+          "mrr@5": 0.5867,
+          "needle_tightness": 0.3493,
+          "boundary_loss": 0.3215,
+          "queries": 405.6667
+        }
+      }
+    },
+    {
+      "name": "recursive-1000-150",
+      "note": "current Settings default, default separators",
+      "shape": {
+        "chunk_count": 3224.0,
+        "chars_p50": 819.6667,
+        "chars_p95": 996.3333,
+        "chars_max": 1000.0,
+        "chars_mean": 688.6333,
+        "chunks_per_page": 5.1433,
+        "abbrev_cut": 0.0004,
+        "mid_sentence_start": 0.2038,
+        "midword_cut": 0.0007,
+        "letter_seam": 0.239,
+        "table_split": 0.0037,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.007
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.6894,
+          "recall@5": 0.7048,
+          "page_recall@5": 0.9378,
+          "mrr@5": 0.6956,
+          "needle_tightness": 0.3479,
+          "boundary_loss": 0.2936,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.5875,
+          "recall@5": 0.658,
+          "page_recall@5": 0.8656,
+          "mrr@5": 0.6147,
+          "needle_tightness": 0.3486,
+          "boundary_loss": 0.2936,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.5809,
+          "recall@5": 0.654,
+          "page_recall@5": 0.8361,
+          "mrr@5": 0.6102,
+          "needle_tightness": 0.3484,
+          "boundary_loss": 0.2936,
+          "queries": 405.6667
+        }
+      }
+    },
+    {
+      "name": "recursive-1500-0",
+      "note": "context-heavy passages",
+      "shape": {
+        "chunk_count": 2276.3333,
+        "chars_p50": 1014.6667,
+        "chars_p95": 1494.0,
+        "chars_max": 1500.0,
+        "chars_mean": 934.3,
+        "chunks_per_page": 3.63,
+        "abbrev_cut": 0.0003,
+        "mid_sentence_start": 0.1495,
+        "midword_cut": 0.0145,
+        "letter_seam": 0.2468,
+        "table_split": 0.0043,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.0022
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.7142,
+          "recall@5": 0.7379,
+          "page_recall@5": 0.9157,
+          "mrr@5": 0.7236,
+          "needle_tightness": 0.2801,
+          "boundary_loss": 0.2605,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.6091,
+          "recall@5": 0.6967,
+          "page_recall@5": 0.8425,
+          "mrr@5": 0.6422,
+          "needle_tightness": 0.2777,
+          "boundary_loss": 0.2605,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.6035,
+          "recall@5": 0.6918,
+          "page_recall@5": 0.8095,
+          "mrr@5": 0.636,
+          "needle_tightness": 0.2786,
+          "boundary_loss": 0.2605,
+          "queries": 405.6667
+        }
+      }
+    },
+    {
+      "name": "recursive-fr-1000-150",
+      "note": "abbreviation-safe French boundaries",
+      "shape": {
+        "chunk_count": 3323.3333,
+        "chars_p50": 797.3333,
+        "chars_p95": 995.0,
+        "chars_max": 1000.0,
+        "chars_mean": 666.7,
+        "chunks_per_page": 5.3,
+        "abbrev_cut": 0.0005,
+        "mid_sentence_start": 0.177,
+        "midword_cut": 0.0006,
+        "letter_seam": 0.2011,
+        "table_split": 0.0037,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.0068
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.6951,
+          "recall@5": 0.7114,
+          "page_recall@5": 0.9803,
+          "mrr@5": 0.7018,
+          "needle_tightness": 0.3631,
+          "boundary_loss": 0.2878,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.5923,
+          "recall@5": 0.6597,
+          "page_recall@5": 0.8958,
+          "mrr@5": 0.6184,
+          "needle_tightness": 0.3654,
+          "boundary_loss": 0.2878,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.5859,
+          "recall@5": 0.6572,
+          "page_recall@5": 0.8874,
+          "mrr@5": 0.6147,
+          "needle_tightness": 0.3647,
+          "boundary_loss": 0.2878,
+          "queries": 405.6667
+        }
+      }
+    },
+    {
+      "name": "recursive-naivefr-1000-150",
+      "note": "reference implementation: splits after Art. / M. / 28,3",
+      "shape": {
+        "chunk_count": 3346.3333,
+        "chars_p50": 792.0,
+        "chars_p95": 995.0,
+        "chars_max": 1000.0,
+        "chars_mean": 661.7667,
+        "chunks_per_page": 5.3367,
+        "abbrev_cut": 0.0046,
+        "mid_sentence_start": 0.1817,
+        "midword_cut": 0.0006,
+        "letter_seam": 0.1839,
+        "table_split": 0.0037,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.0068
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.6951,
+          "recall@5": 0.7106,
+          "page_recall@5": 0.9795,
+          "mrr@5": 0.7016,
+          "needle_tightness": 0.363,
+          "boundary_loss": 0.2878,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.5923,
+          "recall@5": 0.6589,
+          "page_recall@5": 0.895,
+          "mrr@5": 0.6182,
+          "needle_tightness": 0.3653,
+          "boundary_loss": 0.2878,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.5859,
+          "recall@5": 0.6564,
+          "page_recall@5": 0.8866,
+          "mrr@5": 0.6146,
+          "needle_tightness": 0.3647,
+          "boundary_loss": 0.2878,
+          "queries": 405.6667
+        }
+      }
+    },
+    {
+      "name": "markdown-1000-150",
+      "note": "structure-aware: ## / ### then size cap",
+      "shape": {
+        "chunk_count": 2844.0,
+        "chars_p50": 872.3333,
+        "chars_p95": 998.0,
+        "chars_max": 1000.0,
+        "chars_mean": 782.5333,
+        "chunks_per_page": 4.5367,
+        "abbrev_cut": 0.0005,
+        "mid_sentence_start": 0.2287,
+        "midword_cut": 0.0007,
+        "letter_seam": 0.2709,
+        "table_split": 0.2354,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.0029
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.561,
+          "recall@5": 0.6677,
+          "page_recall@5": 0.9613,
+          "mrr@5": 0.6047,
+          "needle_tightness": 0.2979,
+          "boundary_loss": 0.3233,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.465,
+          "recall@5": 0.5923,
+          "page_recall@5": 0.8745,
+          "mrr@5": 0.5148,
+          "needle_tightness": 0.304,
+          "boundary_loss": 0.3233,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.4568,
+          "recall@5": 0.5767,
+          "page_recall@5": 0.8564,
+          "mrr@5": 0.5029,
+          "needle_tightness": 0.3074,
+          "boundary_loss": 0.3233,
+          "queries": 405.6667
+        }
+      }
+    },
+    {
+      "name": "semantic-shift-1000",
+      "note": "lexical-shift semantic proxy, no model call",
+      "shape": {
+        "chunk_count": 3139.3333,
+        "chars_p50": 788.0,
+        "chars_p95": 997.0,
+        "chars_max": 1173.6667,
+        "chars_mean": 677.0,
+        "chunks_per_page": 5.01,
+        "abbrev_cut": 0.0006,
+        "mid_sentence_start": 0.1678,
+        "midword_cut": 0.0206,
+        "letter_seam": 0.2101,
+        "table_split": 0.0459,
+        "table_blocks": 466.3333,
+        "heading_orphan": 0.0045
+      },
+      "regimes": {
+        "verbatim": {
+          "recall@1": 0.8222,
+          "recall@5": 0.8706,
+          "page_recall@5": 0.9934,
+          "mrr@5": 0.8445,
+          "needle_tightness": 0.4476,
+          "boundary_loss": 0.1277,
+          "queries": 405.6667
+        },
+        "keywords": {
+          "recall@1": 0.6159,
+          "recall@5": 0.7978,
+          "page_recall@5": 0.9123,
+          "mrr@5": 0.6851,
+          "needle_tightness": 0.4498,
+          "boundary_loss": 0.1277,
+          "queries": 405.6667
+        },
+        "distractor": {
+          "recall@1": 0.6096,
+          "recall@5": 0.791,
+          "page_recall@5": 0.9031,
+          "mrr@5": 0.6807,
+          "needle_tightness": 0.4493,
+          "boundary_loss": 0.1277,
+          "queries": 405.6667
+        }
+      }
+    }
+  ],
+  "spread": {
+    "fixed-1000::shape.chunk_count": {
+      "min": 2462.0,
+      "max": 2473.0
+    },
+    "fixed-1000::shape.chars_p50": {
+      "min": 1000.0,
+      "max": 1000.0
+    },
+    "fixed-1000::shape.chars_p95": {
+      "min": 1000.0,
+      "max": 1000.0
+    },
+    "fixed-1000::shape.chars_max": {
+      "min": 1000.0,
+      "max": 1000.0
+    },
+    "fixed-1000::shape.chars_mean": {
+      "min": 862.1,
+      "max": 863.7
+    },
+    "fixed-1000::shape.chunks_per_page": {
+      "min": 3.93,
+      "max": 3.94
+    },
+    "fixed-1000::shape.abbrev_cut": {
+      "min": 0.0073,
+      "max": 0.0093
+    },
+    "fixed-1000::shape.mid_sentence_start": {
+      "min": 0.2933,
+      "max": 0.2974
+    },
+    "fixed-1000::shape.midword_cut": {
+      "min": 0.7557,
+      "max": 0.7639
+    },
+    "fixed-1000::shape.letter_seam": {
+      "min": 0.3346,
+      "max": 0.3428
+    },
+    "fixed-1000::shape.table_split": {
+      "min": 0.4235,
+      "max": 0.4413
+    },
+    "fixed-1000::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "fixed-1000::shape.heading_orphan": {
+      "min": 0.0,
+      "max": 0.0
+    },
+    "fixed-1000::regimes.verbatim.recall@1": {
+      "min": 0.7457,
+      "max": 0.8051
+    },
+    "fixed-1000::regimes.verbatim.recall@5": {
+      "min": 0.8617,
+      "max": 0.8937
+    },
+    "fixed-1000::regimes.verbatim.page_recall@5": {
+      "min": 0.9797,
+      "max": 0.988
+    },
+    "fixed-1000::regimes.verbatim.mrr@5": {
+      "min": 0.7926,
+      "max": 0.8405
+    },
+    "fixed-1000::regimes.verbatim.needle_tightness": {
+      "min": 0.2745,
+      "max": 0.2861
+    },
+    "fixed-1000::regimes.verbatim.boundary_loss": {
+      "min": 0.0911,
+      "max": 0.1457
+    },
+    "fixed-1000::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "fixed-1000::regimes.keywords.recall@1": {
+      "min": 0.558,
+      "max": 0.638
+    },
+    "fixed-1000::regimes.keywords.recall@5": {
+      "min": 0.7531,
+      "max": 0.8203
+    },
+    "fixed-1000::regimes.keywords.page_recall@5": {
+      "min": 0.8889,
+      "max": 0.9063
+    },
+    "fixed-1000::regimes.keywords.mrr@5": {
+      "min": 0.6298,
+      "max": 0.7058
+    },
+    "fixed-1000::regimes.keywords.needle_tightness": {
+      "min": 0.2792,
+      "max": 0.2847
+    },
+    "fixed-1000::regimes.keywords.boundary_loss": {
+      "min": 0.0911,
+      "max": 0.1457
+    },
+    "fixed-1000::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "fixed-1000::regimes.distractor.recall@1": {
+      "min": 0.5407,
+      "max": 0.6127
+    },
+    "fixed-1000::regimes.distractor.recall@5": {
+      "min": 0.7259,
+      "max": 0.7949
+    },
+    "fixed-1000::regimes.distractor.page_recall@5": {
+      "min": 0.8642,
+      "max": 0.8759
+    },
+    "fixed-1000::regimes.distractor.mrr@5": {
+      "min": 0.6056,
+      "max": 0.6819
+    },
+    "fixed-1000::regimes.distractor.needle_tightness": {
+      "min": 0.2814,
+      "max": 0.2901
+    },
+    "fixed-1000::regimes.distractor.boundary_loss": {
+      "min": 0.0911,
+      "max": 0.1457
+    },
+    "fixed-1000::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-600-100::shape.chunk_count": {
+      "min": 5442.0,
+      "max": 5507.0
+    },
+    "recursive-600-100::shape.chars_p50": {
+      "min": 465.0,
+      "max": 474.0
+    },
+    "recursive-600-100::shape.chars_p95": {
+      "min": 598.0,
+      "max": 598.0
+    },
+    "recursive-600-100::shape.chars_max": {
+      "min": 600.0,
+      "max": 600.0
+    },
+    "recursive-600-100::shape.chars_mean": {
+      "min": 404.9,
+      "max": 412.5
+    },
+    "recursive-600-100::shape.chunks_per_page": {
+      "min": 8.68,
+      "max": 8.78
+    },
+    "recursive-600-100::shape.abbrev_cut": {
+      "min": 0.0004,
+      "max": 0.0013
+    },
+    "recursive-600-100::shape.mid_sentence_start": {
+      "min": 0.2261,
+      "max": 0.2376
+    },
+    "recursive-600-100::shape.midword_cut": {
+      "min": 0.0,
+      "max": 0.0015
+    },
+    "recursive-600-100::shape.letter_seam": {
+      "min": 0.2525,
+      "max": 0.2586
+    },
+    "recursive-600-100::shape.table_split": {
+      "min": 0.5322,
+      "max": 0.5717
+    },
+    "recursive-600-100::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "recursive-600-100::shape.heading_orphan": {
+      "min": 0.0085,
+      "max": 0.0094
+    },
+    "recursive-600-100::regimes.verbatim.recall@1": {
+      "min": 0.5797,
+      "max": 0.6187
+    },
+    "recursive-600-100::regimes.verbatim.recall@5": {
+      "min": 0.5848,
+      "max": 0.6379
+    },
+    "recursive-600-100::regimes.verbatim.page_recall@5": {
+      "min": 0.9185,
+      "max": 0.9407
+    },
+    "recursive-600-100::regimes.verbatim.mrr@5": {
+      "min": 0.5816,
+      "max": 0.626
+    },
+    "recursive-600-100::regimes.verbatim.needle_tightness": {
+      "min": 0.463,
+      "max": 0.4782
+    },
+    "recursive-600-100::regimes.verbatim.boundary_loss": {
+      "min": 0.3621,
+      "max": 0.4152
+    },
+    "recursive-600-100::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-600-100::regimes.keywords.recall@1": {
+      "min": 0.4886,
+      "max": 0.5276
+    },
+    "recursive-600-100::regimes.keywords.recall@5": {
+      "min": 0.5519,
+      "max": 0.5947
+    },
+    "recursive-600-100::regimes.keywords.page_recall@5": {
+      "min": 0.8494,
+      "max": 0.8987
+    },
+    "recursive-600-100::regimes.keywords.mrr@5": {
+      "min": 0.5121,
+      "max": 0.5524
+    },
+    "recursive-600-100::regimes.keywords.needle_tightness": {
+      "min": 0.4705,
+      "max": 0.4892
+    },
+    "recursive-600-100::regimes.keywords.boundary_loss": {
+      "min": 0.3621,
+      "max": 0.4152
+    },
+    "recursive-600-100::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-600-100::regimes.distractor.recall@1": {
+      "min": 0.4911,
+      "max": 0.5228
+    },
+    "recursive-600-100::regimes.distractor.recall@5": {
+      "min": 0.5468,
+      "max": 0.5923
+    },
+    "recursive-600-100::regimes.distractor.page_recall@5": {
+      "min": 0.8395,
+      "max": 0.8684
+    },
+    "recursive-600-100::regimes.distractor.mrr@5": {
+      "min": 0.5119,
+      "max": 0.5495
+    },
+    "recursive-600-100::regimes.distractor.needle_tightness": {
+      "min": 0.4714,
+      "max": 0.4902
+    },
+    "recursive-600-100::regimes.distractor.boundary_loss": {
+      "min": 0.3621,
+      "max": 0.4152
+    },
+    "recursive-600-100::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1000-0::shape.chunk_count": {
+      "min": 3114.0,
+      "max": 3188.0
+    },
+    "recursive-1000-0::shape.chars_p50": {
+      "min": 798.0,
+      "max": 816.0
+    },
+    "recursive-1000-0::shape.chars_p95": {
+      "min": 995.0,
+      "max": 996.0
+    },
+    "recursive-1000-0::shape.chars_max": {
+      "min": 1000.0,
+      "max": 1000.0
+    },
+    "recursive-1000-0::shape.chars_mean": {
+      "min": 668.8,
+      "max": 682.4
+    },
+    "recursive-1000-0::shape.chunks_per_page": {
+      "min": 4.97,
+      "max": 5.08
+    },
+    "recursive-1000-0::shape.abbrev_cut": {
+      "min": 0.0003,
+      "max": 0.0013
+    },
+    "recursive-1000-0::shape.mid_sentence_start": {
+      "min": 0.1756,
+      "max": 0.186
+    },
+    "recursive-1000-0::shape.midword_cut": {
+      "min": 0.0189,
+      "max": 0.0229
+    },
+    "recursive-1000-0::shape.letter_seam": {
+      "min": 0.2701,
+      "max": 0.2733
+    },
+    "recursive-1000-0::shape.table_split": {
+      "min": 0.0,
+      "max": 0.0089
+    },
+    "recursive-1000-0::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "recursive-1000-0::shape.heading_orphan": {
+      "min": 0.0064,
+      "max": 0.0075
+    },
+    "recursive-1000-0::regimes.verbatim.recall@1": {
+      "min": 0.6475,
+      "max": 0.6864
+    },
+    "recursive-1000-0::regimes.verbatim.recall@5": {
+      "min": 0.6557,
+      "max": 0.6963
+    },
+    "recursive-1000-0::regimes.verbatim.page_recall@5": {
+      "min": 0.9257,
+      "max": 0.9519
+    },
+    "recursive-1000-0::regimes.verbatim.mrr@5": {
+      "min": 0.6508,
+      "max": 0.69
+    },
+    "recursive-1000-0::regimes.verbatim.needle_tightness": {
+      "min": 0.3329,
+      "max": 0.3598
+    },
+    "recursive-1000-0::regimes.verbatim.boundary_loss": {
+      "min": 0.3012,
+      "max": 0.3443
+    },
+    "recursive-1000-0::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1000-0::regimes.keywords.recall@1": {
+      "min": 0.5595,
+      "max": 0.5731
+    },
+    "recursive-1000-0::regimes.keywords.recall@5": {
+      "min": 0.6203,
+      "max": 0.6379
+    },
+    "recursive-1000-0::regimes.keywords.page_recall@5": {
+      "min": 0.8465,
+      "max": 0.8911
+    },
+    "recursive-1000-0::regimes.keywords.mrr@5": {
+      "min": 0.5841,
+      "max": 0.5977
+    },
+    "recursive-1000-0::regimes.keywords.needle_tightness": {
+      "min": 0.3357,
+      "max": 0.3579
+    },
+    "recursive-1000-0::regimes.keywords.boundary_loss": {
+      "min": 0.3012,
+      "max": 0.3443
+    },
+    "recursive-1000-0::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1000-0::regimes.distractor.recall@1": {
+      "min": 0.5556,
+      "max": 0.562
+    },
+    "recursive-1000-0::regimes.distractor.recall@5": {
+      "min": 0.6177,
+      "max": 0.6355
+    },
+    "recursive-1000-0::regimes.distractor.page_recall@5": {
+      "min": 0.8173,
+      "max": 0.8608
+    },
+    "recursive-1000-0::regimes.distractor.mrr@5": {
+      "min": 0.5848,
+      "max": 0.5899
+    },
+    "recursive-1000-0::regimes.distractor.needle_tightness": {
+      "min": 0.3351,
+      "max": 0.3575
+    },
+    "recursive-1000-0::regimes.distractor.boundary_loss": {
+      "min": 0.3012,
+      "max": 0.3443
+    },
+    "recursive-1000-0::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1000-150::shape.chunk_count": {
+      "min": 3191.0,
+      "max": 3254.0
+    },
+    "recursive-1000-150::shape.chars_p50": {
+      "min": 811.0,
+      "max": 831.0
+    },
+    "recursive-1000-150::shape.chars_p95": {
+      "min": 996.0,
+      "max": 997.0
+    },
+    "recursive-1000-150::shape.chars_max": {
+      "min": 1000.0,
+      "max": 1000.0
+    },
+    "recursive-1000-150::shape.chars_mean": {
+      "min": 684.7,
+      "max": 696.4
+    },
+    "recursive-1000-150::shape.chunks_per_page": {
+      "min": 5.09,
+      "max": 5.19
+    },
+    "recursive-1000-150::shape.abbrev_cut": {
+      "min": 0.0,
+      "max": 0.0006
+    },
+    "recursive-1000-150::shape.mid_sentence_start": {
+      "min": 0.2011,
+      "max": 0.2056
+    },
+    "recursive-1000-150::shape.midword_cut": {
+      "min": 0.0,
+      "max": 0.0016
+    },
+    "recursive-1000-150::shape.letter_seam": {
+      "min": 0.2383,
+      "max": 0.2404
+    },
+    "recursive-1000-150::shape.table_split": {
+      "min": 0.0,
+      "max": 0.0089
+    },
+    "recursive-1000-150::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "recursive-1000-150::shape.heading_orphan": {
+      "min": 0.0063,
+      "max": 0.0077
+    },
+    "recursive-1000-150::regimes.verbatim.recall@1": {
+      "min": 0.681,
+      "max": 0.7062
+    },
+    "recursive-1000-150::regimes.verbatim.recall@5": {
+      "min": 0.6911,
+      "max": 0.7136
+    },
+    "recursive-1000-150::regimes.verbatim.page_recall@5": {
+      "min": 0.9257,
+      "max": 0.9494
+    },
+    "recursive-1000-150::regimes.verbatim.mrr@5": {
+      "min": 0.685,
+      "max": 0.7093
+    },
+    "recursive-1000-150::regimes.verbatim.needle_tightness": {
+      "min": 0.3321,
+      "max": 0.3575
+    },
+    "recursive-1000-150::regimes.verbatim.boundary_loss": {
+      "min": 0.284,
+      "max": 0.3089
+    },
+    "recursive-1000-150::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1000-150::regimes.keywords.recall@1": {
+      "min": 0.5802,
+      "max": 0.5923
+    },
+    "recursive-1000-150::regimes.keywords.recall@5": {
+      "min": 0.6506,
+      "max": 0.6691
+    },
+    "recursive-1000-150::regimes.keywords.page_recall@5": {
+      "min": 0.8513,
+      "max": 0.8886
+    },
+    "recursive-1000-150::regimes.keywords.mrr@5": {
+      "min": 0.61,
+      "max": 0.6207
+    },
+    "recursive-1000-150::regimes.keywords.needle_tightness": {
+      "min": 0.3354,
+      "max": 0.3587
+    },
+    "recursive-1000-150::regimes.keywords.boundary_loss": {
+      "min": 0.284,
+      "max": 0.3089
+    },
+    "recursive-1000-150::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1000-150::regimes.distractor.recall@1": {
+      "min": 0.5728,
+      "max": 0.5873
+    },
+    "recursive-1000-150::regimes.distractor.recall@5": {
+      "min": 0.6481,
+      "max": 0.6619
+    },
+    "recursive-1000-150::regimes.distractor.page_recall@5": {
+      "min": 0.8177,
+      "max": 0.8633
+    },
+    "recursive-1000-150::regimes.distractor.mrr@5": {
+      "min": 0.6049,
+      "max": 0.6129
+    },
+    "recursive-1000-150::regimes.distractor.needle_tightness": {
+      "min": 0.3349,
+      "max": 0.3575
+    },
+    "recursive-1000-150::regimes.distractor.boundary_loss": {
+      "min": 0.284,
+      "max": 0.3089
+    },
+    "recursive-1000-150::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1500-0::shape.chunk_count": {
+      "min": 2269.0,
+      "max": 2289.0
+    },
+    "recursive-1500-0::shape.chars_p50": {
+      "min": 1012.0,
+      "max": 1017.0
+    },
+    "recursive-1500-0::shape.chars_p95": {
+      "min": 1493.0,
+      "max": 1495.0
+    },
+    "recursive-1500-0::shape.chars_max": {
+      "min": 1500.0,
+      "max": 1500.0
+    },
+    "recursive-1500-0::shape.chars_mean": {
+      "min": 932.1,
+      "max": 937.2
+    },
+    "recursive-1500-0::shape.chunks_per_page": {
+      "min": 3.62,
+      "max": 3.65
+    },
+    "recursive-1500-0::shape.abbrev_cut": {
+      "min": 0.0,
+      "max": 0.0009
+    },
+    "recursive-1500-0::shape.mid_sentence_start": {
+      "min": 0.1471,
+      "max": 0.1512
+    },
+    "recursive-1500-0::shape.midword_cut": {
+      "min": 0.0109,
+      "max": 0.0195
+    },
+    "recursive-1500-0::shape.letter_seam": {
+      "min": 0.2443,
+      "max": 0.2488
+    },
+    "recursive-1500-0::shape.table_split": {
+      "min": 0.002,
+      "max": 0.0067
+    },
+    "recursive-1500-0::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "recursive-1500-0::shape.heading_orphan": {
+      "min": 0.0004,
+      "max": 0.0035
+    },
+    "recursive-1500-0::regimes.verbatim.recall@1": {
+      "min": 0.6954,
+      "max": 0.7333
+    },
+    "recursive-1500-0::regimes.verbatim.recall@5": {
+      "min": 0.7291,
+      "max": 0.7531
+    },
+    "recursive-1500-0::regimes.verbatim.page_recall@5": {
+      "min": 0.9017,
+      "max": 0.9342
+    },
+    "recursive-1500-0::regimes.verbatim.mrr@5": {
+      "min": 0.7103,
+      "max": 0.7411
+    },
+    "recursive-1500-0::regimes.verbatim.needle_tightness": {
+      "min": 0.2722,
+      "max": 0.2853
+    },
+    "recursive-1500-0::regimes.verbatim.boundary_loss": {
+      "min": 0.242,
+      "max": 0.2709
+    },
+    "recursive-1500-0::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1500-0::regimes.keywords.recall@1": {
+      "min": 0.5951,
+      "max": 0.6304
+    },
+    "recursive-1500-0::regimes.keywords.recall@5": {
+      "min": 0.6911,
+      "max": 0.7012
+    },
+    "recursive-1500-0::regimes.keywords.page_recall@5": {
+      "min": 0.8297,
+      "max": 0.8582
+    },
+    "recursive-1500-0::regimes.keywords.mrr@5": {
+      "min": 0.6339,
+      "max": 0.6547
+    },
+    "recursive-1500-0::regimes.keywords.needle_tightness": {
+      "min": 0.2727,
+      "max": 0.2804
+    },
+    "recursive-1500-0::regimes.keywords.boundary_loss": {
+      "min": 0.242,
+      "max": 0.2709
+    },
+    "recursive-1500-0::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-1500-0::regimes.distractor.recall@1": {
+      "min": 0.5803,
+      "max": 0.6278
+    },
+    "recursive-1500-0::regimes.distractor.recall@5": {
+      "min": 0.6861,
+      "max": 0.6988
+    },
+    "recursive-1500-0::regimes.distractor.page_recall@5": {
+      "min": 0.8025,
+      "max": 0.8203
+    },
+    "recursive-1500-0::regimes.distractor.mrr@5": {
+      "min": 0.6215,
+      "max": 0.6508
+    },
+    "recursive-1500-0::regimes.distractor.needle_tightness": {
+      "min": 0.273,
+      "max": 0.282
+    },
+    "recursive-1500-0::regimes.distractor.boundary_loss": {
+      "min": 0.242,
+      "max": 0.2709
+    },
+    "recursive-1500-0::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-fr-1000-150::shape.chunk_count": {
+      "min": 3286.0,
+      "max": 3360.0
+    },
+    "recursive-fr-1000-150::shape.chars_p50": {
+      "min": 792.0,
+      "max": 806.0
+    },
+    "recursive-fr-1000-150::shape.chars_p95": {
+      "min": 995.0,
+      "max": 995.0
+    },
+    "recursive-fr-1000-150::shape.chars_max": {
+      "min": 1000.0,
+      "max": 1000.0
+    },
+    "recursive-fr-1000-150::shape.chars_mean": {
+      "min": 662.0,
+      "max": 674.7
+    },
+    "recursive-fr-1000-150::shape.chunks_per_page": {
+      "min": 5.24,
+      "max": 5.36
+    },
+    "recursive-fr-1000-150::shape.abbrev_cut": {
+      "min": 0.0,
+      "max": 0.0009
+    },
+    "recursive-fr-1000-150::shape.mid_sentence_start": {
+      "min": 0.1754,
+      "max": 0.1786
+    },
+    "recursive-fr-1000-150::shape.midword_cut": {
+      "min": 0.0,
+      "max": 0.0015
+    },
+    "recursive-fr-1000-150::shape.letter_seam": {
+      "min": 0.1978,
+      "max": 0.2076
+    },
+    "recursive-fr-1000-150::shape.table_split": {
+      "min": 0.0,
+      "max": 0.0089
+    },
+    "recursive-fr-1000-150::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "recursive-fr-1000-150::shape.heading_orphan": {
+      "min": 0.0061,
+      "max": 0.0074
+    },
+    "recursive-fr-1000-150::regimes.verbatim.recall@1": {
+      "min": 0.6861,
+      "max": 0.7111
+    },
+    "recursive-fr-1000-150::regimes.verbatim.recall@5": {
+      "min": 0.6962,
+      "max": 0.7194
+    },
+    "recursive-fr-1000-150::regimes.verbatim.page_recall@5": {
+      "min": 0.9772,
+      "max": 0.9852
+    },
+    "recursive-fr-1000-150::regimes.verbatim.mrr@5": {
+      "min": 0.6901,
+      "max": 0.7142
+    },
+    "recursive-fr-1000-150::regimes.verbatim.needle_tightness": {
+      "min": 0.3527,
+      "max": 0.3696
+    },
+    "recursive-fr-1000-150::regimes.verbatim.boundary_loss": {
+      "min": 0.279,
+      "max": 0.3038
+    },
+    "recursive-fr-1000-150::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-fr-1000-150::regimes.keywords.recall@1": {
+      "min": 0.5827,
+      "max": 0.6019
+    },
+    "recursive-fr-1000-150::regimes.keywords.recall@5": {
+      "min": 0.6519,
+      "max": 0.6715
+    },
+    "recursive-fr-1000-150::regimes.keywords.page_recall@5": {
+      "min": 0.8864,
+      "max": 0.9114
+    },
+    "recursive-fr-1000-150::regimes.keywords.mrr@5": {
+      "min": 0.6102,
+      "max": 0.6287
+    },
+    "recursive-fr-1000-150::regimes.keywords.needle_tightness": {
+      "min": 0.3572,
+      "max": 0.3725
+    },
+    "recursive-fr-1000-150::regimes.keywords.boundary_loss": {
+      "min": 0.279,
+      "max": 0.3038
+    },
+    "recursive-fr-1000-150::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-fr-1000-150::regimes.distractor.recall@1": {
+      "min": 0.5753,
+      "max": 0.5924
+    },
+    "recursive-fr-1000-150::regimes.distractor.recall@5": {
+      "min": 0.6494,
+      "max": 0.6691
+    },
+    "recursive-fr-1000-150::regimes.distractor.page_recall@5": {
+      "min": 0.8815,
+      "max": 0.8911
+    },
+    "recursive-fr-1000-150::regimes.distractor.mrr@5": {
+      "min": 0.6063,
+      "max": 0.6207
+    },
+    "recursive-fr-1000-150::regimes.distractor.needle_tightness": {
+      "min": 0.3567,
+      "max": 0.3713
+    },
+    "recursive-fr-1000-150::regimes.distractor.boundary_loss": {
+      "min": 0.279,
+      "max": 0.3038
+    },
+    "recursive-fr-1000-150::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-naivefr-1000-150::shape.chunk_count": {
+      "min": 3311.0,
+      "max": 3385.0
+    },
+    "recursive-naivefr-1000-150::shape.chars_p50": {
+      "min": 787.0,
+      "max": 801.0
+    },
+    "recursive-naivefr-1000-150::shape.chars_p95": {
+      "min": 995.0,
+      "max": 995.0
+    },
+    "recursive-naivefr-1000-150::shape.chars_max": {
+      "min": 1000.0,
+      "max": 1000.0
+    },
+    "recursive-naivefr-1000-150::shape.chars_mean": {
+      "min": 656.6,
+      "max": 669.3
+    },
+    "recursive-naivefr-1000-150::shape.chunks_per_page": {
+      "min": 5.28,
+      "max": 5.4
+    },
+    "recursive-naivefr-1000-150::shape.abbrev_cut": {
+      "min": 0.0038,
+      "max": 0.0057
+    },
+    "recursive-naivefr-1000-150::shape.mid_sentence_start": {
+      "min": 0.1786,
+      "max": 0.1839
+    },
+    "recursive-naivefr-1000-150::shape.midword_cut": {
+      "min": 0.0,
+      "max": 0.0015
+    },
+    "recursive-naivefr-1000-150::shape.letter_seam": {
+      "min": 0.1822,
+      "max": 0.1867
+    },
+    "recursive-naivefr-1000-150::shape.table_split": {
+      "min": 0.0,
+      "max": 0.0089
+    },
+    "recursive-naivefr-1000-150::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "recursive-naivefr-1000-150::shape.heading_orphan": {
+      "min": 0.006,
+      "max": 0.0074
+    },
+    "recursive-naivefr-1000-150::regimes.verbatim.recall@1": {
+      "min": 0.6861,
+      "max": 0.7111
+    },
+    "recursive-naivefr-1000-150::regimes.verbatim.recall@5": {
+      "min": 0.6962,
+      "max": 0.7185
+    },
+    "recursive-naivefr-1000-150::regimes.verbatim.page_recall@5": {
+      "min": 0.976,
+      "max": 0.9852
+    },
+    "recursive-naivefr-1000-150::regimes.verbatim.mrr@5": {
+      "min": 0.6901,
+      "max": 0.7142
+    },
+    "recursive-naivefr-1000-150::regimes.verbatim.needle_tightness": {
+      "min": 0.3527,
+      "max": 0.3691
+    },
+    "recursive-naivefr-1000-150::regimes.verbatim.boundary_loss": {
+      "min": 0.279,
+      "max": 0.3038
+    },
+    "recursive-naivefr-1000-150::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-naivefr-1000-150::regimes.keywords.recall@1": {
+      "min": 0.5827,
+      "max": 0.6019
+    },
+    "recursive-naivefr-1000-150::regimes.keywords.recall@5": {
+      "min": 0.6519,
+      "max": 0.6691
+    },
+    "recursive-naivefr-1000-150::regimes.keywords.page_recall@5": {
+      "min": 0.8864,
+      "max": 0.9114
+    },
+    "recursive-naivefr-1000-150::regimes.keywords.mrr@5": {
+      "min": 0.6102,
+      "max": 0.6283
+    },
+    "recursive-naivefr-1000-150::regimes.keywords.needle_tightness": {
+      "min": 0.3572,
+      "max": 0.372
+    },
+    "recursive-naivefr-1000-150::regimes.keywords.boundary_loss": {
+      "min": 0.279,
+      "max": 0.3038
+    },
+    "recursive-naivefr-1000-150::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "recursive-naivefr-1000-150::regimes.distractor.recall@1": {
+      "min": 0.5753,
+      "max": 0.5924
+    },
+    "recursive-naivefr-1000-150::regimes.distractor.recall@5": {
+      "min": 0.6494,
+      "max": 0.6667
+    },
+    "recursive-naivefr-1000-150::regimes.distractor.page_recall@5": {
+      "min": 0.8815,
+      "max": 0.8911
+    },
+    "recursive-naivefr-1000-150::regimes.distractor.mrr@5": {
+      "min": 0.6063,
+      "max": 0.6203
+    },
+    "recursive-naivefr-1000-150::regimes.distractor.needle_tightness": {
+      "min": 0.3567,
+      "max": 0.3708
+    },
+    "recursive-naivefr-1000-150::regimes.distractor.boundary_loss": {
+      "min": 0.279,
+      "max": 0.3038
+    },
+    "recursive-naivefr-1000-150::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "markdown-1000-150::shape.chunk_count": {
+      "min": 2829.0,
+      "max": 2863.0
+    },
+    "markdown-1000-150::shape.chars_p50": {
+      "min": 867.0,
+      "max": 878.0
+    },
+    "markdown-1000-150::shape.chars_p95": {
+      "min": 998.0,
+      "max": 998.0
+    },
+    "markdown-1000-150::shape.chars_max": {
+      "min": 1000.0,
+      "max": 1000.0
+    },
+    "markdown-1000-150::shape.chars_mean": {
+      "min": 780.0,
+      "max": 787.4
+    },
+    "markdown-1000-150::shape.chunks_per_page": {
+      "min": 4.51,
+      "max": 4.57
+    },
+    "markdown-1000-150::shape.abbrev_cut": {
+      "min": 0.0,
+      "max": 0.0007
+    },
+    "markdown-1000-150::shape.mid_sentence_start": {
+      "min": 0.2264,
+      "max": 0.2302
+    },
+    "markdown-1000-150::shape.midword_cut": {
+      "min": 0.0,
+      "max": 0.0018
+    },
+    "markdown-1000-150::shape.letter_seam": {
+      "min": 0.2684,
+      "max": 0.2725
+    },
+    "markdown-1000-150::shape.table_split": {
+      "min": 0.213,
+      "max": 0.2616
+    },
+    "markdown-1000-150::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "markdown-1000-150::shape.heading_orphan": {
+      "min": 0.0025,
+      "max": 0.0035
+    },
+    "markdown-1000-150::regimes.verbatim.recall@1": {
+      "min": 0.5392,
+      "max": 0.5778
+    },
+    "markdown-1000-150::regimes.verbatim.recall@5": {
+      "min": 0.643,
+      "max": 0.6835
+    },
+    "markdown-1000-150::regimes.verbatim.page_recall@5": {
+      "min": 0.9544,
+      "max": 0.9654
+    },
+    "markdown-1000-150::regimes.verbatim.mrr@5": {
+      "min": 0.5862,
+      "max": 0.6171
+    },
+    "markdown-1000-150::regimes.verbatim.needle_tightness": {
+      "min": 0.2839,
+      "max": 0.3066
+    },
+    "markdown-1000-150::regimes.verbatim.boundary_loss": {
+      "min": 0.3046,
+      "max": 0.3494
+    },
+    "markdown-1000-150::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "markdown-1000-150::regimes.keywords.recall@1": {
+      "min": 0.442,
+      "max": 0.4796
+    },
+    "markdown-1000-150::regimes.keywords.recall@5": {
+      "min": 0.5778,
+      "max": 0.6043
+    },
+    "markdown-1000-150::regimes.keywords.page_recall@5": {
+      "min": 0.8568,
+      "max": 0.8937
+    },
+    "markdown-1000-150::regimes.keywords.mrr@5": {
+      "min": 0.4973,
+      "max": 0.5247
+    },
+    "markdown-1000-150::regimes.keywords.needle_tightness": {
+      "min": 0.288,
+      "max": 0.3142
+    },
+    "markdown-1000-150::regimes.keywords.boundary_loss": {
+      "min": 0.3046,
+      "max": 0.3494
+    },
+    "markdown-1000-150::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "markdown-1000-150::regimes.distractor.recall@1": {
+      "min": 0.442,
+      "max": 0.4652
+    },
+    "markdown-1000-150::regimes.distractor.recall@5": {
+      "min": 0.5654,
+      "max": 0.5851
+    },
+    "markdown-1000-150::regimes.distractor.page_recall@5": {
+      "min": 0.8444,
+      "max": 0.8759
+    },
+    "markdown-1000-150::regimes.distractor.mrr@5": {
+      "min": 0.4881,
+      "max": 0.5106
+    },
+    "markdown-1000-150::regimes.distractor.needle_tightness": {
+      "min": 0.2909,
+      "max": 0.3188
+    },
+    "markdown-1000-150::regimes.distractor.boundary_loss": {
+      "min": 0.3046,
+      "max": 0.3494
+    },
+    "markdown-1000-150::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "semantic-shift-1000::shape.chunk_count": {
+      "min": 3101.0,
+      "max": 3166.0
+    },
+    "semantic-shift-1000::shape.chars_p50": {
+      "min": 779.0,
+      "max": 801.0
+    },
+    "semantic-shift-1000::shape.chars_p95": {
+      "min": 997.0,
+      "max": 997.0
+    },
+    "semantic-shift-1000::shape.chars_max": {
+      "min": 1165.0,
+      "max": 1183.0
+    },
+    "semantic-shift-1000::shape.chars_mean": {
+      "min": 672.3,
+      "max": 685.3
+    },
+    "semantic-shift-1000::shape.chunks_per_page": {
+      "min": 4.95,
+      "max": 5.05
+    },
+    "semantic-shift-1000::shape.abbrev_cut": {
+      "min": 0.0003,
+      "max": 0.001
+    },
+    "semantic-shift-1000::shape.mid_sentence_start": {
+      "min": 0.1657,
+      "max": 0.169
+    },
+    "semantic-shift-1000::shape.midword_cut": {
+      "min": 0.0186,
+      "max": 0.0226
+    },
+    "semantic-shift-1000::shape.letter_seam": {
+      "min": 0.2045,
+      "max": 0.2132
+    },
+    "semantic-shift-1000::shape.table_split": {
+      "min": 0.0389,
+      "max": 0.0554
+    },
+    "semantic-shift-1000::shape.table_blocks": {
+      "min": 451.0,
+      "max": 488.0
+    },
+    "semantic-shift-1000::shape.heading_orphan": {
+      "min": 0.0041,
+      "max": 0.0048
+    },
+    "semantic-shift-1000::regimes.verbatim.recall@1": {
+      "min": 0.8101,
+      "max": 0.8393
+    },
+    "semantic-shift-1000::regimes.verbatim.recall@5": {
+      "min": 0.8532,
+      "max": 0.8945
+    },
+    "semantic-shift-1000::regimes.verbatim.page_recall@5": {
+      "min": 0.9926,
+      "max": 0.9949
+    },
+    "semantic-shift-1000::regimes.verbatim.mrr@5": {
+      "min": 0.8292,
+      "max": 0.865
+    },
+    "semantic-shift-1000::regimes.verbatim.needle_tightness": {
+      "min": 0.4398,
+      "max": 0.4523
+    },
+    "semantic-shift-1000::regimes.verbatim.boundary_loss": {
+      "min": 0.1031,
+      "max": 0.1468
+    },
+    "semantic-shift-1000::regimes.verbatim.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "semantic-shift-1000::regimes.keywords.recall@1": {
+      "min": 0.6,
+      "max": 0.6427
+    },
+    "semantic-shift-1000::regimes.keywords.recall@5": {
+      "min": 0.7802,
+      "max": 0.8106
+    },
+    "semantic-shift-1000::regimes.keywords.page_recall@5": {
+      "min": 0.8963,
+      "max": 0.9342
+    },
+    "semantic-shift-1000::regimes.keywords.mrr@5": {
+      "min": 0.667,
+      "max": 0.71
+    },
+    "semantic-shift-1000::regimes.keywords.needle_tightness": {
+      "min": 0.4429,
+      "max": 0.4545
+    },
+    "semantic-shift-1000::regimes.keywords.boundary_loss": {
+      "min": 0.1031,
+      "max": 0.1468
+    },
+    "semantic-shift-1000::regimes.keywords.queries": {
+      "min": 395.0,
+      "max": 417.0
+    },
+    "semantic-shift-1000::regimes.distractor.recall@1": {
+      "min": 0.5975,
+      "max": 0.6187
+    },
+    "semantic-shift-1000::regimes.distractor.recall@5": {
+      "min": 0.7802,
+      "max": 0.8106
+    },
+    "semantic-shift-1000::regimes.distractor.page_recall@5": {
+      "min": 0.8938,
+      "max": 0.9114
+    },
+    "semantic-shift-1000::regimes.distractor.mrr@5": {
+      "min": 0.6677,
+      "max": 0.6956
+    },
+    "semantic-shift-1000::regimes.distractor.needle_tightness": {
+      "min": 0.4413,
+      "max": 0.4541
+    },
+    "semantic-shift-1000::regimes.distractor.boundary_loss": {
+      "min": 0.1031,
+      "max": 0.1468
+    },
+    "semantic-shift-1000::regimes.distractor.queries": {
+      "min": 395.0,
+      "max": 417.0
+    }
+  },
+  "verdict": {
+    "rule": "max min(recall@5 over verbatim,keywords) subject to chars_p95<=1500, table_split<=0.10, midword_cut<=0.05; tie-break tightness then fewer chunks",
+    "eligible": [
+      "recursive-1000-0",
+      "recursive-1000-150",
+      "recursive-1500-0",
+      "recursive-fr-1000-150",
+      "recursive-naivefr-1000-150",
+      "semantic-shift-1000"
+    ],
+    "chosen": "semantic-shift-1000",
+    "chosen_recall@5": 0.7978,
+    "runner_up": "recursive-1500-0",
+    "runner_up_recall@5": 0.6967,
+    "constrained_out": [
+      "fixed-1000",
+      "recursive-600-100",
+      "markdown-1000-150"
+    ]
+  }
+}
