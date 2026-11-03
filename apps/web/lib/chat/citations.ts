@@ -8,3 +8,10 @@ export function uniqueCitations(citations: readonly ChatCitation[]) {
     return true;
   });
 }
+
+/** Shared count wording for every surface that lists conversation sources. */
+export function citationCountLabel(count: number): string {
+  if (!count) return "Aucune référence";
+  const plural = count > 1 ? "s" : "";
+  return `${count} référence${plural} active${plural}`;
+}

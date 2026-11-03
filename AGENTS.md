@@ -189,6 +189,12 @@ to every paragraph or delay the appearance of research content.
 Use maintained libraries for UI and charts. Do **not** hand-roll dialogs,
 dropdowns, sheets, tooltips, or chart geometry.
 
+**Both directions animate.** Every dismissible surface (sheet, dialog, sidebar,
+popover, disclosure) must animate its exit as well as its entry; closing must
+never unmount instantly. For Radix, keep a `data-state="closed"` CSS animation
+(Radix waits for it before unmounting) or a Framer `AnimatePresence` exit. Verify
+the close path and the reduced-motion fallback, not just the open state.
+
 ### Charts
 
 Pick the library by task, not by habit:

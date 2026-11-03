@@ -3,7 +3,9 @@
   --motion-feedback: 140ms;
   --motion-enter: 200ms;
   --motion-exit: 140ms;
+  --motion-sheet-exit: 220ms;
   --motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --motion-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 :is(
   [data-slot="select-content"],
@@ -42,26 +44,25 @@
   animation-direction: reverse;
 }
 [data-slot="sheet-content"] {
-  --sheet-offset-x: 24px;
-  --sheet-offset-y: 0px;
+  --sheet-offset-x: 100%;
+  --sheet-offset-y: 0%;
 }
 [data-slot="sheet-content"][data-side="left"] {
-  --sheet-offset-x: -24px;
+  --sheet-offset-x: -100%;
 }
 [data-slot="sheet-content"][data-side="top"] {
-  --sheet-offset-x: 0px;
-  --sheet-offset-y: -24px;
+  --sheet-offset-x: 0%;
+  --sheet-offset-y: -100%;
 }
 [data-slot="sheet-content"][data-side="bottom"] {
-  --sheet-offset-x: 0px;
-  --sheet-offset-y: 24px;
+  --sheet-offset-x: 0%;
+  --sheet-offset-y: 100%;
 }
 [data-slot="sheet-content"][data-state="open"] {
   animation-name: interaction-sheet;
 }
 [data-slot="sheet-content"][data-state="closed"] {
-  animation-name: interaction-sheet;
-  animation-direction: reverse;
+  animation-name: interaction-sheet-out;
 }
 @keyframes interaction-fade {
   from {
@@ -103,6 +104,16 @@
     transform: translate(0, 0);
   }
 }
+@keyframes interaction-sheet-out {
+  from {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(var(--sheet-offset-x), var(--sheet-offset-y));
+  }
+}
 /* Stateful controls: feedback without moving surrounding text or charts. */
 :is(.atlas-page, .atlas-map)
   :is(button, a, summary):active:not(:disabled):not([aria-disabled="true"]) {
@@ -132,11 +143,11 @@
     border-color var(--motion-feedback) var(--motion-ease),
     color var(--motion-feedback) var(--motion-ease);
 }
-/* Keep desktop rails from continuously relaying out the chat while toggling.
-   Only their contents fade; the new column width is applied once. */
+/* Desktop rail: one 220ms width transition per toggle, on the drawer curve.
+   The contents still fade in, so the rail reads as a single surface moving. */
 [data-slot="sidebar-gap"],
 [data-slot="sidebar-container"] {
-  transition: none;
+  transition: width 220ms var(--motion-drawer);
 }
 [data-slot="sidebar"][data-state="expanded"] [data-slot="sidebar-inner"] {
   animation: interaction-fade var(--motion-enter) var(--motion-ease);
@@ -173,6 +184,15 @@
 )[data-state="closed"] {
   animation-duration: var(--motion-exit);
   animation-timing-function: var(--motion-ease);
+}
+/* Drawers get the full off-screen slide, with a longer close so it reads. */
+[data-slot="sheet-content"][data-state="open"] {
+  animation-duration: var(--motion-enter);
+  animation-timing-function: var(--motion-drawer);
+}
+[data-slot="sheet-content"][data-state="closed"] {
+  animation-duration: var(--motion-sheet-exit);
+  animation-timing-function: var(--motion-drawer);
 }
 .corpus-filter-sidebar-toggle svg,
 .corpus-filter-option,
@@ -254,5 +274,12 @@
   }
   .corpus-header::after {
     display: none;
+  }
+  /* Keep the opening/closing state legible without the slide. */
+  [data-slot="sheet-content"][data-state="open"] {
+    animation: interaction-fade 120ms var(--motion-ease) !important;
+  }
+  [data-slot="sheet-content"][data-state="closed"] {
+    animation: interaction-fade 120ms var(--motion-ease) reverse !important;
   }
 }

@@ -13,12 +13,12 @@ export function SourceList({ citations, selectedId, onSelect }: {
 }) {
   const reduceMotion = useReducedMotion();
   return (
-    <div className="min-w-0 divide-y divide-border border-y border-border">
+    <div className="w-full min-w-0 divide-y divide-border border-y border-border">
       {citations.map((citation, index) => (
-        <div key={citation.id} className={cn("border-l-2 px-3 py-3 transition-colors", citation.id === selectedId ? "border-l-gold bg-surface-alt" : "border-l-transparent hover:bg-surface-alt")}>
+        <div key={citation.id} className={cn("min-w-0 border-l-2 px-3 py-3 transition-colors", citation.id === selectedId ? "border-l-gold bg-surface-alt" : "border-l-transparent hover:bg-surface-alt")}>
           <button type="button" onClick={() => onSelect(citation.id)} aria-pressed={citation.id === selectedId} className="flex w-full min-w-0 items-start gap-2 text-left">
             <span className="grid size-6 shrink-0 place-items-center rounded-sm bg-gold text-caption font-bold text-navy-deep">{index + 1}</span>
-            <span className="min-w-0 flex-1"><span className="block text-small font-medium leading-5 text-navy-ink">{citation.title}</span><span className="mt-1 block text-caption text-ink-muted">{citation.source} · p. {citation.page}</span></span>
+            <span className="min-w-0 flex-1"><span className="block break-words text-small font-medium leading-5 text-navy-ink">{citation.title}</span><span className="mt-1 block break-words text-caption text-ink-muted">{citation.source} · p. {citation.page}</span></span>
             <span className="mt-1 inline-flex size-4 shrink-0" aria-hidden>
               <AnimatePresence initial={false}>
                 {citation.id === selectedId ? <motion.span key="selected" variants={feedbackVariants} initial="hidden" animate="visible" exit="hidden" transition={reduceMotion ? { duration: 0 } : feedbackTransition}><Check className="size-4 text-navy-ink" /></motion.span> : null}

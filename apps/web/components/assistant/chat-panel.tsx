@@ -102,7 +102,22 @@ export function ChatPanel({
         )}
       >
         {isEmpty && <div aria-hidden className="flex-1" />}
-        {isEmpty && <EmptyState />}
+        <AnimatePresence initial={false}>
+          {isEmpty && (
+            <motion.div
+              key="empty-state"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.16,
+                ease: [0.23, 1, 0.32, 1],
+              }}
+            >
+              <EmptyState />
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div
           ref={scrollRef}
           onScroll={handleScroll}
