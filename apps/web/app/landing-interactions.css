@@ -187,9 +187,16 @@
   outline-offset: 4px;
   transition: none;
 }
-.brh-home :is(.question-control, .closing-panel form):focus-within {
+/* Composite fields own their focus ring: one ring on the control, never a
+   second one on the bare input inside it. */
+.brh-home
+  :is(.question-control, .closing-panel form > div)
+  :is(input):focus-visible {
+  outline: 0;
+}
+.brh-home .closing-panel form > div:focus-within {
   outline: 2px solid var(--color-azure);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 .brh-home .demo-panel,
 .brh-home .chart-line {
