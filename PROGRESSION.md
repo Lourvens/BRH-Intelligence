@@ -1,11 +1,19 @@
 # Progression
 
-Last updated: 2026-11-03 (expressive landing motion)
+Last updated: 2026-11-03 (landing focus ring)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Landing focus-ring consolidation (2026-11-03).** The hero question field
+  stacked three focus indicators: the control's azure border + halo, a
+  focus-within outline, and the inner input's own focus-visible outline.
+  Composite fields now own one ring each — the hero keeps its soft border and
+  halo, the white closing-panel field gets a single outline, and the bare
+  inputs get none. TypeScript passes; browser checks at 1440px confirm one ring
+  per field.
 
 - **Expressive landing motion (2026-11-03).** Replaced the ten-accent-only
   pass with full hero-to-footer editorial choreography. The hero has an
