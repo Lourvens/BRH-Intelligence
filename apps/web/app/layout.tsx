@@ -103,6 +103,7 @@ export default function RootLayout({
     <html
       lang="fr"
       suppressHydrationWarning
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${montserrat.variable} ${sourceSerif.variable}`}
     >
       <body className="antialiased">
