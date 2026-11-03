@@ -1,15 +1,16 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ChevronDown, Copy, FileText, Share2 } from "lucide-react";
+import { ChevronDown, Copy, FileText } from "lucide-react";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { useAnswerActions } from "@/lib/hooks/use-answer-actions";
+import { useCopyAnswer } from "@/lib/hooks/use-copy-answer";
 import type { ChatCitation } from "@/lib/chat/types";
 import { disclosureVariants, feedbackTransition } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 import { FeedbackAction } from "./feedback-action";
+import { ShareDialog } from "./share-dialog";
 import { SourceList } from "./source-list";
 
 export function MessageActions({ content, citations = [], selectedCitationId, onSelectCitation, threadId }: {
@@ -23,14 +24,14 @@ export function MessageActions({ content, citations = [], selectedCitationId, on
   const sourceTrigger = useRef<HTMLButtonElement>(null);
   const sourceContent = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const { copyState, shareState, copy, share } = useAnswerActions(content, citations, threadId);
+  const { copyState, copy } = useCopyAnswer(content, citations);
 
   function setSourcesExpanded(open: boolean) {
     if (!open && sourceContent.current?.contains(document.activeElement)) sourceTrigger.current?.focus();
     setSourcesOpen(open);
   }
 
-  const announcement = copyState === "error" ? "La copie a échoué. Réessayez ou sélectionnez le texte manuellement." : shareState === "error" ? "Le partage a échoué. Réessayez ou copiez le lien manuellement." : copyState === "success" ? "Réponse et sources copiées." : shareState === "fallback" ? "Lien de la conversation copié. Collez-le pour partager cette réponse." : shareState === "success" ? "Conversation partagée." : "";
+  const announcement = copyState === "error" ? "La copie a échoué. Réessayez ou sélectionnez le texte manuellement." : copyState === "success" ? "Réponse et sources copiées." : "";
 
   return (
     <Collapsible open={sourcesOpen} onOpenChange={setSourcesExpanded} className="mt-4 border-t border-border pt-2">
@@ -45,10 +46,10 @@ export function MessageActions({ content, citations = [], selectedCitationId, on
           </CollapsibleTrigger>
         ) : null}
         <FeedbackAction state={copyState} label="Copier" successLabel="Copié" icon={Copy} onClick={copy} />
-        <FeedbackAction state={shareState} label="Partager" successLabel="Partagé" fallbackLabel="Lien copié" icon={Share2} onClick={share} />
+        <ShareDialog threadId={threadId} />
         <span className="ml-auto hidden text-[11px] text-ink-muted sm:inline">Réponse de démonstration</span>
       </div>
-      <p role="status" aria-live="polite" className={cn("text-caption leading-5", copyState === "error" || shareState === "error" ? "mt-2 text-scarlet" : "sr-only")}>{announcement}</p>
+      <p role="status" aria-live="polite" className={cn("text-caption leading-5", copyState === "error" ? "mt-2 text-scarlet" : "sr-only")}>{announcement}</p>
       {citations.length ? (
         <CollapsibleContent forceMount asChild>
           <motion.div ref={sourceContent} inert={!sourcesOpen} aria-hidden={!sourcesOpen} initial={false} variants={disclosureVariants} animate={sourcesOpen ? "open" : "closed"} transition={reduceMotion ? { duration: 0 } : feedbackTransition} className="grid">
