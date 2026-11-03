@@ -12,6 +12,8 @@ dependencies = [
     "langchain-openai>=1.0",
     "starlette>=0.45",
     "uvicorn>=0.30",
+    "langgraph-checkpoint-postgres>=3.2.0",
+    "psycopg-pool>=3.3.3",
 ]
 
 [project.optional-dependencies]

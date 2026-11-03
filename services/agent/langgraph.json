@@ -6,6 +6,9 @@
     "agent": "./src/brh_agent/graph.py:graph"
   },
   "env": "../../.env",
+  "checkpointer": {
+    "path": "./src/brh_agent/checkpointer.py:create_checkpointer"
+  },
   "http": {
     "app": "./src/brh_agent/http.py:app"
   }
