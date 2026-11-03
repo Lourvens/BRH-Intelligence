@@ -27,7 +27,7 @@ class CorpusQuery(FrozenModel):
     document_id: str | None = None
     kind: str = Field(default="", max_length=40)
     relationship: str = Field(default="", max_length=60)
-    sort: str = Field(default="title", pattern="^(title|recent|period)$")
+    sort: str = Field(default="recent", pattern="^(title|recent|period)$")
     page: int = Field(default=1, ge=1, le=10000)
     page_size: int = Field(default=25, ge=1, le=100)
 
