@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { LandingIcon } from "./icons";
@@ -163,6 +163,55 @@ export function HeroDemo() {
   const [tab, setTab] = useState(0);
   const [pointerChange, setPointerChange] = useState(false);
   const reducedMotion = useReducedMotion();
+  const panelRef = useRef<HTMLDivElement>(null);
+  const firstSequence = useRef(true);
+  const direction = useRef(1);
+
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel || reducedMotion || (!firstSequence.current && !pointerChange))
+      return;
+    const animations: Animation[] = [];
+    const phone = window.matchMedia("(max-width: 600px)").matches;
+    const ease = "cubic-bezier(0.23, 1, 0.32, 1)";
+    const play = (element: Element, frames: Keyframe[], duration: number, delay: number) => {
+      animations.push(element.animate(frames, { duration, delay, easing: ease, fill: "backwards" }));
+    };
+    const start = () => {
+      firstSequence.current = false;
+      panel.querySelectorAll(".answer-card > :not(.source-chip):not(.verified-footer)").forEach((element, index) => {
+        play(element, [
+          { opacity: 0, transform: `translateY(${phone ? 6 : 10}px) scale(.98)` },
+          { opacity: 1, transform: "translateY(0) scale(1)" },
+        ], 300, index * (phone ? 40 : 60));
+      });
+      const line = panel.querySelector<SVGPathElement>(".chart-line");
+      if (line) play(line, [{ strokeDashoffset: "1" }, { strokeDashoffset: "0" }], 650, 220);
+      panel.querySelectorAll(".chart-area").forEach(element =>
+        play(element, [{ opacity: 0 }, { opacity: 1 }], 450, 350));
+      panel.querySelectorAll(".chart-wrap circle, .chart-label").forEach(element =>
+        play(element, [{ opacity: 0 }, { opacity: 1 }], 220, 760));
+      panel.querySelectorAll(".compare-table > div").forEach((element, index) =>
+        play(element, [{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "translateY(0)" }], 280, 180 + index * 60));
+      panel.querySelectorAll(".source-chip, .verified-footer").forEach((element, index) =>
+        play(element, [{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "translateY(0)" }], 250, (tab === 0 ? 820 : 450) + index * 60));
+      const highlight = panel.querySelector(".excerpt-box mark");
+      if (highlight) play(highlight, [{ backgroundSize: "0% 100%" }, { backgroundSize: "100% 100%" }], 450, 300);
+    };
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      observer.disconnect();
+      start();
+    }, { threshold: 0.2 });
+    observer.observe(panel);
+    const settle = () => animations.forEach(animation => animation.finish());
+    panel.addEventListener("focusin", settle);
+    return () => {
+      observer.disconnect();
+      animations.forEach(animation => animation.cancel());
+      panel.removeEventListener("focusin", settle);
+    };
+  }, [tab, pointerChange, reducedMotion]);
 
   return (
     <div className="product-window">
@@ -192,6 +241,7 @@ export function HeroDemo() {
             tabIndex={tab === index ? 0 : -1}
             aria-selected={tab === index}
             onClick={(event) => {
+              direction.current = index > tab ? 1 : -1;
               setPointerChange(event.detail > 0);
               setTab(index);
             }}
@@ -210,18 +260,26 @@ export function HeroDemo() {
             }}
           >
             {label}
+            {tab === index && (
+              <motion.span
+                className="demo-tab-indicator"
+                layoutId="hero-demo-tab"
+                transition={{ duration: pointerChange && !reducedMotion ? 0.22 : 0, ease: [0.23, 1, 0.32, 1] }}
+              />
+            )}
           </button>
         ))}
       </div>
       <motion.div
+        ref={panelRef}
         className="demo-panel"
         id="demo-panel"
         role="tabpanel"
         aria-labelledby={`demo-tab-${tab}`}
         key={tab}
-        initial={pointerChange && !reducedMotion ? { opacity: 0.65 } : false}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.16, ease: [0.23, 1, 0.32, 1] }}
+        initial={pointerChange && !reducedMotion ? { opacity: 0, x: direction.current * 10 } : false}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
       >
         <div className="answer-card">
           {tab === 0 && <SeriesPanel />}
