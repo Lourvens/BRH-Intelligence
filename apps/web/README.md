@@ -20,6 +20,16 @@ bun dev                        # http://localhost:3000
 The agent server must be running (`make agent-dev` from the repo root, default
 `http://localhost:2024`) once the chat is wired.
 
+### Vercel lockfile
+
+Vercel uses `apps/web` as its project root. Keep this directory's
+`pnpm-lock.yaml` in sync with its `package.json`, as well as the workspace
+lockfile at the repository root. After changing web dependencies, run
+`pnpm install --lockfile-only` from the repository root and
+`pnpm install --ignore-workspace --lockfile-only` from `apps/web`. Check the
+standalone deployment lock with `pnpm install --ignore-workspace
+--frozen-lockfile` from `apps/web`.
+
 ## Design system
 
 The source of truth is [`services/analytics/DESIGN.md`](../../services/analytics/DESIGN.md)
