@@ -1,11 +1,28 @@
 # Progression
 
-Last updated: 2026-11-03 (expressive landing motion)
+Last updated: 2026-11-03 (corpus default order + skeleton)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
+
+- **Corpus recent-first order + faithful skeleton (2026-11-03).** Browsing now
+  defaults to the most recently synced publications (`sort=recent`) in the
+  shared `CorpusQuery` and the web sort control. The documents loading
+  skeleton mirrors the real page frame and row anatomy (meta, title, actions)
+  instead of generic boxes; it is scoped to the documents route via a route
+  group, and entities have their own skeleton. TypeScript and the corpus
+  unit/HTTP tests pass; the loading UI was not browser-verified at the user's
+  request.
+
+- **Landing focus-ring consolidation (2026-11-03).** The hero question field
+  stacked three focus indicators: the control's azure border + halo, a
+  focus-within outline, and the inner input's own focus-visible outline.
+  Composite fields now own one ring each — the hero keeps its soft border and
+  halo, the white closing-panel field gets a single outline, and the bare
+  inputs get none. TypeScript passes; browser checks at 1440px confirm one ring
+  per field.
 
 - **Expressive landing motion (2026-11-03).** Replaced the ten-accent-only
   pass with full hero-to-footer editorial choreography. The hero has an

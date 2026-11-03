@@ -200,6 +200,12 @@ def test_jev_nan_cannot_turn_into_a_published_assertion():
     client.close()
 
 
+def test_corpus_browses_by_recent_additions_by_default():
+    from brh_core.corpus.models import CorpusQuery
+
+    assert CorpusQuery().sort == "recent"
+
+
 def test_unfiltered_semantic_search_does_not_enumerate_all_corpus_ids():
     from types import SimpleNamespace
 

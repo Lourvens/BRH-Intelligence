@@ -251,7 +251,7 @@ export function CorpusSearchForm({
           </Sheet>
           {!entities && (
             <Select
-              value={filters.sort || "title"}
+              value={filters.sort || "recent"}
               onValueChange={(v) => {
                 if (v) {
                   setFilters({ ...filters, sort: v });
@@ -269,7 +269,7 @@ export function CorpusSearchForm({
                       title: "Titre A à Z",
                       period: "Période récente",
                       recent: "Ajouts récents",
-                    }[filters.sort || "title"]
+                    }[filters.sort || "recent"]
                   }
                 </SelectValue>
               </SelectTrigger>
