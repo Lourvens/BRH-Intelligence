@@ -136,30 +136,6 @@ make lab                           # JupyterLab for experiments/
   `tsc --noEmit`. `apps/web/package.json` is the source of truth.
 - Ruff excludes `experiments/` (notebook cells trip it).
 
-## Browser verification
-
-Run `agent-browser` **only when the user asks for a browser check or the task
-is complex UI work that genuinely needs rendered/interactive verification**
-(layout, motion, responsive behavior, gestures, multi-step flows). Skip it for
-routine or static changes — copy, config, one-line attributes, type-only edits —
-and verify those with typecheck/tests and the running dev server's HTML. When
-in doubt, do not open a browser.
-
-When a browser check is warranted, `agent-browser` is the preferred harness in
-this repo. Start the app (`bun dev` from `apps/web`), then:
-
-```bash
-agent-browser --args "--no-sandbox" open http://localhost:3000
-agent-browser set viewport 1440 1200
-agent-browser screenshot --full /tmp/opencode/<name>.png
-agent-browser errors
-agent-browser close
-```
-
-`--no-sandbox` is required in this container. For a static HTML mock, open
-`file:///...` with `--args "--no-sandbox,--allow-file-access-from-files"`.
-Do not fall back to raw Chrome headless flags unless the CLI cannot do the job.
-
 ## Gotchas that cost time
 
 - **`langgraph dev` overrides shell env.** `services/agent/langgraph.json` sets
