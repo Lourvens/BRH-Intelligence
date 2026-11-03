@@ -236,8 +236,8 @@ class CorpusRepository:
     ) -> None:
         """Atomically replace extracted pages and chunks for one document."""
         with self._pool.connection() as conn, conn.transaction():
-                conn.execute(
-                    """
+            conn.execute(
+                """
                     INSERT INTO corpus.documents (
                         document_id, sha256, slug, title, source_kind, language, publisher,
                     source_path, source_url, volume, issue, publication_date,
@@ -249,31 +249,29 @@ class CorpusRepository:
                         source_path = EXCLUDED.source_path, metadata = EXCLUDED.metadata,
                         last_seen_at = now()
                     """,
-                    _document_values(document),
-                )
-                conn.execute(
-                    "DELETE FROM corpus.pages WHERE document_id = %s", (document.document_id,)
-                )
-                conn.execute(
-                    "DELETE FROM corpus.chunks WHERE document_id = %s", (document.document_id,)
-                )
-                with conn.cursor() as cursor:
-                    cursor.executemany(
-                        """
+                _document_values(document),
+            )
+            conn.execute("DELETE FROM corpus.pages WHERE document_id = %s", (document.document_id,))
+            conn.execute(
+                "DELETE FROM corpus.chunks WHERE document_id = %s", (document.document_id,)
+            )
+            with conn.cursor() as cursor:
+                cursor.executemany(
+                    """
                         INSERT INTO corpus.pages (document_id, page_number, text)
                         VALUES (%s, %s, %s)
                         """,
-                        [_page_values(page) for page in pages],
-                    )
-                    cursor.executemany(
-                        """
+                    [_page_values(page) for page in pages],
+                )
+                cursor.executemany(
+                    """
                         INSERT INTO corpus.chunks (
                             chunk_id, document_id, page_number, ordinal, text, char_count,
                             page_end, chunk_type, section_path, token_count, metadata
                         ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                         """,
-                        [_chunk_values(chunk) for chunk in chunks],
-                    )
+                    [_chunk_values(chunk) for chunk in chunks],
+                )
 
     # --- processing jobs (idempotency ledger) --------------------------
 
