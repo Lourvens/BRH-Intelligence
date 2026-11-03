@@ -249,7 +249,9 @@ mark { background: var(--gold); color: var(--navy-deep); padding: 0 3px; }
 .step p { margin: 0; color: var(--ink); font-size: 12px; font-weight: 500; line-height: 1.65; }
 .method-note { grid-column: 2; margin: 35px 0 0; padding: 15px 18px; background: var(--alt); border-left: 3px solid var(--azure); color: var(--muted); font-size: 10px; }
 
-.provenance-section { background: var(--navy-deep); color: white; position: relative; overflow: hidden; }
+/* `clip` keeps the sticky provenance grid working; `hidden` would make this
+   section a scroll container and break the pin. */
+.provenance-section { background: var(--navy-deep); color: white; position: relative; overflow: clip; }
 .provenance-section:before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 10% 50%, rgba(0,156,220,.18), transparent 42%); }
 .provenance-grid { position: relative; display: grid; grid-template-columns: 1.05fr .95fr; gap: 90px; align-items: center; }
 .document-preview { display: grid; grid-template-columns: 72px 1fr; background: var(--paper); color: var(--paper-ink); min-height: 480px; border-radius: 4px 17px 17px 4px; overflow: hidden; box-shadow: 0 28px 70px rgba(0,0,0,.25); transform: rotate(-1deg); }

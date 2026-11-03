@@ -195,6 +195,98 @@
 .brh-home .chart-line {
   animation: none;
 }
+
+/* Hero answer sequence. CSS-driven so the demo is already resolving as the
+   product window enters, instead of restarting after hydration. */
+.brh-home .hero-product .answer-card > * {
+  animation: landing-demo-item 300ms var(--motion-ease) both;
+}
+.brh-home .hero-product .answer-card > :nth-child(1) {
+  animation-delay: 120ms;
+}
+.brh-home .hero-product .answer-card > :nth-child(2) {
+  animation-delay: 180ms;
+}
+.brh-home .hero-product .answer-card > :nth-child(3) {
+  animation-delay: 240ms;
+}
+.brh-home .hero-product .answer-card > :nth-child(4) {
+  animation-delay: 300ms;
+}
+.brh-home .hero-product .answer-card > :nth-child(5) {
+  animation-delay: 360ms;
+}
+.brh-home .hero-product .answer-card > .source-chip,
+.brh-home .hero-product .answer-card > .verified-footer {
+  animation: landing-demo-item 250ms var(--motion-ease) both;
+}
+.brh-home .hero-product .answer-card > .source-chip {
+  animation-delay: 940ms;
+}
+.brh-home .hero-product .answer-card > .source-chip + .source-chip {
+  animation-delay: 1000ms;
+}
+.brh-home .hero-product .answer-card > .verified-footer {
+  animation-delay: 1000ms;
+}
+.brh-home .hero-product .answer-card[data-tab="1"] > .source-chip {
+  animation-delay: 570ms;
+}
+.brh-home .hero-product .answer-card[data-tab="1"] > .source-chip + .source-chip {
+  animation-delay: 630ms;
+}
+.brh-home .hero-product .answer-card[data-tab="1"] > .verified-footer {
+  animation-delay: 690ms;
+}
+.brh-home .hero-product .answer-card[data-tab="2"] > .verified-footer {
+  animation-delay: 570ms;
+}
+.brh-home .hero-product .chart-line {
+  animation: landing-demo-line 650ms var(--motion-ease) 340ms both;
+}
+.brh-home .hero-product .chart-area {
+  animation: landing-demo-fade 450ms var(--motion-ease) 470ms both;
+}
+.brh-home .hero-product .chart-wrap circle,
+.brh-home .hero-product .chart-label {
+  animation: landing-demo-fade 220ms var(--motion-ease) 880ms both;
+}
+.brh-home .hero-product .excerpt-box mark {
+  animation: landing-demo-mark 450ms var(--motion-ease) 420ms both;
+}
+@keyframes landing-demo-item {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+@keyframes landing-demo-line {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes landing-demo-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes landing-demo-mark {
+  from {
+    background-size: 0% 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brh-home .hero-product,
+  .brh-home .product-glow,
+  .brh-home .hero-product .answer-card > *,
+  .brh-home .hero-product .chart-line,
+  .brh-home .hero-product .chart-area,
+  .brh-home .hero-product .chart-wrap circle,
+  .brh-home .hero-product .chart-label,
+  .brh-home .hero-product .excerpt-box mark {
+    animation: none;
+  }
+}
 .brh-home .faq-answer {
   display: block;
   overflow: hidden;
