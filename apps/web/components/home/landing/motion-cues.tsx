@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { animateMini, scroll } from "framer-motion/dom";
 
 const easeOut = [0.23, 1, 0.32, 1] as const;
@@ -104,6 +104,8 @@ function phase(progress: number, start: number, end: number) {
 
 /** Landing storytelling motion. Content is SSR-visible until this enhancement mounts. */
 export function useLandingMotionCues() {
+  const [motionRevision, setMotionRevision] = useState(0);
+
   useEffect(() => {
     const root = document.querySelector<HTMLElement>(".brh-home");
     if (!root) return;
@@ -111,8 +113,58 @@ export function useLandingMotionCues() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const desktopStory = window.matchMedia("(min-width: 820px)");
+    const compactLayout = window.matchMedia("(max-width: 819px)");
     const cleanups: Array<() => void> = [];
     const animated = new Set<Element>();
+    const running = new Set<ReturnType<typeof animateMini>>();
+    if (!("IntersectionObserver" in window)) {
+      return () => {
+        delete root.dataset.motionReady;
+      };
+    }
+    const prepared = new Map<HTMLElement, string>();
+    const alreadyVisible = new Set<Element>();
+    const prepare = (element: Element) => {
+      const bounds = element.getBoundingClientRect();
+      if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+        alreadyVisible.add(element);
+        return;
+      }
+      if (reduced.matches || bounds.bottom <= 0) {
+        alreadyVisible.add(element);
+        return;
+      }
+      const target = element as HTMLElement;
+      if (!prepared.has(target)) prepared.set(target, target.style.opacity);
+      target.style.opacity = "0";
+    };
+    for (const reveal of reveals) {
+      root
+        .querySelector(reveal.trigger)
+        ?.querySelectorAll(reveal.targets)
+        .forEach(prepare);
+    }
+    root
+      .querySelectorAll(
+        ".graph-explorer, .graph-toolbar, .graph-inspector, .transition-line, .result-line, .collection-stack > *, .citation-pin, .citation-line, .closing-panel",
+      )
+      .forEach(prepare);
+    const restorePrepared = () => {
+      prepared.forEach((opacity, element) => {
+        element.style.opacity = opacity;
+      });
+      prepared.clear();
+    };
+    const revealFocused = (event: FocusEvent) => {
+      prepared.forEach((opacity, element) => {
+        if (element.contains(event.target as Node)) {
+          element.style.opacity = opacity;
+          prepared.delete(element);
+          animated.add(element);
+        }
+      });
+    };
+    root.addEventListener("focusin", revealFocused);
 
     const onceInView = (
       element: Element,
@@ -142,27 +194,80 @@ export function useLandingMotionCues() {
       easing: readonly [number, number, number, number] = easeOut,
     ) => {
       if (animated.has(element)) return;
+      if (alreadyVisible.has(element)) {
+        animated.add(element);
+        return;
+      }
+      // Stacked phone layouts must reveal each card when it reaches the reader,
+      // rather than spending its entrance below the viewport.
+      const compact = compactLayout.matches;
+      const bounds = element.getBoundingClientRect();
+      if (
+        !reduced.matches &&
+        compact &&
+        bounds.top >= window.innerHeight * 0.9
+      ) {
+        cleanups.push(
+          onceInView(
+            element,
+            () => play(element, from, to, duration, 0, easing),
+            { amount: 0.1 },
+          ),
+        );
+        return;
+      }
       animated.add(element);
       if (reduced.matches) {
         Object.assign((element as HTMLElement).style, to);
         return;
       }
+      const target = element as HTMLElement;
+      const wasPrepared = prepared.has(target);
+      const final = wasPrepared ? { ...to, opacity: 1 } : to;
+      const initial = wasPrepared ? { ...from, opacity: 0 } : from;
       const keyframes = Object.fromEntries(
-        Object.keys(to).map((property) => [
+        Object.keys(final).map((property) => [
           property,
-          [from[property], to[property]],
+          [initial[property], final[property]],
         ]),
       );
-      animateMini(element, keyframes, {
-        duration,
+      const animation = animateMini(element, keyframes, {
+        duration: Math.max(duration * 1.5, 0.65),
         delay,
         ease: easing,
+      });
+      running.add(animation);
+      animation.then(() => {
+        running.delete(animation);
+        if (prepared.has(target)) {
+          target.style.opacity = prepared.get(target)!;
+          prepared.delete(target);
+        }
       });
     };
 
     for (const reveal of reveals) {
       const trigger = root.querySelector(reveal.trigger);
       if (!trigger) continue;
+      if (compactLayout.matches) {
+        trigger.querySelectorAll(reveal.targets).forEach((element) => {
+          cleanups.push(
+            onceInView(
+              element,
+              () => {
+                play(
+                  element,
+                  { opacity: 0, transform: "translateY(12px) scale(.99)" },
+                  { opacity: 1, transform: "translateY(0) scale(1)" },
+                  reveal.duration ?? 0.5,
+                );
+              },
+              { amount: 0.12 },
+            ),
+          );
+        });
+        continue;
+      }
       cleanups.push(
         onceInView(
           trigger,
@@ -479,19 +584,20 @@ export function useLandingMotionCues() {
     };
 
     let stopProvenance = setupProvenance();
-    const refreshProvenance = () => {
-      stopProvenance();
-      stopProvenance = setupProvenance();
-    };
-    reduced.addEventListener("change", refreshProvenance);
-    desktopStory.addEventListener("change", refreshProvenance);
+    const rebuildMotion = () => setMotionRevision((revision) => revision + 1);
+    reduced.addEventListener("change", rebuildMotion);
+    compactLayout.addEventListener("change", rebuildMotion);
 
     return () => {
+      running.forEach((animation) => animation.complete());
+      running.clear();
       cleanups.forEach((cleanup) => cleanup());
+      restorePrepared();
+      root.removeEventListener("focusin", revealFocused);
       stopProvenance();
-      reduced.removeEventListener("change", refreshProvenance);
-      desktopStory.removeEventListener("change", refreshProvenance);
+      reduced.removeEventListener("change", rebuildMotion);
+      compactLayout.removeEventListener("change", rebuildMotion);
       delete root.dataset.motionReady;
     };
-  }, []);
+  }, [motionRevision]);
 }
