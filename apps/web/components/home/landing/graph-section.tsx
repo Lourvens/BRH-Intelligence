@@ -260,6 +260,8 @@ export function GraphSection() {
             </div>
 
             {view === "graph" ? (
+              <>
+              <p className="graph-mobile-hint">Balayez le graphe pour explorer, puis touchez un élément pour voir sa source.</p>
               <div className="graph-canvas">
                 <div className="preview-badge">
                   <span /> Aperçu exploratoire
@@ -369,6 +371,7 @@ export function GraphSection() {
                   </span>
                 </div>
               </div>
+              </>
             ) : (
               <div className="graph-list-view">
                 <div>

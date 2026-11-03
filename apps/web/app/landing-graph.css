@@ -796,17 +796,33 @@
   }
   .brh-home .graph-status-filters {
     width: 100%;
-    overflow-x: auto;
-    padding-bottom: 2px;
+    flex-wrap: wrap;
+    overflow: visible;
+    gap: 6px;
   }
   .brh-home .graph-status-filters button {
     flex: none;
+    min-height: 44px;
+    font-size: 12px;
   }
+  .brh-home .graph-status-filters .validated { display: none; }
   .brh-home .graph-view-toggle {
     width: 100%;
   }
   .brh-home .graph-view-toggle button {
     flex: 1;
+    min-height: 44px;
+    font-size: 13px;
+  }
+  .brh-home .graph-toolbar form label { font-size: 12px; }
+  .brh-home .graph-toolbar input { font-size: 16px; min-height: 44px; }
+  .brh-home .graph-mobile-hint {
+    margin: 0;
+    padding: 12px 16px;
+    color: var(--muted);
+    background: var(--surface);
+    font-size: 13px;
+    line-height: 1.5;
   }
   .brh-home .graph-canvas {
     height: 430px;
@@ -819,24 +835,40 @@
   }
   .brh-home .preview-badge {
     left: 10px;
+    font-size: 11px;
+    min-height: 32px;
   }
   .brh-home .graph-controls {
-    position: sticky;
-    float: right;
-    margin: 14px 10px 0 0;
-  }
-  .brh-home .research-legend {
-    width: 730px;
+    position: absolute;
+    float: none;
     right: auto;
+    left: 10px;
+    top: 52px;
+    margin: 0;
+  }
+  .brh-home .graph-controls button { min-width: 44px; height: 44px; }
+  .brh-home .graph-controls button:last-child { font-size: 12px; }
+  .brh-home .research-legend {
+    width: max-content;
+    right: auto;
+    gap: 12px;
+    font-size: 11px;
   }
   .brh-home .graph-list-view {
-    height: 500px;
+    height: 420px;
     grid-template-columns: 1fr;
     padding: 12px;
   }
+  .brh-home .graph-list-view h3 { font-size: 14px; }
+  .brh-home .graph-list-view button { min-height: 48px; grid-template-columns: 16px minmax(0, 1fr); }
+  .brh-home .graph-list-view button b { font-size: 14px; overflow-wrap: anywhere; }
+  .brh-home .graph-list-view button small { grid-column: 2; font-size: 12px; }
   .brh-home .graph-action-row {
     flex-wrap: wrap;
+    gap: 8px 12px;
   }
+  .brh-home .graph-action-row > button { min-height: 44px; font-size: 13px; }
+  .brh-home .graph-action-row > span, .brh-home .graph-action-row > p { font-size: 12px; line-height: 1.5; }
   .brh-home .graph-action-row > p {
     width: 100%;
     margin: 0;
@@ -844,12 +876,23 @@
   .brh-home .graph-inspector-content {
     padding: 24px 18px;
   }
+  .brh-home .graph-inspector { height: auto; max-height: none; border-radius: 0; box-shadow: none; }
+  .brh-home .graph-inspector [data-slot="scroll-area-viewport"] { max-height: none; }
+  .brh-home :is(.inspector-kicker, .node-type-badge, .status-badge, .node-meta, .probability, .relation-heading, .inspector-relations button > span, .inspector-relations button > span b, .inspector-relations button > em, .edge-parties, .inspector-evidence > span, .inspector-evidence small, .inspector-primary, .inspector-actions .button, .inspector-actions > :is(button, a), .path-result span, .path-result p) { font-size: 12px; }
+  .brh-home :is(.inspector-relations button > strong, .path-result strong) { font-size: 14px; }
+  .brh-home .inspector-relations button > p { font-size: 13px; white-space: normal; }
+  .brh-home .inspector-evidence blockquote { font-size: 15px; }
+  .brh-home .inspector-actions > :is(button, a), .brh-home .inspector-primary { min-height: 44px; }
   .brh-home .inspector-relations {
     grid-template-columns: 1fr;
   }
   .brh-home .graph-disclaimer {
-    font-size: 8px;
+    font-size: 12px;
   }
+}
+
+@media (min-width: 601px) {
+  .brh-home .graph-mobile-hint { display: none; }
 }
 
 /* Dark mode: node labels and outlines must stay visible on charcoal. */

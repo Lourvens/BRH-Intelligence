@@ -26,7 +26,7 @@
   --muted: var(--color-ink-muted);
   --shadow: var(--shadow-card);
 
-  /* The document preview is warm paper in both themes. */
+  /* Document previews use warm paper in light mode. */
   --paper: color-mix(in srgb, var(--color-gold) 5%, white);
   --paper-ink: var(--color-navy-deep);
   --paper-muted: color-mix(in srgb, var(--color-navy-deep) 55%, white);
@@ -444,7 +444,7 @@ footer { background: var(--surface); border-top: 1px solid var(--border); }
  * document: in dark mode it must sit on the same charcoal system as the
  * catalogue, with light text and a visible gold provenance marker.
  */
-.dark .brh-home .reader-preview {
+.dark .brh-home :is(.reader-preview, .document-preview) {
   --paper: var(--color-surface-alt);
   --paper-ink: var(--color-ink);
   --paper-muted: var(--color-ink-muted);
@@ -453,6 +453,9 @@ footer { background: var(--surface); border-top: 1px solid var(--border); }
   --paper-gold-ink: var(--color-gold-ink);
   --paper-link: var(--color-teal);
   box-shadow: var(--shadow-card);
+}
+.dark .brh-home .document-preview {
+  border: 1px solid var(--color-border);
 }
 
 /* Dark-mode graph preview: document nodes and labels sit on charcoal, not white. */

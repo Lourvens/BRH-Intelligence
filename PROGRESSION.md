@@ -7,6 +7,16 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
+- **Provenance dark mode (2026-11-03).** Applied the existing dark document
+  preview tokens to the landing provenance illustration, replacing its white
+  paper surface with charcoal while retaining readable text and source accents.
+
+- **Landing graph mobile layout (2026-11-03).** Made the graph preview easier
+  to navigate on phones: a swipe instruction, readable controls and details,
+  larger touch targets, a wrapping filter row, and an inspector that grows with
+  its content. Browser checks covered 320px and 390px graph/list switching and
+  selection, plus a 768px layout; TypeScript passed in an isolated web install.
+
 - **Landing redesign plan (2026-11-02).** Wrote
   `docs/plans/2026-11-02-landing-page.md` after a grill and copywriting
   research. The page becomes an assistant-first analysis companion for
