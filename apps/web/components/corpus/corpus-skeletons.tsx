@@ -26,14 +26,14 @@ function DocumentRowSkeleton({ secondLine = false }: { secondLine?: boolean }) {
     <li>
       <article className="atlas-document">
         <div className="atlas-document-body">
+          <div className="flex h-[27px] items-center gap-3">
+            <Skeleton className="h-4 w-[76%]" />
+            <Skeleton className="ml-auto size-4 shrink-0" />
+          </div>
           <div className="atlas-document-meta">
             <Skeleton className="h-3.5 w-16" />
             <Skeleton className="h-3.5 w-12" />
             <Skeleton className="h-3.5 w-14" />
-          </div>
-          <div className="flex h-[27px] items-center gap-3">
-            <Skeleton className="h-4 w-[76%]" />
-            <Skeleton className="ml-auto size-4 shrink-0" />
           </div>
           {secondLine ? (
             <div className="flex h-[27px] items-center">
