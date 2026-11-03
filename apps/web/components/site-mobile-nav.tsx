@@ -64,7 +64,7 @@ export function SiteMobileNav() {
         <div className="mt-auto border-t border-border p-4">
           <SheetClose asChild>
             <Link
-              href="#question"
+              href="/assistant"
               className="group flex h-12 items-center justify-between rounded-[11px] border border-white/15 bg-navy px-5 text-small font-semibold text-white transition-colors hover:bg-navy-deep"
             >
               Poser une question
