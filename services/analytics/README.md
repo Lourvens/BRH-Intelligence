@@ -21,9 +21,9 @@ uv run pytest services/analytics            # offline tests
 - [`DESIGN.md`](DESIGN.md) — the style guide. **Read it before drawing anything.**
 - `src/brh_analytics/palette.py` — the tokens, and the only place a hex lives.
 - The `analytics` agent
-  ([`.opencode/agents/analytics.md`](../../.opencode/agents/analytics.md)) owns
-  this scope: it carries the rules below, so hand it the work rather than
-  re-deriving them.
+  ([`.claude/agents/analytics.md`](../../.claude/agents/analytics.md), mirrored
+  in `.codex/agents/analytics.toml`) owns this scope: it carries the rules
+  below, so hand it the work rather than re-deriving them.
 
 ## Grouped by family
 

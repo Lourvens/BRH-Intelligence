@@ -45,8 +45,8 @@ registration remains separate surface work.
   assets, grouped into *families* (one package per kind of analytics; the
   `inventory` family is live). Take colours from `palette.py` and rules from its
   `DESIGN.md`; never hardcode a hex. The `analytics` agent
-  (`.opencode/agents/analytics.md`) owns changes there — delegate to it rather
-  than re-deriving the house style.
+  (`.claude/agents/analytics.md`, mirrored in `.codex/agents/analytics.toml`)
+  owns changes there — delegate to it rather than re-deriving the house style.
 - `experiments/` — a **standalone uv project** (own `.venv` + lockfile), *not* a
   workspace member. **Experiments are notebooks, not code** — see
   [Experiments](#experiments-are-not-code) below. Nothing in `experiments/` is
