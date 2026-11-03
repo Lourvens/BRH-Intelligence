@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ResearchLandingV2 } from "@/components/home/landing-v2";
+import { LandingPage } from "@/components/landing/landing-page";
 import { SiteHeader } from "@/components/site-header";
 import {
   OG_IMAGE,
@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-bg text-ink">
       <SiteHeader />
-      <ResearchLandingV2 />
+      <LandingPage />
     </div>
   );
 }

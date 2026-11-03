@@ -12,7 +12,8 @@ import {
 import Link from "next/link";
 import { ResearchLink } from "./research-link";
 import { Button } from "@/components/ui/button";
-import { familyLabels, numberLabel } from "@/lib/corpus/labels";
+import { familyLabel, numberLabel } from "@/lib/corpus/labels";
+import { documentPageHref, graphFocusHref } from "@/lib/corpus/links";
 import { corpusLink } from "@/lib/corpus/query";
 import type { DocumentList } from "@/lib/corpus/types";
 export function DocumentResults({
@@ -106,7 +107,7 @@ export function DocumentResults({
                 <div className="atlas-document-body">
                   <h3>
                     <ResearchLink
-                      href={`/documents/${doc.slug}?page=${doc.match_page ?? 1}`}
+                      href={documentPageHref(doc.slug, doc.match_page ?? 1)}
                     >
                       {doc.title}
                       <ArrowUpRight size={18} />
@@ -114,7 +115,7 @@ export function DocumentResults({
                   </h3>
                   <div className="atlas-document-meta">
                     {doc.family !== "unknown" && (
-                      <span>{familyLabels[doc.family] ?? doc.family}</span>
+                      <span>{familyLabel(doc.family)}</span>
                     )}
                     {doc.period_label && <span>{doc.period_label}</span>}
                     <span>
@@ -126,7 +127,7 @@ export function DocumentResults({
                   )}
                   <div className="atlas-document-actions">
                     <ResearchLink
-                      href={`/documents/${doc.slug}?page=${doc.match_page ?? 1}`}
+                      href={documentPageHref(doc.slug, doc.match_page ?? 1)}
                     >
                       Lire
                       {doc.match_page
@@ -146,7 +147,7 @@ export function DocumentResults({
                     )}
                     {doc.entity_count > 0 && (
                       <Link
-                        href={`/brh-corpus/graph?focus=document:${doc.document_id}`}
+                        href={graphFocusHref("document", doc.document_id)}
                       >
                         {doc.entity_count} entités
                       </Link>

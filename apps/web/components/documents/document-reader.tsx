@@ -19,7 +19,8 @@ import {
   SheetDescription,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { dateLabel, familyLabels } from "@/lib/corpus/labels";
+import { dateLabel, familyLabel } from "@/lib/corpus/labels";
+import { graphFocusHref } from "@/lib/corpus/links";
 import type { DocumentPage, ResearchDocument } from "@/lib/corpus/types";
 import { ContinuousPages } from "./continuous-pages";
 export function DocumentReader({
@@ -48,7 +49,7 @@ export function DocumentReader({
       <dl>
         <div>
           <dt>Collection</dt>
-          <dd>{familyLabels[document.family] ?? document.family}</dd>
+          <dd>{familyLabel(document.family)}</dd>
         </div>
         <div>
           <dt>Période couverte</dt>
@@ -95,7 +96,7 @@ export function DocumentReader({
         )}
         <Button asChild variant="outline">
           <Link
-            href={`/brh-corpus/graph?focus=document:${document.document_id}`}
+            href={graphFocusHref("document", document.document_id)}
           >
             <Network size={16} />
             Explorer les connexions

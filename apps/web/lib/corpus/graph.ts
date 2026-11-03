@@ -2,7 +2,7 @@ import { SERIES_COLORS } from "@/lib/chat/decision";
 import { buildGraphTree } from "@/lib/chat/graph";
 import type { TableArtifact } from "@/lib/chat/types";
 import { cssColor } from "@/lib/echarts";
-import { relationshipLabels } from "./labels";
+import { relationshipLabel } from "./labels";
 import type { GraphResult } from "./types";
 
 export function researchTree(graph: GraphResult) {
@@ -26,7 +26,7 @@ export function graphArtifact(graph: GraphResult): TableArtifact {
         // IDs keep entities with identical display labels distinct in diagrams.
         subject: `${byId.get(edge.subject_id)?.label ?? "Entité"} · ${edge.subject_id.slice(0, 8)}`,
         object: `${byId.get(edge.object_id)?.label ?? "Entité"} · ${edge.object_id.slice(0, 8)}`,
-        relation: relationshipLabels[edge.predicate] ?? edge.predicate,
+        relation: relationshipLabel(edge.predicate),
         subjectKind: byId.get(edge.subject_id)?.kind ?? "", objectKind: byId.get(edge.object_id)?.kind ?? "",
       })),
     },

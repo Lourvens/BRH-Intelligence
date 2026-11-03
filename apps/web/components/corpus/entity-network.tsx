@@ -2,7 +2,7 @@
 
 import { useReducedMotion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { useECharts } from "@/components/assistant/artifacts/use-echarts";
+import { useECharts } from "@/lib/hooks/use-echarts";
 import { researchGraphOption } from "@/lib/corpus/graph";
 import type { GraphResult } from "@/lib/corpus/types";
 

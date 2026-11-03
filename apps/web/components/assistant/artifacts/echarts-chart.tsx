@@ -6,7 +6,7 @@ import { SERIES_COLORS } from "@/lib/chat/decision";
 import type { TableArtifact } from "@/lib/chat/types";
 import { buildChartOption } from "@/lib/charts/options";
 import { cssColor } from "@/lib/echarts";
-import { useECharts } from "./use-echarts";
+import { useECharts } from "@/lib/hooks/use-echarts";
 
 export function EChartsChart({ artifact, expanded = false }: {
   artifact: TableArtifact;

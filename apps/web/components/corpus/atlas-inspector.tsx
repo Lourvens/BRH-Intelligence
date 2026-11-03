@@ -14,9 +14,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { EvidenceCard } from "./evidence-card";
-import { entityLabels, relationshipLabels } from "@/lib/corpus/labels";
+import { readAtlas } from "@/lib/corpus/atlas-client";
+import { entityLabel, relationshipLabel } from "@/lib/corpus/labels";
+import { documentPageHref, entityHref } from "@/lib/corpus/links";
 import type { AtlasGraph, EvidenceList } from "@/lib/corpus/types";
-import { readAtlas } from "./atlas-data";
 export function AtlasInspector({
   data,
   selected,
@@ -44,7 +45,7 @@ export function AtlasInspector({
     enabled: !!edge,
   });
   const selectedLabel =
-    node?.label ?? (edge ? (relationshipLabels[edge.label] ?? edge.label) : "");
+    node?.label ?? (edge ? relationshipLabel(edge.label) : "");
   return (
     <ScrollArea className="atlas-inspector-scroll">
       <div className="atlas-graph-inspector">
@@ -92,7 +93,7 @@ export function AtlasInspector({
                 <p className="mb-5 text-small text-ink-muted">
                   {node.kind === "document"
                     ? "Publication"
-                    : (entityLabels[node.kind] ?? node.kind)}{" "}
+                    : entityLabel(node.kind)}{" "}
                   · {node.degree} connexions dans le périmètre filtré
                 </p>
                 <Button
@@ -110,8 +111,8 @@ export function AtlasInspector({
                   <ResearchLink
                     href={
                       node.slug
-                        ? `/documents/${node.slug}?page=1`
-                        : `/brh-corpus/entities/${node.id.split(":")[1]}`
+                        ? documentPageHref(node.slug, 1)
+                        : entityHref(node.id.split(":")[1])
                     }
                   >
                     {node.slug ? "Lire le document" : "Voir les passages"}
@@ -137,7 +138,7 @@ export function AtlasInspector({
                       <span>
                         {e.type === "mention"
                           ? `${e.weight} mentions`
-                          : (relationshipLabels[e.label] ?? e.label)}
+                          : relationshipLabel(e.label)}
                         <ArrowRight size={12} />
                       </span>
                     </button>

@@ -2,7 +2,7 @@
 
 import { ArrowUpRight, FileText, Network } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { entityLabels, relationshipLabels } from "@/lib/corpus/labels";
+import { entityLabel, relationshipLabel } from "@/lib/corpus/labels";
 import type { AtlasGraph } from "@/lib/corpus/types";
 
 export function AtlasGraphList({
@@ -38,7 +38,7 @@ export function AtlasGraphList({
               )}
               {node.label}
               <small className="mt-1 block text-ink-muted">
-                {entityLabels[node.kind] ?? "Publication"}
+                {entityLabel(node.kind, "Publication")}
               </small>
             </span>
             <ArrowUpRight size={16} />
@@ -56,7 +56,7 @@ export function AtlasGraphList({
             <span>
               {nodes.get(edge.source)?.label}
               <span className="block py-1 text-teal">
-                {relationshipLabels[edge.label] ?? edge.label} →
+                {relationshipLabel(edge.label)} →
               </span>
               {nodes.get(edge.target)?.label}
             </span>

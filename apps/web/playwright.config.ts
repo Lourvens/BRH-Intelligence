@@ -9,7 +9,7 @@ export default defineConfig({
   reporter: "list",
   outputDir: "./test-results",
   use: {
-    baseURL: process.env.BRH_WEB_TEST_URL ?? "http://127.0.0.1:3000",
+    baseURL: process.env.BRH_WEB_TEST_URL ?? "http://localhost:3000",
     trace: "retain-on-failure",
     launchOptions: {
       executablePath:

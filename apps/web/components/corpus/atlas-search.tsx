@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, FileText, Network, Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { entityLabels } from "@/lib/corpus/labels";
+import { entityLabel } from "@/lib/corpus/labels";
 import type { AtlasGraph } from "@/lib/corpus/types";
 
 export function AtlasSearch({
@@ -103,7 +103,7 @@ export function AtlasSearch({
                   )}
                   <span>
                     {node.label}
-                    <small>{entityLabels[node.kind] ?? "Publication"}</small>
+                    <small>{entityLabel(node.kind, "Publication")}</small>
                   </span>
                   <ArrowRight size={14} />
                 </button>

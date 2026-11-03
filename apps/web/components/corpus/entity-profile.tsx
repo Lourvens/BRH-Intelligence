@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Network, Quote, Files } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { entityLabels } from "@/lib/corpus/labels";
+import { entityLabel } from "@/lib/corpus/labels";
+import { graphFocusHref } from "@/lib/corpus/links";
 import type { Entity, Evidence, GraphResult } from "@/lib/corpus/types";
 import { EvidenceCard } from "./evidence-card";
 import { GraphExplorer } from "./graph-explorer";
@@ -27,7 +28,7 @@ export function EntityProfile({
       <header className="atlas-entity-hero">
         <div>
           <p className="atlas-kicker">
-            {entityLabels[entity.kind] ?? entity.kind}
+            {entityLabel(entity.kind)}
           </p>
           <h1>{entity.label}</h1>
           <div className="mt-5 flex flex-wrap gap-4 text-small text-ink-muted">
@@ -47,7 +48,7 @@ export function EntityProfile({
           )}
         </div>
         <Button asChild className="h-12 rounded-xl">
-          <Link href={`/brh-corpus/graph?focus=entity:${entity.entity_id}`}>
+          <Link href={graphFocusHref("entity", entity.entity_id)}>
             <Network size={17} />
             Explorer le graphe
             <ArrowUpRight size={16} />
