@@ -6,6 +6,7 @@ import { figureUrl, readingSchema } from "@/lib/corpus/markdown";
 import { DocumentFigure } from "./document-figure";
 
 export function MarkdownPage({ markdown, slug, publicationId }: { markdown: string; slug: string; publicationId?: string | null }) {
+  let figureIndex = 0;
   return <article className="research-reading min-w-0 font-reading text-base leading-[1.75] text-ink">
     <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw, [rehypeSanitize, readingSchema]]}
       components={{
@@ -22,8 +23,9 @@ export function MarkdownPage({ markdown, slug, publicationId }: { markdown: stri
         td: ({ children, colSpan, rowSpan }) => <td colSpan={colSpan} rowSpan={rowSpan} className="border border-border p-2.5 align-top">{children}</td>,
         img: ({ src, alt }) => {
           const url = figureUrl(slug, typeof src === "string" ? src : undefined, publicationId);
+          const priority = url ? figureIndex++ === 0 : false;
           // Extracted figures are dynamic local assets, not optimized public images.
-          return url ? <DocumentFigure key={url} src={url} alt={alt || "Figure extraite du document"} /> : <span className="text-sm text-ink-muted">[Figure non disponible]</span>;
+          return url ? <DocumentFigure key={url} src={url} alt={alt || "Figure extraite du document"} priority={priority} /> : <span className="text-sm text-ink-muted">[Figure non disponible]</span>;
         },
         a: ({ href, children }) => <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="text-teal underline underline-offset-4">{children}</a>,
         pre: ({ children }) => <pre className="my-4 overflow-x-auto bg-surface-alt p-4 text-sm">{children}</pre>,

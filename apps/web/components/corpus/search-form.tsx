@@ -29,6 +29,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { familyLabels, entityLabels } from "@/lib/corpus/labels";
+import { feedbackTransition } from "@/lib/motion";
 import type { Facets } from "@/lib/corpus/types";
 
 export function CorpusSearchForm({
@@ -161,7 +162,7 @@ export function CorpusSearchForm({
       </form>
       <div className="atlas-search-options">
         {!entities && (
-          <div className="atlas-segment" aria-label="Cible de recherche">
+          <div className="atlas-segment" role="group" aria-label="Cible de recherche">
             {[
               ["metadata", "Publications"],
               ["text", "Passages"],
@@ -395,8 +396,8 @@ export function CorpusFilterSidebar({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: reducedMotion ? 0 : -8 }}
             transition={{
-              duration: reducedMotion ? 0 : 0.16,
-              ease: [0.2, 0, 0, 1],
+              ...feedbackTransition,
+              duration: reducedMotion ? 0 : feedbackTransition.duration,
             }}
           >
             <p className="corpus-filter-intro">

@@ -23,7 +23,7 @@ export function CopyReference({
       <Button
         variant="outline"
         size="sm"
-        className="rounded-sm"
+        className="min-w-40 rounded-sm"
         aria-busy={state === "pending"}
         onClick={() =>
           run(() =>

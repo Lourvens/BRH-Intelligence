@@ -93,7 +93,6 @@ export type CatalogueData = {
   searchError?: "semantic" | "unavailable";
   query: Record<string, string>;
   documents: DocumentList;
-  entities: Entity[];
   facets: Facets;
   stats: CorpusStats | null;
 };

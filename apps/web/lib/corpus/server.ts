@@ -64,18 +64,12 @@ export async function loadCatalogue(
   const empty: DocumentList = { items: [], total: 0, page: 1, page_size: 25 };
   let searchError: CatalogueData["searchError"];
   const documentsRequest =
-    query.mode === "entities"
-      ? Promise.resolve(empty)
-      : query.mode === "semantic" && !query.q
-        ? Promise.resolve({ ...empty, page_size: 20, bounded: true })
-        : corpusGet<DocumentList>(
-            `${query.mode === "semantic" ? "search" : "documents"}?${search}`,
-          );
-  const entitiesRequest =
-    query.mode === "entities"
-      ? corpusGet<{ items: Entity[] }>(`entities?${search}`)
-      : Promise.resolve({ items: [] as Entity[] });
-  const [stats, facets, documents, entities] = await Promise.all([
+    query.mode === "semantic" && !query.q
+      ? Promise.resolve({ ...empty, page_size: 20, bounded: true })
+      : corpusGet<DocumentList>(
+          `${query.mode === "semantic" ? "search" : "documents"}?${search}`,
+        );
+  const [stats, facets, documents] = await Promise.all([
     corpusGet<CorpusStats>("stats").catch(() => null),
     corpusGet<Facets>(`facets?${search}`).catch(() => ({
       families: [],
@@ -91,14 +85,12 @@ export async function loadCatalogue(
       searchError = query.mode === "semantic" ? "semantic" : "unavailable";
       return empty;
     }),
-    entitiesRequest,
   ]);
   return {
     query,
     stats,
     facets,
     documents,
-    entities: entities.items,
     searchError,
   };
 }

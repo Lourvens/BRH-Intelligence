@@ -41,6 +41,7 @@
   /* Neutrals */
   --color-bg: #f7f9fc;
   --color-surface: #ffffff;
+  --color-on-accent: #ffffff;
   --color-surface-alt: #eef3fa;
   --color-border: #e3e9f2;
   --color-ink: #0b1729;
@@ -153,6 +154,7 @@
   color-scheme: dark;
   --color-bg: #101216;
   --color-surface: #171a20;
+  --color-on-accent: #ffffff;
   --color-surface-alt: #20242b;
   --color-border: #323842;
   --color-ink: #e7e9ed;

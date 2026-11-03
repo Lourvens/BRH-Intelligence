@@ -11,13 +11,13 @@
 )[data-state="open"],
 [data-slot="tooltip-content"][data-state="delayed-open"],
 [data-slot="tooltip-content"][data-state="instant-open"] {
-  animation: interaction-fade var(--motion-feedback) var(--motion-ease);
+  animation: interaction-pop var(--motion-feedback) var(--motion-ease);
 }
 :is(
   [data-slot="select-content"],
   [data-slot="tooltip-content"]
 )[data-state="closed"] {
-  animation: interaction-fade var(--motion-exit) var(--motion-ease) reverse;
+  animation: interaction-pop var(--motion-exit) var(--motion-ease) reverse;
 }
 /* Explicit keyframes also work without a Tailwind animation plugin.
    Radix retains closing surfaces until their exit animation finishes. */
@@ -69,6 +69,18 @@
   }
   to {
     opacity: 1;
+  }
+}
+/* Popovers scale from their Radix trigger origin; `scale` composes with the
+   popper transform instead of replacing it. */
+@keyframes interaction-pop {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
   }
 }
 @keyframes interaction-dialog {
@@ -232,7 +244,10 @@
   ),
   .corpus-header::after {
     animation: none !important;
-    transition: none !important;
+    /* Reduced motion removes movement, not state feedback. */
+    transition-property: background-color, border-color, color, opacity !important;
+    transition-duration: var(--motion-feedback) !important;
+    transition-timing-function: var(--motion-ease) !important;
   }
   [data-slot="button"]:active {
     transform: none !important;

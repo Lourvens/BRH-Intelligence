@@ -29,7 +29,7 @@ export default async function CorpusPage({
   let data;
   let invalid = false;
   try {
-    data = await loadCatalogue(await searchParams);
+    data = await loadCatalogue(params);
   } catch (error) {
     invalid = error instanceof CorpusRequestError && error.status === 400;
   }

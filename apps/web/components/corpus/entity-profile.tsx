@@ -5,7 +5,6 @@ import { entityLabels } from "@/lib/corpus/labels";
 import type { Entity, Evidence, GraphResult } from "@/lib/corpus/types";
 import { EvidenceCard } from "./evidence-card";
 import { GraphExplorer } from "./graph-explorer";
-import { Reveal } from "./reveal";
 export function EntityProfile({
   entity,
   graph,
@@ -25,38 +24,36 @@ export function EntityProfile({
         <ArrowLeft size={16} />
         Toutes les entités
       </Link>
-      <Reveal>
-        <header className="atlas-entity-hero">
-          <div>
-            <p className="atlas-kicker">
-              {entityLabels[entity.kind] ?? entity.kind}
-            </p>
-            <h1>{entity.label}</h1>
-            <div className="mt-5 flex flex-wrap gap-4 text-small text-ink-muted">
-              <span className="flex items-center gap-2">
-                <Files size={16} />
-                {entity.document_count} documents
-              </span>
-              <span className="flex items-center gap-2">
-                <Quote size={16} />
-                {entity.mention_count} mentions
-              </span>
-            </div>
-            {entity.aliases.length > 0 && (
-              <p className="mt-4 text-caption text-ink-muted">
-                Aussi rencontré sous : {entity.aliases.join(", ")}
-              </p>
-            )}
+      <header className="atlas-entity-hero">
+        <div>
+          <p className="atlas-kicker">
+            {entityLabels[entity.kind] ?? entity.kind}
+          </p>
+          <h1>{entity.label}</h1>
+          <div className="mt-5 flex flex-wrap gap-4 text-small text-ink-muted">
+            <span className="flex items-center gap-2">
+              <Files size={16} />
+              {entity.document_count} documents
+            </span>
+            <span className="flex items-center gap-2">
+              <Quote size={16} />
+              {entity.mention_count} mentions
+            </span>
           </div>
-          <Button asChild className="h-12 rounded-xl">
-            <Link href={`/brh-corpus/graph?focus=entity:${entity.entity_id}`}>
-              <Network size={17} />
-              Explorer le graphe
-              <ArrowUpRight size={16} />
-            </Link>
-          </Button>
-        </header>
-      </Reveal>
+          {entity.aliases.length > 0 && (
+            <p className="mt-4 text-caption text-ink-muted">
+              Aussi rencontré sous : {entity.aliases.join(", ")}
+            </p>
+          )}
+        </div>
+        <Button asChild className="h-12 rounded-xl">
+          <Link href={`/brh-corpus/graph?focus=entity:${entity.entity_id}`}>
+            <Network size={17} />
+            Explorer le graphe
+            <ArrowUpRight size={16} />
+          </Link>
+        </Button>
+      </header>
       <div className="atlas-profile-grid">
         <section className="atlas-discovery">
           <div className="atlas-section-heading">

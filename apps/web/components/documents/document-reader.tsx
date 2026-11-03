@@ -1,16 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
-  ArrowRight,
   Download,
   ExternalLink,
   Network,
   Info,
   BookOpen,
-  ChevronDown,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -24,9 +21,7 @@ import {
 } from "@/components/ui/sheet";
 import { dateLabel, familyLabels } from "@/lib/corpus/labels";
 import type { DocumentPage, ResearchDocument } from "@/lib/corpus/types";
-import { CopyReference } from "./copy-reference";
 import { ContinuousPages } from "./continuous-pages";
-import { Reveal } from "@/components/corpus/reveal";
 export function DocumentReader({
   document,
   content: initialContent,
@@ -34,10 +29,8 @@ export function DocumentReader({
   document: ResearchDocument;
   content: DocumentPage;
 }) {
-  const reducedMotion = useReducedMotion();
   const router = useRouter();
   const [content, setContent] = useState(initialContent);
-  const [notes, setNotes] = useState(true);
   const [returnLabel, setReturnLabel] = useState("Retour aux documents");
   useEffect(() => {
     try {
@@ -51,7 +44,7 @@ export function DocumentReader({
   const page = content.page_number;
   const info = (
     <div className="atlas-reader-info">
-      <p className="atlas-kicker mb-6">À LA SOURCE</p>
+      <h2 className="mb-6 text-small font-semibold text-ink">Source</h2>
       <dl>
         <div>
           <dt>Collection</dt>
@@ -89,11 +82,6 @@ export function DocumentReader({
             Lien PDF officiel non retrouvé dans l’inventaire.
           </p>
         )}
-        <CopyReference
-          title={document.title}
-          page={page}
-          pdfUrl={content.pdf_url}
-        />
         {content.publication_id && (
           <Button asChild variant="outline">
             <a
@@ -156,12 +144,7 @@ export function DocumentReader({
         <ArrowLeft size={16} />
         {returnLabel}
       </button>
-      <Reveal>
-        <p className="atlas-kicker mb-3">
-          {familyLabels[document.family] ?? document.family}
-        </p>
-        <h1 className="atlas-reading-title">{document.title}</h1>
-      </Reveal>
+      <h1 className="atlas-reading-title">{document.title}</h1>
       <div className="atlas-reader-toolbar">
         <span className="flex items-center gap-2 text-small">
           <BookOpen size={17} className="text-teal" />
@@ -187,16 +170,6 @@ export function DocumentReader({
               Aller
             </Button>
           </form>
-          <button
-            type="button"
-            className="hidden min-h-11 items-center gap-2 rounded-xl px-3 text-small lg:flex"
-            aria-expanded={notes}
-            onClick={() => setNotes(!notes)}
-          >
-            <Info size={17} />
-            Informations
-            <ChevronDown size={14} />
-          </button>
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -219,60 +192,17 @@ export function DocumentReader({
           </Sheet>
         </div>
       </div>
-      <div
-        className="atlas-reader-layout"
-        style={!notes ? { gridTemplateColumns: "minmax(0,1fr)" } : undefined}
-      >
+      <div className="atlas-reader-layout">
         <div className="min-w-0">
           <ContinuousPages
             initial={initialContent}
             slug={document.slug}
             onActive={setContent}
           />
-          <details className="corpus-single-page-fallback">
-            <summary>Navigation page par page</summary>
-            <nav aria-label="Pages du document" className="atlas-reader-bottom">
-              {page > 1 ? (
-                <Button asChild variant="outline">
-                  <Link href={`?page=${page - 1}`}>
-                    <ArrowLeft size={16} />
-                    Précédente
-                  </Link>
-                </Button>
-              ) : (
-                <span />
-              )}
-              <span className="text-caption text-ink-muted">
-                {page} / {content.page_count}
-              </span>
-              {page < content.page_count ? (
-                <Button asChild>
-                  <Link href={`?page=${page + 1}`}>
-                    Suivante
-                    <ArrowRight size={16} />
-                  </Link>
-                </Button>
-              ) : (
-                <span />
-              )}
-            </nav>
-          </details>
         </div>
-        <AnimatePresence initial={false} mode="popLayout">
-          {notes && (
-            <motion.aside
-              key="reader-information"
-              initial={{ opacity: 0, x: reducedMotion ? 0 : 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: reducedMotion ? 0 : 8 }}
-              transition={{ duration: reducedMotion ? 0 : 0.16 }}
-              className="atlas-reader-notes"
-              aria-label="Informations du document"
-            >
-              {info}
-            </motion.aside>
-          )}
-        </AnimatePresence>
+        <aside className="atlas-reader-notes" aria-label="Informations du document">
+          {info}
+        </aside>
       </div>
     </div>
   );

@@ -273,9 +273,6 @@ body:has(.corpus-header) .atlas-page {
   box-shadow: none;
   transform: none;
 }
-.atlas-page .atlas-document-spine {
-  display: none;
-}
 .atlas-page .atlas-document-body {
   padding: 0 16px;
   min-width: 0;
@@ -418,28 +415,6 @@ body:has(.corpus-header) .atlas-page {
 .corpus-continuous {
   overflow-anchor: none;
 }
-.corpus-reading-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  font-size: 13px;
-  color: var(--color-ink-muted);
-  padding-bottom: 16px;
-}
-.corpus-reading-options label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  cursor: pointer;
-}
-.corpus-reading-options input {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--color-navy-ink);
-}
 .corpus-continuous .atlas-reading-paper {
   margin: 0 0 24px;
   padding: 32px 40px;
@@ -469,24 +444,6 @@ body:has(.corpus-header) .atlas-page {
   align-items: center;
   color: var(--color-navy-ink);
 }
-.corpus-page-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 40px;
-  padding-top: 16px;
-  border-top: 1px solid var(--color-border);
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--color-ink-muted);
-}
-.corpus-page-footer a {
-  color: var(--color-navy-ink);
-  min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-}
 .corpus-load-more {
   padding: 24px 0;
   display: grid;
@@ -498,15 +455,6 @@ body:has(.corpus-header) .atlas-page {
 }
 .corpus-load-more [role="alert"] {
   color: var(--color-scarlet);
-}
-.corpus-single-page-fallback {
-  margin-top: 24px;
-  color: var(--color-ink-muted);
-  font-size: 14px;
-}
-.corpus-single-page-fallback > summary {
-  min-height: 44px;
-  cursor: pointer;
 }
 .corpus-jump-label {
   font-size: 14px;
@@ -684,10 +632,6 @@ body:has(.corpus-header) .atlas-page {
     overflow: hidden;
     clip-path: inset(50%);
   }
-  .corpus-reading-options {
-    font-size: 13px;
-    gap: 0;
-  }
   .corpus-continuous .atlas-reading-paper {
     padding: 20px 16px;
     margin-inline: -8px;
@@ -699,9 +643,6 @@ body:has(.corpus-header) .atlas-page {
   }
   .corpus-page-folio button {
     font-size: 12px;
-  }
-  .corpus-page-footer {
-    font-size: 13px;
   }
   .atlas-map.atlas-graph-page {
     height: calc(100dvh - var(--corpus-header-height));
@@ -724,7 +665,10 @@ body:has(.corpus-header) .atlas-page {
   .atlas-page *,
   .corpus-header * {
     animation: none !important;
-    transition: none !important;
+    /* Keep colour and opacity feedback; drop transform and movement. */
+    transition-property: background-color, border-color, color, opacity !important;
+    transition-duration: var(--motion-feedback) !important;
+    transition-timing-function: var(--motion-ease) !important;
     scroll-behavior: auto !important;
   }
 }
