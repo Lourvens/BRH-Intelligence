@@ -58,6 +58,25 @@ Two separate workspaces: the root `pyproject.toml` is a uv virtual workspace
 (`packages/*`, `services/*`); the root `package.json` is a bun workspace
 (`apps/*`).
 
+## Code organization (binding)
+
+- **250-line cap per code file.** The Claude Code hook
+  `.claude/hooks/precommit-line-limit.sh` blocks `git commit` while a staged
+  `.py`, `.ts`, `.tsx`, `.js`, `.jsx`, `.mjs` or `.cjs` file exceeds 250 lines.
+  Split by concern, not by line count. The playbook is
+  [`.agents/skills/code-organization/SKILL.md`](.agents/skills/code-organization/SKILL.md).
+- **DRY without premature abstraction.** Apply the rule of three; extract
+  duplicated knowledge (constants, validation, formatting, types, error
+  messages), not coincidentally similar lines. Delete dead code before adding a
+  shared module.
+- **Python.** One concept per file; pure business logic separate from I/O;
+  injected dependencies; absolute imports; public facades declare `__all__`;
+  settings, timeouts and retries have one home.
+- **React/Next.** Route files compose; Server Components by default;
+  `"use client"` only at interactive leaves; hook logic in
+  `lib/hooks/use-*.ts`; pure helpers and presentational siblings beside the
+  orchestrator; one component per file.
+
 ## Experiments are not code
 
 `experiments/` answers one question per notebook and then stops. It is **not a
