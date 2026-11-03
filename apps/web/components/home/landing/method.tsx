@@ -23,7 +23,7 @@ export function Method() {
           <div className="step" key={number}>
             <div className="step-top">
               <span>{number}</span>
-              {index < steps.length - 1 && <i />}
+              {index < steps.length - 1 && <i aria-hidden="true" />}
             </div>
             <p>{text}</p>
           </div>

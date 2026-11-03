@@ -7,6 +7,26 @@ start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
+- **Landing scroll cues (2026-11-03).** Implemented the approved agent and
+  corpus icon entrances, method connector sequence and provenance-marker fade.
+  IntersectionObserver triggers once at 25% visibility, with 50/60ms desktop
+  stagger and independent, unstaggered phone cues. Method direction adapts to
+  the layout; reduced motion and viewport changes settle running animations.
+  Reading content remains static and visible without JavaScript.
+  TypeScript passed. Browser checks at 390px and 1440px confirmed all ten
+  decorative targets, correct connector axes, no replay, reduced-motion
+  suppression and no page exceptions; no-JavaScript final content was verified.
+
+- **Landing motion audit (2026-11-03).** Audited every landing section using
+  Emil Kowalski's frequency/purpose gate and implemented purposeful motion with
+  the `animate` skill. Added accessible demo tab navigation and short pointer
+  fades, FAQ state transitions with inert closed answers, once-only explanatory
+  icon accents, and scoped control feedback. Removed decorative chart replay
+  and whole-card lifts. See docs/plans/2026-11-03-landing-motion-audit.md.
+  TypeScript passed in the isolated web install. Browser checks passed for
+  pointer/keyboard demo tabs, mobile/desktop FAQ, closed-answer inert state,
+  reduced motion and example-chip focus, with no page exceptions.
+
 - **Provenance dark mode (2026-11-03).** Applied the existing dark document
   preview tokens to the landing provenance illustration, replacing its white
   paper surface with charcoal while retaining readable text and source accents.

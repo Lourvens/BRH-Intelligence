@@ -1,0 +1,117 @@
+/* Landing motion: feedback and state changes, with stable reading surfaces. */
+.brh-home {
+  --motion-ease: cubic-bezier(0.23, 1, 0.32, 1);
+}
+.brh-home .button,
+.brh-home
+  :is(
+    .example-chips button,
+    .demo-tabs button,
+    .graph-view-toggle button,
+    .graph-status-filters button,
+    .graph-controls button,
+    .graph-action-row button,
+    .inspector-relations button,
+    .source-chip,
+    .result-line,
+    .collection-stack a,
+    .reader-open,
+    .paper-content a,
+    .inspector-primary,
+    .inspector-actions a,
+    .faq-item > button,
+    .footer-links a
+  ) {
+  transition:
+    transform var(--motion-feedback) var(--motion-ease),
+    background-color var(--motion-feedback) ease,
+    border-color var(--motion-feedback) ease,
+    color var(--motion-feedback) ease;
+}
+.brh-home .button:hover,
+.brh-home .bento-card:hover {
+  transform: none;
+}
+.brh-home .bento-card {
+  transition: none;
+}
+.brh-home .step-top i {
+  transform-origin: left center;
+}
+@media (max-width: 600px) {
+  .brh-home .step-top i {
+    transform-origin: center top;
+  }
+}
+.brh-home
+  :is(
+    .button,
+    .example-chips button,
+    .graph-controls button,
+    .graph-action-row button
+  ):active:not(:disabled) {
+  transform: scale(0.97);
+}
+.brh-home :is(button, a, input):focus-visible {
+  outline: 2px solid var(--color-azure);
+  outline-offset: 4px;
+  transition: none;
+}
+.brh-home :is(.question-control, .closing-panel form):focus-within {
+  outline: 2px solid var(--color-azure);
+  outline-offset: 4px;
+}
+.brh-home .demo-panel,
+.brh-home .chart-line {
+  animation: none;
+}
+.brh-home .faq-answer {
+  display: block;
+  overflow: hidden;
+  transition: none;
+}
+.brh-home .faq-answer p,
+.brh-home .faq-item.open .faq-answer p {
+  padding: 0 55px 24px 0;
+}
+.brh-home .faq-item > button i {
+  transition: transform var(--motion-feedback) var(--motion-ease);
+}
+.brh-home .graph-zoom-layer {
+  transition: transform 200ms var(--motion-ease);
+}
+.brh-home .research-node > :is(circle, rect, polygon) {
+  transition:
+    stroke 160ms ease,
+    stroke-width 160ms ease;
+}
+.brh-home .path-result {
+  transition: opacity 200ms var(--motion-ease);
+  @starting-style {
+    opacity: 0.6;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .brh-home .button:hover {
+    transform: translateY(-1px);
+  }
+  .brh-home :is(.source-chip, .result-line, .collection-stack a):hover {
+    border-color: var(--color-azure);
+  }
+  .brh-home
+    :is(
+      .paper-content a,
+      .reader-open,
+      .inspector-primary,
+      .footer-links a
+    ):hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brh-home :is(.button, button, a):active,
+  .brh-home .button:hover {
+    transform: none;
+  }
+}

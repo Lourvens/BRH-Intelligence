@@ -8,10 +8,12 @@ import { Hero } from "./landing/hero";
 import { Method } from "./landing/method";
 import { ProofStrip } from "./landing/proof-strip";
 import { Provenance } from "./landing/provenance";
+import { LandingMotionCues } from "./landing/motion-cues";
 
 export function ResearchLandingV2() {
   return (
     <div className="brh-home">
+      <LandingMotionCues />
       <main>
         <Hero />
         <ProofStrip />

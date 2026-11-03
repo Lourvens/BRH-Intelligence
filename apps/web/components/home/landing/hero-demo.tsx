@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 import { LandingIcon } from "./icons";
 
@@ -15,13 +16,7 @@ const tabs = [
   "Retrouver un texte",
 ];
 
-function SourceChip({
-  children,
-  href,
-}: {
-  children: ReactNode;
-  href: string;
-}) {
+function SourceChip({ children, href }: { children: ReactNode; href: string }) {
   return (
     <a className="source-chip" href={href}>
       <span aria-hidden />
@@ -166,6 +161,8 @@ function TextPanel() {
 
 export function HeroDemo() {
   const [tab, setTab] = useState(0);
+  const [pointerChange, setPointerChange] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   return (
     <div className="product-window">
@@ -190,20 +187,48 @@ export function HeroDemo() {
           <button
             key={label}
             role="tab"
+            id={`demo-tab-${index}`}
+            aria-controls="demo-panel"
+            tabIndex={tab === index ? 0 : -1}
             aria-selected={tab === index}
-            onClick={() => setTab(index)}
+            onClick={(event) => {
+              setPointerChange(event.detail > 0);
+              setTab(index);
+            }}
+            onKeyDown={(event) => {
+              let next = index;
+              if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+              else if (event.key === "ArrowLeft")
+                next = (index + tabs.length - 1) % tabs.length;
+              else if (event.key === "Home") next = 0;
+              else if (event.key === "End") next = tabs.length - 1;
+              else return;
+              event.preventDefault();
+              setPointerChange(false);
+              setTab(next);
+              document.getElementById(`demo-tab-${next}`)?.focus();
+            }}
           >
             {label}
           </button>
         ))}
       </div>
-      <div className="demo-panel" role="tabpanel" key={tab}>
+      <motion.div
+        className="demo-panel"
+        id="demo-panel"
+        role="tabpanel"
+        aria-labelledby={`demo-tab-${tab}`}
+        key={tab}
+        initial={pointerChange && !reducedMotion ? { opacity: 0.65 } : false}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.16, ease: [0.23, 1, 0.32, 1] }}
+      >
         <div className="answer-card">
           {tab === 0 && <SeriesPanel />}
           {tab === 1 && <ComparePanel />}
           {tab === 2 && <TextPanel />}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

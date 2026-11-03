@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 const faqs = [
   [
@@ -28,6 +29,8 @@ const faqs = [
 
 export function Faq() {
   const [open, setOpen] = useState(0);
+  const [pointerChange, setPointerChange] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   return (
     <section className="section faq-section">
@@ -53,19 +56,33 @@ export function Faq() {
                 id={`faq-trigger-${index}`}
                 aria-expanded={isOpen}
                 aria-controls={`faq-panel-${index}`}
-                onClick={() => setOpen(isOpen ? -1 : index)}
+                onClick={(event) => {
+                  setPointerChange(event.detail > 0);
+                  setOpen(isOpen ? -1 : index);
+                }}
               >
                 <span>{question}</span>
-                <i>{isOpen ? "−" : "+"}</i>
+                <i aria-hidden="true">{isOpen ? "−" : "+"}</i>
               </button>
-              <div
+              <motion.div
                 className="faq-answer"
+                initial={false}
+                animate={{
+                  height: isOpen ? "auto" : 0,
+                  opacity: isOpen ? 1 : 0,
+                }}
+                transition={{
+                  duration: reducedMotion || !pointerChange ? 0 : 0.2,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                inert={!isOpen}
+                aria-hidden={!isOpen}
                 id={`faq-panel-${index}`}
                 role="region"
                 aria-labelledby={`faq-trigger-${index}`}
               >
                 <p>{answer}</p>
-              </div>
+              </motion.div>
             </div>
           );
         })}
