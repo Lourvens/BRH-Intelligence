@@ -1,47 +1,34 @@
 # Landing motion audit and implementation
 
-Scope: every section rendered by `ResearchLandingV2`, plus the site header and
-mobile navigation. Guidance: Emil Kowalski's `animate` and its recipes; the
-opportunity skill supplied the frequency/purpose gate during inspection.
+The landing uses an expressive editorial motion level based on Emil
+Kowalski's `animate`, `find-animation-opportunities`, and
+`animation-performance` guidance. Motion explains the product and source
+workflow; controls and data remain stable.
 
-| Section | Finding and decision | Implementation |
-| --- | --- | --- |
-| Header/navigation | Frequent navigation needs immediate response; mobile menu already uses an accessible Radix sheet. | Retain existing sheet motion/focus; no header entrance or keyboard navigation delay. |
-| Hero question | Input and example chips must respond directly to a press. | Immediate focus ring, short press feedback, preserve chip-to-input focus and ordinary form navigation. |
-| Hero demo | Content replayed a translate entrance and chart draw on each tab change. Keyboard tab navigation was incomplete. | Pointer changes fade from .65 to 1 for 160ms; keyboard changes are immediate. Add arrow/Home/End navigation and panel labeling. Keep chart data static. |
-| Corpus proof strip | Counts are factual data, including asynchronously loaded values. | No count-up or reveal animation. |
-| Agent jobs | Explanatory icons are eligible for occasional marketing motion. | Once-only 300ms opacity/8px translation on visibility. No text or chart motion, no loop, cleanup and runtime reduced-motion cancellation. |
-| Corpus workspace | Cards lifted as if the entire card were a button, but only embedded links act. | Remove whole-card lift; give actual links border/underline feedback. Introduce only the three heading icons with a 6px rise/opacity for 250ms. Keep reader excerpt and collection stack stable. |
-| Graph | Node/edge selection, list view and zoom already have state feedback. Reading the evidence is the purpose. | Tune zoom to the common 200ms curve, retain selection colors, fade a newly inserted path result. No force simulation, line drawing, or staggered data. |
-| Method | Sequential numbered steps explain the flow; connectors can reinforce their order. | Reveal only connectors with scaleX (desktop) or scaleY (phone) for 250ms. Numbers and text stay static. |
-| Provenance | Source excerpt is reading content, already theme-corrected. | Keep document still; fade only its gold source marker from .5 to 1 for 250ms. No floating paper or highlight sweep. |
-| FAQ | Grid-row transition combined with open-only padding caused abrupt movement. Closed content lacked explicit inert state. | Short height/opacity transition (isolated accordion exception), constant inner padding, inert and aria-hidden closed panels. Keyboard/reduced-motion changes snap. |
-| Closing question | Same action as hero. | Same press and focus feedback; do not delay submission for an exit effect. |
-| Footer | Plain navigation, low benefit from entry animation. | Link underline on fine-pointer hover and immediate keyboard focus. No entrance or stagger. |
+| Section | Motion |
+| --- | --- |
+| Hero | Immediate CSS entrance: copy rises 14px with a 70ms stagger; the agent preview settles from 24px right and `.98` scale; the glow expands once. |
+| Proof | Four cells rise 10px and settle from `.96` scale. Counts never count up. |
+| Agent | Heading and cards reveal in sequence. The series path draws, comparison bars grow, and citation row appears once. |
+| Corpus | Transition statement wipes vertically; heading and cards enter; search result, collection stack, and reader citation finish the explanation. |
+| Graph | Heading enters and the explorer frame unmasks. Toolbar and inspector fade; nodes, edges, labels, zoom, and selection data do not move for decoration. |
+| Method | Steps enter in order and connectors draw horizontally on desktop or vertically on phones. |
+| Provenance | At 820px and above, a 170vh section pins its composition while document, highlight, evidence, and assurances progress with scroll. Smaller screens use a normal one-time reveal. |
+| FAQ | Heading and rows reveal once. Pointer accordion changes keep the existing short state transition; keyboard changes remain immediate. |
+| Closing | Panel unmasks and copy/form/proof stagger in. Desktop glow moves only 16px across the section's scroll range. |
+| Footer | Brand and link groups make a short final entrance; the divider draws once. |
 
-The strongest opportunities are FAQ state continuity and demo state clarity.
-Rejected: animated counts (functional data), repeated chart drawing (reading
-data), whole-page scroll reveals (delay content), floating provenance paper
-(distracts from verification), and footer/header staggers (navigation frequency).
+Entrances use `cubic-bezier(.23,1,.32,1)`; masks and composed movement use
+`cubic-bezier(.77,0,.175,1)`. Phone movement is capped at 8px and phone groups
+do not stagger. Every observer disconnects after its first trigger. The
+scroll-linked provenance and closing values use Framer Motion's scroll driver,
+avoiding React renders on each frame.
 
-Motion uses the existing duration tokens. The landing scopes the common easing
-token to the skill's `cubic-bezier(.23,1,.32,1)`. CSS handles hover/press/focus;
-Motion handles accordion height and tab state; WAAPI/IntersectionObserver handle
-the once-only explanatory icon entrance. Hover movement requires a fine pointer.
-No new dependency, per-frame React state or scroll polling is added. Content is
-visible in server output and with motion disabled.
+Reduced motion removes translation, scaling, clipping, path drawing, stagger,
+parallax, and desktop pinning. Server output stays in its final visible state;
+CSS supplies the initial hero entrance, and scroll enhancement begins only
+after client hydration. Unsupported JavaScript leaves all content readable.
 
-## Approved scroll cues
-
-The user approved four once-only cues: three agent icons (8px rise/300ms),
-three corpus icons (6px rise/250ms), three method connectors (250ms scale),
-and the provenance marker (250ms opacity). All use the existing landing
-ease-out token. IntersectionObserver triggers at 25% visibility; it observes
-the step or source row for thin decorative elements. Desktop icon stagger is
-50ms, connector stagger 60ms. Phones have no stagger; each item triggers when
-visible. Connectors grow from the left on desktop and the top on phones.
-
-Targets are unobserved after the first trigger. Changing reduced-motion
-preference or rotating the viewport cancels running effects and restores their
-CSS final state. Unsupported APIs and no JavaScript leave the final content
-visible. There is no pinning, parallax, continuous scroll sampling or replay.
+Rejected candidates remain: animated factual counts, graph node/edge drawing,
+moving chart values, scroll snapping, multiple pinned sections, repeated
+reveals, and animated keyboard navigation.

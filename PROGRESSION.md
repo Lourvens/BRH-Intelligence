@@ -1,21 +1,22 @@
 # Progression
 
-Last updated: 2026-11-02 (landing v2 + graph section)
+Last updated: 2026-11-03 (expressive landing motion)
 
 Working state of BRH Intelligence. **Read at session start.** Update when you
 start, finish, or pivot a task, and when a non-obvious learning surfaces.
 
 ## Active
 
-- **Landing scroll cues (2026-11-03).** Implemented the approved agent and
-  corpus icon entrances, method connector sequence and provenance-marker fade.
-  IntersectionObserver triggers once at 25% visibility, with 50/60ms desktop
-  stagger and independent, unstaggered phone cues. Method direction adapts to
-  the layout; reduced motion and viewport changes settle running animations.
-  Reading content remains static and visible without JavaScript.
-  TypeScript passed. Browser checks at 390px and 1440px confirmed all ten
-  decorative targets, correct connector axes, no replay, reduced-motion
-  suppression and no page exceptions; no-JavaScript final content was verified.
+- **Expressive landing motion (2026-11-03).** Replaced the ten-accent-only
+  pass with full hero-to-footer editorial choreography. The hero has an
+  immediate CSS entrance; proof, agent, corpus, graph, method, FAQ, closing and
+  footer groups reveal once through Motion/IntersectionObserver. Agent and
+  corpus illustrations explain their cards without moving factual values, and
+  graph data remains stable. Provenance is a 170vh scroll-linked sticky source
+  story on desktop and a normal once-only sequence below 820px. Reduced motion
+  removes pinning and spatial travel. TypeScript and the production build pass;
+  browser checks at 390px and 1440px confirm final visibility, responsive
+  provenance behavior, reduced motion, and an untouched graph transform.
 
 - **Landing motion audit (2026-11-03).** Audited every landing section using
   Emil Kowalski's frequency/purpose gate and implemented purposeful motion with
