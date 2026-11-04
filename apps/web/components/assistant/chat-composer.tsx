@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowUp, Square } from "lucide-react";
-import { useId, useRef, useState } from "react";
+import { ArrowUp, Square, Timer } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,12 +10,16 @@ export function ChatComposer({
   isThinking,
   isRestoring,
   isStopping,
+  cooldownSeconds,
+  errorPrompt,
   onSubmit,
   onStop,
 }: {
   isThinking: boolean;
   isRestoring: boolean;
   isStopping: boolean;
+  cooldownSeconds: number;
+  errorPrompt: string | null;
   onSubmit: (question: string) => void;
   onStop: () => void;
 }) {
@@ -23,10 +27,23 @@ export function ChatComposer({
   const [draft, setDraft] = useState("");
   const inputId = useId();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const restoredPrompt = useRef<string | null>(null);
+  const waiting = cooldownSeconds > 0;
+
+  useEffect(() => {
+    if (errorPrompt) {
+      restoredPrompt.current = errorPrompt;
+      setDraft((current) => current.trim() ? current : errorPrompt);
+      return;
+    }
+    const restored = restoredPrompt.current;
+    restoredPrompt.current = null;
+    if (restored) setDraft((current) => current === restored ? "" : current);
+  }, [errorPrompt]);
 
   function submit() {
     const question = draft.trim();
-    if (!question || isThinking || isRestoring) return;
+    if (!question || isThinking || isRestoring || waiting) return;
     onSubmit(question);
     setDraft("");
     if (textareaRef.current) textareaRef.current.style.height = "96px";
@@ -56,6 +73,7 @@ export function ChatComposer({
           <Textarea
             id={inputId}
             ref={textareaRef}
+            data-assistant-composer
             value={draft}
             rows={1}
             maxLength={4000}
@@ -83,15 +101,20 @@ export function ChatComposer({
             <Button
               type={isThinking ? "button" : "submit"}
               aria-disabled={
-                isStopping || isRestoring || (!isThinking && !draft.trim())
+                isStopping || isRestoring || waiting || (!isThinking && !draft.trim())
               }
               aria-label={
-                isThinking ? "Arrêter le traitement" : "Envoyer la question"
+                isThinking
+                  ? "Arrêter le traitement"
+                  : waiting
+                    ? `Réessayer dans ${cooldownSeconds} secondes`
+                    : "Envoyer la question"
               }
               onClick={(event) => {
                 if (
                   isStopping ||
                   isRestoring ||
+                  waiting ||
                   (!isThinking && !draft.trim())
                 ) {
                   event.preventDefault();
@@ -103,7 +126,7 @@ export function ChatComposer({
             >
               <AnimatePresence initial={false} mode="wait">
                 <motion.span
-                  key={isThinking ? "stop" : "send"}
+                  key={isThinking ? "stop" : waiting ? "cooldown" : "send"}
                   className="inline-flex items-center gap-2"
                   initial={{ opacity: 0, scale: reducedMotion ? 1 : 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -117,6 +140,11 @@ export function ChatComposer({
                         {isStopping ? "Arrêt…" : "Arrêter"}
                       </span>
                     </>
+                  ) : waiting ? (
+                    <>
+                      <Timer className="size-4" aria-hidden />
+                      <span className="text-caption">{cooldownSeconds} s</span>
+                    </>
                   ) : (
                     <ArrowUp className="size-4" aria-hidden />
                   )}
@@ -126,7 +154,9 @@ export function ChatComposer({
           </div>
         </div>
         <p className="mt-2 text-center text-[11px] leading-relaxed text-ink-muted">
-          Les réponses peuvent contenir des erreurs. Vérifiez la page citée.
+          {waiting
+            ? `Nouvelle tentative possible dans ${cooldownSeconds} s.`
+            : "Les réponses peuvent contenir des erreurs. Vérifiez la page citée."}
         </p>
       </form>
     </div>

@@ -50,7 +50,7 @@ export function useAgent(options: {
   onThreadId?: (threadId: string) => void;
   onCustomEvent?: (data: unknown) => void;
   onFinish?: () => void;
-  onError?: () => void;
+  onError?: (error: unknown) => void;
 } = {}) {
   return useStream<AgentState>({
     assistantId: ASSISTANT_ID,

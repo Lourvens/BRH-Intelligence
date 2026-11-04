@@ -133,7 +133,7 @@ export function useAssistantWorkspace() {
     threads, activeThread, activeThreadId, citations, selectedCitation,
     isThinking: stream.isThinking, activities: stream.activities, runStatus: stream.runStatus,
     isRestoring: stream.isRestoring, isStopping: stream.isStopping,
-    error: stream.requestError || stream.streamError,
+    error: stream.error, errorPrompt: stream.errorPrompt,
     retry: stream.retry, sourcesOpen, setSourcesOpen, sourcesCollapsed, setSourcesCollapsed,
     selectThread, newThread, submitQuestion, stopThinking: stream.stopThinking, selectCitation,
   };

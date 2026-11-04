@@ -26,6 +26,7 @@ export function AssistantShell() {
     isRestoring,
     isStopping,
     error,
+    errorPrompt,
     retry,
     sourcesOpen,
     setSourcesOpen,
@@ -74,6 +75,7 @@ export function AssistantShell() {
             isRestoring={isRestoring}
             isStopping={isStopping}
             error={error}
+            errorPrompt={errorPrompt}
             onRetry={retry}
             selectedCitationId={selectedCitation?.id ?? null}
             onSelectCitation={selectCitation}

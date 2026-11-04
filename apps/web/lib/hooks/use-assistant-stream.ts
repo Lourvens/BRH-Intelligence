@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAgent } from "@/lib/agent";
 import { agentMessagesToChatMessages } from "@/lib/chat/agent-messages";
 import { appendAnswerDelta, parseAnswerDelta } from "@/lib/chat/answer-stream";
 import { mergeActivity, parseActivity, type AgentActivity } from "@/lib/chat/agent-activity";
+import { normalizeAssistantError, type AssistantError } from "@/lib/chat/assistant-error";
 import { threadPath } from "@/lib/chat/thread-path";
 import type { ChatMessage } from "@/lib/chat/types";
 
@@ -26,7 +27,8 @@ export function useAssistantStream(options: {
   const [draft, setDraft] = useState<AnswerDraft | null>(null);
   const [runStatus, setRunStatus] = useState<RunStatus>("idle");
   const [isStopping, setIsStopping] = useState(false);
-  const [requestError, setRequestError] = useState(false);
+  const [requestError, setRequestError] = useState<AssistantError | null>(null);
+  const [errorPrompt, setErrorPrompt] = useState<string | null>(null);
   const acceptActivity = useRef(false);
   const currentTurn = useRef<string | null>(null);
   const queuedDraft = useRef<AnswerDraft | null>(null);
@@ -77,20 +79,20 @@ export function useAssistantStream(options: {
     clearQueuedDraft();
     setRunStatus((current) => current === "running" ? "idle" : current);
   }, [clearQueuedDraft]);
-  const onError = useCallback(() => {
+  const onError = useCallback((cause?: unknown) => {
     if (stoppedByUser.current) return;
     acceptActivity.current = false;
     setRunStatus("error");
-    setRequestError(true);
+    setRequestError(normalizeAssistantError(cause));
+    setErrorPrompt(submitting.current ? pending.current?.text ?? null : null);
     clearQueuedDraft();
-    setDraft(null);
   }, [clearQueuedDraft]);
   const stream = useAgent({ threadId, onThreadId, onCustomEvent, onFinish, onError });
 
   const publishedMessages = agentMessagesToChatMessages(stream.messages);
   const messages: ChatMessage[] = draft && publishedMessages.at(-1)?.role === "user"
     ? [...publishedMessages, { id: `answer-${draft.turnId}`, role: "assistant" as const,
-        content: draft.text, streaming: true, activities }]
+        content: draft.text, streaming: runStatus === "running", activities }]
     : publishedMessages;
   const pendingTitle = pending.current?.text.slice(0, 48) || null;
   const threadTitle = stream.values?.title;
@@ -101,7 +103,8 @@ export function useAssistantStream(options: {
     if (submitting.current) return;
     submitting.current = true;
     pending.current = message;
-    setRequestError(false);
+    setRequestError(null);
+    setErrorPrompt(null);
     setActivities([]);
     clearQueuedDraft();
     setDraft(null);
@@ -120,7 +123,7 @@ export function useAssistantStream(options: {
         }),
         onError,
       });
-    } catch { onError(); }
+    } catch (error) { onError(error); }
     finally {
       submitting.current = false;
       acceptActivity.current = false;
@@ -146,7 +149,7 @@ export function useAssistantStream(options: {
     setDraft(null);
     setRunStatus("stopped");
     try { await stream.stop(); }
-    catch { setRequestError(true); setRunStatus("error"); }
+    catch (error) { setRequestError(normalizeAssistantError(error)); setRunStatus("error"); }
     finally { setIsStopping(false); }
   }
 
@@ -156,17 +159,23 @@ export function useAssistantStream(options: {
       stoppedByUser.current = true;
       acceptActivity.current = false;
       clearQueuedDraft();
-      void stream.stop().catch(() => setRequestError(true));
+      void stream.stop().catch(() => setRequestError(normalizeAssistantError(undefined)));
     }
     setDraft(null);
     setActivities([]);
     setRunStatus("idle");
     pending.current = null;
-    if (options?.clearError) setRequestError(false);
+    setErrorPrompt(null);
+    if (options?.clearError) setRequestError(null);
   }
 
+  const streamError = useMemo(
+    () => (stream.error ? normalizeAssistantError(stream.error) : null),
+    [stream.error],
+  );
   return {
-    messages, pendingTitle, threadTitle, activities, runStatus, requestError,
+    messages, pendingTitle, threadTitle, activities, runStatus,
+    error: requestError ?? streamError, errorPrompt, requestError: Boolean(requestError),
     streamError: Boolean(stream.error), isThinking, isRestoring, isStopping,
     send, retry, stopThinking, resetForThreadChange,
   };
