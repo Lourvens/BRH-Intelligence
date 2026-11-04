@@ -52,5 +52,8 @@ export function mergeActivity(previous: AgentActivity[], event: AgentActivity): 
   if (index === -1) return [...previous, event].slice(-48);
   // Replayed start events must not revert a completed operation.
   if (previous[index].status !== "running" && event.status === "running") return previous;
-  return previous.map((item, i) => i === index ? { ...item, ...event } : item);
+  const defined = Object.fromEntries(
+    Object.entries(event).filter(([, value]) => value !== undefined),
+  );
+  return previous.map((item, i) => i === index ? { ...item, ...defined } : item);
 }

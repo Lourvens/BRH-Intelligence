@@ -102,7 +102,7 @@ export function AgentActivity({ activities, stopped, isStopping, failed, live = 
           <div className="-ml-2 min-h-0 overflow-hidden pl-2">
             <motion.ol
               initial={false}
-              animate={open ? "open" : "closed"}
+              animate="open"
               variants={listVariants}
               className="my-3 space-y-5 border-l border-border pl-5"
               aria-label="Activité de l’assistant"
@@ -112,7 +112,7 @@ export function AgentActivity({ activities, stopped, isStopping, failed, live = 
                 const Icon = item.status === "error" ? CircleAlert : item.status === "complete" ? Check : Search;
                 return <motion.li
                   key={item.id}
-                  initial="closed"
+                  initial={false}
                   variants={itemVariants}
                   className="relative"
                 >

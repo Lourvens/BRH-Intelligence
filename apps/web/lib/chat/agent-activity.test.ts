@@ -4,6 +4,17 @@ import { mergeActivity, parseActivity, type AgentActivity } from "./agent-activi
 const start: AgentActivity = { type: "brh.activity", turn_id: "t1", id: "search:1", stage: "search", status: "running", query: "inflation" };
 
 describe("agent activity stream", () => {
+  test("sparse completion events retain tool output and source previews", () => {
+    const sources = [{ title: "Note BRH", page: 3, excerpt: "Inflation" }];
+    const previous = { ...start, summary: "Passage trouvé", sources };
+    const completion = parseActivity({ type: start.type, turn_id: start.turn_id,
+      id: start.id, stage: "search", status: "complete", result_count: 1 })!;
+    const merged = mergeActivity([previous], completion)[0];
+    expect(merged.query).toBe("inflation");
+    expect(merged.sources).toEqual(sources);
+    expect(merged.summary).toBe("Passage trouvé");
+    expect(merged.status).toBe("complete");
+  });
   test("merges parallel searches without losing their results", () => {
     let events = mergeActivity([], start);
     events = mergeActivity(events, { ...start, id: "search:2", query: "réserves" });

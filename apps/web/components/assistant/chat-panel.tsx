@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import type { AgentActivity as Activity } from "@/lib/chat/agent-activity";
 import { assistantAnnouncement } from "@/lib/chat/assistant-announcement";
-import { feedbackTransition } from "@/lib/motion";
 import { useChatScroll } from "@/lib/hooks/use-chat-scroll";
 import { useRetryCooldown } from "@/lib/hooks/use-retry-cooldown";
 import {
@@ -18,7 +17,6 @@ import { ChatComposer } from "./chat-composer";
 import { EmptyState } from "./empty-state";
 import { Message } from "./message";
 import { WorkspaceHeader } from "./workspace-header";
-import { AgentActivity } from "./agent-activity";
 import { AssistantErrorArea } from "./assistant-error-area";
 
 export function ChatPanel({
@@ -166,32 +164,6 @@ export function ChatPanel({
                         Chargement de la conversation…
                       </p>
                     )}
-                    <AnimatePresence initial={false}>
-                      {((isThinking && !thread?.messages.at(-1)?.streaming) ||
-                        runStatus === "stopped" ||
-                        (runStatus === "error" &&
-                          !(error?.kind === "rate_limit" && activities.length === 0))) && (
-                        <motion.div
-                          key="activity"
-                          initial={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: reduceMotion ? 0 : 2 }}
-                          transition={
-                            reduceMotion ? { duration: 0 } : feedbackTransition
-                          }
-                        >
-                          <AgentActivity
-                            activities={activities}
-                            stopped={
-                              runStatus === "stopped" || runStatus === "error"
-                            }
-                            isStopping={isStopping}
-                            failed={runStatus === "error" && error?.kind !== "rate_limit"}
-                            live={isThinking}
-                          />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
                     <AssistantErrorArea
                       error={isThinking ? null : error}
                       remainingSeconds={cooldown}

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useAgent } from "@/lib/agent";
 import { agentMessagesToChatMessages } from "@/lib/chat/agent-messages";
+import { retainPublishedActivity } from "@/lib/chat/activity-presentation";
 import { appendAnswerDelta, parseAnswerDelta } from "@/lib/chat/answer-stream";
 import { mergeActivity, parseActivity, type AgentActivity } from "@/lib/chat/agent-activity";
 import { normalizeAssistantError, type AssistantError } from "@/lib/chat/assistant-error";
@@ -89,7 +90,9 @@ export function useAssistantStream(options: {
   }, [clearQueuedDraft]);
   const stream = useAgent({ threadId, onThreadId, onCustomEvent, onFinish, onError });
 
-  const publishedMessages = agentMessagesToChatMessages(stream.messages);
+  const publishedMessages = retainPublishedActivity(
+    agentMessagesToChatMessages(stream.messages), activities,
+  );
   const messages: ChatMessage[] = draft && publishedMessages.at(-1)?.role === "user"
     ? [...publishedMessages, { id: `answer-${draft.turnId}`, role: "assistant" as const,
         content: draft.text, streaming: runStatus === "running", activities }]
