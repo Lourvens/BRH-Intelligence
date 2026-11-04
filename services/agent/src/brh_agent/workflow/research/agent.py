@@ -8,6 +8,7 @@ import time
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 
 from brh_agent.lib.prompts import IDENTITY
+from brh_agent.usage.tokens import add_usage, usage_from_message
 
 logger = logging.getLogger(__name__)
 MAX_SEARCHES = 4
@@ -41,7 +42,10 @@ def think(state, model, tool):
         response = model.invoke(history)
     else:
         response = model.bind_tools([tool]).invoke(history)
-    return {"research_messages": [*history, response]}
+    return {
+        "research_messages": [*history, response],
+        "usage": add_usage(state.get("usage"), usage_from_message(response, history)),
+    }
 
 
 def search(state, tool, on_event=None):

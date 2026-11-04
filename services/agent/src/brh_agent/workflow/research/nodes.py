@@ -9,6 +9,7 @@ from langgraph.config import get_stream_writer
 
 from brh_agent.lib.activity import emit
 from brh_agent.lib.publication import ERROR, interrupted_or_error, publish
+from brh_agent.usage.tokens import add_usage, estimate_usage, normalize_usage
 from brh_agent.workflow.research import agent as research
 
 logger = logging.getLogger(__name__)
@@ -67,12 +68,14 @@ def final(state: dict[str, Any], model_factory: Callable[[], Any]) -> dict[str, 
         return publish(text, citations, "answer", state["turn_id"])
     emit(state["turn_id"], "draft", "running", event_id="final-writer")
     parts: list[str] = []
+    usage: dict[str, int] = {}
+    history = [
+        *state["research_messages"],
+        HumanMessage(content=FINAL_WRITER_INSTRUCTIONS),
+    ]
     try:
-        history = [
-            *state["research_messages"],
-            HumanMessage(content=FINAL_WRITER_INSTRUCTIONS),
-        ]
         for sequence, chunk in enumerate(model_factory().stream(history)):
+            usage = normalize_usage(getattr(chunk, "usage_metadata", None)) or usage
             if isinstance(chunk.content, str) and chunk.content:
                 parts.append(chunk.content)
                 get_stream_writer()(
@@ -87,11 +90,19 @@ def final(state: dict[str, Any], model_factory: Callable[[], Any]) -> dict[str, 
         text, citations = research.answer(
             {**state, "research_messages": [AIMessage(content="".join(parts))]}
         )
-        return publish(text, citations, "answer", state["turn_id"])
+        result = publish(text, citations, "answer", state["turn_id"])
+        result["usage"] = add_usage(
+            state.get("usage"), usage or estimate_usage(history, text)
+        )
+        return result
     except Exception:
         logger.exception("Final writer failed")
         emit(state["turn_id"], "draft", "error", event_id="final-writer")
-        return publish(interrupted_or_error(parts), [], "error", state["turn_id"])
+        result = publish(interrupted_or_error(parts), [], "error", state["turn_id"])
+        result["usage"] = add_usage(
+            state.get("usage"), usage or estimate_usage(history, "".join(parts))
+        )
+        return result
 
 
 def next_step(state: dict[str, Any]) -> str:

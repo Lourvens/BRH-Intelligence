@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import math
 import re
 import time
@@ -9,10 +10,18 @@ from collections import deque
 from dataclasses import dataclass
 from threading import Lock
 
+from starlette.concurrency import run_in_threadpool
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
+
+from brh_agent.lib.identity import request_identity
+from brh_agent.usage.quota import DailyTokenQuota, QuotaDecision
+
+logger = logging.getLogger(__name__)
+
+_DAY_SECONDS = 86400
 
 _RUN_CREATION = re.compile(r"^/(?:threads/[^/]+/)?runs(?:/(?:stream|wait))?/?$")
 _AGENT_PREFIXES = ("/threads", "/runs", "/assistants", "/store")
@@ -28,6 +37,10 @@ _RATE_LIMIT_MESSAGES = {
     "agent": "Cette session a envoyé trop de requêtes. Réessayez dans quelques instants.",
     "search": "La recherche sémantique reçoit trop de demandes. Réessayez dans quelques instants.",
     "corpus": "Le corpus reçoit trop de demandes en ce moment. Réessayez dans quelques instants.",
+    "daily_token_limit": (
+        "Votre quota quotidien d’utilisation de l’assistant est atteint. "
+        "Il se réinitialise à minuit UTC."
+    ),
 }
 
 
@@ -62,14 +75,30 @@ class SlidingWindowLimiter:
             return LimitDecision(True, limit, remaining, reset)
 
 
-def client_identity(request: Request, trust_proxy: bool) -> str:
-    if trust_proxy:
-        forwarded = request.headers.get("x-forwarded-for", "")
-        if forwarded:
-            # The proxy appends the address it saw; the right-most hop is
-            # therefore the one we can trust, not a client-supplied prefix.
-            return forwarded.rsplit(",", 1)[-1].strip()
-    return request.client.host if request.client else "unknown"
+def _quota_response(decision: QuotaDecision) -> JSONResponse:
+    headers = {
+        "X-RateLimit-Limit": str(decision.limit),
+        "X-RateLimit-Remaining": str(decision.remaining),
+        "X-RateLimit-Reset": str(int(time.time()) + decision.retry_after),
+        "X-RateLimit-Subcode": "daily_token_limit",
+        "Retry-After": str(decision.retry_after),
+    }
+    return JSONResponse(
+        {
+            "error": {
+                "code": "rate_limited",
+                "subcode": "daily_token_limit",
+                "message": _RATE_LIMIT_MESSAGES["daily_token_limit"],
+                "limit": decision.limit,
+                "remaining": decision.remaining,
+                "used": decision.used,
+                "retry_after": decision.retry_after,
+                "window_seconds": _DAY_SECONDS,
+            }
+        },
+        status_code=429,
+        headers=headers,
+    )
 
 
 def _limit_for_path(path: str, method: str, settings) -> list[tuple[str, int]]:
@@ -90,10 +119,11 @@ def _limit_for_path(path: str, method: str, settings) -> list[tuple[str, int]]:
 
 
 class RateLimitMiddleware(BaseHTTPMiddleware):
-    def __init__(self, app, settings):
+    def __init__(self, app, settings, quota: DailyTokenQuota | None = None):
         super().__init__(app)
         self.settings = settings
         self.limiter = SlidingWindowLimiter()
+        self.quota = quota or DailyTokenQuota(settings)
 
     async def dispatch(self, request: Request, call_next):
         if not self.settings.rate_limit_enabled:
@@ -103,7 +133,11 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         if not checks:
             return await call_next(request)
 
-        identity = client_identity(request, self.settings.rate_limit_trust_proxy)
+        identity = request_identity(
+            request,
+            self.settings.rate_limit_trust_proxy,
+            self.settings.quota_identity_salt.get_secret_value(),
+        )
         decisions = [
             self.limiter.check(
                 name if name == "global" else f"{name}:{identity}",
@@ -147,6 +181,20 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
                 headers=headers,
             )
 
+        daily_check = (
+            request.method == "POST"
+            and _RUN_CREATION.match(request.url.path)
+            and self.quota.enabled
+        )
+        if daily_check:
+            try:
+                quota_decision = await run_in_threadpool(self.quota.check, identity)
+            except Exception:
+                logger.exception("Daily assistant quota could not be checked")
+            else:
+                if not quota_decision.allowed:
+                    return _quota_response(quota_decision)
+
         tightest = min(decisions, key=lambda decision: decision.remaining)
         headers = {
             "X-RateLimit-Limit": str(tightest.limit),
@@ -158,9 +206,9 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         return response
 
 
-def install_security(app, settings) -> None:
+def install_security(app, settings, quota: DailyTokenQuota | None = None) -> None:
     """Install CORS outside the limiter so 429 responses still get CORS headers."""
-    app.add_middleware(RateLimitMiddleware, settings=settings)
+    app.add_middleware(RateLimitMiddleware, settings=settings, quota=quota)
     origins = settings.cors_allowed_origins_list
     if origins:
         app.add_middleware(

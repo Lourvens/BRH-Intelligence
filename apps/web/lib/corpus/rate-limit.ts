@@ -4,6 +4,7 @@ export type CorpusRateLimitSubcode =
   | "agent"
   | "search"
   | "corpus"
+  | "daily_token_limit"
   | "unknown";
 
 export type CorpusRateLimit = {
@@ -23,6 +24,7 @@ const SUBCODES = new Set<CorpusRateLimitSubcode>([
   "agent",
   "search",
   "corpus",
+  "daily_token_limit",
 ]);
 
 function record(value: unknown): Record<string, unknown> | null {
@@ -75,6 +77,7 @@ export function parseCorpusRateLimit(
 
 export function rateLimitTitle(rateLimit: CorpusRateLimit, surface: CorpusSurface): string {
   if (rateLimit.subcode === "global") return "Service momentanément saturé";
+  if (rateLimit.subcode === "daily_token_limit") return "Quota quotidien atteint";
   if (surface === "search") {
     return rateLimit.subcode === "search"
       ? "Recherche par sens temporairement limitée"
@@ -88,7 +91,11 @@ export function rateLimitTitle(rateLimit: CorpusRateLimit, surface: CorpusSurfac
 
 export function rateLimitQuota(rateLimit: CorpusRateLimit): string | null {
   if (!rateLimit.limit || !rateLimit.windowSeconds) return null;
-  const unit = rateLimit.subcode === "search" ? "recherche" : "requête";
+  const unit = rateLimit.subcode === "daily_token_limit"
+    ? "token"
+    : rateLimit.subcode === "search"
+      ? "recherche"
+      : "requête";
   const period = rateLimit.windowSeconds === 60
     ? "minute"
     : rateLimit.windowSeconds === 3600

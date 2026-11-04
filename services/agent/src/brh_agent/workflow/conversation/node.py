@@ -8,6 +8,7 @@ from langgraph.config import get_stream_writer
 
 from brh_agent.lib.activity import emit
 from brh_agent.lib.publication import ERROR, interrupted_or_error, publish
+from brh_agent.usage.tokens import add_usage
 from brh_agent.workflow.conversation.agent import respond
 
 logger = logging.getLogger(__name__)
@@ -27,11 +28,17 @@ def converse(
         )
 
     failed = state["intent"] == "error"
+    usage: dict[str, int] = {}
     try:
-        text = ERROR if failed else respond(state, model_factory(), on_chunk)
+        if failed:
+            text = ERROR
+        else:
+            text, usage = respond(state, model_factory(), on_chunk)
     except Exception:
         logger.exception("Conversation response failed")
         failed = True
         text = interrupted_or_error(parts)
     emit(state["turn_id"], "respond", "error" if failed else "complete")
-    return publish(text, [], "error" if failed else "conversation", state["turn_id"])
+    result = publish(text, [], "error" if failed else "conversation", state["turn_id"])
+    result["usage"] = add_usage(state.get("usage"), usage)
+    return result

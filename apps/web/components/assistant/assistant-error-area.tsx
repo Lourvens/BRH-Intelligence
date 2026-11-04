@@ -12,11 +12,13 @@ export function AssistantErrorArea({
   remainingSeconds,
   onRetry,
   onEdit,
+  onExplore,
 }: {
   error: AssistantError | null;
   remainingSeconds: number;
   onRetry: () => void;
   onEdit: () => void;
+  onExplore?: () => void;
 }) {
   const reduceMotion = useReducedMotion();
 
@@ -35,6 +37,7 @@ export function AssistantErrorArea({
             remainingSeconds={remainingSeconds}
             onRetry={onRetry}
             onEdit={onEdit}
+            onExplore={onExplore}
           />
         </motion.div>
       ) : null}

@@ -20,3 +20,4 @@ class AgentState(TypedDict, total=False):
     answer: str
     grounded: bool
     kind: str
+    usage: dict[str, int]

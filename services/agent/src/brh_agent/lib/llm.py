@@ -20,6 +20,9 @@ def chat_model():
         max_tokens=settings.chat_max_tokens,
         timeout=settings.chat_timeout,
         max_retries=settings.chat_max_retries,
+        # OpenRouter is an OpenAI-compatible endpoint; without this the final
+        # stream chunk carries no token usage and the daily quota cannot settle.
+        stream_usage=True,
     )
 
 
@@ -36,6 +39,7 @@ def small_model():
         max_tokens=settings.slm_max_tokens,
         timeout=settings.slm_timeout,
         max_retries=0,
+        stream_usage=True,
     )
 
 

@@ -8,6 +8,8 @@ from langgraph.graph import END, START, StateGraph
 
 from brh_agent.lib.activity import tracked
 from brh_agent.lib.llm import chat_model, decide_intent, small_model
+from brh_agent.usage.node import commit_daily_usage
+from brh_agent.usage.quota import DailyTokenQuota
 from brh_agent.workflow.context import limit_context
 from brh_agent.workflow.conversation.node import converse
 from brh_agent.workflow.conversation.title import title_thread
@@ -28,6 +30,7 @@ def build_graph(
     search_tool: Any = None,
     checkpointer: Any = None,
     title_model_factory: Callable[[], Any] | None = None,
+    usage_quota: DailyTokenQuota | None = None,
 ) -> Any:
     decision = decision or decide_intent
     model_factory = model_factory or chat_model
@@ -48,6 +51,7 @@ def build_graph(
     builder.add_node("tools", tracked(partial(research_nodes.search, search_tool=search_tool)))
     builder.add_node("final", tracked(partial(research_nodes.final, model_factory=model_factory)))
     builder.add_node("title", partial(title_thread, title_model_factory=title_model_factory))
+    builder.add_node("usage_commit", partial(commit_daily_usage, quota=usage_quota))
 
     builder.add_edge(START, "context_guard")
     builder.add_edge("context_guard", "router")
@@ -57,7 +61,8 @@ def build_graph(
     builder.add_conditional_edges("research", research_nodes.next_step, ["tools", "final"])
     builder.add_edge("tools", "research")
     builder.add_edge("final", "title")
-    builder.add_edge("title", END)
+    builder.add_edge("title", "usage_commit")
+    builder.add_edge("usage_commit", END)
     return builder.compile(checkpointer=checkpointer)
 
 

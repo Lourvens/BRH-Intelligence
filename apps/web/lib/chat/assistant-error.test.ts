@@ -1,6 +1,10 @@
 import { expect, test } from "bun:test";
 
-import { normalizeAssistantError, rateLimitPresentation } from "./assistant-error";
+import {
+  formatRetryDelay,
+  normalizeAssistantError,
+  rateLimitPresentation,
+} from "./assistant-error";
 
 test("429 keeps the server message and Retry-After", () => {
   const error = {
@@ -56,6 +60,37 @@ test("unknown failures get a safe user-facing message", () => {
   });
 });
 
+
+test("the daily quota is a day-scoped limit with its own copy", () => {
+  const error = normalizeAssistantError({
+    status: 429,
+    text: JSON.stringify({
+      error: {
+        code: "rate_limited",
+        subcode: "daily_token_limit",
+        message: "Quota quotidien atteint.",
+        limit: 100000,
+        window_seconds: 86400,
+        retry_after: 43200,
+      },
+    }),
+  });
+  expect(error).toMatchObject({
+    kind: "rate_limit",
+    subcode: "daily_token_limit",
+    retryAfterSeconds: 43200,
+    limit: 100000,
+    windowSeconds: 86400,
+  });
+  expect(rateLimitPresentation(error)).toEqual({
+    title: "Quota quotidien atteint",
+    showEdit: false,
+    quota: "Limite : 100000 tokens par jour.",
+  });
+  expect(formatRetryDelay(43200)).toBe("12 h");
+  expect(formatRetryDelay(3660)).toBe("1 h 1 min");
+  expect(formatRetryDelay(42)).toBe("42 s");
+});
 
 test("each backend subcode maps to its own title and edit policy", () => {
   const base = { kind: "rate_limit" as const, message: "", retryAfterSeconds: 30,

@@ -1,6 +1,7 @@
 """Request limits and CORS are configured independently of route logic."""
 
 from brh_agent.middleware.security import SlidingWindowLimiter, install_security
+from brh_agent.usage.quota import QuotaDecision
 from brh_core.config import Settings
 from starlette.applications import Starlette
 from starlette.responses import JSONResponse
@@ -22,7 +23,14 @@ def _settings(**overrides):
     return Settings(_env_file=None, **values)
 
 
-def _app(settings):
+class DeniedQuota:
+    enabled = True
+
+    def check(self, identity):
+        return QuotaDecision(False, 100000, 100000, 0, 43200)
+
+
+def _app(settings, quota=None):
     async def run(request):
         return JSONResponse({"ok": True})
 
@@ -41,7 +49,7 @@ def _app(settings):
             Route("/ok", health),
         ]
     )
-    install_security(app, settings)
+    install_security(app, settings, quota=quota)
     return app
 
 
@@ -131,6 +139,28 @@ def test_search_subcode():
     response = client.get("/corpus/v1/search")
     assert response.status_code == 429
     assert response.json()["error"]["subcode"] == "search"
+
+
+def test_daily_token_limit_returns_a_day_scoped_429():
+    client = TestClient(
+        _app(
+            _settings(
+                rate_limit_agent_runs=10,
+                rate_limit_agent_requests=10,
+                rate_limit_global_requests=10,
+            ),
+            quota=DeniedQuota(),
+        )
+    )
+    response = client.post("/runs")
+    assert response.status_code == 429
+    error = response.json()["error"]
+    assert error["code"] == "rate_limited"
+    assert error["subcode"] == "daily_token_limit"
+    assert error["limit"] == 100000
+    assert error["window_seconds"] == 86400
+    assert response.headers["x-ratelimit-subcode"] == "daily_token_limit"
+    assert response.headers["retry-after"] == "43200"
 
 
 def test_global_subcode_takes_precedence():

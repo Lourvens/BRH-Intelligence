@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, SecretStr
 
 
 class SecuritySettings(BaseModel):
@@ -39,6 +39,16 @@ class SecuritySettings(BaseModel):
     )
     agent_max_context_messages: int = Field(
         default=40, gt=0, validation_alias="BRH_AGENT_MAX_CONTEXT_MESSAGES"
+    )
+    # 0 disables the daily assistant token quota. The window is the UTC day.
+    agent_daily_token_limit: int = Field(
+        default=0, ge=0, validation_alias="BRH_AGENT_DAILY_TOKEN_LIMIT"
+    )
+    # HMAC key for turning a client address into a non-reversible quota identity.
+    # Set a deployment-specific value; changing it resets all daily counters.
+    quota_identity_salt: SecretStr = Field(
+        default=SecretStr("brh-intelligence"),
+        validation_alias="BRH_QUOTA_IDENTITY_SALT",
     )
 
     @property

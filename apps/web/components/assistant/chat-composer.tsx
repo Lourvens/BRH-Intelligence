@@ -11,6 +11,7 @@ export function ChatComposer({
   isRestoring,
   isStopping,
   cooldownSeconds,
+  cooldownLabel,
   errorPrompt,
   onSubmit,
   onStop,
@@ -19,6 +20,7 @@ export function ChatComposer({
   isRestoring: boolean;
   isStopping: boolean;
   cooldownSeconds: number;
+  cooldownLabel: string;
   errorPrompt: string | null;
   onSubmit: (question: string) => void;
   onStop: () => void;
@@ -107,7 +109,7 @@ export function ChatComposer({
                 isThinking
                   ? "Arrêter le traitement"
                   : waiting
-                    ? `Réessayer dans ${cooldownSeconds} secondes`
+                    ? `Réessayer dans ${cooldownLabel}`
                     : "Envoyer la question"
               }
               onClick={(event) => {
@@ -143,7 +145,7 @@ export function ChatComposer({
                   ) : waiting ? (
                     <>
                       <Timer className="size-4" aria-hidden />
-                      <span className="text-caption">{cooldownSeconds} s</span>
+                      <span className="text-caption tabular-nums">{cooldownLabel}</span>
                     </>
                   ) : (
                     <ArrowUp className="size-4" aria-hidden />
@@ -155,7 +157,7 @@ export function ChatComposer({
         </div>
         <p className="mt-2 text-center text-[11px] leading-relaxed text-ink-muted">
           {waiting
-            ? `Nouvelle tentative possible dans ${cooldownSeconds} s.`
+            ? `Nouvelle tentative possible dans ${cooldownLabel}.`
             : "Les réponses peuvent contenir des erreurs. Vérifiez la page citée."}
         </p>
       </form>

@@ -6,6 +6,7 @@ export type RateLimitSubcode =
   | "agent"
   | "search"
   | "corpus"
+  | "daily_token_limit"
   | "unknown";
 
 export type AssistantError = {
@@ -33,6 +34,7 @@ const RATE_LIMIT_SUBCODES = new Set<RateLimitSubcode>([
   "agent",
   "search",
   "corpus",
+  "daily_token_limit",
 ]);
 
 function record(value: unknown): Record<string, unknown> | null {
@@ -110,6 +112,8 @@ function rateLimitMessage(body: ErrorPayload | null, code: RateLimitSubcode): st
       return "Le corpus reçoit trop de demandes en ce moment. Réessayez dans quelques instants.";
     case "global":
       return "Le service reçoit trop de demandes en ce moment. Réessayez dans quelques instants.";
+    case "daily_token_limit":
+      return "Votre quota quotidien d’utilisation de l’assistant est atteint. Il se réinitialise à minuit UTC.";
     default:
       return "Limite de requêtes atteinte. Réessayez dans quelques instants.";
   }
@@ -157,8 +161,20 @@ const RATE_LIMIT_TITLES: Record<RateLimitSubcode, string> = {
   agent: "Trop de requêtes depuis cette session",
   search: "Recherche temporairement limitée",
   corpus: "Corpus temporairement limité",
+  daily_token_limit: "Quota quotidien atteint",
   unknown: "Limite de requêtes atteinte",
 };
+
+/** A compact French wait label for short windows and multi-hour resets. */
+export function formatRetryDelay(seconds: number): string {
+  const total = Math.max(0, Math.ceil(seconds));
+  if (total < 60) return `${total} s`;
+  const minutes = Math.floor(total / 60);
+  if (minutes < 60) return `${minutes} min`;
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return rest ? `${hours} h ${rest} min` : `${hours} h`;
+}
 
 /** UI copy and action policy for each backend rate-limit subcode. */
 export function rateLimitPresentation(error: AssistantError): {
@@ -168,7 +184,13 @@ export function rateLimitPresentation(error: AssistantError): {
 } {
   const code = error.kind === "rate_limit" ? error.subcode ?? "unknown" : "unknown";
   const window = error.windowSeconds;
-  const unit = code === "agent_run" ? "question" : code === "search" ? "recherche" : "requête";
+  const unit = code === "daily_token_limit"
+    ? "token"
+    : code === "agent_run"
+      ? "question"
+      : code === "search"
+        ? "recherche"
+        : "requête";
   const period = window === 60
     ? "minute"
     : window === 3600

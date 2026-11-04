@@ -50,6 +50,32 @@ test("connection notice uses a direct retry", () => {
 });
 
 
+test("daily quota shows a long reset and a corpus escape hatch", () => {
+  const html = renderToStaticMarkup(
+    <AssistantErrorNotice
+      error={{
+        kind: "rate_limit",
+        message: "Votre quota quotidien est atteint.",
+        retryAfterSeconds: 43200,
+        status: 429,
+        subcode: "daily_token_limit",
+        limit: 100000,
+        windowSeconds: 86400,
+      }}
+      remainingSeconds={43200}
+      onRetry={() => undefined}
+      onEdit={() => undefined}
+      onExplore={() => undefined}
+    />,
+  );
+  expect(html).toContain("Quota quotidien atteint");
+  expect(html).toContain("Nouveau quota disponible dans");
+  expect(html).toContain("12 h");
+  expect(html).toContain("Explorer le corpus");
+  expect(html).not.toContain("Modifier la question");
+  expect(html).toContain("disabled");
+});
+
 test("global limit has no edit CTA", () => {
   const html = renderToStaticMarkup(
     <AssistantErrorNotice

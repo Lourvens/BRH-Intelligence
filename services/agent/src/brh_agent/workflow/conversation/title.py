@@ -6,6 +6,8 @@ from typing import Any
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 
+from brh_agent.usage.tokens import add_usage, usage_from_message
+
 logger = logging.getLogger(__name__)
 
 TITLE_MAX_CHARS = 255
@@ -62,22 +64,24 @@ def title_thread(
     for message in history[:2]:
         limit = TITLE_QUESTION_CHARS if isinstance(message, HumanMessage) else TITLE_ANSWER_CHARS
         exchange.append(type(message)(content=message.text[:limit]))
+    prompt = [
+        SystemMessage(content=TITLE_SYSTEM_PROMPT),
+        # Keep the real Human and AI roles so the title reflects both
+        # sides, then close on a user turn. Ending on the assistant
+        # answer makes the model continue it instead of titling.
+        *exchange,
+        HumanMessage(content=TITLE_USER_PROMPT),
+    ]
     try:
         result = title_model_factory().invoke(
-            [
-                SystemMessage(content=TITLE_SYSTEM_PROMPT),
-                # Keep the real Human and AI roles so the title reflects both
-                # sides, then close on a user turn. Ending on the assistant
-                # answer makes the model continue it instead of titling.
-                *exchange,
-                HumanMessage(content=TITLE_USER_PROMPT),
-            ],
+            prompt,
             # Non-streaming display metadata: keep it out of the answer stream
             # and give the LangSmith run an explicit, searchable name.
             config={"run_name": "thread-title", "tags": ["title-generation"]},
         )
+        usage = add_usage(state.get("usage"), usage_from_message(result, prompt))
         title = normalize_title(result.text)
-        return {"title": title} if title else {}
+        return {"title": title, "usage": usage} if title else {"usage": usage}
     except Exception:
         logger.warning("Conversation title generation failed", exc_info=True)
         return {}

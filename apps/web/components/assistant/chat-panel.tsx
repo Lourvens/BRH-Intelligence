@@ -1,15 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  ACTIVITY_LABELS,
-  type AgentActivity as Activity,
-} from "@/lib/chat/agent-activity";
+import type { AgentActivity as Activity } from "@/lib/chat/agent-activity";
+import { assistantAnnouncement } from "@/lib/chat/assistant-announcement";
 import { feedbackTransition } from "@/lib/motion";
 import { useChatScroll } from "@/lib/hooks/use-chat-scroll";
 import { useRetryCooldown } from "@/lib/hooks/use-retry-cooldown";
-import type { AssistantError } from "@/lib/chat/assistant-error";
+import {
+  formatRetryDelay,
+  type AssistantError,
+} from "@/lib/chat/assistant-error";
 import type { ChatThread } from "@/lib/chat/types";
 import { cn } from "@/lib/utils";
 import { ChatComposer } from "./chat-composer";
@@ -53,27 +55,23 @@ export function ChatPanel({
   onRetry: () => void;
 }) {
   const reduceMotion = useReducedMotion();
+  const router = useRouter();
   const cooldown = useRetryCooldown(error);
+  const cooldownLabel = formatRetryDelay(cooldown);
   const isEmpty = !thread && !isThinking && !isRestoring && !error;
   const threadId = thread?.id && thread.id !== "pending" ? thread.id : null;
   const currentActivity =
     activities.findLast((item) => item.status === "running") ??
     activities.at(-1);
-  const announcement = isRestoring
-    ? "Chargement de la conversation…"
-    : error?.kind === "rate_limit"
-      ? "Limite de requêtes atteinte. Une nouvelle tentative sera possible dans quelques instants."
-      : isStopping
-      ? "Arrêt du traitement…"
-      : runStatus === "stopped"
-        ? "Traitement interrompu."
-        : isThinking
-          ? thread?.messages.at(-1)?.streaming
-            ? "L’assistant rédige sa réponse."
-            : currentActivity
-              ? ACTIVITY_LABELS[currentActivity.stage]
-              : "Demande envoyée à l’assistant."
-          : "";
+  const announcement = assistantAnnouncement({
+    isRestoring,
+    error,
+    isStopping,
+    runStatus,
+    isThinking,
+    streaming: Boolean(thread?.messages.at(-1)?.streaming),
+    currentActivity,
+  });
   const { scrollRef, handleScroll, followMessages, isAtBottom } = useChatScroll(
     thread?.id,
     thread?.messages.length ?? 0,
@@ -203,6 +201,7 @@ export function ChatPanel({
                           .querySelector<HTMLTextAreaElement>("[data-assistant-composer]")
                           ?.focus()
                       }
+                      onExplore={error?.subcode === "daily_token_limit" ? () => router.push("/brh-corpus") : undefined}
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -236,6 +235,7 @@ export function ChatPanel({
           isRestoring={isRestoring}
           isStopping={isStopping}
           cooldownSeconds={cooldown}
+          cooldownLabel={cooldownLabel}
           errorPrompt={errorPrompt}
           onSubmit={(question) => {
             followMessages();

@@ -1,21 +1,29 @@
 import { Timer } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { rateLimitPresentation, type AssistantError } from "@/lib/chat/assistant-error";
+import {
+  formatRetryDelay,
+  rateLimitPresentation,
+  type AssistantError,
+} from "@/lib/chat/assistant-error";
 
 export function AssistantErrorNotice({
   error,
   remainingSeconds,
   onRetry,
   onEdit,
+  onExplore,
 }: {
   error: AssistantError;
   remainingSeconds: number;
   onRetry: () => void;
   onEdit: () => void;
+  onExplore?: () => void;
 }) {
   const rateLimited = error.kind === "rate_limit";
+  const dailyQuota = rateLimited && error.subcode === "daily_token_limit";
   const waiting = rateLimited && remainingSeconds > 0;
+  const waitLabel = formatRetryDelay(remainingSeconds);
   const presentation = rateLimitPresentation(error);
   const title = rateLimited
     ? presentation.title
@@ -45,8 +53,8 @@ export function AssistantErrorNotice({
             <p className="mt-2 text-caption text-ink-muted">
               {waiting ? (
                 <span aria-live="off">
-                  Nouvelle tentative possible dans{" "}
-                  <span className="font-medium text-ink">{remainingSeconds} s</span>.
+                  {dailyQuota ? "Nouveau quota disponible dans " : "Nouvelle tentative possible dans "}
+                  <span className="font-medium tabular-nums text-ink">{waitLabel}</span>.
                 </span>
               ) : (
                 "Vous pouvez réessayer maintenant."
@@ -63,11 +71,15 @@ export function AssistantErrorNotice({
               className="min-h-10"
               aria-label={
                 waiting
-                  ? `Réessayer dans ${remainingSeconds} secondes`
+                  ? `Réessayer dans ${waitLabel}`
                   : "Réessayer la question"
               }
             >
-              {waiting ? `Réessayer dans ${remainingSeconds} s` : "Réessayer"}
+              {waiting
+                ? dailyQuota
+                  ? `Quota dans ${waitLabel}`
+                  : `Réessayer dans ${waitLabel}`
+                : "Réessayer"}
             </Button>
             {presentation.showEdit ? (
               <Button
@@ -78,6 +90,17 @@ export function AssistantErrorNotice({
                 className="min-h-10 text-ink-muted"
               >
                 Modifier la question
+              </Button>
+            ) : null}
+            {dailyQuota && onExplore ? (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={onExplore}
+                className="min-h-10 text-ink-muted"
+              >
+                Explorer le corpus
               </Button>
             ) : null}
           </div>

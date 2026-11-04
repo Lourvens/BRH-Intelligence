@@ -75,6 +75,10 @@ BRH_RATE_LIMIT_CORPUS_REQUESTS=120
 BRH_RATE_LIMIT_SEARCH_REQUESTS=10
 BRH_AGENT_MAX_CONTEXT_TOKENS=12000
 BRH_AGENT_MAX_CONTEXT_MESSAGES=40
+# Daily token quota, reset at 00:00 UTC. 0 disables it.
+BRH_AGENT_DAILY_TOKEN_LIMIT=100000
+# HMAC key for the anonymous quota identity; changing it resets all counters.
+BRH_QUOTA_IDENTITY_SALT=<random-secret>
 ```
 
 The limiter is per client IP and in-process; the Modal function is pinned to
@@ -91,6 +95,7 @@ and action:
 | `agent` | The client has sent too many Agent Server requests. |
 | `search` | Semantic corpus search is rate-limited. |
 | `corpus` | General corpus reads are rate-limited. |
+| `daily_token_limit` | The anonymous identity has used its UTC-day token budget. |
 
 The body also includes `limit`, `remaining`, `retry_after`, and
 `window_seconds`; `Retry-After` and `X-RateLimit-Subcode` are set as headers.
@@ -99,6 +104,12 @@ The assistant maps `subcode` to its title, quota copy, and CTA; only
 the same body through `CorpusRequestError`: search offers “Rechercher par
 titre” for `search`, reader/entity/atlas pages offer retry plus a return to
 the catalogue, and `global` always uses service-wide copy.
+
+The daily quota is a Postgres ledger keyed by an HMAC of the trusted client
+address, not by an account (ADR-0029). It is therefore shared by users behind
+the same NAT. The request that crosses the cap completes; subsequent runs are
+blocked until 00:00 UTC. `BRH_AGENT_DAILY_TOKEN_LIMIT=0` disables enforcement.
+The middleware check runs only while `BRH_RATE_LIMIT_ENABLED=true`.
 
 
 ## Verification

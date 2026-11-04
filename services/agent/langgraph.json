@@ -9,6 +9,9 @@
   "checkpointer": {
     "path": "./src/brh_agent/persistence/checkpointer.py:create_checkpointer"
   },
+  "auth": {
+    "path": "./src/brh_agent/auth.py:auth"
+  },
   "http": {
     "app": "./src/brh_agent/api/app.py:app"
   }

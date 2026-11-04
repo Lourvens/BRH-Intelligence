@@ -30,6 +30,19 @@ test("parses the corpus rate-limit body and headers", () => {
   );
 });
 
+test("daily quota parses with token-per-day quota copy", () => {
+  const daily = parseCorpusRateLimit(429, new Headers(), {
+    error: {
+      subcode: "daily_token_limit",
+      message: "Quota quotidien atteint.",
+      limit: 100000,
+      window_seconds: 86400,
+    },
+  });
+  expect(rateLimitQuota(daily!)).toBe("Limite : 100000 tokens par jour.");
+  expect(rateLimitTitle(daily!, "catalogue")).toBe("Quota quotidien atteint");
+});
+
 test("corpus and global limits get surface-specific titles", () => {
   const corpus = parseCorpusRateLimit(429, new Headers(), {
     error: { subcode: "corpus", message: "Corpus limité." },
