@@ -4,6 +4,7 @@ import { EntityProfile } from "@/components/corpus/entity-profile";
 import { CorpusUnavailable } from "@/components/corpus/unavailable";
 import { CorpusRequestError, loadEntity } from "@/lib/corpus/server";
 import type { SearchParams } from "@/lib/corpus/types";
+import type { CorpusRateLimit } from "@/lib/corpus/rate-limit";
 
 export const metadata: Metadata = {
   title: "Entités et relations documentaires",
@@ -28,10 +29,12 @@ export default async function EntityPage({
   );
   let data;
   let status = 200;
+  let rateLimit: CorpusRateLimit | null = null;
   try {
     data = await loadEntity(entityId, new URLSearchParams(query).toString());
   } catch (error) {
     status = error instanceof CorpusRequestError ? error.status : 503;
+    rateLimit = error instanceof CorpusRequestError ? error.rateLimit : null;
   }
   if (status === 404) notFound();
   return (
@@ -40,7 +43,7 @@ export default async function EntityPage({
         <EntityProfile {...data} query={query} />
       ) : (
         <div className="px-5 py-16">
-          <CorpusUnavailable invalid={status === 400} />
+          <CorpusUnavailable surface="entity" invalid={status === 400} rateLimit={rateLimit} />
         </div>
       )}
     </>

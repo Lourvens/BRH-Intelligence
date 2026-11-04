@@ -29,9 +29,15 @@ def _app(settings):
     async def health(request):
         return JSONResponse({"ok": True})
 
+    async def corpus(request):
+        return JSONResponse({"ok": True})
+
     app = Starlette(
         routes=[
             Route("/runs", run, methods=["POST"]),
+            Route("/threads", corpus, methods=["GET", "POST"]),
+            Route("/corpus/v1/stats", corpus),
+            Route("/corpus/v1/search", corpus),
             Route("/ok", health),
         ]
     )
@@ -55,7 +61,12 @@ def test_agent_runs_have_a_separate_tight_limit():
     assert client.post("/runs").status_code == 200
     response = client.post("/runs")
     assert response.status_code == 429
-    assert response.json()["error"]["code"] == "rate_limited"
+    error = response.json()["error"]
+    assert error["code"] == "rate_limited"
+    assert error["subcode"] == "agent_run"
+    assert error["limit"] == 1
+    assert error["window_seconds"] == 60
+    assert response.headers["x-ratelimit-subcode"] == "agent_run"
     assert "retry-after" in response.headers
 
 
@@ -92,3 +103,47 @@ def test_global_limit_is_shared_across_identities():
     assert client.post("/runs").status_code == 200
     response = client.post("/runs", headers={"X-Forwarded-For": "203.0.113.9"})
     assert response.status_code == 429
+
+
+def test_agent_request_subcode():
+    client = TestClient(_app(_settings(rate_limit_agent_requests=1, rate_limit_global_requests=10)))
+    assert client.get("/threads").status_code == 200
+    response = client.get("/threads")
+    assert response.status_code == 429
+    assert response.json()["error"]["subcode"] == "agent"
+
+
+def test_corpus_subcode():
+    client = TestClient(
+        _app(_settings(rate_limit_corpus_requests=1, rate_limit_global_requests=10))
+    )
+    assert client.get("/corpus/v1/stats").status_code == 200
+    response = client.get("/corpus/v1/stats")
+    assert response.status_code == 429
+    assert response.json()["error"]["subcode"] == "corpus"
+
+
+def test_search_subcode():
+    client = TestClient(
+        _app(_settings(rate_limit_search_requests=1, rate_limit_global_requests=10))
+    )
+    assert client.get("/corpus/v1/search").status_code == 200
+    response = client.get("/corpus/v1/search")
+    assert response.status_code == 429
+    assert response.json()["error"]["subcode"] == "search"
+
+
+def test_global_subcode_takes_precedence():
+    client = TestClient(
+        _app(
+            _settings(
+                rate_limit_global_requests=1,
+                rate_limit_agent_requests=10,
+                rate_limit_agent_runs=10,
+            )
+        )
+    )
+    assert client.post("/runs").status_code == 200
+    response = client.post("/runs")
+    assert response.status_code == 429
+    assert response.json()["error"]["subcode"] == "global"

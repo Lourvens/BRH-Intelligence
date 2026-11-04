@@ -46,7 +46,7 @@ export function CorpusCatalogue({ data }: { data: CatalogueData }) {
             facets={data.facets}
           />
           {data.searchError ? (
-            <SearchFailure semantic={data.searchError === "semantic"} />
+            <SearchFailure semantic={data.searchError === "semantic"} query={data.query} rateLimit={data.searchRateLimit} />
           ) : (
             <DocumentResults documents={data.documents} query={data.query} />
           )}

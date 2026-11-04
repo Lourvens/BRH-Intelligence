@@ -18,6 +18,18 @@ _RUN_CREATION = re.compile(r"^/(?:threads/[^/]+/)?runs(?:/(?:stream|wait))?/?$")
 _AGENT_PREFIXES = ("/threads", "/runs", "/assistants", "/store")
 _HEALTH_PATHS = {"/ok", "/health", "/info", "/metrics", "/docs", "/openapi.json"}
 
+# Keep these values stable: the assistant maps each one to its own copy and CTA.
+_RATE_LIMIT_PRIORITY = ("global", "agent_run", "agent", "search", "corpus")
+_RATE_LIMIT_MESSAGES = {
+    "global": "Le service reçoit trop de demandes en ce moment. Réessayez dans quelques instants.",
+    "agent_run": (
+        "Vous avez posé trop de questions en peu de temps. Réessayez dans quelques instants."
+    ),
+    "agent": "Cette session a envoyé trop de requêtes. Réessayez dans quelques instants.",
+    "search": "La recherche sémantique reçoit trop de demandes. Réessayez dans quelques instants.",
+    "corpus": "Le corpus reçoit trop de demandes en ce moment. Réessayez dans quelques instants.",
+}
+
 
 @dataclass(frozen=True)
 class LimitDecision:
@@ -71,7 +83,7 @@ def _limit_for_path(path: str, method: str, settings) -> list[tuple[str, int]]:
     elif path.startswith(_AGENT_PREFIXES):
         checks.append(("agent", settings.rate_limit_agent_requests))
         if method == "POST" and _RUN_CREATION.match(path):
-            checks.append(("agent-run", settings.rate_limit_agent_runs))
+            checks.append(("agent_run", settings.rate_limit_agent_runs))
     else:
         return []
     return checks
@@ -100,24 +112,47 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
             )
             for name, limit in checks
         ]
+        denied = [
+            (name, decision)
+            for (name, _), decision in zip(checks, decisions, strict=False)
+            if not decision.allowed
+        ]
+        if denied:
+            primary_name, primary = next(
+                (name, decision)
+                for name in _RATE_LIMIT_PRIORITY
+                for name_candidate, decision in denied
+                if name_candidate == name
+            )
+            headers = {
+                "X-RateLimit-Limit": str(primary.limit),
+                "X-RateLimit-Remaining": str(primary.remaining),
+                "X-RateLimit-Reset": str(int(time.time()) + primary.reset_seconds),
+                "X-RateLimit-Subcode": primary_name,
+                "Retry-After": str(primary.reset_seconds),
+            }
+            return JSONResponse(
+                {
+                    "error": {
+                        "code": "rate_limited",
+                        "subcode": primary_name,
+                        "message": _RATE_LIMIT_MESSAGES[primary_name],
+                        "limit": primary.limit,
+                        "remaining": primary.remaining,
+                        "retry_after": primary.reset_seconds,
+                        "window_seconds": self.settings.rate_limit_window_seconds,
+                    }
+                },
+                status_code=429,
+                headers=headers,
+            )
+
         tightest = min(decisions, key=lambda decision: decision.remaining)
         headers = {
             "X-RateLimit-Limit": str(tightest.limit),
             "X-RateLimit-Remaining": str(tightest.remaining),
             "X-RateLimit-Reset": str(int(time.time()) + tightest.reset_seconds),
         }
-        if not all(decision.allowed for decision in decisions):
-            headers["Retry-After"] = str(tightest.reset_seconds)
-            return JSONResponse(
-                {
-                    "error": {
-                        "code": "rate_limited",
-                        "message": "Limite de requêtes atteinte. Réessayez plus tard.",
-                    }
-                },
-                status_code=429,
-                headers=headers,
-            )
         response = await call_next(request)
         response.headers.update(headers)
         return response
@@ -139,6 +174,7 @@ def install_security(app, settings) -> None:
                 "x-ratelimit-limit",
                 "x-ratelimit-remaining",
                 "x-ratelimit-reset",
+                "x-ratelimit-subcode",
             ],
             max_age=600,
         )

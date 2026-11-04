@@ -94,7 +94,7 @@ function Workspace() {
       <AtlasMapStage
         data={data}
         fetching={graph.isFetching}
-        error={graph.isError}
+        error={graph.error}
         pending={graph.isPending}
         refetch={() => graph.refetch()}
         search={search}

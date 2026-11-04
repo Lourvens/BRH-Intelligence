@@ -81,6 +81,25 @@ The limiter is per client IP and in-process; the Modal function is pinned to
 one container. `langgraph.json`'s Starlette middleware runs for both the
 built-in Agent Server routes and `/corpus/v1/*`.
 
+A `429` carries a stable `subcode` so the assistant can choose the right copy
+and action:
+
+| `subcode` | Meaning |
+| --- | --- |
+| `global` | The service-wide request bucket is saturated. |
+| `agent_run` | The client has created too many runs/questions. |
+| `agent` | The client has sent too many Agent Server requests. |
+| `search` | Semantic corpus search is rate-limited. |
+| `corpus` | General corpus reads are rate-limited. |
+
+The body also includes `limit`, `remaining`, `retry_after`, and
+`window_seconds`; `Retry-After` and `X-RateLimit-Subcode` are set as headers.
+The assistant maps `subcode` to its title, quota copy, and CTA; only
+`agent_run` keeps the “Modifier la question” action. Corpus surfaces receive
+the same body through `CorpusRequestError`: search offers “Rechercher par
+titre” for `search`, reader/entity/atlas pages offer retry plus a return to
+the catalogue, and `global` always uses service-wide copy.
+
 
 ## Verification
 

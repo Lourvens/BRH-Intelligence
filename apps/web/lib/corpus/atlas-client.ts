@@ -1,13 +1,17 @@
+import { CorpusRequestError } from "./errors";
+import { parseCorpusRateLimit } from "./rate-limit";
+
 export async function readAtlas<T>(
   url: string,
   signal: AbortSignal,
 ): Promise<T> {
-  const r = await fetch(url, { signal });
-  if (!r.ok)
-    throw new Error(
-      r.status === 400
-        ? "Ces critères ne sont pas valides."
-        : "Le graphe est temporairement indisponible.",
+  const response = await fetch(url, { signal });
+  const body = await response.json().catch(() => null);
+  if (!response.ok) {
+    throw new CorpusRequestError(
+      response.status,
+      parseCorpusRateLimit(response.status, response.headers, body),
     );
-  return r.json();
+  }
+  return body as T;
 }

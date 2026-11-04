@@ -1,7 +1,7 @@
 import { Timer } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import type { AssistantError } from "@/lib/chat/assistant-error";
+import { rateLimitPresentation, type AssistantError } from "@/lib/chat/assistant-error";
 
 export function AssistantErrorNotice({
   error,
@@ -16,8 +16,9 @@ export function AssistantErrorNotice({
 }) {
   const rateLimited = error.kind === "rate_limit";
   const waiting = rateLimited && remainingSeconds > 0;
+  const presentation = rateLimitPresentation(error);
   const title = rateLimited
-    ? "Trop de questions en peu de temps"
+    ? presentation.title
     : error.kind === "connection"
       ? "Connexion interrompue"
       : "L’assistant est indisponible";
@@ -37,6 +38,9 @@ export function AssistantErrorNotice({
           <p className="mt-1 text-small leading-relaxed text-ink">
             {error.message}
           </p>
+          {rateLimited && presentation.quota ? (
+            <p className="mt-1 text-caption text-ink-muted">{presentation.quota}</p>
+          ) : null}
           {rateLimited ? (
             <p className="mt-2 text-caption text-ink-muted">
               {waiting ? (
@@ -65,15 +69,17 @@ export function AssistantErrorNotice({
             >
               {waiting ? `Réessayer dans ${remainingSeconds} s` : "Réessayer"}
             </Button>
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={onEdit}
-              className="min-h-10 text-ink-muted"
-            >
-              Modifier la question
-            </Button>
+            {presentation.showEdit ? (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={onEdit}
+                className="min-h-10 text-ink-muted"
+              >
+                Modifier la question
+              </Button>
+            ) : null}
           </div>
         </div>
       </div>

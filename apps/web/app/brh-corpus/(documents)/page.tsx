@@ -4,6 +4,7 @@ import { CorpusCatalogue } from "@/components/corpus/catalogue";
 import { CorpusUnavailable } from "@/components/corpus/unavailable";
 import { CorpusRequestError, loadCatalogue } from "@/lib/corpus/server";
 import type { SearchParams } from "@/lib/corpus/types";
+import type { CorpusRateLimit } from "@/lib/corpus/rate-limit";
 
 export const metadata: Metadata = {
   title: "Corpus documentaire",
@@ -28,10 +29,12 @@ export default async function CorpusPage({
   }
   let data;
   let invalid = false;
+  let rateLimit: CorpusRateLimit | null = null;
   try {
     data = await loadCatalogue(params);
   } catch (error) {
     invalid = error instanceof CorpusRequestError && error.status === 400;
+    rateLimit = error instanceof CorpusRequestError ? error.rateLimit : null;
   }
   return (
     <>
@@ -39,7 +42,7 @@ export default async function CorpusPage({
         <CorpusCatalogue data={data} />
       ) : (
         <div className="px-5 py-16">
-          <CorpusUnavailable invalid={invalid} />
+          <CorpusUnavailable invalid={invalid} rateLimit={rateLimit} />
         </div>
       )}
     </>

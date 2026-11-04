@@ -5,6 +5,7 @@ import { CorpusUnavailable } from "@/components/corpus/unavailable";
 import { DocumentReader } from "@/components/documents/document-reader";
 import { CorpusRequestError, corpusDocument, loadDocument } from "@/lib/corpus/server";
 import type { SearchParams } from "@/lib/corpus/types";
+import type { CorpusRateLimit } from "@/lib/corpus/rate-limit";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -24,12 +25,16 @@ export default async function ReaderPage({ params, searchParams }: {
   const page = Number(query.page ?? 1);
   let data;
   let status = Number.isInteger(page) && page > 0 ? 200 : 400;
+  let rateLimit: CorpusRateLimit | null = null;
   if (status === 200) {
     try { data = await loadDocument(slug, page); }
-    catch (error) { status = error instanceof CorpusRequestError ? error.status : 503; }
+    catch (error) {
+      status = error instanceof CorpusRequestError ? error.status : 503;
+      rateLimit = error instanceof CorpusRequestError ? error.rateLimit : null;
+    }
   }
   if (status === 404) notFound();
   return <div className="min-h-dvh bg-bg text-ink"><ResearchHeader /><main id="contenu">
-    {data ? <DocumentReader key={`${slug}:${page}`} {...data} /> : <div className="px-5 py-16"><CorpusUnavailable document status={status} invalid={status === 400} /></div>}
+    {data ? <DocumentReader key={`${slug}:${page}`} {...data} /> : <div className="px-5 py-16"><CorpusUnavailable document surface="document" status={status} invalid={status === 400} rateLimit={rateLimit} /></div>}
   </main></div>;
 }

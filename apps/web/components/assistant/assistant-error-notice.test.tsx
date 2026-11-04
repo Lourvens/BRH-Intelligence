@@ -11,6 +11,9 @@ test("rate-limit notice shows the countdown and disables retry", () => {
         message: "Limite de requêtes atteinte.",
         retryAfterSeconds: 42,
         status: 429,
+        subcode: "agent_run",
+        limit: 6,
+        windowSeconds: 60,
       }}
       remainingSeconds={42}
       onRetry={() => undefined}
@@ -31,6 +34,9 @@ test("connection notice uses a direct retry", () => {
         message: "Impossible de joindre l’assistant.",
         retryAfterSeconds: null,
         status: null,
+        subcode: null,
+        limit: null,
+        windowSeconds: null,
       }}
       remainingSeconds={0}
       onRetry={() => undefined}
@@ -39,5 +45,28 @@ test("connection notice uses a direct retry", () => {
   );
   expect(html).toContain("Connexion interrompue");
   expect(html).toContain("Réessayer");
+  expect(html).not.toContain("Modifier la question");
   expect(html).not.toMatch(/\sdisabled(?:=""|\s|>)/);
+});
+
+
+test("global limit has no edit CTA", () => {
+  const html = renderToStaticMarkup(
+    <AssistantErrorNotice
+      error={{
+        kind: "rate_limit",
+        message: "Le service reçoit trop de demandes.",
+        retryAfterSeconds: 30,
+        status: 429,
+        subcode: "global",
+        limit: 600,
+        windowSeconds: 60,
+      }}
+      remainingSeconds={30}
+      onRetry={() => undefined}
+      onEdit={() => undefined}
+    />,
+  );
+  expect(html).toContain("Service momentanément saturé");
+  expect(html).not.toContain("Modifier la question");
 });

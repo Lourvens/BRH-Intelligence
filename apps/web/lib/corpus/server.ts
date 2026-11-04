@@ -13,12 +13,10 @@ import type {
   ResearchDocument,
   SearchParams,
 } from "./types";
+import { CorpusRequestError } from "./errors";
+import { parseCorpusRateLimit } from "./rate-limit";
 
-export class CorpusRequestError extends Error {
-  constructor(public status: number) {
-    super(`Corpus request failed (${status})`);
-  }
-}
+export { CorpusRequestError } from "./errors";
 
 export function corpusUrl(path: string) {
   const base = process.env.BRH_CORPUS_API_URL ?? "http://127.0.0.1:2024";
@@ -30,7 +28,13 @@ export async function corpusGet<T>(path: string): Promise<T> {
     cache: "no-store",
     signal: AbortSignal.timeout(8000),
   });
-  if (!response.ok) throw new CorpusRequestError(response.status);
+  if (!response.ok) {
+    const body = await response.json().catch(() => null);
+    throw new CorpusRequestError(
+      response.status,
+      parseCorpusRateLimit(response.status, response.headers, body),
+    );
+  }
   return response.json() as Promise<T>;
 }
 
@@ -63,6 +67,7 @@ export async function loadCatalogue(
   const search = new URLSearchParams(query).toString();
   const empty: DocumentList = { items: [], total: 0, page: 1, page_size: 25 };
   let searchError: CatalogueData["searchError"];
+  let searchRateLimit: CatalogueData["searchRateLimit"];
   const documentsRequest =
     query.mode === "semantic" && !query.q
       ? Promise.resolve({ ...empty, page_size: 20, bounded: true })
@@ -83,6 +88,7 @@ export async function loadCatalogue(
       )
         throw error;
       searchError = query.mode === "semantic" ? "semantic" : "unavailable";
+      searchRateLimit = error instanceof CorpusRequestError ? error.rateLimit : null;
       return empty;
     }),
   ]);
@@ -92,6 +98,7 @@ export async function loadCatalogue(
     facets,
     documents,
     searchError,
+    searchRateLimit,
   };
 }
 

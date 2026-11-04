@@ -18,7 +18,7 @@ export async function GET(request: Request, context: { params: Promise<{ path: s
       })),
     });
     const headers = new Headers();
-    for (const key of ["content-type", "content-range", "accept-ranges", "etag", "cache-control", "content-disposition", "x-brh-source-sha256", "x-brh-markdown-sha256", "x-brh-published-at", "x-brh-title"]) {
+    for (const key of ["content-type", "content-range", "accept-ranges", "etag", "cache-control", "content-disposition", "retry-after", "x-ratelimit-subcode", "x-ratelimit-limit", "x-ratelimit-remaining", "x-ratelimit-reset", "x-brh-source-sha256", "x-brh-markdown-sha256", "x-brh-published-at", "x-brh-title"]) {
       const value = response.headers.get(key);
       if (value) headers.set(key, value);
     }
