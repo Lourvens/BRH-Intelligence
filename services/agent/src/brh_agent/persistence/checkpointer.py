@@ -35,8 +35,17 @@ def _fallback_url() -> str:
 
 def checkpointer_urls() -> tuple[str, str]:
     """Return (runtime, setup) URLs; Neon injects both on its branches."""
-    runtime = os.environ.get("DATABASE_URL") or _fallback_url()
-    setup = os.environ.get("DATABASE_URL_UNPOOLED") or runtime
+    settings = get_settings()
+    runtime = (
+        os.environ.get("DATABASE_URL")
+        or settings.database_url.get_secret_value()
+        or _fallback_url()
+    )
+    setup = (
+        os.environ.get("DATABASE_URL_UNPOOLED")
+        or settings.database_url_unpooled.get_secret_value()
+        or runtime
+    )
     return runtime, setup
 
 

@@ -5,7 +5,7 @@ from pydantic import TypeAdapter
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 
-from brh_agent.http_support import json_response, query, service
+from brh_agent.api.responses import json_response, query, service
 
 
 def documents(request: Request) -> Response:

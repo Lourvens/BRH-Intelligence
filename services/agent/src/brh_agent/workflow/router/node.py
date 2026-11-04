@@ -4,8 +4,8 @@ from collections.abc import Callable
 from typing import Any
 from uuid import uuid4
 
-from brh_agent.activity import emit
-from brh_agent.router.agent import route_turn
+from brh_agent.lib.activity import emit
+from brh_agent.workflow.router.agent import route_turn
 
 
 def route(

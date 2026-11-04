@@ -5,7 +5,7 @@ from uuid import UUID
 from starlette.requests import Request
 from starlette.responses import Response
 
-from brh_agent.http_support import json_response, query, service
+from brh_agent.api.responses import json_response, query, service
 
 
 def entity(request: Request) -> Response:

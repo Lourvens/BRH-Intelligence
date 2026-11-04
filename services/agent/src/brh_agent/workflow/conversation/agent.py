@@ -2,7 +2,7 @@
 
 from langchain_core.messages import SystemMessage
 
-from brh_agent.prompts import IDENTITY
+from brh_agent.lib.prompts import IDENTITY
 
 
 def respond(state, model, on_chunk):

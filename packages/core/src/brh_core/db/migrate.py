@@ -38,7 +38,9 @@ def apply_migrations(settings: Settings | None = None) -> list[str]:
     settings = settings or get_settings()
     applied: list[str] = []
 
-    with psycopg.connect(settings.postgres_dsn, autocommit=False, row_factory=dict_row) as conn:
+    with psycopg.connect(
+        settings.postgres_migration_dsn, autocommit=False, row_factory=dict_row
+    ) as conn:
         conn.execute(_BOOTSTRAP)
         conn.commit()
 

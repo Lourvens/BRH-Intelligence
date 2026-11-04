@@ -7,9 +7,9 @@ from typing import Any
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.config import get_stream_writer
 
-from brh_agent.activity import emit
-from brh_agent.publication import ERROR, interrupted_or_error, publish
-from brh_agent.research import agent as research
+from brh_agent.lib.activity import emit
+from brh_agent.lib.publication import ERROR, interrupted_or_error, publish
+from brh_agent.workflow.research import agent as research
 
 logger = logging.getLogger(__name__)
 

@@ -1,6 +1,6 @@
 """Research HTTP validation and failure contracts need no external services."""
 
-from brh_agent.http import create_app
+from brh_agent.api.app import create_app
 from starlette.testclient import TestClient
 
 
@@ -45,7 +45,7 @@ def test_semantic_requests_have_a_bounded_shared_budget():
 
 
 def test_atlas_routes_validate_limits_and_clean_up_shared_pool(monkeypatch):
-    from brh_agent import http
+    from brh_agent.api import app as api_app
 
     class Atlas:
         def corpus_atlas(self, params):
@@ -61,8 +61,8 @@ def test_atlas_routes_validate_limits_and_clean_up_shared_pool(monkeypatch):
             self.closed = True
 
     pool = Pool()
-    monkeypatch.setattr(http, "build_retrieval_service", lambda: (Atlas(), pool))
-    with TestClient(http.create_app()) as client:
+    monkeypatch.setattr(api_app, "build_retrieval_service", lambda: (Atlas(), pool))
+    with TestClient(api_app.create_app()) as client:
         assert client.get("/corpus/v1/graph").json()["view"] == "mentions"
         for query in ["node_limit=501", "edge_limit=1001", "hops=3", "focus=document:bad"]:
             assert client.get("/corpus/v1/graph?" + query).status_code == 400

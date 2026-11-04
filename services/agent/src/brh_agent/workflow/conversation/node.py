@@ -6,9 +6,9 @@ from typing import Any
 
 from langgraph.config import get_stream_writer
 
-from brh_agent.activity import emit
-from brh_agent.conversation.agent import respond
-from brh_agent.publication import ERROR, interrupted_or_error, publish
+from brh_agent.lib.activity import emit
+from brh_agent.lib.publication import ERROR, interrupted_or_error, publish
+from brh_agent.workflow.conversation.agent import respond
 
 logger = logging.getLogger(__name__)
 

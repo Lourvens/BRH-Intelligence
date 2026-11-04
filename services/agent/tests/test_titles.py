@@ -1,6 +1,6 @@
 """Offline conversation-title generation and normalization checks."""
 
-from brh_agent.conversation.title import normalize_title
+from brh_agent.workflow.conversation.title import normalize_title
 from helpers import Model, build_graph
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.checkpoint.memory import InMemorySaver

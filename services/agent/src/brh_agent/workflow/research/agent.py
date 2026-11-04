@@ -7,7 +7,7 @@ import time
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 
-from brh_agent.prompts import IDENTITY
+from brh_agent.lib.prompts import IDENTITY
 
 logger = logging.getLogger(__name__)
 MAX_SEARCHES = 4

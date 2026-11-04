@@ -7,7 +7,7 @@ from brh_core.corpus.storage import digest
 from starlette.requests import Request
 from starlette.responses import Response
 
-from brh_agent.http_support import json_response, service
+from brh_agent.api.responses import json_response, service
 
 
 def document(request: Request) -> Response:

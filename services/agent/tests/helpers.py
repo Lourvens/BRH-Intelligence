@@ -1,6 +1,6 @@
 """Shared offline fakes and graph builders for agent tests."""
 
-from brh_agent.graph import build_graph as create_graph
+from brh_agent.workflow.graph import build_graph as create_graph
 from brh_core.models import Citation, RetrievedChunk, SearchResult
 from langchain_core.messages import AIMessage
 

@@ -56,7 +56,9 @@ class ResearchImportRepository:
             conn.execute(
                 """INSERT INTO corpus.research_publications
                 (document_id,publication_id,artifact_hash,storage_backend,manifest)
-                VALUES (%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING""",
+                VALUES (%s,%s,%s,%s,%s)
+                ON CONFLICT (document_id,publication_id) DO UPDATE
+                SET storage_backend=EXCLUDED.storage_backend""",
                 (
                     document["document_id"],
                     publication["publication_id"],

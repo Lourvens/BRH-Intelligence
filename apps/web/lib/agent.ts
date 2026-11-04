@@ -25,7 +25,7 @@ export type Citation = {
   source_url?: string | null;
 };
 
-/** The graph state, mirroring `brh_agent.state.AgentState`. */
+/** The graph state, mirroring `brh_agent.workflow.state.AgentState`. */
 export type AgentState = {
   messages: Message[];
   title?: string;
