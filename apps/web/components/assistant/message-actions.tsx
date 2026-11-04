@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { FeedbackAction } from "./feedback-action";
 import { ShareDialog } from "./share-dialog";
 import { SourceList } from "./source-list";
+import { FeedbackDialog } from "@/components/feedback/feedback-dialog";
 
 export function MessageActions({ content, citations = [], selectedCitationId, onSelectCitation, threadId }: {
   content: string;
@@ -47,6 +48,7 @@ export function MessageActions({ content, citations = [], selectedCitationId, on
         ) : null}
         <FeedbackAction state={copyState} label="Copier" successLabel="Copié" icon={Copy} onClick={copy} />
         <ShareDialog threadId={threadId} />
+        <FeedbackDialog threadId={threadId} answerExcerpt={content} />
         <span className="ml-auto hidden text-[11px] text-ink-muted sm:inline">Réponse de démonstration</span>
       </div>
       <p role="status" aria-live="polite" className={cn("text-caption leading-5", copyState === "error" ? "mt-2 text-scarlet" : "sr-only")}>{announcement}</p>
