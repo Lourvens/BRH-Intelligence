@@ -58,3 +58,4 @@ Multiple URLs pointing to one PDF are aliases, not duplicate corpus documents.
 | [0027](0027-langsmith-tracing.md) | LangSmith tracing for the agent | Accepted |
 | [0028](0028-api-hardening.md) | API hardening for the public agent service | Accepted |
 | [0029](0029-assistant-daily-token-quota.md) | Daily assistant token quota | Accepted |
+| [0030](0030-admin-operations-and-feedback.md) | Private operations dashboard and durable user feedback | Accepted |

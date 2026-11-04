@@ -58,3 +58,22 @@ same-origin mutation protection, input validation, pagination, status changes
 and feedback throttling. Browser checks cover login/logout, submission,
 feedback review, mobile layout and reduced motion. No deployment or live
 database migration is part of this change.
+
+## Completed verification
+
+- Offline Python regression suite: 385 passed, 14 integration tests deselected.
+- Ruff: clean. Frontend library tests: 75 passed across the full library suite
+  and the three added streamed-request-boundary tests.
+- TypeScript and isolated optimized production build: passed.
+- Production-build Playwright checks: six passed across desktop and mobile.
+  They verify anonymous denial, same-origin protection, valid/expired/revoked/
+  tampered sessions, feedback failure recovery and submission, review state and
+  notes, filtering, pagination, logout, keyboard focus and reduced motion.
+- Desktop and mobile dashboard screenshots inspected; no viewport overflow.
+- Bun frozen-lockfile install unchanged; deployment YAML locks independently
+  checked against the resolved package graph and integrity hashes.
+- All 50 committed code files in the first two implementation milestones
+  remain within the 250-line cap; browser test and fixture also comply.
+
+Browser operations use an in-memory test service. SQL repositories are covered
+by offline fakes; no live database migration or deployment was performed.

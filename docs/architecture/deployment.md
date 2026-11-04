@@ -114,6 +114,10 @@ The middleware check runs only while `BRH_RATE_LIMIT_ENABLED=true`.
 
 ## Verification
 
+For the private dashboard, shared API token and feedback migration setup, see
+[Administration and feedback](admin-operations.md). Admin credentials are
+server-only and must be configured separately from public LangGraph URLs.
+
 ```bash
 curl -fsS https://<modal-app>.modal.run/ok
 curl -fsS https://<modal-app>.modal.run/corpus/v1/stats
