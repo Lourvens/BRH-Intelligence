@@ -53,7 +53,12 @@ def decide_intent(messages):
     criteria = {
         "greeting": "Salutation ou échange social simple, sans question documentaire.",
         "meta": "Question sur les capacités ou l'utilisation de cet assistant.",
-        "out_of_scope": "Demande clairement sans rapport avec les documents BRH ou leur domaine.",
+        "out_of_scope": (
+            "Demande hors périmètre : code, développement logiciel, tutoriel, comparaison "
+            "de technologies, actualité générale, santé, voyage, divertissement, ou toute "
+            "demande sans lien substantiel avec les publications de la BRH ou l'économie "
+            "et la finance haïtiennes."
+        ),
         "financial_query": (
             "Question sur la BRH, ses documents ou leur contexte économique et financier."
         ),
