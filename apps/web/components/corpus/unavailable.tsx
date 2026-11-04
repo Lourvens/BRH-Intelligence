@@ -3,8 +3,36 @@
 import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { CorpusRateLimitNotice } from "./corpus-rate-limit-notice";
+import type { CorpusRateLimit } from "@/lib/corpus/rate-limit";
 
-export function CorpusUnavailable({ invalid = false, document = false, status }: { invalid?: boolean; document?: boolean; status?: number }) {
+export function CorpusUnavailable({
+  invalid = false,
+  document = false,
+  status,
+  surface = "catalogue",
+  rateLimit = null,
+}: {
+  invalid?: boolean;
+  document?: boolean;
+  status?: number;
+  surface?: "catalogue" | "document" | "entity";
+  rateLimit?: CorpusRateLimit | null;
+}) {
+  if (rateLimit) {
+    return (
+      <CorpusRateLimitNotice
+        rateLimit={rateLimit}
+        surface={surface}
+        onRetry={() => window.location.reload()}
+        secondaryAction={
+          surface === "catalogue"
+            ? undefined
+            : { label: "Revenir au catalogue", onClick: () => window.location.assign("/brh-corpus") }
+        }
+      />
+    );
+  }
   return (
     <div role="alert" className="mx-auto max-w-xl border border-border bg-surface p-8 text-center">
       <AlertCircle className="mx-auto mb-4 size-6 text-ink-muted" aria-hidden />

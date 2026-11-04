@@ -1,6 +1,6 @@
 """Offline routing and activity-retention checks."""
 
-from brh_agent.research.tools import make_search_tool
+from brh_agent.workflow.research.tools import make_search_tool
 from helpers import Model, Service, build_graph
 from langchain_core.messages import AIMessage, HumanMessage
 

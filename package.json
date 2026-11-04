@@ -9,5 +9,9 @@
     "build": "bun run --filter web build",
     "lint": "bun run --filter web lint",
     "typecheck": "bun run --filter web typecheck"
+  },
+  "devDependencies": {
+    "@neon/config": "^1.10.1",
+    "@neon/env": "^1.6.9"
   }
 }

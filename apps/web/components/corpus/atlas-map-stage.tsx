@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { LoaderCircle, Network } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CorpusRequestError } from "@/lib/corpus/errors";
+import { CorpusRateLimitNotice } from "./corpus-rate-limit-notice";
 import type { AtlasGraph } from "@/lib/corpus/types";
 import { AtlasGraphList } from "./atlas-graph-list";
 import type { AtlasControls } from "./atlas-network";
@@ -35,7 +37,7 @@ export function AtlasMapStage({
 }: {
   data: AtlasGraph | undefined;
   fetching: boolean;
-  error: boolean;
+  error: unknown;
   pending: boolean;
   refetch: () => void;
   search: Pick<URLSearchParams, "get">;
@@ -46,6 +48,8 @@ export function AtlasMapStage({
   reset: () => void;
   controls: RefObject<AtlasControls | null>;
 }) {
+  const rateLimit = error instanceof CorpusRequestError ? error.rateLimit : null;
+
   return (
     <div className="atlas-graph-workspace">
       <div className="atlas-graph-stage" aria-busy={fetching}>
@@ -68,7 +72,18 @@ export function AtlasMapStage({
             )}
           </>
         )}
-        {error ? (
+        {rateLimit ? (
+          <CorpusRateLimitNotice
+            rateLimit={rateLimit}
+            surface="atlas"
+            onRetry={refetch}
+            secondaryAction={{
+              label: "Explorer les publications",
+              onClick: () => window.location.assign("/brh-corpus"),
+            }}
+            className="m-4"
+          />
+        ) : error ? (
           <div className="atlas-map-message" role="alert">
             <Network size={32} />
             <h2>Le graphe est temporairement indisponible.</h2>

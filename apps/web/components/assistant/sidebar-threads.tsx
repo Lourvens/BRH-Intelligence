@@ -1,7 +1,5 @@
 "use client";
 
-import { MessageSquare } from "lucide-react";
-
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -9,10 +7,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { threadTimestamp, threadTimestampTitle } from "@/lib/chat/thread-time";
 import type { ChatThread } from "@/lib/chat/types";
+import { useNow } from "@/lib/hooks/use-now";
 import { cn } from "@/lib/utils";
 
-const GROUPS = ["Aujourd’hui", "Cette semaine"] as const;
+const GROUPS = ["Aujourd’hui", "Cette semaine", "Plus ancien"] as const;
 
 export function ThreadList({
   threads,
@@ -25,10 +25,15 @@ export function ThreadList({
   onSelectThread: (threadId: string) => void;
   collapsed: boolean;
 }) {
+  const now = useNow();
+
   return (
     <>
       {GROUPS.map((group) => {
-        const items = threads.filter((thread) => thread.group === group);
+        const items = threads
+          .filter((thread) => thread.group === group)
+          .slice()
+          .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt));
         if (!items.length) return null;
 
         return (
@@ -39,6 +44,7 @@ export function ThreadList({
             <SidebarMenu>
               {items.map((thread) => {
                 const active = thread.id === activeThreadId;
+                const initial = thread.title.trim().charAt(0).toLocaleUpperCase("fr") || "•";
 
                 return (
                   <SidebarMenuItem key={thread.id}>
@@ -47,6 +53,7 @@ export function ThreadList({
                       isActive={active}
                       onClick={() => onSelectThread(thread.id)}
                       aria-current={active ? "page" : undefined}
+                      aria-label={thread.title}
                       tooltip={thread.title}
                       className={cn(
                         "group/thread h-auto min-h-10 items-start rounded-sm border-l-2 px-2 py-3 text-left transition-colors duration-150 motion-reduce:transition-none",
@@ -56,22 +63,30 @@ export function ThreadList({
                           : "border-transparent text-ink-muted hover:bg-azure/5 hover:text-navy-ink",
                       )}
                     >
-                      <MessageSquare
-                        className={cn(
-                          "size-3.5 shrink-0 transition-colors duration-150 group-hover/thread:text-navy-ink group-data-[active=true]:text-teal motion-reduce:transition-none",
-                          collapsed ? "mt-0" : "mt-0.5",
-                        )}
-                        aria-hidden
-                      />
-                      <span
-                        className={cn("min-w-0 flex-1", collapsed && "hidden")}
-                      >
+                      {collapsed ? (
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "inline-flex size-5 shrink-0 items-center justify-center rounded-sm text-[10px] font-bold",
+                            active
+                              ? "bg-azure/15 text-navy-ink"
+                              : "bg-surface-alt text-ink-muted",
+                          )}
+                        >
+                          {initial}
+                        </span>
+                      ) : null}
+                      <span className={cn("min-w-0 flex-1", collapsed && "hidden")}>
                         <span className="block truncate text-[13px] font-medium">
                           {thread.title}
                         </span>
-                        <span className="mt-0.5 block text-[11px] text-ink-muted">
-                          {thread.updatedAt}
-                        </span>
+                        <time
+                          dateTime={thread.updatedAt}
+                          title={threadTimestampTitle(thread.updatedAt)}
+                          className="mt-0.5 block text-[11px] tabular-nums text-ink-muted"
+                        >
+                          {threadTimestamp(thread.updatedAt, now)}
+                        </time>
                       </span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

@@ -66,10 +66,12 @@ export type ChatMessage = {
   activities?: import("./agent-activity").AgentActivity[];
 };
 
+export type ChatThreadGroup = "Aujourd’hui" | "Cette semaine" | "Plus ancien";
+
 export type ChatThread = {
   id: string;
   title: string;
   updatedAt: string;
-  group: "Aujourd’hui" | "Cette semaine";
+  group: ChatThreadGroup;
   messages: ChatMessage[];
 };

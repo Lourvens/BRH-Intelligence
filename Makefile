@@ -35,7 +35,7 @@ corpus-sync: ## Publish completed OCR Markdown without embedding or LLM calls
 	uv run python -m brh_core.corpus sync $(ARGS)
 
 corpus-dev: ## Run only the research HTTP routes (no agent generation required)
-	uv run uvicorn brh_agent.http:app --host 127.0.0.1 --port 2024
+	uv run uvicorn brh_agent.api.app:app --host 127.0.0.1 --port 2024
 
 corpus-extract: ## Explicit paid graph extraction; requires reviewed policy and --allow-paid
 	uv run python -m brh_core.corpus extract $(ARGS)
@@ -45,6 +45,15 @@ ocr-pull: ## Pull Modal's OCR output into data/ocr — a volume is not a backup
 	$(MODAL) volume get brh-ocr /ocr /tmp/brh-ocr-pull --force
 	uv run python scripts/merge_ocr.py --from /tmp/brh-ocr-pull/ocr --into data/ocr
 	uv run python scripts/verify_ocr.py
+
+modal-agent-deploy: ## Deploy the agent + corpus service to Modal
+	uvx --with python-dotenv modal deploy scripts/modal_agent.py
+
+modal-agent-sync: ## Publish OCR bundles from the Modal volume into Neon S3
+	uvx --with python-dotenv modal run scripts/modal_agent.py::sync_corpus
+
+modal-agent-pdfs: ## Publish source PDFs at <slug>.pdf for citation deep links
+	uvx --with python-dotenv modal run scripts/modal_agent.py::upload_pdfs
 
 analytics: ## Render the posts into services/analytics/out (ARGS="--size portrait")
 	uv run python -m brh_analytics $(ARGS)

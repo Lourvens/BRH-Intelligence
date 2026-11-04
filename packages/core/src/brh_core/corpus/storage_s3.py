@@ -8,12 +8,23 @@ from brh_core.corpus.storage import StorageUnavailable, digest, safe_key
 class S3PublicationStorage:
     backend = "s3"
 
-    def __init__(self, bucket, *, endpoint="", region="us-east-1", client=None):
+    def __init__(
+        self,
+        bucket,
+        *,
+        endpoint="",
+        region="us-east-1",
+        access_key_id="",
+        secret_access_key="",
+        client=None,
+    ):
         if not bucket:
             raise ValueError("BRH_ARTIFACT_S3_BUCKET is required for S3 storage")
         self.bucket = bucket
         self.endpoint = endpoint
         self.region = region
+        self.access_key_id = access_key_id
+        self.secret_access_key = secret_access_key
         self._client = client
 
     @cached_property
@@ -21,10 +32,17 @@ class S3PublicationStorage:
         import boto3
         from botocore.config import Config
 
+        credentials = {}
+        if self.access_key_id and self.secret_access_key:
+            credentials = {
+                "aws_access_key_id": self.access_key_id,
+                "aws_secret_access_key": self.secret_access_key,
+            }
         return self._client or boto3.client(
             "s3",
             endpoint_url=self.endpoint or None,
             region_name=self.region,
+            **credentials,
             config=Config(
                 connect_timeout=3,
                 read_timeout=5,

@@ -25,7 +25,7 @@ export type Citation = {
   source_url?: string | null;
 };
 
-/** The graph state, mirroring `brh_agent.state.AgentState`. */
+/** The graph state, mirroring `brh_agent.workflow.state.AgentState`. */
 export type AgentState = {
   messages: Message[];
   title?: string;
@@ -50,7 +50,7 @@ export function useAgent(options: {
   onThreadId?: (threadId: string) => void;
   onCustomEvent?: (data: unknown) => void;
   onFinish?: () => void;
-  onError?: () => void;
+  onError?: (error: unknown) => void;
 } = {}) {
   return useStream<AgentState>({
     assistantId: ASSISTANT_ID,

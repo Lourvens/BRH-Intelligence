@@ -1,13 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import {
-  ACTIVITY_LABELS,
-  type AgentActivity as Activity,
-} from "@/lib/chat/agent-activity";
+import type { AgentActivity as Activity } from "@/lib/chat/agent-activity";
+import { assistantAnnouncement } from "@/lib/chat/assistant-announcement";
 import { feedbackTransition } from "@/lib/motion";
 import { useChatScroll } from "@/lib/hooks/use-chat-scroll";
+import { useRetryCooldown } from "@/lib/hooks/use-retry-cooldown";
+import {
+  formatRetryDelay,
+  type AssistantError,
+} from "@/lib/chat/assistant-error";
 import type { ChatThread } from "@/lib/chat/types";
 import { cn } from "@/lib/utils";
 import { ChatComposer } from "./chat-composer";
@@ -15,6 +19,7 @@ import { EmptyState } from "./empty-state";
 import { Message } from "./message";
 import { WorkspaceHeader } from "./workspace-header";
 import { AgentActivity } from "./agent-activity";
+import { AssistantErrorArea } from "./assistant-error-area";
 
 export function ChatPanel({
   thread,
@@ -30,6 +35,7 @@ export function ChatPanel({
   isRestoring,
   isStopping,
   error,
+  errorPrompt,
   onRetry,
 }: {
   thread: ChatThread | null;
@@ -44,28 +50,28 @@ export function ChatPanel({
   runStatus: "idle" | "running" | "stopped" | "error";
   isRestoring: boolean;
   isStopping: boolean;
-  error: boolean;
+  error: AssistantError | null;
+  errorPrompt: string | null;
   onRetry: () => void;
 }) {
   const reduceMotion = useReducedMotion();
-  const isEmpty = !thread && !isThinking && !isRestoring;
+  const router = useRouter();
+  const cooldown = useRetryCooldown(error);
+  const cooldownLabel = formatRetryDelay(cooldown);
+  const isEmpty = !thread && !isThinking && !isRestoring && !error;
   const threadId = thread?.id && thread.id !== "pending" ? thread.id : null;
   const currentActivity =
     activities.findLast((item) => item.status === "running") ??
     activities.at(-1);
-  const announcement = isRestoring
-    ? "Chargement de la conversation…"
-    : isStopping
-      ? "Arrêt du traitement…"
-      : runStatus === "stopped"
-        ? "Traitement interrompu."
-        : isThinking
-          ? thread?.messages.at(-1)?.streaming
-            ? "L’assistant rédige sa réponse."
-            : currentActivity
-              ? ACTIVITY_LABELS[currentActivity.stage]
-              : "Demande envoyée à l’assistant."
-          : "";
+  const announcement = assistantAnnouncement({
+    isRestoring,
+    error,
+    isStopping,
+    runStatus,
+    isThinking,
+    streaming: Boolean(thread?.messages.at(-1)?.streaming),
+    currentActivity,
+  });
   const { scrollRef, handleScroll, followMessages, isAtBottom } = useChatScroll(
     thread?.id,
     thread?.messages.length ?? 0,
@@ -163,7 +169,8 @@ export function ChatPanel({
                     <AnimatePresence initial={false}>
                       {((isThinking && !thread?.messages.at(-1)?.streaming) ||
                         runStatus === "stopped" ||
-                        runStatus === "error") && (
+                        (runStatus === "error" &&
+                          !(error?.kind === "rate_limit" && activities.length === 0))) && (
                         <motion.div
                           key="activity"
                           initial={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
@@ -179,29 +186,23 @@ export function ChatPanel({
                               runStatus === "stopped" || runStatus === "error"
                             }
                             isStopping={isStopping}
-                            failed={runStatus === "error"}
+                            failed={runStatus === "error" && error?.kind !== "rate_limit"}
                             live={isThinking}
                           />
                         </motion.div>
                       )}
                     </AnimatePresence>
-                    {error && !isThinking ? (
-                      <div
-                        role="alert"
-                        className="border-t border-border py-4 text-small text-ink"
-                      >
-                        Impossible de joindre l’assistant. Vérifiez la connexion
-                        et réessayez.
-                        <Button
-                          type="button"
-                          variant="link"
-                          onClick={onRetry}
-                          className="ml-2 min-h-11 text-azure"
-                        >
-                          Réessayer
-                        </Button>
-                      </div>
-                    ) : null}
+                    <AssistantErrorArea
+                      error={isThinking ? null : error}
+                      remainingSeconds={cooldown}
+                      onRetry={onRetry}
+                      onEdit={() =>
+                        document
+                          .querySelector<HTMLTextAreaElement>("[data-assistant-composer]")
+                          ?.focus()
+                      }
+                      onExplore={error?.subcode === "daily_token_limit" ? () => router.push("/brh-corpus") : undefined}
+                    />
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -233,6 +234,9 @@ export function ChatPanel({
           isThinking={isThinking}
           isRestoring={isRestoring}
           isStopping={isStopping}
+          cooldownSeconds={cooldown}
+          cooldownLabel={cooldownLabel}
+          errorPrompt={errorPrompt}
           onSubmit={(question) => {
             followMessages();
             onSubmit(question);

@@ -75,5 +75,7 @@ def publication_storage(settings) -> PublicationStorage:
             settings.artifact_s3_bucket,
             endpoint=settings.artifact_s3_endpoint,
             region=settings.artifact_s3_region,
+            access_key_id=settings.aws_access_key_id.get_secret_value(),
+            secret_access_key=settings.aws_secret_access_key.get_secret_value(),
         )
     return LocalPublicationStorage(settings.publication_dir)

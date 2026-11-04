@@ -91,6 +91,7 @@ export type Facets = {
 export type SearchParams = Record<string, string | string[] | undefined>;
 export type CatalogueData = {
   searchError?: "semantic" | "unavailable";
+  searchRateLimit?: import("./rate-limit").CorpusRateLimit | null;
   query: Record<string, string>;
   documents: DocumentList;
   facets: Facets;

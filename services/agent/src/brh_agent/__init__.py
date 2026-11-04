@@ -1,1 +1,1 @@
-"""HTTP service for the BRH research corpus."""
+"""BRH Intelligence LangGraph agent and corpus HTTP service."""

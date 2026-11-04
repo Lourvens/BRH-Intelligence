@@ -3,6 +3,7 @@
 import json
 import mimetypes
 import re
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 
 from brh_core.corpus.storage import StorageUnavailable, digest, safe_key
@@ -29,9 +30,16 @@ class Bundle:
 
     def publish(self, storage):
         prefix = bundle_prefix(self.manifest["sha256"], self.publication_id)
-        for name, data in self.files.items():
-            storage.put(f"{prefix}/{name}", data)
-        # Completion marker is uploaded last, after all verified immutable objects.
+        # S3 round-trips dominate a full-corpus import. The objects are
+        # independent; upload them concurrently, then write the completion
+        # marker last so a reader never sees a partial publication.
+        with ThreadPoolExecutor(max_workers=max(1, min(4, len(self.files)))) as executor:
+            list(
+                executor.map(
+                    lambda item: storage.put(f"{prefix}/{item[0]}", item[1]),
+                    self.files.items(),
+                )
+            )
         storage.put(f"{prefix}/manifest.json", canonical_json(self.manifest))
 
 

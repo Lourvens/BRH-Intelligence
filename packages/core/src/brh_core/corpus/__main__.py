@@ -22,6 +22,7 @@ def main():
     commands = parser.add_subparsers(dest="command", required=True)
     sync = commands.add_parser("sync", help="Import OCR Markdown; no embedding or LLM calls")
     sync.add_argument("--watch", type=int, default=0)
+    sync.add_argument("--workers", type=int, default=1, help="Concurrent document syncs")
     extract = commands.add_parser(
         "extract", help="Paid extraction using the existing OpenRouter key"
     )
@@ -36,6 +37,8 @@ def main():
         if args.command == "sync":
             if args.watch and args.watch < 5:
                 parser.error("--watch must be zero or at least 5 seconds")
+            if args.workers < 1:
+                parser.error("--workers must be at least 1")
             while True:
                 print(
                     json.dumps(
@@ -43,6 +46,7 @@ def main():
                             settings.resolved_ocr_dir,
                             ResearchImportRepository(pool),
                             publication_storage(settings),
+                            workers=args.workers,
                         )
                     )
                 )

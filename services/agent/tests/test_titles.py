@@ -1,6 +1,6 @@
 """Offline conversation-title generation and normalization checks."""
 
-from brh_agent.conversation.title import normalize_title
+from brh_agent.workflow.conversation.title import normalize_title
 from helpers import Model, build_graph
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.checkpoint.memory import InMemorySaver
@@ -55,7 +55,8 @@ def test_title_prompt_uses_both_roles_and_ends_on_a_user_turn():
     assert "générateur de titres" in prompt[0].text
     assert prompt[1].text == "Bonjour"
     assert prompt[2].text == "Bonjour ! Je peux vous aider."
-    assert "255 caractères" in prompt[-1].text
+    assert "60 caractères maximum" in prompt[-1].text
+    assert "3 à 8 mots" in prompt[-1].text
     assert "conservez les sigles" in prompt[-1].text
     assert configs[0]["run_name"] == "thread-title"
 
@@ -64,6 +65,12 @@ def test_normalize_title_strips_wrapping_prefix_and_punctuation():
     assert normalize_title("**Titre : « Taux directeur ».**") == "Taux directeur"
     assert normalize_title("Titre : Taux directeur.") == "Taux directeur"
     assert normalize_title("12345") == ""
+
+
+def test_normalize_title_caps_the_sidebar_title_length():
+    title = normalize_title("mot " * 30)
+    assert len(title) <= 60
+    assert title == "mot " * 14 + "mot"
 
 
 def test_title_failure_does_not_replace_response():

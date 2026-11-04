@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "bunx",
+      "args": ["-y", "mcp-remote", "https://mcp.neon.tech/mcp"]
+    }
+  }
+}

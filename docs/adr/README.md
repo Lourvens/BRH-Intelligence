@@ -56,3 +56,5 @@ Multiple URLs pointing to one PDF are aliases, not duplicate corpus documents.
 | [0021](0021-streamed-agent-activity.md) | Temporary activity UI over the LangGraph SDK stream | Accepted |
 | [0022](0022-opt-in-trace-content.md) | Opt-in Arize trace content for agent debugging | Superseded by 0027 |
 | [0027](0027-langsmith-tracing.md) | LangSmith tracing for the agent | Accepted |
+| [0028](0028-api-hardening.md) | API hardening for the public agent service | Accepted |
+| [0029](0029-assistant-daily-token-quota.md) | Daily assistant token quota | Accepted |

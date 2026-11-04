@@ -4,7 +4,7 @@ import os
 import uuid
 
 import pytest
-from brh_agent.checkpointer import create_checkpointer
+from brh_agent.persistence.checkpointer import create_checkpointer
 from brh_core.config import get_settings
 from psycopg import OperationalError, connect, sql
 from psycopg.conninfo import make_conninfo
@@ -13,7 +13,9 @@ pytestmark = pytest.mark.integration
 
 
 def base_dsn() -> str:
-    return os.environ.get("BRH_TEST_POSTGRES_DSN") or get_settings().postgres_dsn
+    # Schema setup needs a direct connection: Neon's pooler rejects startup
+    # options, and this test pins a throwaway search_path.
+    return os.environ.get("BRH_TEST_POSTGRES_DSN") or get_settings().postgres_migration_dsn
 
 
 @pytest.mark.asyncio

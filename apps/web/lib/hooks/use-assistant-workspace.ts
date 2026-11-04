@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { threadIdFromPath, threadPath } from "@/lib/chat/thread-path";
 import {
-  createThreadInfo, readStoredThreads, writeStoredThreads, type ThreadInfo,
+  createThreadInfo, readStoredThreads, threadGroup, writeStoredThreads, type ThreadInfo,
 } from "@/lib/chat/thread-storage";
 import { useAssistantStream } from "@/lib/hooks/use-assistant-stream";
 import type { ChatThread } from "@/lib/chat/types";
@@ -21,9 +21,18 @@ export function useAssistantWorkspace() {
 
   const handleThreadId = useCallback((id: string, pendingText: string | null) => {
     setActiveThreadId(id);
+    const now = new Date();
     setThreadInfo((current) => current.some((thread) => thread.id === id)
-      ? current
-      : [createThreadInfo(id, pendingText), ...current]);
+      ? current.map((thread) => thread.id === id
+        ? { ...thread, updatedAt: now.toISOString(), group: threadGroup(now, now) }
+        : thread)
+      : [createThreadInfo(id, pendingText, now), ...current]);
+  }, []);
+  const touchThread = useCallback((id: string) => {
+    const now = new Date();
+    setThreadInfo((current) => current.map((thread) => thread.id === id
+      ? { ...thread, updatedAt: now.toISOString(), group: threadGroup(now, now) }
+      : thread));
   }, []);
   const resetSelection = useCallback(() => {
     setSelectedMessageId(null);
@@ -72,7 +81,7 @@ export function useAssistantWorkspace() {
     if (!activeThreadId || !title) return;
     setThreadInfo((current) => {
       if (!current.some((thread) => thread.id === activeThreadId)) {
-        return [{ id: activeThreadId, title, updatedAt: "À l’instant", group: "Aujourd’hui" }, ...current];
+        return [createThreadInfo(activeThreadId, title), ...current];
       }
       return current.map((thread) =>
         thread.id === activeThreadId && thread.title !== title ? { ...thread, title } : thread);
@@ -84,7 +93,9 @@ export function useAssistantWorkspace() {
   const activeThread: ChatThread | null = activeThreadId || messages.length ? {
     id: activeThreadId || "pending",
     title: threadTitle || activeInfo?.title || pendingTitle || "Conversation",
-    updatedAt: "À l’instant", group: "Aujourd’hui", messages,
+    updatedAt: activeInfo?.updatedAt ?? new Date().toISOString(),
+    group: activeInfo?.group ?? "Aujourd’hui",
+    messages,
   } : null;
   const threads = threadInfo.map((thread) => ({
     ...thread, messages: thread.id === activeThreadId ? messages : [],
@@ -119,7 +130,13 @@ export function useAssistantWorkspace() {
   function submitQuestion(question: string) {
     const text = question.trim();
     if (!text || text.length > 4000 || isBusy) return;
+    if (activeThreadId) touchThread(activeThreadId);
     void stream.send({ id: crypto.randomUUID(), text });
+  }
+
+  function retry() {
+    if (activeThreadId) touchThread(activeThreadId);
+    stream.retry();
   }
 
   function selectCitation(citationId: string, messageId?: string) {
@@ -133,8 +150,8 @@ export function useAssistantWorkspace() {
     threads, activeThread, activeThreadId, citations, selectedCitation,
     isThinking: stream.isThinking, activities: stream.activities, runStatus: stream.runStatus,
     isRestoring: stream.isRestoring, isStopping: stream.isStopping,
-    error: stream.requestError || stream.streamError,
-    retry: stream.retry, sourcesOpen, setSourcesOpen, sourcesCollapsed, setSourcesCollapsed,
+    error: stream.error, errorPrompt: stream.errorPrompt,
+    retry, sourcesOpen, setSourcesOpen, sourcesCollapsed, setSourcesCollapsed,
     selectThread, newThread, submitQuestion, stopThinking: stream.stopThinking, selectCitation,
   };
 }

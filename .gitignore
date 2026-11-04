@@ -58,3 +58,4 @@ data/ocr/_ledger/
 # Browser regression artifacts
 apps/web/test-results/
 apps/web/playwright-report/
+.neon
