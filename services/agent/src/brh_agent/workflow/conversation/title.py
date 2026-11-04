@@ -10,7 +10,7 @@ from brh_agent.usage.tokens import add_usage, usage_from_message
 
 logger = logging.getLogger(__name__)
 
-TITLE_MAX_CHARS = 255
+TITLE_MAX_CHARS = 60
 TITLE_QUESTION_CHARS = 2000
 TITLE_ANSWER_CHARS = 500
 
@@ -23,14 +23,15 @@ TITLE_SYSTEM_PROMPT = (
 
 TITLE_USER_PROMPT = (
     "À partir de l'échange ci-dessus, rédigez un titre en français pour la "
-    "conversation, en 255 caractères maximum. Le titre doit nommer le sujet principal "
-    "abordé dans la question et la réponse, pas répéter la demande. Utilisez uniquement "
-    "les informations présentes dans l'échange : conservez les sigles et les noms "
-    "propres exactement tels qu'ils apparaissent, sans les développer, et n'inventez "
-    "aucun fait. Pour une salutation ou un message très court, décrivez l'intention "
-    "(par exemple « Prise de contact »). Répondez uniquement par le titre : une seule "
-    "ligne, sans guillemets, sans préfixe, sans ponctuation finale et sans mise en "
-    "forme Markdown."
+    "conversation : 60 caractères maximum, idéalement 3 à 8 mots, sous la forme "
+    "d'un groupe nominal concis. Nommez le sujet principal abordé dans la question "
+    "et la réponse, sans répéter la demande. Utilisez uniquement les informations "
+    "présentes dans l'échange : conservez les sigles et les noms propres exactement "
+    "tels qu'ils apparaissent, sans les développer, et n'inventez aucun fait. Pour "
+    "une salutation ou un message très court, décrivez l'intention (par exemple "
+    "« Prise de contact »). Répondez uniquement par le titre : une seule ligne, "
+    "sans guillemets, sans préfixe, sans ponctuation finale et sans mise en forme "
+    "Markdown."
 )
 
 
