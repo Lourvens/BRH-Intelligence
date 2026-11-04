@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { submitFeedback } from "@/lib/feedback/client";
+import { threadIdFromPath } from "@/lib/chat/thread-path";
 import { feedbackLimits, feedbackMessageError, type FeedbackCategory } from "@/lib/feedback/types";
 
 export function useFeedback({ threadId, answerExcerpt }: { threadId?: string | null; answerExcerpt?: string }) {
@@ -47,7 +48,7 @@ export function useFeedback({ threadId, answerExcerpt }: { threadId?: string | n
         category,
         message,
         page_path: pathname.slice(0, feedbackLimits.pagePathMax),
-        thread_id: threadId ?? pathname.match(/^\/assistant\/([^/]+)$/)?.[1] ?? null,
+        thread_id: threadId ?? threadIdFromPath(pathname),
         answer_excerpt: includeAnswer && answerExcerpt ? answerExcerpt.slice(0, feedbackLimits.answerExcerptMax) : null,
       }, controller.current.signal);
       setSubmittedId(response.id);

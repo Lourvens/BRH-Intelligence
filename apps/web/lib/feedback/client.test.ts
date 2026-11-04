@@ -40,6 +40,15 @@ test("explains rate limits without reporting an unsaved message as received", as
   await expect(submitFeedback(input)).rejects.toThrow("Patientez quelques minutes");
 });
 
+test("preserves the associated conversation ID in feedback submissions", async () => {
+  fetchSpy = spyOn(globalThis, "fetch").mockResolvedValue(Response.json({ id: "feedback-thread" }, { status: 201 }));
+  const threadId = "12345678-1234-1234-1234-123456789abc";
+  await submitFeedback({ ...input, thread_id: threadId });
+  const payload = JSON.parse(fetchSpy.mock.calls[0][1]?.body as string);
+  expect(payload.thread_id).toBe(threadId);
+  expect(payload.answer_excerpt).toBeNull();
+});
+
 test("rejects unavailable storage and malformed successful responses", async () => {
   fetchSpy = spyOn(globalThis, "fetch").mockResolvedValue(Response.json({ error: "database unavailable" }, { status: 503 }));
   await expect(submitFeedback(input)).rejects.toThrow("Votre texte est conservé");

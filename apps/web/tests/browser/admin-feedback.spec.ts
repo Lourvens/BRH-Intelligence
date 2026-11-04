@@ -41,10 +41,22 @@ test("sealed sessions reject expired, revoked and tampered credentials", async (
 });
 
 test("a user submits feedback and an admin reviews it through the real web proxy", async ({ page, baseURL }, testInfo) => {
+  const threadId = crypto.randomUUID();
+  const conversationPath = `/assistant/${threadId}`;
   const message = `Avis navigateur ${testInfo.project.name} ${crypto.randomUUID()} : le contenu du corpus pourrait être plus clair.`;
   const note = `Vérification effectuée pour ${testInfo.project.name}.`;
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/assistant");
+  await page.route("**/api/corpus/stats", (route) => route.fulfill({ json: {
+    discovered_urls: 24, readable_documents: 24, readable_pages: 240, entities: 0,
+    graph_documents: 0, relationships: 0, processed_documents: 24,
+    as_of: null, indexed_documents: null, indexed_vectors: null,
+  } }));
+  await page.route("**/threads/**", (route) => route.fulfill({
+    json: new URL(route.request().url()).pathname.endsWith("/history") ? [] : {
+      thread_id: threadId, values: { messages: [] }, next: [], tasks: [], metadata: {}, status: "idle",
+    },
+  }));
+  await page.goto(conversationPath);
   const trigger = page.getByRole("button", { name: "Donner un avis", exact: true });
   await trigger.focus();
   await page.keyboard.press("Enter");
@@ -66,7 +78,8 @@ test("a user submits feedback and an admin reviews it through the real web proxy
   const submittedId = (await sentResponse.json()).id;
   const submitted = sentResponse.request().postDataJSON();
   expect(submitted.answer_excerpt).toBeNull();
-  expect(submitted.page_path).toBe("/assistant");
+  expect(submitted.page_path).toBe(conversationPath);
+  expect(submitted.thread_id).toBe(threadId);
   await expect(feedback.getByRole("heading", { name: "Merci pour votre avis" })).toBeVisible();
   await noOverflow(page);
   await feedback.getByRole("button", { name: "Fermer", exact: true }).first().click();
@@ -93,6 +106,8 @@ test("a user submits feedback and an admin reviews it through the real web proxy
   expect(refusedUpdate.status()).toBe(403);
   await row.getByRole("button", { name: /^Examiner/ }).click();
   const review = page.getByRole("dialog");
+  await expect(review.getByText(threadId, { exact: true })).toBeVisible();
+  await expect(review.getByRole("link", { name: /Ouvrir la conversation/ })).toHaveAttribute("href", conversationPath);
   await review.getByRole("combobox", { name: "Statut de traitement" }).click();
   await page.getByRole("option", { name: "Résolu", exact: true }).click();
   await review.getByLabel("Note interne").fill(note);
@@ -108,6 +123,7 @@ test("a user submits feedback and an admin reviews it through the real web proxy
   expect(stored.status).toBe("resolved");
   expect(stored.admin_note).toBe(note);
   expect(stored.answer_excerpt).toBeNull();
+  expect(stored.thread_id).toBe(threadId);
   await row.getByRole("button", { name: /^Examiner/ }).click();
   await expect(review.getByLabel("Note interne")).toHaveValue(note);
   await page.keyboard.press("Escape");

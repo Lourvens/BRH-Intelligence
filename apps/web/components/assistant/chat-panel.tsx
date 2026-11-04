@@ -89,6 +89,7 @@ export function ChatPanel({
     >
       <WorkspaceHeader
         title={thread?.title}
+        threadId={threadId}
         sourceCount={sourceCount}
         onOpenSources={onOpenSources}
       />

@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { adminDate } from "@/lib/admin/format";
+import { threadPath } from "@/lib/chat/thread-path";
 import {
   feedbackCategories,
   feedbackStatuses,
@@ -100,8 +101,18 @@ export function FeedbackReview({
           </p>
           <p className="break-all text-caption text-ink-muted">
             Page : {item.page_path}
-            {item.thread_id ? ` · Conversation : ${item.thread_id}` : ""}
           </p>
+          {item.thread_id && (
+            <div className="space-y-2 rounded-lg border border-border p-3">
+              <h3 className="text-caption font-medium">Conversation associée</h3>
+              <p className="break-all font-mono text-caption text-ink-muted">{item.thread_id}</p>
+              <Button asChild variant="outline" size="sm">
+                <a href={threadPath(item.thread_id)} target="_blank" rel="noopener noreferrer">
+                  Ouvrir la conversation<span className="sr-only"> (nouvel onglet)</span>
+                </a>
+              </Button>
+            </div>
+          )}
           {item.answer_excerpt && (
             <div>
               <h3 className="text-caption font-medium text-ink-muted">

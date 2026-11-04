@@ -5,6 +5,8 @@ The private dashboard at `/admin` combines corpus statistics/readiness,
 It uses the existing Next.js and Python services; no analytics provider is
 required. Public feedback controls live in the assistant header and answer
 actions. Answer excerpts are explicitly opt-in and capped at 2,000 characters.
+Feedback automatically includes the active conversation ID when available;
+the admin review shows that ID and a link to open the conversation.
 The web runtime requires Node.js 22.13 or newer for iron-session 9; verification
 uses Node.js 24.
 
