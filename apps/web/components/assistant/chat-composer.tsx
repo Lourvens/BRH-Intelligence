@@ -5,6 +5,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { AssistantVersionNotice } from "./assistant-version-notice";
 
 export function ChatComposer({
   isThinking,
@@ -155,11 +156,12 @@ export function ChatComposer({
             </Button>
           </div>
         </div>
-        <p className="mt-2 text-center text-[11px] leading-relaxed text-ink-muted">
-          {waiting
-            ? `Nouvelle tentative possible dans ${cooldownLabel}.`
-            : "Les réponses peuvent contenir des erreurs. Vérifiez la page citée."}
-        </p>
+        <AssistantVersionNotice />
+        {waiting && (
+          <p className="mt-2 text-center text-[11px] leading-relaxed text-ink-muted">
+            Nouvelle tentative possible dans {cooldownLabel}.
+          </p>
+        )}
       </form>
     </div>
   );
