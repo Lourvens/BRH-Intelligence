@@ -6,6 +6,12 @@ from pydantic import BaseModel, Field, SecretStr
 
 
 class SecuritySettings(BaseModel):
+    admin_api_token: SecretStr = Field(
+        default=SecretStr(""), validation_alias="BRH_ADMIN_API_TOKEN"
+    )
+    feedback_hourly_limit: int = Field(
+        default=5, ge=1, validation_alias="BRH_FEEDBACK_HOURLY_LIMIT"
+    )
     cors_allowed_origins: str = Field(
         default="http://localhost:3000",
         validation_alias="BRH_CORS_ALLOWED_ORIGINS",
