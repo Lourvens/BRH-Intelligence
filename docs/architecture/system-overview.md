@@ -57,7 +57,7 @@ BRH Intelligence is a single retrieval core with several ways in.
 | Ingestion | `packages/core/src/brh_core/ingestion/` | discover → extract → chunk → store | 0005 |
 | Retrieval | `packages/core/src/brh_core/retrieval/` | The shared `RetrievalService` | 0006 |
 | Citations | `packages/core/src/brh_core/citations.py` | Build `#page=N` deep links | 0005 |
-| Agent | `services/agent/src/brh_agent/` | LangGraph graph + prompts | 0002 |
+| Agent | `services/agent/src/` | LangGraph graph + corpus/operations HTTP | 0002 |
 | MCP | `services/mcp/src/brh_mcp/` | FastMCP tools | 0007 |
 | Web | `apps/web/` | Next.js chat + viewer | 0008 |
 

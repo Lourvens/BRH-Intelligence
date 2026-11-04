@@ -30,7 +30,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/brh_agent"]
+# Flat src layout: everything directly under src/ ships at the wheel root, so
+# the import roots are api/, access/, workflow/, usage/, persistence/ and the
+# graph.py, llm.py, prompts.py modules.
+sources = ["src"]
+include = ["src"]
 
 [tool.uv.sources]
 brh-core = { workspace = true }

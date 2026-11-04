@@ -35,7 +35,7 @@ corpus-sync: ## Publish completed OCR Markdown without embedding or LLM calls
 	uv run python -m brh_core.corpus sync $(ARGS)
 
 corpus-dev: ## Run only the research HTTP routes (no agent generation required)
-	uv run uvicorn brh_agent.api.app:app --host 127.0.0.1 --port 2024
+	uv run uvicorn api.app:app --host 127.0.0.1 --port 2024
 
 corpus-extract: ## Explicit paid graph extraction; requires reviewed policy and --allow-paid
 	uv run python -m brh_core.corpus extract $(ARGS)

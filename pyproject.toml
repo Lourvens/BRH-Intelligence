@@ -29,7 +29,7 @@ dev = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["packages/core/tests", "services/agent/tests"]
-pythonpath = ["services/agent"]
+pythonpath = ["services/agent/src", "services/agent/tests"]
 markers = [
     "integration: tests that need live Postgres / Pinecone / network",
 ]
@@ -46,3 +46,17 @@ select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
 # French text legitimately uses the typographic apostrophe and en dash; RUF001
 # is about homoglyph risk in identifiers, not in a French corpus's fixtures.
 allowed-confusables = ["’", "–"]
+
+# services/agent is a flat src layout, so its import roots are top-level modules.
+[tool.ruff.lint.isort]
+known-first-party = [
+    "access",
+    "api",
+    "graph",
+    "llm",
+    "persistence",
+    "prompts",
+    "support",
+    "usage",
+    "workflow",
+]

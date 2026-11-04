@@ -71,8 +71,8 @@ After the split:
 - Use absolute imports (`from brh_core...`), not relative ones.
 - Frozen pydantic models: build new instances instead of mutating.
 - Catch specific exceptions, log with context, never `except Exception: pass`.
-- Surfaces (`brh_agent`, `brh_mcp`) go through `RetrievalService`; no direct
-  Pinecone/Postgres reads.
+- Surfaces (`services/agent`'s `workflow`/`api`, `brh_mcp`) go through
+  `RetrievalService`; no direct Pinecone/Postgres reads.
 
 ## react and next.js
 

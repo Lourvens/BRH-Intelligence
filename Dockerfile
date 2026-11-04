@@ -2,7 +2,7 @@
 #
 # One process serves both surfaces the web app needs:
 #   - the LangGraph agent API (/threads, /runs, streaming) from langgraph.json
-#   - the research corpus routes (/corpus/v1/*) from brh_agent.api.app
+#   - the research corpus routes (/corpus/v1/*) from api.app
 #
 # The LangGraph Agent Server in this image is the in-memory dev server. It is
 # suitable for a demo deployment; production needs a licensed Agent Server,

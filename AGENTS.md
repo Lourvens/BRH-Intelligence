@@ -21,7 +21,7 @@ OCR stage: manifest → ledger → page-marked markdown),
 `brh_core.db.repository`, and `brh_core.catalog` (discovery → PaddleOCR artifact
 validation → page/chunk persistence; vector indexing remains opt-in),
 `brh_core.ingestion.chunking` (structure-aware hybrid chunking v2, ADR-0011) with
-`chunk.py` as its stable facade, `brh_agent` (bounded adaptive research,
+`chunk.py` as its stable facade, `services/agent` (bounded adaptive research,
 chat/decision clients, validated answer publication and configurable LangSmith
 tracing; ADR-0017/0027), and the
 `brh_analytics` design layer plus its `inventory` family.
@@ -37,8 +37,11 @@ registration remains separate surface work.
 
 - `packages/core` (`brh_core`) — domain model, storage, ingestion, retrieval;
   the single shared core that both services depend on.
-- `services/agent` (`brh_agent`) — LangGraph graph. `services/mcp` (`brh_mcp`)
-  — FastMCP server. `apps/web` — Next.js, talks to the agent via the LangGraph SDK.
+- `services/agent` — LangGraph graph plus the corpus/operations HTTP surface.
+  It is a flat `src/` layout (`api/`, `access/`, `workflow/`, `usage/`,
+  `persistence/` and the `graph.py`, `llm.py`, `prompts.py` modules); there is no
+  `brh_agent` package. `services/mcp` (`brh_mcp`) — FastMCP server. `apps/web` —
+  Next.js, talks to the agent via the LangGraph SDK.
 - `services/analytics` (`brh_analytics`) — stats, charts and social-media
   assets, grouped into *families* (one package per kind of analytics; the
   `inventory` family is live). Take colours from `palette.py` and rules from its
@@ -98,8 +101,9 @@ The loop is: **notebook → sign-off → ADR → eval/test → implementation.**
 The boundary that makes this real:
 
 - **Nothing in `experiments/` is importable by shipped code.** No
-  `brh_core`/`brh_agent`/`brh_mcp`/`brh_analytics` module may import from it,
-  and `experiments/` is not a workspace member. If a notebook function is worth
+  `brh_core`/`brh_mcp`/`brh_analytics` module, and nothing under
+  `services/agent/src`, may import from it, and `experiments/` is not a
+  workspace member. If a notebook function is worth
   keeping, it is re-written in `packages/` behind a test — not copied over.
 - **A `.py` under `experiments/` is the experiment, never the product.** It is
   allowed only as the notebook's driver or as the scoring/glue for a run that
