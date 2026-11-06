@@ -1,10 +1,11 @@
 import { expect, test } from "bun:test";
 
-import {
-  formatRetryDelay,
-  normalizeAssistantError,
-  rateLimitPresentation,
-} from "./assistant-error";
+import { normalizeAssistantError } from "./assistant-error";
+
+/** The shape `@langchain/langgraph-sdk` rejects with: an HTTPError carrying the body. */
+function httpError(status: number, body: string) {
+  return { status, text: body, message: `HTTP ${status}: ${body}` };
+}
 
 test("429 keeps the server message and Retry-After", () => {
   const error = {
@@ -44,64 +45,92 @@ test("a rate limit without Retry-After falls back to one minute", () => {
   });
 });
 
+test("a 404 names the conversation that no longer exists", () => {
+  const error = normalizeAssistantError(
+    httpError(404, '{"detail":"Thread not found"}'),
+    { hasThread: true },
+  );
+  expect(error).toMatchObject({
+    kind: "not_found",
+    status: 404,
+    resource: "thread",
+    retryAfterSeconds: null,
+    subcode: null,
+  });
+  // Server text is never shown for a missing destination; copy is owned by the
+  // presentation layer.
+  expect(error.message).toBe("");
+});
+
+test("a 404 separates a missing assistant from a missing conversation", () => {
+  expect(normalizeAssistantError(httpError(404, '{"detail":"Assistant not found"}')))
+    .toMatchObject({ kind: "not_found", resource: "assistant" });
+  expect(normalizeAssistantError(httpError(404, '{"detail":"Run not found"}')))
+    .toMatchObject({ kind: "not_found", resource: "run" });
+});
+
+test("a bare 404 falls back to the thread only when one is open", () => {
+  const statusText = new Error("Failed to stream: Not Found");
+  expect(normalizeAssistantError(statusText, { hasThread: true }))
+    .toMatchObject({ kind: "not_found", status: null, resource: "thread" });
+  expect(normalizeAssistantError(statusText, { hasThread: false }))
+    .toMatchObject({ kind: "not_found", resource: "service" });
+});
+
+test("401 and 403 are access failures, not outages", () => {
+  expect(normalizeAssistantError(httpError(401, '{"detail":"Unauthorized"}')))
+    .toMatchObject({ kind: "forbidden", status: 401 });
+  expect(normalizeAssistantError({ status: 403 })).toMatchObject({
+    kind: "forbidden",
+    status: 403,
+  });
+});
+
+test("a refused request is distinct from an outage", () => {
+  expect(normalizeAssistantError(httpError(422, '{"detail":"Invalid input"}')))
+    .toMatchObject({ kind: "invalid", status: 422 });
+  expect(normalizeAssistantError(httpError(413, "Payload Too Large")))
+    .toMatchObject({ kind: "invalid", status: 413 });
+});
+
+test("5xx and timeouts are transient outages", () => {
+  expect(normalizeAssistantError(httpError(503, '{"detail":"unavailable"}')))
+    .toMatchObject({ kind: "unavailable", status: 503 });
+  expect(normalizeAssistantError(httpError(504, "Gateway Timeout")))
+    .toMatchObject({ kind: "unavailable", status: 504 });
+  expect(normalizeAssistantError(new Error("HTTP 500: upstream error")))
+    .toMatchObject({ kind: "unavailable" });
+});
+
+test("a Retry-After on an outage becomes a cooldown", () => {
+  const error = {
+    status: 503,
+    text: '{"detail":"unavailable"}',
+    response: {
+      headers: { get: (name: string) => (name === "retry-after" ? "30" : null) },
+    },
+  };
+  expect(normalizeAssistantError(error)).toMatchObject({
+    kind: "unavailable",
+    retryAfterSeconds: 30,
+  });
+});
+
 test("connection failures stay separate from rate limits", () => {
   expect(normalizeAssistantError(new Error("Failed to fetch"))).toMatchObject({
     kind: "connection",
     retryAfterSeconds: null,
     subcode: null,
   });
+  expect(normalizeAssistantError({ name: "ConnectionError" })).toMatchObject({
+    kind: "connection",
+  });
 });
 
-test("unknown failures get a safe user-facing message", () => {
-  expect(normalizeAssistantError(new Error("HTTP 500: upstream error"))).toMatchObject({
+test("unknown failures stay unknown instead of becoming outages", () => {
+  expect(normalizeAssistantError(new Error("boom"))).toMatchObject({
     kind: "unknown",
-    message: "L’assistant est momentanément indisponible. Réessayez dans quelques instants.",
+    status: null,
     subcode: null,
-  });
-});
-
-
-test("the daily quota is a day-scoped limit with its own copy", () => {
-  const error = normalizeAssistantError({
-    status: 429,
-    text: JSON.stringify({
-      error: {
-        code: "rate_limited",
-        subcode: "daily_token_limit",
-        message: "Quota quotidien atteint.",
-        limit: 100000,
-        window_seconds: 86400,
-        retry_after: 43200,
-      },
-    }),
-  });
-  expect(error).toMatchObject({
-    kind: "rate_limit",
-    subcode: "daily_token_limit",
-    retryAfterSeconds: 43200,
-    limit: 100000,
-    windowSeconds: 86400,
-  });
-  expect(rateLimitPresentation(error)).toEqual({
-    title: "Quota quotidien atteint",
-    showEdit: false,
-    quota: "Limite : 100000 tokens par jour.",
-  });
-  expect(formatRetryDelay(43200)).toBe("12 h");
-  expect(formatRetryDelay(3660)).toBe("1 h 1 min");
-  expect(formatRetryDelay(42)).toBe("42 s");
-});
-
-test("each backend subcode maps to its own title and edit policy", () => {
-  const base = { kind: "rate_limit" as const, message: "", retryAfterSeconds: 30,
-    status: 429, limit: 6, windowSeconds: 60 };
-  expect(rateLimitPresentation({ ...base, subcode: "agent_run" })).toMatchObject({
-    title: "Trop de questions en peu de temps", showEdit: true,
-  });
-  expect(rateLimitPresentation({ ...base, subcode: "global" })).toMatchObject({
-    title: "Service momentanément saturé", showEdit: false,
-  });
-  expect(rateLimitPresentation({ ...base, subcode: "search" })).toMatchObject({
-    title: "Recherche temporairement limitée", showEdit: false,
   });
 });

@@ -1,35 +1,21 @@
-import { Timer } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-import {
-  formatRetryDelay,
-  rateLimitPresentation,
-  type AssistantError,
-} from "@/lib/chat/assistant-error";
+import type {
+  AssistantErrorAction,
+  AssistantErrorActionHandlers,
+  AssistantErrorView,
+} from "@/lib/chat/assistant-error-view";
+import { cn } from "@/lib/utils";
+
+import { AssistantErrorGlyph } from "./assistant-error-glyph";
 
 export function AssistantErrorNotice({
-  error,
-  remainingSeconds,
-  onRetry,
-  onEdit,
-  onExplore,
+  view,
+  actions,
 }: {
-  error: AssistantError;
-  remainingSeconds: number;
-  onRetry: () => void;
-  onEdit: () => void;
-  onExplore?: () => void;
+  view: AssistantErrorView;
+  actions: AssistantErrorActionHandlers;
 }) {
-  const rateLimited = error.kind === "rate_limit";
-  const dailyQuota = rateLimited && error.subcode === "daily_token_limit";
-  const waiting = rateLimited && remainingSeconds > 0;
-  const waitLabel = formatRetryDelay(remainingSeconds);
-  const presentation = rateLimitPresentation(error);
-  const title = rateLimited
-    ? presentation.title
-    : error.kind === "connection"
-      ? "Connexion interrompue"
-      : "L’assistant est indisponible";
+  const available = view.actions.filter((action) => actions[action.id]);
 
   return (
     <div
@@ -38,74 +24,62 @@ export function AssistantErrorNotice({
       className="rounded-xl border border-border border-l-2 border-l-scarlet bg-surface-alt/60 p-4"
     >
       <div className="flex items-start gap-3">
-        <Timer className="mt-0.5 size-4 shrink-0 text-scarlet" aria-hidden />
+        <AssistantErrorGlyph
+          icon={view.icon}
+          className="mt-0.5 size-4 shrink-0 text-scarlet"
+        />
         <div className="min-w-0">
           <p className="font-display text-caption font-bold text-navy-ink">
-            {title}
+            {view.title}
           </p>
           <p className="mt-1 text-small leading-relaxed text-ink">
-            {error.message}
+            {view.description}
           </p>
-          {rateLimited && presentation.quota ? (
-            <p className="mt-1 text-caption text-ink-muted">{presentation.quota}</p>
+          {view.quota ? (
+            <p className="mt-1 text-caption text-ink-muted">{view.quota}</p>
           ) : null}
-          {rateLimited ? (
+          {view.waitingNote ? (
             <p className="mt-2 text-caption text-ink-muted">
-              {waiting ? (
-                <span aria-live="off">
-                  {dailyQuota ? "Nouveau quota disponible dans " : "Nouvelle tentative possible dans "}
-                  <span className="font-medium tabular-nums text-ink">{waitLabel}</span>.
-                </span>
-              ) : (
-                "Vous pouvez réessayer maintenant."
-              )}
+              <span aria-live="off">{view.waitingNote}</span>
             </p>
           ) : null}
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              disabled={waiting}
-              onClick={onRetry}
-              className="min-h-10"
-              aria-label={
-                waiting
-                  ? `Réessayer dans ${waitLabel}`
-                  : "Réessayer la question"
-              }
-            >
-              {waiting
-                ? dailyQuota
-                  ? `Quota dans ${waitLabel}`
-                  : `Réessayer dans ${waitLabel}`
-                : "Réessayer"}
-            </Button>
-            {presentation.showEdit ? (
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={onEdit}
-                className="min-h-10 text-ink-muted"
-              >
-                Modifier la question
-              </Button>
-            ) : null}
-            {dailyQuota && onExplore ? (
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={onExplore}
-                className="min-h-10 text-ink-muted"
-              >
-                Explorer le corpus
-              </Button>
-            ) : null}
-          </div>
+          {available.length ? (
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              {available.map((action) => (
+                <ErrorActionButton
+                  key={action.id}
+                  action={action}
+                  waiting={view.waiting}
+                  onAction={actions[action.id] as () => void}
+                />
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
+  );
+}
+
+function ErrorActionButton({
+  action,
+  waiting,
+  onAction,
+}: {
+  action: AssistantErrorAction;
+  waiting: boolean;
+  onAction: () => void;
+}) {
+  return (
+    <Button
+      type="button"
+      variant={action.variant}
+      size="sm"
+      disabled={action.id === "retry" && waiting}
+      onClick={onAction}
+      className={cn("min-h-10", action.variant === "ghost" && "text-ink-muted")}
+    >
+      {action.label}
+    </Button>
   );
 }

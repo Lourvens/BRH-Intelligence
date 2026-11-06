@@ -1,4 +1,11 @@
-export type AssistantErrorKind = "rate_limit" | "connection" | "unknown";
+export type AssistantErrorKind =
+  | "rate_limit"
+  | "connection"
+  | "not_found"
+  | "forbidden"
+  | "invalid"
+  | "unavailable"
+  | "unknown";
 
 export type RateLimitSubcode =
   | "global"
@@ -9,14 +16,23 @@ export type RateLimitSubcode =
   | "daily_token_limit"
   | "unknown";
 
+/** What a 404 was about; the presentation layer keys its copy on this. */
+export type NotFoundResource = "thread" | "assistant" | "run" | "service";
+
 export type AssistantError = {
   kind: AssistantErrorKind;
+  /**
+   * Server-provided text, kept only when it is safe to display. The copy for
+   * every other kind is owned by the presentation layer.
+   */
   message: string;
   retryAfterSeconds: number | null;
   status: number | null;
   subcode: RateLimitSubcode | null;
   limit: number | null;
   windowSeconds: number | null;
+  /** Present for `not_found` only; defaults to the conversation when unknown. */
+  resource?: NotFoundResource;
 };
 
 type ErrorPayload = {
@@ -62,14 +78,30 @@ function numberValue(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
-function payload(error: Record<string, unknown> | null): ErrorPayload | null {
-  const text = errorText(error);
+function parseBody(text: string): Record<string, unknown> | null {
   try {
-    const parsed = record(JSON.parse(text));
-    return record(parsed?.error) as ErrorPayload | null;
+    return record(JSON.parse(text));
   } catch {
     return null;
   }
+}
+
+function payload(error: Record<string, unknown> | null): ErrorPayload | null {
+  const parsed = parseBody(errorText(error));
+  return record(parsed?.error) as ErrorPayload | null;
+}
+
+/** The `detail` string of a FastAPI/LangGraph error body, when there is one. */
+function serverDetail(error: Record<string, unknown> | null): string | null {
+  const parsed = parseBody(errorText(error));
+  if (!parsed) return null;
+  for (const key of ["detail", "message"]) {
+    const value = parsed[key];
+    if (typeof value === "string") return value;
+    const nested = record(value);
+    if (typeof nested?.message === "string") return nested.message;
+  }
+  return null;
 }
 
 function retryAfter(error: Record<string, unknown> | null, body: ErrorPayload | null): number | null {
@@ -96,115 +128,114 @@ function subcode(body: ErrorPayload | null): RateLimitSubcode | null {
   return value && RATE_LIMIT_SUBCODES.has(value) ? value : null;
 }
 
-function rateLimitMessage(body: ErrorPayload | null, code: RateLimitSubcode): string {
-  if (body?.message) return body.message;
-  const limit = body?.limit;
-  const window = body?.window_seconds;
-  const scope = limit && window ? ` (${limit} requêtes / ${window} s)` : "";
-  switch (code) {
-    case "agent_run":
-      return `Vous avez posé trop de questions en peu de temps${scope}. Réessayez dans quelques instants.`;
-    case "agent":
-      return `Cette session a envoyé trop de requêtes${scope}. Réessayez dans quelques instants.`;
-    case "search":
-      return "La recherche sémantique reçoit trop de demandes. Réessayez dans quelques instants.";
-    case "corpus":
-      return "Le corpus reçoit trop de demandes en ce moment. Réessayez dans quelques instants.";
-    case "global":
-      return "Le service reçoit trop de demandes en ce moment. Réessayez dans quelques instants.";
-    case "daily_token_limit":
-      return "Votre quota quotidien d’utilisation de l’assistant est atteint. Il se réinitialise à minuit UTC.";
-    default:
-      return "Limite de requêtes atteinte. Réessayez dans quelques instants.";
-  }
+function isRateLimited(status: number | null, body: ErrorPayload | null, text: string): boolean {
+  return status === 429
+    || body?.subcode !== undefined
+    || /rate.?limit|limite de requ[êe]tes/i.test(text);
 }
 
-/** Turn an SDK/HTTP error into the user-facing assistant error contract. */
-export function normalizeAssistantError(value: unknown): AssistantError {
+function isConnection(error: Record<string, unknown> | null, text: string): boolean {
+  if (error?.name === "ConnectionError") return true;
+  return /failed to fetch|unable to connect|networkerror|connexion/i.test(text);
+}
+
+/*
+ * HTTP status is authoritative when present. Text fallbacks exist because the
+ * SDK sometimes wraps a response as `Error("Failed to stream: Not Found")`
+ * with no status attached.
+ */
+function isNotFound(status: number | null, text: string): boolean {
+  if (status === 404) return true;
+  return status == null && /not found|introuvable|\b404\b/i.test(text);
+}
+
+function isForbidden(status: number | null, text: string): boolean {
+  if (status === 401 || status === 403) return true;
+  return status == null && /unauthorized|forbidden|acc[èe]s refus/i.test(text);
+}
+
+function isInvalid(status: number | null, text: string): boolean {
+  const refused = status === 400 || status === 405 || status === 406
+    || status === 413 || status === 415 || status === 422;
+  return refused
+    || (status == null && /bad request|unprocessable|invalid request|payload too large/i.test(text));
+}
+
+function isUnavailable(status: number | null, text: string): boolean {
+  if (status === 408 || status === 425 || (status !== null && status >= 500)) return true;
+  return status == null
+    && (/internal server error|bad gateway|service unavailable|gateway time-?out|timed out/i.test(text)
+      || /\bhttp 5\d\d\b/i.test(text));
+}
+
+function notFoundResource(
+  detail: string | null,
+  text: string,
+  hasThread: boolean,
+): NotFoundResource {
+  const hint = `${detail ?? ""} ${text}`.toLowerCase();
+  if (/assistant|graph|deployment/.test(hint)) return "assistant";
+  if (/thread|conversation/.test(hint)) return "thread";
+  if (/\bruns?\b/.test(hint)) return "run";
+  // A bare "Not Found" is most often the conversation the URL names.
+  return hasThread ? "thread" : "service";
+}
+
+/**
+ * Turn an SDK/HTTP error into the user-facing assistant error contract.
+ * `hasThread` disambiguates a bare 404: an unknown thread when a conversation
+ * was open, an unknown endpoint on a fresh page.
+ */
+export function normalizeAssistantError(
+  value: unknown,
+  context: { hasThread?: boolean } = {},
+): AssistantError {
   const error = record(value);
   const status = errorStatus(error);
   const text = errorText(error);
   const body = payload(error);
-  const rateLimited = status === 429
-    || body?.subcode !== undefined
-    || /rate.?limit|limite de requ[êe]tes/i.test(text);
-  if (rateLimited) {
-    const code = subcode(body) ?? "unknown";
-    return {
-      kind: "rate_limit",
-      message: rateLimitMessage(body, code),
-      retryAfterSeconds: retryAfter(error, body) ?? DEFAULT_RATE_LIMIT_RETRY_SECONDS,
-      status,
-      subcode: code,
-      limit: numberValue(body?.limit),
-      windowSeconds: numberValue(body?.window_seconds),
-    };
-  }
-  const connection = /failed to fetch|unable to connect|networkerror|connexion/i.test(text)
-    || error?.name === "ConnectionError";
-  return {
-    kind: connection ? "connection" : "unknown",
-    message: connection
-      ? "Impossible de joindre l’assistant. Vérifiez la connexion et réessayez."
-      : "L’assistant est momentanément indisponible. Réessayez dans quelques instants.",
-    retryAfterSeconds: null,
+  const base = {
+    message: "",
     status,
     subcode: null,
     limit: null,
     windowSeconds: null,
-  };
-}
+  } as const;
 
-const RATE_LIMIT_TITLES: Record<RateLimitSubcode, string> = {
-  global: "Service momentanément saturé",
-  agent_run: "Trop de questions en peu de temps",
-  agent: "Trop de requêtes depuis cette session",
-  search: "Recherche temporairement limitée",
-  corpus: "Corpus temporairement limité",
-  daily_token_limit: "Quota quotidien atteint",
-  unknown: "Limite de requêtes atteinte",
-};
+  if (isRateLimited(status, body, text)) {
+    return {
+      ...base,
+      kind: "rate_limit",
+      message: body?.message ?? "",
+      retryAfterSeconds: retryAfter(error, body) ?? DEFAULT_RATE_LIMIT_RETRY_SECONDS,
+      subcode: subcode(body) ?? "unknown",
+      limit: numberValue(body?.limit),
+      windowSeconds: numberValue(body?.window_seconds),
+    };
+  }
 
-/** A compact French wait label for short windows and multi-hour resets. */
-export function formatRetryDelay(seconds: number): string {
-  const total = Math.max(0, Math.ceil(seconds));
-  if (total < 60) return `${total} s`;
-  const minutes = Math.floor(total / 60);
-  if (minutes < 60) return `${minutes} min`;
-  const hours = Math.floor(minutes / 60);
-  const rest = minutes % 60;
-  return rest ? `${hours} h ${rest} min` : `${hours} h`;
-}
+  const retryAfterSeconds = retryAfter(error, body);
 
-/** UI copy and action policy for each backend rate-limit subcode. */
-export function rateLimitPresentation(error: AssistantError): {
-  title: string;
-  showEdit: boolean;
-  quota: string | null;
-} {
-  const code = error.kind === "rate_limit" ? error.subcode ?? "unknown" : "unknown";
-  const window = error.windowSeconds;
-  const unit = code === "daily_token_limit"
-    ? "token"
-    : code === "agent_run"
-      ? "question"
-      : code === "search"
-        ? "recherche"
-        : "requête";
-  const period = window === 60
-    ? "minute"
-    : window === 3600
-      ? "heure"
-      : window === 86400
-        ? "jour"
-        : window
-          ? `${window} secondes`
-          : null;
+  if (isNotFound(status, text)) {
+    return {
+      ...base,
+      kind: "not_found",
+      retryAfterSeconds,
+      resource: notFoundResource(serverDetail(error), text, context.hasThread ?? false),
+    };
+  }
+  if (isForbidden(status, text)) {
+    return { ...base, kind: "forbidden", retryAfterSeconds };
+  }
+  if (isInvalid(status, text)) {
+    return { ...base, kind: "invalid", retryAfterSeconds };
+  }
+  if (isUnavailable(status, text)) {
+    return { ...base, kind: "unavailable", retryAfterSeconds };
+  }
   return {
-    title: RATE_LIMIT_TITLES[code],
-    showEdit: code === "agent_run",
-    quota: error.limit && period
-      ? `Limite : ${error.limit} ${unit}${error.limit > 1 ? "s" : ""} par ${period}.`
-      : null,
+    ...base,
+    kind: isConnection(error, text) ? "connection" : "unknown",
+    retryAfterSeconds,
   };
 }

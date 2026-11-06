@@ -35,6 +35,8 @@ export function AssistantShell() {
     submitQuestion,
     stopThinking,
     selectCitation,
+    forgetThread,
+    canForget,
   } = useAssistantWorkspace();
 
   const initialQuestionSent = useRef(false);
@@ -77,6 +79,9 @@ export function AssistantShell() {
             error={error}
             errorPrompt={errorPrompt}
             onRetry={retry}
+            onNewThread={newThread}
+            onForget={forgetThread}
+            canForget={canForget}
             selectedCitationId={selectedCitation?.id ?? null}
             onSelectCitation={selectCitation}
             onSubmit={submitQuestion}

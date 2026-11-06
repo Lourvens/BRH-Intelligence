@@ -84,10 +84,10 @@ export function useAssistantStream(options: {
     if (stoppedByUser.current) return;
     acceptActivity.current = false;
     setRunStatus("error");
-    setRequestError(normalizeAssistantError(cause));
+    setRequestError(normalizeAssistantError(cause, { hasThread: Boolean(threadId) }));
     setErrorPrompt(submitting.current ? pending.current?.text ?? null : null);
     clearQueuedDraft();
-  }, [clearQueuedDraft]);
+  }, [clearQueuedDraft, threadId]);
   const stream = useAgent({ threadId, onThreadId, onCustomEvent, onFinish, onError });
 
   const publishedMessages = retainPublishedActivity(
@@ -173,8 +173,10 @@ export function useAssistantStream(options: {
   }
 
   const streamError = useMemo(
-    () => (stream.error ? normalizeAssistantError(stream.error) : null),
-    [stream.error],
+    () => (stream.error
+      ? normalizeAssistantError(stream.error, { hasThread: Boolean(threadId) })
+      : null),
+    [stream.error, threadId],
   );
   return {
     messages, pendingTitle, threadTitle, activities, runStatus,

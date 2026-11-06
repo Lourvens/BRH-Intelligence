@@ -1,23 +1,23 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import type { AgentActivity as Activity } from "@/lib/chat/agent-activity";
 import { assistantAnnouncement } from "@/lib/chat/assistant-announcement";
+import type { AssistantError } from "@/lib/chat/assistant-error";
+import { presentAssistantError } from "@/lib/chat/assistant-error-presentation";
+import { formatRetryDelay } from "@/lib/chat/retry-delay";
+import type { ChatThread } from "@/lib/chat/types";
+import { useAssistantErrorActions } from "@/lib/hooks/use-assistant-error-actions";
 import { useChatScroll } from "@/lib/hooks/use-chat-scroll";
 import { useRetryCooldown } from "@/lib/hooks/use-retry-cooldown";
-import {
-  formatRetryDelay,
-  type AssistantError,
-} from "@/lib/chat/assistant-error";
-import type { ChatThread } from "@/lib/chat/types";
 import { cn } from "@/lib/utils";
 import { ChatComposer } from "./chat-composer";
 import { EmptyState } from "./empty-state";
 import { Message } from "./message";
 import { WorkspaceHeader } from "./workspace-header";
 import { AssistantErrorArea } from "./assistant-error-area";
+import { AssistantErrorPanel } from "./assistant-error-panel";
 
 export function ChatPanel({
   thread,
@@ -35,6 +35,9 @@ export function ChatPanel({
   error,
   errorPrompt,
   onRetry,
+  onNewThread,
+  onForget,
+  canForget,
 }: {
   thread: ChatThread | null;
   isThinking: boolean;
@@ -51,11 +54,12 @@ export function ChatPanel({
   error: AssistantError | null;
   errorPrompt: string | null;
   onRetry: () => void;
+  onNewThread: () => void;
+  onForget: () => void;
+  canForget: boolean;
 }) {
   const reduceMotion = useReducedMotion();
-  const router = useRouter();
   const cooldown = useRetryCooldown(error);
-  const cooldownLabel = formatRetryDelay(cooldown);
   const isEmpty = !thread && !isThinking && !isRestoring && !error;
   const threadId = thread?.id && thread.id !== "pending" ? thread.id : null;
   const currentActivity =
@@ -69,6 +73,20 @@ export function ChatPanel({
     isThinking,
     streaming: Boolean(thread?.messages.at(-1)?.streaming),
     currentActivity,
+  });
+  const view = error && !isThinking
+    ? presentAssistantError({
+        error,
+        remainingSeconds: cooldown,
+        hasConversation: Boolean(thread?.messages.length),
+        canForget,
+      })
+    : null;
+  const actions = useAssistantErrorActions({
+    retry: onRetry,
+    newThread: onNewThread,
+    forget: onForget,
+    canForget,
   });
   const { scrollRef, handleScroll, followMessages, isAtBottom } = useChatScroll(
     thread?.id,
@@ -101,123 +119,121 @@ export function ChatPanel({
       >
         {announcement}
       </p>
-      <div
-        className={cn(
-          "flex min-h-0 flex-1 flex-col",
-          isEmpty && "overflow-y-auto overscroll-contain",
-        )}
-      >
-        {isEmpty && <div aria-hidden className="flex-1" />}
-        <AnimatePresence initial={false}>
-          {isEmpty && (
-            <motion.div
-              key="empty-state"
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.16,
-                ease: [0.23, 1, 0.32, 1],
-              }}
-            >
-              <EmptyState />
-            </motion.div>
-          )}
-        </AnimatePresence>
+      {view?.surface === "panel" ? (
+        <div className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto overscroll-contain">
+          <AssistantErrorPanel view={view} actions={actions} />
+        </div>
+      ) : (
         <div
           className={cn(
-            "relative flex min-h-0 flex-col",
-            !isEmpty && "flex-1",
+            "flex min-h-0 flex-1 flex-col",
+            isEmpty && "overflow-y-auto overscroll-contain",
           )}
         >
-          <div
-            ref={scrollRef}
-            onScroll={handleScroll}
-            className={cn(
-              "min-h-0 overflow-y-auto overscroll-contain",
-              isEmpty ? "hidden" : "flex-1",
-            )}
-          >
-            {!isEmpty && (
-              <div className="px-4 py-8 sm:px-6">
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={thread?.id ?? "no-thread"}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: reduceMotion ? 0.01 : 0.16 }}
-                    className="mx-auto flex max-w-[780px] flex-col gap-8"
-                  >
-                    {thread?.messages.map((message) => (
-                      <Message
-                        key={message.id}
-                        message={message}
-                        selectedCitationId={selectedCitationId}
-                        onSelectCitation={(id) =>
-                          onSelectCitation(id, message.id)
-                        }
-                        threadId={threadId}
-                      />
-                    ))}
-                    {isRestoring && (
-                      <p className="py-4 text-small text-ink-muted">
-                        Chargement de la conversation…
-                      </p>
-                    )}
-                    <AssistantErrorArea
-                      error={isThinking ? null : error}
-                      remainingSeconds={cooldown}
-                      onRetry={onRetry}
-                      onEdit={() =>
-                        document
-                          .querySelector<HTMLTextAreaElement>("[data-assistant-composer]")
-                          ?.focus()
-                      }
-                      onExplore={error?.subcode === "daily_token_limit" ? () => router.push("/brh-corpus") : undefined}
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            )}
-          </div>
+          {isEmpty && <div aria-hidden className="flex-1" />}
           <AnimatePresence initial={false}>
-            {!isAtBottom && !isEmpty && (
+            {isEmpty && (
               <motion.div
-                key="follow-answer"
-                className="pointer-events-none absolute inset-x-0 bottom-3 z-10 flex justify-center"
-                initial={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
+                key="empty-state"
+                initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
-                transition={{ duration: reduceMotion ? 0 : 0.14 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{
+                  duration: reduceMotion ? 0 : 0.16,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
               >
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => followMessages({ smooth: true })}
-                  className="pointer-events-auto rounded-full shadow-md"
-                >
-                  Revenir à la réponse ↓
-                </Button>
+                <EmptyState />
               </motion.div>
             )}
           </AnimatePresence>
+          <div
+            className={cn(
+              "relative flex min-h-0 flex-col",
+              !isEmpty && "flex-1",
+            )}
+          >
+            <div
+              ref={scrollRef}
+              onScroll={handleScroll}
+              className={cn(
+                "min-h-0 overflow-y-auto overscroll-contain",
+                isEmpty ? "hidden" : "flex-1",
+              )}
+            >
+              {!isEmpty && (
+                <div className="px-4 py-8 sm:px-6">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={thread?.id ?? "no-thread"}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: reduceMotion ? 0.01 : 0.16 }}
+                      className="mx-auto flex max-w-[780px] flex-col gap-8"
+                    >
+                      {thread?.messages.map((message) => (
+                        <Message
+                          key={message.id}
+                          message={message}
+                          selectedCitationId={selectedCitationId}
+                          onSelectCitation={(id) =>
+                            onSelectCitation(id, message.id)
+                          }
+                          threadId={threadId}
+                        />
+                      ))}
+                      {isRestoring && (
+                        <p className="py-4 text-small text-ink-muted">
+                          Chargement de la conversation…
+                        </p>
+                      )}
+                      <AssistantErrorArea view={view} actions={actions} />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              )}
+            </div>
+            <AnimatePresence initial={false}>
+              {!isAtBottom && !isEmpty && (
+                <motion.div
+                  key="follow-answer"
+                  className="pointer-events-none absolute inset-x-0 bottom-3 z-10 flex justify-center"
+                  initial={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.14 }}
+                >
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => followMessages({ smooth: true })}
+                    className="pointer-events-auto rounded-full shadow-md"
+                  >
+                    Revenir à la réponse ↓
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          {view?.hideComposer ? null : (
+            <ChatComposer
+              isThinking={isThinking}
+              isRestoring={isRestoring}
+              isStopping={isStopping}
+              cooldownSeconds={cooldown}
+              cooldownLabel={formatRetryDelay(cooldown)}
+              errorPrompt={errorPrompt}
+              onSubmit={(question) => {
+                followMessages();
+                onSubmit(question);
+              }}
+              onStop={onStop}
+            />
+          )}
+          {isEmpty && <div aria-hidden className="flex-1" />}
         </div>
-        <ChatComposer
-          isThinking={isThinking}
-          isRestoring={isRestoring}
-          isStopping={isStopping}
-          cooldownSeconds={cooldown}
-          cooldownLabel={cooldownLabel}
-          errorPrompt={errorPrompt}
-          onSubmit={(question) => {
-            followMessages();
-            onSubmit(question);
-          }}
-          onStop={onStop}
-        />
-        {isEmpty && <div aria-hidden className="flex-1" />}
-      </div>
+      )}
     </section>
   );
 }

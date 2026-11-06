@@ -59,3 +59,5 @@ Multiple URLs pointing to one PDF are aliases, not duplicate corpus documents.
 | [0028](0028-api-hardening.md) | API hardening for the public agent service | Accepted |
 | [0029](0029-assistant-daily-token-quota.md) | Daily assistant token quota | Accepted |
 | [0030](0030-admin-operations-and-feedback.md) | Private operations dashboard and durable user feedback | Accepted |
+| [0032](0032-assistant-error-surfaces.md) | Assistant error surfaces match the scope of the failure | Accepted |
+| [0033](0033-durable-assistant-conversations.md) | Durable assistant conversations in Postgres | Accepted |

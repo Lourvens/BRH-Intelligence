@@ -2,43 +2,34 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
+import type {
+  AssistantErrorActionHandlers,
+  AssistantErrorView,
+} from "@/lib/chat/assistant-error-view";
 import { feedbackTransition } from "@/lib/motion";
-import type { AssistantError } from "@/lib/chat/assistant-error";
 
 import { AssistantErrorNotice } from "./assistant-error-notice";
 
 export function AssistantErrorArea({
-  error,
-  remainingSeconds,
-  onRetry,
-  onEdit,
-  onExplore,
+  view,
+  actions,
 }: {
-  error: AssistantError | null;
-  remainingSeconds: number;
-  onRetry: () => void;
-  onEdit: () => void;
-  onExplore?: () => void;
+  view: AssistantErrorView | null;
+  actions: AssistantErrorActionHandlers;
 }) {
   const reduceMotion = useReducedMotion();
 
   return (
     <AnimatePresence initial={false}>
-      {error ? (
+      {view ? (
         <motion.div
-          key={`${error.kind}:${error.status ?? "none"}:${error.retryAfterSeconds ?? "none"}`}
+          key={`${view.kind}:${view.title}`}
           initial={{ opacity: 0, y: reduceMotion ? 0 : 4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: reduceMotion ? 0 : -4 }}
           transition={reduceMotion ? { duration: 0 } : feedbackTransition}
         >
-          <AssistantErrorNotice
-            error={error}
-            remainingSeconds={remainingSeconds}
-            onRetry={onRetry}
-            onEdit={onEdit}
-            onExplore={onExplore}
-          />
+          <AssistantErrorNotice view={view} actions={actions} />
         </motion.div>
       ) : null}
     </AnimatePresence>

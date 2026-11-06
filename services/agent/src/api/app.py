@@ -3,6 +3,7 @@
 from contextlib import asynccontextmanager
 from typing import Any
 
+from brh_core.assistant import AssistantThreadRepository
 from brh_core.config import get_settings
 from brh_core.operations import OperationsRepository
 from brh_core.retrieval import build_retrieval_service
@@ -12,11 +13,15 @@ from starlette.routing import Route
 
 from access.middleware import install_security
 from api.errors import EXCEPTION_HANDLERS
+from api.routes import assistant_threads as assistant_thread_routes
 from api.routes import corpus, documents, entities, operations, search
 
 
 def create_app(
-    retrieval: Any = None, operations_store: Any = None, settings: Any = None
+    retrieval: Any = None,
+    operations_store: Any = None,
+    settings: Any = None,
+    thread_store: Any = None,
 ) -> Starlette:
     settings = settings or get_settings()
 
@@ -30,6 +35,9 @@ def create_app(
         app.state.operations_settings = settings
         if operations_store is None and pool is not None:
             app.state.operations = OperationsRepository(pool, settings.feedback_hourly_limit)
+        app.state.assistant_threads = thread_store
+        if thread_store is None and pool is not None:
+            app.state.assistant_threads = AssistantThreadRepository(pool)
         try:
             yield
         finally:
@@ -38,6 +46,22 @@ def create_app(
 
     prefix = "/corpus/v1"
     routes = [
+        Route("/assistant/v1/threads", assistant_thread_routes.list_threads),
+        Route(
+            "/assistant/v1/threads/{thread_id}",
+            assistant_thread_routes.save_thread,
+            methods=["PUT"],
+        ),
+        Route(
+            "/assistant/v1/threads/{thread_id}",
+            assistant_thread_routes.delete_thread,
+            methods=["DELETE"],
+        ),
+        Route(
+            "/assistant/v1/threads/{thread_id}/restore",
+            assistant_thread_routes.restore_thread,
+            methods=["POST"],
+        ),
         Route("/feedback/v1", operations.submit_feedback, methods=["POST"]),
         Route("/admin/v1/overview", operations.overview),
         Route("/admin/v1/feedback", operations.list_feedback),
